@@ -5,13 +5,13 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import { CONTAINER } from "@/lib/constants";
-import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const navLinks = [
-  { label: "Features", targetId: "features" },
+  { label: "Websites", targetId: "websites" },
+  { label: "Mobile Apps", targetId: "mobile-apps" },
+  { label: "AI Automation", targetId: "ai-automation" },
+  { label: "Smart Parking", targetId: "smart-parking" },
   { label: "Pricing", targetId: "pricing" },
-  { label: "Demo", targetId: "demo" },
-  { label: "About", targetId: "about" },
 ];
 
 function LogoMark() {
@@ -70,7 +70,7 @@ export default function Navbar() {
               key={link.label}
               type="button"
               onClick={() => goToSection(link.targetId)}
-              className="text-sm text-text-secondary transition hover:text-text-primary dark:text-dark-text-secondary dark:hover:text-dark-text-primary"
+              className="cursor-pointer text-sm text-text-secondary transition hover:text-text-primary dark:text-dark-text-secondary dark:hover:text-dark-text-primary"
             >
               {link.label}
             </button>
@@ -78,10 +78,9 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-3 md:flex">
-          <ThemeToggle />
           <Link
             href="/login"
-            className="rounded-full border border-border-primary px-4 py-2 text-sm font-medium text-text-primary transition hover:border-border-secondary dark:border-dark-border-primary dark:text-dark-text-primary dark:hover:border-dark-border-secondary"
+            className="cursor-pointer rounded-full border border-border-primary px-4 py-2 text-sm font-medium text-text-primary transition hover:border-border-secondary dark:border-dark-border-primary dark:text-dark-text-primary dark:hover:border-dark-border-secondary"
           >
             Login
           </Link>
@@ -89,18 +88,18 @@ export default function Navbar() {
             href="/"
             onClick={(event) => {
               event.preventDefault();
-              goToSection("demo");
+              goToSection("contact-cta");
             }}
-            className="rounded-full bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+            className="cursor-pointer rounded-full bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
           >
-            Book Demo
+            Book Free Consultation
           </Link>
         </div>
 
         <button
           type="button"
           aria-label="Toggle navigation menu"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border-primary md:hidden dark:border-dark-border-primary"
+          className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-border-primary md:hidden dark:border-dark-border-primary"
           onClick={() => setIsMenuOpen((prev) => !prev)}
         >
           <span className="sr-only">Open menu</span>
@@ -115,15 +114,11 @@ export default function Navbar() {
       {isMenuOpen ? (
         <div className="border-t border-border-primary bg-bg-card px-4 py-4 dark:border-dark-border-primary dark:bg-dark-bg-card md:hidden">
           <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <p className="text-sm text-text-secondary dark:text-dark-text-secondary">Theme</p>
-              <ThemeToggle />
-            </div>
             {navLinks.map((link) => (
               <button
                 key={link.label}
                 type="button"
-                className="w-fit text-sm text-text-secondary dark:text-dark-text-secondary"
+                className="w-fit cursor-pointer text-sm text-text-secondary dark:text-dark-text-secondary"
                 onClick={() => {
                   goToSection(link.targetId);
                   setIsMenuOpen(false);
@@ -135,21 +130,21 @@ export default function Navbar() {
             <div className="mt-2 flex gap-3">
               <Link
                 href="/login"
-                className="rounded-full border border-border-primary px-4 py-2 text-sm font-medium text-text-primary dark:border-dark-border-primary dark:text-dark-text-primary"
+                className="cursor-pointer rounded-full border border-border-primary px-4 py-2 text-sm font-medium text-text-primary dark:border-dark-border-primary dark:text-dark-text-primary"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Login
               </Link>
               <Link
                 href="/"
-                className="rounded-full bg-black px-4 py-2 text-sm font-medium text-white dark:bg-white dark:text-black"
+                className="cursor-pointer rounded-full bg-black px-4 py-2 text-sm font-medium text-white dark:bg-white dark:text-black"
                 onClick={(event) => {
                   event.preventDefault();
-                  goToSection("demo");
+                  goToSection("contact-cta");
                   setIsMenuOpen(false);
                 }}
               >
-                Book Demo
+                Book Free Consultation
               </Link>
             </div>
           </div>

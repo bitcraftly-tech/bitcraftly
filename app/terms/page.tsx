@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Navbar />
-      <main>
+      <main className="flex-1">
         <section className="border-b border-border-primary bg-bg-card py-3 dark:border-dark-border-primary dark:bg-dark-bg-card">
           <div className={`${CONTAINER} text-xs text-text-tertiary dark:text-dark-text-tertiary`}>
             Home <span className="px-2">/</span> Terms of Service
@@ -24,6 +24,6 @@ export default function TermsPage() {
         <TermsContent />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

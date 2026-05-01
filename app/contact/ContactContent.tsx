@@ -159,7 +159,7 @@ export default function ContactContent() {
           <div className="mt-7 space-y-3">
             <div className="flex items-start gap-3 rounded-lg border border-border-primary bg-bg-card p-3 dark:border-dark-border-primary dark:bg-dark-bg-card">
               {iconWrapper(
-                <svg viewBox="0 0 20 20" className="h-4 w-4 fill-[#1A1916]" aria-hidden="true">
+                <svg viewBox="0 0 20 20" className="h-4 w-4 fill-current text-text-primary dark:text-dark-text-primary" aria-hidden="true">
                   <path d="M17.4 2.6A9.97 9.97 0 0010.3 0C4.9 0 .5 4.4.5 9.8c0 1.7.4 3.4 1.3 5L0 20l5.3-1.7c1.5.8 3.1 1.3 4.8 1.3h.1c5.4 0 9.8-4.4 9.8-9.8 0-2.6-1-5.1-2.6-7.2zM10.2 18c-1.4 0-2.8-.4-4-1.2l-.3-.2-3.1 1 1-3-.2-.3a8.3 8.3 0 01-1.3-4.4c0-4.4 3.6-8 8-8 2.1 0 4.1.8 5.7 2.4a8 8 0 012.3 5.7c0 4.4-3.6 8-8.1 8zm4.4-6c-.2-.1-1.2-.6-1.4-.7-.2-.1-.3-.1-.5.1l-.7.8c-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.5-.9a5.6 5.6 0 01-1-1.2c-.1-.2 0-.3.1-.4l.3-.3.2-.4c.1-.1.1-.3 0-.4l-.7-1.7c-.2-.3-.3-.3-.5-.3h-.4c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.1.9 2.2.1.2 1.6 2.5 3.9 3.4.5.2 1 .4 1.4.5.6.2 1.1.1 1.5.1.5-.1 1.2-.5 1.4-1 .2-.5.2-.9.2-1 0-.1-.1-.1-.3-.2z" />
                 </svg>,
               )}
@@ -178,7 +178,7 @@ export default function ContactContent() {
 
             <div className="flex items-start gap-3 rounded-lg border border-border-primary bg-bg-card p-3 dark:border-dark-border-primary dark:bg-dark-bg-card">
               {iconWrapper(
-                <svg viewBox="0 0 20 20" className="h-4 w-4 fill-[#1A1916]" aria-hidden="true">
+                <svg viewBox="0 0 20 20" className="h-4 w-4 fill-current text-text-primary dark:text-dark-text-primary" aria-hidden="true">
                   <path d="M2.5 4A2.5 2.5 0 000 6.5v7A2.5 2.5 0 002.5 16h15a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0017.5 4h-15zm0 1.5h15c.2 0 .5.1.7.2L10 10.9 1.8 5.7c.2-.1.4-.2.7-.2zm-1 2 8.1 5.1a.8.8 0 00.8 0l8.1-5.1v6a1 1 0 01-1 1h-15a1 1 0 01-1-1v-6z" />
                 </svg>,
               )}
@@ -195,7 +195,7 @@ export default function ContactContent() {
 
             <div className="flex items-start gap-3 rounded-lg border border-border-primary bg-bg-card p-3 dark:border-dark-border-primary dark:bg-dark-bg-card">
               {iconWrapper(
-                <svg viewBox="0 0 20 20" className="h-4 w-4 fill-[#1A1916]" aria-hidden="true">
+                <svg viewBox="0 0 20 20" className="h-4 w-4 fill-current text-text-primary dark:text-dark-text-primary" aria-hidden="true">
                   <path d="M10 0a6.8 6.8 0 00-6.8 6.8c0 4.9 6.1 12.6 6.4 12.9.2.2.5.2.7 0 .3-.3 6.4-8 6.4-12.9A6.8 6.8 0 0010 0zm0 9.8a3 3 0 110-6 3 3 0 010 6z" />
                 </svg>,
               )}
@@ -230,7 +230,7 @@ export default function ContactContent() {
           <div className="w-full rounded-lg border border-border-primary bg-bg-card p-5 dark:border-dark-border-primary dark:bg-dark-bg-card sm:p-7">
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div className="mb-5 flex flex-col gap-1">
-                  <label className="text-sm font-medium text-[#1A1916]" htmlFor="fullName">
+                  <label className="text-sm font-medium text-text-primary dark:text-dark-text-primary" htmlFor="fullName">
                     Full Name <span className="text-red-600">*</span>
                   </label>
                   <input
@@ -238,17 +238,17 @@ export default function ContactContent() {
                     value={values.fullName}
                     onChange={(event) => handleChange("fullName", event.target.value)}
                     onBlur={() => handleBlur("fullName")}
-                    className={`h-11 w-full rounded-lg border px-4 text-sm outline-none transition-colors ${
+                    className={`h-11 w-full rounded-lg border bg-bg-card px-4 text-sm text-text-primary outline-none transition-colors placeholder:text-text-tertiary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary ${
                       errors.fullName
-                        ? "border-red-400 focus:border-red-500"
-                        : "border-gray-200 focus:border-blue-500 dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary dark:focus:border-accent-primary"
+                        ? "border-red-500 focus:border-red-500 dark:border-red-400 dark:focus:border-red-400"
+                        : "border-border-primary focus:border-accent-primary dark:border-dark-border-primary dark:focus:border-accent-primary"
                     }`}
                   />
-                  {errors.fullName ? <p className="text-red-500 text-xs mt-0.5">{errors.fullName}</p> : null}
+                  {errors.fullName ? <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">{errors.fullName}</p> : null}
                 </div>
 
                 <div className="mb-5 flex flex-col gap-1">
-                  <label className="text-sm font-medium text-[#1A1916]" htmlFor="businessName">
+                  <label className="text-sm font-medium text-text-primary dark:text-dark-text-primary" htmlFor="businessName">
                     Business Name <span className="text-red-600">*</span>
                   </label>
                   <input
@@ -256,17 +256,17 @@ export default function ContactContent() {
                     value={values.businessName}
                     onChange={(event) => handleChange("businessName", event.target.value)}
                     onBlur={() => handleBlur("businessName")}
-                    className={`h-11 w-full rounded-lg border px-4 text-sm outline-none transition-colors ${
+                    className={`h-11 w-full rounded-lg border bg-bg-card px-4 text-sm text-text-primary outline-none transition-colors placeholder:text-text-tertiary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary ${
                       errors.businessName
-                        ? "border-red-400 focus:border-red-500"
-                        : "border-gray-200 focus:border-blue-500 dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary dark:focus:border-accent-primary"
+                        ? "border-red-500 focus:border-red-500 dark:border-red-400 dark:focus:border-red-400"
+                        : "border-border-primary focus:border-accent-primary dark:border-dark-border-primary dark:focus:border-accent-primary"
                     }`}
                   />
-                  {errors.businessName ? <p className="text-red-500 text-xs mt-0.5">{errors.businessName}</p> : null}
+                  {errors.businessName ? <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">{errors.businessName}</p> : null}
                 </div>
 
                 <div className="mb-5 flex flex-col gap-1">
-                  <label className="text-sm font-medium text-[#1A1916]" htmlFor="businessType">
+                  <label className="text-sm font-medium text-text-primary dark:text-dark-text-primary" htmlFor="businessType">
                     Business Type
                   </label>
                   <select
@@ -274,10 +274,10 @@ export default function ContactContent() {
                     value={values.businessType}
                     onChange={(event) => handleChange("businessType", event.target.value)}
                     onBlur={() => handleBlur("businessType")}
-                    className={`h-11 w-full rounded-lg border px-4 text-sm outline-none transition-colors ${
+                    className={`h-11 w-full rounded-lg border bg-bg-card px-4 text-sm text-text-primary outline-none transition-colors dark:bg-dark-bg-secondary dark:text-dark-text-primary ${
                       errors.businessType
-                        ? "border-red-400 focus:border-red-500"
-                        : "border-gray-200 focus:border-blue-500 dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:focus:border-accent-primary"
+                        ? "border-red-500 focus:border-red-500 dark:border-red-400 dark:focus:border-red-400"
+                        : "border-border-primary focus:border-accent-primary dark:border-dark-border-primary dark:focus:border-accent-primary"
                     }`}
                   >
                     {businessTypes.map((type) => (
@@ -286,11 +286,11 @@ export default function ContactContent() {
                       </option>
                     ))}
                   </select>
-                  {errors.businessType ? <p className="text-red-500 text-xs mt-0.5">{errors.businessType}</p> : null}
+                  {errors.businessType ? <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">{errors.businessType}</p> : null}
                 </div>
 
                 <div className="mb-5 flex flex-col gap-1">
-                  <label className="text-sm font-medium text-[#1A1916]" htmlFor="phone">
+                  <label className="text-sm font-medium text-text-primary dark:text-dark-text-primary" htmlFor="phone">
                     Phone Number <span className="text-red-600">*</span>
                   </label>
                   <input
@@ -299,17 +299,17 @@ export default function ContactContent() {
                     onChange={(event) => handleChange("phone", event.target.value)}
                     onBlur={() => handleBlur("phone")}
                     placeholder="10-digit Indian number"
-                    className={`h-11 w-full rounded-lg border px-4 text-sm outline-none transition-colors ${
+                    className={`h-11 w-full rounded-lg border bg-bg-card px-4 text-sm text-text-primary outline-none transition-colors placeholder:text-text-tertiary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary ${
                       errors.phone
-                        ? "border-red-400 focus:border-red-500"
-                        : "border-gray-200 focus:border-blue-500 dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary dark:focus:border-accent-primary"
+                        ? "border-red-500 focus:border-red-500 dark:border-red-400 dark:focus:border-red-400"
+                        : "border-border-primary focus:border-accent-primary dark:border-dark-border-primary dark:focus:border-accent-primary"
                     }`}
                   />
-                  {errors.phone ? <p className="text-red-500 text-xs mt-0.5">{errors.phone}</p> : null}
+                  {errors.phone ? <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">{errors.phone}</p> : null}
                 </div>
 
                 <div className="mb-5 flex flex-col gap-1">
-                  <label className="text-sm font-medium text-[#1A1916]" htmlFor="email">
+                  <label className="text-sm font-medium text-text-primary dark:text-dark-text-primary" htmlFor="email">
                     Email (optional)
                   </label>
                   <input
@@ -317,17 +317,17 @@ export default function ContactContent() {
                     value={values.email}
                     onChange={(event) => handleChange("email", event.target.value)}
                     onBlur={() => handleBlur("email")}
-                    className={`h-11 w-full rounded-lg border px-4 text-sm outline-none transition-colors ${
+                    className={`h-11 w-full rounded-lg border bg-bg-card px-4 text-sm text-text-primary outline-none transition-colors placeholder:text-text-tertiary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary ${
                       errors.email
-                        ? "border-red-400 focus:border-red-500"
-                        : "border-gray-200 focus:border-blue-500 dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary dark:focus:border-accent-primary"
+                        ? "border-red-500 focus:border-red-500 dark:border-red-400 dark:focus:border-red-400"
+                        : "border-border-primary focus:border-accent-primary dark:border-dark-border-primary dark:focus:border-accent-primary"
                     }`}
                   />
-                  {errors.email ? <p className="text-red-500 text-xs mt-0.5">{errors.email}</p> : null}
+                  {errors.email ? <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">{errors.email}</p> : null}
                 </div>
 
                 <div className="mb-5 flex flex-col gap-1">
-                  <label className="text-sm font-medium text-[#1A1916]" htmlFor="message">
+                  <label className="text-sm font-medium text-text-primary dark:text-dark-text-primary" htmlFor="message">
                     Message / What do you need?
                   </label>
                   <textarea
@@ -336,17 +336,17 @@ export default function ContactContent() {
                     value={values.message}
                     onChange={(event) => handleChange("message", event.target.value)}
                     onBlur={() => handleBlur("message")}
-                    className={`w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-colors ${
+                    className={`w-full rounded-lg border bg-bg-card px-4 py-2.5 text-sm text-text-primary outline-none transition-colors placeholder:text-text-tertiary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary ${
                       errors.message
-                        ? "border-red-400 focus:border-red-500"
-                        : "border-gray-200 focus:border-blue-500 dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary dark:focus:border-accent-primary"
+                        ? "border-red-500 focus:border-red-500 dark:border-red-400 dark:focus:border-red-400"
+                        : "border-border-primary focus:border-accent-primary dark:border-dark-border-primary dark:focus:border-accent-primary"
                     }`}
                   />
-                  {errors.message ? <p className="text-red-500 text-xs mt-0.5">{errors.message}</p> : null}
+                  {errors.message ? <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">{errors.message}</p> : null}
                 </div>
 
                 <div className="mb-5 flex flex-col gap-1">
-                  <label className="text-sm font-medium text-[#1A1916]" htmlFor="source">
+                  <label className="text-sm font-medium text-text-primary dark:text-dark-text-primary" htmlFor="source">
                     How did you hear about us?
                   </label>
                   <select
@@ -354,10 +354,10 @@ export default function ContactContent() {
                     value={values.source}
                     onChange={(event) => handleChange("source", event.target.value)}
                     onBlur={() => handleBlur("source")}
-                    className={`h-11 w-full rounded-lg border px-4 text-sm outline-none transition-colors ${
+                    className={`h-11 w-full rounded-lg border bg-bg-card px-4 text-sm text-text-primary outline-none transition-colors dark:bg-dark-bg-secondary dark:text-dark-text-primary ${
                       errors.source
-                        ? "border-red-400 focus:border-red-500"
-                        : "border-gray-200 focus:border-blue-500 dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:focus:border-accent-primary"
+                        ? "border-red-500 focus:border-red-500 dark:border-red-400 dark:focus:border-red-400"
+                        : "border-border-primary focus:border-accent-primary dark:border-dark-border-primary dark:focus:border-accent-primary"
                     }`}
                   >
                     {sources.map((source) => (
@@ -366,13 +366,13 @@ export default function ContactContent() {
                       </option>
                     ))}
                   </select>
-                  {errors.source ? <p className="text-red-500 text-xs mt-0.5">{errors.source}</p> : null}
+                  {errors.source ? <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">{errors.source}</p> : null}
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="mt-1 h-12 w-full rounded-lg bg-[#1A1916] px-4 text-sm font-semibold text-white transition hover:bg-[#1A1916]/92 disabled:cursor-not-allowed disabled:opacity-70"
+                  className="mt-1 h-12 w-full rounded-lg bg-[#1A1916] px-4 text-sm font-semibold text-white transition hover:bg-[#1A1916]/92 disabled:cursor-not-allowed disabled:opacity-70 dark:bg-white dark:text-black dark:hover:bg-gray-200"
                 >
                   {isSubmitting ? "Sending..." : "Send Message →"}
                 </button>

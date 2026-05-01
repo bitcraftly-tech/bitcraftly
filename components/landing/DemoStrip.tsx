@@ -1,109 +1,78 @@
-"use client";
-
-import { FormEvent, useState } from "react";
-
+import Link from "next/link";
 import { CONTAINER } from "@/lib/constants";
-import { showErrorAlert, showSuccessAlert } from "@/lib/sweetAlert";
 
-const categories = ["Restaurant", "Salon", "Clinic", "Gym", "Shop"] as const;
-type Category = (typeof categories)[number];
-
-type PreviewResponse = {
-  preview_url: string;
-};
+const mobileFeatures = [
+  "React Native single codebase for iOS + Android",
+  "Reusable component architecture with scalable project setup",
+  "App Store and Play Store submission included",
+  "Push notifications, auth, payments and API integrations",
+  "Optional native modules for advanced device capabilities",
+  "6 months free maintenance and bug fixes",
+];
 
 export default function DemoStrip() {
-  const [businessName, setBusinessName] = useState("");
-  const [category, setCategory] = useState<Category>("Restaurant");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!businessName.trim()) {
-      setError("Business name daalna zaroori hai");
-      return;
-    }
-
-    setIsLoading(true);
-    setError("");
-
-    try {
-      const response = await fetch("/api/demo/preview", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          business_name: businessName.trim(),
-          category,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to generate preview");
-      }
-
-      const data: PreviewResponse = await response.json();
-      if (!data.preview_url) {
-        throw new Error("Missing preview URL");
-      }
-
-      await showSuccessAlert("Demo preview generated successfully.");
-      window.open(data.preview_url, "_blank", "noopener,noreferrer");
-    } catch (_err) {
-      setError("Something went wrong, please try again.");
-      await showErrorAlert("Something went wrong, please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   return (
-    <section id="demo" className="bg-text-primary py-10 dark:bg-dark-bg-secondary">
-      <div className={CONTAINER}>
-        <h2 className="text-center font-[var(--font-playfair)] text-2xl text-white sm:text-3xl">
-          Apne restaurant ki website 10 second mein dekhein
-        </h2>
-
-        <form onSubmit={handleSubmit} className="mx-auto mt-6 max-w-3xl">
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <input
-              type="text"
-              value={businessName}
-              onChange={(event) => setBusinessName(event.target.value)}
-              placeholder="Business name daalo..."
-              className="h-12 flex-1 rounded-full border border-white/20 bg-white px-5 text-sm text-text-primary outline-none transition focus:border-accent-primary dark:border-dark-border-primary dark:bg-dark-bg-card dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary"
-              disabled={isLoading}
-            />
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="h-12 rounded-full bg-[#2B5CE6] px-6 text-sm font-semibold text-white transition hover:bg-[#2B5CE6]/90 disabled:cursor-not-allowed disabled:opacity-70"
-            >
-              {isLoading ? "Generating..." : "Live Preview Generate Karo →"}
-            </button>
+    <section id="mobile-apps" className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-16 dark:border-dark-border-primary lg:py-24`}>
+      <div className="grid items-center gap-12 md:grid-cols-2">
+        <div className="relative md:order-2">
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-3xl" />
+          <div className="relative flex items-end justify-center gap-4">
+            <div className="w-44 rounded-[2.2rem] border border-border-primary bg-bg-card p-2 shadow-lg dark:border-dark-border-primary dark:bg-dark-bg-card">
+              <div className="h-80 rounded-[1.8rem] border border-border-primary bg-bg-secondary p-3 dark:border-dark-border-primary dark:bg-dark-bg-secondary">
+                <div className="mx-auto h-5 w-24 rounded-full bg-black/80" />
+                <div className="mt-8 flex h-[calc(100%-3rem)] items-center justify-center rounded-xl border border-border-primary text-sm text-text-tertiary dark:border-dark-border-primary dark:text-dark-text-tertiary">
+                  iOS App
+                </div>
+              </div>
+            </div>
+            <div className="-mb-5 w-44 rounded-[2rem] border border-border-primary bg-bg-card p-2 shadow-lg dark:border-dark-border-primary dark:bg-dark-bg-card">
+              <div className="h-80 rounded-[1.6rem] border border-border-primary bg-bg-secondary p-3 dark:border-dark-border-primary dark:bg-dark-bg-secondary">
+                <div className="mt-6 flex h-[calc(100%-2rem)] items-center justify-center rounded-xl border border-border-primary text-sm text-text-tertiary dark:border-dark-border-primary dark:text-dark-text-tertiary">
+                  Android App
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
 
-          {error ? <p className="mt-3 text-sm text-red-200 dark:text-red-300">{error}</p> : null}
+        <div className="md:order-1">
+          <div className="mb-4 flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-purple-500/30 bg-purple-500/10 text-xl">📱</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-purple-500">Service 02</span>
+          </div>
+          <h2 className="font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
+            Mobile App Development
+          </h2>
+          <p className="mt-4 text-base leading-7 text-text-secondary dark:text-dark-text-secondary">
+            React Native ke saath iOS aur Android dono ke liye single codebase app build karte hain. Faster delivery,
+            lower maintenance cost, aur production-ready performance for modern business workflows.
+          </p>
 
-          <div className="mt-5 flex flex-wrap gap-2">
-            {categories.map((item) => (
-              <button
-                key={item}
-                type="button"
-                onClick={() => setCategory(item)}
-                className={`rounded-full border px-4 py-2 text-xs font-medium uppercase tracking-wide transition ${
-                  category === item
-                    ? "border-white bg-white text-[#1A1916]"
-                    : "border-white/30 text-white/85 hover:border-white/60"
-                }`}
-              >
-                {item}
-              </button>
+          <ul className="mt-6 space-y-3">
+            {mobileFeatures.map((feature) => (
+              <li key={feature} className="flex items-start gap-3 text-sm text-text-secondary dark:text-dark-text-secondary">
+                <span className="mt-1 inline-block h-2 w-2 rounded-full bg-purple-500" />
+                <span>{feature}</span>
+              </li>
             ))}
+          </ul>
+
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            <Link href="/contact" className="rounded-xl bg-purple-600 px-5 py-3 text-sm font-semibold text-white hover:bg-purple-700">
+              Get App Quote
+            </Link>
+            <Link href="/demo" className="text-sm font-semibold text-purple-500 hover:text-purple-400">
+              React Native Consultation →
+            </Link>
           </div>
-        </form>
+
+          <div className="mt-6 inline-flex rounded-xl border border-border-primary bg-bg-card px-4 py-3 dark:border-dark-border-primary dark:bg-dark-bg-card">
+            <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
+              Starting from <span className="font-semibold text-text-primary dark:text-dark-text-primary">₹59,000</span> (iOS + Android single codebase)
+            </p>
+          </div>
+          <p className="mt-2 text-sm font-medium text-purple-600 dark:text-purple-400">Launch offer: First 10 clients</p>
+        </div>
       </div>
     </section>
   );
