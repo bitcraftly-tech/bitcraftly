@@ -4,6 +4,8 @@ import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
 import { CONTAINER } from "@/lib/constants";
 
+import { isGoogleLoginConfigured } from "@/lib/googleAuthEnv";
+
 import LoginContent from "./LoginContent";
 
 export const metadata: Metadata = {
@@ -14,12 +16,7 @@ export const metadata: Metadata = {
 /** Read OAuth env at request time (not baked into static HTML at build). */
 export const dynamic = "force-dynamic";
 
-const googleEnabled = Boolean(
-  process.env.AUTH_GOOGLE_ID &&
-    process.env.AUTH_GOOGLE_SECRET &&
-    process.env.AUTH_SECRET &&
-    process.env.NEXTAUTH_URL,
-);
+const googleEnabled = isGoogleLoginConfigured();
 
 export default function LoginPage() {
   return (

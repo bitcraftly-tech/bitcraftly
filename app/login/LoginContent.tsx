@@ -193,8 +193,8 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
 
           {!googleEnabled ? (
             <p className="mt-3 text-xs text-red-600">
-              Google login is not configured. In hosting (e.g. Vercel → Environment Variables) set `AUTH_GOOGLE_ID`,
-              `AUTH_GOOGLE_SECRET`, `AUTH_SECRET`, and `NEXTAUTH_URL` (your public site URL like https://bitcraftly.com), then redeploy.
+              Google login is not configured. In Vercel → Environment Variables set `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`,
+              `NEXTAUTH_URL` (https://bitcraftly.com), and either `AUTH_SECRET` or `NEXTAUTH_SECRET`, then redeploy.
             </p>
           ) : null}
 

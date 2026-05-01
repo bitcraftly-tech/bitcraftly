@@ -3,7 +3,9 @@ import type { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 
-const googleEnabled = Boolean(process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET);
+import { isGoogleLoginConfigured, resolvedNextAuthSecret } from "@/lib/googleAuthEnv";
+
+const googleEnabled = isGoogleLoginConfigured();
 const authApiBaseUrl = process.env.AUTH_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 const fallbackTestEmail = process.env.AUTH_TEST_EMAIL || "test.user@bitcraftly.local";
 const fallbackTestPassword = process.env.AUTH_TEST_PASSWORD || "Test@12345";
@@ -49,7 +51,7 @@ async function loginWithApi(email: string, password: string) {
 }
 
 export const authOptions: NextAuthOptions = {
-  secret: process.env.AUTH_SECRET,
+  secret: resolvedNextAuthSecret(),
   providers: [
     Credentials({
       name: "Credentials",
