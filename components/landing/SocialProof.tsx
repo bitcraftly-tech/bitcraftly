@@ -29,8 +29,8 @@ export default function SocialProof() {
             AI Automation Solutions
           </h2>
           <p className="mt-4 text-base leading-7 text-text-secondary dark:text-dark-text-secondary">
-            Repetitive tasks ko AI se automate karo: customer support, document flows aur reporting. Teams zyada focus
-            karengi strategy par, manual kaam par nahi.
+            Automate repetitive work with AI: customer support, document flows, and reporting — so teams spend more time
+            on strategy, not manual busywork. Customer-facing flows can tune for English, Hinglish, or bilingual scripts.
           </p>
 
           <div className="mt-6 space-y-4">
@@ -61,7 +61,7 @@ export default function SocialProof() {
                   AI
                 </div>
                 <div className="rounded-2xl rounded-tl-none border border-border-primary bg-bg-secondary px-4 py-2.5 text-sm text-text-primary dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary">
-                  Namaste! Main aapki kaise madad kar sakta hoon?
+                  Namaste 👋 Help chahiye? English ya Hinglish — dono chalenge.
                 </div>
               </div>
               <div className="flex justify-end gap-3">

@@ -52,8 +52,8 @@ export default function FinalCTA() {
                   </div>
                 </div>
                 <p className="mt-2 text-xs text-text-secondary dark:text-dark-text-secondary">
-                  Sticker ko front/rear windshield corner par chipkaya jata hai. Scan karte hi owner number masked format me
-                  show hota hai aur secure call relay open hota hai.
+                  The sticker is placed on the front or rear windshield corner. After a scan, the owner's number appears
+                  masked and opens a secure call relay.
                 </p>
                 <p className="mt-1 text-xs text-text-secondary dark:text-dark-text-secondary">
                   Demo contact: <span className="font-semibold text-text-primary dark:text-dark-text-primary">+91 9667710954</span> (Call/WhatsApp)
@@ -89,8 +89,12 @@ export default function FinalCTA() {
             Smart Parking Solutions
           </h2>
           <p className="mt-4 text-base leading-7 text-text-secondary dark:text-dark-text-secondary">
-            Ye service un car owners ke liye hai jo apni car par barcode sticker install karna chahte hain. Parking
-            issue hone par barcode scan karke owner ko turant call kiya ja sakta hai.
+            Built for drivers who want a barcode sticker on their vehicle. When parking goes wrong, a quick scan routes
+            a call straight to the owner.
+          </p>
+          <p className="mt-2 text-sm text-text-tertiary dark:text-dark-text-tertiary">
+            RWA / admin teams: rollout discuss karna ho to call ya WhatsApp par Hinglish mix mein baat ho sakti hai — SOPs
+            English PDF mein mil jayenge.
           </p>
 
           <div className="mt-6 space-y-4">

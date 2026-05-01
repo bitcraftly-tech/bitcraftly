@@ -5,15 +5,15 @@ import { CONTAINER } from "@/lib/constants";
 const perks = [
   {
     title: "Ownership, not tickets",
-    body: "Har project mein meaningful scope — tum feature own karoge, sirf peripheral fixes nahi.",
+    body: "Meaningful scope every project — you own features end to end, not only peripheral fixes.",
   },
   {
     title: "Remote-first + Ghaziabad",
-    body: "Zyaada asynchronous work, zaroor mil-baith ke liye Delhi-NCR timezone friendly.",
+    body: "Mostly async work with Delhi–NCR–friendly overlap when we sync live.",
   },
   {
     title: "Modern stack",
-    body: "Next.js, TypeScript, Python/FastAPI, aur jo client projects demand karein — seekh-te rehna default hai.",
+    body: "Next.js, TypeScript, Python/FastAPI, and whatever client work needs — continuous learning is the default.",
   },
 ];
 
@@ -23,7 +23,7 @@ type Role = {
   focus: string;
 };
 
-/** Jab roles live hon, yahan entries add kar do — niche list automatically render ho jayegi. */
+/** When roles go live, add entries here — the list below renders automatically. */
 const openings: Role[] = [];
 
 export default function CareersContent() {
@@ -41,14 +41,18 @@ export default function CareersContent() {
         <div className={`${CONTAINER} relative py-16 md:py-24`}>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2B5CE6] dark:text-[#7ea0ff]">Careers</p>
           <h1 className="mt-3 max-w-3xl font-[var(--font-playfair)] text-4xl font-semibold tracking-tight text-text-primary md:text-5xl dark:text-dark-text-primary">
-            Chhoti team,{" "}
+            Small team,{" "}
             <span className="bg-gradient-to-r from-emerald-600 to-[#2B5CE6] bg-clip-text text-transparent dark:from-emerald-400 dark:to-[#7ea0ff]">
-              lambi runway
+              long runway
             </span>
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-secondary dark:text-dark-text-secondary">
-            Bitcraftly SMB digital products ship karta hai — websites, apps, AI tooling, aur Smart Parking. Hum aligned builders dhoondh rahe hain jo clear
-            communication aur ship discipline ke saath kaam karein.
+            Bitcraftly ships digital products for SMBs — websites, apps, AI tooling, and Smart Parking. We're looking for
+            builders who communicate clearly and ship with discipline.
+          </p>
+          <p className="mt-3 max-w-2xl text-sm italic text-text-tertiary dark:text-dark-text-tertiary">
+            Interviews aur async updates English-first; agar tum Hinglish mein articulate ho — theek hai, clarity same
+            rehni chahiye.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
@@ -69,8 +73,10 @@ export default function CareersContent() {
 
       <section className="border-b border-border-primary py-14 dark:border-dark-border-primary">
         <div className={CONTAINER}>
-          <h2 className="font-[var(--font-playfair)] text-2xl font-semibold text-text-primary dark:text-dark-text-primary">Yahan kya milega</h2>
-          <p className="mt-2 max-w-2xl text-text-secondary dark:text-dark-text-secondary">Samajh-ke likhe gaye perks — flashy HR slides nahi.</p>
+          <h2 className="font-[var(--font-playfair)] text-2xl font-semibold text-text-primary dark:text-dark-text-primary">What you'll get</h2>
+          <p className="mt-2 max-w-2xl text-text-secondary dark:text-dark-text-secondary">
+            Honest perks, straight‑up bullets — flashy HR decks nahi.
+          </p>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {perks.map((p) => (
               <div
@@ -93,7 +99,7 @@ export default function CareersContent() {
           {openings.length > 0 ? (
             <>
               <p className="mt-2 max-w-2xl text-text-secondary dark:text-dark-text-secondary">
-                Profiles flexible hain — agar overlap ho to form par role mention kar do; hum shortlisted par loop back karte hain.
+                Profiles can overlap roles — mention the fit on the form and we'll loop back with shortlisted folks.
               </p>
               <ul className="mt-10 space-y-4">
                 {openings.map((role) => (
@@ -121,18 +127,20 @@ export default function CareersContent() {
           ) : (
             <>
               <p className="mt-2 max-w-2xl text-text-secondary dark:text-dark-text-secondary">
-                Filhaal hum kisi specific vacancy ke active hiring round mein nahi hain — lekin agla phase plan karte waqt seedha yahi section roles se update ho jayega.
+                We don't have an active hiring round for a specific vacancy right now — this section will update as soon as
+                the next phase opens.
               </p>
               <div className="mt-8 rounded-2xl border border-dashed border-border-primary bg-bg-card px-6 py-8 md:px-8 dark:border-dark-border-primary dark:bg-dark-bg-card">
                 <p className="inline-flex rounded-full border border-[#2B5CE6]/25 bg-[#2B5CE6]/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#2B5CE6] dark:border-[#7ea0ff]/30 dark:bg-[#2B5CE6]/10 dark:text-[#7ea0ff]">
                   No openings right now
                 </p>
                 <p className="mt-4 max-w-2xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
-                  Strong builders hum hamesha note karte hain. Agar tum Next.js / product / design / client-delivery vibe mein align ho — general candidature bhejo; jab formal role khulega, hum pehle existing pool ko dekhte hain.
+                  Strong builders stay on our radar. If Next.js / product / design / client delivery sounds like you, send a
+                  general application; when a formal role opens, we look at this pool first.
                 </p>
                 <ul className="mt-5 list-disc space-y-2 pl-5 text-sm text-text-secondary dark:text-dark-text-secondary">
-                  <li>Saath hi portfolio / GitHub / Behance ya 2 strongest work links attach karna mat bhoolna.</li>
-                  <li>Remote-friendly + Ghaziabad / NCR timezone overlap helpful hai delivery ke liye.</li>
+                  <li>Attach portfolio / GitHub / Behance or your two strongest work links.</li>
+                  <li>Remote-friendly roles still benefit from Ghaziabad / NCR timezone overlap for delivery.</li>
                 </ul>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link

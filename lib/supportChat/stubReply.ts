@@ -14,31 +14,31 @@ export function buildStubAssistantReply(messages: ChatTurnDto[], latestUserRaw: 
   const waHref = `https://wa.me/${SUPPORT_WHATSAPP_E164}`;
 
   if (!q.length) {
-    return "Kuch likhkar bhejo — pricing, demo, ya Smart Parking ke baare mein poochh sakte ho.";
+    return "Send something — you can ask about pricing, demos, or Smart Parking.";
   }
 
   if (/^(hi|hello|hey|namaste|नमस्ते|hii)\b|^good (morning|afternoon|evening)/u.test(q)) {
-    return `Hi! Main Bitcraftly ka assistant hoon.\nAbhi live AI integrate ho rahi hai — tab tak main quick answers de sakta hoon.\nJaldi response chahiye? WhatsApp (${SUPPORT_PHONE_DISPLAY}) ya ${SUPPORT_EMAIL} par ping karo.\nShortcuts: pricing, parking demo, website.`;
+    return `Hi / Namaste! I'm Bitcraftly's assistant — English ya Hinglish, dono theek.\nLive AI is being integrated — until then I can share quick answers.\nNeed a fast reply? WhatsApp (${SUPPORT_PHONE_DISPLAY}) ya email ${SUPPORT_EMAIL} fastest.\nShortcuts: pricing, parking demo, website.`;
   }
 
   if (/(price|pricing|cost|budget|packages|quote|भाव|प्राइस|\u20b9)/i.test(q)) {
-    return `Pricing har project ke scope par depend karti hai (website, app, AI, Smart Parking).\nHomepage par Pricing section dekho, ya Consultation book karo: /contact\nWhatsApp: ${waHref}`;
+    return `Pricing depends on scope (website, app, AI, Smart Parking).\nSee the Pricing section on the homepage, or book a consultation: /contact\nWhatsApp: ${waHref}`;
   }
 
   if (/(parking|barcode|sticker|society\s*parking)/i.test(q)) {
-    return `Smart Parking: barcode sticker + gate scan → owner contact tak connect.\nDemo: /contact?service=Smart%20Parking&intent=demo\nFlow: homepage par Smart Parking → how it works.${messages.length <= 4 ? "\nDetailed AI jawab baad mein isi chat se milega." : ""}`;
+    return `Smart Parking: barcode sticker + gate scan → connect to the owner.\nDemo: /contact?service=Smart%20Parking&intent=demo\nFlow: homepage → Smart Parking → how it works.${messages.length <= 4 ? "\nMore detailed AI answers will land in this chat soon." : ""}`;
   }
 
   if (/(website|web\b|landing|seo|domain|होस्ट)/i.test(q)) {
-    return `Websites: custom design + mobile fast + WhatsApp/forms + analytics.\nQuote: /contact — scope bata do, hum jaldi revert karte hain.`;
+    return `Websites: custom design, fast on mobile, WhatsApp/forms, analytics.\nQuote: /contact — share your scope and we'll respond quickly.`;
   }
 
   if (/(app|mobile|android|ios|react native)/i.test(q)) {
-    return `Apps: React Native se iOS + Android ek codebase.\nDiscuss: /contact — apna business type (salon/clinic/restaurant etc.) mention karna.`;
+    return `Apps: React Native for iOS + Android from one codebase.\nDiscuss: /contact — mention your business type (salon, clinic, restaurant, etc.).`;
   }
 
   if (/(ai|automation|chatbot|gpt|workflow)/i.test(q)) {
-    return `AI automation: chatbots, document flows, integrations.\nProcess discuss karne ke liye /contact use karo.`;
+    return `AI automation: chatbots, document flows, integrations.\nTo walk through the process, use /contact.`;
   }
 
   if (/(contact|call|whatsapp|mail|support|फोन|मोबाइल)/i.test(q)) {
@@ -46,12 +46,12 @@ export function buildStubAssistantReply(messages: ChatTurnDto[], latestUserRaw: 
   }
 
   if (/(team|office|founder|ghaziabad|who are you)/i.test(q)) {
-    return `Hum Ghaziabad / NCR se SMB digital delivery karte hain. Team dekho: /team`;
+    return `We're a Ghaziabad / NCR team shipping digital projects for SMBs. See /team`;
   }
 
   if (/\b(thanks?|thank you)\b/i.test(q) || /\u0927\u0928\u094d\u092f\u0935\u093e\u0926/u.test(q)) {
-    return "You're welcome 🙂 — aur koi sawaal ho to likho.";
+    return "You're welcome 🙂 — aur koi sawaal ho to likh dena!";
   }
 
-  return `Is topic par detail ke liye /contact par message chhod do (${SUPPORT_EMAIL}).\nYahi chat jald AI se connect ho jayegi — tab tak shortcuts try karo: pricing, parking demo, website, contact.`;
+  return `For more detail on that topic, leave a message at /contact (${SUPPORT_EMAIL}).\nThis chat will connect to AI soon — meanwhile try shortcuts: pricing, parking demo, website, contact.`;
 }

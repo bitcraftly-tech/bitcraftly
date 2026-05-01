@@ -6,27 +6,27 @@ const steps = [
     step: "01",
     title: "Setup and Installation",
     points: [
-      "Car owner apni vehicle par unique barcode sticker install karta hai.",
-      "Vehicle number aur owner contact secure mapping me store hota hai.",
-      "Society admin aur guards ko scan access diya jata hai.",
+      "The vehicle owner installs a unique barcode sticker on their vehicle.",
+      "Vehicle registration and owner contact are stored in a secure mapping.",
+      "Society admins and guards receive scan access.",
     ],
   },
   {
     step: "02",
     title: "Daily Usage",
     points: [
-      "Parking issue dikhe to barcode scan karo.",
-      "System owner identify karta hai aur call option deta hai.",
-      "Owner ko instant call ya WhatsApp alert bheja ja sakta hai.",
+      "If there's a parking issue, anyone can scan the barcode.",
+      "The system identifies the owner and offers a call option.",
+      "The owner can get an instant call or WhatsApp alert.",
     ],
   },
   {
     step: "03",
     title: "Reports and Control",
     points: [
-      "Admins parking incidents aur response time track karte hain.",
-      "Frequent complaints dashboard par highlight hoti hain.",
-      "Monthly summary reports management ke liye available rehti hain.",
+      "Admins track parking incidents and response times.",
+      "Frequent complaints are highlighted on the dashboard.",
+      "Monthly summary reports stay available for management.",
     ],
   },
 ];
@@ -38,10 +38,14 @@ export default function ParkingHowItWorks() {
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-emerald-600 dark:text-emerald-400">Smart Parking Flow</p>
           <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
-            Smart parking kaise kaam karta hai?
+            How does smart parking work?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-text-secondary dark:text-dark-text-secondary sm:text-base">
-            Simple 3-step process jisme barcode scan karke car owner se direct contact kiya ja sakta hai.
+            A simple three-step flow: scan the barcode to reach the car owner directly when something goes wrong.
+          </p>
+          <p className="mx-auto mt-2 max-w-2xl text-xs text-text-tertiary dark:text-dark-text-tertiary sm:text-sm">
+            Society admins ke liye: demo ya rollout discuss karna ho to WhatsApp par “Smart Parking demo” likh kar ping
+            karo — reply mix English–Hinglish mein aa sakta hai.
           </p>
         </div>
 

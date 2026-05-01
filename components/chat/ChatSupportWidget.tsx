@@ -9,7 +9,7 @@ import { clearChatMessages, loadChatMessages, saveChatMessages } from "@/lib/sup
 import type { ClientChatMessage, ChatTurnDto } from "@/lib/supportChat/types";
 
 const WELCOME_TEXT =
-  "Namaste 👋 Main Bitcraftly support assistant hoon.\nPricing, demos, ya Smart Parking — short sawaal yahan bhejo.\nPattern ready: /api/support/chat (+ optional SUPPORT_CHAT_WEBHOOK_URL).\nJo abhi chal raha hai: smart stubs till LLM wires in.";
+  "Hi 👋 Namaste — Bitcraftly support assistant here.\nEnglish ya Hinglish, short messages welcome — pricing, demos, Smart Parking.\nWiring: /api/support/chat (+ optional SUPPORT_CHAT_WEBHOOK_URL).\nRight now you'll get smart stub replies until the LLM is connected.";
 
 function newMsgId(prefix: string) {
   try {
@@ -190,7 +190,7 @@ export default function ChatSupportWidget() {
     const lastTurn = payload[payload.length - 1];
     if (!lastTurn || lastTurn.role !== "user") {
       setBusy(false);
-      toast.error("Sync issue — page refresh karke dubara try karo.");
+      toast.error("Sync issue — refresh the page and try again.");
       return;
     }
 
@@ -204,7 +204,7 @@ export default function ChatSupportWidget() {
       const body = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        toast.error(typeof body?.error === "string" ? body.error : "Server error — dubara try karo.");
+        toast.error(typeof body?.error === "string" ? body.error : "Server error — please try again.");
         setMessages((prev) => prev.map((x) => (x.id === optimisticUser.id ? { ...x, status: "error" as const } : x)));
         return;
       }
@@ -226,7 +226,7 @@ export default function ChatSupportWidget() {
 
       setMessages((prev) => [...prev, assistantBubble]);
     } catch {
-      toast.error("Network error — dubara send karo.");
+      toast.error("Network error — please send again.");
       setMessages((prev) => prev.map((x) => (x.id === optimisticUser.id ? { ...x, status: "error" as const } : x)));
     } finally {
       setBusy(false);
@@ -248,7 +248,7 @@ export default function ChatSupportWidget() {
           onClick={() => setOpen((o) => !o)}
           className="support-chat-fab-btn inline-flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-[#2B5CE6] text-white shadow-lg shadow-[#2B5CE6]/35 transition hover:scale-[1.03] hover:bg-[#1e47c4] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2B5CE6] dark:bg-[#4068ff] dark:hover:bg-[#2f57e6]"
         >
-          <span className="sr-only">AI support chat kholo ya band karo</span>
+          <span className="sr-only">Open or close AI support chat</span>
           <svg
             viewBox="0 0 24 24"
             className="h-7 w-7 shrink-0 motion-safe:animate-[support-chat-fab-icon_2.4s_ease-in-out_infinite]"
@@ -269,7 +269,7 @@ export default function ChatSupportWidget() {
         <div className="fixed inset-0 z-[48]" role="presentation">
           <button
             type="button"
-            aria-label="Chat band karo"
+            aria-label="Close chat overlay"
             className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"
             onClick={() => setOpen(false)}
           />
@@ -301,7 +301,7 @@ export default function ChatSupportWidget() {
                   <h2 id={headingId} className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">
                     AI support chat
                   </h2>
-                  <p className="mt-0.5 text-xs text-text-tertiary dark:text-dark-text-tertiary">Stub replies abhi · webhook / LLM-ready</p>
+                  <p className="mt-0.5 text-xs text-text-tertiary dark:text-dark-text-tertiary">Stub replies for now · webhook / LLM-ready</p>
                 </div>
               </div>
               <div className="flex shrink-0 gap-1">
@@ -337,7 +337,7 @@ export default function ChatSupportWidget() {
                   >
                     <MessageBody content={msg.content} />
                     {msg.role === "user" && msg.status === "error" ? (
-                      <p className="mt-1 border-t border-white/25 pt-1 text-[10px] uppercase tracking-wide text-white/95">Deliver nahi hua · dubara send karo</p>
+                      <p className="mt-1 border-t border-white/25 pt-1 text-[10px] uppercase tracking-wide text-white/95">Not delivered · send again</p>
                     ) : null}
                   </div>
                 </div>
@@ -365,7 +365,7 @@ export default function ChatSupportWidget() {
                       void handleSend();
                     }
                   }}
-                  placeholder="Likho… (Shift+Enter nayi line)"
+                  placeholder="Type a message… (Shift+Enter for new line)"
                   className="max-h-28 min-h-[44px] w-0 flex-1 resize-none rounded-xl border border-border-primary bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2B5CE6]/35 dark:border-dark-border-primary dark:bg-dark-bg-primary dark:text-dark-text-primary dark:focus-visible:ring-[#7ea0ff]/35"
                 />
                 <button
@@ -378,7 +378,7 @@ export default function ChatSupportWidget() {
                 </button>
               </div>
               <p className="mt-2 text-[10px] leading-snug text-text-tertiary dark:text-dark-text-tertiary">
-                Ye tab sirf browser session mein rahata hai. Passwords / OTP mat bhejo.
+                This chat stays in your browser session only. Do not send passwords or OTPs.
               </p>
             </div>
           </div>

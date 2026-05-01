@@ -50,10 +50,10 @@ export default function ContactContent() {
 
   const timeline = useMemo(
     () => [
-      "Aap form bharo (2 min)",
-      "Hum call/WhatsApp karein (same day)",
-      "Free demo dekhein (15 min)",
-      "48 hrs mein live",
+      "Fill the form (about 2 min)",
+      "We reply on call/WhatsApp (same day)",
+      "Free demo (15 min)",
+      "Go live within 48 hours",
     ],
     [],
   );
@@ -198,9 +198,14 @@ export default function ContactContent() {
       <div className={`${CONTAINER} grid grid-cols-1 gap-12 md:grid-cols-5`}>
         <section className="md:col-span-2">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">Get in touch</p>
-          <h1 className="mt-3 font-[var(--font-playfair)] text-4xl text-text-primary dark:text-dark-text-primary sm:text-5xl">Baat karte hain</h1>
+          <h1 className="mt-3 font-[var(--font-playfair)] text-4xl text-text-primary dark:text-dark-text-primary sm:text-5xl">
+            Let's talk
+          </h1>
           <p className="mt-4 text-sm leading-7 text-text-secondary dark:text-dark-text-secondary">
-            Demo chahiye? Koi sawaal hai? Hum 24 ghante mein jawab dete hain.
+            Need a demo or have questions? We usually respond within 24 hours.
+          </p>
+          <p className="mt-3 text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
+            Zarurat ho to message Hindi–English mix mein likh sakte ho — padh kar hi reply karte hain.
           </p>
 
           <div className="mt-7 space-y-3">

@@ -44,8 +44,12 @@ export default function DemoStrip() {
             Mobile App Development
           </h2>
           <p className="mt-4 text-base leading-7 text-text-secondary dark:text-dark-text-secondary">
-            React Native ke saath iOS aur Android dono ke liye single codebase app build karte hain. Faster delivery,
-            lower maintenance cost, aur production-ready performance for modern business workflows.
+            We ship iOS and Android apps from one React Native codebase — faster delivery, lower maintenance, and
+            production-ready performance for modern business workflows.
+          </p>
+          <p className="mt-2 text-sm text-text-tertiary dark:text-dark-text-tertiary">
+            In‑app strings Hindi / Hinglish / English — teeno handle ho sakte hain; review builds hum shared sheet par
+            karte hain.
           </p>
 
           <ul className="mt-6 space-y-3">

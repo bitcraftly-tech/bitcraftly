@@ -78,6 +78,10 @@ export default function Pricing() {
       <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
         Service-wise pricing
       </h2>
+      <p className="mt-4 max-w-3xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
+        Final quote scope par depend karta hai — form bharo, hum same day revert karte hain where possible (English ya
+        Hinglish breakdown, jo aapke liye comfortable ho).
+      </p>
 
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         {plans.map((plan) => (

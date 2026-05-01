@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { CONTAINER } from "@/lib/constants";
 
-/** Jab asli bios public karni hon, `false` karo — blur aur overlay hat jayenge. */
+/** Set to `false` when you're ready to show real bios — blur and overlay will disappear. */
 const BLUR_TEAM_CARD_GRID = true;
 
 type TeamMember = {
@@ -16,15 +16,15 @@ type TeamMember = {
 const pillars = [
   {
     title: "Own the outcome",
-    body: "Hum delivery end-to-end lete hain — clear scope, timelines, aur handoff ke baad bhi support.",
+    body: "We take delivery end to end — clear scope and timelines — with support after handoff.",
   },
   {
     title: "Ship in days, not months",
-    body: "Templates, reusable components, aur automation se aapki team ka time bachta hai.",
+    body: "Templates, reusable components, and automation save your team time.",
   },
   {
     title: "Plain-language updates",
-    body: "Tech jargon kam, business impact zyada — har milestone par short, honest status.",
+    body: "Less jargon, more business impact — short, honest status at every milestone.",
   },
 ];
 
@@ -32,28 +32,28 @@ const members: TeamMember[] = [
   {
     name: "Raj Malhotra",
     role: "Founder & Strategy",
-    bio: "SMB growth, partnerships, aur product direction — Ghaziabad se pan-India delivery.",
+    bio: "SMB growth, partnerships, and product direction — pan-India delivery from Ghaziabad.",
     initials: "RM",
     accent: "from-[#2B5CE6] to-indigo-600",
   },
   {
     name: "Priya Sharma",
     role: "Technical Lead",
-    bio: "Next.js, APIs, aur infra — scalable apps jo traffic utha lein aur maintainable rahein.",
+    bio: "Next.js, APIs, and infra — scalable apps that handle traffic and stay maintainable.",
     initials: "PS",
     accent: "from-violet-600 to-purple-700",
   },
   {
     name: "Arjun Verma",
     role: "Product & UX",
-    bio: "Landing flows, dashboards, aur design systems jo aapki brand cohesive rakhein.",
+    bio: "Landing flows, dashboards, and design systems that keep your brand cohesive.",
     initials: "AV",
     accent: "from-teal-600 to-emerald-700",
   },
   {
     name: "Sneha Kapoor",
     role: "Client Success",
-    bio: "Onboarding, training, aur post-launch tweaks — taake team turant productive ho jaye.",
+    bio: "Onboarding, training, and post-launch tweaks so teams get productive fast.",
     initials: "SK",
     accent: "from-rose-600 to-orange-600",
   },
@@ -80,14 +80,18 @@ export default function TeamContent() {
         <div className={`${CONTAINER} relative py-16 md:py-24`}>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2B5CE6] dark:text-[#7ea0ff]">People</p>
           <h1 className="mt-3 max-w-3xl font-[var(--font-playfair)] text-4xl font-semibold tracking-tight text-text-primary md:text-5xl dark:text-dark-text-primary">
-            Chhota team,{" "}
+            Small team,{" "}
             <span className="bg-gradient-to-r from-[#2B5CE6] to-indigo-500 bg-clip-text text-transparent dark:from-[#7ea0ff] dark:to-indigo-300">
-              seedha impact
+              direct impact
             </span>
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-secondary dark:text-dark-text-secondary">
-            Bitcraftly ek focused delivery unit hai — websites, apps, AI workflows, aur Smart Parking ke liye hum design se deploy tak
-            saath rehte hain. Yeh woh log hain jo aapke project ko ground par le aate hain.
+            Bitcraftly is a focused delivery squad for websites, apps, AI workflows, and Smart Parking — from design through
+            deploy. These are the people who ship your work on the ground.
+          </p>
+          <p className="mt-3 max-w-2xl text-sm text-text-tertiary dark:text-dark-text-tertiary">
+            Client calls kabhi‑kabhi Hindi–English mix mein chal jaati hain; milestones, timelines, aur handoff docs English
+            mein tidy rehte hain.
           </p>
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {stats.map((item) => (
@@ -105,8 +109,8 @@ export default function TeamContent() {
 
       <section className="border-b border-border-primary py-14 dark:border-dark-border-primary">
         <div className={CONTAINER}>
-          <h2 className="font-[var(--font-playfair)] text-2xl font-semibold text-text-primary dark:text-dark-text-primary">Kaise kaam karte hain</h2>
-          <p className="mt-2 max-w-2xl text-text-secondary dark:text-dark-text-secondary">Teen cheezein jo har engagement mein non-negotiable hain.</p>
+          <h2 className="font-[var(--font-playfair)] text-2xl font-semibold text-text-primary dark:text-dark-text-primary">How we work</h2>
+          <p className="mt-2 max-w-2xl text-text-secondary dark:text-dark-text-secondary">Three non‑negotiables on every engagement.</p>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {pillars.map((p) => (
               <div
@@ -126,7 +130,7 @@ export default function TeamContent() {
         <div className={CONTAINER}>
           <h2 className="font-[var(--font-playfair)] text-2xl font-semibold text-text-primary dark:text-dark-text-primary">Core team</h2>
           <p className="mt-2 max-w-2xl text-text-secondary dark:text-dark-text-secondary">
-            Delivery, product, aur client success — ek hi thread mein taake aapko alag-alag vendors ke beech relay na karna pade.
+            Delivery, product, and client success stay on one thread so you aren't relaying between vendors.
           </p>
           {BLUR_TEAM_CARD_GRID ? (
             <>
@@ -187,9 +191,9 @@ export default function TeamContent() {
       <section className="border-t border-border-primary bg-bg-secondary py-14 dark:border-dark-border-primary dark:bg-dark-bg-secondary">
         <div className={`${CONTAINER} flex flex-col items-start justify-between gap-8 rounded-3xl border border-border-primary bg-bg-card px-8 py-10 md:flex-row md:items-center dark:border-dark-border-primary dark:bg-dark-bg-card`}>
           <div>
-            <h2 className="font-[var(--font-playfair)] text-2xl font-semibold text-text-primary dark:text-dark-text-primary">Humare saath build karein</h2>
+            <h2 className="font-[var(--font-playfair)] text-2xl font-semibold text-text-primary dark:text-dark-text-primary">Build with us</h2>
             <p className="mt-2 max-w-xl text-text-secondary dark:text-dark-text-secondary">
-              Naya product, redesign, ya Smart Parking pilot — 15 minute free consult par scope aur next steps clear kar lete hain.
+              New product, redesign, or Smart Parking pilot — a free 15‑minute consult to align scope and next steps.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

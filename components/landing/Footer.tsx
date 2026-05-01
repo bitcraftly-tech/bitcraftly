@@ -64,6 +64,9 @@ export default function Footer() {
             <p className="mt-3 text-sm text-text-secondary dark:text-dark-text-secondary">
               Digital transformation agency for Indian businesses.
             </p>
+            <p className="mt-2 text-xs text-text-tertiary dark:text-dark-text-tertiary">
+              Ghaziabad se pan‑India · local rapport, polished delivery.
+            </p>
             <div className="mt-4 flex flex-wrap items-center gap-2.5">
               <span
                 className="inline-flex h-9 w-9 cursor-default items-center justify-center rounded-full border border-red-500/20 bg-red-500/[0.08] text-red-600 opacity-60 dark:border-red-400/25 dark:bg-red-500/10 dark:text-red-400"

@@ -77,13 +77,15 @@ export default function Hero() {
         </div>
 
         <h1 className="mt-6 font-[var(--font-playfair)] text-3xl font-semibold leading-tight text-text-primary dark:text-dark-text-primary sm:text-4xl lg:text-5xl">
-          Website se lekar <span className="text-accent-primary">AI</span> tak —
+          From websites to <span className="text-accent-primary">AI</span> —
           <br />
-          aapki business ki har digital zaroorat
+          every digital need your business has
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-text-secondary dark:text-dark-text-secondary lg:mx-0 lg:text-lg">
-          Hum websites banate hain, mobile apps develop karte hain, AI se kaam automate karte hain, aur smart parking
-          solutions dete hain.
+          We build websites, ship mobile apps, automate work with AI, and deliver smart parking solutions.
+        </p>
+        <p className="mx-auto mt-3 max-w-2xl text-sm italic leading-relaxed text-text-tertiary dark:text-dark-text-tertiary lg:mx-0">
+          WhatsApp / calls par English–Hinglish mix bilkul comfortable — timelines aur scope hamesha clear, likh kar confirm.
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">

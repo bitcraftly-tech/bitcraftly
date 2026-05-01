@@ -22,8 +22,11 @@ export default function Features() {
             Website Development
           </h2>
           <p className="mt-4 text-base leading-7 text-text-secondary dark:text-dark-text-secondary">
-            Aapki business ke liye professional website with lead capture, WhatsApp integration aur SEO-ready
-            architecture. Fast turnaround with premium quality.
+            A professional site for your business with lead capture, WhatsApp integration, and SEO-ready architecture.
+            Fast turnaround with premium quality.
+          </p>
+          <p className="mt-2 text-sm text-text-tertiary dark:text-dark-text-tertiary">
+            Copy Hindi–English mix mein chahiye ho to brief likh do — layout aur SEO labels English-first rakhte hain.
           </p>
 
           <ul className="mt-6 space-y-3">
