@@ -11,6 +11,13 @@ def normalize_phone_for_whatsapp(raw_phone: str) -> str:
     return "".join(char for char in raw_phone if char.isdigit())
 
 
+def mask_phone(raw_phone: str) -> str:
+    phone = normalize_phone_for_whatsapp(raw_phone)
+    if len(phone) <= 4:
+        return "*" * len(phone)
+    return f"+{'*' * (len(phone) - 4)}{phone[-4:]}"
+
+
 def generate_unique_qr_code(db: Session) -> str:
     while True:
         code = secrets.token_urlsafe(8).replace("-", "").replace("_", "")[:12]

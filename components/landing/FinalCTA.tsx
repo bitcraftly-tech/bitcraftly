@@ -8,11 +8,11 @@ const parkingFeatures = [
   },
   {
     title: "Scan and Call Owner",
-    desc: "If parking causes a blockage, anyone can scan and call the owner instantly.",
+    desc: "If parking causes a blockage, anyone can scan and call instantly without seeing full owner number.",
   },
   {
     title: "Privacy-safe Contact Flow",
-    desc: "Contact details are shared through controlled access so communication is quick and safer.",
+    desc: "Barcode opens a secure relay page where owner number stays masked and call is routed safely.",
   },
   {
     title: "Society and Complex Management",
@@ -29,34 +29,53 @@ export default function FinalCTA() {
           <div className="relative rounded-2xl border border-border-primary bg-bg-card p-5 dark:border-dark-border-primary dark:bg-dark-bg-card">
             <div className="rounded-xl border border-border-primary bg-bg-secondary p-4 dark:border-dark-border-primary dark:bg-dark-bg-secondary">
               <div className="mb-4 flex items-center justify-between">
-                <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Illegal Parking Report</p>
-                <span className="rounded-full bg-red-500/15 px-2 py-1 text-xs font-semibold text-red-500">Unauthorized</span>
+                <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Car Sticker Demo</p>
+                <span className="rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-semibold text-emerald-600">Live Preview</span>
               </div>
-              <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3">
-                <div className="flex gap-1.5">
-                  {Array.from({ length: 12 }).map((_, idx) => (
-                    <span key={idx} className="h-10 w-1 rounded-sm bg-emerald-400/60" />
-                  ))}
+              <div className="rounded-lg border border-dashed border-emerald-500/40 bg-emerald-500/5 p-3">
+                <div className="rounded-md border border-border-primary bg-white p-3 dark:border-dark-border-primary dark:bg-dark-bg-secondary">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-text-tertiary dark:text-dark-text-tertiary">
+                    Bitcraftly Smart Parking
+                  </p>
+                <div className="mt-2 flex items-center gap-3">
+                  <img
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fbitcraftly-tech-v2.vercel.app%2Fparking%2Freport%2Fdemo"
+                    alt="Scannable demo QR for parking report"
+                    className="h-20 w-20 rounded border border-border-primary bg-white p-1 dark:border-dark-border-primary"
+                  />
                 </div>
-                <p className="mt-2 text-xs text-text-tertiary dark:text-dark-text-tertiary">Scan parking barcode</p>
+                  <div className="mt-2 flex items-center justify-between text-[11px] text-text-secondary dark:text-dark-text-secondary">
+                    <span className="font-mono">SP-UP14-UP14ES0111</span>
+                    <span className="rounded bg-emerald-500/10 px-1.5 py-0.5 text-emerald-700 dark:text-emerald-400">
+                      Scan QR
+                    </span>
+                  </div>
+                </div>
+                <p className="mt-2 text-xs text-text-secondary dark:text-dark-text-secondary">
+                  Sticker ko front/rear windshield corner par chipkaya jata hai. Scan karte hi owner number masked format me
+                  show hota hai aur secure call relay open hota hai.
+                </p>
+                <p className="mt-1 text-xs text-text-secondary dark:text-dark-text-secondary">
+                  Demo contact: <span className="font-semibold text-text-primary dark:text-dark-text-primary">+91 9667710954</span> (Call/WhatsApp)
+                </p>
               </div>
-              <div className="mt-4 space-y-2 text-sm">
-                <div className="flex justify-between text-text-secondary dark:text-dark-text-secondary">
-                  <span>Vehicle</span>
-                  <span className="font-mono text-text-primary dark:text-dark-text-primary">DL 01 AB 1234</span>
-                </div>
-                <div className="flex justify-between text-text-secondary dark:text-dark-text-secondary">
-                  <span>Owner</span>
-                  <span className="text-emerald-600 dark:text-emerald-400">+91 98765 43210</span>
-                </div>
-                <div className="flex justify-between text-text-secondary dark:text-dark-text-secondary">
-                  <span>Issue</span>
-                  <span className="text-text-primary dark:text-dark-text-primary">Wrong parking / blocked exit</span>
-                </div>
-              </div>
-              <button type="button" className="mt-4 w-full rounded-lg bg-emerald-600 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700">
-                Call Car Owner
-              </button>
+              <Link
+                href="/parking/report/demo"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-emerald-600 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700"
+              >
+                Open Live Report Flow
+              </Link>
+              <p className="mt-2 text-[11px] text-text-tertiary dark:text-dark-text-tertiary">
+                Demo shows masked number + secure call relay.
+              </p>
+              <Link
+                href="https://wa.me/919667710954"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-2 inline-flex text-xs font-semibold text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300"
+              >
+                Open WhatsApp Demo Contact →
+              </Link>
             </div>
           </div>
         </div>
@@ -101,7 +120,7 @@ export default function FinalCTA() {
 
           <div className="mt-6 inline-flex rounded-xl border border-border-primary bg-bg-card px-4 py-3 dark:border-dark-border-primary dark:bg-dark-bg-card">
             <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-              Pricing <span className="font-semibold text-text-primary dark:text-dark-text-primary">₹49/car/month</span> (platform only) · barcode sticker printing extra
+              Launch Offer: <span className="font-semibold text-text-primary dark:text-dark-text-primary">₹29/car/month</span> (first 3 months, min 100 cars) · Standard ₹49/car/month · 500+ cars ₹39/car/month · barcode sticker printing extra
             </p>
           </div>
         </div>

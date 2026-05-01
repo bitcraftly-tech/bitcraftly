@@ -64,3 +64,98 @@ body {
   }
 }
 
+@keyframes footer-nav-arrow {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.footer-nav-arrow {
+  display: inline-block;
+  animation: footer-nav-arrow 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-nav-arrow {
+    animation: none;
+    opacity: 0.92;
+  }
+}
+
+@keyframes support-chat-fab-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70% {
+    opacity: 0.12;
+  }
+  100% {
+    transform: scale(1.85);
+    opacity: 0;
+  }
+}
+
+@keyframes support-chat-fab-icon {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-1px) scale(1.05);
+  }
+}
+
+@keyframes support-chat-fab-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 10px 25px -5px rgb(43 92 230 / 0.38),
+      0 0 0 0 rgb(43 92 230 / 0.35);
+  }
+  50% {
+    box-shadow:
+      0 14px 32px -4px rgb(43 92 230 / 0.45),
+      0 0 0 10px rgb(43 92 230 / 0);
+  }
+}
+
+.support-chat-fab-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  border: 2px solid rgb(43 92 230 / 0.55);
+  animation: support-chat-fab-ring 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.support-chat-fab-ring--delayed {
+  animation-delay: 1.3s;
+}
+
+.dark .support-chat-fab-ring {
+  border-color: rgb(96 139 255 / 0.5);
+}
+
+.support-chat-fab-btn {
+  position: relative;
+  z-index: 1;
+  animation: support-chat-fab-glow 2.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .support-chat-fab-ring {
+    animation: none;
+    opacity: 0;
+  }
+
+  .support-chat-fab-btn {
+    animation: none;
+  }
+}
+

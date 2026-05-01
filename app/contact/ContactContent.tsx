@@ -63,6 +63,7 @@ export default function ContactContent() {
     const serviceRaw = params.get("service") || "";
     const service = serviceRaw.toLowerCase();
     const intent = (params.get("intent") || "").toLowerCase();
+    const roleParam = params.get("role") || "";
     const source = (params.get("source") || "").toLowerCase();
 
     if (!service && !intent && !source) return;
@@ -80,6 +81,17 @@ export default function ContactContent() {
 
       if (intent === "demo" && !next.message.trim()) {
         next.message = "I want to schedule a free demo.";
+      }
+
+      if (intent === "careers") {
+        if (!next.message.trim()) {
+          const roleLine =
+            roleParam.trim().length > 0
+              ? ` I'm applying for the ${roleParam.trim()} role at Bitcraftly. Portfolio / LinkedIn links are attached below.\n`
+              : " I'm reaching out regarding career opportunities at Bitcraftly. Portfolio / GitHub links are below.\n";
+          next.message = `Careers inquiry.${roleLine}`.trimEnd();
+        }
+        next.source = "Other";
       }
 
       if (source === "smart-parking-cta") {

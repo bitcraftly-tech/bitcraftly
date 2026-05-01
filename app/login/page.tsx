@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
@@ -25,7 +26,10 @@ export default function LoginPage() {
       <main>
         <section className="border-b border-[#1A1916]/10 bg-white py-3">
           <div className={`${CONTAINER} text-xs text-[#1A1916]/60`}>
-            Home <span className="px-2">/</span> Login
+            <Link href="/" className="hover:text-[#1A1916] hover:underline">
+              Home
+            </Link>
+            <span className="px-2">/</span> Login
           </div>
         </section>
         <LoginContent googleEnabled={googleEnabled} />

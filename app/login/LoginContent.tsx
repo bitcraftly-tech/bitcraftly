@@ -225,11 +225,6 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
               Book a demo
             </Link>
           </p>
-          <p className="mt-2 text-center text-sm text-[#1A1916]/70">
-            <Link href="/" className="font-semibold text-[#2B5CE6] hover:underline">
-              Back to Home
-            </Link>
-          </p>
         </div>
       </div>
     </section>

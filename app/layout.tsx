@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+/** Re-enable when chatbot should ship: uncomment import + <ChatSupportWidget /> below */
+// import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
 import FloatingScrollButton from "@/components/landing/FloatingScrollButton";
 import FloatingThemeTumbler from "@/components/landing/FloatingThemeTumbler";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
@@ -26,6 +28,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body suppressHydrationWarning className="font-[var(--font-inter)] antialiased">
         <ThemeProvider>
           {children}
+          {/* <ChatSupportWidget /> */}
           <FloatingScrollButton />
           <FloatingThemeTumbler />
           <Toaster />

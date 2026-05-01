@@ -5,14 +5,14 @@ import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
 import { CONTAINER } from "@/lib/constants";
 
-import TermsContent from "./TermsContent";
+import TeamContent from "./TeamContent";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Bitcraftly",
-  description: "Review terms for using Bitcraftly services including billing, permitted usage, and liability.",
+  title: "Team | Bitcraftly",
+  description: "Meet the Bitcraftly delivery team — strategy, engineering, product, and client success for Indian SMBs.",
 };
 
-export default function TermsPage() {
+export default function TeamPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
@@ -22,10 +22,10 @@ export default function TermsPage() {
             <Link href="/" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
               Home
             </Link>
-            <span className="px-2">/</span> Terms of Service
+            <span className="px-2">/</span> Team
           </div>
         </section>
-        <TermsContent />
+        <TeamContent />
       </main>
       <Footer />
     </div>

@@ -28,8 +28,8 @@ export default function Features() {
 
           <ul className="mt-6 space-y-3">
             {websiteFeatures.map((feature) => (
-              <li key={feature} className="flex items-start gap-3 text-sm text-text-secondary dark:text-dark-text-secondary">
-                <span className="mt-1 inline-block h-2 w-2 rounded-full bg-indigo-500" />
+              <li key={feature} className="flex items-center gap-3 text-sm text-text-secondary dark:text-dark-text-secondary">
+                <span className="size-2 shrink-0 rounded-full bg-indigo-500" aria-hidden />
                 <span>{feature}</span>
               </li>
             ))}

@@ -7,6 +7,7 @@ import { signOut, useSession } from "next-auth/react";
 import {
   BarChart3,
   Bell,
+  Car,
   ChevronDown,
   LayoutDashboard,
   Menu,
@@ -35,6 +36,7 @@ const navItems: Array<{
   { label: "Overview", href: "/dashboard", icon: LayoutDashboard, roles: ["admin", "staff"] },
   { label: "Leads", href: "/dashboard/leads", icon: Users, roles: ["admin", "staff"] },
   { label: "Analytics", href: "/dashboard/analytics", icon: BarChart3, roles: ["admin"] },
+  { label: "Parking Reports", href: "/dashboard/parking-reports", icon: Car, roles: ["admin", "staff"] },
   { label: "Settings", href: "/dashboard/settings", icon: Settings, roles: ["admin", "staff"] },
 ];
 

@@ -50,6 +50,27 @@ export type Template = {
   created_at: string;
 };
 
+export type ParkingReport = {
+  id: number;
+  tenant_id: number;
+  qr_contact_id: number;
+  issue_type: string;
+  status: "open" | "resolved";
+  notes?: string | null;
+  reporter_phone?: string | null;
+  resolved_by_user_id?: number | null;
+  resolved_at?: string | null;
+  created_at: string;
+  vehicle_number?: string | null;
+  owner_name?: string | null;
+  destination_phone?: string | null;
+};
+
+export type ParkingReportListResponse = {
+  total: number;
+  items: ParkingReport[];
+};
+
 type QrCreatePayload = { phone: string };
 type QrCreateResponse = { qr_url: string; redirect_url: string };
 type TemplatePayload = { type: "intro" | "demo" | "price"; content: string };
@@ -79,6 +100,14 @@ export function useTemplatesQuery() {
   return useQuery({
     queryKey: ["templates"],
     queryFn: async () => (await apiClient.get<Template[]>("/api/templates")).data,
+  });
+}
+
+export function useParkingReportsQuery(status: "all" | "open" | "resolved" = "all") {
+  return useQuery({
+    queryKey: ["parking-reports", status],
+    queryFn: async () =>
+      (await apiClient.get<ParkingReportListResponse>(`/api/parking-reports?status_filter=${status}`)).data,
   });
 }
 
@@ -156,6 +185,17 @@ export function useUpdateContactMetaMutation() {
       ).data,
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ["contact-submissions"] });
+    },
+  });
+}
+
+export function useResolveParkingReportMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (reportId: number) =>
+      (await apiClient.patch<{ success: boolean; message: string }>(`/api/parking-reports/${reportId}/resolve`)).data,
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["parking-reports"] });
     },
   });
 }

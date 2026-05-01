@@ -70,9 +70,9 @@ export default function Navbar() {
               key={link.label}
               type="button"
               onClick={() => goToSection(link.targetId)}
-              className="cursor-pointer text-sm text-text-secondary transition hover:text-text-primary dark:text-dark-text-secondary dark:hover:text-dark-text-primary"
+              className="group relative inline-flex cursor-pointer flex-col items-center text-sm text-text-secondary transition-colors duration-300 ease-out hover:text-[#2B5CE6] dark:text-dark-text-secondary dark:hover:text-[#7ea0ff]"
             >
-              {link.label}
+              <span className="relative inline-block">{link.label}</span>
             </button>
           ))}
         </div>
@@ -118,7 +118,7 @@ export default function Navbar() {
               <button
                 key={link.label}
                 type="button"
-                className="w-fit cursor-pointer text-sm text-text-secondary dark:text-dark-text-secondary"
+                className="w-fit cursor-pointer text-sm text-text-secondary transition-colors duration-300 ease-out hover:text-[#2B5CE6] dark:text-dark-text-secondary dark:hover:text-[#7ea0ff]"
                 onClick={() => {
                   goToSection(link.targetId);
                   setIsMenuOpen(false);

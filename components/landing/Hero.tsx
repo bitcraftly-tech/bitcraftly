@@ -64,7 +64,10 @@ export default function Hero() {
   };
 
   return (
-    <section id="about" className={`${CONTAINER} scroll-mt-24 grid min-h-[82vh] items-center gap-12 py-16 lg:grid-cols-2 lg:py-24`}>
+    <section
+      id="about"
+      className={`${CONTAINER} scroll-mt-24 grid min-h-[41vh] items-center gap-12 py-8 lg:grid-cols-2 lg:py-12`}
+    >
       <div className="text-center lg:text-left">
         <div className="inline-flex items-center gap-2 rounded-full border border-border-primary bg-bg-card px-4 py-2 dark:border-dark-border-primary dark:bg-dark-bg-card">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -73,7 +76,7 @@ export default function Hero() {
           </span>
         </div>
 
-        <h1 className="mt-6 font-[var(--font-playfair)] text-4xl font-semibold leading-tight text-text-primary dark:text-dark-text-primary sm:text-5xl lg:text-6xl">
+        <h1 className="mt-6 font-[var(--font-playfair)] text-3xl font-semibold leading-tight text-text-primary dark:text-dark-text-primary sm:text-4xl lg:text-5xl">
           Website se lekar <span className="text-accent-primary">AI</span> tak —
           <br />
           aapki business ki har digital zaroorat

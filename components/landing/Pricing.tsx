@@ -56,11 +56,18 @@ const plans: PricingPlan[] = [
     accentClass: "text-emerald-500",
     buttonClass: "bg-emerald-600 text-white hover:bg-emerald-700",
     bulletClass: "bg-emerald-500",
-    price: "₹49/car",
-    period: "per month (platform only)",
-    features: ["Car barcode profile", "Scan-to-call owner flow", "SMS/WhatsApp alerts", "Admin reports", "Barcode sticker printing extra"],
+    price: "Starts ₹29/car",
+    period: "launch offer (first 3 months)",
+    features: [
+      "Launch: ₹29/car/month (min 100 cars, first 3 months)",
+      "Standard: ₹49/car/month",
+      "High-volume: ₹39/car/month (500+ cars)",
+      "Car barcode profile + scan-to-call owner flow",
+      "Admin reports · barcode sticker printing extra",
+    ],
     cta: "Request Demo",
     featured: true,
+    launchOffer: true,
   },
 ];
 
@@ -76,7 +83,7 @@ export default function Pricing() {
         {plans.map((plan) => (
           <article
             key={plan.service}
-            className={`group relative transform-gpu rounded-xl bg-bg-card p-6 transition-[transform,box-shadow,border-color] duration-300 ease-out will-change-transform hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(2,6,23,0.12)] dark:bg-dark-bg-card dark:hover:shadow-[0_14px_26px_rgba(2,6,23,0.4)] ${
+            className={`group relative flex h-full transform-gpu flex-col rounded-xl bg-bg-card p-6 transition-[transform,box-shadow,border-color] duration-300 ease-out will-change-transform hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(2,6,23,0.12)] dark:bg-dark-bg-card dark:hover:shadow-[0_14px_26px_rgba(2,6,23,0.4)] ${
               plan.featured
                 ? "border-2 border-emerald-500 hover:shadow-[0_20px_40px_rgba(16,185,129,0.25)]"
                 : "border border-border-primary hover:border-border-secondary dark:border-dark-border-primary dark:hover:border-dark-border-secondary"
@@ -107,12 +114,14 @@ export default function Pricing() {
               ))}
             </ul>
 
-            <Link
-              href={`/contact?service=${encodeURIComponent(plan.service)}&intent=quote&source=pricing-card`}
-              className={`mt-6 inline-flex w-full cursor-pointer items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold transition duration-300 ease-out group-hover:brightness-105 ${plan.buttonClass}`}
-            >
-              {plan.cta}
-            </Link>
+            <div className="mt-auto pt-6">
+              <Link
+                href={`/contact?service=${encodeURIComponent(plan.service)}&intent=quote&source=pricing-card`}
+                className={`inline-flex w-full cursor-pointer items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold transition duration-300 ease-out group-hover:brightness-105 ${plan.buttonClass}`}
+              >
+                {plan.cta}
+              </Link>
+            </div>
           </article>
         ))}
       </div>

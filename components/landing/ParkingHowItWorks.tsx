@@ -57,9 +57,16 @@ export default function ParkingHowItWorks() {
               <h3 className="mt-3 text-lg font-semibold text-text-primary dark:text-dark-text-primary">{item.title}</h3>
               <ul className="mt-4 space-y-2">
                 {item.points.map((point) => (
-                  <li key={point} className="flex items-start gap-2 text-sm text-text-secondary dark:text-dark-text-secondary">
-                    <span className="mt-1 inline-block h-2 w-2 rounded-full bg-emerald-500" />
-                    <span>{point}</span>
+                  <li
+                    key={point}
+                    className="relative py-0 pl-[1.125rem] text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary"
+                  >
+                    {/* Centre dot on first line: 0.5lh ≈ midpoint of caps / x-height row */}
+                    <span
+                      className="absolute left-0 top-[calc(0.5lh)] size-2 -translate-y-1/2 rounded-full bg-emerald-500"
+                      aria-hidden
+                    />
+                    <span className="block min-w-0 text-pretty">{point}</span>
                   </li>
                 ))}
               </ul>

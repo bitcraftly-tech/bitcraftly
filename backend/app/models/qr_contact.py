@@ -13,6 +13,9 @@ class QRContact(Base):
     tenant_id: Mapped[int] = mapped_column(ForeignKey("tenants.id"), index=True, nullable=False)
     code: Mapped[str] = mapped_column(String(32), unique=True, index=True, nullable=False)
     destination_phone: Mapped[str] = mapped_column(String(24), nullable=False)
+    owner_name: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    vehicle_number: Mapped[str | None] = mapped_column(String(32), nullable=True, index=True)
+    default_issue: Mapped[str | None] = mapped_column(String(160), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
