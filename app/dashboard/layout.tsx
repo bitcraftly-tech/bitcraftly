@@ -1,5 +1,8 @@
 import { ReactNode } from "react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
+import { createAuthOptions } from "@/auth";
 import DashboardNav from "@/components/dashboard/DashboardNav";
 import QueryProvider from "@/components/providers/QueryProvider";
 
@@ -7,7 +10,19 @@ type DashboardLayoutProps = {
   children: ReactNode;
 };
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+const ALLOWED_DASHBOARD_ROLES = new Set(["admin", "staff"]);
+
+export default async function DashboardLayout({ children }: DashboardLayoutProps) {
+  const session = await getServerSession(createAuthOptions());
+  const role = `${session?.role ?? ""}`.toLowerCase();
+
+  if (!session) {
+    redirect("/login");
+  }
+  if (!ALLOWED_DASHBOARD_ROLES.has(role)) {
+    redirect("/portal");
+  }
+
   return (
     <QueryProvider>
       <>

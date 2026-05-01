@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { signIn } from "next-auth/react";
+import { getSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -22,10 +22,15 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
 
+  const isPrivilegedRole = (role?: string) => {
+    const normalized = `${role ?? ""}`.toLowerCase();
+    return normalized === "admin" || normalized === "staff";
+  };
+
   const handleGoogleLogin = async () => {
     if (!googleEnabled) return;
     setIsLoading(true);
-    await signIn("google", { callbackUrl: "/dashboard" });
+    await signIn("google", { callbackUrl: "/auth/redirect" });
     setIsLoading(false);
   };
 
@@ -45,6 +50,14 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
           redirect: false,
         });
         if (result?.ok) {
+          const session = await getSession();
+          if (!isPrivilegedRole(session?.role)) {
+            await signOut({ redirect: false });
+            toast.error("Only admin/staff login is allowed.");
+            await showErrorAlert("Only admin/staff login is allowed.");
+            router.replace("/login");
+            return;
+          }
           toast.success("Login successful.");
           await showSuccessAlert("Login successful.");
           router.push("/dashboard");
@@ -88,6 +101,14 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
         redirect: false,
       });
       if (loginResult?.ok) {
+        const session = await getSession();
+        if (!isPrivilegedRole(session?.role)) {
+          await signOut({ redirect: false });
+          toast.error("Only admin/staff login is allowed.");
+          await showErrorAlert("Only admin/staff login is allowed.");
+          router.replace("/login");
+          return;
+        }
         toast.success("Account created successfully.");
         await showSuccessAlert("Account created successfully.");
         router.push("/dashboard");

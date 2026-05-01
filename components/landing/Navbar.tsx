@@ -82,7 +82,7 @@ export default function Navbar() {
             href="/login"
             className="cursor-pointer rounded-full border border-border-primary px-4 py-2 text-sm font-medium text-text-primary transition hover:border-border-secondary dark:border-dark-border-primary dark:text-dark-text-primary dark:hover:border-dark-border-secondary"
           >
-            Login
+            Admin Login
           </Link>
           <Link
             href="/"
@@ -133,7 +133,7 @@ export default function Navbar() {
                 className="cursor-pointer rounded-full border border-border-primary px-4 py-2 text-sm font-medium text-text-primary dark:border-dark-border-primary dark:text-dark-text-primary"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Login
+                Admin Login
               </Link>
               <Link
                 href="/"

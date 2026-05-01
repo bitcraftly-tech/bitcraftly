@@ -33,7 +33,7 @@ const steps = [
 
 export default function ParkingHowItWorks() {
   return (
-    <section id="how-parking-works" className="scroll-mt-24 border-t border-border-primary bg-bg-secondary py-16 dark:border-dark-border-primary dark:bg-dark-bg-secondary lg:py-24">
+    <section id="how-parking-works" className="scroll-mt-24 border-t border-border-primary bg-bg-secondary py-12 dark:border-dark-border-primary dark:bg-dark-bg-secondary lg:py-16">
       <div className={CONTAINER}>
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-emerald-600 dark:text-emerald-400">Smart Parking Flow</p>

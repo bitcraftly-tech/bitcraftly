@@ -1,4 +1,5 @@
 import type { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
 const RESERVED_SUBDOMAINS = new Set(["www", "api", "admin"]);
@@ -20,7 +21,23 @@ function extractSubdomain(host: string | null): string | null {
   return candidate;
 }
 
-export function middleware(request: NextRequest) {
+const ALLOWED_DASHBOARD_ROLES = new Set(["admin", "staff"]);
+
+export async function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith("/dashboard")) {
+    const token = await getToken({
+      req: request,
+      secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
+    });
+    const role = `${token?.role ?? ""}`.toLowerCase();
+    if (!token) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+    if (!ALLOWED_DASHBOARD_ROLES.has(role)) {
+      return NextResponse.redirect(new URL("/portal", request.url));
+    }
+  }
+
   const subdomain = extractSubdomain(request.headers.get("host"));
   const headers = new Headers(request.headers);
   const response = NextResponse.next({

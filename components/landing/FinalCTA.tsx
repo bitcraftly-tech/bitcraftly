@@ -22,7 +22,7 @@ const parkingFeatures = [
 
 export default function FinalCTA() {
   return (
-    <section id="smart-parking" className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-16 dark:border-dark-border-primary lg:py-24`}>
+    <section id="smart-parking" className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-12 dark:border-dark-border-primary lg:py-16`}>
       <div className="grid items-center gap-12 md:grid-cols-2">
         <div className="relative md:order-2">
           <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 blur-3xl" />

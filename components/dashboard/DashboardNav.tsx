@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import {
   BarChart3,
   Bell,
@@ -24,11 +24,18 @@ import {
 import { useTenant } from "@/hooks/useTenant";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
-const navItems = [
-  { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Leads", href: "/dashboard/leads", icon: Users },
-  { label: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
-  { label: "Settings", href: "/dashboard/settings", icon: Settings },
+type DashboardRole = "admin" | "staff" | "customer";
+
+const navItems: Array<{
+  label: string;
+  href: string;
+  icon: typeof LayoutDashboard;
+  roles: DashboardRole[];
+}> = [
+  { label: "Overview", href: "/dashboard", icon: LayoutDashboard, roles: ["admin", "staff"] },
+  { label: "Leads", href: "/dashboard/leads", icon: Users, roles: ["admin", "staff"] },
+  { label: "Analytics", href: "/dashboard/analytics", icon: BarChart3, roles: ["admin"] },
+  { label: "Settings", href: "/dashboard/settings", icon: Settings, roles: ["admin", "staff"] },
 ];
 
 function LogoMark() {
@@ -45,6 +52,7 @@ function LogoMark() {
 export default function DashboardNav() {
   const router = useRouter();
   const pathname = usePathname();
+  const { data: session } = useSession();
   const { tenant } = useTenant();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [tenantMenuOpen, setTenantMenuOpen] = useState(false);
@@ -54,9 +62,11 @@ export default function DashboardNav() {
   const tenantMenuRef = useRef<HTMLDivElement>(null);
   const notificationsRef = useRef<HTMLDivElement>(null);
 
-  const userName = "Admin User";
-  const userEmail = "admin@bitcraftly.com";
+  const role = ((`${session?.role ?? "staff"}`.toLowerCase() as DashboardRole) || "staff");
+  const userName = session?.user?.name || "Bitcraftly User";
+  const userEmail = session?.user?.email || "user@bitcraftly.com";
   const avatarText = useMemo(() => userName.slice(0, 1).toUpperCase(), [userName]);
+  const visibleNavItems = useMemo(() => navItems.filter((item) => item.roles.includes(role)), [role]);
   const notificationsQuery = useNotificationsQuery();
   const markReadMutation = useMarkNotificationReadMutation();
   const markAllReadMutation = useMarkAllNotificationsReadMutation();
@@ -128,7 +138,7 @@ export default function DashboardNav() {
             </Link>
 
             <div className="hidden items-center gap-1 md:flex">
-              {navItems.map((item) => {
+              {visibleNavItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = pathname === item.href;
                 return (
@@ -232,6 +242,9 @@ export default function DashboardNav() {
                   <div className="border-b border-border-primary px-4 py-2 dark:border-dark-border-primary">
                     <div className="text-sm font-medium text-text-primary dark:text-dark-text-primary">{userName}</div>
                     <div className="text-xs text-text-tertiary dark:text-dark-text-tertiary">{userEmail}</div>
+                    <div className="mt-1 inline-flex rounded-full bg-bg-secondary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-text-secondary dark:bg-dark-bg-secondary dark:text-dark-text-secondary">
+                      {role}
+                    </div>
                   </div>
                   <Link
                     href="/dashboard/profile"
@@ -264,7 +277,7 @@ export default function DashboardNav() {
       {mobileMenuOpen ? (
         <div className="border-t border-border-primary bg-bg-card px-6 py-3 dark:border-dark-border-primary dark:bg-dark-bg-card md:hidden">
           <div className="flex flex-col gap-1">
-            {navItems.map((item) => {
+            {visibleNavItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
               return (

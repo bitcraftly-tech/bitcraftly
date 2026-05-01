@@ -32,7 +32,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-border-primary bg-bg-card py-12 dark:border-dark-border-primary dark:bg-dark-bg-card">
+    <footer className="border-t border-border-primary bg-bg-card py-8 dark:border-dark-border-primary dark:bg-dark-bg-card">
       <div className={CONTAINER}>
         <div className="grid gap-8 md:grid-cols-4">
           <div>
@@ -99,7 +99,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-border-primary pt-6 text-center text-sm text-text-tertiary dark:border-dark-border-primary dark:text-dark-text-tertiary">
+        <div className="mt-5 border-t border-border-primary pt-4 text-center text-sm text-text-tertiary dark:border-dark-border-primary dark:text-dark-text-tertiary">
           © {new Date().getFullYear()} Bitcraftly · All rights reserved
         </div>
       </div>
