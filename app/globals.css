@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bg-primary: #fafaf8;
+  --color-bg-secondary: #f4f3f0;
+  --color-bg-card: #ffffff;
+  --color-text-primary: #1a1916;
+  --color-text-secondary: #4a4845;
+  --color-text-tertiary: #8a8885;
+  --color-border-primary: #e8e6e1;
+  --color-border-secondary: #d4d1ca;
+  --color-accent-primary: #2b5ce6;
+  --color-accent-hover: #1a3d9e;
+  --color-dark-bg-primary: #0a0a0f;
+  --color-dark-bg-secondary: #13131a;
+  --color-dark-bg-card: #1c1c27;
+  --color-dark-text-primary: #f0eff8;
+  --color-dark-text-secondary: #b8b7c8;
+  --color-dark-text-tertiary: #8888aa;
+  --color-dark-border-primary: #2a2a3d;
+  --color-dark-border-secondary: #3a3a4d;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  @apply bg-bg-primary text-text-primary transition-colors duration-200 dark:bg-dark-bg-primary dark:text-dark-text-primary;
+}
+
+.dark body {
+  color-scheme: dark;
+}
+
+* {
+  @apply transition-colors duration-150;
+}
+
