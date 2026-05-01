@@ -11,7 +11,15 @@ export const metadata: Metadata = {
   description: "Secure login to your Bitcraftly dashboard with Gmail.",
 };
 
-const googleEnabled = Boolean(process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET);
+/** Read OAuth env at request time (not baked into static HTML at build). */
+export const dynamic = "force-dynamic";
+
+const googleEnabled = Boolean(
+  process.env.AUTH_GOOGLE_ID &&
+    process.env.AUTH_GOOGLE_SECRET &&
+    process.env.AUTH_SECRET &&
+    process.env.NEXTAUTH_URL,
+);
 
 export default function LoginPage() {
   return (
