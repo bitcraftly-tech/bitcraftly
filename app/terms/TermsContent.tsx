@@ -90,7 +90,7 @@ export default function TermsContent() {
 
   return (
     <main className="bg-bg-primary dark:bg-dark-bg-primary">
-      <section className="bg-text-primary py-14 dark:bg-dark-bg-secondary">
+      <section className="bg-text-primary py-7 dark:bg-dark-bg-secondary">
         <div className={CONTAINER}>
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">Legal</p>
           <h1 className="mt-3 font-[var(--font-playfair)] text-4xl text-white sm:text-5xl">Terms of Service</h1>
@@ -98,7 +98,7 @@ export default function TermsContent() {
         </div>
       </section>
 
-      <section className="py-10">
+      <section className="py-5">
         <div className={`${CONTAINER} grid gap-10 md:grid-cols-[220px_1fr]`}>
           <aside className="hidden md:block">
             <div className="sticky top-24 space-y-1">

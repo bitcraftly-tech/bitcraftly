@@ -17,7 +17,7 @@ export default function CareersPage() {
     <div className="flex min-h-screen flex-col">
       <Navbar />
       <main className="flex-1">
-        <section className="border-b border-border-primary bg-bg-card py-3 dark:border-dark-border-primary dark:bg-dark-bg-card">
+        <section className="border-b border-border-primary bg-bg-card py-1.5 dark:border-dark-border-primary dark:bg-dark-bg-card">
           <div className={`${CONTAINER} text-xs text-text-tertiary dark:text-dark-text-tertiary`}>
             <Link href="/" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
               Home

@@ -24,7 +24,7 @@ export default function LoginPage() {
     <>
       <Navbar />
       <main>
-        <section className="border-b border-[#1A1916]/10 bg-white py-3">
+        <section className="border-b border-[#1A1916]/10 bg-white py-1.5">
           <div className={`${CONTAINER} text-xs text-[#1A1916]/60`}>
             <Link href="/" className="hover:text-[#1A1916] hover:underline">
               Home

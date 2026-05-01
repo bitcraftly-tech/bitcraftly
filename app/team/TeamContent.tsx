@@ -77,7 +77,7 @@ export default function TeamContent() {
               "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(43, 92, 230, 0.22), transparent 55%), radial-gradient(ellipse 60% 40% at 100% 0%, rgba(99, 102, 241, 0.12), transparent 50%)",
           }}
         />
-        <div className={`${CONTAINER} relative py-16 md:py-24`}>
+        <div className={`${CONTAINER} relative py-8 md:py-12`}>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2B5CE6] dark:text-[#7ea0ff]">People</p>
           <h1 className="mt-3 max-w-3xl font-[var(--font-playfair)] text-4xl font-semibold tracking-tight text-text-primary md:text-5xl dark:text-dark-text-primary">
             Small team,{" "}
@@ -107,7 +107,7 @@ export default function TeamContent() {
         </div>
       </section>
 
-      <section className="border-b border-border-primary py-14 dark:border-dark-border-primary">
+      <section className="border-b border-border-primary py-7 dark:border-dark-border-primary">
         <div className={CONTAINER}>
           <h2 className="font-[var(--font-playfair)] text-2xl font-semibold text-text-primary dark:text-dark-text-primary">How we work</h2>
           <p className="mt-2 max-w-2xl text-text-secondary dark:text-dark-text-secondary">Three non‑negotiables on every engagement.</p>
@@ -126,7 +126,7 @@ export default function TeamContent() {
         </div>
       </section>
 
-      <section className="py-14">
+      <section className="py-7">
         <div className={CONTAINER}>
           <h2 className="font-[var(--font-playfair)] text-2xl font-semibold text-text-primary dark:text-dark-text-primary">Core team</h2>
           <p className="mt-2 max-w-2xl text-text-secondary dark:text-dark-text-secondary">
@@ -188,8 +188,8 @@ export default function TeamContent() {
         </div>
       </section>
 
-      <section className="border-t border-border-primary bg-bg-secondary py-14 dark:border-dark-border-primary dark:bg-dark-bg-secondary">
-        <div className={`${CONTAINER} flex flex-col items-start justify-between gap-8 rounded-3xl border border-border-primary bg-bg-card px-8 py-10 md:flex-row md:items-center dark:border-dark-border-primary dark:bg-dark-bg-card`}>
+      <section className="border-t border-border-primary bg-bg-secondary py-7 dark:border-dark-border-primary dark:bg-dark-bg-secondary">
+        <div className={`${CONTAINER} flex flex-col items-start justify-between gap-8 rounded-3xl border border-border-primary bg-bg-card px-8 py-5 md:flex-row md:items-center dark:border-dark-border-primary dark:bg-dark-bg-card`}>
           <div>
             <h2 className="font-[var(--font-playfair)] text-2xl font-semibold text-text-primary dark:text-dark-text-primary">Build with us</h2>
             <p className="mt-2 max-w-xl text-text-secondary dark:text-dark-text-secondary">

@@ -66,7 +66,7 @@ export default function Hero() {
   return (
     <section
       id="about"
-      className={`${CONTAINER} scroll-mt-24 grid min-h-[41vh] items-center gap-12 py-8 lg:grid-cols-2 lg:py-12`}
+      className={`${CONTAINER} scroll-mt-24 grid min-h-[41vh] items-center gap-6 py-4 lg:grid-cols-2 lg:py-6`}
     >
       <div className="text-center lg:text-left">
         <div className="inline-flex items-center gap-2 rounded-full border border-border-primary bg-bg-card px-4 py-2 dark:border-dark-border-primary dark:bg-dark-bg-card">

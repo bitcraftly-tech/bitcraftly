@@ -11,7 +11,7 @@ const websiteFeatures = [
 
 export default function Features() {
   return (
-    <section id="websites" className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-12 dark:border-dark-border-primary lg:py-16`}>
+    <section id="websites" className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-6 dark:border-dark-border-primary lg:py-8`}>
       <div className="grid items-center gap-12 md:grid-cols-2">
         <div>
           <div className="mb-4 flex items-center gap-3">

@@ -73,7 +73,7 @@ const plans: PricingPlan[] = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className={`${CONTAINER} scroll-mt-24 py-14 md:py-20`}>
+    <section id="pricing" className={`${CONTAINER} scroll-mt-24 py-7 md:py-10`}>
       <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">Pricing</p>
       <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
         Service-wise pricing

@@ -93,7 +93,7 @@ export default function ParkingReportPage({ params }: PageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-[#dcebe8] px-4 py-10">
+    <main className="min-h-screen bg-[#dcebe8] px-4 py-5">
       <div className="mx-auto w-full max-w-4xl rounded-[28px] border border-[#cfd7d5] bg-[#f4f5f3] p-5 sm:p-8">
         <div className="rounded-[20px] border border-[#cfd7d5] bg-[#ececea] p-5 sm:p-6">
           <div className="mb-5 flex items-center justify-between">

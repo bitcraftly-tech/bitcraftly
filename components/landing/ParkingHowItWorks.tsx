@@ -33,7 +33,7 @@ const steps = [
 
 export default function ParkingHowItWorks() {
   return (
-    <section id="how-parking-works" className="scroll-mt-24 border-t border-border-primary bg-bg-secondary py-12 dark:border-dark-border-primary dark:bg-dark-bg-secondary lg:py-16">
+    <section id="how-parking-works" className="scroll-mt-24 border-t border-border-primary bg-bg-secondary py-6 dark:border-dark-border-primary dark:bg-dark-bg-secondary lg:py-8">
       <div className={CONTAINER}>
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-emerald-600 dark:text-emerald-400">Smart Parking Flow</p>
@@ -49,7 +49,7 @@ export default function ParkingHowItWorks() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <div className="mt-5 grid gap-5 md:grid-cols-3">
           {steps.map((item) => (
             <article
               key={item.step}
@@ -78,7 +78,7 @@ export default function ParkingHowItWorks() {
           ))}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-5 text-center">
           <Link
             href="/contact?service=Smart%20Parking&intent=demo&source=smart-parking-cta"
             className="inline-flex rounded-xl bg-emerald-600 px-7 py-3 text-sm font-semibold text-white hover:bg-emerald-700"

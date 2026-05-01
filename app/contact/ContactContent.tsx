@@ -194,7 +194,7 @@ export default function ContactContent() {
   };
 
   return (
-    <main className="bg-bg-primary py-10 dark:bg-dark-bg-primary md:py-14">
+    <main className="bg-bg-primary py-5 dark:bg-dark-bg-primary md:py-7">
       <div className={`${CONTAINER} grid grid-cols-1 gap-12 md:grid-cols-5`}>
         <section className="md:col-span-2">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">Get in touch</p>

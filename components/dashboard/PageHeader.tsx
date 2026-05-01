@@ -17,7 +17,7 @@ type PageHeaderProps = {
 export default function PageHeader({ title, breadcrumbs, action }: PageHeaderProps) {
   return (
     <div className="border-b border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card">
-      <div className="w-full py-6">
+      <div className="w-full py-3">
         <div className="flex items-center justify-between gap-4">
           <div>
             {breadcrumbs?.length ? (

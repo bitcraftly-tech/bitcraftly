@@ -128,7 +128,7 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
   };
 
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white py-8">
       <div className="mx-auto w-full max-w-md px-6">
         <div className="rounded-2xl border border-[#1A1916]/10 bg-white p-7 shadow-[0_10px_40px_rgba(26,25,22,0.06)]">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#1A1916]/65">Welcome back</p>

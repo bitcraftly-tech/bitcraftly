@@ -69,7 +69,7 @@ export default function DemoGeneratorPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-100 px-4 py-12 text-slate-900 sm:px-6">
+    <main className="min-h-screen bg-slate-100 px-4 py-6 text-slate-900 sm:px-6">
       <section className="mx-auto w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
         <p className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
           Try Live Demo

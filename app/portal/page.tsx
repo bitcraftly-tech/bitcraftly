@@ -39,7 +39,7 @@ export default async function CustomerPortalPage() {
   }
 
   return (
-    <main className="min-h-screen bg-bg-primary px-6 py-12 dark:bg-dark-bg-primary">
+    <main className="min-h-screen bg-bg-primary px-6 py-6 dark:bg-dark-bg-primary">
       <div className="mx-auto w-full max-w-5xl space-y-6">
         <div className="rounded-2xl border border-border-primary bg-bg-card p-8 dark:border-dark-border-primary dark:bg-dark-bg-card">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-text-tertiary dark:text-dark-text-tertiary">

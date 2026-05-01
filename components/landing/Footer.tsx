@@ -53,7 +53,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-border-primary bg-bg-card py-8 dark:border-dark-border-primary dark:bg-dark-bg-card">
+    <footer className="border-t border-border-primary bg-bg-card py-4 dark:border-dark-border-primary dark:bg-dark-bg-card">
       <div className={CONTAINER}>
         <div className="grid gap-8 md:grid-cols-4">
           <div>

@@ -86,14 +86,14 @@ export default function DemoPage() {
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
-      <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+      <div className="mx-auto w-full max-w-6xl px-4 py-4 sm:px-6 sm:py-6">
         <Hero
           restaurantName={tenant.name}
           whatsappUrl={WHATSAPP_URL}
           demoUrl="#contact-demo"
         />
 
-        <section className="mt-12">
+        <section className="mt-6">
           <div className="mb-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-blue-600">Menu</p>

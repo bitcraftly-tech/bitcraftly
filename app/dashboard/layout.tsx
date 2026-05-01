@@ -28,7 +28,7 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
       <>
         <DashboardNav />
         <main className="min-h-[calc(100vh-64px)] bg-bg-primary dark:bg-dark-bg-primary">
-          <div className="mx-auto w-full max-w-7xl px-6 py-8 lg:px-12">{children}</div>
+          <div className="mx-auto w-full max-w-7xl px-6 py-4 lg:px-12">{children}</div>
         </main>
       </>
     </QueryProvider>
