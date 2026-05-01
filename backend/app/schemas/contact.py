@@ -70,7 +70,11 @@ class ContactResponse(BaseModel):
     message: Optional[str]
     source: Optional[str]
     is_contacted: bool
+    stage: str
+    assigned_to: Optional[str]
+    notes: Optional[str]
     created_at: datetime
+    updated_at: Optional[datetime]
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -78,3 +82,29 @@ class ContactResponse(BaseModel):
 class ContactListResponse(BaseModel):
     total: int
     submissions: list[ContactResponse]
+
+
+class ContactNotesUpdate(BaseModel):
+    notes: str = Field(default="")
+
+
+class ContactMetaUpdate(BaseModel):
+    stage: str = Field(default="new")
+    assigned_to: Optional[str] = None
+
+    @field_validator("stage")
+    @classmethod
+    def validate_stage(cls, value: str) -> str:
+        allowed = {"new", "in_progress", "closed"}
+        cleaned = value.strip().lower()
+        if cleaned not in allowed:
+            raise ValueError("Invalid stage")
+        return cleaned
+
+    @field_validator("assigned_to")
+    @classmethod
+    def normalize_assigned_to(cls, value: Optional[str]) -> Optional[str]:
+        if value is None:
+            return None
+        cleaned = value.strip()
+        return cleaned or None

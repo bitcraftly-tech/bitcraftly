@@ -56,3 +56,19 @@ def update_notes(db: Session, contact_id: int, notes: str) -> Optional[ContactSu
         db.commit()
         db.refresh(contact)
     return contact
+
+
+def update_meta(
+    db: Session,
+    contact_id: int,
+    stage: str,
+    assigned_to: Optional[str],
+) -> Optional[ContactSubmission]:
+    contact = db.get(ContactSubmission, contact_id)
+    if contact:
+        contact.stage = stage
+        contact.assigned_to = assigned_to
+        contact.is_contacted = stage == "closed"
+        db.commit()
+        db.refresh(contact)
+    return contact

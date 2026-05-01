@@ -88,7 +88,10 @@ export default function FinalCTA() {
           </div>
 
           <div className="mt-7 flex scroll-mt-24 flex-wrap items-center gap-3" id="contact-cta">
-            <Link href="/contact" className="rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-700">
+            <Link
+              href="/contact?service=Smart%20Parking&intent=demo&source=smart-parking-cta"
+              className="rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-700"
+            >
               Request Demo
             </Link>
             <Link href="/how-parking-works" className="text-sm font-semibold text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300">

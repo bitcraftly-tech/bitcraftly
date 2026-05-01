@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { CONTAINER } from "@/lib/constants";
@@ -20,7 +20,7 @@ type FieldName = keyof ContactFormValues;
 type FieldErrors = Partial<Record<FieldName, string>>;
 
 const businessTypes = ["Restaurant", "Salon", "Clinic", "Gym", "Shop", "Other"];
-const sources = ["WhatsApp", "Google", "Friend", "Social Media", "Other"];
+const sources = ["WhatsApp", "Google", "Friend", "Social Media", "Smart Parking CTA", "Pricing Card CTA", "Other"];
 
 const initialValues: ContactFormValues = {
   fullName: "",
@@ -46,6 +46,7 @@ export default function ContactContent() {
   const [values, setValues] = useState<ContactFormValues>(initialValues);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [requestType, setRequestType] = useState<string>("");
 
   const timeline = useMemo(
     () => [
@@ -56,6 +57,40 @@ export default function ContactContent() {
     ],
     [],
   );
+
+  useEffect(() => {
+    const params = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
+    const serviceRaw = params.get("service") || "";
+    const service = serviceRaw.toLowerCase();
+    const intent = (params.get("intent") || "").toLowerCase();
+    const source = (params.get("source") || "").toLowerCase();
+
+    if (!service && !intent && !source) return;
+    if (serviceRaw) setRequestType(serviceRaw);
+
+    setValues((prev) => {
+      const next = { ...prev };
+
+      if (service.includes("smart") || service.includes("parking")) {
+        next.businessType = "Other";
+        if (!next.message.trim()) {
+          next.message = "I want a Smart Parking demo for my society/complex.";
+        }
+      }
+
+      if (intent === "demo" && !next.message.trim()) {
+        next.message = "I want to schedule a free demo.";
+      }
+
+      if (source === "smart-parking-cta") {
+        next.source = "Smart Parking CTA";
+      } else if (source === "pricing-card") {
+        next.source = "Pricing Card CTA";
+      }
+
+      return next;
+    });
+  }, []);
 
   const validateField = (field: FieldName, value: string): string => {
     if (field === "fullName") {
@@ -228,6 +263,11 @@ export default function ContactContent() {
 
         <section className="md:col-span-3">
           <div className="w-full rounded-lg border border-border-primary bg-bg-card p-5 dark:border-dark-border-primary dark:bg-dark-bg-card sm:p-7">
+            {requestType ? (
+              <p className="mb-4 inline-flex rounded-full border border-accent-primary/30 bg-accent-primary/10 px-3 py-1 text-xs font-semibold text-accent-primary">
+                Request Type: {requestType}
+              </p>
+            ) : null}
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div className="mb-5 flex flex-col gap-1">
                   <label className="text-sm font-medium text-text-primary dark:text-dark-text-primary" htmlFor="fullName">

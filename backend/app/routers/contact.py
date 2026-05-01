@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 import logging
 
 from app.core.database import get_db
-from app.crud.contact import create_contact, get_all_contacts, mark_as_contacted, update_notes
+from app.crud.contact import create_contact, get_all_contacts, mark_as_contacted, update_meta, update_notes
 from app.models.notification import NotificationType
 from app.schemas.notification import NotificationRead
-from app.schemas.contact import ContactCreate, ContactListResponse
+from app.schemas.contact import ContactCreate, ContactListResponse, ContactMetaUpdate, ContactNotesUpdate
 from app.services.notification_hub import notification_hub
 from app.services.notification_service import create_notification
 
@@ -78,10 +78,22 @@ async def mark_contacted(
 @router.patch("/{contact_id}/notes")
 async def add_notes(
     contact_id: int,
-    notes: str,
+    payload: ContactNotesUpdate,
     db: Session = Depends(get_db),
 ):
-    contact = update_notes(db, contact_id, notes)
+    contact = update_notes(db, contact_id, payload.notes)
     if not contact:
         raise HTTPException(status_code=404, detail="Contact not found")
-    return {"success": True}
+    return {"success": True, "message": "Notes updated"}
+
+
+@router.patch("/{contact_id}/meta")
+async def update_contact_meta(
+    contact_id: int,
+    payload: ContactMetaUpdate,
+    db: Session = Depends(get_db),
+):
+    contact = update_meta(db, contact_id, payload.stage, payload.assigned_to)
+    if not contact:
+        raise HTTPException(status_code=404, detail="Contact not found")
+    return {"success": True, "message": "Contact pipeline updated"}

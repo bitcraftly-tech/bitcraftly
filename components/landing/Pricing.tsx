@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CONTAINER } from "@/lib/constants";
 
 type PricingPlan = {
@@ -106,12 +107,12 @@ export default function Pricing() {
               ))}
             </ul>
 
-            <button
-              type="button"
-              className={`mt-6 w-full rounded-full px-4 py-2.5 text-sm font-semibold transition duration-300 ease-out group-hover:brightness-105 ${plan.buttonClass}`}
+            <Link
+              href={`/contact?service=${encodeURIComponent(plan.service)}&intent=quote&source=pricing-card`}
+              className={`mt-6 inline-flex w-full cursor-pointer items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold transition duration-300 ease-out group-hover:brightness-105 ${plan.buttonClass}`}
             >
               {plan.cta}
-            </button>
+            </Link>
           </article>
         ))}
       </div>

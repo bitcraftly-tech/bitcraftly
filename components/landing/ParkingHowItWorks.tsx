@@ -68,7 +68,10 @@ export default function ParkingHowItWorks() {
         </div>
 
         <div className="mt-10 text-center">
-          <Link href="/contact" className="inline-flex rounded-xl bg-emerald-600 px-7 py-3 text-sm font-semibold text-white hover:bg-emerald-700">
+          <Link
+            href="/contact?service=Smart%20Parking&intent=demo&source=smart-parking-cta"
+            className="inline-flex rounded-xl bg-emerald-600 px-7 py-3 text-sm font-semibold text-white hover:bg-emerald-700"
+          >
             Book Free Parking Demo
           </Link>
         </div>
