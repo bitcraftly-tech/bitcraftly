@@ -6,19 +6,21 @@ const ALLOWED_SECTIONS = ["features", "pricing", "demo", "about"] as const;
 type AllowedSection = (typeof ALLOWED_SECTIONS)[number];
 
 type SectionPageProps = {
-  params: {
+  params: Promise<{
     section: string;
-  };
+  }>;
 };
 
 export function generateStaticParams() {
   return ALLOWED_SECTIONS.map((section) => ({ section }));
 }
 
-export default function SectionPage({ params }: SectionPageProps) {
-  if (!ALLOWED_SECTIONS.includes(params.section as AllowedSection)) {
+export default async function SectionPage({ params }: SectionPageProps) {
+  const { section } = await params;
+
+  if (!ALLOWED_SECTIONS.includes(section as AllowedSection)) {
     notFound();
   }
 
-  return <LandingPage sectionId={params.section as AllowedSection} />;
+  return <LandingPage sectionId={section as AllowedSection} />;
 }
