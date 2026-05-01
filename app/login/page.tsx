@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 /** Read OAuth env at request time (not baked into static HTML at build). */
 export const dynamic = "force-dynamic";
 
-const googleEnabled = isGoogleLoginConfigured();
-
 export default function LoginPage() {
+  const googleEnabled = isGoogleLoginConfigured();
+
   return (
     <>
       <Navbar />

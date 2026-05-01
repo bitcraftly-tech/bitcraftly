@@ -1,6 +1,10 @@
 import NextAuth from "next-auth";
-import { authOptions } from "@/auth";
 
-const handler = NextAuth(authOptions);
+import { createAuthOptions } from "@/auth";
 
-export { handler as GET, handler as POST };
+function nextAuth(req: Request, context: unknown) {
+  return NextAuth(createAuthOptions())(req as never, context as never);
+}
+
+export const GET = nextAuth;
+export const POST = nextAuth;

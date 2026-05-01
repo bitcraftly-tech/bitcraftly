@@ -1,11 +1,9 @@
-import NextAuth from "next-auth";
 import type { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 
 import { isGoogleLoginConfigured, resolvedNextAuthSecret } from "@/lib/googleAuthEnv";
 
-const googleEnabled = isGoogleLoginConfigured();
 const authApiBaseUrl = process.env.AUTH_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 const fallbackTestEmail = process.env.AUTH_TEST_EMAIL || "test.user@bitcraftly.local";
 const fallbackTestPassword = process.env.AUTH_TEST_PASSWORD || "Test@12345";
@@ -50,57 +48,62 @@ async function loginWithApi(email: string, password: string) {
   return null;
 }
 
-export const authOptions: NextAuthOptions = {
-  secret: resolvedNextAuthSecret(),
-  providers: [
-    Credentials({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials) {
-        const email = String(credentials?.email || "");
-        const password = String(credentials?.password || "");
-        if (!email || !password) return null;
-        return loginWithApi(email, password);
-      },
-    }),
-    ...(googleEnabled
-      ? [
-        Google({
-          clientId: process.env.AUTH_GOOGLE_ID!,
-          clientSecret: process.env.AUTH_GOOGLE_SECRET!,
-        }),
-      ]
-      : []),
-  ],
-  session: {
-    strategy: "jwt",
-  },
-  callbacks: {
-    async jwt({ token, user, account }) {
-      if (user && "accessToken" in user) {
-        token.accessToken = user.accessToken as string;
-      }
-      if (user && "role" in user) {
-        token.role = String(user.role);
-      }
-      if (account?.provider === "google" && account.access_token) {
-        token.accessToken = account.access_token;
-        token.role = token.role || "user";
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      session.accessToken = typeof token.accessToken === "string" ? token.accessToken : undefined;
-      session.role = typeof token.role === "string" ? token.role : undefined;
-      return session;
-    },
-  },
-  pages: {
-    signIn: "/login",
-  },
-};
+/** Build options at request time so Vercel/runtime env is always current (not snapshotted at module load). */
+export function createAuthOptions(): NextAuthOptions {
+  const googleEnabled = isGoogleLoginConfigured();
+  const clientId = `${process.env.AUTH_GOOGLE_ID ?? ""}`.trim();
+  const clientSecret = `${process.env.AUTH_GOOGLE_SECRET ?? ""}`.trim();
 
-export default NextAuth(authOptions);
+  return {
+    secret: resolvedNextAuthSecret(),
+    providers: [
+      Credentials({
+        name: "Credentials",
+        credentials: {
+          email: { label: "Email", type: "email" },
+          password: { label: "Password", type: "password" },
+        },
+        async authorize(credentials) {
+          const email = String(credentials?.email || "");
+          const password = String(credentials?.password || "");
+          if (!email || !password) return null;
+          return loginWithApi(email, password);
+        },
+      }),
+      ...(googleEnabled && clientId && clientSecret
+        ? [
+            Google({
+              clientId,
+              clientSecret,
+            }),
+          ]
+        : []),
+    ],
+    session: {
+      strategy: "jwt",
+    },
+    callbacks: {
+      async jwt({ token, user, account }) {
+        if (user && "accessToken" in user) {
+          token.accessToken = user.accessToken as string;
+        }
+        if (user && "role" in user) {
+          token.role = String(user.role);
+        }
+        if (account?.provider === "google" && account.access_token) {
+          token.accessToken = account.access_token;
+          token.role = token.role || "user";
+        }
+        return token;
+      },
+      async session({ session, token }) {
+        session.accessToken = typeof token.accessToken === "string" ? token.accessToken : undefined;
+        session.role = typeof token.role === "string" ? token.role : undefined;
+        return session;
+      },
+    },
+    pages: {
+      signIn: "/login",
+    },
+  };
+}
