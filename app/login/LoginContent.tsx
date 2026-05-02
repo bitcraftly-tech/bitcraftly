@@ -24,7 +24,7 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
 
   const isPrivilegedRole = (role?: string) => {
     const normalized = `${role ?? ""}`.toLowerCase();
-    return normalized === "admin" || normalized === "staff";
+    return normalized === "admin" || normalized === "staff" || normalized === "manager";
   };
 
   const handleGoogleLogin = async () => {
@@ -53,8 +53,8 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
           const session = await getSession();
           if (!isPrivilegedRole(session?.role)) {
             await signOut({ redirect: false });
-            toast.error("Only admin/staff login is allowed.");
-            await showErrorAlert("Only admin/staff login is allowed.");
+            toast.error("Only admin, staff, or manager login is allowed.");
+            await showErrorAlert("Only admin, staff, or manager login is allowed.");
             router.replace("/login");
             return;
           }
@@ -104,8 +104,8 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
         const session = await getSession();
         if (!isPrivilegedRole(session?.role)) {
           await signOut({ redirect: false });
-          toast.error("Only admin/staff login is allowed.");
-          await showErrorAlert("Only admin/staff login is allowed.");
+          toast.error("Only admin, staff, or manager login is allowed.");
+          await showErrorAlert("Only admin, staff, or manager login is allowed.");
           router.replace("/login");
           return;
         }

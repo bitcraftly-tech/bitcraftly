@@ -21,7 +21,7 @@ function extractSubdomain(host: string | null): string | null {
   return candidate;
 }
 
-const ALLOWED_DASHBOARD_ROLES = new Set(["admin", "staff"]);
+const ALLOWED_DASHBOARD_ROLES = new Set(["admin", "staff", "manager"]);
 
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith("/dashboard")) {

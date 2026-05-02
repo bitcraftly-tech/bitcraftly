@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 
 from sqlalchemy import DateTime, ForeignKey, Integer, String, Text, func
 from sqlalchemy.orm import Mapped, mapped_column
@@ -14,8 +15,8 @@ class ParkingReport(Base):
     qr_contact_id: Mapped[int] = mapped_column(ForeignKey("qr_contacts.id"), nullable=False, index=True)
     issue_type: Mapped[str] = mapped_column(String(120), nullable=False)
     status: Mapped[str] = mapped_column(String(20), nullable=False, server_default="open")
-    notes: Mapped[str | None] = mapped_column(Text, nullable=True)
-    reporter_phone: Mapped[str | None] = mapped_column(String(24), nullable=True)
-    resolved_by_user_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
-    resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    notes: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    reporter_phone: Mapped[Optional[str]] = mapped_column(String(24), nullable=True)
+    resolved_by_user_id: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    resolved_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, server_default=func.now())

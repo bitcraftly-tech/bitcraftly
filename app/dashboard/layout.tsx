@@ -10,7 +10,7 @@ type DashboardLayoutProps = {
   children: ReactNode;
 };
 
-const ALLOWED_DASHBOARD_ROLES = new Set(["admin", "staff"]);
+const ALLOWED_DASHBOARD_ROLES = new Set(["admin", "staff", "manager"]);
 
 export default async function DashboardLayout({ children }: DashboardLayoutProps) {
   const session = await getServerSession(createAuthOptions());

@@ -20,6 +20,12 @@ class Settings(BaseSettings):
     auth_secret: str = "change-me-in-production"
     access_token_expire_seconds: int = 60 * 60 * 24
 
+    # Razorpay (https://dashboard.razorpay.com/app/keys) — server-side secret must never be exposed to the browser
+    RAZORPAY_KEY_ID: Optional[str] = None
+    RAZORPAY_KEY_SECRET: Optional[str] = None
+    # Webhooks → Settings → Webhooks → signing secret (verify incoming webhook payloads)
+    RAZORPAY_WEBHOOK_SECRET: Optional[str] = None
+
     @property
     def DB_URL(self) -> str:
         # Prefer explicitly configured DATABASE_URL across environments.

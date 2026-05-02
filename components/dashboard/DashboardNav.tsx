@@ -25,7 +25,7 @@ import {
 import { useTenant } from "@/hooks/useTenant";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
-type DashboardRole = "admin" | "staff" | "customer";
+type DashboardRole = "admin" | "staff" | "manager" | "customer";
 
 const navItems: Array<{
   label: string;
@@ -33,11 +33,11 @@ const navItems: Array<{
   icon: typeof LayoutDashboard;
   roles: DashboardRole[];
 }> = [
-  { label: "Overview", href: "/dashboard", icon: LayoutDashboard, roles: ["admin", "staff"] },
-  { label: "Leads", href: "/dashboard/leads", icon: Users, roles: ["admin", "staff"] },
+  { label: "Overview", href: "/dashboard", icon: LayoutDashboard, roles: ["admin", "staff", "manager"] },
+  { label: "Leads", href: "/dashboard/leads", icon: Users, roles: ["admin", "staff", "manager"] },
   { label: "Analytics", href: "/dashboard/analytics", icon: BarChart3, roles: ["admin"] },
-  { label: "Parking Reports", href: "/dashboard/parking-reports", icon: Car, roles: ["admin", "staff"] },
-  { label: "Settings", href: "/dashboard/settings", icon: Settings, roles: ["admin", "staff"] },
+  { label: "Parking Reports", href: "/dashboard/parking-reports", icon: Car, roles: ["admin", "staff", "manager"] },
+  { label: "Settings", href: "/dashboard/settings", icon: Settings, roles: ["admin", "staff", "manager"] },
 ];
 
 function LogoMark() {

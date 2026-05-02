@@ -9,6 +9,9 @@ from app.models.user import User, UserRole
 from app.core.config import settings
 from app.services.security import verify_access_token
 
+# Must match `accessToken` in `auth.ts` when the API is unreachable (local fallback login).
+_LOCAL_DEV_BYPASS_TOKEN = "local-dev-test-token"
+
 DBSession = Annotated[Session, Depends(get_db_session)]
 
 
@@ -30,6 +33,16 @@ def get_optional_current_user(request: Request, db: DBSession) -> Optional[User]
     if not auth_header.lower().startswith("bearer "):
         return None
     token = auth_header.split(" ", 1)[1].strip()
+
+    if not settings.is_production and token == _LOCAL_DEV_BYPASS_TOKEN:
+        dev_user = (
+            db.query(User)
+            .filter(User.email == "test.user@bitcraftly.local")
+            .first()
+        )
+        if dev_user is not None:
+            return dev_user
+
     payload = verify_access_token(token, settings.auth_secret)
     if not payload:
         return None

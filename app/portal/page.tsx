@@ -34,7 +34,7 @@ export default async function CustomerPortalPage() {
   if (!session) {
     redirect("/login");
   }
-  if (role === "admin" || role === "staff") {
+  if (role === "admin" || role === "staff" || role === "manager") {
     redirect("/dashboard");
   }
 
