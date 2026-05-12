@@ -5,6 +5,7 @@ import { signOut, useSession } from "next-auth/react";
 import { ChevronDown, CreditCard, LayoutDashboard, LayoutGrid, LogOut, Settings, User } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 
+import { LogoutConfirmDialog } from "@/components/ui/LogoutConfirmDialog";
 import { userInitials } from "@/lib/userDisplay";
 
 function isPrivilegedRole(role?: string | null) {
@@ -22,6 +23,7 @@ type NavbarProfileMenuProps = {
 export default function NavbarProfileMenu({ variant = "desktop", onNavigate }: NavbarProfileMenuProps) {
   const { data: session } = useSession();
   const [open, setOpen] = useState(false);
+  const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
 
@@ -195,8 +197,7 @@ export default function NavbarProfileMenu({ variant = "desktop", onNavigate }: N
             className={`${itemClass} text-red-600 hover:bg-red-500/10 focus-visible:ring-red-500/30 dark:text-red-400 dark:hover:bg-red-950/40`}
             onClick={() => {
               setOpen(false);
-              signOut({ callbackUrl: "/" });
-              onNavigate?.();
+              setLogoutConfirmOpen(true);
             }}
           >
             <span className={`${iconWrap} bg-red-500/10 text-red-600 dark:bg-red-950/50 dark:text-red-400`} aria-hidden>
@@ -206,6 +207,16 @@ export default function NavbarProfileMenu({ variant = "desktop", onNavigate }: N
           </button>
         </div>
       </div>
+
+      <LogoutConfirmDialog
+        open={logoutConfirmOpen}
+        onClose={() => setLogoutConfirmOpen(false)}
+        onConfirm={() => {
+          setLogoutConfirmOpen(false);
+          signOut({ callbackUrl: "/" });
+          onNavigate?.();
+        }}
+      />
     </div>
   );
 }

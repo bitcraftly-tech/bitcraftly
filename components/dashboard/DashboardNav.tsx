@@ -23,6 +23,7 @@ import {
   useNotificationsQuery,
 } from "@/hooks/useNotifications";
 import { useTenant } from "@/hooks/useTenant";
+import { LogoutConfirmDialog } from "@/components/ui/LogoutConfirmDialog";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
 type DashboardRole = "admin" | "staff" | "manager" | "customer";
@@ -60,6 +61,7 @@ export default function DashboardNav() {
   const [tenantMenuOpen, setTenantMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const tenantMenuRef = useRef<HTMLDivElement>(null);
   const notificationsRef = useRef<HTMLDivElement>(null);
@@ -113,7 +115,7 @@ export default function DashboardNav() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = async () => {
+  const performLogout = async () => {
     setUserMenuOpen(false);
     try {
       await signOut({ callbackUrl: "/login", redirect: true });
@@ -265,7 +267,10 @@ export default function DashboardNav() {
                   <button
                     type="button"
                     className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50"
-                    onClick={() => void handleLogout()}
+                    onClick={() => {
+                      setUserMenuOpen(false);
+                      setLogoutConfirmOpen(true);
+                    }}
                   >
                     Logout
                   </button>
@@ -382,6 +387,15 @@ export default function DashboardNav() {
           ) : null}
         </div>
       </aside>
+
+      <LogoutConfirmDialog
+        open={logoutConfirmOpen}
+        onClose={() => setLogoutConfirmOpen(false)}
+        onConfirm={() => {
+          setLogoutConfirmOpen(false);
+          void performLogout();
+        }}
+      />
     </nav>
   );
 }
