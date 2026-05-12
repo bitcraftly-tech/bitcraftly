@@ -75,9 +75,6 @@ export default function Footer() {
             <p className="mt-2 text-xs font-medium tracking-wide text-text-secondary dark:text-dark-text-secondary">
               Websites • Apps • Ecommerce • SEO • AI integrations
             </p>
-            <p className="mt-2 text-xs font-medium text-text-secondary dark:text-dark-text-secondary">
-              Affordable Website Design Services in Jamshedpur
-            </p>
             <div className="mt-4 flex flex-wrap items-center gap-2.5">
               <span
                 className="inline-flex h-9 w-9 cursor-default items-center justify-center rounded-full border border-red-500/20 bg-red-500/[0.08] text-red-600 opacity-60 dark:border-red-400/25 dark:bg-red-500/10 dark:text-red-400"
@@ -278,6 +275,9 @@ export default function Footer() {
         <div className="mt-6 border-t border-border-primary pt-5 text-center text-sm text-text-tertiary dark:border-dark-border-primary dark:text-dark-text-tertiary">
           <p className="text-xs leading-relaxed">
             Website Design · Ecommerce Development · App Development · SEO · UI/UX
+          </p>
+          <p className="text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
+            Affordable Website Design Services in Jamshedpur
           </p>
           <p className="mt-4 text-sm">© 2026 Bitcraftly. Built with modern web technologies.</p>
           <nav aria-label="Legal" className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs">

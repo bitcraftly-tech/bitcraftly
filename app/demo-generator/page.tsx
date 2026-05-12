@@ -72,11 +72,12 @@ export default function DemoGeneratorPage() {
     <main className="min-h-screen bg-slate-100 px-4 py-6 text-slate-900 sm:px-6">
       <section className="mx-auto w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
         <p className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-          Try Live Demo
+          Website preview
         </p>
-        <h1 className="mt-4 text-2xl font-bold sm:text-3xl">Generate your business demo site</h1>
+        <h1 className="mt-4 text-2xl font-bold sm:text-3xl">See How Your Business Website Can Look</h1>
         <p className="mt-2 text-sm text-slate-600">
-          Enter your business name and get a live demo URL instantly.
+          Modern website previews for restaurants, gyms, schools and local businesses. Enter your business name to open a
+          tailored preview link.
         </p>
 
         <form className="mt-6 space-y-4" onSubmit={onSubmit}>
@@ -100,7 +101,7 @@ export default function DemoGeneratorPage() {
                 Generating...
               </>
             ) : (
-              "Generate Demo"
+              "Open preview"
             )}
           </button>
         </form>

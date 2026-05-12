@@ -1,6 +1,6 @@
 import { CONTAINER } from "@/lib/constants";
 
-const industries = ["Restaurants", "Gyms", "Schools", "Clinics", "Builders", "Local Businesses"];
+const industries = ["Restaurants", "Gyms", "Schools", "Clinics", "Builders", "Local Shops"];
 
 export default function IndustriesWeServe() {
   return (

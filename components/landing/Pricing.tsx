@@ -20,7 +20,7 @@ const plans: PricingPlan[] = [
     buttonClass: "bg-indigo-600 text-white hover:bg-indigo-700",
     price: "₹15,000",
     period: "project estimate after scope call",
-    whatsIncluded: ["Up to 5 pages", "Mobile responsive", "WhatsApp integration", "Basic SEO", "Lead-focused layout"],
+    whatsIncluded: ["Up to 5 pages", "Mobile responsive", "WhatsApp integration", "Basic SEO", "Simple admin for edits"],
     cta: "Get Quote",
   },
   {

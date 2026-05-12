@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import type { PortfolioItem, PortfolioMockup } from "@/lib/portfolioItems";
 
 type PortfolioProjectCardProps = {
@@ -203,27 +201,83 @@ function MockupInterior({ variant }: { variant: PortfolioMockup }) {
   }
 }
 
-export default function PortfolioProjectCard({ item, showDetails }: PortfolioProjectCardProps) {
-  const bottomBlock = Boolean(item.demoHref || (showDetails && item.details));
-
+function MobileShellPreview({ variant }: { variant: PortfolioMockup }) {
   return (
-    <article className="group flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card">
-      <div className={`relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-gradient-to-br ${item.gradient} p-4`}>
-        <div className="absolute inset-0 rounded-t-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12),transparent_45%)]" />
-        <div className="relative flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-border-primary/60 bg-bg-card/90 p-3 shadow-sm backdrop-blur-sm dark:border-dark-border-primary/60 dark:bg-dark-bg-card/90">
-          <div className="flex shrink-0 items-center gap-1.5 border-b border-border-primary/50 pb-2 dark:border-dark-border-primary/50">
+    <div className="pointer-events-none relative min-h-0 flex-1 overflow-hidden rounded-lg bg-bg-secondary/80 dark:bg-dark-bg-secondary/80">
+      <div className="absolute inset-0 overflow-hidden rounded-lg">
+        <div className="absolute left-0 top-0 w-[240%] origin-top-left scale-[0.415]">
+          <MockupInterior variant={variant} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DualMockupChrome({ variant, emoji }: { variant: PortfolioMockup; emoji: string }) {
+  return (
+    <div className="relative">
+      <div
+        className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12),transparent_45%)]"
+        aria-hidden
+      />
+      <div className="relative flex min-h-[168px] gap-2 sm:min-h-[188px] sm:gap-3">
+        <div className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-xl border border-border-primary/60 bg-bg-card/90 shadow-sm backdrop-blur-sm dark:border-dark-border-primary/60 dark:bg-dark-bg-card/90">
+          <div className="flex shrink-0 items-center gap-1.5 border-b border-border-primary/50 px-2 py-1.5 dark:border-dark-border-primary/50">
             <span className="h-2 w-2 rounded-full bg-red-400/70" />
             <span className="h-2 w-2 rounded-full bg-yellow-400/70" />
             <span className="h-2 w-2 rounded-full bg-green-400/70" />
-            <span className="ml-auto text-[10px] text-text-tertiary dark:text-dark-text-tertiary">preview</span>
+            <span className="ml-1 hidden min-w-0 truncate rounded bg-bg-secondary px-2 py-0.5 text-[9px] text-text-tertiary dark:bg-dark-bg-secondary dark:text-dark-text-tertiary sm:inline">
+              Desktop preview
+            </span>
           </div>
-          <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
-            <MockupInterior variant={item.mockup} />
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden p-2">
+            <MockupInterior variant={variant} />
           </div>
-          <div className="mt-2 flex shrink-0 items-center justify-between text-lg" aria-hidden>
-            <span>{item.emoji}</span>
+          <div className="flex shrink-0 justify-end border-t border-border-primary/40 px-2 py-1 dark:border-dark-border-primary/40">
+            <span className="text-base" aria-hidden>
+              {emoji}
+            </span>
           </div>
         </div>
+
+        <div className="flex w-[76px] shrink-0 flex-col items-center sm:w-[92px]">
+          <div className="relative flex h-[156px] w-full max-w-[92px] flex-col overflow-hidden rounded-[1.35rem] border-[3px] border-border-primary bg-bg-card shadow-md dark:border-dark-border-primary dark:bg-dark-bg-card sm:h-[168px]">
+            <div className="absolute left-1/2 top-1.5 z-10 h-1 w-7 -translate-x-1/2 rounded-full bg-border-secondary dark:bg-dark-border-secondary" aria-hidden />
+            <div className="mt-5 flex min-h-0 flex-1 flex-col gap-1 overflow-hidden px-1.5 pb-2">
+              <MobileShellPreview variant={variant} />
+            </div>
+          </div>
+          <span className="mt-1 text-[9px] font-medium text-text-tertiary dark:text-dark-text-tertiary">Mobile</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function slugifyProjectTitle(title: string) {
+  return title
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+export default function PortfolioProjectCard({ item, showDetails }: PortfolioProjectCardProps) {
+  const anchorId = slugifyProjectTitle(item.title);
+  const resolvedHref =
+    item.liveUrl?.trim() ||
+    (item.demoHref?.startsWith("http") ? item.demoHref : `/portfolio#${anchorId}`);
+  const ctaLabel = item.ctaLabel ?? "View Live Project →";
+  const isExternal = resolvedHref.startsWith("http");
+
+  return (
+    <article
+      id={anchorId}
+      className="group flex h-full min-h-0 scroll-mt-28 flex-col overflow-hidden rounded-2xl border border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card"
+    >
+      <div className={`relative w-full shrink-0 overflow-hidden rounded-t-2xl bg-gradient-to-br ${item.gradient} p-3 sm:p-4`}>
+        <DualMockupChrome variant={item.mockup} emoji={item.emoji} />
       </div>
       <div className="flex min-h-0 flex-1 flex-col border-t border-border-primary p-4 dark:border-dark-border-primary">
         <div className="flex min-h-0 flex-1 flex-col">
@@ -251,21 +305,18 @@ export default function PortfolioProjectCard({ item, showDetails }: PortfolioPro
               </ul>
             ) : null}
           </div>
-          {bottomBlock ? (
-            <div className="mt-auto flex flex-col gap-2 pt-3">
-              {item.demoHref ? (
-                <Link
-                  href={item.demoHref}
-                  className="inline-flex w-fit items-center gap-0.5 text-[11px] font-medium text-indigo-600 transition hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
-                >
-                  View Demo <span aria-hidden>→</span>
-                </Link>
-              ) : null}
-              {showDetails && item.details ? (
-                <p className="text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">{item.details}</p>
-              ) : null}
-            </div>
-          ) : null}
+          <div className="mt-auto flex flex-col gap-2 pt-3">
+            <a
+              href={resolvedHref}
+              className="inline-flex w-fit items-center gap-0.5 text-[11px] font-medium text-indigo-600 transition hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+              {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              {ctaLabel}
+            </a>
+            {showDetails && item.details ? (
+              <p className="text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">{item.details}</p>
+            ) : null}
+          </div>
         </div>
       </div>
     </article>

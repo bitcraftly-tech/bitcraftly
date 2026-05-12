@@ -8,16 +8,23 @@ export type PortfolioMockup =
   | "local"
   | "generic";
 
+/** Shown on homepage recent-project cards */
+export const RECENT_PROJECT_TRUST_LINES = ["Mobile friendly", "SEO ready", "WhatsApp integration", "Fast loading"];
+
 export type PortfolioItem = {
   title: string;
   hint: string;
   gradient: string;
   emoji: string;
   mockup: PortfolioMockup;
-  /** Three short trust/feature lines under the subtitle */
+  /** Trust or feature lines under the subtitle */
   featureBullets: string[];
-  /** Lightweight “View demo” style link */
+  /** Primary CTA destination (legacy); use `liveUrl` for external sites */
   demoHref?: string;
+  /** Public live site URL — opens in new tab when set */
+  liveUrl?: string;
+  /** CTA label (default: live project) */
+  ctaLabel?: string;
   /** Shown on full portfolio page only */
   details?: string;
   tag: "Website" | "Ecommerce";
@@ -32,43 +39,47 @@ const ecommerceDetails =
 
 export const homePortfolioItems: PortfolioItem[] = [
   {
-    title: "Restaurant Website",
-    hint: "Menus, reservations, brand story",
+    title: "Shrishti Cloud Kitchen",
+    hint: "Menu-led UX, fast ordering path, local delivery trust",
     gradient: "from-orange-500/20 to-amber-500/10",
     emoji: "🍽️",
     mockup: "restaurant",
-    featureBullets: ["Online Menu", "Table Booking", "Mobile Friendly"],
-    demoHref: "/demo",
-    tag: "Website",
-  },
-  {
-    title: "School Website",
-    hint: "Admissions, notices, parent trust",
-    gradient: "from-blue-500/20 to-indigo-500/10",
-    emoji: "🎓",
-    mockup: "school",
-    featureBullets: ["Admission Forms", "Notice Board", "Parent Updates"],
-    demoHref: "/demo",
+    featureBullets: [...RECENT_PROJECT_TRUST_LINES],
+    demoHref: "/portfolio",
+    ctaLabel: "View Live Project →",
     tag: "Website",
   },
   {
     title: "Gym Website",
-    hint: "Memberships, trainers, class schedules",
+    hint: "Plans, trainers, class schedules & trial enquiries",
     gradient: "from-rose-500/20 to-fuchsia-500/10",
     emoji: "💪",
     mockup: "gym",
-    featureBullets: ["Membership Plans", "Trainer Profiles", "Class Schedule"],
-    demoHref: "/demo",
+    featureBullets: [...RECENT_PROJECT_TRUST_LINES],
+    demoHref: "/portfolio",
+    ctaLabel: "View Live Project →",
     tag: "Website",
   },
   {
-    title: "Ecommerce Website",
-    hint: "Catalog, payments, delivery trust",
+    title: "School Website",
+    hint: "Admissions, notices & parent-friendly structure",
+    gradient: "from-blue-500/20 to-indigo-500/10",
+    emoji: "🎓",
+    mockup: "school",
+    featureBullets: [...RECENT_PROJECT_TRUST_LINES],
+    demoHref: "/portfolio",
+    ctaLabel: "View Live Project →",
+    tag: "Website",
+  },
+  {
+    title: "Ecommerce Store",
+    hint: "Catalog, checkout clarity & delivery messaging",
     gradient: "from-violet-500/20 to-purple-500/10",
     emoji: "🛍️",
     mockup: "ecommerce",
-    featureBullets: ["Product Catalog", "Online Payments", "Order Tracking"],
-    demoHref: "/demo",
+    featureBullets: [...RECENT_PROJECT_TRUST_LINES],
+    demoHref: "/portfolio",
+    ctaLabel: "View Live Project →",
     tag: "Ecommerce",
   },
 ];
@@ -81,7 +92,8 @@ const portfolioExtras: PortfolioItem[] = [
     emoji: "💬",
     mockup: "chatbot",
     featureBullets: ["Quick menu answers", "WhatsApp handoff", "Hours & FAQs"],
-    demoHref: "/demo",
+    demoHref: "/portfolio",
+    ctaLabel: "View Live Project →",
     tag: "Website",
     details:
       "Customer-facing assistant for menus, hours, and quick questions — with a clean handoff to staff or WhatsApp.",
@@ -93,7 +105,8 @@ const portfolioExtras: PortfolioItem[] = [
     emoji: "🏥",
     mockup: "clinic",
     featureBullets: ["Doctor profiles", "Appointment requests", "Mobile friendly"],
-    demoHref: "/demo",
+    demoHref: "/portfolio",
+    ctaLabel: "View Live Project →",
     tag: "Website",
     details: "Clean layouts that feel credible — services, doctors, and secure enquiry flows.",
   },
@@ -104,7 +117,8 @@ const portfolioExtras: PortfolioItem[] = [
     emoji: "📍",
     mockup: "local",
     featureBullets: ["Strong CTAs", "WhatsApp contact", "Local-ready pages"],
-    demoHref: "/demo",
+    demoHref: "/portfolio",
+    ctaLabel: "View Live Project →",
     tag: "Website",
     details:
       "One-page or multi-page funnels with strong CTAs for Jamshedpur and nearby local search.",
@@ -115,13 +129,13 @@ export const portfolioPageItems: PortfolioItem[] = [
   ...homePortfolioItems.map((item) => ({
     ...item,
     details:
-      item.title === "Restaurant Website"
+      item.title === "Shrishti Cloud Kitchen"
         ? restaurantDetails
         : item.title === "School Website"
           ? schoolDetails
           : item.title === "Gym Website"
             ? gymDetails
-            : item.title === "Ecommerce Website"
+            : item.title === "Ecommerce Store"
               ? ecommerceDetails
               : "Tailored layout and flows for your industry.",
   })),

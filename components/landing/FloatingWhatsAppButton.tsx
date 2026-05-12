@@ -7,7 +7,7 @@ export default function FloatingWhatsAppButton() {
       href="https://wa.me/919667710954"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-24 left-5 z-40 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition hover:bg-[#20bd5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/60 sm:bottom-20"
+      className="fixed bottom-24 left-5 z-[60] inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition hover:bg-[#20bd5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/60 sm:bottom-20"
       aria-label="Chat on WhatsApp"
     >
       <svg viewBox="0 0 24 24" aria-hidden className="h-5 w-5 shrink-0 fill-current" xmlns="http://www.w3.org/2000/svg">

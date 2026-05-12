@@ -16,14 +16,13 @@ export default function Features() {
         <div>
           <div className="mb-4 flex items-center gap-3">
             <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-xl">🌐</span>
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-500">Spotlight</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-500">Website preview</span>
           </div>
           <h2 className="font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
-            Business Website Development
+            See How Your Business Website Can Look
           </h2>
           <p className="mt-4 text-base leading-7 text-text-secondary dark:text-dark-text-secondary">
-            Affordable website design services for shops, schools, clinics, and service teams in Jamshedpur and nearby
-            cities — focused on credibility, calls, and WhatsApp enquiries.
+            Modern website previews for restaurants, gyms, schools and local businesses.
           </p>
           <p className="mt-2 text-sm text-text-tertiary dark:text-dark-text-tertiary">
             Need Hindi or Hinglish on-page copy? Share a rough brief; we keep headings clean for SEO and readability.

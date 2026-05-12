@@ -29,10 +29,10 @@ export default function Hero({ restaurantName, whatsappUrl, demoUrl }: HeroProps
             Order on WhatsApp
           </a>
           <a
-            href={demoUrl}
+            href="/contact?intent=consultation&source=demo-hero-secondary"
             className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
           >
-            Get Free Demo
+            Book Free Call
           </a>
         </div>
       </div>
