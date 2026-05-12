@@ -10,11 +10,11 @@ export default function PortfolioShowcase() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">Portfolio</p>
           <h2 className="mt-2 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
-            Recent-style builds we ship
+            Websites &amp; stores built for real businesses
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-text-secondary dark:text-dark-text-secondary sm:text-base">
-            Mockup-style cards below represent typical industries — we tailor layout, copy, and integrations to your
-            brand.
+            Preview-style mockups for sectors we ship often — layout, copy, and integrations are tailored to your brand
+            and local customers.
           </p>
         </div>
         <Link href="/portfolio" className="text-sm font-semibold text-indigo-500 hover:text-indigo-400 dark:text-indigo-400 dark:hover:text-indigo-300">

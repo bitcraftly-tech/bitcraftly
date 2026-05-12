@@ -21,7 +21,7 @@ const plans: PricingPlan[] = [
     buttonClass: "bg-indigo-600 text-white hover:bg-indigo-700",
     bulletClass: "bg-indigo-500",
     price: "₹15,000",
-    period: "starting from",
+    period: "project estimate after scope call",
     features: ["Brand-led layout", "Mobile-first build", "Lead forms + WhatsApp", "SEO-ready structure", "Launch support"],
     cta: "Get Quote",
   },
@@ -32,7 +32,7 @@ const plans: PricingPlan[] = [
     buttonClass: "bg-violet-600 text-white hover:bg-violet-700",
     bulletClass: "bg-violet-500",
     price: "₹35,000",
-    period: "starting from",
+    period: "project estimate after scope call",
     features: ["Product catalog setup", "Checkout flow", "Payments guidance", "Performance-focused theme", "Handover training"],
     cta: "Get Quote",
   },
@@ -43,7 +43,7 @@ const plans: PricingPlan[] = [
     buttonClass: "bg-purple-600 text-white hover:bg-purple-700",
     bulletClass: "bg-purple-500",
     price: "₹25,000",
-    period: "starting from",
+    period: "project estimate after scope call",
     features: ["Screen flows & components", "Design system handoff", "Revisions within agreed scope", "Developer-ready assets", "Optional build support"],
     cta: "Get Quote",
   },
@@ -54,7 +54,7 @@ const plans: PricingPlan[] = [
     buttonClass: "bg-teal-600 text-white hover:bg-teal-700",
     bulletClass: "bg-teal-500",
     price: "₹5,000",
-    period: "per month · starting from",
+    period: "per month · updates, edits & checks",
     features: ["Security & plugin updates", "Small content edits", "Uptime checks", "Monthly health summary", "Priority WhatsApp channel"],
     cta: "Discuss Plan",
   },
@@ -82,7 +82,21 @@ export default function Pricing() {
             <div className="text-3xl">{plan.icon}</div>
             <h3 className="mt-2 text-lg font-semibold text-text-primary dark:text-dark-text-primary">{plan.service}</h3>
             <p className={`mt-1 text-xs font-semibold uppercase tracking-[0.12em] ${plan.accentClass}`}>Bitcraftly</p>
-            <p className="mt-2 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary">{plan.price}</p>
+            {plan.service === "Website Maintenance" ? (
+              <>
+                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-text-secondary dark:text-dark-text-secondary">
+                  Per month
+                </p>
+                <p className="mt-1 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary">{plan.price}</p>
+              </>
+            ) : (
+              <>
+                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-text-secondary dark:text-dark-text-secondary">
+                  Starting from
+                </p>
+                <p className="mt-1 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary">{plan.price}</p>
+              </>
+            )}
             <p className="mt-1 text-sm text-text-tertiary dark:text-dark-text-tertiary">{plan.period}</p>
 
             <ul className="mt-4 space-y-2">

@@ -8,6 +8,7 @@ import FadeInOnView from "@/components/ui/FadeInOnView";
 const DemoStrip = dynamic(() => import("@/components/landing/DemoStrip"));
 const ServicesGrid = dynamic(() => import("@/components/landing/ServicesGrid"));
 const PortfolioShowcase = dynamic(() => import("@/components/landing/PortfolioShowcase"));
+const IndustriesWeServe = dynamic(() => import("@/components/landing/IndustriesWeServe"));
 const Features = dynamic(() => import("@/components/landing/Features"));
 const WhyChooseUs = dynamic(() => import("@/components/landing/WhyChooseUs"));
 const Pricing = dynamic(() => import("@/components/landing/Pricing"));
@@ -40,6 +41,9 @@ export default function LandingPage({ sectionId }: LandingPageProps) {
       </FadeInOnView>
       <FadeInOnView delayMs={90}>
         <PortfolioShowcase />
+      </FadeInOnView>
+      <FadeInOnView delayMs={105}>
+        <IndustriesWeServe />
       </FadeInOnView>
       <FadeInOnView delayMs={120}>
         <Features />

@@ -73,8 +73,8 @@ export default function Navbar() {
             <span className="font-[var(--font-playfair)] text-xl font-semibold text-text-primary dark:text-dark-text-primary">
               Bitcraftly
             </span>
-            <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-text-tertiary dark:text-dark-text-tertiary">
-              Websites · Apps · Local growth
+            <span className="max-w-[15rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary">
+              Website &amp; App Development Company in Jamshedpur
             </span>
           </span>
         </Link>

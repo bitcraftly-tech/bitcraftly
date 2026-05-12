@@ -18,7 +18,12 @@ const navPills: NavPill[] = [
   { name: "Pricing", icon: "💳", targetId: "pricing", shellClass: "bg-emerald-500/10 border-emerald-500/30 hover:bg-emerald-500/20" },
 ];
 
-const heroBullets = ["Modern UI Design", "Mobile Friendly", "SEO Optimized", "Fast Loading", "Affordable Pricing"];
+const trustChecks = [
+  "18+ Years Experience",
+  "Modern UI/UX",
+  "Fast Delivery",
+  "Mobile Friendly",
+];
 
 const showcase = [
   {
@@ -46,8 +51,8 @@ const showcase = [
     glow: "from-teal-500/25 to-emerald-500/10",
   },
   {
-    title: "AI integrations",
-    desc: "Chatbots and light automation built into your website or app — where they genuinely speed up enquiries.",
+    title: "Customer enquiries",
+    desc: "Quick replies on your site with a clean handoff to WhatsApp when customers want to talk to someone on your team.",
     stat: "Practical, not flashy",
     glow: "from-slate-500/20 to-indigo-500/15",
   },
@@ -81,7 +86,7 @@ export default function Hero() {
         <div className="inline-flex items-center gap-2 rounded-full border border-border-primary bg-bg-card px-4 py-2 dark:border-dark-border-primary dark:bg-dark-bg-card">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
           <span className="text-xs font-medium uppercase tracking-[0.1em] text-text-secondary dark:text-dark-text-secondary">
-            Website, app &amp; AI solutions · Jamshedpur
+            Website &amp; app solutions · Jamshedpur
           </span>
         </div>
 
@@ -89,34 +94,11 @@ export default function Hero() {
           Professional Websites &amp; Apps That Grow Your Business
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-text-secondary dark:text-dark-text-secondary lg:mx-0 lg:text-lg">
-          Bitcraftly helps businesses in Jamshedpur &amp; across India build modern websites, ecommerce stores, mobile apps and AI-powered digital solutions that drive real growth.
+          Bitcraftly helps businesses in Jamshedpur &amp; across India build modern websites, ecommerce stores, mobile apps and practical digital solutions that drive real growth.
         </p>
         <p className="mx-auto mt-3 max-w-2xl text-sm italic leading-relaxed text-text-tertiary dark:text-dark-text-tertiary lg:mx-0">
           Clear scope, written estimates, and friendly English–Hinglish on calls or WhatsApp — whichever you prefer.
         </p>
-
-        <ul className="mx-auto mt-6 flex max-w-xl flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-text-secondary dark:text-dark-text-secondary lg:mx-0 lg:justify-start">
-          {heroBullets.map((b) => (
-            <li key={b} className="inline-flex items-center gap-2">
-              <span className="size-1.5 shrink-0 rounded-full bg-indigo-500" aria-hidden />
-              {b}
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
-          {navPills.map((p) => (
-            <button
-              key={p.name}
-              type="button"
-              onClick={() => scrollToSection(p.targetId)}
-              className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm text-text-primary transition dark:text-dark-text-primary ${p.shellClass}`}
-            >
-              <span>{p.icon}</span>
-              <span className="font-medium">{p.name}</span>
-            </button>
-          ))}
-        </div>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
           <Link
@@ -133,6 +115,35 @@ export default function Hero() {
           >
             Chat on WhatsApp
           </Link>
+        </div>
+
+        <ul className="mx-auto mt-5 flex max-w-xl flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-text-secondary dark:text-dark-text-secondary lg:mx-0 lg:justify-start">
+          {trustChecks.map((t) => (
+            <li key={t} className="inline-flex items-center gap-1.5">
+              <span className="text-emerald-600 dark:text-emerald-400" aria-hidden>
+                ✔
+              </span>
+              {t}
+            </li>
+          ))}
+        </ul>
+
+        <p className="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary lg:mx-0">
+          Led by a frontend developer with 18+ years of IT industry experience.
+        </p>
+
+        <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
+          {navPills.map((p) => (
+            <button
+              key={p.name}
+              type="button"
+              onClick={() => scrollToSection(p.targetId)}
+              className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm text-text-primary transition dark:text-dark-text-primary ${p.shellClass}`}
+            >
+              <span>{p.icon}</span>
+              <span className="font-medium">{p.name}</span>
+            </button>
+          ))}
         </div>
       </div>
 

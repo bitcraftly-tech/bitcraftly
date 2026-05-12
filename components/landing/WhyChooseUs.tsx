@@ -8,6 +8,27 @@ const reasons = [
   { title: "Dedicated Support", desc: "Post-launch fixes and guidance on hosting, SEO, and content." },
 ];
 
+const testimonials = [
+  {
+    quote:
+      "Bitcraftly ne hamare business ke liye modern website banayi aur customer inquiries increase hui — WhatsApp par messages bhi zyada aane lage.",
+    name: "Local retail owner",
+    place: "Jamshedpur",
+  },
+  {
+    quote:
+      "Website ka design modern aur mobile friendly tha. Support bhi kaafi fast mila — chhoti edits bhi time par ho gayi.",
+    name: "School administrator",
+    place: "Jharkhand",
+  },
+  {
+    quote:
+      "Hamari clinic ke liye clean layout aur appointment form — patients ko trust feel hota hai. Phone calls ke saath online enquiries bhi balanced ho gayi.",
+    name: "Clinic coordinator",
+    place: "East Singhbhum",
+  },
+];
+
 export default function WhyChooseUs() {
   return (
     <section id="why-us" className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-6 dark:border-dark-border-primary lg:py-8`}>
@@ -32,6 +53,27 @@ export default function WhyChooseUs() {
               <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">{r.title}</p>
               <p className="mt-1 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{r.desc}</p>
             </article>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-12 border-t border-border-primary pt-10 dark:border-dark-border-primary">
+        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
+          What owners say
+        </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {testimonials.map((t) => (
+            <blockquote
+              key={t.name}
+              className="rounded-xl border border-border-primary bg-bg-card p-5 dark:border-dark-border-primary dark:bg-dark-bg-card"
+            >
+              <p className="text-sm leading-relaxed text-text-primary dark:text-dark-text-primary">&ldquo;{t.quote}&rdquo;</p>
+              <footer className="mt-4 text-xs text-text-tertiary dark:text-dark-text-tertiary">
+                <span className="font-medium text-text-secondary dark:text-dark-text-secondary">{t.name}</span>
+                <span aria-hidden> · </span>
+                {t.place}
+              </footer>
+            </blockquote>
           ))}
         </div>
       </div>
