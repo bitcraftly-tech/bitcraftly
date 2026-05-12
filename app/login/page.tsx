@@ -24,9 +24,9 @@ export default function LoginPage() {
     <>
       <Navbar />
       <main>
-        <section className="border-b border-[#1A1916]/10 bg-white py-1.5">
-          <div className={`${CONTAINER} text-xs text-[#1A1916]/60`}>
-            <Link href="/" className="hover:text-[#1A1916] hover:underline">
+        <section className="border-b border-border-primary bg-bg-card py-1.5 dark:border-dark-border-primary dark:bg-dark-bg-card">
+          <div className={`${CONTAINER} text-xs text-text-tertiary dark:text-dark-text-tertiary`}>
+            <Link href="/" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
               Home
             </Link>
             <span className="px-2">/</span> Login

@@ -5,6 +5,7 @@ import "./globals.css";
 // import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
 import FloatingScrollButton from "@/components/landing/FloatingScrollButton";
 import FloatingThemeTumbler from "@/components/landing/FloatingThemeTumbler";
+import AuthSessionProvider from "@/components/providers/AuthSessionProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import Toaster from "@/components/ui/Toaster";
 
@@ -27,7 +28,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${playfair.variable}`}>
       <body suppressHydrationWarning className="font-[var(--font-inter)] antialiased">
         <ThemeProvider>
-          {children}
+          <AuthSessionProvider>{children}</AuthSessionProvider>
           {/* <ChatSupportWidget /> */}
           <FloatingScrollButton />
           <FloatingThemeTumbler />

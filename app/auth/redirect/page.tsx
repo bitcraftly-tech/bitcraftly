@@ -11,6 +11,7 @@ export default async function AuthRedirectPage() {
   }
 
   const role = `${session.role ?? ""}`.toLowerCase();
-  const nextPath = role === "admin" || role === "staff" || role === "manager" ? "/dashboard" : "/login?error=access_denied";
+  const nextPath =
+    role === "admin" || role === "staff" || role === "manager" ? "/dashboard" : "/portal";
   redirect(nextPath);
 }

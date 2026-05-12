@@ -14,6 +14,11 @@ class LoginRequest(BaseModel):
     password: str = Field(min_length=1, max_length=128)
 
 
+class GoogleSyncRequest(BaseModel):
+    email: str = Field(min_length=3, max_length=190)
+    name: str = Field(min_length=1, max_length=120)
+
+
 class UserResponse(BaseModel):
     id: int
     name: str

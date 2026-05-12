@@ -20,6 +20,9 @@ class Settings(BaseSettings):
     auth_secret: str = "change-me-in-production"
     access_token_expire_seconds: int = 60 * 60 * 24
 
+    # Shared secret for NextAuth → FastAPI Google account sync (server-to-server only). Same value as AUTH_GOOGLE_SYNC_SECRET on the Next.js app.
+    AUTH_GOOGLE_SYNC_SECRET: Optional[str] = None
+
     # Razorpay (https://dashboard.razorpay.com/app/keys) — server-side secret must never be exposed to the browser
     RAZORPAY_KEY_ID: Optional[str] = None
     RAZORPAY_KEY_SECRET: Optional[str] = None
