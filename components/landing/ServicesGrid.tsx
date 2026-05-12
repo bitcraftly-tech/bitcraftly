@@ -20,6 +20,12 @@ const services = [
     accent: "border-purple-500/30 bg-purple-500/10 text-purple-500",
   },
   {
+    title: "Smart Parking",
+    desc: "Society and visitor parking flows — barcode scans, alerts, and admin reports for active deployments.",
+    icon: "🅿️",
+    accent: "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+  },
+  {
     title: "Website Maintenance",
     desc: "Keep your website updated, secure and optimized.",
     icon: "🔧",
@@ -45,12 +51,12 @@ export default function ServicesGrid() {
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">Services</p>
         <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
-          Website & app development for local businesses
+          Websites, apps &amp; smart parking for local businesses
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary sm:text-base">
           As a website development company in Jamshedpur, we work with owners who want clear scope, fast delivery, and
-          affordable website design services — plus ecommerce website development and app builds when you are ready to
-          scale.
+          affordable website design services — plus ecommerce website development, Smart Parking for societies and complexes,
+          and app builds when you are ready to scale.
         </p>
       </div>
 

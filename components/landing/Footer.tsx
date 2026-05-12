@@ -147,6 +147,16 @@ export default function Footer() {
                 <NavArrowBullet />
                 <button
                   type="button"
+                  onClick={() => goToSection("how-parking-works")}
+                  className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
+                >
+                  Smart Parking
+                </button>
+              </li>
+              <li className="group/navitem flex items-start gap-2">
+                <NavArrowBullet />
+                <button
+                  type="button"
                   onClick={() => goToSection("pricing")}
                   className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
                 >
