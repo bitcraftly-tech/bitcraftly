@@ -46,7 +46,7 @@ const showcase = [
   },
   {
     title: "Maintenance & growth",
-    desc: "Security updates, SEO tuning, and WhatsApp Business integration when you want to scale conversations.",
+    desc: "Updates, SEO basics, and WhatsApp Business wiring so customers can reach you faster after launch.",
     stat: "Ongoing partnership",
     glow: "from-teal-500/25 to-emerald-500/10",
   },

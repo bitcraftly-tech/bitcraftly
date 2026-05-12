@@ -13,8 +13,8 @@ export default function PortfolioShowcase() {
             Websites &amp; stores built for real businesses
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-text-secondary dark:text-dark-text-secondary sm:text-base">
-            Preview-style mockups for sectors we ship often — layout, copy, and integrations are tailored to your brand
-            and local customers.
+            Realistic previews for restaurants, gyms, schools and stores — mobile-friendly layouts tailored to your brand
+            and local customers (examples shown).
           </p>
         </div>
         <Link href="/portfolio" className="text-sm font-semibold text-indigo-500 hover:text-indigo-400 dark:text-indigo-400 dark:hover:text-indigo-300">

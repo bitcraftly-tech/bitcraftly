@@ -27,7 +27,7 @@ export default function FinalCTA() {
               rel="noreferrer"
               className="rounded-xl border border-border-secondary px-6 py-3 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"
             >
-              WhatsApp Us
+              Chat on WhatsApp
             </Link>
           </div>
           <p className="mt-6 text-xs text-text-tertiary dark:text-dark-text-tertiary">

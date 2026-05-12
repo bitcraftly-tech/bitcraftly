@@ -3,7 +3,7 @@ import { CONTAINER } from "@/lib/constants";
 
 const mobileFeatures = [
   "Android & iOS from one codebase where it fits your roadmap",
-  "UI tuned for real customers — not internal dashboards",
+  "UI tuned for real customers — clear flows, not cluttered admin screens",
   "Store-ready builds with clear handoff and documentation",
   "Payments, auth, and WhatsApp deep links when you need them",
   "Practical support window after launch",

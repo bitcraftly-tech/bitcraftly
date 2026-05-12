@@ -68,9 +68,9 @@ export default function Pricing() {
         Clear starting points
       </h2>
       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
-        Final numbers depend on pages, integrations, and content readiness — we confirm scope in writing (English or
-        Hinglish) before work starts. Ecommerce website development and larger apps are quoted after a short discovery
-        call.
+        Starting-from prices below — final quote depends on pages, features and content readiness. We confirm scope in
+        writing (English or Hinglish) before work starts. Larger ecommerce and app builds are quoted after a short
+        discovery call.
       </p>
 
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">

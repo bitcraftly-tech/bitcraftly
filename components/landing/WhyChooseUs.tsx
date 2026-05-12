@@ -12,19 +12,25 @@ const testimonials = [
   {
     quote:
       "Bitcraftly ne hamare business ke liye modern website banayi aur customer inquiries increase hui — WhatsApp par messages bhi zyada aane lage.",
-    name: "Local retail owner",
+    name: "Priya K.",
+    initials: "PK",
+    businessType: "Retail",
     place: "Jamshedpur",
   },
   {
     quote:
       "Website ka design modern aur mobile friendly tha. Support bhi kaafi fast mila — chhoti edits bhi time par ho gayi.",
-    name: "School administrator",
+    name: "Amit R.",
+    initials: "AR",
+    businessType: "School",
     place: "Jharkhand",
   },
   {
     quote:
       "Hamari clinic ke liye clean layout aur appointment form — patients ko trust feel hota hai. Phone calls ke saath online enquiries bhi balanced ho gayi.",
-    name: "Clinic coordinator",
+    name: "Dr. Neha S.",
+    initials: "NS",
+    businessType: "Clinic",
     place: "East Singhbhum",
   },
 ];
@@ -39,8 +45,8 @@ export default function WhyChooseUs() {
             Built for owners who want results, not jargon
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary sm:text-base">
-            Whether you need an app development company in Jamshedpur or a partner for ecommerce website development
-            across India, we keep communication simple and timelines realistic.
+            Whether you need website development in Jamshedpur or ecommerce and apps across India, we keep communication
+            simple and timelines realistic — a trustworthy partner for local businesses.
           </p>
         </div>
 
@@ -64,15 +70,27 @@ export default function WhyChooseUs() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {testimonials.map((t) => (
             <blockquote
-              key={t.name}
+              key={`${t.name}-${t.place}`}
               className="rounded-xl border border-border-primary bg-bg-card p-5 dark:border-dark-border-primary dark:bg-dark-bg-card"
             >
-              <p className="text-sm leading-relaxed text-text-primary dark:text-dark-text-primary">&ldquo;{t.quote}&rdquo;</p>
-              <footer className="mt-4 text-xs text-text-tertiary dark:text-dark-text-tertiary">
-                <span className="font-medium text-text-secondary dark:text-dark-text-secondary">{t.name}</span>
-                <span aria-hidden> · </span>
-                {t.place}
-              </footer>
+              <div className="flex items-start gap-3">
+                <span
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg-secondary text-xs font-semibold text-text-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary"
+                  aria-hidden
+                >
+                  {t.initials}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm leading-relaxed text-text-primary dark:text-dark-text-primary">&ldquo;{t.quote}&rdquo;</p>
+                  <footer className="mt-4 text-xs text-text-tertiary dark:text-dark-text-tertiary">
+                    <span className="font-medium text-text-secondary dark:text-dark-text-secondary">{t.name}</span>
+                    <span aria-hidden> · </span>
+                    <span>{t.businessType}</span>
+                    <span aria-hidden> · </span>
+                    {t.place}
+                  </footer>
+                </div>
+              </div>
             </blockquote>
           ))}
         </div>

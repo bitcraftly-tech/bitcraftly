@@ -135,14 +135,14 @@ export default function DashboardNav() {
       <div className="mx-auto w-full max-w-7xl px-6 lg:px-12">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-8">
-            <Link href="/dashboard" className="flex items-center gap-2.5">
+            <Link href="/dashboard" className="flex items-center gap-2.5" title="Bitcraftly — Website & App Development Company in Jamshedpur">
               <LogoMark />
               <div>
                 <div className="font-[var(--font-playfair)] text-xl font-semibold text-text-primary dark:text-dark-text-primary">
                   Bitcraftly
                 </div>
-                <div className="-mt-0.5 text-[11px] uppercase tracking-[0.12em] text-text-tertiary dark:text-dark-text-tertiary">
-                  Client workspace
+                <div className="max-w-[13rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary lg:max-w-[16rem]">
+                  Website &amp; App Development Company in Jamshedpur
                 </div>
               </div>
             </Link>

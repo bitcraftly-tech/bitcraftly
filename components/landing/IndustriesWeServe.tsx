@@ -16,7 +16,8 @@ export default function IndustriesWeServe() {
           Trusted by local teams across Jharkhand &amp; beyond
         </h2>
         <p className="mt-2 text-sm text-text-secondary dark:text-dark-text-secondary">
-          Website development and digital solutions tailored to how your sector actually works — no generic templates.
+          Websites and apps tailored to how your sector works — clear messaging and local-friendly structure, not generic
+          templates.
         </p>
       </div>
       <div className="mt-8 flex flex-wrap justify-center gap-2 sm:gap-3">

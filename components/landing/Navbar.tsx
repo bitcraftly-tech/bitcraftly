@@ -67,13 +67,17 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-border-primary bg-bg-card/90 backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card/90">
       <nav className={`${CONTAINER} flex items-center justify-between py-3`}>
-        <Link href="/" className="flex items-center gap-2">
+        <Link
+          href="/"
+          className="flex items-center gap-2"
+          title="Bitcraftly — Website & App Development Company in Jamshedpur"
+        >
           <LogoMark />
           <span className="flex flex-col leading-tight">
             <span className="font-[var(--font-playfair)] text-xl font-semibold text-text-primary dark:text-dark-text-primary">
               Bitcraftly
             </span>
-            <span className="max-w-[15rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary">
+            <span className="max-w-[15rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary sm:max-w-[18rem]">
               Website &amp; App Development Company in Jamshedpur
             </span>
           </span>

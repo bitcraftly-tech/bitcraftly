@@ -57,9 +57,14 @@ export default function Footer() {
       <div className={CONTAINER}>
         <div className="grid gap-8 md:grid-cols-4">
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-start gap-2">
               <LogoMark />
-              <span className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary">Bitcraftly</span>
+              <span className="flex flex-col leading-tight">
+                <span className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary">Bitcraftly</span>
+                <span className="mt-1 max-w-[14rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary">
+                  Website &amp; App Development Company in Jamshedpur
+                </span>
+              </span>
             </div>
             <p className="mt-3 text-sm text-text-secondary dark:text-dark-text-secondary">
               Bitcraftly helps businesses grow online with modern websites, ecommerce stores, mobile apps and ongoing support when you need it.
