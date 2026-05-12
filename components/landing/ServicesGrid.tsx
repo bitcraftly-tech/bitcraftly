@@ -43,6 +43,12 @@ const services = [
     icon: "💬",
     accent: "border-teal-500/30 bg-teal-500/10 text-teal-500",
   },
+  {
+    title: "Custom Business Solutions",
+    desc: "Tailored technology solutions for modern businesses.",
+    icon: "🧩",
+    accent: "border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400",
+  },
 ];
 
 export default function ServicesGrid() {

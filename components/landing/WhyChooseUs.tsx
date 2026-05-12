@@ -12,26 +12,20 @@ const testimonials = [
   {
     quote:
       "Bitcraftly ne hamare business ke liye modern website banayi aur customer inquiries increase hui — WhatsApp par messages bhi zyada aane lage.",
-    name: "Priya K.",
     initials: "PK",
-    businessType: "Retail",
-    place: "Jamshedpur",
+    attribution: "Retail store owner · Jamshedpur",
   },
   {
     quote:
       "Website ka design modern aur mobile friendly tha. Support bhi kaafi fast mila — chhoti edits bhi time par ho gayi.",
-    name: "Amit R.",
     initials: "AR",
-    businessType: "School",
-    place: "Jharkhand",
+    attribution: "School administrator · Jamshedpur",
   },
   {
     quote:
       "Hamari clinic ke liye clean layout aur appointment form — patients ko trust feel hota hai. Phone calls ke saath online enquiries bhi balanced ho gayi.",
-    name: "Dr. Neha S.",
     initials: "NS",
-    businessType: "Clinic",
-    place: "East Singhbhum",
+    attribution: "Clinic owner · East Singhbhum",
   },
 ];
 
@@ -70,7 +64,7 @@ export default function WhyChooseUs() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {testimonials.map((t) => (
             <blockquote
-              key={`${t.name}-${t.place}`}
+              key={t.attribution}
               className="rounded-xl border border-border-primary bg-bg-card p-5 dark:border-dark-border-primary dark:bg-dark-bg-card"
             >
               <div className="flex items-start gap-3">
@@ -82,13 +76,7 @@ export default function WhyChooseUs() {
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm leading-relaxed text-text-primary dark:text-dark-text-primary">&ldquo;{t.quote}&rdquo;</p>
-                  <footer className="mt-4 text-xs text-text-tertiary dark:text-dark-text-tertiary">
-                    <span className="font-medium text-text-secondary dark:text-dark-text-secondary">{t.name}</span>
-                    <span aria-hidden> · </span>
-                    <span>{t.businessType}</span>
-                    <span aria-hidden> · </span>
-                    {t.place}
-                  </footer>
+                  <footer className="mt-4 text-xs font-medium text-text-secondary dark:text-dark-text-secondary">{t.attribution}</footer>
                 </div>
               </div>
             </blockquote>

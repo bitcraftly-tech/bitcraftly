@@ -6,10 +6,9 @@ type PricingPlan = {
   icon: string;
   accentClass: string;
   buttonClass: string;
-  bulletClass: string;
   price: string;
   period: string;
-  features: string[];
+  whatsIncluded: string[];
   cta: string;
 };
 
@@ -19,10 +18,9 @@ const plans: PricingPlan[] = [
     icon: "🌐",
     accentClass: "text-indigo-500",
     buttonClass: "bg-indigo-600 text-white hover:bg-indigo-700",
-    bulletClass: "bg-indigo-500",
     price: "₹15,000",
     period: "project estimate after scope call",
-    features: ["Brand-led layout", "Mobile-first build", "Lead forms + WhatsApp", "SEO-ready structure", "Launch support"],
+    whatsIncluded: ["Up to 5 pages", "Mobile responsive", "WhatsApp integration", "Basic SEO", "Lead-focused layout"],
     cta: "Get Quote",
   },
   {
@@ -30,10 +28,9 @@ const plans: PricingPlan[] = [
     icon: "🛒",
     accentClass: "text-violet-500",
     buttonClass: "bg-violet-600 text-white hover:bg-violet-700",
-    bulletClass: "bg-violet-500",
     price: "₹35,000",
     period: "project estimate after scope call",
-    features: ["Product catalog setup", "Checkout flow", "Payments guidance", "Performance-focused theme", "Handover training"],
+    whatsIncluded: ["Product catalog & categories", "Mobile checkout flow", "Payments setup guidance", "WhatsApp order enquiries", "Launch handoff"],
     cta: "Get Quote",
   },
   {
@@ -41,10 +38,9 @@ const plans: PricingPlan[] = [
     icon: "📱",
     accentClass: "text-purple-500",
     buttonClass: "bg-purple-600 text-white hover:bg-purple-700",
-    bulletClass: "bg-purple-500",
     price: "₹25,000",
     period: "project estimate after scope call",
-    features: ["Screen flows & components", "Design system handoff", "Revisions within agreed scope", "Developer-ready assets", "Optional build support"],
+    whatsIncluded: ["Key screen flows", "UI components & states", "Developer-ready handoff", "Revisions within scope", "Optional build support"],
     cta: "Get Quote",
   },
   {
@@ -52,10 +48,9 @@ const plans: PricingPlan[] = [
     icon: "🔧",
     accentClass: "text-teal-500",
     buttonClass: "bg-teal-600 text-white hover:bg-teal-700",
-    bulletClass: "bg-teal-500",
     price: "₹5,000",
     period: "per month · updates, edits & checks",
-    features: ["Security & plugin updates", "Small content edits", "Uptime checks", "Monthly health summary", "Priority WhatsApp channel"],
+    whatsIncluded: ["Security & CMS/plugin updates", "Small content edits", "Uptime checks", "Monthly summary", "Priority WhatsApp"],
     cta: "Discuss Plan",
   },
 ];
@@ -99,11 +94,16 @@ export default function Pricing() {
             )}
             <p className="mt-1 text-sm text-text-tertiary dark:text-dark-text-tertiary">{plan.period}</p>
 
-            <ul className="mt-4 space-y-2">
-              {plan.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2 text-sm text-text-secondary dark:text-dark-text-secondary">
-                  <span className={`mt-2 h-1.5 w-1.5 rounded-full ${plan.bulletClass}`} />
-                  <span>{feature}</span>
+            <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-text-secondary dark:text-dark-text-secondary">
+              What&apos;s included
+            </p>
+            <ul className="mt-2 space-y-2">
+              {plan.whatsIncluded.map((line) => (
+                <li key={line} className="flex items-start gap-2 text-sm text-text-secondary dark:text-dark-text-secondary">
+                  <span className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden>
+                    ✔
+                  </span>
+                  <span>{line}</span>
                 </li>
               ))}
             </ul>

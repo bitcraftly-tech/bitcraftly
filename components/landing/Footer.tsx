@@ -73,7 +73,7 @@ export default function Footer() {
               Trusted by local businesses across Jamshedpur &amp; nearby cities.
             </p>
             <p className="mt-2 text-xs font-medium tracking-wide text-text-secondary dark:text-dark-text-secondary">
-              Websites • Apps • Ecommerce • Local SEO
+              Websites • Apps • Ecommerce • SEO • AI integrations
             </p>
             <p className="mt-2 text-xs font-medium text-text-secondary dark:text-dark-text-secondary">
               Affordable Website Design Services in Jamshedpur
@@ -155,10 +155,10 @@ export default function Footer() {
                 <NavArrowBullet />
                 <button
                   type="button"
-                  onClick={() => goToSection("how-parking-works")}
+                  onClick={() => goToSection("services")}
                   className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
                 >
-                  Smart Parking
+                  AI integrations
                 </button>
               </li>
               <li className="group/navitem flex items-start gap-2">

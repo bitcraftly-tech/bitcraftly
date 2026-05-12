@@ -128,10 +128,6 @@ export default function Hero() {
           ))}
         </ul>
 
-        <p className="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary lg:mx-0">
-          Led by a frontend developer with 18+ years of IT industry experience.
-        </p>
-
         <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
           {navPills.map((p) => (
             <button
@@ -164,6 +160,62 @@ export default function Hero() {
             <div className="mt-4 inline-flex rounded-full bg-bg-card px-3 py-1.5 text-xs font-medium text-text-secondary dark:bg-dark-bg-card dark:text-dark-text-secondary">
               {item.stat}
             </div>
+          </div>
+        </div>
+
+        <div className="relative mt-5 grid grid-cols-3 gap-2">
+          <div className="rounded-xl border border-border-primary bg-bg-secondary/90 p-2 dark:border-dark-border-primary dark:bg-dark-bg-secondary/90">
+            <div className="aspect-[16/11] overflow-hidden rounded-lg border border-border-primary/60 bg-bg-card dark:border-dark-border-primary/60 dark:bg-dark-bg-card">
+              <div className="flex h-3.5 shrink-0 items-center gap-1 border-b border-border-primary/40 bg-bg-secondary px-1.5 dark:border-dark-border-primary/40 dark:bg-dark-bg-secondary">
+                <span className="h-1.5 w-1.5 rounded-full bg-red-400/90" aria-hidden />
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-400/90" aria-hidden />
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500/80" aria-hidden />
+              </div>
+              <div className="grid h-[calc(100%-0.875rem)] grid-cols-12 gap-1 p-1.5">
+                <div className="col-span-5 rounded bg-indigo-500/15 dark:bg-indigo-400/20" />
+                <div className="col-span-7 space-y-1">
+                  <div className="h-1.5 rounded bg-border-secondary dark:bg-dark-border-secondary" />
+                  <div className="h-1.5 w-[82%] rounded bg-border-secondary/80 dark:bg-dark-border-secondary/80" />
+                  <div className="mt-1.5 grid grid-cols-2 gap-1">
+                    <div className="aspect-square rounded bg-violet-500/12 dark:bg-violet-400/15" />
+                    <div className="aspect-square rounded bg-violet-500/12 dark:bg-violet-400/15" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p className="mt-1.5 text-center text-[10px] font-medium text-text-tertiary dark:text-dark-text-tertiary">
+              Website mockup
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center rounded-xl border border-border-primary bg-bg-secondary/90 p-2 dark:border-dark-border-primary dark:bg-dark-bg-secondary/90">
+            <div className="relative h-[7.25rem] w-[3.35rem] shrink-0 rounded-[1rem] border-[3px] border-border-primary bg-bg-card shadow-sm dark:border-dark-border-primary dark:bg-dark-bg-card">
+              <div className="absolute left-1/2 top-1.5 h-1 w-6 -translate-x-1/2 rounded-full bg-border-secondary dark:bg-dark-border-secondary" aria-hidden />
+              <div className="mx-1 mt-5 space-y-1 rounded-md bg-bg-secondary p-1 dark:bg-dark-bg-secondary">
+                <div className="h-1 rounded bg-indigo-500/25 dark:bg-indigo-400/25" />
+                <div className="h-6 rounded bg-gradient-to-br from-indigo-500/15 to-violet-500/10" />
+                <div className="h-1 w-2/3 rounded bg-border-secondary/70 dark:bg-dark-border-secondary/70" />
+              </div>
+            </div>
+            <p className="mt-auto pt-2 text-center text-[10px] font-medium text-text-tertiary dark:text-dark-text-tertiary">
+              App preview
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-border-primary bg-bg-secondary/90 p-2 dark:border-dark-border-primary dark:bg-dark-bg-secondary/90">
+            <div className="aspect-square overflow-hidden rounded-lg border border-border-primary/60 bg-bg-card dark:border-dark-border-primary/60 dark:bg-dark-bg-card">
+              <div className="flex h-full flex-col bg-gradient-to-br from-slate-500/10 via-bg-secondary to-emerald-500/10 p-2 dark:from-slate-400/10 dark:via-dark-bg-secondary dark:to-emerald-500/10">
+                <div className="h-2 w-2/3 rounded bg-text-primary/15 dark:bg-dark-text-primary/15" />
+                <div className="mt-2 grid flex-1 grid-cols-2 gap-1">
+                  <div className="rounded bg-teal-500/15 dark:bg-teal-400/15" />
+                  <div className="rounded bg-indigo-500/15 dark:bg-indigo-400/15" />
+                  <div className="col-span-2 rounded bg-violet-500/12 dark:bg-violet-400/15" />
+                </div>
+              </div>
+            </div>
+            <p className="mt-1.5 text-center text-[10px] font-medium text-text-tertiary dark:text-dark-text-tertiary">
+              Recent work
+            </p>
           </div>
         </div>
       </div>

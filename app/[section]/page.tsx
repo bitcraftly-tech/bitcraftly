@@ -11,6 +11,7 @@ const ALLOWED_SECTIONS = [
   "pricing",
   "contact-cta",
   "how-parking-works",
+  "process",
 ] as const;
 type AllowedSection = (typeof ALLOWED_SECTIONS)[number];
 

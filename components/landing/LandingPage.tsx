@@ -12,7 +12,9 @@ const IndustriesWeServe = dynamic(() => import("@/components/landing/IndustriesW
 const Features = dynamic(() => import("@/components/landing/Features"));
 const WhyChooseUs = dynamic(() => import("@/components/landing/WhyChooseUs"));
 const Pricing = dynamic(() => import("@/components/landing/Pricing"));
+const HowWeWork = dynamic(() => import("@/components/landing/HowWeWork"));
 const FinalCTA = dynamic(() => import("@/components/landing/FinalCTA"));
+const TrustReviewsPlaceholder = dynamic(() => import("@/components/landing/TrustReviewsPlaceholder"));
 const ParkingHowItWorks = dynamic(() => import("@/components/landing/ParkingHowItWorks"));
 const Footer = dynamic(() => import("@/components/landing/Footer"));
 
@@ -25,7 +27,8 @@ type LandingPageProps = {
     | "why-us"
     | "pricing"
     | "contact-cta"
-    | "how-parking-works";
+    | "how-parking-works"
+    | "process";
 };
 
 export default function LandingPage({ sectionId }: LandingPageProps) {
@@ -54,16 +57,22 @@ export default function LandingPage({ sectionId }: LandingPageProps) {
       <FadeInOnView delayMs={180}>
         <WhyChooseUs />
       </FadeInOnView>
+      <FadeInOnView delayMs={195}>
+        <HowWeWork />
+      </FadeInOnView>
       <FadeInOnView delayMs={210}>
         <Pricing />
+      </FadeInOnView>
+      <FadeInOnView delayMs={225}>
+        <TrustReviewsPlaceholder />
       </FadeInOnView>
       <FadeInOnView delayMs={240}>
         <FinalCTA />
       </FadeInOnView>
-      <FadeInOnView delayMs={270}>
+      <FadeInOnView delayMs={265}>
         <ParkingHowItWorks />
       </FadeInOnView>
-      <FadeInOnView delayMs={300}>
+      <FadeInOnView delayMs={285}>
         <Footer />
       </FadeInOnView>
     </main>
