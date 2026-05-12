@@ -38,6 +38,12 @@ const services = [
     accent: "border-emerald-500/30 bg-emerald-500/10 text-emerald-500",
   },
   {
+    title: "AI Integrations",
+    desc: "Integrate AI chatbots, smart automation and modern AI tools into your business website or app.",
+    icon: "✨",
+    accent: "border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
+  },
+  {
     title: "WhatsApp Business Integration",
     desc: "Connect your business directly with customers.",
     icon: "💬",
@@ -51,12 +57,12 @@ export default function ServicesGrid() {
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">Services</p>
         <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
-          Websites, apps &amp; smart parking for local businesses
+          Modern websites, apps &amp; AI-powered solutions for local businesses
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary sm:text-base">
-          As a website development company in Jamshedpur, we work with owners who want clear scope, fast delivery, and
-          affordable website design services — plus ecommerce website development, Smart Parking for societies and complexes,
-          and app builds when you are ready to scale.
+          We are a website &amp; app development company in Jamshedpur — with practical AI-powered business solutions when they
+          genuinely help your customers. Clear scope, fast delivery, affordable website design, ecommerce builds, Smart Parking
+          for societies, and thoughtful AI integrations into sites and apps when you are ready.
         </p>
       </div>
 

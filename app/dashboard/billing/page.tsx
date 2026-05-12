@@ -4,7 +4,7 @@ import PageHeader from "@/components/dashboard/PageHeader";
 export default function DashboardBillingPage() {
   return (
     <div>
-      <PageHeader title="Billing" breadcrumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Billing" }]} />
+      <PageHeader title="Invoices" breadcrumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Invoices" }]} />
       <div className="mt-6 rounded-lg border border-border-primary bg-bg-card p-6 dark:border-dark-border-primary dark:bg-dark-bg-card">
         <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
           Pay invoices or deposits securely. Successful payments are verified on the server before being treated as final.

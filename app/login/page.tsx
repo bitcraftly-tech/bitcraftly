@@ -10,8 +10,9 @@ import { isGoogleLoginConfigured } from "@/lib/googleAuthEnv";
 import LoginContent from "./LoginContent";
 
 export const metadata: Metadata = {
-  title: "Login | Bitcraftly",
-  description: "Secure login to your Bitcraftly dashboard with Gmail.",
+  title: "Login | Bitcraftly Portal",
+  description:
+    "Sign in to the Bitcraftly Portal — manage websites, projects and business tools. Website & app development company in Jamshedpur.",
 };
 
 /** Read OAuth env at request time (not baked into static HTML at build). */

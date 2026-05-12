@@ -45,6 +45,12 @@ const showcase = [
     stat: "Ongoing partnership",
     glow: "from-teal-500/25 to-emerald-500/10",
   },
+  {
+    title: "AI integrations",
+    desc: "Chatbots and light automation built into your website or app — where they genuinely speed up enquiries.",
+    stat: "Practical, not flashy",
+    glow: "from-slate-500/20 to-indigo-500/15",
+  },
 ];
 
 export default function Hero() {
@@ -75,7 +81,7 @@ export default function Hero() {
         <div className="inline-flex items-center gap-2 rounded-full border border-border-primary bg-bg-card px-4 py-2 dark:border-dark-border-primary dark:bg-dark-bg-card">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
           <span className="text-xs font-medium uppercase tracking-[0.1em] text-text-secondary dark:text-dark-text-secondary">
-            Website &amp; app development company · Jamshedpur
+            Website, app &amp; AI solutions · Jamshedpur
           </span>
         </div>
 
@@ -83,7 +89,7 @@ export default function Hero() {
           Professional Websites &amp; Apps That Grow Your Business
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-text-secondary dark:text-dark-text-secondary lg:mx-0 lg:text-lg">
-          Bitcraftly helps businesses in Jamshedpur &amp; across India build modern websites, ecommerce stores and mobile apps that drive real growth.
+          Bitcraftly helps businesses in Jamshedpur &amp; across India build modern websites, ecommerce stores, mobile apps and AI-powered digital solutions that drive real growth.
         </p>
         <p className="mx-auto mt-3 max-w-2xl text-sm italic leading-relaxed text-text-tertiary dark:text-dark-text-tertiary lg:mx-0">
           Clear scope, written estimates, and friendly English–Hinglish on calls or WhatsApp — whichever you prefer.

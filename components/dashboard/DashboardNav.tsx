@@ -9,8 +9,11 @@ import {
   Bell,
   Car,
   ChevronDown,
+  CreditCard,
+  Globe,
   LayoutDashboard,
   Menu,
+  MessageCircle,
   Settings,
   Users,
   X,
@@ -34,10 +37,13 @@ const navItems: Array<{
   icon: typeof LayoutDashboard;
   roles: DashboardRole[];
 }> = [
-  { label: "Overview", href: "/dashboard", icon: LayoutDashboard, roles: ["admin", "staff", "manager"] },
-  { label: "Leads", href: "/dashboard/leads", icon: Users, roles: ["admin", "staff", "manager"] },
-  { label: "Analytics", href: "/dashboard/analytics", icon: BarChart3, roles: ["admin"] },
-  { label: "Parking Reports", href: "/dashboard/parking-reports", icon: Car, roles: ["admin", "staff", "manager"] },
+  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard, roles: ["admin", "staff", "manager"] },
+  { label: "Projects", href: "/dashboard/leads", icon: Users, roles: ["admin", "staff", "manager"] },
+  { label: "Websites", href: "/dashboard/templates", icon: Globe, roles: ["admin", "staff", "manager"] },
+  { label: "Apps", href: "/dashboard/parking-reports", icon: Car, roles: ["admin", "staff", "manager"] },
+  { label: "Insights", href: "/dashboard/analytics", icon: BarChart3, roles: ["admin"] },
+  { label: "Invoices", href: "/dashboard/billing", icon: CreditCard, roles: ["admin", "staff", "manager"] },
+  { label: "Support", href: "/contact?source=bitcraftly-portal", icon: MessageCircle, roles: ["admin", "staff", "manager"] },
   { label: "Settings", href: "/dashboard/settings", icon: Settings, roles: ["admin", "staff", "manager"] },
 ];
 
@@ -136,7 +142,7 @@ export default function DashboardNav() {
                   Bitcraftly
                 </div>
                 <div className="-mt-0.5 text-[11px] uppercase tracking-[0.12em] text-text-tertiary dark:text-dark-text-tertiary">
-                  Admin Dashboard
+                  Bitcraftly Portal
                 </div>
               </div>
             </Link>
@@ -144,7 +150,8 @@ export default function DashboardNav() {
             <div className="hidden items-center gap-1 md:flex">
               {visibleNavItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = pathname === item.href;
+                const base = item.href.split("?")[0];
+                const isActive = base === "/contact" ? pathname === "/contact" : pathname === base;
                 return (
                   <Link
                     key={item.href}
@@ -258,11 +265,18 @@ export default function DashboardNav() {
                     Profile
                   </Link>
                   <Link
+                    href="/contact?intent=support&topic=ai-assistant&source=dashboard-ai-tools"
+                    className="block px-4 py-2 text-sm text-text-secondary hover:bg-bg-secondary dark:text-dark-text-secondary dark:hover:bg-dark-bg-secondary"
+                    onClick={() => setUserMenuOpen(false)}
+                  >
+                    Smart AI Tools <span className="text-[10px] font-semibold uppercase text-text-tertiary">Beta</span>
+                  </Link>
+                  <Link
                     href="/dashboard/billing"
                     className="block px-4 py-2 text-sm text-text-secondary hover:bg-bg-secondary dark:text-dark-text-secondary dark:hover:bg-dark-bg-secondary"
                     onClick={() => setUserMenuOpen(false)}
                   >
-                    Billing
+                    Invoices
                   </Link>
                   <button
                     type="button"
@@ -286,7 +300,8 @@ export default function DashboardNav() {
           <div className="flex flex-col gap-1">
             {visibleNavItems.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href;
+              const base = item.href.split("?")[0];
+              const isActive = base === "/contact" ? pathname === "/contact" : pathname === base;
               return (
                 <Link
                   key={item.href}

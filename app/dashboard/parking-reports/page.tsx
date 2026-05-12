@@ -30,12 +30,12 @@ export default function DashboardParkingReportsPage() {
   return (
     <div>
       <PageHeader
-        title="Parking Reports"
-        breadcrumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Parking Reports" }]}
+        title="Apps"
+        breadcrumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Apps" }]}
       />
 
       <div className="mt-8">
-        <SectionCard title="Reported Incidents" description="Reports generated from parking barcode scans">
+        <SectionCard title="Smart Parking reports" description="Operational reports from parking barcode scans">
           <div className="mb-4 flex flex-wrap gap-2">
             {(["all", "open", "resolved"] as const).map((item) => (
               <button

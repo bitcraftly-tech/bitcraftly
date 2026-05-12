@@ -66,7 +66,7 @@ export default async function CustomerPortalPage() {
                 Home
               </Link>
               <span className="px-2">/</span>
-              <span aria-current="page">Service portal</span>
+              <span aria-current="page">Portal</span>
             </div>
           </div>
         </section>
@@ -75,13 +75,17 @@ export default async function CustomerPortalPage() {
           <div className={`${CONTAINER} space-y-10`}>
             <header className="border-b border-border-primary pb-8 dark:border-dark-border-primary">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-text-tertiary dark:text-dark-text-tertiary">
-                Customer portal
+                Bitcraftly Portal
               </p>
               <h1 className="mt-3 font-[var(--font-playfair)] text-3xl tracking-tight text-text-primary dark:text-dark-text-primary md:text-4xl">
                 Welcome, {firstName}
               </h1>
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary md:text-[15px]">
-                Request updates and support for your projects. Your profile lives under{" "}
+                Your digital workspace for websites, apps and business growth. Request updates and manage tools from one
+                place — built by Bitcraftly, your website &amp; app development partner in Jamshedpur.
+              </p>
+              <p className="mt-3 max-w-2xl text-sm text-text-secondary dark:text-dark-text-secondary">
+                Your profile lives under{" "}
                 <Link
                   href="/account"
                   className="font-medium text-violet-600 underline-offset-2 hover:underline dark:text-violet-400"
@@ -95,10 +99,10 @@ export default async function CustomerPortalPage() {
             <section aria-labelledby="portal-services-heading" className="space-y-5">
               <div>
                 <h2 id="portal-services-heading" className="text-lg font-semibold text-text-primary dark:text-dark-text-primary">
-                  What do you need help with?
+                  Services &amp; support
                 </h2>
                 <p className="mt-1 max-w-xl text-sm text-text-secondary dark:text-dark-text-secondary">
-                  Pick a category — we&apos;ll route your message with the right context.
+                  Pick a category — we route your message with the right context (websites, apps &amp; digital solutions).
                 </p>
               </div>
 
@@ -156,6 +160,16 @@ export default async function CustomerPortalPage() {
           </div>
         </div>
       </main>
+      <div className="border-t border-border-primary bg-bg-primary py-6 dark:border-dark-border-primary dark:bg-dark-bg-primary">
+        <div className={`${CONTAINER} text-center`}>
+          <p className="text-xs text-text-tertiary dark:text-dark-text-tertiary">
+            Built by Bitcraftly — Website &amp; App Development Company in Jamshedpur.
+          </p>
+          <p className="mt-2 text-xs text-text-tertiary dark:text-dark-text-tertiary">
+            Bitcraftly Portal — Manage your digital projects efficiently.
+          </p>
+        </div>
+      </div>
       <Footer />
     </div>
   );

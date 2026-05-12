@@ -145,13 +145,15 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
     <section className="bg-bg-primary py-8 dark:bg-dark-bg-primary">
       <div className="mx-auto w-full max-w-md px-6">
         <div className="rounded-2xl border border-border-primary bg-bg-card p-7 shadow-[0_10px_40px_rgba(26,25,22,0.06)] dark:border-dark-border-primary dark:bg-dark-bg-card dark:shadow-[0_10px_40px_rgba(0,0,0,0.45)]">
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">Welcome back</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
+            Bitcraftly Portal
+          </p>
           <h1 className="mt-2 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary">
-            {mode === "login" ? "Login to Bitcraftly" : "Create your account"}
+            {mode === "login" ? "Welcome back to Bitcraftly Portal" : "Create your account"}
           </h1>
           <p className="mt-2 text-sm text-text-secondary dark:text-dark-text-secondary">
             {mode === "login"
-              ? "Continue with your Gmail account or use email login."
+              ? "Manage your websites, projects and business tools in one place."
               : "Sign up with your details or continue with Gmail."}
           </p>
 

@@ -4,8 +4,8 @@ export default function DashboardAnalyticsPage() {
   return (
     <div>
       <PageHeader
-        title="Analytics"
-        breadcrumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Analytics" }]}
+        title="Insights"
+        breadcrumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Insights" }]}
       />
 
       <section className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">

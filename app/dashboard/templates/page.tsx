@@ -6,7 +6,7 @@ export default function DashboardTemplatesPage() {
     <div>
       <PageHeader
         title="WhatsApp Templates"
-        breadcrumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Templates" }]}
+        breadcrumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Websites" }]}
       />
 
       <div className="mt-8">

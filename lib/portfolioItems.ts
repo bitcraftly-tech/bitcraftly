@@ -37,6 +37,13 @@ export const homePortfolioItems: PortfolioItem[] = [
     emoji: "🛍️",
     tag: "Ecommerce",
   },
+  {
+    title: "AI Chatbot for Restaurant",
+    hint: "Menu FAQs, smart replies & WhatsApp handoff",
+    gradient: "from-indigo-500/15 to-slate-500/15",
+    emoji: "💬",
+    tag: "Website",
+  },
 ];
 
 export const portfolioPageItems: PortfolioItem[] = [
@@ -49,7 +56,11 @@ export const portfolioPageItems: PortfolioItem[] = [
           ? "Admission funnel, fee enquiry forms, news & calendar for parents."
           : item.title === "Gym Website"
             ? "Plans, trainer roster, class timetable, trial enquiry strip."
-            : "Category-led UX, trust badges, shipping & COD messaging tuned for your audience.",
+            : item.title === "Ecommerce Website"
+              ? "Category-led UX, trust badges, shipping & COD messaging tuned for your audience."
+              : item.title === "AI Chatbot for Restaurant"
+                ? "Customer-facing assistant for menus, hours, and quick questions — with a clean handoff to staff or WhatsApp."
+                : "Tailored layout and flows for your industry.",
   })),
   {
     title: "Clinic & Healthcare",

@@ -62,13 +62,16 @@ export default function Footer() {
               <span className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary">Bitcraftly</span>
             </div>
             <p className="mt-3 text-sm text-text-secondary dark:text-dark-text-secondary">
-              Bitcraftly helps businesses grow online with modern websites, ecommerce solutions and mobile apps.
+              Bitcraftly helps businesses grow online with modern websites, ecommerce stores, mobile apps and practical AI where it fits your workflow.
             </p>
             <p className="mt-2 text-xs text-text-tertiary dark:text-dark-text-tertiary">
               Trusted by local businesses across Jamshedpur &amp; nearby cities.
             </p>
+            <p className="mt-2 text-xs font-medium tracking-wide text-text-secondary dark:text-dark-text-secondary">
+              Websites • Apps • AI Solutions • Ecommerce
+            </p>
             <p className="mt-2 text-xs font-medium text-text-secondary dark:text-dark-text-secondary">
-              Website &amp; App Development Company in Jamshedpur
+              Website &amp; App Development Company · AI Solutions Company in Jamshedpur
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-2.5">
               <span

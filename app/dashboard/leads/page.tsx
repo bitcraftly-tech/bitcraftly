@@ -131,15 +131,15 @@ export default function DashboardLeadsPage() {
   return (
     <div>
       <PageHeader
-        title="Customer Requests"
-        breadcrumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Leads" }]}
+        title="Projects"
+        breadcrumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Projects" }]}
         action={{ label: "Refresh", href: "/dashboard/leads" }}
       />
 
       <div className="mt-8">
         <SectionCard
-          title="Requests List"
-          description="Contact form submissions and leads. Track pending vs contacted."
+          title="Requests & inquiries"
+          description="Contact submissions and leads — track what needs follow-up."
         >
           <input
             type="text"
