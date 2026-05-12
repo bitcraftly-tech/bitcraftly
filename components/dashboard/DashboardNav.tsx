@@ -41,9 +41,9 @@ const navItems: Array<{
   { label: "Projects", href: "/dashboard/leads", icon: Users, roles: ["admin", "staff", "manager"] },
   { label: "Websites", href: "/dashboard/templates", icon: Globe, roles: ["admin", "staff", "manager"] },
   { label: "Apps", href: "/dashboard/parking-reports", icon: Car, roles: ["admin", "staff", "manager"] },
-  { label: "Insights", href: "/dashboard/analytics", icon: BarChart3, roles: ["admin"] },
+  { label: "Support", href: "/contact?intent=support&source=bitcraftly-portal-nav", icon: MessageCircle, roles: ["admin", "staff", "manager"] },
   { label: "Invoices", href: "/dashboard/billing", icon: CreditCard, roles: ["admin", "staff", "manager"] },
-  { label: "Support", href: "/contact?source=bitcraftly-portal", icon: MessageCircle, roles: ["admin", "staff", "manager"] },
+  { label: "Reports", href: "/dashboard/analytics", icon: BarChart3, roles: ["admin"] },
   { label: "Settings", href: "/dashboard/settings", icon: Settings, roles: ["admin", "staff", "manager"] },
 ];
 
@@ -142,7 +142,7 @@ export default function DashboardNav() {
                   Bitcraftly
                 </div>
                 <div className="-mt-0.5 text-[11px] uppercase tracking-[0.12em] text-text-tertiary dark:text-dark-text-tertiary">
-                  Bitcraftly Portal
+                  Client workspace
                 </div>
               </div>
             </Link>
@@ -265,11 +265,11 @@ export default function DashboardNav() {
                     Profile
                   </Link>
                   <Link
-                    href="/contact?intent=support&topic=ai-assistant&source=dashboard-ai-tools"
+                    href="/contact?intent=support&topic=ai-assistant-beta&source=dashboard-ai-assistant"
                     className="block px-4 py-2 text-sm text-text-secondary hover:bg-bg-secondary dark:text-dark-text-secondary dark:hover:bg-dark-bg-secondary"
                     onClick={() => setUserMenuOpen(false)}
                   >
-                    Smart AI Tools <span className="text-[10px] font-semibold uppercase text-text-tertiary">Beta</span>
+                    AI Assistant <span className="text-[10px] font-semibold uppercase text-text-tertiary">Beta</span>
                   </Link>
                   <Link
                     href="/dashboard/billing"
@@ -397,7 +397,7 @@ export default function DashboardNav() {
           })}
           {!notifications.length ? (
             <p className="rounded-lg border border-border-primary px-4 py-3 text-sm text-text-secondary dark:border-dark-border-primary dark:text-dark-text-secondary">
-              No notifications yet.
+              No updates yet — we&apos;ll notify you when something changes.
             </p>
           ) : null}
         </div>

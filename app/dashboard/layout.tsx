@@ -35,7 +35,7 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
                 Built by Bitcraftly — Website &amp; App Development Company in Jamshedpur.
               </p>
               <p className="mt-2 text-xs text-text-tertiary dark:text-dark-text-tertiary">
-                Bitcraftly Portal — Manage your digital projects efficiently.
+                Manage websites, apps and digital projects in one client workspace.
               </p>
             </div>
           </div>

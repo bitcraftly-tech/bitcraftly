@@ -75,14 +75,14 @@ export default async function CustomerPortalPage() {
           <div className={`${CONTAINER} space-y-10`}>
             <header className="border-b border-border-primary pb-8 dark:border-dark-border-primary">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-text-tertiary dark:text-dark-text-tertiary">
-                Bitcraftly Portal
+                Client workspace
               </p>
               <h1 className="mt-3 font-[var(--font-playfair)] text-3xl tracking-tight text-text-primary dark:text-dark-text-primary md:text-4xl">
-                Welcome, {firstName}
+                Welcome back, {firstName} 👋
               </h1>
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary md:text-[15px]">
-                Your digital workspace for websites, apps and business growth. Request updates and manage tools from one
-                place — built by Bitcraftly, your website &amp; app development partner in Jamshedpur.
+                Manage your websites, projects and digital solutions from one place — request updates and reach our team
+                whenever you need help.
               </p>
               <p className="mt-3 max-w-2xl text-sm text-text-secondary dark:text-dark-text-secondary">
                 Your profile lives under{" "}
@@ -166,7 +166,7 @@ export default async function CustomerPortalPage() {
             Built by Bitcraftly — Website &amp; App Development Company in Jamshedpur.
           </p>
           <p className="mt-2 text-xs text-text-tertiary dark:text-dark-text-tertiary">
-            Bitcraftly Portal — Manage your digital projects efficiently.
+            Websites, apps &amp; digital projects — one simple client hub.
           </p>
         </div>
       </div>

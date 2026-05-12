@@ -39,7 +39,14 @@ export default function LeadsTable({
   savingNotesContactId,
 }: LeadsTableProps) {
   if (!leads.length) {
-    return <p className="text-sm text-text-secondary dark:text-dark-text-secondary">No customer requests yet.</p>;
+    return (
+      <div className="rounded-xl border border-dashed border-border-primary px-4 py-10 text-center dark:border-dark-border-primary">
+        <p className="text-sm font-medium text-text-primary dark:text-dark-text-primary">No active projects yet.</p>
+        <p className="mt-2 text-sm text-text-secondary dark:text-dark-text-secondary">
+          Start your next website or app project with Bitcraftly — new enquiries will appear in this list.
+        </p>
+      </div>
+    );
   }
 
   return (
