@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { getSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -24,6 +24,17 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
   const [signupName, setSignupName] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("reason") !== "session_expired") return;
+    toast.info("Your session ended for security. Please sign in again.");
+    const url = new URL(window.location.href);
+    url.searchParams.delete("reason");
+    const qs = url.searchParams.toString();
+    const path = qs ? `${url.pathname}?${qs}` : url.pathname;
+    window.history.replaceState({}, "", path);
+  }, []);
 
   const isPrivilegedRole = (role?: string) => {
     const normalized = `${role ?? ""}`.toLowerCase();

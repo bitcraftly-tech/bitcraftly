@@ -52,11 +52,7 @@ export default async function CustomerPortalPage() {
                 Home
               </Link>
               <span className="px-2">/</span>
-              <Link href="/account" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
-                My account
-              </Link>
-              <span className="px-2">/</span>
-              Service portal
+              <span aria-current="page">Service portal</span>
             </div>
           </div>
         </section>

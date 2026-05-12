@@ -81,6 +81,13 @@ export function createAuthOptions(): NextAuthOptions {
     ],
     session: {
       strategy: "jwt",
+      /** Cookie/JWT lifetime — client warning uses `session.expires` (last ~60s configurable). */
+      maxAge: (() => {
+        const raw = process.env.SESSION_MAX_AGE_SECONDS?.trim();
+        if (!raw) return 30 * 24 * 60 * 60;
+        const n = Number.parseInt(raw, 10);
+        return Number.isFinite(n) && n > 0 ? n : 30 * 24 * 60 * 60;
+      })(),
     },
     callbacks: {
       async jwt({ token, user, account, profile }) {
