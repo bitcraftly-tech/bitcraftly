@@ -24,7 +24,7 @@ export default function PortfolioContent() {
       </section>
 
       <section className={`${CONTAINER} border-t border-border-primary pb-12 dark:border-dark-border-primary`}>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {portfolioPageItems.map((item) => (
             <PortfolioProjectCard key={item.title} item={item} showDetails />
           ))}

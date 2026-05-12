@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import type { PortfolioItem, PortfolioMockup } from "@/lib/portfolioItems";
 
 type PortfolioProjectCardProps = {
@@ -114,7 +116,7 @@ function MockupInterior({ variant }: { variant: PortfolioMockup }) {
                 key={i}
                 className={`rounded-md border border-border-primary/40 bg-gradient-to-br ${cell.tone} p-1.5 dark:border-dark-border-primary/40`}
               >
-                <div className="aspect-[4/3] rounded bg-bg-card/80 dark:bg-dark-bg-card/80" />
+                <div className="h-5 w-full rounded bg-bg-card/80 dark:bg-dark-bg-card/80" />
                 <div className="mt-1 flex items-center justify-between text-[9px]">
                   <span className="h-1 w-10 rounded bg-border-secondary/90 dark:bg-dark-border-secondary/90" />
                   <span className="font-semibold text-text-primary dark:text-dark-text-primary">{cell.price}</span>
@@ -202,34 +204,69 @@ function MockupInterior({ variant }: { variant: PortfolioMockup }) {
 }
 
 export default function PortfolioProjectCard({ item, showDetails }: PortfolioProjectCardProps) {
+  const bottomBlock = Boolean(item.demoHref || (showDetails && item.details));
+
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card">
-      <div className={`relative aspect-[4/3] bg-gradient-to-br ${item.gradient} p-4`}>
+    <article className="group flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card">
+      <div className={`relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-gradient-to-br ${item.gradient} p-4`}>
         <div className="absolute inset-0 rounded-t-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12),transparent_45%)]" />
-        <div className="relative flex h-full min-h-0 flex-col rounded-xl border border-border-primary/60 bg-bg-card/90 p-3 shadow-sm backdrop-blur-sm dark:border-dark-border-primary/60 dark:bg-dark-bg-card/90">
-          <div className="flex items-center gap-1.5 border-b border-border-primary/50 pb-2 dark:border-dark-border-primary/50">
+        <div className="relative flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-border-primary/60 bg-bg-card/90 p-3 shadow-sm backdrop-blur-sm dark:border-dark-border-primary/60 dark:bg-dark-bg-card/90">
+          <div className="flex shrink-0 items-center gap-1.5 border-b border-border-primary/50 pb-2 dark:border-dark-border-primary/50">
             <span className="h-2 w-2 rounded-full bg-red-400/70" />
             <span className="h-2 w-2 rounded-full bg-yellow-400/70" />
             <span className="h-2 w-2 rounded-full bg-green-400/70" />
             <span className="ml-auto text-[10px] text-text-tertiary dark:text-dark-text-tertiary">preview</span>
           </div>
-          <MockupInterior variant={item.mockup} />
-          <div className="mt-3 flex items-center justify-between text-lg" aria-hidden>
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+            <MockupInterior variant={item.mockup} />
+          </div>
+          <div className="mt-2 flex shrink-0 items-center justify-between text-lg" aria-hidden>
             <span>{item.emoji}</span>
           </div>
         </div>
       </div>
-      <div className="border-t border-border-primary p-4 dark:border-dark-border-primary">
-        <div className="flex flex-wrap items-center gap-2">
-          <h3 className="text-base font-semibold text-text-primary dark:text-dark-text-primary">{item.title}</h3>
-          <span className="rounded-full border border-border-secondary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-text-tertiary dark:border-dark-border-secondary dark:text-dark-text-tertiary">
-            {item.tag}
-          </span>
+      <div className="flex min-h-0 flex-1 flex-col border-t border-border-primary p-4 dark:border-dark-border-primary">
+        <div className="flex min-h-0 flex-1 flex-col">
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <h3 className="text-base font-semibold text-text-primary dark:text-dark-text-primary">{item.title}</h3>
+              <span className="rounded-full border border-border-secondary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-text-tertiary dark:border-dark-border-secondary dark:text-dark-text-tertiary">
+                {item.tag}
+              </span>
+            </div>
+            <p className="mt-1 text-xs text-text-secondary dark:text-dark-text-secondary">{item.hint}</p>
+            {item.featureBullets.length ? (
+              <ul className="mt-3 space-y-1">
+                {item.featureBullets.map((line) => (
+                  <li
+                    key={line}
+                    className="flex items-start gap-1.5 text-[11px] leading-snug text-text-secondary/95 dark:text-dark-text-secondary/95"
+                  >
+                    <span className="mt-[2px] shrink-0 text-[10px] text-emerald-600/85 dark:text-emerald-400/75" aria-hidden>
+                      ✔
+                    </span>
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+          {bottomBlock ? (
+            <div className="mt-auto flex flex-col gap-2 pt-3">
+              {item.demoHref ? (
+                <Link
+                  href={item.demoHref}
+                  className="inline-flex w-fit items-center gap-0.5 text-[11px] font-medium text-indigo-600 transition hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+                >
+                  View Demo <span aria-hidden>→</span>
+                </Link>
+              ) : null}
+              {showDetails && item.details ? (
+                <p className="text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">{item.details}</p>
+              ) : null}
+            </div>
+          ) : null}
         </div>
-        <p className="mt-1 text-xs text-text-secondary dark:text-dark-text-secondary">{item.hint}</p>
-        {showDetails && item.details ? (
-          <p className="mt-2 text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">{item.details}</p>
-        ) : null}
       </div>
     </article>
   );

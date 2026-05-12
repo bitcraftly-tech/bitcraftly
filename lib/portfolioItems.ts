@@ -14,6 +14,10 @@ export type PortfolioItem = {
   gradient: string;
   emoji: string;
   mockup: PortfolioMockup;
+  /** Three short trust/feature lines under the subtitle */
+  featureBullets: string[];
+  /** Lightweight “View demo” style link */
+  demoHref?: string;
   /** Shown on full portfolio page only */
   details?: string;
   tag: "Website" | "Ecommerce";
@@ -33,6 +37,8 @@ export const homePortfolioItems: PortfolioItem[] = [
     gradient: "from-orange-500/20 to-amber-500/10",
     emoji: "🍽️",
     mockup: "restaurant",
+    featureBullets: ["Online Menu", "Table Booking", "Mobile Friendly"],
+    demoHref: "/demo",
     tag: "Website",
   },
   {
@@ -41,6 +47,8 @@ export const homePortfolioItems: PortfolioItem[] = [
     gradient: "from-blue-500/20 to-indigo-500/10",
     emoji: "🎓",
     mockup: "school",
+    featureBullets: ["Admission Forms", "Notice Board", "Parent Updates"],
+    demoHref: "/demo",
     tag: "Website",
   },
   {
@@ -49,6 +57,8 @@ export const homePortfolioItems: PortfolioItem[] = [
     gradient: "from-rose-500/20 to-fuchsia-500/10",
     emoji: "💪",
     mockup: "gym",
+    featureBullets: ["Membership Plans", "Trainer Profiles", "Class Schedule"],
+    demoHref: "/demo",
     tag: "Website",
   },
   {
@@ -57,6 +67,8 @@ export const homePortfolioItems: PortfolioItem[] = [
     gradient: "from-violet-500/20 to-purple-500/10",
     emoji: "🛍️",
     mockup: "ecommerce",
+    featureBullets: ["Product Catalog", "Online Payments", "Order Tracking"],
+    demoHref: "/demo",
     tag: "Ecommerce",
   },
 ];
@@ -68,6 +80,8 @@ const portfolioExtras: PortfolioItem[] = [
     gradient: "from-indigo-500/15 to-slate-500/15",
     emoji: "💬",
     mockup: "chatbot",
+    featureBullets: ["Quick menu answers", "WhatsApp handoff", "Hours & FAQs"],
+    demoHref: "/demo",
     tag: "Website",
     details:
       "Customer-facing assistant for menus, hours, and quick questions — with a clean handoff to staff or WhatsApp.",
@@ -78,6 +92,8 @@ const portfolioExtras: PortfolioItem[] = [
     gradient: "from-cyan-500/20 to-teal-500/10",
     emoji: "🏥",
     mockup: "clinic",
+    featureBullets: ["Doctor profiles", "Appointment requests", "Mobile friendly"],
+    demoHref: "/demo",
     tag: "Website",
     details: "Clean layouts that feel credible — services, doctors, and secure enquiry flows.",
   },
@@ -87,6 +103,8 @@ const portfolioExtras: PortfolioItem[] = [
     gradient: "from-amber-500/20 to-yellow-500/10",
     emoji: "📍",
     mockup: "local",
+    featureBullets: ["Strong CTAs", "WhatsApp contact", "Local-ready pages"],
+    demoHref: "/demo",
     tag: "Website",
     details:
       "One-page or multi-page funnels with strong CTAs for Jamshedpur and nearby local search.",

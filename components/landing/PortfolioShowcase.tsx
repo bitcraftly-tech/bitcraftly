@@ -22,7 +22,7 @@ export default function PortfolioShowcase() {
         </Link>
       </div>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {homePortfolioItems.map((p) => (
           <PortfolioProjectCard key={p.title} item={p} />
         ))}
