@@ -45,7 +45,7 @@ export const homePortfolioItems: PortfolioItem[] = [
     emoji: "🍽️",
     mockup: "restaurant",
     featureBullets: [...RECENT_PROJECT_TRUST_LINES],
-    demoHref: "/portfolio",
+    liveUrl: "https://www.shrishticloud.kitchen/",
     ctaLabel: "View Live Project →",
     tag: "Website",
   },
