@@ -2,11 +2,11 @@ import Link from "next/link";
 import { CONTAINER } from "@/lib/constants";
 
 const websiteFeatures = [
-  "Custom design tailored to your brand",
-  "Mobile-responsive and fast loading experience",
-  "Contact forms with WhatsApp integration",
-  "Google Analytics and SEO setup",
-  "Free SSL certificate with hosting guidance",
+  "Modern UI that matches your brand",
+  "Mobile-friendly, fast-loading pages",
+  "Lead forms with WhatsApp handoff",
+  "SEO-ready structure for local discovery",
+  "Hosting & SSL guidance included",
 ];
 
 export default function Features() {
@@ -16,17 +16,17 @@ export default function Features() {
         <div>
           <div className="mb-4 flex items-center gap-3">
             <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-xl">🌐</span>
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-500">Service 01</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-500">Spotlight</span>
           </div>
           <h2 className="font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
-            Website Development
+            Business Website Development
           </h2>
           <p className="mt-4 text-base leading-7 text-text-secondary dark:text-dark-text-secondary">
-            A professional site for your business with lead capture, WhatsApp integration, and SEO-ready architecture.
-            Fast turnaround with premium quality.
+            Affordable website design services for shops, schools, clinics, and service teams in Jamshedpur and nearby
+            cities — focused on credibility, calls, and WhatsApp enquiries.
           </p>
           <p className="mt-2 text-sm text-text-tertiary dark:text-dark-text-tertiary">
-            Copy Hindi–English mix mein chahiye ho to brief likh do — layout aur SEO labels English-first rakhte hain.
+            Need Hindi or Hinglish on-page copy? Share a rough brief; we keep headings clean for SEO and readability.
           </p>
 
           <ul className="mt-6 space-y-3">
@@ -39,8 +39,8 @@ export default function Features() {
           </ul>
 
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            <Link href="/contact" className="rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-700">
-              Get Website Quote
+            <Link href="/contact?service=Business%20Website&intent=quote&source=websites-section" className="rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-700">
+              Get Free Consultation
             </Link>
             <Link href="/demo" className="text-sm font-semibold text-indigo-500 hover:text-indigo-400">
               View Portfolio →
@@ -49,7 +49,7 @@ export default function Features() {
 
           <div className="mt-6 inline-flex rounded-xl border border-border-primary bg-bg-card px-4 py-3 dark:border-dark-border-primary dark:bg-dark-bg-card">
             <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-              Starting from <span className="font-semibold text-text-primary dark:text-dark-text-primary">₹15,000</span> one-time
+              Business websites from <span className="font-semibold text-text-primary dark:text-dark-text-primary">₹15,000</span> — scope confirmed in writing before build.
             </p>
           </div>
         </div>
@@ -63,7 +63,7 @@ export default function Features() {
                 <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
                 <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
                 <span className="ml-3 rounded-md bg-bg-card px-2 py-1 text-xs text-text-tertiary dark:bg-dark-bg-card dark:text-dark-text-tertiary">
-                  yourwebsite.com
+                  yourbusiness.in
                 </span>
               </div>
               <div className="aspect-video bg-gradient-to-br from-indigo-500/10 to-purple-500/10 p-5">

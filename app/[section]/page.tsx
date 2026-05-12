@@ -2,7 +2,16 @@ import { notFound } from "next/navigation";
 
 import LandingPage from "@/components/landing/LandingPage";
 
-const ALLOWED_SECTIONS = ["websites", "mobile-apps", "ai-automation", "smart-parking", "pricing", "how-parking-works", "about"] as const;
+const ALLOWED_SECTIONS = [
+  "about",
+  "services",
+  "websites",
+  "mobile-apps",
+  "why-us",
+  "pricing",
+  "contact-cta",
+  "how-parking-works",
+] as const;
 type AllowedSection = (typeof ALLOWED_SECTIONS)[number];
 
 type SectionPageProps = {

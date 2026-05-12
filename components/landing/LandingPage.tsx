@@ -6,15 +6,25 @@ import SectionAutoScroll from "@/components/landing/SectionAutoScroll";
 import FadeInOnView from "@/components/ui/FadeInOnView";
 
 const DemoStrip = dynamic(() => import("@/components/landing/DemoStrip"));
+const ServicesGrid = dynamic(() => import("@/components/landing/ServicesGrid"));
+const PortfolioShowcase = dynamic(() => import("@/components/landing/PortfolioShowcase"));
 const Features = dynamic(() => import("@/components/landing/Features"));
-const SocialProof = dynamic(() => import("@/components/landing/SocialProof"));
+const WhyChooseUs = dynamic(() => import("@/components/landing/WhyChooseUs"));
 const Pricing = dynamic(() => import("@/components/landing/Pricing"));
 const FinalCTA = dynamic(() => import("@/components/landing/FinalCTA"));
 const ParkingHowItWorks = dynamic(() => import("@/components/landing/ParkingHowItWorks"));
 const Footer = dynamic(() => import("@/components/landing/Footer"));
 
 type LandingPageProps = {
-  sectionId?: "websites" | "mobile-apps" | "ai-automation" | "smart-parking" | "pricing" | "how-parking-works" | "about";
+  sectionId?:
+    | "about"
+    | "services"
+    | "websites"
+    | "mobile-apps"
+    | "why-us"
+    | "pricing"
+    | "contact-cta"
+    | "how-parking-works";
 };
 
 export default function LandingPage({ sectionId }: LandingPageProps) {
@@ -25,25 +35,31 @@ export default function LandingPage({ sectionId }: LandingPageProps) {
       <FadeInOnView delayMs={30}>
         <Hero />
       </FadeInOnView>
-      <FadeInOnView delayMs={80}>
-        <DemoStrip />
+      <FadeInOnView delayMs={60}>
+        <ServicesGrid />
+      </FadeInOnView>
+      <FadeInOnView delayMs={90}>
+        <PortfolioShowcase />
       </FadeInOnView>
       <FadeInOnView delayMs={120}>
         <Features />
       </FadeInOnView>
-      <FadeInOnView delayMs={160}>
-        <SocialProof />
+      <FadeInOnView delayMs={150}>
+        <DemoStrip />
       </FadeInOnView>
-      <FadeInOnView delayMs={200}>
+      <FadeInOnView delayMs={180}>
+        <WhyChooseUs />
+      </FadeInOnView>
+      <FadeInOnView delayMs={210}>
         <Pricing />
       </FadeInOnView>
       <FadeInOnView delayMs={240}>
         <FinalCTA />
       </FadeInOnView>
-      <FadeInOnView delayMs={280}>
+      <FadeInOnView delayMs={270}>
         <ParkingHowItWorks />
       </FadeInOnView>
-      <FadeInOnView delayMs={320}>
+      <FadeInOnView delayMs={300}>
         <Footer />
       </FadeInOnView>
     </main>

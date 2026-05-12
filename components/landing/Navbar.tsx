@@ -7,10 +7,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { CONTAINER } from "@/lib/constants";
 
 const navLinks = [
+  { label: "Services", targetId: "services" },
+  { label: "Portfolio", targetId: "portfolio" },
   { label: "Websites", targetId: "websites" },
   { label: "Mobile Apps", targetId: "mobile-apps" },
-  { label: "AI Automation", targetId: "ai-automation" },
-  { label: "Smart Parking", targetId: "smart-parking" },
   { label: "Pricing", targetId: "pricing" },
 ];
 
@@ -37,6 +37,18 @@ export default function Navbar() {
   };
 
   const goToSection = (targetId: string) => {
+    if (targetId === "portfolio") {
+      if (pathname === "/") {
+        const targetSection = document.getElementById("portfolio");
+        if (targetSection) {
+          scrollToSection("portfolio");
+          return;
+        }
+      }
+      router.push("/portfolio");
+      return;
+    }
+
     const targetSection = document.getElementById(targetId);
 
     if (targetSection) {
@@ -59,7 +71,7 @@ export default function Navbar() {
               Bitcraftly
             </span>
             <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-text-tertiary dark:text-dark-text-tertiary">
-              Grow Faster, Smarter
+              Websites · Apps · Local growth
             </span>
           </span>
         </Link>
@@ -85,14 +97,10 @@ export default function Navbar() {
             Admin Login
           </Link>
           <Link
-            href="/"
-            onClick={(event) => {
-              event.preventDefault();
-              goToSection("contact-cta");
-            }}
+            href="/contact?intent=consultation&source=navbar"
             className="cursor-pointer rounded-full bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
           >
-            Book Free Consultation
+            Get Free Consultation
           </Link>
         </div>
 
@@ -136,15 +144,11 @@ export default function Navbar() {
                 Admin Login
               </Link>
               <Link
-                href="/"
+                href="/contact?intent=consultation&source=navbar-mobile"
                 className="cursor-pointer rounded-full bg-black px-4 py-2 text-sm font-medium text-white dark:bg-white dark:text-black"
-                onClick={(event) => {
-                  event.preventDefault();
-                  goToSection("contact-cta");
-                  setIsMenuOpen(false);
-                }}
+                onClick={() => setIsMenuOpen(false)}
               >
-                Book Free Consultation
+                Get Free Consultation
               </Link>
             </div>
           </div>

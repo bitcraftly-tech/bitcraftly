@@ -2,12 +2,11 @@ import Link from "next/link";
 import { CONTAINER } from "@/lib/constants";
 
 const mobileFeatures = [
-  "React Native single codebase for iOS + Android",
-  "Reusable component architecture with scalable project setup",
-  "App Store and Play Store submission included",
-  "Push notifications, auth, payments and API integrations",
-  "Optional native modules for advanced device capabilities",
-  "6 months free maintenance and bug fixes",
+  "Android & iOS from one codebase where it fits your roadmap",
+  "UI tuned for real customers — not internal dashboards",
+  "Store-ready builds with clear handoff and documentation",
+  "Payments, auth, and WhatsApp deep links when you need them",
+  "Practical support window after launch",
 ];
 
 export default function DemoStrip() {
@@ -38,18 +37,17 @@ export default function DemoStrip() {
         <div className="md:order-1">
           <div className="mb-4 flex items-center gap-3">
             <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-purple-500/30 bg-purple-500/10 text-xl">📱</span>
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-purple-500">Service 02</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-purple-500">Mobile</span>
           </div>
           <h2 className="font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
             Mobile App Development
           </h2>
           <p className="mt-4 text-base leading-7 text-text-secondary dark:text-dark-text-secondary">
-            We ship iOS and Android apps from one React Native codebase — faster delivery, lower maintenance, and
-            production-ready performance for modern business workflows.
+            Android &amp; iOS app solutions for modern businesses — customer-first screens, stable releases, and a
+            partner who explains tech without the buzzwords.
           </p>
           <p className="mt-2 text-sm text-text-tertiary dark:text-dark-text-tertiary">
-            In‑app strings Hindi / Hinglish / English — teeno handle ho sakte hain; review builds hum shared sheet par
-            karte hain.
+            Bilingual or Hinglish in-app copy is fine; we align tone with your brand and reviewers.
           </p>
 
           <ul className="mt-6 space-y-3">
@@ -62,20 +60,19 @@ export default function DemoStrip() {
           </ul>
 
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            <Link href="/contact" className="rounded-xl bg-purple-600 px-5 py-3 text-sm font-semibold text-white hover:bg-purple-700">
-              Get App Quote
+            <Link href="/contact?service=Mobile%20App&intent=quote&source=mobile-section" className="rounded-xl bg-purple-600 px-5 py-3 text-sm font-semibold text-white hover:bg-purple-700">
+              Get Free Consultation
             </Link>
             <Link href="/demo" className="text-sm font-semibold text-purple-500 hover:text-purple-400">
-              React Native Consultation →
+              View Portfolio →
             </Link>
           </div>
 
           <div className="mt-6 inline-flex rounded-xl border border-border-primary bg-bg-card px-4 py-3 dark:border-dark-border-primary dark:bg-dark-bg-card">
             <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-              Starting from <span className="font-semibold text-text-primary dark:text-dark-text-primary">₹59,000</span> (iOS + Android single codebase)
+              Mobile app UI from <span className="font-semibold text-text-primary dark:text-dark-text-primary">₹25,000</span> — full app scope quoted after discovery.
             </p>
           </div>
-          <p className="mt-2 text-sm font-medium text-purple-600 dark:text-purple-400">Launch offer: First 10 clients</p>
         </div>
       </div>
     </section>

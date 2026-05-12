@@ -11,63 +11,52 @@ type PricingPlan = {
   period: string;
   features: string[];
   cta: string;
-  featured?: boolean;
-  launchOffer?: boolean;
 };
 
 const plans: PricingPlan[] = [
   {
-    service: "Website",
+    service: "Business Website",
     icon: "🌐",
     accentClass: "text-indigo-500",
     buttonClass: "bg-indigo-600 text-white hover:bg-indigo-700",
     bulletClass: "bg-indigo-500",
     price: "₹15,000",
-    period: "one-time",
-    features: ["5 pages included", "Mobile responsive", "Contact form + WhatsApp", "Free SSL + hosting guide", "1 month support"],
+    period: "starting from",
+    features: ["Brand-led layout", "Mobile-first build", "Lead forms + WhatsApp", "SEO-ready structure", "Launch support"],
     cta: "Get Quote",
   },
   {
-    service: "Mobile App",
+    service: "Ecommerce Website",
+    icon: "🛒",
+    accentClass: "text-violet-500",
+    buttonClass: "bg-violet-600 text-white hover:bg-violet-700",
+    bulletClass: "bg-violet-500",
+    price: "₹35,000",
+    period: "starting from",
+    features: ["Product catalog setup", "Checkout flow", "Payments guidance", "Performance-focused theme", "Handover training"],
+    cta: "Get Quote",
+  },
+  {
+    service: "Mobile App UI",
     icon: "📱",
     accentClass: "text-purple-500",
     buttonClass: "bg-purple-600 text-white hover:bg-purple-700",
     bulletClass: "bg-purple-500",
-    price: "₹59,000",
-    period: "iOS + Android single codebase",
-    features: ["React Native architecture", "Custom UI/UX", "Store submission", "Push notifications", "6 months support"],
+    price: "₹25,000",
+    period: "starting from",
+    features: ["Screen flows & components", "Design system handoff", "Revisions within agreed scope", "Developer-ready assets", "Optional build support"],
     cta: "Get Quote",
-    launchOffer: true,
   },
   {
-    service: "AI Automation",
-    icon: "🤖",
-    accentClass: "text-pink-500",
-    buttonClass: "bg-pink-600 text-white hover:bg-pink-700",
-    bulletClass: "bg-pink-500",
-    price: "Custom",
-    period: "based on scope",
-    features: ["Chatbot setup", "Workflow automation", "Document processing", "Team training", "Ongoing support"],
-    cta: "Discuss Scope",
-  },
-  {
-    service: "Smart Parking",
-    icon: "🚗",
-    accentClass: "text-emerald-500",
-    buttonClass: "bg-emerald-600 text-white hover:bg-emerald-700",
-    bulletClass: "bg-emerald-500",
-    price: "Starts ₹29/car",
-    period: "launch offer (first 3 months)",
-    features: [
-      "Launch: ₹29/car/month (min 100 cars, first 3 months)",
-      "Standard: ₹49/car/month",
-      "High-volume: ₹39/car/month (500+ cars)",
-      "Car barcode profile + scan-to-call owner flow",
-      "Admin reports · barcode sticker printing extra",
-    ],
-    cta: "Request Demo",
-    featured: true,
-    launchOffer: true,
+    service: "Website Maintenance",
+    icon: "🔧",
+    accentClass: "text-teal-500",
+    buttonClass: "bg-teal-600 text-white hover:bg-teal-700",
+    bulletClass: "bg-teal-500",
+    price: "₹5,000",
+    period: "per month · starting from",
+    features: ["Security & plugin updates", "Small content edits", "Uptime checks", "Monthly health summary", "Priority WhatsApp channel"],
+    cta: "Discuss Plan",
   },
 ];
 
@@ -76,36 +65,23 @@ export default function Pricing() {
     <section id="pricing" className={`${CONTAINER} scroll-mt-24 py-7 md:py-10`}>
       <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">Pricing</p>
       <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
-        Service-wise pricing
+        Clear starting points
       </h2>
       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
-        Final quote scope par depend karta hai — form bharo, hum same day revert karte hain where possible (English ya
-        Hinglish breakdown, jo aapke liye comfortable ho).
+        Final numbers depend on pages, integrations, and content readiness — we confirm scope in writing (English or
+        Hinglish) before work starts. Ecommerce website development and larger apps are quoted after a short discovery
+        call.
       </p>
 
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         {plans.map((plan) => (
           <article
             key={plan.service}
-            className={`group relative flex h-full transform-gpu flex-col rounded-xl bg-bg-card p-6 transition-[transform,box-shadow,border-color] duration-300 ease-out will-change-transform hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(2,6,23,0.12)] dark:bg-dark-bg-card dark:hover:shadow-[0_14px_26px_rgba(2,6,23,0.4)] ${
-              plan.featured
-                ? "border-2 border-emerald-500 hover:shadow-[0_20px_40px_rgba(16,185,129,0.25)]"
-                : "border border-border-primary hover:border-border-secondary dark:border-dark-border-primary dark:hover:border-dark-border-secondary"
-            }`}
+            className="group relative flex h-full transform-gpu flex-col rounded-xl border border-border-primary bg-bg-card p-6 transition-[transform,box-shadow,border-color] duration-300 ease-out will-change-transform hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(2,6,23,0.12)] dark:border-dark-border-primary dark:bg-dark-bg-card dark:hover:shadow-[0_14px_26px_rgba(2,6,23,0.4)] hover:border-border-secondary dark:hover:border-dark-border-secondary"
           >
-            {plan.featured ? (
-              <span className="absolute -top-3 left-5 rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white">
-                New Launch
-              </span>
-            ) : null}
-            {plan.launchOffer ? (
-              <span className="absolute right-4 top-4 rounded-full bg-purple-600 px-2.5 py-1 text-[11px] font-semibold text-white">
-                Launch Offer
-              </span>
-            ) : null}
             <div className="text-3xl">{plan.icon}</div>
             <h3 className="mt-2 text-lg font-semibold text-text-primary dark:text-dark-text-primary">{plan.service}</h3>
-            <p className={`mt-1 text-xs font-semibold uppercase tracking-[0.12em] ${plan.accentClass}`}>Bitcraftly service</p>
+            <p className={`mt-1 text-xs font-semibold uppercase tracking-[0.12em] ${plan.accentClass}`}>Bitcraftly</p>
             <p className="mt-2 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary">{plan.price}</p>
             <p className="mt-1 text-sm text-text-tertiary dark:text-dark-text-tertiary">{plan.period}</p>
 
@@ -131,7 +107,7 @@ export default function Pricing() {
       </div>
 
       <p className="mt-8 text-center text-sm text-text-secondary dark:text-dark-text-secondary">
-        Transparent pricing with flexible project scope. No hidden charges.
+        Transparent estimates · No surprise line items after kickoff
       </p>
     </section>
   );

@@ -62,10 +62,13 @@ export default function Footer() {
               <span className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary">Bitcraftly</span>
             </div>
             <p className="mt-3 text-sm text-text-secondary dark:text-dark-text-secondary">
-              Digital transformation agency for Indian businesses.
+              Bitcraftly helps businesses grow online with modern websites, ecommerce solutions and mobile apps.
             </p>
             <p className="mt-2 text-xs text-text-tertiary dark:text-dark-text-tertiary">
-              Ghaziabad se pan‑India · local rapport, polished delivery.
+              Trusted by local businesses across Jamshedpur &amp; nearby cities.
+            </p>
+            <p className="mt-2 text-xs font-medium text-text-secondary dark:text-dark-text-secondary">
+              Website &amp; App Development Company in Jamshedpur
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-2.5">
               <span
@@ -117,7 +120,17 @@ export default function Footer() {
                   onClick={() => goToSection("websites")}
                   className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
                 >
-                  Websites
+                  Business Website Development
+                </button>
+              </li>
+              <li className="group/navitem flex items-start gap-2">
+                <NavArrowBullet />
+                <button
+                  type="button"
+                  onClick={() => goToSection("services")}
+                  className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
+                >
+                  Ecommerce Website Development
                 </button>
               </li>
               <li className="group/navitem flex items-start gap-2">
@@ -127,27 +140,7 @@ export default function Footer() {
                   onClick={() => goToSection("mobile-apps")}
                   className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
                 >
-                  Mobile Apps
-                </button>
-              </li>
-              <li className="group/navitem flex items-start gap-2">
-                <NavArrowBullet />
-                <button
-                  type="button"
-                  onClick={() => goToSection("ai-automation")}
-                  className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
-                >
-                  AI Automation
-                </button>
-              </li>
-              <li className="group/navitem flex items-start gap-2">
-                <NavArrowBullet />
-                <button
-                  type="button"
-                  onClick={() => goToSection("smart-parking")}
-                  className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
-                >
-                  Smart Parking
+                  Mobile App Development
                 </button>
               </li>
               <li className="group/navitem flex items-start gap-2">
@@ -157,7 +150,17 @@ export default function Footer() {
                   onClick={() => goToSection("pricing")}
                   className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
                 >
-                  Pricing
+                  Website Maintenance
+                </button>
+              </li>
+              <li className="group/navitem flex items-start gap-2">
+                <NavArrowBullet />
+                <button
+                  type="button"
+                  onClick={() => goToSection("services")}
+                  className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
+                >
+                  SEO Services
                 </button>
               </li>
             </ul>
@@ -190,7 +193,7 @@ export default function Footer() {
               </li>
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />
-                <Link href="/demo" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
+                <Link href="/portfolio" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
                   Portfolio
                 </Link>
               </li>
@@ -206,15 +209,59 @@ export default function Footer() {
           <div>
             <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Contact</p>
             <ul className="mt-3 space-y-2 text-sm text-text-secondary dark:text-dark-text-secondary">
-              <li>+91 96677 10954</li>
-              <li>hello@bitcraftly.com</li>
-              <li>Ghaziabad, Uttar Pradesh, India</li>
+              <li>
+                <a href="tel:+919667710954" className="hover:text-text-primary dark:hover:text-dark-text-primary">
+                  +91 96677 10954
+                </a>
+              </li>
+              <li>
+                <a href="mailto:hello@bitcraftly.com" className="hover:text-text-primary dark:hover:text-dark-text-primary">
+                  hello@bitcraftly.com
+                </a>
+              </li>
+              <li>Jamshedpur, Jharkhand, India</li>
+              <li className="pt-1">
+                <Link
+                  href="https://wa.me/919667710954"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex font-semibold text-indigo-500 hover:text-indigo-400 dark:text-indigo-400 dark:hover:text-indigo-300"
+                >
+                  Chat on WhatsApp →
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-5 border-t border-border-primary pt-4 text-center text-sm text-text-tertiary dark:border-dark-border-primary dark:text-dark-text-tertiary">
-          <p>© {new Date().getFullYear()} Bitcraftly · All rights reserved</p>
+        <div className="mt-8 border-t border-border-primary pt-8 text-center dark:border-dark-border-primary">
+          <h3 className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary sm:text-xl">
+            Ready to build your website or app?
+          </h3>
+          <p className="mt-2 text-sm text-text-secondary dark:text-dark-text-secondary">Book a free consultation today.</p>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="https://wa.me/919667710954"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-xl border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"
+            >
+              WhatsApp Us
+            </Link>
+            <Link
+              href="/contact?intent=quote&source=footer-cta"
+              className="rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-95"
+            >
+              Get Free Quote
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-6 border-t border-border-primary pt-5 text-center text-sm text-text-tertiary dark:border-dark-border-primary dark:text-dark-text-tertiary">
+          <p className="text-xs leading-relaxed">
+            Website Design · Ecommerce Development · App Development · SEO · UI/UX
+          </p>
+          <p className="mt-4 text-sm">© 2026 Bitcraftly. Built with modern web technologies.</p>
           <nav aria-label="Legal" className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs">
             <Link href="/privacy" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
               Privacy

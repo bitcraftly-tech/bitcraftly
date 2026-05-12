@@ -16,9 +16,9 @@ const cards = [
     cta: "Request App Status",
   },
   {
-    title: "AI Automation",
-    description: "Share new automation requirements or check progress on ongoing AI workflows.",
-    cta: "Request Automation Update",
+    title: "Maintenance & SEO",
+    description: "Request content updates, security checks, or help improving visibility online.",
+    cta: "Request Care Task",
   },
   {
     title: "Smart Parking",

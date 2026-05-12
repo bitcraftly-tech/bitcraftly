@@ -25,8 +25,8 @@ const steps = [
     title: "Reports and Control",
     points: [
       "Admins track parking incidents and response times.",
-      "Frequent complaints are highlighted on the dashboard.",
-      "Monthly summary reports stay available for management.",
+      "Repeat issues surface clearly in monthly summaries.",
+      "Management receives a concise report without digging through spreadsheets.",
     ],
   },
 ];
@@ -83,7 +83,7 @@ export default function ParkingHowItWorks() {
             href="/contact?service=Smart%20Parking&intent=demo&source=smart-parking-cta"
             className="inline-flex rounded-xl bg-emerald-600 px-7 py-3 text-sm font-semibold text-white hover:bg-emerald-700"
           >
-            Book Free Parking Demo
+            Talk to us about Smart Parking
           </Link>
         </div>
       </div>
