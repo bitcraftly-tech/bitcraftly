@@ -234,7 +234,7 @@ export default function Footer() {
                   hello@bitcraftly.com
                 </a>
               </li>
-              <li>Jamshedpur, Jharkhand, India</li>
+              <li>Ghaziabad, Uttar Pradesh, India</li>
               <li className="pt-1">
                 <Link
                   href="https://wa.me/919667710954"
