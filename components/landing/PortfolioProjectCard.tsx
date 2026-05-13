@@ -45,7 +45,7 @@ function MockupInterior({ variant }: { variant: PortfolioMockup }) {
             <span className="font-semibold">Admissions open · 2026–27</span>
             <div className="mt-1 h-1 w-full rounded bg-blue-500/20" />
           </div>
-          <div className="grid flex-1 grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-1.5">
             <div className="rounded border border-border-primary/50 bg-bg-secondary/80 p-1.5 dark:border-dark-border-primary/50 dark:bg-dark-bg-secondary/80">
               <p className="text-[9px] font-semibold text-text-primary dark:text-dark-text-primary">Notices</p>
               <div className="mt-1 space-y-1">
@@ -55,9 +55,9 @@ function MockupInterior({ variant }: { variant: PortfolioMockup }) {
             </div>
             <div className="rounded border border-border-primary/50 bg-bg-secondary/80 p-1.5 dark:border-dark-border-primary/50 dark:bg-dark-bg-secondary/80">
               <p className="text-[9px] font-semibold text-text-primary dark:text-dark-text-primary">Parents</p>
-              <div className="mt-2 space-y-1">
-                <div className="h-3 rounded bg-indigo-500/25" />
-                <div className="h-3 rounded bg-indigo-500/15" />
+              <div className="mt-1 space-y-1">
+                <div className="h-2 rounded bg-indigo-500/25" />
+                <div className="h-2 rounded bg-indigo-500/15" />
               </div>
             </div>
           </div>
@@ -220,8 +220,12 @@ function DualMockupChrome({ variant, emoji }: { variant: PortfolioMockup; emoji:
         className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12),transparent_45%)]"
         aria-hidden
       />
-      <div className="relative flex min-h-[168px] gap-2 sm:min-h-[188px] sm:gap-3">
-        <div className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-xl border border-border-primary/60 bg-bg-card/90 shadow-sm backdrop-blur-sm dark:border-dark-border-primary/60 dark:bg-dark-bg-card/90">
+      {/*
+        Fixed row height: min-h alone let tall mockup interiors (e.g. school) stretch this row,
+        so gradient headers misaligned across cards. Phone is 156px / 168px + “Mobile” label.
+      */}
+      <div className="relative flex h-[176px] min-h-0 shrink-0 gap-2 sm:h-[192px] sm:gap-3">
+        <div className="relative flex h-full min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-xl border border-border-primary/60 bg-bg-card/90 shadow-sm backdrop-blur-sm dark:border-dark-border-primary/60 dark:bg-dark-bg-card/90">
           <div className="flex shrink-0 items-center gap-1.5 border-b border-border-primary/50 px-2 py-1.5 dark:border-dark-border-primary/50">
             <span className="h-2 w-2 rounded-full bg-red-400/70" />
             <span className="h-2 w-2 rounded-full bg-yellow-400/70" />
@@ -240,8 +244,8 @@ function DualMockupChrome({ variant, emoji }: { variant: PortfolioMockup; emoji:
           </div>
         </div>
 
-        <div className="flex w-[76px] shrink-0 flex-col items-center sm:w-[92px]">
-          <div className="relative flex h-[156px] w-full max-w-[92px] flex-col overflow-hidden rounded-[1.35rem] border-[3px] border-border-primary bg-bg-card shadow-md dark:border-dark-border-primary dark:bg-dark-bg-card sm:h-[168px]">
+        <div className="flex h-full min-h-0 w-[76px] shrink-0 flex-col items-center sm:w-[92px]">
+          <div className="relative flex h-[156px] w-full max-w-[92px] shrink-0 flex-col overflow-hidden rounded-[1.35rem] border-[3px] border-border-primary bg-bg-card shadow-md dark:border-dark-border-primary dark:bg-dark-bg-card sm:h-[168px]">
             <div className="absolute left-1/2 top-1.5 z-10 h-1 w-7 -translate-x-1/2 rounded-full bg-border-secondary dark:bg-dark-border-secondary" aria-hidden />
             <div className="mt-5 flex min-h-0 flex-1 flex-col gap-1 overflow-hidden px-1.5 pb-2">
               <MobileShellPreview variant={variant} />

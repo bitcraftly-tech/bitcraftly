@@ -8,6 +8,8 @@ type PricingPlan = {
   buttonClass: string;
   price: string;
   period: string;
+  /** Optional one line under the period — delivery or positioning, kept subtle */
+  subtleLine?: string;
   whatsIncluded: string[];
   cta: string;
 };
@@ -20,6 +22,7 @@ const plans: PricingPlan[] = [
     buttonClass: "bg-indigo-600 text-white hover:bg-indigo-700",
     price: "₹15,000",
     period: "project estimate after scope call",
+    subtleLine: "Delivery: 5–7 Days",
     whatsIncluded: ["Up to 5 pages", "Mobile responsive", "WhatsApp integration", "Basic SEO", "Simple admin for edits"],
     cta: "Get Quote",
   },
@@ -30,11 +33,12 @@ const plans: PricingPlan[] = [
     buttonClass: "bg-violet-600 text-white hover:bg-violet-700",
     price: "₹35,000",
     period: "project estimate after scope call",
+    subtleLine: "Best for growing businesses",
     whatsIncluded: ["Product catalog & categories", "Mobile checkout flow", "Payments setup guidance", "WhatsApp order enquiries", "Launch handoff"],
     cta: "Get Quote",
   },
   {
-    service: "Mobile App UI",
+    service: "Mobile App UI/UX",
     icon: "📱",
     accentClass: "text-purple-500",
     buttonClass: "bg-purple-600 text-white hover:bg-purple-700",
@@ -50,7 +54,7 @@ const plans: PricingPlan[] = [
     buttonClass: "bg-teal-600 text-white hover:bg-teal-700",
     price: "₹5,000",
     period: "per month · updates, edits & checks",
-    whatsIncluded: ["Security & CMS/plugin updates", "Small content edits", "Uptime checks", "Monthly summary", "Priority WhatsApp"],
+    whatsIncluded: ["Security & CMS/plugin updates", "Small content edits", "Uptime checks", "Monthly summary", "Priority WhatsApp Support"],
     cta: "Discuss Plan",
   },
 ];
@@ -93,6 +97,11 @@ export default function Pricing() {
               </>
             )}
             <p className="mt-1 text-sm text-text-tertiary dark:text-dark-text-tertiary">{plan.period}</p>
+            {plan.subtleLine ? (
+              <p className="mt-2 text-xs leading-snug text-text-tertiary dark:text-dark-text-tertiary">
+                {plan.subtleLine}
+              </p>
+            ) : null}
 
             <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-text-secondary dark:text-dark-text-secondary">
               What&apos;s included
@@ -120,9 +129,14 @@ export default function Pricing() {
         ))}
       </div>
 
-      <p className="mt-8 text-center text-sm text-text-secondary dark:text-dark-text-secondary">
-        Transparent estimates · No surprise line items after kickoff
-      </p>
+      <div className="mt-8 space-y-2 text-center">
+        <p className="text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
+          Custom pricing available for larger projects.
+        </p>
+        <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
+          Transparent estimates · No surprise line items after kickoff
+        </p>
+      </div>
     </section>
   );
 }
