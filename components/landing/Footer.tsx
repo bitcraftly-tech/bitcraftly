@@ -272,15 +272,29 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 border-t border-border-primary pt-5 text-center text-sm text-text-tertiary dark:border-dark-border-primary dark:text-dark-text-tertiary">
-          <p className="text-xs leading-relaxed">
+        <div className="mt-6 border-t border-border-primary pt-4 text-center dark:border-dark-border-primary">
+          <p className="text-[11px] font-medium leading-relaxed tracking-[0.04em] text-text-secondary dark:text-dark-text-secondary">
+            100+ projects · Modern UI/UX · Fast delivery · Jamshedpur, India
+          </p>
+          <p className="mt-1.5 text-[10px] leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
+            Jamshedpur, India · Live support available · Mon–Sat · 10AM–8PM IST
+          </p>
+        </div>
+
+        <div className="mt-6 border-t border-border-primary pt-5 text-center text-text-tertiary dark:border-dark-border-primary">
+          <p className="text-xs leading-relaxed text-text-secondary dark:text-dark-text-secondary">
+            Built with modern web technologies · <span className="whitespace-nowrap">Bitcraftly © 2026</span>
+          </p>
+          <p className="mt-1.5 text-[11px] leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
+            Website &amp; App Development Company in Jamshedpur
+          </p>
+          <p className="mt-3 text-[11px] leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
             Website Design · Ecommerce Development · App Development · SEO · UI/UX
           </p>
-          <p className="text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
+          <p className="mt-1 text-[11px] leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
             Affordable Website Design Services in Jamshedpur
           </p>
-          <p className="mt-4 text-sm">© 2026 Bitcraftly. Built with modern web technologies.</p>
-          <nav aria-label="Legal" className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs">
+          <nav aria-label="Legal" className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs">
             <Link href="/privacy" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
               Privacy
             </Link>
