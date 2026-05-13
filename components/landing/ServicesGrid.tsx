@@ -45,7 +45,7 @@ const services = [
   },
   {
     title: "Custom Business Solutions",
-    desc: "Tailored technology solutions for modern businesses.",
+    desc: "Tailored digital solutions for businesses, builders and residential societies.",
     icon: "🧩",
     accent: "border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400",
   },

@@ -86,6 +86,32 @@ export const homePortfolioItems: PortfolioItem[] = [
 
 const portfolioExtras: PortfolioItem[] = [
   {
+    title: "Builder Website",
+    hint: "Projects, credibility & enquiry-ready layouts",
+    gradient: "from-slate-500/18 to-zinc-500/10",
+    emoji: "🏗️",
+    mockup: "local",
+    featureBullets: ["Project highlights", "Lead enquiries", "Mobile friendly"],
+    demoHref: "/portfolio",
+    ctaLabel: "View Live Project →",
+    tag: "Website",
+    details:
+      "Trust-first pages for builders — project showcases and enquiry flows scoped to how you sell, without turning your site into a listings portal.",
+  },
+  {
+    title: "Society Portal",
+    hint: "Residents, notices & practical workflows",
+    gradient: "from-emerald-500/15 to-teal-500/12",
+    emoji: "🏘️",
+    mockup: "generic",
+    featureBullets: ["Clear resident UX", "Forms & notices", "WhatsApp-friendly"],
+    demoHref: "/portfolio",
+    ctaLabel: "View Live Project →",
+    tag: "Website",
+    details:
+      "Lightweight resident-facing sites or small portals — notices, forms and handoffs scoped to what your committee needs — not a full ERP pitch.",
+  },
+  {
     title: "AI Chatbot for Restaurant",
     hint: "Menu FAQs, smart replies & WhatsApp handoff",
     gradient: "from-indigo-500/15 to-slate-500/15",

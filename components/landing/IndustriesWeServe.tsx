@@ -1,6 +1,14 @@
 import { CONTAINER } from "@/lib/constants";
 
-const industries = ["Restaurants", "Gyms", "Schools", "Clinics", "Builders", "Local Shops"];
+const industries = [
+  "Restaurants",
+  "Gyms",
+  "Schools",
+  "Clinics",
+  "Builders",
+  "Residential Societies",
+  "Local Businesses",
+];
 
 export default function IndustriesWeServe() {
   return (
@@ -13,11 +21,11 @@ export default function IndustriesWeServe() {
           Industries we serve
         </p>
         <h2 className="mt-3 font-[var(--font-playfair)] text-2xl text-text-primary dark:text-dark-text-primary sm:text-3xl">
-          Trusted by local teams across Jharkhand &amp; beyond
+          Trusted by local teams across India
         </h2>
         <p className="mt-2 text-sm text-text-secondary dark:text-dark-text-secondary">
-          Websites and apps tailored to how your sector works — clear messaging and local-friendly structure, not generic
-          templates.
+          Websites and apps tailored to how you work — retail, education, healthcare, builders, societies and more — clear
+          messaging and local-friendly structure, not generic templates.
         </p>
       </div>
       <div className="mt-8 flex flex-wrap justify-center gap-2 sm:gap-3">
