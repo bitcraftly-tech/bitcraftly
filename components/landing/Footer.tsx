@@ -53,31 +53,23 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-border-primary bg-bg-card py-4 dark:border-dark-border-primary dark:bg-dark-bg-card">
+    <footer className="border-t border-border-primary bg-bg-card py-6 dark:border-dark-border-primary dark:bg-dark-bg-card md:py-8">
       <div className={CONTAINER}>
-        <div className="grid gap-8 md:grid-cols-4">
-          <div>
-            <div className="flex items-start gap-2">
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4 md:gap-8 md:items-start lg:gap-12">
+          <div className="max-w-sm md:max-w-none">
+            <div className="flex items-start gap-3">
               <LogoMark />
-              <span className="flex flex-col leading-tight">
+              <span className="flex min-w-0 flex-col leading-tight">
                 <span className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary">Bitcraftly</span>
-                <span className="mt-1 max-w-[14rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary">
-                  Website &amp; App Development Company in Jamshedpur
-                </span>
               </span>
             </div>
-            <p className="mt-3 text-sm text-text-secondary dark:text-dark-text-secondary">
-              Bitcraftly helps businesses grow online with modern websites, ecommerce stores, mobile apps and ongoing support when you need it.
+            <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
+              Websites, ecommerce, apps and ongoing support — clear scope and delivery for teams that want a modern online
+              presence.
             </p>
-            <p className="mt-2 text-xs text-text-tertiary dark:text-dark-text-tertiary">
-              Trusted by local businesses across Jamshedpur &amp; nearby cities.
-            </p>
-            <p className="mt-2 text-xs font-medium tracking-wide text-text-secondary dark:text-dark-text-secondary">
-              Websites • Apps • Ecommerce • SEO • AI integrations
-            </p>
-            <div className="mt-4 flex flex-wrap items-center gap-2.5">
+            <div className="mt-5 flex flex-wrap gap-3">
               <span
-                className="inline-flex h-9 w-9 cursor-default items-center justify-center rounded-full border border-red-500/20 bg-red-500/[0.08] text-red-600 opacity-60 dark:border-red-400/25 dark:bg-red-500/10 dark:text-red-400"
+                className="inline-flex h-9 w-9 cursor-default items-center justify-center rounded-full border border-red-500/20 bg-red-500/[0.08] text-red-600 opacity-60 transition-opacity duration-200 hover:opacity-90 dark:border-red-400/25 dark:bg-red-500/10 dark:text-red-400"
                 aria-label="YouTube — coming soon"
                 title="Coming soon"
               >
@@ -86,7 +78,7 @@ export default function Footer() {
                 </svg>
               </span>
               <span
-                className="inline-flex h-9 w-9 cursor-default items-center justify-center rounded-full border border-pink-500/20 bg-gradient-to-br from-orange-400/[0.1] via-pink-500/[0.1] to-fuchsia-600/[0.1] text-pink-600 opacity-60 dark:border-pink-400/25 dark:text-pink-400"
+                className="inline-flex h-9 w-9 cursor-default items-center justify-center rounded-full border border-pink-500/20 bg-gradient-to-br from-orange-400/[0.1] via-pink-500/[0.1] to-fuchsia-600/[0.1] text-pink-600 opacity-60 transition-opacity duration-200 hover:opacity-90 dark:border-pink-400/25 dark:text-pink-400"
                 aria-label="Instagram — coming soon"
                 title="Coming soon"
               >
@@ -95,7 +87,7 @@ export default function Footer() {
                 </svg>
               </span>
               <span
-                className="inline-flex h-9 w-9 cursor-default items-center justify-center rounded-full border border-[#1877F2]/25 bg-[#1877F2]/10 text-[#1877F2] opacity-60 dark:bg-[#1877F2]/12 dark:text-[#6eb3ff]"
+                className="inline-flex h-9 w-9 cursor-default items-center justify-center rounded-full border border-[#1877F2]/25 bg-[#1877F2]/10 text-[#1877F2] opacity-60 transition-opacity duration-200 hover:opacity-90 dark:bg-[#1877F2]/12 dark:text-[#6eb3ff]"
                 aria-label="Facebook — coming soon"
                 title="Coming soon"
               >
@@ -104,7 +96,7 @@ export default function Footer() {
                 </svg>
               </span>
               <span
-                className="inline-flex h-9 w-9 cursor-default items-center justify-center rounded-full border border-[#0A66C2]/25 bg-[#0A66C2]/10 text-[#0A66C2] opacity-60 dark:bg-[#0A66C2]/12 dark:text-sky-400"
+                className="inline-flex h-9 w-9 cursor-default items-center justify-center rounded-full border border-[#0A66C2]/25 bg-[#0A66C2]/10 text-[#0A66C2] opacity-60 transition-opacity duration-200 hover:opacity-90 dark:bg-[#0A66C2]/12 dark:text-sky-400"
                 aria-label="LinkedIn — coming soon"
                 title="Coming soon"
               >
@@ -116,8 +108,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Services</p>
-            <ul className="mt-3 space-y-2 text-sm text-text-secondary dark:text-dark-text-secondary">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-text-primary dark:text-dark-text-primary">Services</p>
+            <ul className="mt-4 space-y-2.5 text-sm text-text-secondary dark:text-dark-text-secondary">
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />
                 <button
@@ -182,8 +174,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Company</p>
-            <ul className="mt-3 space-y-2 text-sm text-text-secondary dark:text-dark-text-secondary">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-text-primary dark:text-dark-text-primary">Company</p>
+            <ul className="mt-4 space-y-2.5 text-sm text-text-secondary dark:text-dark-text-secondary">
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />
                 <button
@@ -218,12 +210,24 @@ export default function Footer() {
                   Contact
                 </Link>
               </li>
+              <li className="group/navitem flex items-start gap-2">
+                <NavArrowBullet />
+                <Link href="/privacy" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
+                  Privacy
+                </Link>
+              </li>
+              <li className="group/navitem flex items-start gap-2">
+                <NavArrowBullet />
+                <Link href="/terms" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
+                  Terms
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
-            <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Contact</p>
-            <ul className="mt-3 space-y-2 text-sm text-text-secondary dark:text-dark-text-secondary">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-text-primary dark:text-dark-text-primary">Contact</p>
+            <ul className="mt-4 space-y-2.5 text-sm text-text-secondary dark:text-dark-text-secondary">
               <li>
                 <a href="tel:+919667710954" className="hover:text-text-primary dark:hover:text-dark-text-primary">
                   +91 96677 10954
@@ -249,62 +253,46 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-border-primary pt-8 text-center dark:border-dark-border-primary">
-          <h3 className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary sm:text-xl">
-            Ready to build your website or app?
-          </h3>
-          <p className="mt-2 text-sm text-text-secondary dark:text-dark-text-secondary">Book a free consultation today.</p>
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="https://wa.me/919667710954"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-xl border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"
-            >
-              WhatsApp Us
-            </Link>
-            <Link
-              href="/contact?intent=quote&source=footer-cta"
-              className="rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-95"
-            >
-              Get Free Quote
-            </Link>
+        <div className="mt-10 border-t border-border-primary pt-8 dark:border-dark-border-primary">
+          <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 rounded-2xl border border-border-primary bg-bg-secondary/35 px-5 py-5 text-center dark:border-dark-border-primary dark:bg-dark-bg-secondary/25 sm:flex-row sm:justify-center sm:gap-8 sm:px-8 sm:py-5">
+            <h3 className="max-w-md font-[var(--font-playfair)] text-lg font-semibold leading-snug text-text-primary dark:text-dark-text-primary sm:text-xl">
+              Ready to build your next website or app?
+            </h3>
+            <div className="flex shrink-0 flex-wrap items-center justify-center gap-2.5">
+              <Link
+                href="https://wa.me/919667710954"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-xl border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"
+              >
+                WhatsApp Us
+              </Link>
+              <Link
+                href="/contact?intent=quote&source=footer-cta"
+                className="rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-95"
+              >
+                Get Free Quote
+              </Link>
+            </div>
           </div>
         </div>
 
-        <div className="mt-6 border-t border-border-primary pt-4 text-center dark:border-dark-border-primary">
-          <p className="text-[11px] font-medium leading-relaxed tracking-[0.04em] text-text-secondary dark:text-dark-text-secondary">
-            100+ projects · Modern UI/UX · Fast delivery · Jamshedpur, India
+        <div className="mt-8 border-t border-border-primary pt-6 text-center dark:border-dark-border-primary">
+          <p className="text-xs font-medium leading-relaxed tracking-[0.06em] text-text-secondary dark:text-dark-text-secondary sm:text-[13px]">
+            100+ Projects · 18+ Years Experience · Fast Delivery · Jamshedpur, India
           </p>
-          <p className="mt-1.5 text-[10px] leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
-            Jamshedpur, India · Live support available · Mon–Sat · 10AM–8PM IST
+          <p className="mt-2 text-[11px] leading-relaxed tracking-[0.04em] text-text-tertiary dark:text-dark-text-tertiary sm:text-xs">
+            Live Support Available · Mon–Sat · 10AM–8PM IST
           </p>
         </div>
 
-        <div className="mt-6 border-t border-border-primary pt-5 text-center text-text-tertiary dark:border-dark-border-primary">
-          <p className="text-xs leading-relaxed text-text-secondary dark:text-dark-text-secondary">
+        <div className="mt-8 border-t border-border-primary pt-6 text-center dark:border-dark-border-primary">
+          <p className="text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
             Built with modern web technologies · <span className="whitespace-nowrap">Bitcraftly © 2026</span>
           </p>
-          <p className="mt-1.5 text-[11px] leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
+          <p className="mt-2 text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary sm:text-sm">
             Website &amp; App Development Company in Jamshedpur
           </p>
-          <p className="mt-3 text-[11px] leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
-            Website Design · Ecommerce Development · App Development · SEO · UI/UX
-          </p>
-          <p className="mt-1 text-[11px] leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
-            Affordable Website Design Services in Jamshedpur
-          </p>
-          <nav aria-label="Legal" className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs">
-            <Link href="/privacy" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
-              Privacy
-            </Link>
-            <span aria-hidden className="text-border-primary dark:text-dark-border-primary">
-              ·
-            </span>
-            <Link href="/terms" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
-              Terms
-            </Link>
-          </nav>
         </div>
       </div>
     </footer>
