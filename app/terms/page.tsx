@@ -9,7 +9,7 @@ import TermsContent from "./TermsContent";
 
 export const metadata: Metadata = {
   title: "Terms of Service | Bitcraftly",
-  description: "Review terms for using Bitcraftly services including billing, permitted usage, and liability.",
+  description: "Terms for engaging Bitcraftly as your website and app development agency—projects, payments, and permitted use.",
 };
 
 export default function TermsPage() {

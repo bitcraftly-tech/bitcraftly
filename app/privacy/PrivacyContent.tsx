@@ -16,37 +16,37 @@ const sections: PrivacySection[] = [
     id: "data-collection",
     label: "Data Collection",
     title: "Data Collection",
-    body: "We collect business name, contact details, website usage data, and WhatsApp interaction logs to operate and improve Bitcraftly services.",
+    body: "We collect basic contact and project-related information shared through forms, consultations and communication channels to provide our services.",
   },
   {
     id: "how-we-use-data",
     label: "How We Use Data",
     title: "How We Use Data",
-    body: "We use data to provide services, send weekly performance reports, and continuously improve platform experience and outcomes.",
+    body: "We use collected information to communicate with clients, manage projects, provide support, and improve our services.",
   },
   {
     id: "data-storage",
     label: "Data Storage",
     title: "Data Storage",
-    body: "Data is stored on secure infrastructure using Render and PostgreSQL. We maintain encryption at rest and access controls.",
+    body: "We take reasonable steps to protect client information using secure modern technologies and access controls.",
   },
   {
     id: "third-party-services",
     label: "Third Party Services",
     title: "Third Party Services",
-    body: "Our platform may integrate with OpenAI, WhatsApp Business API, Cloudflare, and Vercel for core functionality and delivery.",
+    body: "We may use trusted third-party services such as hosting, analytics, communication and AI tools to support our operations.",
   },
   {
     id: "your-rights",
     label: "Your Rights",
     title: "Your Rights",
-    body: "You may request data export, deletion, or correction at any time. We process verified requests as quickly as possible.",
+    body: "You may request access, correction, export, or deletion of your personal information where applicable law allows. We handle verified requests as soon as we reasonably can.",
   },
   {
     id: "contact-us",
     label: "Contact Us",
     title: "Contact Us",
-    body: "For privacy-related requests, contact us at privacy@bitcraftly.com.",
+    body: "For privacy-related questions or requests, contact us at privacy@bitcraftly.com.",
   },
 ];
 
@@ -88,7 +88,7 @@ export default function PrivacyContent() {
         <div className={CONTAINER}>
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">Legal</p>
           <h1 className="mt-3 font-[var(--font-playfair)] text-4xl text-white sm:text-5xl">Privacy Policy</h1>
-          <p className="mt-4 text-sm text-white/70">Last updated: January 2025</p>
+          <p className="mt-4 text-sm text-white/70">Last updated: May 2026</p>
         </div>
       </section>
 

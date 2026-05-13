@@ -16,43 +16,43 @@ const sections: TermsSection[] = [
     id: "acceptance",
     label: "Acceptance",
     title: "Acceptance",
-    body: "By using Bitcraftly, you agree to these terms. If you disagree, please do not use the platform.",
+    body: "By using Bitcraftly's website and services, you agree to these terms. If you disagree, please do not use our site or engage our services.",
   },
   {
     id: "services",
     label: "Services",
     title: "Services",
-    body: "We provide website generation, WhatsApp automation, lead capture systems, and QR workflows for local businesses.",
+    body: "Bitcraftly is a website and app development agency. We provide website development, ecommerce solutions, mobile app UI/UX design, ongoing maintenance, and custom digital solutions for businesses, typically on a project or engagement basis as agreed in writing.",
   },
   {
     id: "payments-refunds",
     label: "Payments & Refunds",
     title: "Payments & Refunds",
-    body: "Subscriptions are billed monthly in advance. No refunds are provided for partial months. Cancel anytime and service continues till billing cycle end. Setup fee is non-refundable after work begins.",
+    body: "Project payments are milestone-based unless agreed otherwise in your quote or contract. Advance payments are non-refundable once project work has started, except where required by applicable law.",
   },
   {
     id: "prohibited-use",
     label: "Prohibited Use",
     title: "Prohibited Use",
-    body: "No illegal activity, no spam through WhatsApp automation, and no resale without written permission except approved reseller program.",
+    body: "Clients may not use Bitcraftly services for illegal, harmful or fraudulent activities. You agree not to misuse deliverables (including code or integrations) in ways that violate law or third-party rights.",
   },
   {
     id: "termination",
     label: "Termination",
     title: "Termination",
-    body: "Accounts violating terms may be suspended or terminated. A 7-day notice is issued except in abuse or security risk cases.",
+    body: "We may suspend or stop work where these terms are breached, invoices remain unpaid, or there is misuse. Where reasonable, we will give notice before ending an engagement, except in cases of abuse, illegality, or serious security risk.",
   },
   {
     id: "liability",
     label: "Liability",
     title: "Liability",
-    body: "Bitcraftly is not liable for indirect or consequential losses. Total liability is capped at fees paid in the last three months.",
+    body: "To the fullest extent permitted by law, Bitcraftly is not liable for indirect or consequential losses. Our total liability for any claim relating to our services is limited to the fees you paid Bitcraftly for the services directly related to that claim in the twelve months before you notified us.",
   },
   {
     id: "governing-law",
     label: "Governing Law",
     title: "Governing Law",
-    body: "These terms are governed by the laws of India. All disputes are subject to the jurisdiction of Jharkhand courts.",
+    body: "These terms are governed by the laws of India. Disputes are subject to the jurisdiction of courts in Jharkhand, unless a written agreement between you and Bitcraftly says otherwise.",
   },
 ];
 
@@ -94,7 +94,7 @@ export default function TermsContent() {
         <div className={CONTAINER}>
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">Legal</p>
           <h1 className="mt-3 font-[var(--font-playfair)] text-4xl text-white sm:text-5xl">Terms of Service</h1>
-          <p className="mt-4 text-sm text-white/70">Effective from January 2025</p>
+          <p className="mt-4 text-sm text-white/70">Last updated: May 2026</p>
         </div>
       </section>
 

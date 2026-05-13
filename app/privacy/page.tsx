@@ -9,7 +9,7 @@ import PrivacyContent from "./PrivacyContent";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Bitcraftly",
-  description: "Read how Bitcraftly collects, uses, stores, and protects customer and business data.",
+  description: "How Bitcraftly collects and uses contact and project information when you work with our development agency.",
 };
 
 export default function PrivacyPage() {
