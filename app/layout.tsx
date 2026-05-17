@@ -3,9 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 /** Re-enable when chatbot should ship: uncomment import + <ChatSupportWidget /> below */
 // import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
-import FloatingScrollButton from "@/components/landing/FloatingScrollButton";
-import FloatingThemeTumbler from "@/components/landing/FloatingThemeTumbler";
-import FloatingWhatsAppButton from "@/components/landing/FloatingWhatsAppButton";
+import PortfolioFloatingChrome from "@/components/landing/PortfolioFloatingChrome";
 import AuthSessionProvider from "@/components/providers/AuthSessionProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import Toaster from "@/components/ui/Toaster";
@@ -27,13 +25,18 @@ const playfair = Playfair_Display({
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var p=location.pathname;if(p.indexOf("/portfolio/")===0){document.documentElement.classList.remove("dark");return;}var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.classList.add("dark");}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body suppressHydrationWarning className="font-[var(--font-inter)] antialiased">
         <ThemeProvider>
           <AuthSessionProvider>{children}</AuthSessionProvider>
           {/* <ChatSupportWidget /> */}
-          <FloatingScrollButton />
-          <FloatingWhatsAppButton />
-          <FloatingThemeTumbler />
+          <PortfolioFloatingChrome />
           <Toaster />
         </ThemeProvider>
       </body>

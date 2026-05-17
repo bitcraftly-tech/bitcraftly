@@ -28,6 +28,12 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   const [resolvedTheme, setResolvedTheme] = useState<ThemeValue>("light");
 
   useEffect(() => {
+    const isPortfolio = window.location.pathname.startsWith("/portfolio/");
+    if (isPortfolio) {
+      setResolvedTheme("light");
+      applyThemeToDom("light");
+      return;
+    }
     const storedTheme = window.localStorage.getItem("theme");
     const initialTheme: ThemeValue = storedTheme === "dark" ? "dark" : "light";
     setResolvedTheme(initialTheme);

@@ -159,3 +159,811 @@ body {
   }
 }
 
+/* Portfolio showcase pages: remap dark token utilities to a light client-site palette */
+.portfolio-showcase-light {
+  color-scheme: light;
+  --color-dark-bg-primary: #f8fafc;
+  --color-dark-bg-secondary: #f1f5f9;
+  --color-dark-bg-card: #ffffff;
+  --color-dark-text-primary: #0f172a;
+  --color-dark-text-secondary: #475569;
+  --color-dark-text-tertiary: #64748b;
+  --color-dark-border-primary: #e2e8f0;
+  --color-dark-border-secondary: #cbd5e1;
+}
+
+.portfolio-showcase-light .showcase-card-panel {
+  @apply border-slate-200/90 bg-white/95 text-slate-900 shadow-sm backdrop-blur-sm;
+}
+
+.portfolio-showcase-light .showcase-gradient-panel {
+  @apply border-slate-200 bg-gradient-to-br from-white via-slate-50 to-slate-100 text-slate-900;
+}
+
+.portfolio-showcase-light.dark {
+  color-scheme: dark;
+  --color-dark-bg-primary: #0a0a0f;
+  --color-dark-bg-secondary: #13131a;
+  --color-dark-bg-card: #1c1c27;
+  --color-dark-text-primary: #f0eff8;
+  --color-dark-text-secondary: #b8b7c8;
+  --color-dark-text-tertiary: #8888aa;
+  --color-dark-border-primary: #2a2a3d;
+  --color-dark-border-secondary: #3a3a4d;
+}
+
+.portfolio-showcase-light.dark .showcase-card-panel {
+  @apply border-slate-700/90 bg-slate-900/95 text-slate-100 shadow-sm;
+}
+
+.portfolio-showcase-light.dark .showcase-gradient-panel {
+  @apply border-slate-700 bg-gradient-to-br from-slate-900 via-slate-950 to-black text-slate-100;
+}
+
+/* ShopKart ecommerce — indigo + teal (not marketplace-clone navy/orange) */
+.ecommerce-showcase {
+  color-scheme: light;
+  --ec-page: #f1f5f9;
+  --ec-surface: #ffffff;
+  --ec-surface-soft: #f8fafc;
+  --ec-surface-hover: #f1f5f9;
+  --ec-text: #0f172a;
+  --ec-muted: #64748b;
+  --ec-border: #e2e8f0;
+  --ec-border-soft: #f1f5f9;
+  --ec-link: #4f46e5;
+  --ec-link-hover: #7c3aed;
+  --ec-sale: #e11d48;
+  --ec-header: #1e293b;
+  --ec-header-nav: #334155;
+  --ec-header-muted: #94a3b8;
+  --ec-brand: #2dd4bf;
+  --ec-brand-strong: #14b8a6;
+  --ec-chrome-text: #f8fafc;
+  --ec-search: #ffffff;
+  --ec-search-dept: #e2e8f0;
+  --ec-search-dept-hover: #cbd5e1;
+  --ec-search-btn: #0d9488;
+  --ec-search-btn-hover: #0f766e;
+  --ec-cta: #6366f1;
+  --ec-cta-hover: #4f46e5;
+  --ec-cta-text: #ffffff;
+  --ec-badge: #14b8a6;
+  --ec-highlight: #eef2ff;
+  --ec-tile-overlay: rgb(255 255 255 / 0.65);
+  --ec-tip-bg: rgb(255 255 255 / 0.88);
+  --ec-footer-mid: #334155;
+  --ec-footer-deep: #1e293b;
+}
+
+.ecommerce-showcase.dark {
+  color-scheme: dark;
+  --ec-page: #0f172a;
+  --ec-surface: #1e293b;
+  --ec-surface-soft: #334155;
+  --ec-surface-hover: #475569;
+  --ec-text: #f1f5f9;
+  --ec-muted: #94a3b8;
+  --ec-border: #475569;
+  --ec-border-soft: #334155;
+  --ec-link: #a5b4fc;
+  --ec-link-hover: #c4b5fd;
+  --ec-sale: #fb7185;
+  --ec-header: #0f172a;
+  --ec-header-nav: #1e293b;
+  --ec-header-muted: #94a3b8;
+  --ec-brand: #5eead4;
+  --ec-brand-strong: #2dd4bf;
+  --ec-chrome-text: #f8fafc;
+  --ec-search: #1e293b;
+  --ec-search-dept: #334155;
+  --ec-search-dept-hover: #475569;
+  --ec-search-btn: #14b8a6;
+  --ec-search-btn-hover: #0d9488;
+  --ec-cta: #818cf8;
+  --ec-cta-hover: #6366f1;
+  --ec-cta-text: #0f172a;
+  --ec-badge: #2dd4bf;
+  --ec-highlight: #312e81;
+  --ec-tile-overlay: rgb(15 23 42 / 0.72);
+  --ec-tip-bg: rgb(30 41 59 / 0.92);
+  --ec-footer-mid: #1e293b;
+  --ec-footer-deep: #0f172a;
+}
+
+@layer components {
+  .ec-bg-page {
+    background-color: var(--ec-page);
+    color: var(--ec-text);
+  }
+
+  .ec-bg-surface {
+    background-color: var(--ec-surface);
+  }
+
+  .ec-bg-surface-soft {
+    background-color: var(--ec-surface-soft);
+  }
+
+  .ec-text {
+    color: var(--ec-text);
+  }
+
+  .ec-text-muted {
+    color: var(--ec-muted);
+  }
+
+  .ec-border {
+    border-color: var(--ec-border);
+  }
+
+  .ec-border-soft {
+    border-color: var(--ec-border-soft);
+  }
+
+  .ec-link {
+    color: var(--ec-link);
+  }
+
+  .ec-link:hover {
+    color: var(--ec-link-hover);
+  }
+
+  .ec-input {
+    background-color: var(--ec-search);
+    color: var(--ec-text);
+  }
+
+  .ec-hover-surface:hover {
+    background-color: var(--ec-surface-hover);
+  }
+
+  .ec-tile-overlay {
+    background-color: var(--ec-tile-overlay);
+  }
+
+  .ec-tip-bar {
+    background-color: var(--ec-tip-bg);
+    border-color: var(--ec-border);
+  }
+
+  .ec-highlight {
+    background-color: var(--ec-highlight);
+  }
+
+  .ec-category-tile {
+    background-color: var(--ec-surface);
+    border: 1px solid var(--ec-border);
+    color: var(--ec-text);
+  }
+
+  .ec-category-tile:hover {
+    border-color: var(--ec-link);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
+  }
+
+  .ecommerce-showcase.dark .ec-category-tile:hover {
+    box-shadow: 0 2px 12px rgb(0 0 0 / 0.35);
+  }
+
+  .ec-category-thumb {
+    background-color: var(--ec-surface-soft);
+  }
+
+  .ec-product-thumb {
+    background: linear-gradient(145deg, var(--ec-surface-soft) 0%, var(--ec-surface-hover) 100%);
+  }
+
+  .ec-image-skeleton {
+    background: linear-gradient(
+      110deg,
+      var(--ec-surface-soft) 0%,
+      var(--ec-surface-hover) 45%,
+      var(--ec-surface-soft) 90%
+    );
+    background-size: 200% 100%;
+    animation: ec-shimmer 1.4s ease-in-out infinite;
+  }
+
+  @keyframes ec-shimmer {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
+
+  .ec-btn-primary {
+    background-color: var(--ec-cta);
+    color: var(--ec-cta-text);
+  }
+
+  .ec-btn-primary:hover {
+    background-color: var(--ec-cta-hover);
+  }
+
+  .ec-btn-cart {
+    border: 1px solid var(--ec-cta-hover);
+    background-color: var(--ec-cta);
+    color: var(--ec-cta-text);
+    font-weight: 500;
+    transition: background-color 0.15s ease;
+  }
+
+  .ec-btn-cart:hover {
+    background-color: var(--ec-cta-hover);
+  }
+
+  .ec-btn-secondary {
+    border: 1px solid var(--ec-brand-strong);
+    background-color: var(--ec-brand);
+    color: #0f172a;
+    font-weight: 600;
+    transition: filter 0.15s ease;
+  }
+
+  .ec-btn-secondary:hover {
+    filter: brightness(1.05);
+  }
+
+  .ecommerce-showcase.dark .ec-btn-secondary {
+    color: #0f172a;
+  }
+
+  .ec-header-bar {
+    background-color: var(--ec-header);
+    color: var(--ec-chrome-text);
+  }
+
+  .ec-header-nav-bar {
+    background-color: var(--ec-header-nav);
+    color: var(--ec-chrome-text);
+  }
+
+  .ec-brand-accent {
+    color: var(--ec-brand);
+  }
+
+  .ec-footer-mid {
+    background-color: var(--ec-footer-mid);
+  }
+
+  .ec-footer-deep {
+    background-color: var(--ec-footer-deep);
+  }
+
+  .ec-search-submit {
+    background-color: var(--ec-search-btn);
+    color: #ffffff;
+    transition: background-color 0.15s ease;
+  }
+
+  .ec-search-submit:hover {
+    background-color: var(--ec-search-btn-hover);
+  }
+
+  .ec-cart-badge {
+    background-color: var(--ec-badge);
+    color: #0f172a;
+  }
+
+  .ec-sale-text {
+    color: var(--ec-sale);
+  }
+
+  .ec-query-highlight {
+    color: var(--ec-link-hover);
+    font-weight: 700;
+  }
+
+  /* FitRally gym showcase — light, bold red accent */
+  .gym-showcase {
+    color-scheme: light;
+    --gym-page: #ffffff;
+    --gym-surface: #f6f7f9;
+    --gym-surface-elevated: #ffffff;
+    --gym-text: #0d0d0d;
+    --gym-muted: #6b7280;
+    --gym-border: #e8eaed;
+    --gym-brand: #ff327a;
+    --gym-brand-hover: #e62e6e;
+    --gym-brand-soft: #fff0f5;
+    --gym-dark: #0d0d0d;
+    --gym-success: #16a34a;
+  }
+
+  .gym-bg-page {
+    background-color: var(--gym-page);
+    color: var(--gym-text);
+  }
+
+  .gym-bg-surface {
+    background-color: var(--gym-surface);
+  }
+
+  .gym-bg-card {
+    background-color: var(--gym-surface-elevated);
+  }
+
+  .gym-text-muted {
+    color: var(--gym-muted);
+  }
+
+  .gym-border {
+    border-color: var(--gym-border);
+  }
+
+  .gym-brand-text {
+    color: var(--gym-brand);
+  }
+
+  .gym-btn-primary {
+    background-color: var(--gym-brand);
+    color: #ffffff;
+    font-weight: 600;
+    transition: background-color 0.15s ease;
+  }
+
+  .gym-btn-primary:hover {
+    background-color: var(--gym-brand-hover);
+  }
+
+  .gym-btn-outline {
+    border: 1px solid var(--gym-border);
+    background-color: var(--gym-surface-elevated);
+    color: var(--gym-text);
+    font-weight: 600;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .gym-btn-outline:hover {
+    border-color: var(--gym-brand);
+    background-color: var(--gym-brand-soft);
+  }
+
+  .gym-image-skeleton {
+    background: linear-gradient(110deg, #f3f4f6 0%, #e5e7eb 45%, #f3f4f6 90%);
+    background-size: 200% 100%;
+    animation: ec-shimmer 1.4s ease-in-out infinite;
+  }
+
+  .gym-pass-featured {
+    border-color: var(--gym-brand);
+    box-shadow: 0 12px 40px -16px rgb(255 50 122 / 0.45);
+  }
+}
+
+.gym-showcase.dark {
+  color-scheme: dark;
+  --gym-page: #0a0a0a;
+  --gym-surface: #141414;
+  --gym-surface-elevated: #1c1c1c;
+  --gym-text: #f5f5f5;
+  --gym-muted: #a3a3a3;
+  --gym-border: #2e2e2e;
+  --gym-brand: #ff327a;
+  --gym-brand-hover: #ff5c95;
+  --gym-brand-soft: #3a1528;
+  --gym-dark: #0d0d0d;
+  --gym-success: #22c55e;
+}
+
+.gym-showcase.dark .gym-image-skeleton {
+  background: linear-gradient(110deg, #262626 0%, #363636 45%, #262626 90%);
+  background-size: 200% 100%;
+}
+
+.gym-showcase.dark .gym-pass-featured {
+  box-shadow: 0 12px 40px -16px rgb(255 50 122 / 0.35);
+}
+
+/* School showcase — Elevate-style navy + golden orange */
+@layer components {
+  .school-showcase {
+    color-scheme: light;
+    --school-page: #ffffff;
+    --school-surface: #f8fafc;
+    --school-surface-elevated: #ffffff;
+    --school-surface-soft: #f1f5f9;
+    --school-text: #1e293b;
+    --school-muted: #64748b;
+    --school-border: #e2e8f0;
+    --school-brand: #0f2744;
+    --school-brand-hover: #0a1c33;
+    --school-navy: #0f2744;
+    --school-orange: #e8a317;
+    --school-orange-hover: #d49210;
+    --school-accent: #e8913a;
+    --school-accent-soft: #fef3e7;
+    --school-footer: #0a1c33;
+    --school-topbar: #0f2744;
+    --school-hero-navy: #0f2744;
+  }
+
+  .school-bg-page {
+    background-color: var(--school-page);
+    color: var(--school-text);
+  }
+
+  .school-bg-surface {
+    background-color: var(--school-surface);
+  }
+
+  .school-bg-soft {
+    background-color: var(--school-surface-soft);
+  }
+
+  .school-bg-card {
+    background-color: var(--school-surface-elevated);
+  }
+
+  .school-bg-brand {
+    background-color: var(--school-brand);
+  }
+
+  .school-bg-footer {
+    background-color: var(--school-footer);
+  }
+
+  .school-top-bar {
+    background-color: var(--school-topbar);
+  }
+
+  .school-btn-orange {
+    background-color: var(--school-orange);
+    color: #ffffff;
+    font-weight: 700;
+    transition: background-color 0.15s ease;
+  }
+
+  .school-btn-orange:hover {
+    background-color: var(--school-orange-hover);
+  }
+
+  .school-btn-navy {
+    background-color: var(--school-navy);
+    color: #ffffff;
+    font-weight: 600;
+    transition: background-color 0.15s ease;
+  }
+
+  .school-btn-navy:hover {
+    background-color: var(--school-brand-hover);
+  }
+
+  .school-btn-ghost {
+    border: 2px solid rgba(255 255 255 / 0.85);
+    color: #ffffff;
+    font-weight: 600;
+    background-color: transparent;
+    transition: background-color 0.15s ease;
+  }
+
+  .school-btn-ghost:hover {
+    background-color: rgba(255 255 255 / 0.12);
+  }
+
+  .school-highlight {
+    color: var(--school-orange);
+  }
+
+  .school-stats-bar {
+    background-color: var(--school-navy);
+  }
+
+  .school-hero {
+    background-color: var(--school-navy);
+  }
+
+  /* Hero — photo right, navy left with organic curve (no stretched SVG) */
+  @media (max-width: 1023px) {
+    .school-hero-photo {
+      bottom: auto;
+      height: 11rem;
+    }
+
+    .school-hero-navy-panel {
+      top: 11rem;
+      height: auto;
+      bottom: 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .school-hero-photo {
+      left: 38%;
+    }
+  }
+
+  .school-hero-navy-panel {
+    width: 100%;
+    background-color: var(--school-navy);
+  }
+
+  @media (min-width: 1024px) {
+    .school-hero-navy-panel {
+      width: 54%;
+      clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 8%,
+        108% 28%,
+        114% 50%,
+        108% 72%,
+        100% 92%,
+        100% 100%,
+        0 100%
+      );
+    }
+  }
+
+  .school-hero-copy,
+  .school-hero-copy h1,
+  .school-hero-copy p,
+  .school-hero-copy li span {
+    color: #ffffff;
+  }
+
+  .school-hero-copy .school-highlight {
+    color: var(--school-orange);
+  }
+
+  .school-hero-stats-panel {
+    background-color: #122d4d;
+    border-radius: 1rem 1rem 0 0;
+    box-shadow: 0 -4px 24px rgb(0 0 0 / 0.15);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-bottom: none;
+  }
+
+  .school-btn-hero-video {
+    border: 1px solid rgb(255 255 255 / 0.9);
+    color: #ffffff;
+    font-weight: 600;
+    background-color: transparent;
+    transition: background-color 0.15s ease;
+  }
+
+  .school-btn-hero-video:hover {
+    background-color: rgb(255 255 255 / 0.1);
+  }
+
+  .school-btn-cta-outline {
+    border: 2px solid var(--school-orange);
+    color: #ffffff;
+    font-weight: 700;
+    background-color: transparent;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .school-btn-cta-outline:hover {
+    background-color: var(--school-orange);
+    color: #ffffff;
+  }
+
+  .school-cta-section {
+    background: linear-gradient(180deg, var(--school-surface-soft) 0%, var(--school-page) 100%);
+  }
+
+  .school-cta-spotlight__content {
+    background: linear-gradient(145deg, #0f2744 0%, #132f52 55%, #0a1c33 100%);
+  }
+
+  @media (min-width: 1024px) {
+    .school-cta-spotlight__content::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: -1px;
+      bottom: 0;
+      width: 48px;
+      background: linear-gradient(90deg, #132f52 0%, transparent 100%);
+      pointer-events: none;
+    }
+  }
+
+  .school-vm-panel {
+    background-color: var(--school-accent-soft);
+  }
+
+  .school-input-hero {
+    border: 1px solid var(--school-border);
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    color: var(--school-text);
+    outline: none;
+  }
+
+  .school-input-hero::placeholder {
+    color: var(--school-muted);
+  }
+
+  .school-input-hero:focus {
+    border-color: var(--school-orange);
+    box-shadow: 0 0 0 2px rgb(230 166 35 / 0.2);
+  }
+
+  .school-stats-float {
+    background-color: var(--school-navy);
+  }
+
+  .school-section-label {
+    color: var(--school-orange);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .school-glass {
+    background: rgb(255 255 255 / 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.6);
+    box-shadow: 0 8px 32px rgb(15 39 68 / 0.12);
+  }
+
+  .school-glass-dark {
+    background: rgb(255 255 255 / 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.15);
+  }
+
+  .school-card-hover {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .school-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgb(15 39 68 / 0.12);
+  }
+
+  .school-masonry {
+    column-count: 2;
+    column-gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .school-masonry {
+      column-count: 3;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .school-masonry {
+      column-count: 4;
+    }
+  }
+
+  .school-masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+
+  /* Campus Life — horizontal film reel on navy band */
+  .school-campus-reel-section {
+    background: var(--school-navy);
+  }
+
+  .school-campus-reel {
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .school-campus-reel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .school-campus-reel-card {
+    flex: 0 0 min(78vw, 260px);
+    scroll-snap-align: start;
+  }
+
+  @media (min-width: 640px) {
+    .school-campus-reel-card {
+      flex-basis: 280px;
+    }
+  }
+
+  .school-campus-reel-card:focus-visible {
+    outline: 2px solid var(--school-orange);
+    outline-offset: 4px;
+    border-radius: 1rem;
+  }
+
+  .school-gradient-hero {
+    background: linear-gradient(135deg, rgb(15 39 68 / 0.97) 0%, rgb(15 39 68 / 0.85) 45%, transparent 100%);
+  }
+
+  .school-text-muted {
+    color: var(--school-muted);
+  }
+
+  .school-border {
+    border-color: var(--school-border);
+  }
+
+  .school-brand-text {
+    color: var(--school-brand);
+  }
+
+  .school-btn-primary {
+    background-color: var(--school-orange);
+    color: #ffffff;
+    font-weight: 700;
+    transition: background-color 0.15s ease;
+  }
+
+  .school-btn-primary:hover {
+    background-color: var(--school-orange-hover);
+  }
+
+  .school-input {
+    border: 1px solid var(--school-border);
+    border-radius: 0.375rem;
+    background-color: var(--school-surface-elevated);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    outline: none;
+  }
+
+  .school-input:focus {
+    border-color: var(--school-brand);
+    box-shadow: 0 0 0 2px rgb(30 58 95 / 0.15);
+  }
+
+  .school-programs-heading::before,
+  .school-programs-heading::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 3rem;
+    margin: 0.75rem auto 0;
+    background: linear-gradient(90deg, transparent, var(--school-orange), transparent);
+  }
+
+  .school-enquiry-card {
+    border: 1px solid var(--school-border);
+  }
+
+  .school-quote-bar {
+    background-color: var(--school-brand-hover);
+  }
+
+  .school-image-skeleton {
+    background: linear-gradient(110deg, #e2e8f0 0%, #f1f5f9 45%, #e2e8f0 90%);
+    background-size: 200% 100%;
+    animation: ec-shimmer 1.4s ease-in-out infinite;
+  }
+}
+
+.school-showcase.dark {
+  color-scheme: dark;
+  --school-page: #0f172a;
+  --school-surface: #1e293b;
+  --school-surface-elevated: #334155;
+  --school-surface-soft: #1e293b;
+  --school-text: #f1f5f9;
+  --school-muted: #94a3b8;
+  --school-border: #475569;
+  --school-brand: #1e3a5f;
+  --school-brand-hover: #0f2744;
+  --school-navy: #e2e8f0;
+  --school-orange: #f0a04d;
+  --school-orange-hover: #e8913a;
+  --school-accent: #f0a04d;
+  --school-accent-soft: #422006;
+  --school-footer: #020617;
+  --school-topbar: #020617;
+}
+
+.school-showcase.dark .school-image-skeleton {
+  background: linear-gradient(110deg, #334155 0%, #475569 45%, #334155 90%);
+  background-size: 200% 100%;
+}
+

@@ -1,0 +1,39 @@
+"use client";
+
+import type { ReactNode } from "react";
+
+import EcommerceFooter from "@/components/portfolio/ecommerce/EcommerceFooter";
+import EcommerceNavbar from "@/components/portfolio/ecommerce/EcommerceNavbar";
+import { ShowcaseScopedThemeProvider } from "@/components/providers/ShowcaseScopedThemeProvider";
+
+import {
+  AccountModal,
+  CartDrawer,
+  DemoToast,
+  OrdersPanel,
+  PincodeModal,
+  ProductModal,
+} from "./EcommerceDemoOverlays";
+import { EcommerceDemoProvider } from "./EcommerceDemoContext";
+import EcommerceRazorpayMockModal from "./EcommerceRazorpayMockModal";
+
+export default function EcommerceShowcaseLayout({ children }: { children: ReactNode }) {
+  return (
+    <EcommerceDemoProvider>
+      <ShowcaseScopedThemeProvider showcaseId="ecommerce" className="ecommerce-showcase flex min-h-screen flex-col ec-bg-page">
+        <div id="top" className="flex min-h-0 flex-1 flex-col">
+          <EcommerceNavbar />
+          <main className="flex-1 ec-bg-page">{children}</main>
+          <EcommerceFooter />
+          <CartDrawer />
+          <AccountModal />
+          <PincodeModal />
+          <OrdersPanel />
+          <ProductModal />
+          <DemoToast />
+          <EcommerceRazorpayMockModal />
+        </div>
+      </ShowcaseScopedThemeProvider>
+    </EcommerceDemoProvider>
+  );
+}

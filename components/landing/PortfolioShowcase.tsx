@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PortfolioProjectCard from "@/components/landing/PortfolioProjectCard";
 import { CONTAINER } from "@/lib/constants";
+import { newTabProps } from "@/lib/newTabLink";
 import { homePortfolioItems } from "@/lib/portfolioItems";
 
 export default function PortfolioShowcase() {
@@ -17,7 +18,7 @@ export default function PortfolioShowcase() {
             local SEO and WhatsApp enquiries (preview mockups shown).
           </p>
         </div>
-        <Link href="/portfolio" className="text-sm font-semibold text-indigo-500 hover:text-indigo-400 dark:text-indigo-400 dark:hover:text-indigo-300">
+        <Link href="/portfolio" className="text-sm font-semibold text-indigo-500 hover:text-indigo-400 dark:text-indigo-400 dark:hover:text-indigo-300" {...newTabProps("/portfolio")}>
           Full portfolio →
         </Link>
       </div>

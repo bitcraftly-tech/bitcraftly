@@ -19,9 +19,9 @@ export type PortfolioItem = {
   mockup: PortfolioMockup;
   /** Trust or feature lines under the subtitle */
   featureBullets: string[];
-  /** Primary CTA destination (legacy); use `liveUrl` for external sites */
+  /** Showcase path `/portfolio/...`; wins over `liveUrl` when set */
   demoHref?: string;
-  /** Public live site URL — opens in new tab when set */
+  /** External live site URL — card opens in new tab; used when `demoHref` is unset */
   liveUrl?: string;
   /** CTA label (default: live project) */
   ctaLabel?: string;
@@ -56,7 +56,7 @@ export const homePortfolioItems: PortfolioItem[] = [
     emoji: "💪",
     mockup: "gym",
     featureBullets: [...RECENT_PROJECT_TRUST_LINES],
-    demoHref: "/portfolio",
+    demoHref: "/portfolio/gym-fitness-showcase",
     ctaLabel: "View Live Project →",
     tag: "Website",
   },
@@ -67,7 +67,7 @@ export const homePortfolioItems: PortfolioItem[] = [
     emoji: "🎓",
     mockup: "school",
     featureBullets: [...RECENT_PROJECT_TRUST_LINES],
-    demoHref: "/portfolio",
+    demoHref: "/portfolio/school-website-showcase",
     ctaLabel: "View Live Project →",
     tag: "Website",
   },
@@ -78,7 +78,7 @@ export const homePortfolioItems: PortfolioItem[] = [
     emoji: "🛍️",
     mockup: "ecommerce",
     featureBullets: [...RECENT_PROJECT_TRUST_LINES],
-    demoHref: "/portfolio",
+    demoHref: "/portfolio/ecommerce-store-showcase",
     ctaLabel: "View Live Project →",
     tag: "Ecommerce",
   },
@@ -92,7 +92,7 @@ const portfolioExtras: PortfolioItem[] = [
     emoji: "🏗️",
     mockup: "local",
     featureBullets: ["Project highlights", "Lead enquiries", "Mobile friendly"],
-    demoHref: "/portfolio",
+    demoHref: "/portfolio/builder-real-estate-showcase",
     ctaLabel: "View Live Project →",
     tag: "Website",
     details:
@@ -105,7 +105,7 @@ const portfolioExtras: PortfolioItem[] = [
     emoji: "🏘️",
     mockup: "generic",
     featureBullets: ["Clear resident UX", "Forms & notices", "WhatsApp-friendly"],
-    demoHref: "/portfolio",
+    demoHref: "/portfolio/society-management-showcase",
     ctaLabel: "View Live Project →",
     tag: "Website",
     details:
@@ -118,7 +118,7 @@ const portfolioExtras: PortfolioItem[] = [
     emoji: "💬",
     mockup: "chatbot",
     featureBullets: ["Quick menu answers", "WhatsApp handoff", "Hours & FAQs"],
-    demoHref: "/portfolio",
+    demoHref: "/portfolio/restaurant-ai-chatbot-showcase",
     ctaLabel: "View Live Project →",
     tag: "Website",
     details:
@@ -131,7 +131,7 @@ const portfolioExtras: PortfolioItem[] = [
     emoji: "🏥",
     mockup: "clinic",
     featureBullets: ["Doctor profiles", "Appointment requests", "Mobile friendly"],
-    demoHref: "/portfolio",
+    demoHref: "/portfolio/clinic-healthcare-showcase",
     ctaLabel: "View Live Project →",
     tag: "Website",
     details: "Clean layouts that feel credible — services, doctors, and secure enquiry flows.",
@@ -143,7 +143,7 @@ const portfolioExtras: PortfolioItem[] = [
     emoji: "📍",
     mockup: "local",
     featureBullets: ["Strong CTAs", "WhatsApp contact", "Local-ready pages"],
-    demoHref: "/portfolio",
+    demoHref: "/portfolio/local-services-leads-showcase",
     ctaLabel: "View Live Project →",
     tag: "Website",
     details:
@@ -167,3 +167,17 @@ export const portfolioPageItems: PortfolioItem[] = [
   })),
   ...portfolioExtras,
 ];
+
+/** URL segment for root `/gym-website` etc. — generateStaticParams + card anchors; CTAs prefer `demoHref` showcases */
+export function slugifyPortfolioTitle(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+export function getPortfolioPageItemBySlug(slug: string): PortfolioItem | undefined {
+  return portfolioPageItems.find((item) => slugifyPortfolioTitle(item.title) === slug);
+}

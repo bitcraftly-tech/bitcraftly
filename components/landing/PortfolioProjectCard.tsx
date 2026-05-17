@@ -1,4 +1,5 @@
-import type { PortfolioItem, PortfolioMockup } from "@/lib/portfolioItems";
+import { newTabProps } from "@/lib/newTabLink";
+import { type PortfolioItem, type PortfolioMockup, slugifyPortfolioTitle } from "@/lib/portfolioItems";
 
 type PortfolioProjectCardProps = {
   item: PortfolioItem;
@@ -38,7 +39,7 @@ function MockupInterior({ variant }: { variant: PortfolioMockup }) {
       return (
         <div className="flex min-h-0 flex-1 flex-col gap-2 text-[10px] leading-tight">
           <div className="flex items-center justify-between rounded-md bg-blue-600/85 px-2 py-1.5 text-white">
-            <span className="font-semibold tracking-tight">Green Valley School</span>
+            <span className="font-semibold tracking-tight">Heritage Crown School</span>
             <span className="rounded bg-white/20 px-1.5 py-0.5 text-[9px]">Menu</span>
           </div>
           <div className="rounded-md border border-blue-500/25 bg-blue-500/10 px-2 py-1.5 text-blue-900 dark:text-blue-100">
@@ -258,26 +259,18 @@ function DualMockupChrome({ variant, emoji }: { variant: PortfolioMockup; emoji:
   );
 }
 
-function slugifyProjectTitle(title: string) {
-  return title
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9-]/g, "")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
-}
-
 export default function PortfolioProjectCard({ item, showDetails }: PortfolioProjectCardProps) {
-  const anchorId = slugifyProjectTitle(item.title);
+  const slug = slugifyPortfolioTitle(item.title);
+  const demo = item.demoHref?.trim();
+  const live = item.liveUrl?.trim();
+  /** Explicit demoHref (`/portfolio/...` or external) wins; then live client URL; else legacy root slug. */
   const resolvedHref =
-    item.liveUrl?.trim() ||
-    (item.demoHref?.startsWith("http") ? item.demoHref : `/portfolio#${anchorId}`);
+    demo && (demo.startsWith("http") || demo.startsWith("/")) ? demo : live ? live : `/${slug}`;
   const ctaLabel = item.ctaLabel ?? "View Live Project →";
-  const isExternal = resolvedHref.startsWith("http");
 
   return (
     <article
-      id={anchorId}
+      id={slug}
       className="group flex h-full min-h-0 scroll-mt-28 flex-col overflow-hidden rounded-2xl border border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card"
     >
       <div className={`relative w-full shrink-0 overflow-hidden rounded-t-2xl bg-gradient-to-br ${item.gradient} p-3 sm:p-4`}>
@@ -313,7 +306,7 @@ export default function PortfolioProjectCard({ item, showDetails }: PortfolioPro
             <a
               href={resolvedHref}
               className="inline-flex w-fit items-center gap-0.5 text-[11px] font-medium text-indigo-600 transition hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
-              {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              {...newTabProps(resolvedHref)}
             >
               {ctaLabel}
             </a>

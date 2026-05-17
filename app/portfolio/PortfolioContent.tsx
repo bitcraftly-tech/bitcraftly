@@ -1,4 +1,4 @@
-import Link from "next/link";
+import ShowcaseLink from "@/components/portfolio/ShowcaseLink";
 
 import PortfolioProjectCard from "@/components/landing/PortfolioProjectCard";
 import { CONTAINER } from "@/lib/constants";
@@ -42,25 +42,25 @@ export default function PortfolioContent() {
               Share your sector, timeline, and budget band — we reply with a clear next step.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Link
+              <ShowcaseLink
                 href="/contact?intent=consultation&source=portfolio-page"
                 className="rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-95"
               >
                 Get Free Consultation
-              </Link>
-              <Link
+              </ShowcaseLink>
+              <ShowcaseLink
                 href="https://wa.me/919667710954"
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-xl border border-border-secondary px-6 py-3 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"
               >
                 Chat on WhatsApp
-              </Link>
+              </ShowcaseLink>
             </div>
             <p className="mt-6 text-xs text-text-tertiary dark:text-dark-text-tertiary">
-              <Link href="/" className="font-semibold text-indigo-500 hover:text-indigo-400 dark:text-indigo-400">
+              <ShowcaseLink href="/" className="font-semibold text-indigo-500 hover:text-indigo-400 dark:text-indigo-400">
                 ← Back to home
-              </Link>
+              </ShowcaseLink>
             </p>
           </div>
         </div>
