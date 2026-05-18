@@ -169,8 +169,22 @@ export const HERO_BANNER_IMAGE = img("photo-1631049307264-da0ec9d70304", 1200, 5
 
 export type SortOption = "recommended" | "price-asc" | "price-desc" | "rating";
 
+/** Stable SSR/client formatting (avoids locale hydration mismatches). */
+export function formatIndianNumber(n: number): string {
+  const str = String(Math.round(n));
+  if (str.length <= 3) return str;
+  let result = str.slice(-3);
+  let remaining = str.slice(0, -3);
+  while (remaining.length > 0) {
+    const chunk = remaining.length > 2 ? remaining.slice(-2) : remaining;
+    result = `${chunk},${result}`;
+    remaining = remaining.length > 2 ? remaining.slice(0, -2) : "";
+  }
+  return result;
+}
+
 export function formatInr(n: number) {
-  return `₹${n.toLocaleString("en-IN")}`;
+  return `₹${formatIndianNumber(n)}`;
 }
 
 export const DEAL_MIN_DISCOUNT = 35;

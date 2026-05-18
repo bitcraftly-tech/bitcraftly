@@ -13,10 +13,12 @@ type EcommerceLazyImageProps = {
   alt: string;
   wrapperClassName?: string;
   imgClassName?: string;
-  /** Load immediately (hero banner) — skips intersection wait */
   eager?: boolean;
   onFallback?: () => string | null;
 };
+
+const wrapClass = (wrapperClassName: string) =>
+  `ec-product-thumb relative block overflow-hidden ${wrapperClassName}`.trim();
 
 function EcommerceLazyImage({
   src,
@@ -26,7 +28,7 @@ function EcommerceLazyImage({
   eager = false,
   onFallback,
 }: EcommerceLazyImageProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLSpanElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const [visible, setVisible] = useState(eager);
   const [currentSrc, setCurrentSrc] = useState(src);
@@ -82,26 +84,43 @@ function EcommerceLazyImage({
   }, [currentSrc, onFallback]);
 
   if (failed) {
-    return <div className={`ec-product-thumb ${wrapperClassName}`} aria-hidden />;
+    return <span className={wrapClass(wrapperClassName)} aria-hidden />;
+  }
+
+  if (eager) {
+    return (
+      <span className={wrapClass(wrapperClassName)}>
+        <img
+          ref={imgRef}
+          src={currentSrc}
+          alt={alt}
+          decoding="async"
+          loading="eager"
+          fetchPriority="high"
+          className={imgClassName}
+          onLoad={() => setLoaded(true)}
+          onError={handleError}
+        />
+      </span>
+    );
   }
 
   return (
-    <div ref={containerRef} className={`ec-product-thumb relative overflow-hidden ${wrapperClassName}`}>
-      {!loaded ? <div className="ec-image-skeleton absolute inset-0 z-0" aria-hidden /> : null}
+    <span ref={containerRef} className={wrapClass(wrapperClassName)}>
+      {!loaded ? <span className="ec-image-skeleton absolute inset-0 z-0 block" aria-hidden /> : null}
       {visible ? (
         <img
           ref={imgRef}
           src={currentSrc}
           alt={alt}
           decoding="async"
-          loading={eager ? "eager" : "lazy"}
-          fetchPriority={eager ? "high" : "auto"}
+          loading="lazy"
           className={`relative z-[1] transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"} ${imgClassName}`}
           onLoad={() => setLoaded(true)}
           onError={handleError}
         />
       ) : null}
-    </div>
+    </span>
   );
 }
 
@@ -127,7 +146,6 @@ export function EcommerceProductImage({
   );
 }
 
-/** Generic showcase image with picsum fallback */
 export function EcommerceShowcaseImage({
   src,
   alt,

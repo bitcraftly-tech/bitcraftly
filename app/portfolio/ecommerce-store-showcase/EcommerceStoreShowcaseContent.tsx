@@ -3,6 +3,8 @@ import { Star } from "lucide-react";
 import ShowcaseLink from "@/components/portfolio/ShowcaseLink";
 import { CONTAINER } from "@/lib/constants";
 
+import { formatIndianNumber, formatInr } from "./ecommerce-demo-data";
+
 const CATEGORY_TILES = [
   { label: "Revamp your home", href: "#catalog", tone: "from-sky-100 to-blue-50" },
   { label: "Top deals in electronics", href: "#deals", tone: "from-slate-100 to-zinc-50" },
@@ -103,10 +105,6 @@ const DEAL_ROWS = [
   },
 ] as const;
 
-function formatInr(n: number) {
-  return `₹${n.toLocaleString("en-IN")}`;
-}
-
 function StarRow({ rating, count }: { rating: number; count: number }) {
   const full = Math.floor(rating);
   return (
@@ -116,7 +114,7 @@ function StarRow({ rating, count }: { rating: number; count: number }) {
           <Star key={i} className={`h-3.5 w-3.5 ${i < full ? "fill-[#ffa41c]" : "fill-[#e0e0e0] text-[#e0e0e0]"}`} aria-hidden />
         ))}
       </div>
-      <span className="text-xs text-[#007185] hover:text-[#c7511f] hover:underline">{count.toLocaleString("en-IN")}</span>
+      <span className="text-xs text-[#007185] hover:text-[#c7511f] hover:underline">{formatIndianNumber(count)}</span>
     </div>
   );
 }

@@ -62,8 +62,9 @@ export function ShowcaseScopedThemeProvider({
   return (
     <ShowcaseThemeContext.Provider value={value}>
       <div
-        className={`${className} ${resolvedTheme === "dark" ? "dark" : ""}`.trim()}
-        data-showcase-theme={mounted ? resolvedTheme : undefined}
+        className={`${className} ${mounted && resolvedTheme === "dark" ? "dark" : ""}`.trim()}
+        suppressHydrationWarning
+        data-showcase-theme={mounted ? resolvedTheme : "light"}
       >
         {children}
         <ShowcaseThemeToggle />

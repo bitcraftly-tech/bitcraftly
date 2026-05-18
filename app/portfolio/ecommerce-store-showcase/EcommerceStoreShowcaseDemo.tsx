@@ -4,7 +4,9 @@ import { CreditCard, RotateCcw, ShieldCheck, Star, Tag, Truck } from "lucide-rea
 
 import { CONTAINER } from "@/lib/constants";
 
+import { ecCardClickProps } from "./ecommerce-clickable";
 import { useEcommerceDemo } from "./EcommerceDemoContext";
+import { formatIndianNumber } from "./ecommerce-demo-data";
 import {
   CATEGORY_TILES,
   HERO_BANNER_IMAGE,
@@ -30,7 +32,7 @@ function StarRow({ rating, count }: { rating: number; count: number }) {
           />
         ))}
       </div>
-      <span className="ec-link text-xs">{count.toLocaleString("en-IN")}</span>
+      <span className="ec-link text-xs">{formatIndianNumber(count)}</span>
     </div>
   );
 }
@@ -41,12 +43,12 @@ function ProductCard({ product }: { product: ShopProduct }) {
 
   return (
     <article className="ec-bg-surface flex h-full min-h-0 flex-col rounded border p-3 shadow-sm ec-border">
-      <button type="button" onClick={() => setProductModal(product)} className="text-left">
+      <div {...ecCardClickProps(() => setProductModal(product))} className="cursor-pointer text-left">
         <EcommerceProductImage product={product} className="aspect-square w-full rounded-sm" />
-        <h3 className="ec-text mt-3 line-clamp-2 min-h-[2.5rem] text-sm leading-snug hover:text-[var(--ec-link-hover)] hover:underline">
+        <p className="ec-text mt-3 line-clamp-2 min-h-[2.5rem] text-sm font-medium leading-snug hover:text-[var(--ec-link-hover)] hover:underline">
           {product.title}
-        </h3>
-      </button>
+        </p>
+      </div>
       <div className="flex min-h-0 flex-1 flex-col">
         <div className="mt-1">
           <StarRow rating={product.rating} count={product.count} />
@@ -120,13 +122,12 @@ export default function EcommerceStoreShowcaseDemo() {
     <div>
       <section className={`${CONTAINER} py-4 md:py-5`}>
         <div className="grid gap-4 lg:grid-cols-[1.35fr_1fr]">
-          <button
-            type="button"
-            onClick={() => {
+          <div
+            {...ecCardClickProps(() => {
               setDepartment("Deals");
               scrollToSection("deals");
-            }}
-            className="ec-border group relative flex min-h-[220px] overflow-hidden rounded-lg border text-left shadow-sm md:min-h-[260px]"
+            })}
+            className="ec-border group relative flex min-h-[220px] cursor-pointer overflow-hidden rounded-lg border text-left shadow-sm md:min-h-[260px]"
           >
             <EcommerceShowcaseImage
               src={HERO_BANNER_IMAGE}
@@ -152,17 +153,16 @@ export default function EcommerceStoreShowcaseDemo() {
                 Browse deals
               </span>
             </div>
-          </button>
+          </div>
           <div className="grid grid-cols-2 gap-3">
             {CATEGORY_TILES.map((t) => (
-              <button
+              <div
                 key={t.label}
-                type="button"
-                onClick={() => {
+                {...ecCardClickProps(() => {
                   setDepartment(t.department);
                   scrollToSection("search-results");
-                }}
-                className="ec-category-tile flex min-h-[120px] flex-col rounded-lg p-3 text-left shadow-sm transition md:min-h-[125px]"
+                })}
+                className="ec-category-tile flex min-h-[120px] cursor-pointer flex-col rounded-lg p-3 text-left shadow-sm transition md:min-h-[125px]"
               >
                 <EcommerceShowcaseImage
                   src={t.image}
@@ -172,7 +172,7 @@ export default function EcommerceStoreShowcaseDemo() {
                   className="h-full w-full object-cover object-center"
                 />
                 <p className="mt-2 text-sm font-semibold leading-snug">{t.label}</p>
-              </button>
+              </div>
             ))}
           </div>
         </div>

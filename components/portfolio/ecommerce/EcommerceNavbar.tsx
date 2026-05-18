@@ -147,14 +147,14 @@ export default function EcommerceNavbar() {
               onClick={() => setCartOpen(true)}
               className="flex items-end gap-1 rounded-sm border border-transparent px-2 py-1 hover:border-white"
             >
-              <div className="relative">
+              <span className="relative inline-block">
                 <ShoppingCart className="h-8 w-8" aria-hidden />
                 {cartCount > 0 ? (
                   <span className="ec-cart-badge absolute -right-1 top-0 rounded-full px-1.5 text-[11px] font-bold">
                     {cartCount}
                   </span>
                 ) : null}
-              </div>
+              </span>
               <span className="hidden pb-1 font-bold sm:inline">Cart</span>
             </button>
           </div>
