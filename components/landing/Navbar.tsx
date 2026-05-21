@@ -70,15 +70,15 @@ export default function Navbar() {
         <Link
           href="/"
           className="flex items-center gap-2"
-          title="Bitcraftly — Website & App Development Company in Jamshedpur"
+          title="Bitcraftly — React & Next.js · AI-Powered Frontend Solutions"
         >
           <LogoMark />
           <span className="flex flex-col leading-tight">
             <span className="font-[var(--font-playfair)] text-xl font-semibold text-text-primary dark:text-dark-text-primary">
               Bitcraftly
             </span>
-            <span className="max-w-[15rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary sm:max-w-[18rem]">
-              Website &amp; App Development Company in Jamshedpur
+            <span className="max-w-[15rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary sm:max-w-[20rem]">
+              React &amp; Next.js · Ghaziabad · India &amp; remote
             </span>
           </span>
         </Link>

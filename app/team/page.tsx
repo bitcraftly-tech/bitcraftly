@@ -8,8 +8,9 @@ import { CONTAINER } from "@/lib/constants";
 import TeamContent from "./TeamContent";
 
 export const metadata: Metadata = {
-  title: "Team | Bitcraftly",
-  description: "Meet the Bitcraftly delivery team — strategy, engineering, product, and client success for Indian SMBs.",
+  title: "Founder | Sanjay Kr. Singh | Bitcraftly",
+  description:
+    "Meet Sanjay Kr. Singh — Tech Lead & Frontend Architect. Founder-led React.js, Next.js, and AI-powered web solutions from Ghaziabad, serving India and remote clients.",
 };
 
 export default function TeamPage() {

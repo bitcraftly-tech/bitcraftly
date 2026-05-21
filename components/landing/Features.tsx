@@ -48,7 +48,7 @@ export default function Features() {
 
           <div className="mt-6 inline-flex rounded-xl border border-border-primary bg-bg-card px-4 py-3 dark:border-dark-border-primary dark:bg-dark-bg-card">
             <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-              Business websites from <span className="font-semibold text-text-primary dark:text-dark-text-primary">₹15,000</span> — scope confirmed in writing before build.
+              Business websites from <span className="font-semibold text-text-primary dark:text-dark-text-primary">₹7,999</span> — scope confirmed in writing before build.
             </p>
           </div>
         </div>

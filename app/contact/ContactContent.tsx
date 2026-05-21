@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, PRIMARY_LOCATION, whatsappUrl, WHATSAPP_HOURS } from "@/lib/constants";
 import { showErrorAlert, showSuccessAlert } from "@/lib/sweetAlert";
 
 type ContactFormValues = {
@@ -52,8 +52,8 @@ export default function ContactContent() {
     () => [
       "Fill the form (about 2 min)",
       "We reply on call/WhatsApp (same day)",
-      "Free demo (15 min)",
-      "Go live within 48 hours",
+      "Free 15-min consultation with the founder",
+      "Written scope + timeline before kickoff",
     ],
     [],
   );
@@ -218,13 +218,14 @@ export default function ContactContent() {
               <div>
                 <p className="text-xs uppercase tracking-wide text-text-tertiary dark:text-dark-text-tertiary">WhatsApp</p>
                 <a
-                  href="https://wa.me/919667710954"
+                  href={whatsappUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm font-medium text-text-primary hover:text-accent-primary dark:text-dark-text-primary"
                 >
                   +91 96677 10954
                 </a>
+                <p className="mt-0.5 text-xs text-text-tertiary dark:text-dark-text-tertiary">{WHATSAPP_HOURS}</p>
               </div>
             </div>
 
@@ -253,7 +254,7 @@ export default function ContactContent() {
               )}
               <div>
                 <p className="text-xs uppercase tracking-wide text-text-tertiary dark:text-dark-text-tertiary">Location</p>
-                <p className="text-sm font-medium text-text-primary dark:text-dark-text-primary">Ghaziabad, Uttar Pradesh, India</p>
+                <p className="text-sm font-medium text-text-primary dark:text-dark-text-primary">{PRIMARY_LOCATION}</p>
               </div>
             </div>
           </div>

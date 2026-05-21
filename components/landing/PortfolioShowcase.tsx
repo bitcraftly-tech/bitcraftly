@@ -14,8 +14,8 @@ export default function PortfolioShowcase() {
             Live-style builds for shops, schools &amp; services
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-text-secondary dark:text-dark-text-secondary sm:text-base">
-            Representative work across cloud kitchens, fitness, education and ecommerce — structured for mobile visitors,
-            local SEO and WhatsApp enquiries (preview mockups shown).
+            Live client work and interactive demos — cloud kitchens, fitness, education, ecommerce — built for mobile,
+            local SEO, and WhatsApp leads. React/Next.js where scale matters.
           </p>
         </div>
         <Link href="/portfolio" className="text-sm font-semibold text-indigo-500 hover:text-indigo-400 dark:text-indigo-400 dark:hover:text-indigo-300" {...newTabProps("/portfolio")}>

@@ -3,16 +3,17 @@ import type { Metadata } from "next";
 import LandingPage from "@/components/landing/LandingPage";
 
 export const metadata: Metadata = {
-  title: "Bitcraftly | Website & App Development Company in Jamshedpur",
+  title: "Bitcraftly | React & Next.js Website Development | Ghaziabad & India",
   description:
-    "Website & app development company in Jamshedpur and across India — business sites, ecommerce, mobile apps, AI-powered business solutions, SEO, and affordable website design.",
+    "Founder-led AI-powered frontend studio — React.js, Next.js websites, redesigns, and business solutions for startups, clinics, gyms, and local brands. Based in Ghaziabad, serving India & remote clients.",
   keywords: [
-    "Website Development Company in Jamshedpur",
-    "App Development Company in Jamshedpur",
-    "Ecommerce Website Development",
-    "Affordable Website Design Services",
-    "AI Solutions Company in Jamshedpur",
-    "AI-powered Business Solutions",
+    "React.js Development India",
+    "Next.js Website Development",
+    "Website Development Ghaziabad",
+    "Frontend Architect India",
+    "AI-Powered Website Solutions",
+    "Business Website Development",
+    "Website Redesign Services",
   ],
 };
 

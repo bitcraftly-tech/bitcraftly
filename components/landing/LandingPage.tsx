@@ -6,6 +6,8 @@ import SectionAutoScroll from "@/components/landing/SectionAutoScroll";
 import FadeInOnView from "@/components/ui/FadeInOnView";
 
 const DemoStrip = dynamic(() => import("@/components/landing/DemoStrip"));
+const FounderSection = dynamic(() => import("@/components/landing/FounderSection"));
+const FaqSection = dynamic(() => import("@/components/landing/FaqSection"));
 const ServicesGrid = dynamic(() => import("@/components/landing/ServicesGrid"));
 const PortfolioShowcase = dynamic(() => import("@/components/landing/PortfolioShowcase"));
 const IndustriesWeServe = dynamic(() => import("@/components/landing/IndustriesWeServe"));
@@ -14,7 +16,6 @@ const WhyChooseUs = dynamic(() => import("@/components/landing/WhyChooseUs"));
 const Pricing = dynamic(() => import("@/components/landing/Pricing"));
 const HowWeWork = dynamic(() => import("@/components/landing/HowWeWork"));
 const FinalCTA = dynamic(() => import("@/components/landing/FinalCTA"));
-const TrustReviewsPlaceholder = dynamic(() => import("@/components/landing/TrustReviewsPlaceholder"));
 const ParkingHowItWorks = dynamic(() => import("@/components/landing/ParkingHowItWorks"));
 const Footer = dynamic(() => import("@/components/landing/Footer"));
 
@@ -28,7 +29,9 @@ type LandingPageProps = {
     | "pricing"
     | "contact-cta"
     | "how-parking-works"
-    | "process";
+    | "process"
+    | "founder"
+    | "faq";
 };
 
 export default function LandingPage({ sectionId }: LandingPageProps) {
@@ -38,6 +41,9 @@ export default function LandingPage({ sectionId }: LandingPageProps) {
       <Navbar />
       <FadeInOnView delayMs={30}>
         <Hero />
+      </FadeInOnView>
+      <FadeInOnView delayMs={45}>
+        <FounderSection />
       </FadeInOnView>
       <FadeInOnView delayMs={60}>
         <ServicesGrid />
@@ -63,8 +69,8 @@ export default function LandingPage({ sectionId }: LandingPageProps) {
       <FadeInOnView delayMs={210}>
         <Pricing />
       </FadeInOnView>
-      <FadeInOnView delayMs={225}>
-        <TrustReviewsPlaceholder />
+      <FadeInOnView delayMs={218}>
+        <FaqSection />
       </FadeInOnView>
       <FadeInOnView delayMs={240}>
         <FinalCTA />

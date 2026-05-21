@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, FOUNDER_LINKEDIN_URL, PRIMARY_LOCATION, whatsappUrl, WHATSAPP_HOURS } from "@/lib/constants";
+import { BRAND } from "@/lib/siteContent";
 
 function NavArrowBullet() {
   return (
@@ -64,8 +65,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
-              Websites, ecommerce, apps and ongoing support — clear scope and delivery for teams that want a modern online
-              presence.
+              {BRAND.positioning} Founder-led delivery, clear scope, and long-term support.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <span
@@ -95,15 +95,19 @@ export default function Footer() {
                   <path d="M13.5 21v-7h2.3l.3-2.7h-2.6V9.6c0-.8.2-1.3 1.4-1.3h1.5V5.9c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v1.7H8.7V14h2.1v7h2.7z" />
                 </svg>
               </span>
-              <span
-                className="inline-flex h-9 w-9 cursor-default items-center justify-center rounded-full border border-[#0A66C2]/25 bg-[#0A66C2]/10 text-[#0A66C2] opacity-60 transition-opacity duration-200 hover:opacity-90 dark:bg-[#0A66C2]/12 dark:text-sky-400"
-                aria-label="LinkedIn — coming soon"
-                title="Coming soon"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" />
-                </svg>
-              </span>
+              {FOUNDER_LINKEDIN_URL ? (
+                <a
+                  href={FOUNDER_LINKEDIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#0A66C2]/25 bg-[#0A66C2]/10 text-[#0A66C2] transition-opacity duration-200 hover:opacity-90 dark:bg-[#0A66C2]/12 dark:text-sky-400"
+                  aria-label="LinkedIn — Sanjay Kr. Singh"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" />
+                  </svg>
+                </a>
+              ) : null}
             </div>
           </div>
 
@@ -238,10 +242,10 @@ export default function Footer() {
                   hello@bitcraftly.com
                 </a>
               </li>
-              <li>Ghaziabad, Uttar Pradesh, India</li>
+              <li>{PRIMARY_LOCATION}</li>
               <li className="pt-1">
                 <Link
-                  href="https://wa.me/919667710954"
+                  href={whatsappUrl()}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex font-semibold text-indigo-500 hover:text-indigo-400 dark:text-indigo-400 dark:hover:text-indigo-300"
@@ -256,11 +260,11 @@ export default function Footer() {
         <div className="mt-10 border-t border-border-primary pt-8 dark:border-dark-border-primary">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 rounded-2xl border border-border-primary bg-bg-secondary/35 px-5 py-5 text-center dark:border-dark-border-primary dark:bg-dark-bg-secondary/25 sm:flex-row sm:justify-center sm:gap-8 sm:px-8 sm:py-5">
             <h3 className="max-w-md font-[var(--font-playfair)] text-lg font-semibold leading-snug text-text-primary dark:text-dark-text-primary sm:text-xl">
-              Ready to build your next website or app?
+              {BRAND.ctaHeadline}
             </h3>
             <div className="flex shrink-0 flex-wrap items-center justify-center gap-2.5">
               <Link
-                href="https://wa.me/919667710954"
+                href={whatsappUrl()}
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-xl border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"
@@ -279,10 +283,10 @@ export default function Footer() {
 
         <div className="mt-8 border-t border-border-primary pt-6 text-center dark:border-dark-border-primary">
           <p className="text-xs font-medium leading-relaxed tracking-[0.06em] text-text-secondary dark:text-dark-text-secondary sm:text-[13px]">
-            100+ Projects · 18+ Years Experience · Fast Delivery · Jamshedpur, India
+            18+ Years Experience · React &amp; Next.js · Founder-Led · Ghaziabad, India
           </p>
           <p className="mt-2 text-[11px] leading-relaxed tracking-[0.04em] text-text-tertiary dark:text-dark-text-tertiary sm:text-xs">
-            Live Support Available · Mon–Sat · 10AM–8PM IST
+            WhatsApp support · {WHATSAPP_HOURS}
           </p>
         </div>
 
@@ -291,7 +295,7 @@ export default function Footer() {
             Built with modern web technologies · <span className="whitespace-nowrap">Bitcraftly © 2026</span>
           </p>
           <p className="mt-2 text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary sm:text-sm">
-            Website &amp; App Development Company in Jamshedpur
+            AI-Powered React &amp; Next.js Frontend Solutions · {BRAND.locationShort}
           </p>
         </div>
       </div>

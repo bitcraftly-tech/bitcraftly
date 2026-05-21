@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, whatsappUrl } from "@/lib/constants";
+import { BRAND, TRUST_CHECKS } from "@/lib/siteContent";
 
 type NavPill = {
   name: string;
@@ -14,46 +15,39 @@ type NavPill = {
 const navPills: NavPill[] = [
   { name: "Services", icon: "✨", targetId: "services", shellClass: "bg-indigo-500/10 border-indigo-500/30 hover:bg-indigo-500/20" },
   { name: "Portfolio", icon: "🖼️", targetId: "portfolio", shellClass: "bg-violet-500/10 border-violet-500/30 hover:bg-violet-500/20" },
-  { name: "Why Us", icon: "⭐", targetId: "why-us", shellClass: "bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/20" },
+  { name: "Founder", icon: "👤", targetId: "founder", shellClass: "bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/20" },
   { name: "Pricing", icon: "💳", targetId: "pricing", shellClass: "bg-emerald-500/10 border-emerald-500/30 hover:bg-emerald-500/20" },
-];
-
-const trustChecks = [
-  "18+ Years Experience",
-  "Modern UI/UX",
-  "Fast Delivery",
-  "Mobile Friendly",
 ];
 
 const showcase = [
   {
-    title: "Business websites",
-    desc: "Trust-first layouts, clear calls-to-action, and WhatsApp-ready contact flows.",
-    stat: "Lead-focused builds",
+    title: "React & Next.js websites",
+    desc: "Fast, SEO-friendly, mobile-first builds for startups and growing brands.",
+    stat: "Premium frontend delivery",
     glow: "from-indigo-500/25 to-violet-500/10",
   },
   {
-    title: "Ecommerce stores",
-    desc: "Product storytelling, smooth checkout paths, and mobile-first shopping.",
-    stat: "Sell online with confidence",
+    title: "Business & local websites",
+    desc: "Trust-first layouts, clear CTAs, and WhatsApp lead flows for clinics, gyms, and shops.",
+    stat: "Lead-focused builds",
     glow: "from-violet-500/25 to-purple-500/10",
   },
   {
-    title: "Mobile apps",
-    desc: "Android & iOS experiences aligned with how your customers already behave on their phones.",
-    stat: "Shipped as one roadmap",
+    title: "AI-powered solutions",
+    desc: "Chatbots, smart forms, and automation-ready architecture — practical, not gimmicky.",
+    stat: "AI-ready when it helps",
     glow: "from-purple-500/25 to-fuchsia-500/10",
   },
   {
-    title: "Maintenance & growth",
-    desc: "Updates, SEO basics, and WhatsApp Business wiring so customers can reach you faster after launch.",
-    stat: "Ongoing partnership",
+    title: "Website redesign",
+    desc: "Modern UI, better speed, and mobile UX without losing your SEO footing.",
+    stat: "Refresh & optimize",
     glow: "from-teal-500/25 to-emerald-500/10",
   },
   {
-    title: "Customer enquiries",
-    desc: "Quick replies on your site with a clean handoff to WhatsApp when customers want to talk to someone on your team.",
-    stat: "Practical, not flashy",
+    title: "Ongoing maintenance",
+    desc: "Updates, fixes, and performance checks so your site stays reliable after launch.",
+    stat: "Monthly care plans",
     glow: "from-slate-500/20 to-indigo-500/15",
   },
 ];
@@ -86,18 +80,18 @@ export default function Hero() {
         <div className="inline-flex items-center gap-2 rounded-full border border-border-primary bg-bg-card px-4 py-2 dark:border-dark-border-primary dark:bg-dark-bg-card">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
           <span className="text-xs font-medium uppercase tracking-[0.1em] text-text-secondary dark:text-dark-text-secondary">
-            Website &amp; app solutions · Jamshedpur
+            {BRAND.tagline} · {BRAND.locationShort}
           </span>
         </div>
 
         <h1 className="mt-6 font-[var(--font-playfair)] text-3xl font-semibold leading-tight text-text-primary dark:text-dark-text-primary sm:text-4xl lg:text-5xl">
-          Professional Websites &amp; Apps That Grow Your Business
+          Modern React &amp; Next.js Websites That Turn Visitors Into Leads
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-text-secondary dark:text-dark-text-secondary lg:mx-0 lg:text-lg">
-          Bitcraftly helps businesses in Jamshedpur &amp; across India build modern websites, ecommerce stores, mobile apps and practical digital solutions that drive real growth.
+          {BRAND.positioning} Founder-led delivery for startups, clinics, gyms, coaches, and local businesses across India — and remote clients worldwide.
         </p>
         <p className="mx-auto mt-3 max-w-2xl text-sm italic leading-relaxed text-text-tertiary dark:text-dark-text-tertiary lg:mx-0">
-          Clear scope, written estimates, and friendly English–Hinglish on calls or WhatsApp — whichever you prefer.
+          Clear written scope, honest timelines, aur friendly English–Hinglish on WhatsApp — {BRAND.whatsappHours}.
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
@@ -105,10 +99,10 @@ export default function Hero() {
             href="/contact?intent=consultation&source=hero"
             className="rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-95"
           >
-            Get Free Consultation
+            Get Free Website Plan
           </Link>
           <Link
-            href="https://wa.me/919667710954"
+            href={whatsappUrl()}
             target="_blank"
             rel="noreferrer"
             className="rounded-xl border border-border-secondary px-6 py-3 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"
@@ -118,7 +112,7 @@ export default function Hero() {
         </div>
 
         <ul className="mx-auto mt-5 flex max-w-xl flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-text-secondary dark:text-dark-text-secondary lg:mx-0 lg:justify-start">
-          {trustChecks.map((t) => (
+          {TRUST_CHECKS.map((t) => (
             <li key={t} className="inline-flex items-center gap-1.5">
               <span className="text-emerald-600 dark:text-emerald-400" aria-hidden>
                 ✔
@@ -183,9 +177,7 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-            <p className="mt-1.5 text-center text-[10px] font-medium text-text-tertiary dark:text-dark-text-tertiary">
-              Website mockup
-            </p>
+            <p className="mt-1.5 text-center text-[10px] font-medium text-text-tertiary dark:text-dark-text-tertiary">Website mockup</p>
           </div>
 
           <div className="flex flex-col items-center rounded-xl border border-border-primary bg-bg-secondary/90 p-2 dark:border-dark-border-primary dark:bg-dark-bg-secondary/90">
@@ -197,9 +189,7 @@ export default function Hero() {
                 <div className="h-1 w-2/3 rounded bg-border-secondary/70 dark:bg-dark-border-secondary/70" />
               </div>
             </div>
-            <p className="mt-auto pt-2 text-center text-[10px] font-medium text-text-tertiary dark:text-dark-text-tertiary">
-              App preview
-            </p>
+            <p className="mt-auto pt-2 text-center text-[10px] font-medium text-text-tertiary dark:text-dark-text-tertiary">App preview</p>
           </div>
 
           <div className="rounded-xl border border-border-primary bg-bg-secondary/90 p-2 dark:border-dark-border-primary dark:bg-dark-bg-secondary/90">
@@ -213,9 +203,7 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-            <p className="mt-1.5 text-center text-[10px] font-medium text-text-tertiary dark:text-dark-text-tertiary">
-              Recent work
-            </p>
+            <p className="mt-1.5 text-center text-[10px] font-medium text-text-tertiary dark:text-dark-text-tertiary">Recent work</p>
           </div>
         </div>
       </div>
