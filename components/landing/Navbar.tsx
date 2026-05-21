@@ -13,7 +13,7 @@ const navLinks = [
   { label: "Portfolio", targetId: "portfolio" },
   { label: "Websites", targetId: "websites" },
   { label: "Mobile Apps", targetId: "mobile-apps" },
-  { label: "Pricing", targetId: "pricing" },
+  { label: "Pricing", targetId: "fast-packages" },
 ];
 
 function LogoMark() {

@@ -1,5 +1,13 @@
 import { newTabProps } from "@/lib/newTabLink";
+import { PORTFOLIO_CARD_HOVER, PORTFOLIO_CARD_SHELL, PORTFOLIO_LINK_ACCENT, PORTFOLIO_RESULT_HIGHLIGHT } from "@/lib/portfolioPalette";
 import { type PortfolioItem, type PortfolioMockup, slugifyPortfolioTitle } from "@/lib/portfolioItems";
+import {
+  cardPreviewAccent,
+  projectBadgeClasses,
+  projectFocusClasses,
+  PORTFOLIO_CHECK_ICON,
+  techStackBadgeClasses,
+} from "@/lib/portfolioVisualUtils";
 
 type PortfolioProjectCardProps = {
   item: PortfolioItem;
@@ -261,12 +269,6 @@ function DualMockupChrome({ variant, emoji }: { variant: PortfolioMockup; emoji:
   );
 }
 
-function badgeClass(badge: PortfolioItem["badge"]) {
-  return badge === "Live client"
-    ? "border-emerald-500/35 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
-    : "border-violet-500/30 bg-violet-500/10 text-violet-700 dark:text-violet-300";
-}
-
 export default function PortfolioProjectCard({ item, showDetails, linkToCaseStudy }: PortfolioProjectCardProps) {
   const slug = slugifyPortfolioTitle(item.title);
   const demo = item.demoHref?.trim();
@@ -278,33 +280,44 @@ export default function PortfolioProjectCard({ item, showDetails, linkToCaseStud
   const ctaLabel = item.ctaLabel ?? "View Live Project →";
 
   return (
-    <article
-      id={slug}
-      className="group flex h-full min-h-0 scroll-mt-28 flex-col overflow-hidden rounded-2xl border border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card"
-    >
+    <article id={slug} className={`${PORTFOLIO_CARD_SHELL} ${PORTFOLIO_CARD_HOVER}`}>
       <div className={`relative w-full shrink-0 overflow-hidden rounded-t-2xl bg-gradient-to-br ${item.gradient} p-3 sm:p-4`}>
-        <DualMockupChrome variant={item.mockup} emoji={item.emoji} />
+        <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${cardPreviewAccent(item)}`} aria-hidden />
+        <div className="relative">
+          <DualMockupChrome variant={item.mockup} emoji={item.emoji} />
+        </div>
       </div>
-      <div className="flex min-h-0 flex-1 flex-col border-t border-border-primary p-4 dark:border-dark-border-primary">
+      <div className="flex min-h-0 flex-1 flex-col border-t border-[#bdc3c7]/35 p-4 dark:border-[#34495e]/45">
         <div className="flex min-h-0 flex-1 flex-col">
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="text-base font-semibold text-text-primary dark:text-dark-text-primary">{item.title}</h3>
-              <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${badgeClass(item.badge)}`}>
+              <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${projectBadgeClasses(item.badge)}`}>
                 {item.badge}
               </span>
-              <span className="rounded-full border border-border-secondary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-text-tertiary dark:border-dark-border-secondary dark:text-dark-text-tertiary">
+              <span className="rounded-full border border-[#bdc3c7]/50 bg-[#ecf0f1]/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#7f8c8d] dark:border-[#34495e]/55 dark:bg-[#34495e]/35 dark:text-[#bdc3c7]">
                 {item.tag}
               </span>
+              <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${projectFocusClasses(item.projectFocus)}`}>
+                {item.projectFocus}
+              </span>
             </div>
-            <p className="mt-1 text-xs font-medium text-text-primary/90 dark:text-dark-text-primary/90">{item.cardLine}</p>
-            <p className="mt-1 text-xs text-text-secondary dark:text-dark-text-secondary">{item.hint}</p>
-            <p className="mt-2 text-[11px] font-semibold text-indigo-600/90 dark:text-indigo-400/90">{item.resultHighlight}</p>
+            <p className="mt-1 text-xs font-medium text-text-primary/90 dark:text-dark-text-primary/90 md:hidden">{item.mobileCardLine}</p>
+            <p className="mt-1 hidden text-xs font-medium text-text-primary/90 dark:text-dark-text-primary/90 md:block">{item.cardLine}</p>
+            <p className="mt-1 hidden text-xs text-text-secondary dark:text-dark-text-secondary sm:block">{item.hint}</p>
+            <p className={`mt-2 text-[11px] font-semibold ${PORTFOLIO_RESULT_HIGHLIGHT}`}>{item.resultHighlight}</p>
+            {item.caseStudy.performance?.[0] ? (
+              <p className="mt-1 text-[10px] text-text-tertiary dark:text-dark-text-tertiary">
+                <span className="font-semibold text-text-secondary dark:text-dark-text-secondary">{item.caseStudy.performance[0].label}:</span>{" "}
+                {item.caseStudy.performance[0].value}
+                {item.caseStudy.performance[0].note ? ` · ${item.caseStudy.performance[0].note}` : ""}
+              </p>
+            ) : null}
             <div className="mt-2 flex flex-wrap gap-1">
               {item.techStack.slice(0, 4).map((tech) => (
                 <span
                   key={tech}
-                  className="rounded border border-border-primary/80 bg-bg-secondary/80 px-1.5 py-0.5 text-[10px] font-medium text-text-tertiary dark:border-dark-border-primary/80 dark:bg-dark-bg-secondary/80 dark:text-dark-text-tertiary"
+                  className={`rounded border px-1.5 py-0.5 text-[10px] font-medium ${techStackBadgeClasses(tech)}`}
                 >
                   {tech}
                 </span>
@@ -317,7 +330,7 @@ export default function PortfolioProjectCard({ item, showDetails, linkToCaseStud
                     key={line}
                     className="flex items-start gap-1.5 text-[11px] leading-snug text-text-secondary/95 dark:text-dark-text-secondary/95"
                   >
-                    <span className="mt-[2px] shrink-0 text-[10px] text-emerald-600/85 dark:text-emerald-400/75" aria-hidden>
+                    <span className={`mt-[2px] shrink-0 text-[10px] ${PORTFOLIO_CHECK_ICON}`} aria-hidden>
                       ✔
                     </span>
                     <span>{line}</span>
@@ -329,7 +342,7 @@ export default function PortfolioProjectCard({ item, showDetails, linkToCaseStud
           <div className="mt-auto flex flex-col gap-2 pt-3">
             <a
               href={resolvedHref}
-              className="inline-flex w-fit items-center gap-0.5 text-[11px] font-medium text-indigo-600 transition hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+              className={`inline-flex w-fit items-center gap-0.5 text-[11px] font-medium ${PORTFOLIO_LINK_ACCENT}`}
               {...newTabProps(resolvedHref)}
             >
               {ctaLabel}
@@ -337,7 +350,7 @@ export default function PortfolioProjectCard({ item, showDetails, linkToCaseStud
             {linkToCaseStudy ? (
               <a
                 href={caseStudyHref}
-                className="inline-flex w-fit text-[11px] font-medium text-text-secondary transition hover:text-text-primary dark:text-dark-text-secondary dark:hover:text-dark-text-primary"
+                className={`inline-flex w-fit text-[11px] font-medium text-[#7f8c8d] transition hover:text-[#2980b9] dark:text-[#bdc3c7] dark:hover:text-[#5dade2]`}
               >
                 Read case study →
               </a>

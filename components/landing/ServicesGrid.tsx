@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { CONTAINER, whatsappUrl } from "@/lib/constants";
+import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { SERVICES, SERVICES_SECTION } from "@/lib/siteContent";
 
 export default function ServicesGrid() {
@@ -63,7 +64,7 @@ export default function ServicesGrid() {
             {SERVICES_SECTION.sectionCtaPrimary}
           </Link>
           <Link
-            href={whatsappUrl()}
+            href={whatsappUrl(WHATSAPP_MESSAGES.services)}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-xl border border-border-secondary px-4 py-2.5 text-sm font-semibold text-text-primary dark:border-dark-border-secondary dark:text-dark-text-primary"

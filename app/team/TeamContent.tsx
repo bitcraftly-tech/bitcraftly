@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import FounderAvatar from "@/components/landing/FounderAvatar";
 import { CONTAINER, FOUNDER_LINKEDIN_URL, whatsappUrl } from "@/lib/constants";
+import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { BRAND, FOUNDER, PROCESS_STEPS } from "@/lib/siteContent";
 
 const pillars = [
@@ -118,7 +119,7 @@ export default function TeamContent() {
                     LinkedIn →
                   </a>
                 ) : null}
-                <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
+                <a href={whatsappUrl(WHATSAPP_MESSAGES.founder)} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
                   WhatsApp →
                 </a>
               </div>

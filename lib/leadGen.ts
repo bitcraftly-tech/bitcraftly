@@ -2,20 +2,7 @@
 
 export const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL ?? "";
 
-export const WHATSAPP_MESSAGES = {
-  default:
-    "Hi Bitcraftly — I'm Sanjay's enquiry from the website. I want to discuss a React/Next.js website or AI-powered project for my business.",
-  consultation:
-    "Hi Bitcraftly, I'd like to book a free 15-minute consultation with Sanjay about my website/project. My business is: ",
-  audit:
-    "Hi Bitcraftly, I want the free website audit (speed, mobile UX & lead checklist). My website is: ",
-  portfolio:
-    "Hi Bitcraftly, I saw your portfolio and want something similar for my business. Industry: ",
-  pricing:
-    "Hi Bitcraftly, I checked your pricing and want a written estimate. Package I'm interested in: ",
-  services:
-    "Hi Bitcraftly, I need help with a frontend/React/Next.js project. Service: ",
-} as const;
+export { WHATSAPP_MESSAGES, resolveWhatsAppMessage, type WhatsAppMessageKey } from "@/lib/whatsappFunnel";
 
 export const FREE_CONSULTATION = {
   id: "free-consultation",

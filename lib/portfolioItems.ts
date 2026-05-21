@@ -1,4 +1,13 @@
-import type { PortfolioCategoryId } from "@/lib/portfolioContent";
+import type { PortfolioFocusType } from "@/lib/portfolioContent";
+
+/** @deprecated Import from @/lib/portfolio/categories */
+export type { PortfolioCategoryId } from "@/lib/portfolio/categories";
+
+export type PortfolioPerformanceMetric = {
+  label: string;
+  value: string;
+  note?: string;
+};
 
 export type PortfolioMockup =
   | "restaurant"
@@ -20,6 +29,8 @@ export type PortfolioCaseStudy = {
   afterLabel: string;
   beforePoints: string[];
   afterPoints: string[];
+  performance?: PortfolioPerformanceMetric[];
+  trustNote?: string;
 };
 
 export type PortfolioItem = {
@@ -27,6 +38,10 @@ export type PortfolioItem = {
   hint: string;
   /** Premium one-liner on cards */
   cardLine: string;
+  /** Shorter line on mobile cards */
+  mobileCardLine: string;
+  /** Build type for filters & trust */
+  projectFocus: PortfolioFocusType;
   gradient: string;
   emoji: string;
   mockup: PortfolioMockup;
@@ -36,9 +51,18 @@ export type PortfolioItem = {
   ctaLabel?: string;
   details?: string;
   tag: "Website" | "Ecommerce" | "AI" | "Product UI";
-  categories: PortfolioCategoryId[];
+  categories: (
+    | "business-websites"
+    | "startup-saas"
+    | "react-nextjs"
+    | "ai-powered"
+    | "ecommerce"
+    | "dashboard-admin"
+  )[];
   badge: PortfolioProjectBadge;
   techStack: string[];
+  githubUrl?: string;
+  keyFeatures?: string[];
   resultHighlight: string;
   caseStudy: PortfolioCaseStudy;
 };
@@ -50,6 +74,12 @@ export const RECENT_PROJECT_TRUST_LINES = [
   "Fast mobile experience",
 ];
 
+const defaultPerformance: PortfolioPerformanceMetric[] = [
+  { label: "Mobile UX", value: "First", note: "Layouts built for phone traffic" },
+  { label: "Lead CTA", value: "WhatsApp", note: "Enquiry path above the fold" },
+  { label: "SEO", value: "Structured", note: "Titles, hierarchy, local basics" },
+];
+
 const defaultCaseStudy = (overrides: Partial<PortfolioCaseStudy>): PortfolioCaseStudy => ({
   problem: "Visitors were not converting — unclear offers, weak mobile UX, and no structured path to enquire.",
   solution: "A modern, mobile-first experience with clear CTAs, trust sections, and WhatsApp-ready contact flows.",
@@ -58,6 +88,8 @@ const defaultCaseStudy = (overrides: Partial<PortfolioCaseStudy>): PortfolioCase
   afterLabel: "After (Bitcraftly build)",
   beforePoints: ["Generic layout", "Slow or cluttered mobile", "Weak CTA placement", "Limited local SEO structure"],
   afterPoints: ["Industry-tailored UX", "Mobile-first performance focus", "Prominent enquiry paths", "SEO-friendly page structure"],
+  performance: defaultPerformance,
+  trustNote: "Founder-led frontend — scope and stack choices explained before payment.",
   ...overrides,
 });
 
@@ -66,6 +98,8 @@ export const homePortfolioItems: PortfolioItem[] = [
     title: "Shrishti Cloud Kitchen",
     hint: "Menu-led UX, fast ordering path, local delivery trust",
     cardLine: "Live cloud kitchen — menu discovery built for WhatsApp orders",
+    mobileCardLine: "Live site · menu + WhatsApp orders",
+    projectFocus: "Next.js",
     gradient: "from-orange-500/20 to-amber-500/10",
     emoji: "🍽️",
     mockup: "restaurant",
@@ -83,12 +117,20 @@ export const homePortfolioItems: PortfolioItem[] = [
       results: ["Clear menu discovery", "Mobile-friendly ordering path", "Local SEO structure", "WhatsApp-ready CTAs"],
       beforePoints: ["Menu scattered on social posts", "No dedicated mobile ordering flow", "Weak local discovery"],
       afterPoints: ["Structured menu UX", "One-tap WhatsApp order path", "Trust-first local brand page"],
+      performance: [
+        { label: "Ordering path", value: "Fewer taps", note: "Menu → WhatsApp without phone tag" },
+        { label: "Mobile", value: "First", note: "Built for local delivery searches on phone" },
+        { label: "Trust", value: "Brand-led", note: "Kitchen story + service area clarity" },
+      ],
+      trustNote: "Production client site — same delivery standards we offer new business builds.",
     }),
   },
   {
     title: "Gym Website",
     hint: "Plans, trainers, class schedules & trial enquiries",
     cardLine: "Fitness brand demo — trials, classes & membership enquiries",
+    mobileCardLine: "Gym demo · trials & class enquiries",
+    projectFocus: "Business website",
     gradient: "from-rose-500/20 to-fuchsia-500/10",
     emoji: "💪",
     mockup: "gym",
@@ -110,6 +152,8 @@ export const homePortfolioItems: PortfolioItem[] = [
     title: "School Website",
     hint: "Admissions, notices & parent-friendly structure",
     cardLine: "Education demo — admissions funnel parents actually use",
+    mobileCardLine: "School demo · admissions & notices",
+    projectFocus: "Next.js",
     gradient: "from-blue-500/20 to-indigo-500/10",
     emoji: "🎓",
     mockup: "school",
@@ -131,6 +175,8 @@ export const homePortfolioItems: PortfolioItem[] = [
     title: "Ecommerce Store",
     hint: "Catalog, checkout clarity & delivery messaging",
     cardLine: "Ecommerce demo — catalog UX, checkout clarity, COD trust",
+    mobileCardLine: "Store demo · catalog + checkout clarity",
+    projectFocus: "Next.js",
     gradient: "from-violet-500/20 to-purple-500/10",
     emoji: "🛍️",
     mockup: "ecommerce",
@@ -157,6 +203,8 @@ const portfolioExtras: PortfolioItem[] = [
     title: "Builder Website",
     hint: "Projects, credibility & enquiry-ready layouts",
     cardLine: "Real estate demo — project gallery that builds enquiry trust",
+    mobileCardLine: "Builder demo · project gallery + leads",
+    projectFocus: "Business website",
     gradient: "from-slate-500/18 to-zinc-500/10",
     emoji: "🏗️",
     mockup: "local",
@@ -178,6 +226,8 @@ const portfolioExtras: PortfolioItem[] = [
     title: "Society Portal",
     hint: "Residents, notices & practical workflows",
     cardLine: "Resident portal demo — notices, forms & lightweight workflows",
+    mobileCardLine: "Portal demo · notices & resident forms",
+    projectFocus: "Dashboard / admin",
     gradient: "from-emerald-500/15 to-teal-500/12",
     emoji: "🏘️",
     mockup: "generic",
@@ -185,9 +235,9 @@ const portfolioExtras: PortfolioItem[] = [
     demoHref: "/portfolio/society-management-showcase",
     ctaLabel: "Open interactive demo →",
     tag: "Website",
-    categories: ["business-websites", "startup-saas"],
+    categories: ["business-websites", "startup-saas", "dashboard-admin"],
     badge: "Interactive demo",
-    techStack: ["React", "Forms", "Notices UX"],
+    techStack: ["React", "Forms", "Notices UX", "Admin patterns"],
     resultHighlight: "Resident tasks simplified — not a heavy ERP pitch",
     details: "Lightweight resident-facing sites — notices, forms and handoffs scoped to committee needs.",
     caseStudy: defaultCaseStudy({
@@ -199,6 +249,8 @@ const portfolioExtras: PortfolioItem[] = [
     title: "AI Chatbot for Restaurant",
     hint: "Menu FAQs, smart replies & WhatsApp handoff",
     cardLine: "AI demo — menu answers with human WhatsApp handoff",
+    mobileCardLine: "AI chat · menu FAQs → WhatsApp",
+    projectFocus: "AI-powered",
     gradient: "from-indigo-500/15 to-slate-500/15",
     emoji: "💬",
     mockup: "chatbot",
@@ -223,6 +275,8 @@ const portfolioExtras: PortfolioItem[] = [
     title: "Clinic & Healthcare",
     hint: "Doctors, timings, appointment requests",
     cardLine: "Healthcare demo — credible layout + appointment enquiries",
+    mobileCardLine: "Clinic demo · doctors + appointments",
+    projectFocus: "Business website",
     gradient: "from-cyan-500/20 to-teal-500/10",
     emoji: "🏥",
     mockup: "clinic",
@@ -244,6 +298,8 @@ const portfolioExtras: PortfolioItem[] = [
     title: "Local Services Lead Site",
     hint: "Coaching, salons, CA firms — calls & WhatsApp",
     cardLine: "Local services demo — high-intent CTAs for coaches & pros",
+    mobileCardLine: "Local leads demo · WhatsApp-first funnel",
+    projectFocus: "Business website",
     gradient: "from-amber-500/20 to-yellow-500/10",
     emoji: "📍",
     mockup: "local",
@@ -265,6 +321,8 @@ const portfolioExtras: PortfolioItem[] = [
     title: "React Product UI Demo",
     hint: "SaaS-style screens, motion & component systems",
     cardLine: "Startup UI demo — React product screens & interaction patterns",
+    mobileCardLine: "SaaS UI demo · React dashboards & flows",
+    projectFocus: "Startup frontend",
     gradient: "from-indigo-500/20 to-violet-500/10",
     emoji: "⚛️",
     mockup: "generic",
@@ -272,9 +330,9 @@ const portfolioExtras: PortfolioItem[] = [
     demoHref: "/portfolio/react-video-demo",
     ctaLabel: "Open product demo →",
     tag: "Product UI",
-    categories: ["startup-saas", "react-nextjs"],
+    categories: ["startup-saas", "react-nextjs", "dashboard-admin"],
     badge: "Interactive demo",
-    techStack: ["React.js", "TypeScript", "UI systems", "Motion"],
+    techStack: ["React.js", "TypeScript", "Dashboard UI", "Motion"],
     resultHighlight: "Product-grade frontend patterns for SaaS & startup MVPs",
     details: "Showcase of modern React UI patterns for founders who need investor-ready product screens.",
     caseStudy: defaultCaseStudy({
@@ -300,7 +358,4 @@ export function getPortfolioPageItemBySlug(slug: string): PortfolioItem | undefi
   return portfolioPageItems.find((item) => slugifyPortfolioTitle(item.title) === slug);
 }
 
-export function filterPortfolioByCategory(items: PortfolioItem[], category: PortfolioCategoryId): PortfolioItem[] {
-  if (category === "all") return items;
-  return items.filter((item) => item.categories.includes(category));
-}
+export { filterPortfolioByCategory, countByCategory } from "@/lib/portfolio/categories";

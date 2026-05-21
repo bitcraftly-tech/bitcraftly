@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { CONTAINER, whatsappUrl } from "@/lib/constants";
+import { WHATSAPP_MESSAGES } from "@/lib/leadGen";
 import { PORTFOLIO } from "@/lib/portfolioContent";
 
 export default function PortfolioAfterCta() {
@@ -21,7 +22,7 @@ export default function PortfolioAfterCta() {
             {PORTFOLIO.primaryCta}
           </Link>
           <Link
-            href={whatsappUrl("Hi Bitcraftly, I saw your portfolio and want a similar website for my business.")}
+            href={whatsappUrl(WHATSAPP_MESSAGES.portfolio)}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-xl border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary dark:border-dark-border-secondary dark:text-dark-text-primary"

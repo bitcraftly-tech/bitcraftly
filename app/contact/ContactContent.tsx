@@ -1,17 +1,18 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, Suspense, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import CalendlyEmbed from "@/components/landing/CalendlyEmbed";
+import WhatsAppInquiryPanel from "@/components/landing/WhatsAppInquiryPanel";
 import { CONTAINER, PRIMARY_LOCATION, whatsappUrl, WHATSAPP_HOURS } from "@/lib/constants";
 import {
   BUDGET_OPTIONS,
   CONTACT_FORM,
   TIMELINE_OPTIONS,
   TRUST_INQUIRY,
-  WHATSAPP_MESSAGES,
 } from "@/lib/leadGen";
+import { resolveWhatsAppMessage, WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { showErrorAlert, showSuccessAlert } from "@/lib/sweetAlert";
 
 type ContactFormValues = {
@@ -38,7 +39,9 @@ const sources = [
   "Social Media",
   "Website Audit CTA",
   "Free Consultation CTA",
+  "WhatsApp Floating CTA",
   "Pricing Card CTA",
+  "Fast Package CTA",
   "Smart Parking CTA",
   "Other",
 ];
@@ -72,6 +75,7 @@ export default function ContactContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [requestType, setRequestType] = useState<string>("");
   const [submitLabel, setSubmitLabel] = useState<string>(CONTACT_FORM.submitCta);
+  const [whatsappMessage, setWhatsappMessage] = useState(WHATSAPP_MESSAGES.consultation);
 
   const timeline = useMemo(
     () => [
@@ -99,6 +103,14 @@ export default function ContactContent() {
     } else if (intent === "consultation") {
       setSubmitLabel(CONTACT_FORM.submitCta);
     }
+
+    setWhatsappMessage(
+      resolveWhatsAppMessage({
+        source: params.get("source"),
+        service: serviceRaw || null,
+        intent: params.get("intent"),
+      }),
+    );
 
     setValues((prev) => {
       const next = { ...prev };
@@ -138,6 +150,8 @@ export default function ContactContent() {
         next.source = "Smart Parking CTA";
       } else if (source === "pricing-card") {
         next.source = "Pricing Card CTA";
+      } else if (source === "fast-package" || source.includes("fast-packages")) {
+        next.source = "Fast Package CTA";
       } else if (source.includes("audit")) {
         next.source = "Website Audit CTA";
       } else if (source.includes("consultation") || source.includes("free-consultation")) {
@@ -270,7 +284,7 @@ export default function ContactContent() {
               <div>
                 <p className="text-xs uppercase tracking-wide text-text-tertiary dark:text-dark-text-tertiary">WhatsApp</p>
                 <a
-                  href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
+                  href={whatsappUrl(whatsappMessage)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm font-medium text-text-primary hover:text-accent-primary dark:text-dark-text-primary"
@@ -346,6 +360,9 @@ export default function ContactContent() {
         </section>
 
         <section className="md:col-span-3">
+          <Suspense fallback={<div className="mb-6 h-40 animate-pulse rounded-2xl border border-border-primary bg-bg-secondary/50 dark:border-dark-border-primary dark:bg-dark-bg-secondary/30" />}>
+            <WhatsAppInquiryPanel className="mb-6" />
+          </Suspense>
           <CalendlyEmbed className="mb-6" />
           <div className="w-full rounded-lg border border-border-primary bg-bg-card p-5 dark:border-dark-border-primary dark:bg-dark-bg-card sm:p-7">
             {requestType ? (
@@ -555,7 +572,7 @@ export default function ContactContent() {
                 <p className="mt-3 text-center text-xs text-text-tertiary dark:text-dark-text-tertiary">{CONTACT_FORM.privacyNote}</p>
                 <p className="mt-2 text-center text-sm">
                   <a
-                    href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
+                    href={whatsappUrl(whatsappMessage)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"

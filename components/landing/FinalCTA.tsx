@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CONTAINER, whatsappUrl } from "@/lib/constants";
+import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { BRAND } from "@/lib/siteContent";
 
 export default function FinalCTA() {
@@ -29,7 +30,7 @@ export default function FinalCTA() {
         </div>
         <div className="relative mt-8 flex shrink-0 flex-wrap items-center gap-3 md:mt-0 md:justify-end">
           <Link
-            href={whatsappUrl()}
+            href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
             target="_blank"
             rel="noreferrer"
             className="rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-95"

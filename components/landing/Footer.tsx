@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { CONTAINER, FOUNDER_LINKEDIN_URL, PRIMARY_LOCATION, whatsappUrl, WHATSAPP_HOURS } from "@/lib/constants";
+import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { BRAND } from "@/lib/siteContent";
 
 function NavArrowBullet() {
@@ -158,7 +159,7 @@ export default function Footer() {
                 <NavArrowBullet />
                 <button
                   type="button"
-                  onClick={() => goToSection("pricing")}
+                  onClick={() => goToSection("fast-packages")}
                   className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
                 >
                   Website Maintenance
@@ -245,7 +246,7 @@ export default function Footer() {
               <li>{PRIMARY_LOCATION}</li>
               <li className="pt-1">
                 <Link
-                  href={whatsappUrl()}
+                  href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex font-semibold text-indigo-500 hover:text-indigo-400 dark:text-indigo-400 dark:hover:text-indigo-300"
@@ -264,7 +265,7 @@ export default function Footer() {
             </h3>
             <div className="flex shrink-0 flex-wrap items-center justify-center gap-2.5">
               <Link
-                href={whatsappUrl()}
+                href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-xl border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"

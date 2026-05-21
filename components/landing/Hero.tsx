@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { CONTAINER, whatsappUrl } from "@/lib/constants";
+import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { BRAND, HERO, TRUST_CHECKS } from "@/lib/siteContent";
 
 type NavPill = {
@@ -16,7 +17,7 @@ const navPills: NavPill[] = [
   { name: "Services", icon: "✨", targetId: "services", shellClass: "bg-indigo-500/10 border-indigo-500/30 hover:bg-indigo-500/20" },
   { name: "Portfolio", icon: "🖼️", targetId: "portfolio", shellClass: "bg-violet-500/10 border-violet-500/30 hover:bg-violet-500/20" },
   { name: "Founder", icon: "👤", targetId: "founder", shellClass: "bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/20" },
-  { name: "Pricing", icon: "💳", targetId: "pricing", shellClass: "bg-emerald-500/10 border-emerald-500/30 hover:bg-emerald-500/20" },
+  { name: "Pricing", icon: "💳", targetId: "fast-packages", shellClass: "bg-emerald-500/10 border-emerald-500/30 hover:bg-emerald-500/20" },
 ];
 
 const showcase = [
@@ -103,7 +104,7 @@ export default function Hero() {
             {HERO.primaryCta}
           </Link>
           <Link
-            href={whatsappUrl()}
+            href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
             target="_blank"
             rel="noreferrer"
             className="rounded-xl border border-border-secondary px-6 py-3 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"

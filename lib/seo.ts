@@ -35,11 +35,17 @@ export const SEO_KEYWORDS = {
   local: [
     "website development company Ghaziabad",
     "web developer Ghaziabad",
+    "React.js developer Ghaziabad",
+    "Next.js website development Ghaziabad",
+    "website designer Ghaziabad",
+    "website development company Noida",
+    "website development Delhi NCR",
+    "web developer Greater Noida",
+    "website development Gurugram",
     "website development Uttar Pradesh",
     "website development Patna",
     "website development Ranchi",
     "website development Jamshedpur",
-    "website development Gaya Bihar",
     "website developer Noida",
   ],
   react: [
@@ -104,5 +110,23 @@ export const LOCAL_BUSINESS = {
   addressRegion: "Uttar Pradesh",
   addressCountry: "IN",
   telephone: "+91-96677-10954",
-  areaServed: ["Ghaziabad", "Delhi NCR", "Bihar", "Jharkhand", "India"],
+  areaServed: [
+    "Ghaziabad",
+    "Noida",
+    "Greater Noida",
+    "Delhi",
+    "Gurugram",
+    "Faridabad",
+    "Delhi NCR",
+    "Uttar Pradesh",
+    "Bihar",
+    "Jharkhand",
+    "India",
+  ],
+  geo: {
+    latitude: 28.6692,
+    longitude: 77.4538,
+  },
 } as const;
+
+export { GBP_DESCRIPTION, LOCAL_SEO_KEYWORDS, GBP_CATEGORIES } from "@/lib/localSeo";

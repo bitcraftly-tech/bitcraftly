@@ -1,66 +1,88 @@
 /** Portfolio & case study marketing copy */
 
 export const PORTFOLIO = {
-  eyebrow: "Portfolio",
-  heading: "Work built to perform — not just look good",
+  eyebrow: "Portfolio & case studies",
+  heading: "Real builds and production-ready demos — structured for trust",
   intro:
-    "Live client sites and interactive demos across business websites, startups, ecommerce, and AI-powered experiences. Every build is structured for mobile visitors, local SEO, WhatsApp leads, and maintainable React/Next.js where your roadmap needs scale.",
+    "Live client websites and interactive showcases across React.js, Next.js, AI-powered experiences, business sites, and startup frontends. Each project is presented with the challenge, what we built, measurable focus areas, and tech stack — so you can judge fit before you book a call.",
   introNote:
-    "Demos show industry-ready patterns — your project is scoped and customized after discovery. Live badge = production site.",
-  whyPerformTitle: "Why our projects perform better",
+    "Live = production URL you can open today. Interactive demo = industry-ready pattern you can click through — your build is scoped and customized after discovery.",
+  structureTitle: "How we present every project",
+  structureSteps: [
+    { step: "01", title: "Project snapshot", body: "Type, stack, live or demo, and the business outcome we optimized for." },
+    { step: "02", title: "Challenge → build → results", body: "Problem, solution, and outcome bullets — not vague “we designed a website.”" },
+    { step: "03", title: "Before & after", body: "What changed in UX, speed, and lead paths compared to typical template sites." },
+    { step: "04", title: "Performance focus", body: "Mobile UX, SEO structure, Core Web Vitals mindset, and conversion paths." },
+  ] as const,
+  projectFocusLabel: "Build type",
+  whyPerformTitle: "Performance & conversion — built in, not patched later",
   whyPerformIntro:
-    "Pretty mockups are easy. Outcomes need architecture — clear funnels, fast pages, and tech choices that match how your customers actually behave.",
+    "We treat portfolio work like product delivery: mobile-first layouts, lean page weight, SEO-conscious structure, and enquiry funnels that survive real traffic — especially WhatsApp-first Indian buyers on phones.",
   whyPerformPoints: [
     {
-      title: "Conversion-first structure",
-      body: "Hero, trust, services, and CTAs placed for enquiries — not buried below endless scroll.",
+      title: "Mobile-first enquiry paths",
+      body: "CTAs, click-to-call, and WhatsApp placed where thumb traffic actually converts — not hidden in desktop-only menus.",
     },
     {
-      title: "React & Next.js when it counts",
-      body: "SEO-friendly, fast, component-driven frontends for startups and growing brands — not bloated page builders.",
+      title: "React & Next.js performance discipline",
+      body: "Component structure, image strategy, and route-level SEO — fewer heavy scripts than page-builder stacks.",
     },
     {
-      title: "AI with a purpose",
-      body: "Chat, smart forms, and automation only where they shorten the path to a human conversation or sale.",
+      title: "Core Web Vitals mindset",
+      body: "LCP, CLS, and interaction readiness considered during layout — not “we’ll optimize after launch.”",
     },
     {
-      title: "Founder-led quality bar",
-      body: "Senior architecture review on layout, performance, and handoff — so your site stays maintainable after launch.",
+      title: "AI that protects human sales",
+      body: "Bots answer repeat questions; high-intent leads still reach a person on WhatsApp when it matters.",
     },
   ] as const,
-  ctaTitle: "Want a project like these for your business?",
+  performanceSectionTitle: "What we optimize on every engagement",
+  performanceMetrics: [
+    { label: "Mobile UX", value: "Thumb-first", note: "Layouts tested for small screens first" },
+    { label: "Lead paths", value: "WhatsApp-ready", note: "Enquiry CTAs above scroll fatigue" },
+    { label: "SEO structure", value: "Crawlable", note: "Titles, hierarchy, local discovery basics" },
+    { label: "Stack", value: "React / Next", note: "Maintainable frontends, not locked templates" },
+  ] as const,
+  liveProjectTitle: "View the live build",
+  liveProjectBody: "Open the production site — same quality bar we bring to your project after scope is confirmed in writing.",
+  demoProjectTitle: "Interactive demo",
+  demoProjectBody: "Click through a scoped industry pattern — we customize layout, copy, and integrations for your brand.",
+  trustStoryline:
+    "Founder-led delivery: Sanjay Kr. Singh (18+ yrs) architects the frontend on every engagement — you see how we think before you pay.",
+  ctaTitle: "Want a project structured like these?",
   ctaBody:
-    "Share your industry and goals — we'll recommend React vs Next.js scope, timeline, and a written starting estimate. Free 15-minute consultation.",
+    "Tell us your industry and goal — we’ll recommend React vs Next.js, whether AI helps, timeline, and a written starting estimate. Free 15-minute consultation with the founder.",
   primaryCta: "Book Free Consultation",
-  secondaryCta: "WhatsApp Project Enquiry",
-  pageHeading: "Portfolio — React, Next.js & AI-ready business builds",
+  secondaryCta: "WhatsApp — Scope Similar Project",
+  pageHeading: "Portfolio — live work, case studies & interactive demos",
   pageIntro:
-    "Explore live work and interactive showcases. Filter by category, open a project for the case-study breakdown, then book a call to scope yours.",
+    "Filter by build type. Open any project for the full case study: problem, solution, results, tech stack, and performance focus. Live client work is labeled clearly.",
 } as const;
 
-export type PortfolioCategoryId =
-  | "all"
-  | "business-websites"
-  | "startup-saas"
-  | "react-nextjs"
-  | "ai-powered"
-  | "ecommerce";
+export type { PortfolioCategoryId } from "@/lib/portfolio/categories";
+export { PORTFOLIO_CATEGORIES } from "@/lib/portfolio/categories";
 
-export const PORTFOLIO_CATEGORIES: { id: PortfolioCategoryId; label: string }[] = [
-  { id: "all", label: "All work" },
-  { id: "business-websites", label: "Business websites" },
-  { id: "startup-saas", label: "Startups & SaaS" },
-  { id: "react-nextjs", label: "React & Next.js" },
-  { id: "ai-powered", label: "AI-powered" },
-  { id: "ecommerce", label: "Ecommerce" },
-];
+export const PORTFOLIO_FOCUS_TYPES = [
+  "React.js",
+  "Next.js",
+  "AI-powered",
+  "Business website",
+  "Dashboard / admin",
+  "Startup frontend",
+] as const;
 
-/** Case study section labels — used on detail pages */
+export type PortfolioFocusType = (typeof PORTFOLIO_FOCUS_TYPES)[number];
+
+/** Case study section labels — detail pages */
 export const CASE_STUDY_LABELS = {
+  overview: "Case study overview",
   problem: "The challenge",
   solution: "What we built",
-  results: "Outcomes & focus",
+  results: "Results & business focus",
   before: "Before",
-  after: "After",
+  after: "After delivery",
   techStack: "Tech stack",
+  performance: "Performance & conversion focus",
+  live: "Live project",
+  trust: "Why clients trust this approach",
 } as const;

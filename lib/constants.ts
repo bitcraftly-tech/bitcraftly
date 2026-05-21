@@ -1,5 +1,5 @@
 import { BRAND, FOUNDER } from "@/lib/siteContent";
-import { WHATSAPP_MESSAGES } from "@/lib/leadGen";
+import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 
 export const CONTAINER = "mx-auto w-full max-w-7xl px-6 lg:px-12";
 

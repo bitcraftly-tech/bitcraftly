@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: SectionPageProps): Promise<Me
   if (item) {
     return {
       title: `${item.title} | Portfolio | Bitcraftly`,
-      description: `${item.hint} Representative industry mockup — your build is scoped after discovery.`,
+      description: `${item.cardLine} Case study: challenge, solution, results, and ${item.projectFocus} stack. ${item.badge === "Live client" ? "Live production site." : "Interactive demo."}`,
     };
   }
   return {};

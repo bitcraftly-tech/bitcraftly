@@ -16,7 +16,10 @@ export default function OrganizationJsonLd() {
           name: LOCAL_BUSINESS.founder,
           jobTitle: "Tech Lead & Frontend Architect",
         },
-        areaServed: LOCAL_BUSINESS.areaServed,
+        areaServed: LOCAL_BUSINESS.areaServed.map((city) => ({
+          "@type": "City",
+          name: city,
+        })),
         knowsAbout: ["React.js", "Next.js", "Frontend Architecture", "AI-powered web development"],
       },
       {
@@ -31,14 +34,23 @@ export default function OrganizationJsonLd() {
           addressRegion: LOCAL_BUSINESS.addressRegion,
           addressCountry: LOCAL_BUSINESS.addressCountry,
         },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: LOCAL_BUSINESS.geo.latitude,
+          longitude: LOCAL_BUSINESS.geo.longitude,
+        },
         telephone: LOCAL_BUSINESS.telephone,
         priceRange: "₹₹",
+        areaServed: LOCAL_BUSINESS.areaServed,
         serviceType: [
           "React.js Development",
           "Next.js Development",
-          "AI-Powered Website Solutions",
+          "Website Development",
+          "AI-Powered Web Solutions",
+          "Frontend Architecture",
           "Website Redesign",
           "Business Website Development",
+          "Landing Page Development",
         ],
       },
       {
