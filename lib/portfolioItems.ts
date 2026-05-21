@@ -1,3 +1,5 @@
+import type { PortfolioCategoryId } from "@/lib/portfolioContent";
+
 export type PortfolioMockup =
   | "restaurant"
   | "school"
@@ -8,79 +10,145 @@ export type PortfolioMockup =
   | "local"
   | "generic";
 
-/** Shown on homepage recent-project cards */
-export const RECENT_PROJECT_TRUST_LINES = ["Mobile friendly", "SEO ready", "WhatsApp integration", "Fast loading"];
+export type PortfolioProjectBadge = "Live client" | "Interactive demo";
+
+export type PortfolioCaseStudy = {
+  problem: string;
+  solution: string;
+  results: string[];
+  beforeLabel: string;
+  afterLabel: string;
+  beforePoints: string[];
+  afterPoints: string[];
+};
 
 export type PortfolioItem = {
   title: string;
   hint: string;
+  /** Premium one-liner on cards */
+  cardLine: string;
   gradient: string;
   emoji: string;
   mockup: PortfolioMockup;
-  /** Trust or feature lines under the subtitle */
   featureBullets: string[];
-  /** Showcase path `/portfolio/...`; wins over `liveUrl` when set */
   demoHref?: string;
-  /** External live site URL — card opens in new tab; used when `demoHref` is unset */
   liveUrl?: string;
-  /** CTA label (default: live project) */
   ctaLabel?: string;
-  /** Shown on full portfolio page only */
   details?: string;
-  tag: "Website" | "Ecommerce";
+  tag: "Website" | "Ecommerce" | "AI" | "Product UI";
+  categories: PortfolioCategoryId[];
+  badge: PortfolioProjectBadge;
+  techStack: string[];
+  resultHighlight: string;
+  caseStudy: PortfolioCaseStudy;
 };
 
-const restaurantDetails =
-  "Hero story, menu highlights, map & hours, WhatsApp ordering handoff.";
-const schoolDetails = "Admission funnel, fee enquiry forms, news & calendar for parents.";
-const gymDetails = "Plans, trainer roster, class timetable, trial enquiry strip.";
-const ecommerceDetails =
-  "Category-led UX, trust badges, shipping & COD messaging tuned for your audience.";
+export const RECENT_PROJECT_TRUST_LINES = [
+  "Lead-focused UX",
+  "SEO-ready structure",
+  "WhatsApp handoff",
+  "Fast mobile experience",
+];
+
+const defaultCaseStudy = (overrides: Partial<PortfolioCaseStudy>): PortfolioCaseStudy => ({
+  problem: "Visitors were not converting — unclear offers, weak mobile UX, and no structured path to enquire.",
+  solution: "A modern, mobile-first experience with clear CTAs, trust sections, and WhatsApp-ready contact flows.",
+  results: ["Clearer user journey", "Faster mobile experience", "Structured SEO pages", "Easier enquiry handoff"],
+  beforeLabel: "Before",
+  afterLabel: "After (Bitcraftly build)",
+  beforePoints: ["Generic layout", "Slow or cluttered mobile", "Weak CTA placement", "Limited local SEO structure"],
+  afterPoints: ["Industry-tailored UX", "Mobile-first performance focus", "Prominent enquiry paths", "SEO-friendly page structure"],
+  ...overrides,
+});
 
 export const homePortfolioItems: PortfolioItem[] = [
   {
     title: "Shrishti Cloud Kitchen",
     hint: "Menu-led UX, fast ordering path, local delivery trust",
+    cardLine: "Live cloud kitchen — menu discovery built for WhatsApp orders",
     gradient: "from-orange-500/20 to-amber-500/10",
     emoji: "🍽️",
     mockup: "restaurant",
     featureBullets: [...RECENT_PROJECT_TRUST_LINES],
     liveUrl: "https://www.shrishticloud.kitchen/",
-    ctaLabel: "View Live Project →",
+    ctaLabel: "View live site →",
     tag: "Website",
+    categories: ["business-websites", "react-nextjs"],
+    badge: "Live client",
+    techStack: ["Next.js", "React", "Mobile UX", "SEO", "WhatsApp"],
+    resultHighlight: "Menu-led path designed for faster order enquiries",
+    caseStudy: defaultCaseStudy({
+      problem: "Customers needed a faster way to browse menus and reach the kitchen without phone tag.",
+      solution: "Menu-led website with mobile-first layout, local trust cues, and direct WhatsApp order handoff.",
+      results: ["Clear menu discovery", "Mobile-friendly ordering path", "Local SEO structure", "WhatsApp-ready CTAs"],
+      beforePoints: ["Menu scattered on social posts", "No dedicated mobile ordering flow", "Weak local discovery"],
+      afterPoints: ["Structured menu UX", "One-tap WhatsApp order path", "Trust-first local brand page"],
+    }),
   },
   {
     title: "Gym Website",
     hint: "Plans, trainers, class schedules & trial enquiries",
+    cardLine: "Fitness brand demo — trials, classes & membership enquiries",
     gradient: "from-rose-500/20 to-fuchsia-500/10",
     emoji: "💪",
     mockup: "gym",
     featureBullets: [...RECENT_PROJECT_TRUST_LINES],
     demoHref: "/portfolio/gym-fitness-showcase",
-    ctaLabel: "View Live Project →",
+    ctaLabel: "Open interactive demo →",
     tag: "Website",
+    categories: ["business-websites"],
+    badge: "Interactive demo",
+    techStack: ["React", "Responsive UI", "Lead forms", "SEO"],
+    resultHighlight: "Trial & class enquiry flows tuned for mobile visitors",
+    caseStudy: defaultCaseStudy({
+      problem: "Gyms lose leads when class schedules and trial offers are hard to find on mobile.",
+      solution: "Showcase with plans, trainer roster, timetable, and prominent trial CTA strip.",
+      results: ["Trial offer above the fold", "Class schedule clarity", "Trainer credibility section"],
+    }),
   },
   {
     title: "School Website",
     hint: "Admissions, notices & parent-friendly structure",
+    cardLine: "Education demo — admissions funnel parents actually use",
     gradient: "from-blue-500/20 to-indigo-500/10",
     emoji: "🎓",
     mockup: "school",
     featureBullets: [...RECENT_PROJECT_TRUST_LINES],
     demoHref: "/portfolio/school-website-showcase",
-    ctaLabel: "View Live Project →",
+    ctaLabel: "Open interactive demo →",
     tag: "Website",
+    categories: ["business-websites"],
+    badge: "Interactive demo",
+    techStack: ["Next.js", "Forms", "Content structure", "Mobile UX"],
+    resultHighlight: "Parent-friendly admissions and notices architecture",
+    caseStudy: defaultCaseStudy({
+      problem: "Parents could not quickly find admissions info, notices, and contact paths on older school sites.",
+      solution: "Admission-focused layout with notices, downloads, and enquiry forms scoped for parent journeys.",
+      results: ["Clear admission CTA", "Notices & calendar structure", "Mobile-readable content hierarchy"],
+    }),
   },
   {
     title: "Ecommerce Store",
     hint: "Catalog, checkout clarity & delivery messaging",
+    cardLine: "Ecommerce demo — catalog UX, checkout clarity, COD trust",
     gradient: "from-violet-500/20 to-purple-500/10",
     emoji: "🛍️",
     mockup: "ecommerce",
-    featureBullets: [...RECENT_PROJECT_TRUST_LINES],
+    featureBullets: ["Category-led UX", "Checkout clarity", "Mobile shopping", "Trust badges"],
     demoHref: "/portfolio/ecommerce-store-showcase",
-    ctaLabel: "View Live Project →",
+    ctaLabel: "Open interactive demo →",
     tag: "Ecommerce",
+    categories: ["ecommerce", "react-nextjs"],
+    badge: "Interactive demo",
+    techStack: ["Next.js", "React", "Razorpay-ready UX", "Cart flows"],
+    resultHighlight: "Shopping flow designed for clarity — not checkout confusion",
+    caseStudy: defaultCaseStudy({
+      problem: "Small stores lose sales when catalog browsing and checkout steps feel cluttered on mobile.",
+      solution: "Category-led storefront with trust badges, delivery/COD messaging, and simplified checkout path.",
+      results: ["Clear product discovery", "Mobile checkout patterns", "Payment-ready UX scaffolding"],
+      beforePoints: ["Flat product lists", "Unclear shipping/COD info", "Heavy checkout friction"],
+      afterPoints: ["Category navigation", "Trust & delivery messaging", "Streamlined mobile checkout UX"],
+    }),
   },
 ];
 
@@ -88,87 +156,137 @@ const portfolioExtras: PortfolioItem[] = [
   {
     title: "Builder Website",
     hint: "Projects, credibility & enquiry-ready layouts",
+    cardLine: "Real estate demo — project gallery that builds enquiry trust",
     gradient: "from-slate-500/18 to-zinc-500/10",
     emoji: "🏗️",
     mockup: "local",
     featureBullets: ["Project highlights", "Lead enquiries", "Mobile friendly"],
     demoHref: "/portfolio/builder-real-estate-showcase",
-    ctaLabel: "View Live Project →",
+    ctaLabel: "Open interactive demo →",
     tag: "Website",
-    details:
-      "Trust-first pages for builders — project showcases and enquiry flows scoped to how you sell, without turning your site into a listings portal.",
+    categories: ["business-websites"],
+    badge: "Interactive demo",
+    techStack: ["React", "Gallery UX", "Lead forms"],
+    resultHighlight: "Project credibility structured for serious buyer enquiries",
+    details: "Trust-first pages for builders — project showcases and enquiry flows scoped to how you sell.",
+    caseStudy: defaultCaseStudy({
+      problem: "Builders relied on PDFs and phone calls — projects were not showcased with modern mobile credibility.",
+      solution: "Project gallery, enquiry forms, and trust sections without turning the site into a listings portal.",
+    }),
   },
   {
     title: "Society Portal",
     hint: "Residents, notices & practical workflows",
+    cardLine: "Resident portal demo — notices, forms & lightweight workflows",
     gradient: "from-emerald-500/15 to-teal-500/12",
     emoji: "🏘️",
     mockup: "generic",
     featureBullets: ["Clear resident UX", "Forms & notices", "WhatsApp-friendly"],
     demoHref: "/portfolio/society-management-showcase",
-    ctaLabel: "View Live Project →",
+    ctaLabel: "Open interactive demo →",
     tag: "Website",
-    details:
-      "Lightweight resident-facing sites or small portals — notices, forms and handoffs scoped to what your committee needs — not a full ERP pitch.",
+    categories: ["business-websites", "startup-saas"],
+    badge: "Interactive demo",
+    techStack: ["React", "Forms", "Notices UX"],
+    resultHighlight: "Resident tasks simplified — not a heavy ERP pitch",
+    details: "Lightweight resident-facing sites — notices, forms and handoffs scoped to committee needs.",
+    caseStudy: defaultCaseStudy({
+      problem: "Societies needed resident-facing clarity without buying an oversized management suite.",
+      solution: "Focused portal patterns for notices, forms, and WhatsApp-friendly resident communication.",
+    }),
   },
   {
     title: "AI Chatbot for Restaurant",
     hint: "Menu FAQs, smart replies & WhatsApp handoff",
+    cardLine: "AI demo — menu answers with human WhatsApp handoff",
     gradient: "from-indigo-500/15 to-slate-500/15",
     emoji: "💬",
     mockup: "chatbot",
     featureBullets: ["Quick menu answers", "WhatsApp handoff", "Hours & FAQs"],
     demoHref: "/portfolio/restaurant-ai-chatbot-showcase",
-    ctaLabel: "View Live Project →",
-    tag: "Website",
-    details:
-      "Customer-facing assistant for menus, hours, and quick questions — with a clean handoff to staff or WhatsApp.",
+    ctaLabel: "Open AI demo →",
+    tag: "AI",
+    categories: ["ai-powered", "business-websites"],
+    badge: "Interactive demo",
+    techStack: ["AI chat UX", "React", "WhatsApp API-ready"],
+    resultHighlight: "FAQ automation that still routes to a real person",
+    details: "Customer-facing assistant for menus, hours, and quick questions — with clean handoff to staff or WhatsApp.",
+    caseStudy: defaultCaseStudy({
+      problem: "Staff repeated the same menu and hours questions — wasting time on low-value calls.",
+      solution: "AI-assisted FAQ layer with structured menu answers and WhatsApp escalation when humans are needed.",
+      results: ["Faster FAQ resolution", "Staff time saved on repeat questions", "WhatsApp handoff preserved"],
+      beforePoints: ["Manual replies only", "No structured menu Q&A", "Leads lost after hours"],
+      afterPoints: ["Instant menu/hours answers", "Smart escalation paths", "Brand-consistent tone"],
+    }),
   },
   {
     title: "Clinic & Healthcare",
     hint: "Doctors, timings, appointment requests",
+    cardLine: "Healthcare demo — credible layout + appointment enquiries",
     gradient: "from-cyan-500/20 to-teal-500/10",
     emoji: "🏥",
     mockup: "clinic",
     featureBullets: ["Doctor profiles", "Appointment requests", "Mobile friendly"],
     demoHref: "/portfolio/clinic-healthcare-showcase",
-    ctaLabel: "View Live Project →",
+    ctaLabel: "Open interactive demo →",
     tag: "Website",
+    categories: ["business-websites"],
+    badge: "Interactive demo",
+    techStack: ["React", "Forms", "Trust UX", "SEO"],
+    resultHighlight: "Patient trust and appointment paths on mobile",
     details: "Clean layouts that feel credible — services, doctors, and secure enquiry flows.",
+    caseStudy: defaultCaseStudy({
+      problem: "Clinics lost patient trust online when sites looked outdated or hid appointment options.",
+      solution: "Credible healthcare layout with doctor profiles, services, and secure appointment enquiry flows.",
+    }),
   },
   {
     title: "Local Services Lead Site",
     hint: "Coaching, salons, CA firms — calls & WhatsApp",
+    cardLine: "Local services demo — high-intent CTAs for coaches & pros",
     gradient: "from-amber-500/20 to-yellow-500/10",
     emoji: "📍",
     mockup: "local",
     featureBullets: ["Strong CTAs", "WhatsApp contact", "Local-ready pages"],
     demoHref: "/portfolio/local-services-leads-showcase",
-    ctaLabel: "View Live Project →",
+    ctaLabel: "Open interactive demo →",
     tag: "Website",
-    details:
-      "One-page or multi-page funnels with strong CTAs for Jamshedpur and nearby local search.",
+    categories: ["business-websites"],
+    badge: "Interactive demo",
+    techStack: ["React", "Landing UX", "Local SEO"],
+    resultHighlight: "One-page funnels engineered for calls and WhatsApp",
+    details: "Multi-page funnels with strong CTAs for local search and professional services.",
+    caseStudy: defaultCaseStudy({
+      problem: "Coaches and local pros depended on Instagram alone — no structured funnel to capture leads.",
+      solution: "Lead-focused site with service clarity, social proof placeholders, and WhatsApp-first contact.",
+    }),
+  },
+  {
+    title: "React Product UI Demo",
+    hint: "SaaS-style screens, motion & component systems",
+    cardLine: "Startup UI demo — React product screens & interaction patterns",
+    gradient: "from-indigo-500/20 to-violet-500/10",
+    emoji: "⚛️",
+    mockup: "generic",
+    featureBullets: ["Component patterns", "Dashboard-ready UI", "Responsive layouts"],
+    demoHref: "/portfolio/react-video-demo",
+    ctaLabel: "Open product demo →",
+    tag: "Product UI",
+    categories: ["startup-saas", "react-nextjs"],
+    badge: "Interactive demo",
+    techStack: ["React.js", "TypeScript", "UI systems", "Motion"],
+    resultHighlight: "Product-grade frontend patterns for SaaS & startup MVPs",
+    details: "Showcase of modern React UI patterns for founders who need investor-ready product screens.",
+    caseStudy: defaultCaseStudy({
+      problem: "Startups needed polished UI fast without hiring a full product team.",
+      solution: "React-based product demo illustrating scalable components, states, and dashboard-ready layouts.",
+      results: ["Reusable UI patterns", "Investor-demo ready screens", "Maintainable component structure"],
+    }),
   },
 ];
 
-export const portfolioPageItems: PortfolioItem[] = [
-  ...homePortfolioItems.map((item) => ({
-    ...item,
-    details:
-      item.title === "Shrishti Cloud Kitchen"
-        ? restaurantDetails
-        : item.title === "School Website"
-          ? schoolDetails
-          : item.title === "Gym Website"
-            ? gymDetails
-            : item.title === "Ecommerce Store"
-              ? ecommerceDetails
-              : "Tailored layout and flows for your industry.",
-  })),
-  ...portfolioExtras,
-];
+export const portfolioPageItems: PortfolioItem[] = [...homePortfolioItems, ...portfolioExtras];
 
-/** URL segment for root `/gym-website` etc. — generateStaticParams + card anchors; CTAs prefer `demoHref` showcases */
 export function slugifyPortfolioTitle(title: string): string {
   return title
     .toLowerCase()
@@ -180,4 +298,9 @@ export function slugifyPortfolioTitle(title: string): string {
 
 export function getPortfolioPageItemBySlug(slug: string): PortfolioItem | undefined {
   return portfolioPageItems.find((item) => slugifyPortfolioTitle(item.title) === slug);
+}
+
+export function filterPortfolioByCategory(items: PortfolioItem[], category: PortfolioCategoryId): PortfolioItem[] {
+  if (category === "all") return items;
+  return items.filter((item) => item.categories.includes(category));
 }

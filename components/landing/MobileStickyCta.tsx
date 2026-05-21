@@ -1,0 +1,39 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { whatsappUrl } from "@/lib/constants";
+import { MOBILE_STICKY_CTA, WHATSAPP_MESSAGES } from "@/lib/leadGen";
+
+/** Mobile-only sticky conversion bar — homepage & key pages */
+export default function MobileStickyCta() {
+  const pathname = usePathname();
+  const showOn = pathname === "/" || pathname === "/contact" || pathname === "/portfolio";
+  if (!showOn) return null;
+
+  return (
+    <div
+      className="fixed inset-x-0 bottom-0 z-[55] border-t border-border-primary bg-bg-card/95 px-4 py-2.5 backdrop-blur-md dark:border-dark-border-primary dark:bg-dark-bg-card/95 md:hidden"
+      role="region"
+      aria-label="Quick contact"
+    >
+      <div className="mx-auto flex max-w-lg gap-2">
+        <Link
+          href="/contact?intent=consultation&source=mobile-sticky"
+          className="flex flex-1 items-center justify-center rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] py-2.5 text-sm font-semibold text-white"
+        >
+          {MOBILE_STICKY_CTA.consultation}
+        </Link>
+        <Link
+          href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-1 items-center justify-center rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 py-2.5 text-sm font-semibold text-[#128C7E] dark:text-[#25D366]"
+        >
+          {MOBILE_STICKY_CTA.whatsapp}
+        </Link>
+      </div>
+    </div>
+  );
+}

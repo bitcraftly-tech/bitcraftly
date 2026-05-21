@@ -3,7 +3,15 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
+import CalendlyEmbed from "@/components/landing/CalendlyEmbed";
 import { CONTAINER, PRIMARY_LOCATION, whatsappUrl, WHATSAPP_HOURS } from "@/lib/constants";
+import {
+  BUDGET_OPTIONS,
+  CONTACT_FORM,
+  TIMELINE_OPTIONS,
+  TRUST_INQUIRY,
+  WHATSAPP_MESSAGES,
+} from "@/lib/leadGen";
 import { showErrorAlert, showSuccessAlert } from "@/lib/sweetAlert";
 
 type ContactFormValues = {
@@ -12,6 +20,9 @@ type ContactFormValues = {
   businessType: string;
   phone: string;
   email: string;
+  websiteUrl: string;
+  budgetRange: string;
+  timeline: string;
   message: string;
   source: string;
 };
@@ -19,15 +30,28 @@ type ContactFormValues = {
 type FieldName = keyof ContactFormValues;
 type FieldErrors = Partial<Record<FieldName, string>>;
 
-const businessTypes = ["Restaurant", "Salon", "Clinic", "Gym", "Shop", "Other"];
-const sources = ["WhatsApp", "Google", "Friend", "Social Media", "Smart Parking CTA", "Pricing Card CTA", "Other"];
+const businessTypes = ["Restaurant", "Clinic", "Gym", "Shop", "Startup", "SaaS", "Coach", "Agency", "Salon", "Other"];
+const sources = [
+  "WhatsApp",
+  "Google",
+  "Friend",
+  "Social Media",
+  "Website Audit CTA",
+  "Free Consultation CTA",
+  "Pricing Card CTA",
+  "Smart Parking CTA",
+  "Other",
+];
 
 const initialValues: ContactFormValues = {
   fullName: "",
   businessName: "",
-  businessType: "Restaurant",
+  businessType: "Startup",
   phone: "",
   email: "",
+  websiteUrl: "",
+  budgetRange: BUDGET_OPTIONS[0],
+  timeline: TIMELINE_OPTIONS[3],
   message: "",
   source: "WhatsApp",
 };
@@ -47,6 +71,7 @@ export default function ContactContent() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [requestType, setRequestType] = useState<string>("");
+  const [submitLabel, setSubmitLabel] = useState<string>(CONTACT_FORM.submitCta);
 
   const timeline = useMemo(
     () => [
@@ -69,8 +94,23 @@ export default function ContactContent() {
     if (!service && !intent && !source) return;
     if (serviceRaw) setRequestType(serviceRaw);
 
+    if (intent === "audit") {
+      setSubmitLabel(CONTACT_FORM.submitAuditCta);
+    } else if (intent === "consultation") {
+      setSubmitLabel(CONTACT_FORM.submitCta);
+    }
+
     setValues((prev) => {
       const next = { ...prev };
+
+      if (intent === "audit" && !next.message.trim()) {
+        next.message =
+          "I'd like a free website audit. My current website URL is: \n\nMain goals: ";
+      }
+
+      if (intent === "consultation" && !next.message.trim()) {
+        next.message = "I'd like a free 15-minute consultation about my website/project.\n\nWhat I need: ";
+      }
 
       if (service.includes("smart") || service.includes("parking")) {
         next.businessType = "Other";
@@ -98,6 +138,10 @@ export default function ContactContent() {
         next.source = "Smart Parking CTA";
       } else if (source === "pricing-card") {
         next.source = "Pricing Card CTA";
+      } else if (source.includes("audit")) {
+        next.source = "Website Audit CTA";
+      } else if (source.includes("consultation") || source.includes("free-consultation")) {
+        next.source = "Free Consultation CTA";
       }
 
       return next;
@@ -155,6 +199,16 @@ export default function ContactContent() {
     }
 
     setIsSubmitting(true);
+    const extraLines = [
+      values.websiteUrl.trim() ? `Website: ${values.websiteUrl.trim()}` : "",
+      `Budget: ${values.budgetRange}`,
+      `Timeline: ${values.timeline}`,
+      requestType ? `Service/Request: ${requestType}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const fullMessage = [values.message.trim(), extraLines].filter(Boolean).join("\n\n");
+
     try {
       const response = await fetch(`${API_URL}/api/contact/`, {
         method: "POST",
@@ -167,7 +221,7 @@ export default function ContactContent() {
           business_type: values.businessType,
           phone: values.phone,
           email: values.email || undefined,
-          message: values.message || undefined,
+          message: fullMessage || undefined,
           source: values.source || undefined,
         }),
       });
@@ -194,18 +248,16 @@ export default function ContactContent() {
   };
 
   return (
-    <main className="bg-bg-primary py-5 dark:bg-dark-bg-primary md:py-7">
+    <main className="bg-bg-primary py-5 pb-24 dark:bg-dark-bg-primary md:py-7 md:pb-7">
       <div className={`${CONTAINER} grid grid-cols-1 gap-12 md:grid-cols-5`}>
         <section className="md:col-span-2">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">Get in touch</p>
           <h1 className="mt-3 font-[var(--font-playfair)] text-4xl text-text-primary dark:text-dark-text-primary sm:text-5xl">
-            Let's talk
+            {CONTACT_FORM.headline}
           </h1>
-          <p className="mt-4 text-sm leading-7 text-text-secondary dark:text-dark-text-secondary">
-            Need a demo or have questions? We usually respond within 24 hours.
-          </p>
+          <p className="mt-4 text-sm leading-7 text-text-secondary dark:text-dark-text-secondary">{CONTACT_FORM.subheadline}</p>
           <p className="mt-3 text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
-            Zarurat ho to message Hindi–English mix mein likh sakte ho — padh kar hi reply karte hain.
+            Hindi–English mix message bilkul theek hai — padh kar hi reply karte hain.
           </p>
 
           <div className="mt-7 space-y-3">
@@ -218,12 +270,12 @@ export default function ContactContent() {
               <div>
                 <p className="text-xs uppercase tracking-wide text-text-tertiary dark:text-dark-text-tertiary">WhatsApp</p>
                 <a
-                  href={whatsappUrl()}
+                  href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm font-medium text-text-primary hover:text-accent-primary dark:text-dark-text-primary"
                 >
-                  +91 96677 10954
+                  +91 96677 10954 — Message Sanjay
                 </a>
                 <p className="mt-0.5 text-xs text-text-tertiary dark:text-dark-text-tertiary">{WHATSAPP_HOURS}</p>
               </div>
@@ -265,6 +317,20 @@ export default function ContactContent() {
           </div>
 
           <div className="mt-7 rounded-lg border border-border-primary bg-bg-card p-5 dark:border-dark-border-primary dark:bg-dark-bg-card">
+            <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">{TRUST_INQUIRY.title}</p>
+            <ul className="mt-3 space-y-2">
+              {TRUST_INQUIRY.points.map((p) => (
+                <li key={p} className="flex items-start gap-2 text-xs text-text-secondary dark:text-dark-text-secondary">
+                  <span className="text-emerald-600 dark:text-emerald-400" aria-hidden>
+                    ✔
+                  </span>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-5 rounded-lg border border-border-primary bg-bg-card p-5 dark:border-dark-border-primary dark:bg-dark-bg-card">
             <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">What happens next?</p>
             <div className="mt-4 space-y-3">
               {timeline.map((step, index) => (
@@ -280,6 +346,7 @@ export default function ContactContent() {
         </section>
 
         <section className="md:col-span-3">
+          <CalendlyEmbed className="mb-6" />
           <div className="w-full rounded-lg border border-border-primary bg-bg-card p-5 dark:border-dark-border-primary dark:bg-dark-bg-card sm:p-7">
             {requestType ? (
               <p className="mb-4 inline-flex rounded-full border border-accent-primary/30 bg-accent-primary/10 px-3 py-1 text-xs font-semibold text-accent-primary">
@@ -367,6 +434,20 @@ export default function ContactContent() {
                 </div>
 
                 <div className="mb-5 flex flex-col gap-1">
+                  <label className="text-sm font-medium text-text-primary dark:text-dark-text-primary" htmlFor="websiteUrl">
+                    Current website URL (optional)
+                  </label>
+                  <input
+                    id="websiteUrl"
+                    type="url"
+                    value={values.websiteUrl}
+                    onChange={(event) => handleChange("websiteUrl", event.target.value)}
+                    placeholder="https://yourbusiness.com"
+                    className="h-11 w-full rounded-lg border border-border-primary bg-bg-card px-4 text-sm text-text-primary outline-none transition-colors placeholder:text-text-tertiary focus:border-accent-primary dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary dark:focus:border-accent-primary"
+                  />
+                </div>
+
+                <div className="mb-5 flex flex-col gap-1">
                   <label className="text-sm font-medium text-text-primary dark:text-dark-text-primary" htmlFor="email">
                     Email (optional)
                   </label>
@@ -382,6 +463,43 @@ export default function ContactContent() {
                     }`}
                   />
                   {errors.email ? <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">{errors.email}</p> : null}
+                </div>
+
+                <div className="mb-5 grid gap-4 sm:grid-cols-2">
+                  <div className="flex flex-col gap-1">
+                    <label className="text-sm font-medium text-text-primary dark:text-dark-text-primary" htmlFor="budgetRange">
+                      Budget range
+                    </label>
+                    <select
+                      id="budgetRange"
+                      value={values.budgetRange}
+                      onChange={(event) => handleChange("budgetRange", event.target.value)}
+                      className="h-11 w-full rounded-lg border border-border-primary bg-bg-card px-4 text-sm text-text-primary outline-none dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary"
+                    >
+                      {BUDGET_OPTIONS.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <label className="text-sm font-medium text-text-primary dark:text-dark-text-primary" htmlFor="timeline">
+                      Timeline
+                    </label>
+                    <select
+                      id="timeline"
+                      value={values.timeline}
+                      onChange={(event) => handleChange("timeline", event.target.value)}
+                      className="h-11 w-full rounded-lg border border-border-primary bg-bg-card px-4 text-sm text-text-primary outline-none dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary"
+                    >
+                      {TIMELINE_OPTIONS.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 <div className="mb-5 flex flex-col gap-1">
@@ -430,10 +548,21 @@ export default function ContactContent() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="mt-1 h-12 w-full rounded-lg bg-[#1A1916] px-4 text-sm font-semibold text-white transition hover:bg-[#1A1916]/92 disabled:cursor-not-allowed disabled:opacity-70 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+                  className="mt-1 h-12 w-full rounded-lg bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-4 text-sm font-semibold text-white transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  {isSubmitting ? "Sending..." : "Send Message →"}
+                  {isSubmitting ? "Sending..." : submitLabel}
                 </button>
+                <p className="mt-3 text-center text-xs text-text-tertiary dark:text-dark-text-tertiary">{CONTACT_FORM.privacyNote}</p>
+                <p className="mt-2 text-center text-sm">
+                  <a
+                    href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
+                  >
+                    {CONTACT_FORM.whatsappAlternative} →
+                  </a>
+                </p>
             </form>
           </div>
         </section>

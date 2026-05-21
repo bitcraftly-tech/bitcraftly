@@ -2,11 +2,12 @@ import Link from "next/link";
 
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
+import PortfolioCaseStudy from "@/components/landing/PortfolioCaseStudy";
 import PortfolioProjectCard from "@/components/landing/PortfolioProjectCard";
 import { CONTAINER } from "@/lib/constants";
 import type { PortfolioItem } from "@/lib/portfolioItems";
 
-/** Root slug pages e.g. `/gym-website` — same chrome as `/portfolio/...` detail view */
+/** Root slug pages e.g. `/gym-website` — portfolio detail + case study */
 export default function PortfolioProjectDetailShell({ item }: { item: PortfolioItem }) {
   return (
     <div className="flex min-h-screen flex-col">
@@ -34,9 +35,15 @@ export default function PortfolioProjectDetailShell({ item }: { item: PortfolioI
             >
               ← All portfolio
             </Link>
-            <div className="mx-auto mt-8 max-w-lg lg:max-w-xl">
+            <p className="mt-6 text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">Case study</p>
+            <h1 className="mt-2 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">{item.title}</h1>
+            <p className="mt-2 max-w-2xl text-sm font-medium text-text-secondary dark:text-dark-text-secondary">{item.cardLine}</p>
+
+            <div className="mt-8 max-w-lg lg:max-w-xl">
               <PortfolioProjectCard item={item} showDetails />
             </div>
+
+            <PortfolioCaseStudy item={item} />
           </section>
         </div>
       </main>

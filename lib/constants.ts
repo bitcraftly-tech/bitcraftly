@@ -1,4 +1,5 @@
 import { BRAND, FOUNDER } from "@/lib/siteContent";
+import { WHATSAPP_MESSAGES } from "@/lib/leadGen";
 
 export const CONTAINER = "mx-auto w-full max-w-7xl px-6 lg:px-12";
 
@@ -9,7 +10,7 @@ export const SUPPORT_WHATSAPP_E164 = "919667710954";
 
 export const PRIMARY_LOCATION = BRAND.location;
 export const WHATSAPP_HOURS = BRAND.whatsappHours;
-export const WHATSAPP_DEFAULT_MESSAGE = BRAND.whatsappMessage;
+export const WHATSAPP_DEFAULT_MESSAGE = WHATSAPP_MESSAGES.default;
 
 /** Override via `NEXT_PUBLIC_FOUNDER_LINKEDIN_URL` in .env.local */
 export const FOUNDER_LINKEDIN_URL =

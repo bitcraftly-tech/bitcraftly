@@ -8,8 +8,9 @@ import { CONTAINER } from "@/lib/constants";
 import ContactContent from "./ContactContent";
 
 export const metadata: Metadata = {
-  title: "Contact | Bitcraftly",
-  description: "Talk to Bitcraftly for demos, onboarding help, and growth-focused digital systems for local businesses.",
+  title: "Contact | Free Consultation & Website Audit | Bitcraftly",
+  description:
+    "Book a free 15-minute consultation or request a free website audit with Sanjay Kr. Singh — React, Next.js & AI-powered web solutions. Ghaziabad, India & remote.",
 };
 
 export default function ContactPage() {

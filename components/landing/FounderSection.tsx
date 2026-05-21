@@ -1,44 +1,114 @@
 import Link from "next/link";
 
 import FounderAvatar from "@/components/landing/FounderAvatar";
-import { CONTAINER, FOUNDER_LINKEDIN_URL } from "@/lib/constants";
+import { CONTAINER, FOUNDER_LINKEDIN_URL, whatsappUrl } from "@/lib/constants";
 import { FOUNDER } from "@/lib/siteContent";
 
 export default function FounderSection() {
   return (
     <section id="founder" className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-6 dark:border-dark-border-primary lg:py-8`}>
-      <div className="grid items-start gap-8 rounded-2xl border border-border-primary bg-bg-card p-6 dark:border-dark-border-primary dark:bg-dark-bg-card md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
-        <FounderAvatar size="lg" className="mx-auto md:mx-0" />
-        <div className="text-center md:text-left">
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
-            Founder-led studio
-          </p>
-          <h2 className="mt-2 font-[var(--font-playfair)] text-2xl text-text-primary dark:text-dark-text-primary sm:text-3xl">
-            {FOUNDER.name}
-          </h2>
-          <p className="mt-1 text-sm font-medium text-indigo-600 dark:text-indigo-400">{FOUNDER.title}</p>
-          <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.bio}</p>
-          <p className="mt-3 text-sm italic leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">{FOUNDER.bioHinglish}</p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 md:justify-start">
-            <Link
-              href="/contact?intent=consultation&source=founder"
-              className="rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-95"
-            >
-              Talk to the founder
-            </Link>
-            <Link href="/team" className="rounded-xl border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary dark:border-dark-border-secondary dark:text-dark-text-primary">
-              About Bitcraftly
-            </Link>
-            {FOUNDER_LINKEDIN_URL ? (
-              <a
-                href={FOUNDER_LINKEDIN_URL}
+      <div className="space-y-6">
+        {/* Main founder card */}
+        <div className="grid items-start gap-8 rounded-2xl border border-border-primary bg-bg-card p-6 dark:border-dark-border-primary dark:bg-dark-bg-card md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
+          <FounderAvatar size="lg" className="mx-auto md:mx-0" />
+          <div className="text-center md:text-left">
+            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
+              {FOUNDER.sectionEyebrow}
+            </p>
+            <h2 className="mt-2 font-[var(--font-playfair)] text-2xl leading-snug text-text-primary dark:text-dark-text-primary sm:text-3xl">
+              {FOUNDER.introHeadline}
+            </h2>
+            <p className="mt-3 text-base font-semibold text-text-primary dark:text-dark-text-primary">{FOUNDER.name}</p>
+            <p className="mt-1 text-sm font-medium text-indigo-600 dark:text-indigo-400">{FOUNDER.title}</p>
+            <p className="mt-1 text-sm font-medium text-text-secondary dark:text-dark-text-secondary">{FOUNDER.shortBio}</p>
+            <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.story}</p>
+            <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.authorityBio}</p>
+            <p className="mt-3 text-sm font-medium text-indigo-600/90 dark:text-indigo-400/90">{FOUNDER.premiumLine}</p>
+            <p className="mt-3 text-sm italic leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">{FOUNDER.bioHinglish}</p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 md:justify-start">
+              <Link
+                href="/contact?intent=consultation&source=founder"
+                className="rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-95"
+              >
+                {FOUNDER.primaryCta}
+              </Link>
+              <Link
+                href={whatsappUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
+                className="rounded-xl border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary dark:border-dark-border-secondary dark:text-dark-text-primary"
               >
-                LinkedIn →
-              </a>
-            ) : null}
+                {FOUNDER.secondaryCta}
+              </Link>
+              {FOUNDER_LINKEDIN_URL ? (
+                <a
+                  href={FOUNDER_LINKEDIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
+                >
+                  LinkedIn →
+                </a>
+              ) : null}
+            </div>
+          </div>
+        </div>
+
+        {/* Why I started */}
+        <div className="rounded-2xl border border-border-primary bg-bg-secondary/40 p-6 dark:border-dark-border-primary dark:bg-dark-bg-secondary/30 md:p-8">
+          <h3 className="font-[var(--font-playfair)] text-xl text-text-primary dark:text-dark-text-primary">{FOUNDER.whyStartedTitle}</h3>
+          <p className="mt-3 max-w-4xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.whyStarted}</p>
+        </div>
+
+        {/* Achievements */}
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {FOUNDER.achievements.map((item) => (
+            <div
+              key={item.label}
+              className="rounded-xl border border-border-primary bg-bg-card p-4 dark:border-dark-border-primary dark:bg-dark-bg-card"
+            >
+              <p className="font-[var(--font-playfair)] text-xl font-semibold text-text-primary dark:text-dark-text-primary">{item.value}</p>
+              <p className="mt-1 text-xs leading-relaxed text-text-secondary dark:text-dark-text-secondary">{item.label}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Trust */}
+        <ul className="grid gap-3 md:grid-cols-3">
+          {FOUNDER.trustPoints.map((point) => (
+            <li
+              key={point}
+              className="flex items-start gap-2 rounded-xl border border-border-primary bg-bg-card p-4 text-sm leading-relaxed text-text-secondary dark:border-dark-border-primary dark:bg-dark-bg-card dark:text-dark-text-secondary"
+            >
+              <span className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden>
+                ✔
+              </span>
+              {point}
+            </li>
+          ))}
+        </ul>
+
+        {/* Bottom CTA */}
+        <div className="flex w-full flex-col gap-4 rounded-2xl border border-border-primary bg-bg-card px-6 py-6 dark:border-dark-border-primary dark:bg-dark-bg-card sm:flex-row sm:items-center sm:justify-between sm:px-8">
+          <div className="text-left">
+            <p className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary">{FOUNDER.ctaTitle}</p>
+            <p className="mt-2 max-w-2xl text-sm text-text-secondary dark:text-dark-text-secondary">{FOUNDER.ctaBody}</p>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-3">
+            <Link
+              href="/contact?intent=consultation&source=founder-cta"
+              className="rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-95"
+            >
+              {FOUNDER.primaryCta}
+            </Link>
+            <Link
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-xl border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary dark:border-dark-border-secondary dark:text-dark-text-primary"
+            >
+              {FOUNDER.secondaryCta}
+            </Link>
           </div>
         </div>
       </div>

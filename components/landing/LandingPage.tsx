@@ -8,6 +8,8 @@ import FadeInOnView from "@/components/ui/FadeInOnView";
 const DemoStrip = dynamic(() => import("@/components/landing/DemoStrip"));
 const FounderSection = dynamic(() => import("@/components/landing/FounderSection"));
 const FaqSection = dynamic(() => import("@/components/landing/FaqSection"));
+const WebsiteAuditLeadMagnet = dynamic(() => import("@/components/landing/WebsiteAuditLeadMagnet"));
+const FreeConsultationSection = dynamic(() => import("@/components/landing/FreeConsultationSection"));
 const ServicesGrid = dynamic(() => import("@/components/landing/ServicesGrid"));
 const PortfolioShowcase = dynamic(() => import("@/components/landing/PortfolioShowcase"));
 const IndustriesWeServe = dynamic(() => import("@/components/landing/IndustriesWeServe"));
@@ -36,7 +38,7 @@ type LandingPageProps = {
 
 export default function LandingPage({ sectionId }: LandingPageProps) {
   return (
-    <main className="min-h-screen bg-bg-primary text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary">
+    <main className="min-h-screen bg-bg-primary pb-20 text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary md:pb-0">
       <SectionAutoScroll sectionId={sectionId} />
       <Navbar />
       <FadeInOnView delayMs={30}>
@@ -47,6 +49,9 @@ export default function LandingPage({ sectionId }: LandingPageProps) {
       </FadeInOnView>
       <FadeInOnView delayMs={60}>
         <ServicesGrid />
+      </FadeInOnView>
+      <FadeInOnView delayMs={75}>
+        <WebsiteAuditLeadMagnet />
       </FadeInOnView>
       <FadeInOnView delayMs={90}>
         <PortfolioShowcase />
@@ -71,6 +76,9 @@ export default function LandingPage({ sectionId }: LandingPageProps) {
       </FadeInOnView>
       <FadeInOnView delayMs={218}>
         <FaqSection />
+      </FadeInOnView>
+      <FadeInOnView delayMs={230}>
+        <FreeConsultationSection />
       </FadeInOnView>
       <FadeInOnView delayMs={240}>
         <FinalCTA />

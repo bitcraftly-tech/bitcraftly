@@ -93,13 +93,20 @@ export default function TeamContent() {
           <p className="mt-2 max-w-2xl text-text-secondary dark:text-dark-text-secondary">
             Delivery, architecture, and client communication — one thread, no vendor relay.
           </p>
-          <article className="mt-10 flex max-w-3xl flex-col gap-6 rounded-2xl border border-border-primary bg-bg-card p-6 dark:border-dark-border-primary dark:bg-dark-bg-card sm:flex-row sm:items-start sm:p-8">
+          <article className="mt-10 flex w-full flex-col gap-6 rounded-2xl border border-border-primary bg-bg-card p-6 dark:border-dark-border-primary dark:bg-dark-bg-card sm:flex-row sm:items-start sm:p-8">
             <FounderAvatar size="md" />
-            <div>
+            <div className="min-w-0 flex-1">
               <h3 className="text-xl font-semibold text-text-primary dark:text-dark-text-primary">{FOUNDER.name}</h3>
               <p className="mt-1 text-sm font-medium text-[#2B5CE6] dark:text-[#7ea0ff]">{FOUNDER.title}</p>
-              <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.bio}</p>
+              <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.story}</p>
+              <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.authorityBio}</p>
+              <h4 className="mt-6 text-sm font-semibold text-text-primary dark:text-dark-text-primary">{FOUNDER.whyStartedTitle}</h4>
+              <p className="mt-2 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.whyStarted}</p>
               <p className="mt-3 text-sm italic leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">{FOUNDER.bioHinglish}</p>
+              <p className="mt-4 rounded-lg border border-border-primary bg-bg-secondary/50 p-3 text-xs leading-relaxed text-text-tertiary dark:border-dark-border-primary dark:bg-dark-bg-secondary/40 dark:text-dark-text-tertiary">
+                <span className="font-semibold text-text-secondary dark:text-dark-text-secondary">LinkedIn summary: </span>
+                {FOUNDER.linkedInSummary}
+              </p>
               <div className="mt-5 flex flex-wrap gap-3">
                 {FOUNDER_LINKEDIN_URL ? (
                   <a

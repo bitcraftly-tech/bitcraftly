@@ -9,9 +9,9 @@ import PortfolioContent from "./PortfolioContent";
 import PortfolioHashRedirect from "./PortfolioHashRedirect";
 
 export const metadata: Metadata = {
-  title: "Portfolio | Bitcraftly",
+  title: "Portfolio | React, Next.js & AI Web Projects | Bitcraftly",
   description:
-    "Explore sample industries we build for — restaurants, schools, gyms, ecommerce, clinics, and local lead sites in Jamshedpur and India.",
+    "Live client work and interactive demos — business websites, startups, ecommerce, and AI-powered experiences built for leads, SEO, and mobile.",
 };
 
 export default function PortfolioPage() {

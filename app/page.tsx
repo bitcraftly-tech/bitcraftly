@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
 
 import LandingPage from "@/components/landing/LandingPage";
+import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
+import { HOME_SEO, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Bitcraftly | React & Next.js Website Development | Ghaziabad & India",
-  description:
-    "Founder-led AI-powered frontend studio — React.js, Next.js websites, redesigns, and business solutions for startups, clinics, gyms, and local brands. Based in Ghaziabad, serving India & remote clients.",
-  keywords: [
-    "React.js Development India",
-    "Next.js Website Development",
-    "Website Development Ghaziabad",
-    "Frontend Architect India",
-    "AI-Powered Website Solutions",
-    "Business Website Development",
-    "Website Redesign Services",
-  ],
+  title: HOME_SEO.title,
+  description: HOME_SEO.description,
+  keywords: [...HOME_SEO.keywords],
+  alternates: { canonical: SITE_URL },
 };
 
 export default function HomePage() {
-  return <LandingPage />;
+  return (
+    <>
+      <OrganizationJsonLd />
+      <LandingPage />
+    </>
+  );
 }

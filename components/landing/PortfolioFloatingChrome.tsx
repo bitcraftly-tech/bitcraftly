@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import FloatingScrollButton from "@/components/landing/FloatingScrollButton";
 import FloatingThemeTumbler from "@/components/landing/FloatingThemeTumbler";
 import FloatingWhatsAppButton from "@/components/landing/FloatingWhatsAppButton";
+import MobileStickyCta from "@/components/landing/MobileStickyCta";
 
 /** Site-wide floating controls — hidden on portfolio showcases (they ship their own chrome). */
 export default function PortfolioFloatingChrome() {
@@ -14,6 +15,7 @@ export default function PortfolioFloatingChrome() {
   return (
     <>
       <FloatingWhatsAppButton />
+      <MobileStickyCta />
       <FloatingScrollButton />
       <FloatingThemeTumbler />
     </>

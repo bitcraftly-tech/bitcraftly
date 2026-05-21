@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { CONTAINER, whatsappUrl } from "@/lib/constants";
-import { BRAND, TRUST_CHECKS } from "@/lib/siteContent";
+import { BRAND, HERO, TRUST_CHECKS } from "@/lib/siteContent";
 
 type NavPill = {
   name: string;
@@ -80,18 +80,19 @@ export default function Hero() {
         <div className="inline-flex items-center gap-2 rounded-full border border-border-primary bg-bg-card px-4 py-2 dark:border-dark-border-primary dark:bg-dark-bg-card">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
           <span className="text-xs font-medium uppercase tracking-[0.1em] text-text-secondary dark:text-dark-text-secondary">
-            {BRAND.tagline} · {BRAND.locationShort}
+            {HERO.badge}
           </span>
         </div>
 
         <h1 className="mt-6 font-[var(--font-playfair)] text-3xl font-semibold leading-tight text-text-primary dark:text-dark-text-primary sm:text-4xl lg:text-5xl">
-          Modern React &amp; Next.js Websites That Turn Visitors Into Leads
+          <span className="sm:hidden">{HERO.mobileHeadline}</span>
+          <span className="hidden sm:inline">{HERO.headline}</span>
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-text-secondary dark:text-dark-text-secondary lg:mx-0 lg:text-lg">
-          {BRAND.positioning} Founder-led delivery for startups, clinics, gyms, coaches, and local businesses across India — and remote clients worldwide.
+          {HERO.subheadline}
         </p>
         <p className="mx-auto mt-3 max-w-2xl text-sm italic leading-relaxed text-text-tertiary dark:text-dark-text-tertiary lg:mx-0">
-          Clear written scope, honest timelines, aur friendly English–Hinglish on WhatsApp — {BRAND.whatsappHours}.
+          {HERO.trustLine} — {BRAND.whatsappHours}.
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
@@ -99,7 +100,7 @@ export default function Hero() {
             href="/contact?intent=consultation&source=hero"
             className="rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-95"
           >
-            Get Free Website Plan
+            {HERO.primaryCta}
           </Link>
           <Link
             href={whatsappUrl()}
@@ -107,7 +108,7 @@ export default function Hero() {
             rel="noreferrer"
             className="rounded-xl border border-border-secondary px-6 py-3 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"
           >
-            Chat on WhatsApp
+            {HERO.secondaryCta}
           </Link>
         </div>
 

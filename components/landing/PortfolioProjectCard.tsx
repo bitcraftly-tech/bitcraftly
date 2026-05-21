@@ -5,6 +5,8 @@ type PortfolioProjectCardProps = {
   item: PortfolioItem;
   /** Extra bottom copy on full portfolio page */
   showDetails?: boolean;
+  /** Link to `/slug` case study page instead of only demo/live URL */
+  linkToCaseStudy?: boolean;
 };
 
 function MockupInterior({ variant }: { variant: PortfolioMockup }) {
@@ -259,13 +261,20 @@ function DualMockupChrome({ variant, emoji }: { variant: PortfolioMockup; emoji:
   );
 }
 
-export default function PortfolioProjectCard({ item, showDetails }: PortfolioProjectCardProps) {
+function badgeClass(badge: PortfolioItem["badge"]) {
+  return badge === "Live client"
+    ? "border-emerald-500/35 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+    : "border-violet-500/30 bg-violet-500/10 text-violet-700 dark:text-violet-300";
+}
+
+export default function PortfolioProjectCard({ item, showDetails, linkToCaseStudy }: PortfolioProjectCardProps) {
   const slug = slugifyPortfolioTitle(item.title);
   const demo = item.demoHref?.trim();
   const live = item.liveUrl?.trim();
+  const caseStudyHref = `/${slug}`;
   /** Explicit demoHref (`/portfolio/...` or external) wins; then live client URL; else legacy root slug. */
   const resolvedHref =
-    demo && (demo.startsWith("http") || demo.startsWith("/")) ? demo : live ? live : `/${slug}`;
+    demo && (demo.startsWith("http") || demo.startsWith("/")) ? demo : live ? live : caseStudyHref;
   const ctaLabel = item.ctaLabel ?? "View Live Project →";
 
   return (
@@ -281,11 +290,26 @@ export default function PortfolioProjectCard({ item, showDetails }: PortfolioPro
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="text-base font-semibold text-text-primary dark:text-dark-text-primary">{item.title}</h3>
+              <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${badgeClass(item.badge)}`}>
+                {item.badge}
+              </span>
               <span className="rounded-full border border-border-secondary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-text-tertiary dark:border-dark-border-secondary dark:text-dark-text-tertiary">
                 {item.tag}
               </span>
             </div>
+            <p className="mt-1 text-xs font-medium text-text-primary/90 dark:text-dark-text-primary/90">{item.cardLine}</p>
             <p className="mt-1 text-xs text-text-secondary dark:text-dark-text-secondary">{item.hint}</p>
+            <p className="mt-2 text-[11px] font-semibold text-indigo-600/90 dark:text-indigo-400/90">{item.resultHighlight}</p>
+            <div className="mt-2 flex flex-wrap gap-1">
+              {item.techStack.slice(0, 4).map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded border border-border-primary/80 bg-bg-secondary/80 px-1.5 py-0.5 text-[10px] font-medium text-text-tertiary dark:border-dark-border-primary/80 dark:bg-dark-bg-secondary/80 dark:text-dark-text-tertiary"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
             {item.featureBullets.length ? (
               <ul className="mt-3 space-y-1">
                 {item.featureBullets.map((line) => (
@@ -310,6 +334,14 @@ export default function PortfolioProjectCard({ item, showDetails }: PortfolioPro
             >
               {ctaLabel}
             </a>
+            {linkToCaseStudy ? (
+              <a
+                href={caseStudyHref}
+                className="inline-flex w-fit text-[11px] font-medium text-text-secondary transition hover:text-text-primary dark:text-dark-text-secondary dark:hover:text-dark-text-primary"
+              >
+                Read case study →
+              </a>
+            ) : null}
             {showDetails && item.details ? (
               <p className="text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">{item.details}</p>
             ) : null}
