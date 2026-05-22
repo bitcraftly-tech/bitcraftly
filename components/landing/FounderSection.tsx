@@ -9,32 +9,38 @@ export default function FounderSection() {
   return (
     <section id="founder" className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-6 dark:border-dark-border-primary lg:py-8`}>
       <div className="space-y-6">
-        {/* Main founder card */}
-        <div className="grid items-start gap-8 rounded-2xl border border-border-primary bg-bg-card p-6 dark:border-dark-border-primary dark:bg-dark-bg-card md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
-          <FounderAvatar size="lg" className="mx-auto md:mx-0" />
-          <div className="text-center md:text-left">
-            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
-              {FOUNDER.sectionEyebrow}
-            </p>
-            <h2 className="mt-2 font-[var(--font-playfair)] text-2xl leading-snug text-text-primary dark:text-dark-text-primary sm:text-3xl">
-              {FOUNDER.introHeadline}
-            </h2>
+        <div className="rounded-2xl border border-border-primary bg-bg-card p-6 dark:border-dark-border-primary dark:bg-dark-bg-card md:p-8">
+          {/* Avatar + headline — single row, no empty left column */}
+          <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:gap-6 sm:text-left">
+            <FounderAvatar size="lg" className="shrink-0" />
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
+                {FOUNDER.sectionEyebrow}
+              </p>
+              <h2 className="mt-2 font-[var(--font-playfair)] text-2xl leading-snug text-text-primary dark:text-dark-text-primary sm:text-3xl">
+                {FOUNDER.introHeadline}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary md:hidden">
+                {FOUNDER.mobileConcise}
+              </p>
+            </div>
+          </div>
 
-            {/* Mobile: concise trust snapshot */}
-            <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary md:hidden">{FOUNDER.mobileConcise}</p>
+          <div className="mt-6 space-y-4 text-center sm:text-left">
+            <p className="text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.introParagraph}</p>
 
-            <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.introParagraph}</p>
+            <div className="rounded-xl border border-border-primary/80 bg-bg-secondary/50 px-4 py-4 dark:border-dark-border-primary/80 dark:bg-dark-bg-secondary/40 sm:px-5">
+              <p className="text-base font-semibold text-text-primary dark:text-dark-text-primary">{FOUNDER.name}</p>
+              <p className="mt-1 text-sm font-medium text-indigo-600 dark:text-indigo-400">{FOUNDER.title}</p>
+              <p className="mt-2 text-sm text-text-secondary dark:text-dark-text-secondary">{FOUNDER.shortBio}</p>
+            </div>
 
-            <p className="mt-4 text-base font-semibold text-text-primary dark:text-dark-text-primary">{FOUNDER.name}</p>
-            <p className="mt-1 text-sm font-medium text-indigo-600 dark:text-indigo-400">{FOUNDER.title}</p>
-            <p className="mt-2 text-sm font-medium text-text-secondary dark:text-dark-text-secondary">{FOUNDER.shortBio}</p>
+            <p className="hidden text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary md:block">{FOUNDER.story}</p>
 
-            <p className="mt-4 hidden text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary md:block">{FOUNDER.story}</p>
-
-            <div className="mt-5 hidden md:block">
+            <div className="hidden rounded-xl border border-border-primary/80 bg-bg-card p-4 dark:border-dark-border-primary/80 dark:bg-dark-bg-card md:block sm:p-5">
               <h3 className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">{FOUNDER.authorityHeadline}</h3>
               <p className="mt-2 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.authorityBio}</p>
-              <ul className="mt-3 space-y-2">
+              <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                 {FOUNDER.authorityBullets.map((bullet) => (
                   <li key={bullet} className="flex items-start gap-2 text-sm text-text-secondary dark:text-dark-text-secondary">
                     <span className="mt-0.5 shrink-0 font-semibold text-indigo-600 dark:text-indigo-400" aria-hidden>
@@ -46,11 +52,11 @@ export default function FounderSection() {
               </ul>
             </div>
 
-            <p className="mt-4 text-sm font-medium text-indigo-600/90 dark:text-indigo-400/90">{FOUNDER.premiumLine}</p>
-            <p className="mt-2 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.premiumPositioning}</p>
-            <p className="mt-3 text-sm italic leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">{FOUNDER.bioHinglish}</p>
+            <p className="text-sm font-medium text-indigo-600/90 dark:text-indigo-400/90">{FOUNDER.premiumLine}</p>
+            <p className="text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.premiumPositioning}</p>
+            <p className="text-sm italic leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">{FOUNDER.bioHinglish}</p>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 md:justify-start">
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-2 sm:justify-start">
               <Link
                 href="/contact?intent=consultation&source=founder"
                 className="rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-95"
@@ -79,13 +85,11 @@ export default function FounderSection() {
           </div>
         </div>
 
-        {/* Why Bitcraftly */}
         <div className="rounded-2xl border border-border-primary bg-bg-secondary/40 p-6 dark:border-dark-border-primary dark:bg-dark-bg-secondary/30 md:p-8">
           <h3 className="font-[var(--font-playfair)] text-xl text-text-primary dark:text-dark-text-primary">{FOUNDER.whyStartedTitle}</h3>
           <p className="mt-3 max-w-4xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{FOUNDER.whyStarted}</p>
         </div>
 
-        {/* Experience highlights */}
         <div>
           <h3 className="font-[var(--font-playfair)] text-lg text-text-primary dark:text-dark-text-primary">Experience & expertise</h3>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -101,7 +105,6 @@ export default function FounderSection() {
           </ul>
         </div>
 
-        {/* Stat strip */}
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {FOUNDER.achievements.map((item) => (
             <div
@@ -114,7 +117,6 @@ export default function FounderSection() {
           ))}
         </div>
 
-        {/* Trust guarantees */}
         <ul className="grid gap-3 sm:grid-cols-2">
           {FOUNDER.trustPoints.map((point) => (
             <li
@@ -129,7 +131,6 @@ export default function FounderSection() {
           ))}
         </ul>
 
-        {/* LinkedIn trust block */}
         {FOUNDER_LINKEDIN_URL ? (
           <div className="rounded-2xl border border-border-primary bg-bg-card p-6 dark:border-dark-border-primary dark:bg-dark-bg-card md:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">LinkedIn</p>
@@ -147,7 +148,6 @@ export default function FounderSection() {
           </div>
         ) : null}
 
-        {/* Bottom CTA */}
         <div className="flex w-full flex-col gap-4 rounded-2xl border border-border-primary bg-bg-card px-6 py-6 dark:border-dark-border-primary dark:bg-dark-bg-card sm:flex-row sm:items-center sm:justify-between sm:px-8">
           <div className="text-left">
             <p className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary">{FOUNDER.ctaTitle}</p>
