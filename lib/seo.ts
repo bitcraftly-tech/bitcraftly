@@ -2,7 +2,7 @@
 
 export const SITE_URL = "https://bitcraftly.com";
 export const SITE_NAME = "Bitcraftly";
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/icon.svg`;
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/icon.png`;
 
 export const HOME_SEO = {
   title: "Bitcraftly | React.js & Next.js Web Development | AI-Powered Frontend | Ghaziabad",
