@@ -27,7 +27,7 @@ export const PROPRIETOR = {
 export const HERO_DESCRIPTION =
   "Explore Char Sahebzade — where modern design and quality construction come together to create exceptional living and commercial spaces.";
 
-export const HERO_IMAGE = "/dayal-builders/projects/hero-char-sahebzade.png";
+export const HERO_IMAGE = "/dayal-builders/showcase-hero.png";
 
 export const ABOUT_INTRO =
   "Mr Surender Pal Singh (Proprietor, M/S Dayal Builders) derives core strength from state-of-the-art engineering techniques and top-quality materials — delivering cost-effective, holistic solutions for residential complexes and business centers across Jamshedpur.";

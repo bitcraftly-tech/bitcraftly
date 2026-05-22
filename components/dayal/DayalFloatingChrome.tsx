@@ -26,14 +26,16 @@ export default function DayalFloatingChrome() {
         </a>
         <a
           href={`tel:${DAYAL.phones[0].tel}`}
-          className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#0b1633] text-white shadow-lg transition hover:scale-105"
+          className="flex h-12 w-12 items-center justify-center rounded-lg text-white shadow-lg transition hover:scale-105"
+          style={{ background: "linear-gradient(145deg, var(--dayal-navy-mid), var(--dayal-navy))" }}
           aria-label="Call us"
         >
           <Phone className="h-5 w-5" />
         </a>
         <a
           href="#contact"
-          className="flex h-12 w-12 items-center justify-center rounded-lg border border-[#c8a46b] bg-white text-[#0b1633] shadow-lg transition hover:scale-105"
+          className="flex h-12 w-12 items-center justify-center rounded-lg border bg-[color:var(--dayal-cream)] shadow-lg transition hover:scale-105"
+          style={{ borderColor: "var(--dayal-gold)", color: "var(--dayal-navy-mid)" }}
           aria-label="Brochure"
         >
           <FileText className="h-5 w-5" />
@@ -50,7 +52,13 @@ export default function DayalFloatingChrome() {
         <MessageCircle className="h-6 w-6" />
       </a>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#0b1633]/10 bg-[#fffdf9]/95 p-3 backdrop-blur-lg lg:hidden">
+      <div
+        className="fixed inset-x-0 bottom-0 z-40 border-t p-3 backdrop-blur-xl lg:hidden"
+        style={{
+          borderColor: "rgba(201, 169, 98, 0.2)",
+          background: "rgba(255, 254, 249, 0.92)",
+        }}
+      >
         <div className="mx-auto flex max-w-lg gap-2">
           <a href="#contact" className="dayal-btn-primary flex-1 text-center text-sm py-2.5">
             <Calendar className="h-4 w-4" />

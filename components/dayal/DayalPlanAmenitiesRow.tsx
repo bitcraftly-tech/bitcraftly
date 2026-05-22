@@ -35,63 +35,52 @@ export default function DayalPlanAmenitiesRow() {
   const legacyImage = ONGOING_PROJECTS[0]?.image;
 
   return (
-    <section className="py-16 lg:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
+    <section className="dayal-section dayal-section-ivory">
+      <div className="dayal-container">
+        <div className="grid gap-14 lg:grid-cols-2 lg:gap-16">
           <DayalReveal>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c8a46b]">
-              Meet Our Legacy
-            </p>
-            <h2 className="dayal-serif mt-2 text-2xl font-semibold text-[#0b1633] sm:text-3xl">
-              Landmarks of Quality Living
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-[#5c6478] sm:text-base">
+            <p className="dayal-eyebrow">Meet Our Legacy</p>
+            <h2 className="dayal-heading dayal-heading-lg mt-5">Landmarks of Quality Living</h2>
+            <div className="dayal-gold-line mt-5" />
+            <p className="mt-6 text-sm leading-relaxed dayal-text-muted sm:text-base">
               Dayal Galaxy, Dayal Vatika, Dayal Enclave, and Teg Bahadur Block have become symbols of
               quality living. With every new venture, we continue to raise the bar in design,
               durability, and community planning.
             </p>
             {legacyImage && (
-              <div className="relative mt-6 aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
-                <Image
-                  src={legacyImage}
-                  alt="Dayal Builders ongoing project"
-                  fill
-                  className="object-cover"
-                  sizes="50vw"
-                />
+              <div className="dayal-image-frame relative mt-8 aspect-[4/3]">
+                <Image src={legacyImage} alt="Dayal Builders project" fill className="object-cover" sizes="50vw" />
               </div>
             )}
             <a
               href="https://www.dayalbuilder.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="dayal-btn-outline mt-6 inline-flex"
+              className="dayal-btn-outline mt-8 inline-flex"
             >
               View More Projects
             </a>
           </DayalReveal>
 
           <DayalReveal delay={0.1} id="amenities">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c8a46b]">
-              Project Amenities
-            </p>
-            <h2 className="dayal-serif mt-2 text-2xl font-semibold text-[#0b1633] sm:text-3xl">
-              Thoughtfully Planned Spaces
-            </h2>
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <p className="dayal-eyebrow">Project Amenities</p>
+            <h2 className="dayal-heading dayal-heading-lg mt-5">Thoughtfully Planned Spaces</h2>
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {AMENITIES.map((item) => {
                 const Icon = ICON_MAP[item.icon] ?? Building;
                 return (
-                  <div
-                    key={item.name}
-                    className="group flex flex-col items-center rounded-xl bg-white px-3 py-5 text-center shadow-sm ring-1 ring-[#0b1633]/5 transition hover:ring-[#c8a46b]/50 hover:shadow-md"
-                  >
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#c8a46b]/40 text-[#c8a46b] transition group-hover:bg-[#c8a46b]/10 group-hover:shadow-[0_0_16px_rgba(200,164,107,0.3)]">
+                  <div key={item.name} className="dayal-amenity-tile group">
+                    <span
+                      className="flex h-11 w-11 items-center justify-center rounded-full transition group-hover:scale-105"
+                      style={{
+                        border: "1px solid rgba(201, 169, 98, 0.4)",
+                        color: "var(--dayal-gold-dark)",
+                        background: "var(--dayal-champagne)",
+                      }}
+                    >
                       <Icon className="h-5 w-5" strokeWidth={1.5} />
                     </span>
-                    <p className="mt-3 text-[11px] font-medium leading-tight text-[#0b1633] sm:text-xs">
-                      {item.name}
-                    </p>
+                    <p className="mt-3 text-[11px] font-semibold leading-tight sm:text-xs">{item.name}</p>
                   </div>
                 );
               })}
