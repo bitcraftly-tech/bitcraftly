@@ -2,16 +2,18 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import {
+  Building2,
   Calendar,
   Download,
+  HardHat,
+  HeartHandshake,
   MapPin,
+  Maximize2,
   Shield,
   Sparkles,
-  HardHat,
-  Building2,
-  HeartHandshake,
+  X,
 } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import DayalReveal from "@/components/dayal/DayalReveal";
 import {
@@ -24,17 +26,120 @@ import {
 
 const TRUST_ICONS = [HardHat, Building2, Sparkles, Shield, HeartHandshake] as const;
 
+type VideoWithWebkit = HTMLVideoElement & {
+  webkitEnterFullscreen?: () => void;
+  webkitDisplayingFullscreen?: boolean;
+};
+
+function isDocumentFullscreen() {
+  const doc = document as Document & { webkitFullscreenElement?: Element | null };
+  return Boolean(doc.fullscreenElement ?? doc.webkitFullscreenElement);
+}
+
 export default function DayalHero() {
   const reduce = useReducedMotion();
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const shellRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    if (reduce) return;
+  const hasVideo = Boolean(HERO_VIDEO) && !reduce;
+
+  const syncFullscreenState = useCallback(() => {
+    const shell = shellRef.current;
+    const video = videoRef.current;
+    const doc = document as Document & { webkitFullscreenElement?: Element | null };
+    const active = doc.fullscreenElement ?? doc.webkitFullscreenElement;
+    const webkitFs = Boolean((video as VideoWithWebkit | null)?.webkitDisplayingFullscreen);
+    setIsFullscreen(Boolean(active === shell || active === video || webkitFs));
+  }, []);
+
+  const resetHeroVideo = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
+    video.controls = false;
     video.muted = true;
     void video.play().catch(() => {});
-  }, [reduce]);
+  }, []);
+
+  useEffect(() => {
+    if (!hasVideo) return;
+    resetHeroVideo();
+  }, [hasVideo, resetHeroVideo]);
+
+  const openFullscreen = useCallback(async () => {
+    const video = videoRef.current;
+    const shell = shellRef.current;
+    if (!video) return;
+
+    video.controls = true;
+    video.muted = false;
+
+    try {
+      await video.play();
+
+      if (shell?.requestFullscreen) {
+        await shell.requestFullscreen();
+        return;
+      }
+
+      if (video.requestFullscreen) {
+        await video.requestFullscreen();
+        return;
+      }
+
+      const webkitVideo = video as VideoWithWebkit;
+      if (webkitVideo.webkitEnterFullscreen) {
+        webkitVideo.webkitEnterFullscreen();
+        setIsFullscreen(true);
+        return;
+      }
+    } catch {
+      resetHeroVideo();
+    }
+  }, [resetHeroVideo]);
+
+  const closeFullscreen = useCallback(
+    async (e: { stopPropagation: () => void }) => {
+      e.stopPropagation();
+      try {
+        if (document.fullscreenElement) {
+          await document.exitFullscreen();
+        }
+      } catch {
+        // ignore
+      }
+      resetHeroVideo();
+    },
+    [resetHeroVideo]
+  );
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const onFullscreenChange = () => {
+      syncFullscreenState();
+      if (!isDocumentFullscreen()) {
+        const webkitVideo = video as VideoWithWebkit;
+        if (!webkitVideo.webkitDisplayingFullscreen) {
+          resetHeroVideo();
+        }
+      }
+    };
+
+    const onWebkitEnd = () => {
+      syncFullscreenState();
+      resetHeroVideo();
+    };
+
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    video.addEventListener("webkitendfullscreen", onWebkitEnd);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
+      video.removeEventListener("webkitendfullscreen", onWebkitEnd);
+    };
+  }, [hasVideo, resetHeroVideo, syncFullscreenState]);
 
   return (
     <section id="home" className="relative overflow-hidden pt-24 pb-16 lg:pt-28 lg:pb-24">
@@ -102,32 +207,78 @@ export default function DayalHero() {
         </DayalReveal>
 
         <DayalReveal delay={0.15} className="relative">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl shadow-[#0b1633]/20 ring-1 ring-[#0b1633]/10">
-            {reduce || !HERO_VIDEO ? (
-              // eslint-disable-next-line @next/next/no-img-element
+          {hasVideo ? (
+            <div className="overflow-hidden rounded-2xl shadow-2xl shadow-[#0b1633]/20 ring-1 ring-[#0b1633]/10">
+              <div
+                ref={shellRef}
+                className="dayal-hero-video-shell group relative aspect-[4/3] cursor-pointer overflow-hidden"
+                role="button"
+                tabIndex={0}
+                aria-label={
+                  isFullscreen
+                    ? "Char Sahebzade video fullscreen"
+                    : "Play Char Sahebzade video in fullscreen"
+                }
+                onClick={() => {
+                  if (!isFullscreen) void openFullscreen();
+                }}
+                onKeyDown={(e) => {
+                  if (isFullscreen) return;
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    void openFullscreen();
+                  }
+                }}
+              >
+                <video
+                  ref={videoRef}
+                  className="dayal-hero-video h-full w-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  poster={HERO_VIDEO_POSTER}
+                  aria-label="Dayal Builders — Char Sahebzade"
+                >
+                  <source src={HERO_VIDEO} type="video/mp4" />
+                </video>
+                <div
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#0b1633]/50 via-transparent to-transparent"
+                  aria-hidden
+                />
+                {isFullscreen ? (
+                  <button
+                    type="button"
+                    onClick={(e) => void closeFullscreen(e)}
+                    className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-lg bg-[#c8a46b] text-[#0b1633] shadow-lg transition hover:bg-[#d4b57d]"
+                    aria-label="Close fullscreen video"
+                  >
+                    <X className="h-5 w-5" aria-hidden />
+                  </button>
+                ) : (
+                  <span className="pointer-events-none absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-lg bg-black/50 text-white backdrop-blur-sm">
+                    <Maximize2 className="h-4 w-4" aria-hidden />
+                  </span>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl shadow-[#0b1633]/20 ring-1 ring-[#0b1633]/10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={HERO_VIDEO_POSTER}
                 alt="Dayal Builders — Char Sahebzade"
                 className="h-full w-full object-cover"
               />
-            ) : (
-              <video
-                ref={videoRef}
-                className="h-full w-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                poster={HERO_VIDEO_POSTER}
-                aria-label="Dayal Builders — Char Sahebzade"
-              >
-                <source src={HERO_VIDEO} type="video/mp4" />
-              </video>
-            )}
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#0b1633]/50 via-transparent to-transparent" />
-          </div>
-          <div className="absolute -bottom-4 -left-4 hidden rounded-xl bg-white px-5 py-4 shadow-xl sm:block">
+              <div
+                className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#0b1633]/50 via-transparent to-transparent"
+                aria-hidden
+              />
+            </div>
+          )}
+
+          <div className="absolute -bottom-4 -left-4 z-10 hidden rounded-xl bg-white px-5 py-4 shadow-xl sm:block">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#c8a46b]">Since</p>
             <p className="dayal-serif text-lg font-semibold text-[#0b1633]">Jamshedpur</p>
           </div>
