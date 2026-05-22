@@ -20,9 +20,9 @@ export default function PortfolioPage() {
       <Navbar />
       <main className="flex-1">
         <PortfolioHashRedirect />
-        <section className="border-b border-border-primary bg-bg-card py-1.5 dark:border-dark-border-primary dark:bg-dark-bg-card">
-          <div className={`${CONTAINER} text-xs text-text-tertiary dark:text-dark-text-tertiary`}>
-            <ShowcaseLink href="/" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
+        <section className="border-b border-[#e8ecef] bg-white py-1.5">
+          <div className={`${CONTAINER} text-xs text-[#95a5a6]`}>
+            <ShowcaseLink href="/" className="hover:text-[#7f8c8d] hover:underline">
               Home
             </ShowcaseLink>
             <span className="px-2">/</span> Portfolio

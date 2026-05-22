@@ -1,6 +1,24 @@
 import type { PortfolioItem, PortfolioProjectBadge } from "@/lib/portfolioItems";
 import type { PortfolioFocusType } from "@/lib/portfolioContent";
 
+/** Uppercase label for showcase cards */
+export function showcaseBadgeLabel(item: PortfolioItem): string {
+  if (item.projectFocus === "AI-powered" || item.tag === "AI") return "AI Powered";
+  if (item.badge === "Live client") return "Live Client";
+  return "Interactive Demo";
+}
+
+/** Light-theme card badge colors */
+export function projectBadgeClassesLight(item: PortfolioItem): string {
+  if (item.projectFocus === "AI-powered" || item.tag === "AI") {
+    return "border-[#27ae60]/30 bg-[#2ecc71]/10 text-[#27ae60]";
+  }
+  if (item.badge === "Live client") {
+    return "border-[#f39c12]/35 bg-[#f39c12]/10 text-[#e67e22]";
+  }
+  return "border-[#9b59b6]/30 bg-[#9b59b6]/10 text-[#8e44ad]";
+}
+
 /** Live vs interactive demo badge */
 export function projectBadgeClasses(badge: PortfolioProjectBadge): string {
   return badge === "Live client"
@@ -36,6 +54,9 @@ export function techStackBadgeClasses(tech: string): string {
   if (t.includes("react")) {
     return "border-[#3498db]/35 bg-[#3498db]/8 text-[#2980b9] dark:border-[#3498db]/40 dark:bg-[#3498db]/12 dark:text-[#85c1e9]";
   }
+  if (t.includes("openai")) {
+    return "border-[#e91e63]/30 bg-[#fd79a8]/12 text-[#d63031]";
+  }
   if (t.includes("ai") || t.includes("chat") || t.includes("automation")) {
     return "border-[#8e44ad]/38 bg-[#9b59b6]/10 text-[#8e44ad] dark:border-[#8e44ad]/42 dark:bg-[#8e44ad]/14 dark:text-[#d2b4de]";
   }
@@ -45,8 +66,11 @@ export function techStackBadgeClasses(tech: string): string {
   if (t.includes("tailwind")) {
     return "border-[#1abc9c]/35 bg-[#1abc9c]/10 text-[#16a085] dark:text-[#48c9b0]";
   }
-  if (t.includes("node")) {
+  if (t.includes("node") || t.includes("mongo")) {
     return "border-[#27ae60]/35 bg-[#2ecc71]/8 text-[#27ae60] dark:text-[#58d68d]";
+  }
+  if (t.includes("stripe") || t.includes("prisma") || t.includes("postgres")) {
+    return "border-[#3498db]/30 bg-[#3498db]/8 text-[#2980b9]";
   }
   if (t.includes("redux")) {
     return "border-[#8e44ad]/35 bg-[#9b59b6]/10 text-[#8e44ad] dark:text-[#c39bd3]";

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+import BitcraftlyLogoMark from "@/components/brand/BitcraftlyLogoMark";
 import { CONTAINER, FOUNDER_LINKEDIN_URL, PRIMARY_LOCATION, whatsappUrl, WHATSAPP_HOURS } from "@/lib/constants";
 import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { BRAND } from "@/lib/siteContent";
@@ -28,17 +29,6 @@ function NavArrowBullet() {
   );
 }
 
-function LogoMark() {
-  return (
-    <div className="grid h-7 w-7 grid-cols-2 gap-1 rounded-md border border-border-primary p-1 dark:border-dark-border-primary">
-      <span className="rounded-sm bg-[#2B5CE6]" />
-      <span className="rounded-sm bg-text-primary dark:bg-dark-text-primary" />
-      <span className="rounded-sm bg-text-primary dark:bg-dark-text-primary" />
-      <span className="rounded-sm bg-[#2B5CE6]" />
-    </div>
-  );
-}
-
 export default function Footer() {
   const router = useRouter();
 
@@ -60,7 +50,7 @@ export default function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4 md:gap-8 md:items-start lg:gap-12">
           <div className="max-w-sm md:max-w-none">
             <div className="flex items-start gap-3">
-              <LogoMark />
+              <BitcraftlyLogoMark size="xs" />
               <span className="flex min-w-0 flex-col leading-tight">
                 <span className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary">Bitcraftly</span>
               </span>

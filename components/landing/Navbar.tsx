@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
+import BitcraftlyLogoMark from "@/components/brand/BitcraftlyLogoMark";
 import NavbarProfileMenu from "@/components/landing/NavbarProfileMenu";
 import { CONTAINER } from "@/lib/constants";
 
@@ -15,17 +16,6 @@ const navLinks = [
   { label: "Mobile Apps", targetId: "mobile-apps" },
   { label: "Pricing", targetId: "fast-packages" },
 ];
-
-function LogoMark() {
-  return (
-    <div className="grid h-8 w-8 grid-cols-2 gap-1 rounded-md border border-border-primary p-1 dark:border-dark-border-primary">
-      <span className="rounded-sm bg-[#2B5CE6]" />
-      <span className="rounded-sm bg-text-primary dark:bg-dark-text-primary" />
-      <span className="rounded-sm bg-text-primary dark:bg-dark-text-primary" />
-      <span className="rounded-sm bg-[#2B5CE6]" />
-    </div>
-  );
-}
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -72,7 +62,7 @@ export default function Navbar() {
           className="flex items-center gap-2"
           title="Bitcraftly — React & Next.js · AI-Powered Frontend Solutions"
         >
-          <LogoMark />
+          <BitcraftlyLogoMark size="nav" />
           <span className="flex flex-col leading-tight">
             <span className="font-[var(--font-playfair)] text-xl font-semibold text-text-primary dark:text-dark-text-primary">
               Bitcraftly

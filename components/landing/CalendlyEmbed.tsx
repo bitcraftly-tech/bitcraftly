@@ -1,4 +1,8 @@
+import Link from "next/link";
+
+import { whatsappUrl } from "@/lib/constants";
 import { CALENDLY_URL } from "@/lib/leadGen";
+import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 
 type CalendlyEmbedProps = {
   className?: string;
@@ -9,11 +13,34 @@ export default function CalendlyEmbed({ className = "" }: CalendlyEmbedProps) {
   if (!CALENDLY_URL) {
     return (
       <div
-        className={`rounded-xl border border-dashed border-border-primary bg-bg-secondary/30 px-4 py-6 text-center dark:border-dark-border-primary dark:bg-dark-bg-secondary/20 ${className}`}
+        className={`w-full rounded-xl border border-border-primary bg-bg-card px-5 py-6 dark:border-dark-border-primary dark:bg-dark-bg-card sm:px-6 sm:py-7 ${className}`}
       >
-        <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Prefer to pick a time slot?</p>
-        <p className="mt-2 text-xs text-text-tertiary dark:text-dark-text-tertiary">
-          Add your Calendly link in <code className="text-[11px]">NEXT_PUBLIC_CALENDLY_URL</code> — embed appears here automatically.
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Prefer to pick a time slot?</p>
+            <p className="mt-1.5 text-xs leading-relaxed text-text-secondary dark:text-dark-text-secondary">
+              Book a free 15-minute consultation — or message on WhatsApp for the fastest reply.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-2">
+            <a
+              href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-10 items-center justify-center rounded-lg bg-[#25D366] px-4 text-xs font-semibold text-white transition hover:bg-[#20bd5a]"
+            >
+              WhatsApp — Book slot
+            </a>
+            <Link
+              href="#contact-form"
+              className="inline-flex h-10 items-center justify-center rounded-lg border border-border-primary bg-bg-secondary px-4 text-xs font-semibold text-text-primary transition hover:border-accent-primary/40 dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary"
+            >
+              Use form instead
+            </Link>
+          </div>
+        </div>
+        <p className="mt-4 border-t border-border-primary/60 pt-3 text-[10px] text-text-tertiary dark:border-dark-border-primary/60 dark:text-dark-text-tertiary">
+          Team: add <code className="text-[10px]">NEXT_PUBLIC_CALENDLY_URL</code> in env to show live calendar embed here.
         </p>
       </div>
     );

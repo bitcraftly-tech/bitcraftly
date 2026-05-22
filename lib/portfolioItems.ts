@@ -9,6 +9,13 @@ export type PortfolioPerformanceMetric = {
   note?: string;
 };
 
+/** Hero metrics in case study modal */
+export type CaseStudyHeadlineMetric = {
+  value: string;
+  label: string;
+  icon?: "zap" | "trending" | "users" | "clock" | "target";
+};
+
 export type PortfolioMockup =
   | "restaurant"
   | "school"
@@ -31,6 +38,13 @@ export type PortfolioCaseStudy = {
   afterPoints: string[];
   performance?: PortfolioPerformanceMetric[];
   trustNote?: string;
+  /** Modal overview paragraph */
+  overview?: string;
+  client?: string;
+  timeline?: string;
+  categoryLabel?: string;
+  services?: string[];
+  headlineMetrics?: CaseStudyHeadlineMetric[];
 };
 
 export type PortfolioItem = {
@@ -260,10 +274,29 @@ const portfolioExtras: PortfolioItem[] = [
     tag: "AI",
     categories: ["ai-powered", "business-websites"],
     badge: "Interactive demo",
-    techStack: ["AI chat UX", "React", "WhatsApp API-ready"],
+    techStack: ["OpenAI", "Next.js", "React", "WhatsApp API"],
+    keyFeatures: [
+      "Natural language menu queries",
+      "WhatsApp handoff for complex orders",
+      "24/7 automated customer support",
+      "Multi-language support ready",
+      "Order tracking integration",
+      "Custom training on menu data",
+    ],
     resultHighlight: "FAQ automation that still routes to a real person",
     details: "Customer-facing assistant for menus, hours, and quick questions — with clean handoff to staff or WhatsApp.",
     caseStudy: defaultCaseStudy({
+      overview:
+        "AI chatbot for restaurants with WhatsApp integration, enabling automated customer support, menu queries, and order assistance while maintaining a human touch for complex requests.",
+      client: "The Food Junction (Demo)",
+      timeline: "3 Weeks",
+      categoryLabel: "AI Solutions",
+      services: ["AI Development", "WhatsApp Integration"],
+      headlineMetrics: [
+        { value: "45%", label: "Faster Response", icon: "zap" },
+        { value: "32%", label: "Order Increase", icon: "trending" },
+        { value: "2.8K+", label: "Happy Users", icon: "users" },
+      ],
       problem: "Staff repeated the same menu and hours questions — wasting time on low-value calls.",
       solution: "AI-assisted FAQ layer with structured menu answers and WhatsApp escalation when humans are needed.",
       results: ["Faster FAQ resolution", "Staff time saved on repeat questions", "WhatsApp handoff preserved"],

@@ -7,6 +7,7 @@ import { HOME_SEO, SITE_NAME, SITE_URL } from "@/lib/seo";
 // import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
 import PortfolioFloatingChrome from "@/components/landing/PortfolioFloatingChrome";
 import AuthSessionProvider from "@/components/providers/AuthSessionProvider";
+import { LoaderProvider } from "@/components/providers/LoaderProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import Toaster from "@/components/ui/Toaster";
 
@@ -66,10 +67,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </head>
       <body suppressHydrationWarning className="font-[var(--font-inter)] antialiased">
         <ThemeProvider>
-          <AuthSessionProvider>{children}</AuthSessionProvider>
-          {/* <ChatSupportWidget /> */}
-          <PortfolioFloatingChrome />
-          <Toaster />
+          <LoaderProvider>
+            <AuthSessionProvider>{children}</AuthSessionProvider>
+            {/* <ChatSupportWidget /> */}
+            <PortfolioFloatingChrome />
+            <Toaster />
+          </LoaderProvider>
         </ThemeProvider>
       </body>
     </html>

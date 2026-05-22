@@ -3,16 +3,19 @@
 import { useEffect, useRef, useState } from "react";
 
 import type { PortfolioProject } from "@/lib/portfolio/projectUtils";
+import { PS_THUMB } from "@/lib/portfolioShowcaseTheme";
 import { cardPreviewAccent } from "@/lib/portfolioVisualUtils";
 
 type PortfolioCardThumbnailProps = {
   project: PortfolioProject;
+  variant?: "card" | "compact";
 };
 
-/** Lazy-rendered preview — gradient + device chrome (no heavy mockup DOM until visible) */
-export default function PortfolioCardThumbnail({ project }: PortfolioCardThumbnailProps) {
+/** Lazy-rendered preview — pastel gradient + project icon */
+export default function PortfolioCardThumbnail({ project, variant = "card" }: PortfolioCardThumbnailProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const compact = variant === "compact";
 
   useEffect(() => {
     const el = ref.current;
@@ -30,35 +33,38 @@ export default function PortfolioCardThumbnail({ project }: PortfolioCardThumbna
     return () => io.disconnect();
   }, []);
 
-  return (
-    <div
-      ref={ref}
-      className={`relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-br ${project.gradient}`}
-    >
-      <div className={`absolute inset-0 bg-gradient-to-br ${cardPreviewAccent(project)}`} aria-hidden />
-      <div className="absolute inset-x-0 top-0 flex items-center gap-1 border-b border-white/10 bg-black/20 px-2.5 py-2 backdrop-blur-sm dark:bg-black/35">
-        <span className="size-2 rounded-full bg-[#e74c3c]/80" aria-hidden />
-        <span className="size-2 rounded-full bg-[#f1c40f]/80" aria-hidden />
-        <span className="size-2 rounded-full bg-[#2ecc71]/80" aria-hidden />
-        <span className="ml-2 truncate text-[10px] font-medium text-white/90">{project.title}</span>
+  if (compact) {
+    return (
+      <div
+        ref={ref}
+        className={`${PS_THUMB} size-[88px] sm:size-[100px] ${project.gradient}`}
+      >
+        <div className={`absolute inset-0 bg-gradient-to-br ${cardPreviewAccent(project)}`} aria-hidden />
+        {visible ? (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-3xl drop-shadow-sm sm:text-4xl" aria-hidden>
+              {project.emoji}
+            </span>
+          </div>
+        ) : (
+          <div className="absolute inset-0 animate-pulse bg-[#ecf0f1]/40" aria-hidden />
+        )}
       </div>
+    );
+  }
+
+  return (
+    <div ref={ref} className={`relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-br ${project.gradient}`}>
+      <div className={`absolute inset-0 bg-gradient-to-br ${cardPreviewAccent(project)}`} aria-hidden />
       {visible ? (
-        <div className="absolute inset-0 flex flex-col items-center justify-center pt-8">
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-4xl drop-shadow-sm sm:text-5xl" aria-hidden>
             {project.emoji}
           </span>
-          <p className="mt-2 max-w-[85%] text-center text-[10px] font-semibold uppercase tracking-wide text-white/90">
-            {project.projectFocus}
-          </p>
         </div>
       ) : (
-        <div className="absolute inset-0 animate-pulse bg-[#ecf0f1]/20 dark:bg-[#34495e]/25" aria-hidden />
+        <div className="absolute inset-0 animate-pulse bg-[#ecf0f1]/40" aria-hidden />
       )}
-      {project.badge === "Live client" ? (
-        <span className="absolute bottom-2 right-2 rounded-full border border-[#2ecc71]/50 bg-[#27ae60]/90 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">
-          Live
-        </span>
-      ) : null}
     </div>
   );
 }

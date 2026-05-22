@@ -3,29 +3,33 @@
 import { AnimatePresence, motion } from "framer-motion";
 
 import PortfolioShowcaseCard from "@/components/portfolio/showcase/PortfolioShowcaseCard";
+import { PORTFOLIO_FEATURED } from "@/lib/portfolioContent";
 import type { PortfolioProject } from "@/lib/portfolio/projectUtils";
 
 type PortfolioAnimatedGridProps = {
   projects: PortfolioProject[];
   onOpenCaseStudy: (project: PortfolioProject) => void;
-  layout?: "home" | "page";
+  showFeaturedSeparately?: boolean;
 };
 
-export default function PortfolioAnimatedGrid({ projects, onOpenCaseStudy, layout = "home" }: PortfolioAnimatedGridProps) {
-  const gridClass =
-    layout === "home"
-      ? "grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-      : "grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3";
+export default function PortfolioAnimatedGrid({
+  projects,
+  onOpenCaseStudy,
+  showFeaturedSeparately = true,
+}: PortfolioAnimatedGridProps) {
+  const gridProjects = showFeaturedSeparately
+    ? projects.filter((p) => p.slug !== PORTFOLIO_FEATURED.slug)
+    : projects;
 
-  if (projects.length === 0) {
+  if (gridProjects.length === 0) {
     return (
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="rounded-xl border border-dashed border-[#95a5a6]/50 bg-bg-card px-4 py-8 text-center text-sm text-text-secondary dark:border-[#7f8c8d]/50"
+        className="rounded-2xl border border-dashed border-[#bdc3c7]/60 bg-white px-6 py-10 text-center text-sm text-[#7f8c8d]"
       >
         No projects in this category — try another filter or{" "}
-        <a href="/contact" className="font-semibold text-[#2980b9] hover:underline">
+        <a href="/contact" className="font-semibold text-[#8e44ad] hover:underline">
           contact us
         </a>{" "}
         for a custom build.
@@ -34,9 +38,9 @@ export default function PortfolioAnimatedGrid({ projects, onOpenCaseStudy, layou
   }
 
   return (
-    <motion.div layout className={gridClass}>
+    <motion.div layout className="grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
       <AnimatePresence mode="popLayout">
-        {projects.map((project, index) => (
+        {gridProjects.map((project, index) => (
           <PortfolioShowcaseCard key={project.slug} project={project} index={index} onOpenCaseStudy={onOpenCaseStudy} />
         ))}
       </AnimatePresence>

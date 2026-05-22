@@ -26,6 +26,7 @@ import {
   useNotificationsQuery,
 } from "@/hooks/useNotifications";
 import { useTenant } from "@/hooks/useTenant";
+import BitcraftlyLogoMark from "@/components/brand/BitcraftlyLogoMark";
 import { LogoutConfirmDialog } from "@/components/ui/LogoutConfirmDialog";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
@@ -46,17 +47,6 @@ const navItems: Array<{
   { label: "Reports", href: "/dashboard/analytics", icon: BarChart3, roles: ["admin"] },
   { label: "Settings", href: "/dashboard/settings", icon: Settings, roles: ["admin", "staff", "manager"] },
 ];
-
-function LogoMark() {
-  return (
-    <div className="grid h-8 w-8 grid-cols-2 gap-1 rounded-md border border-border-primary p-1 dark:border-dark-border-primary">
-      <span className="rounded-sm bg-[#2B5CE6]" />
-      <span className="rounded-sm bg-text-primary dark:bg-dark-text-primary" />
-      <span className="rounded-sm bg-text-primary dark:bg-dark-text-primary" />
-      <span className="rounded-sm bg-[#2B5CE6]" />
-    </div>
-  );
-}
 
 export default function DashboardNav() {
   const router = useRouter();
@@ -136,7 +126,7 @@ export default function DashboardNav() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-8">
             <Link href="/dashboard" className="flex items-center gap-2.5" title="Bitcraftly — Website & App Development Company in Jamshedpur">
-              <LogoMark />
+              <BitcraftlyLogoMark size="nav" />
               <div>
                 <div className="font-[var(--font-playfair)] text-xl font-semibold text-text-primary dark:text-dark-text-primary">
                   Bitcraftly

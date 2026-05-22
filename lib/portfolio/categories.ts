@@ -12,16 +12,23 @@ export type PortfolioCategoryId =
   | "startup-mvp"
   | "ui-systems";
 
-export const PORTFOLIO_CATEGORIES: { id: PortfolioCategoryId; label: string; shortLabel: string }[] = [
-  { id: "all", label: "All work", shortLabel: "All" },
-  { id: "react-projects", label: "React.js", shortLabel: "React" },
-  { id: "nextjs-projects", label: "Next.js", shortLabel: "Next.js" },
-  { id: "ai-powered", label: "AI-powered", shortLabel: "AI" },
-  { id: "business-websites", label: "Business websites", shortLabel: "Business" },
-  { id: "dashboard-admin", label: "Admin dashboards", shortLabel: "Dashboard" },
-  { id: "landing-pages", label: "Landing pages", shortLabel: "Landing" },
-  { id: "startup-mvp", label: "Startup MVPs", shortLabel: "MVP" },
-  { id: "ui-systems", label: "UI / UX systems", shortLabel: "UI systems" },
+export type PortfolioCategoryMeta = {
+  id: PortfolioCategoryId;
+  label: string;
+  shortLabel: string;
+  icon: string;
+};
+
+export const PORTFOLIO_CATEGORIES: PortfolioCategoryMeta[] = [
+  { id: "all", label: "All Projects", shortLabel: "All", icon: "grid" },
+  { id: "react-projects", label: "React.js", shortLabel: "React", icon: "react" },
+  { id: "nextjs-projects", label: "Next.js", shortLabel: "Next", icon: "next" },
+  { id: "ai-powered", label: "AI Solutions", shortLabel: "AI", icon: "ai" },
+  { id: "business-websites", label: "Websites", shortLabel: "Web", icon: "web" },
+  { id: "dashboard-admin", label: "Dashboards", shortLabel: "Dash", icon: "dash" },
+  { id: "landing-pages", label: "Landing Pages", shortLabel: "Landing", icon: "landing" },
+  { id: "startup-mvp", label: "MVPs", shortLabel: "MVP", icon: "mvp" },
+  { id: "ui-systems", label: "UI Systems", shortLabel: "UI", icon: "ui" },
 ];
 
 const hasTech = (item: PortfolioItem, pattern: RegExp) => item.techStack.some((t) => pattern.test(t));

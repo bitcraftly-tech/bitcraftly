@@ -967,3 +967,46 @@ body {
   background-size: 200% 100%;
 }
 
+/* —— Bitcraftly loader — CSS fallback (reduced motion) —— */
+@keyframes bc-loader-dot-fallback {
+  0%,
+  100% {
+    background-color: #d1d5db;
+    transform: scale(0.82);
+  }
+  40% {
+    background-color: #7c3aed;
+    transform: scale(1.08);
+  }
+}
+
+.bc-loader-dot-fallback {
+  animation: bc-loader-dot-fallback 1.35s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bc-loader-dot-fallback {
+    animation: none;
+    background-color: #a78bfa;
+  }
+}
+
+/* Contact enquiry modal — thin scrollbar */
+.contact-modal-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+}
+
+.contact-modal-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.contact-modal-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 999px;
+}
+
+.contact-modal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+

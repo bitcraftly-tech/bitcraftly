@@ -2,6 +2,12 @@
 
 export const PORTFOLIO = {
   eyebrow: "Portfolio & case studies",
+  featuredLabel: "Featured Work",
+  showcaseHeading: "Our Portfolio",
+  showcaseDescription:
+    "A showcase of modern, fast, and AI-powered digital solutions built with React.js, Next.js & cutting-edge technologies.",
+  experienceBadgeTitle: "18+ Years of Experience",
+  experienceBadgeBody: "Delivering high-quality solutions that drive real business results.",
   heading: "Real builds and production-ready demos — structured for trust",
   intro:
     "Live client websites and interactive showcases across React.js, Next.js, AI-powered experiences, business sites, and startup frontends. Each project is presented with the challenge, what we built, measurable focus areas, and tech stack — so you can judge fit before you book a call.",
@@ -57,6 +63,20 @@ export const PORTFOLIO = {
   pageHeading: "Portfolio — live work, case studies & interactive demos",
   pageIntro:
     "Filter by build type. Open any project for the full case study: problem, solution, results, tech stack, and performance focus. Live client work is labeled clearly.",
+  bottomCtaTitle: "Have a Project in Mind?",
+  bottomCtaBody: "Let's build something amazing together.",
+  bottomCtaPrimary: "Start Your Project",
+  bottomCtaWhatsApp: "Chat on WhatsApp",
+} as const;
+
+/** Wide featured row — startup / SaaS highlight */
+export const PORTFOLIO_FEATURED = {
+  title: "Next-Gen SaaS Platform",
+  description:
+    "Full-stack startup frontend with authentication flows, billing-ready UI, analytics dashboards, and scalable component architecture.",
+  techStack: ["Next.js", "TypeScript", "Stripe", "PostgreSQL", "Prisma"],
+  demoHref: "/portfolio/react-video-demo",
+  slug: "react-product-ui-demo",
 } as const;
 
 export type { PortfolioCategoryId } from "@/lib/portfolio/categories";
