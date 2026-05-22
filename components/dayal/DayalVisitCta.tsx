@@ -17,7 +17,7 @@ const buildingZoom = {
     transition: {
       duration: 2.4,
       times: [0, 0.48, 1],
-      ease: [0.25, 0.1, 0.25, 1],
+      ease: [0.25, 0.1, 0.25, 1] as const,
       delay: 0.12,
     },
   },
