@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 
-import ContactBrandHeader from "@/components/contact/ContactLogo";
 import { CP_ACCENT, CP_CARD } from "@/lib/contactPageTheme";
 import { CONTACT_FORM, FREE_CONSULTATION, TRUST_INQUIRY } from "@/lib/leadGen";
 import { FOUNDER } from "@/lib/siteContent";
@@ -15,8 +14,6 @@ export default function ContactSidebar({ timeline, contactCards }: ContactSideba
     <aside className="lg:col-span-5">
       <div className="lg:sticky lg:top-20">
         <div className="space-y-6">
-          <ContactBrandHeader />
-
           <div>
             <h1 className="font-[var(--font-playfair)] text-3xl font-semibold leading-tight text-[#4F46E5] sm:text-4xl lg:text-[2.35rem]">
               {CONTACT_FORM.headline}

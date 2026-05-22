@@ -53,6 +53,9 @@ export default function Footer() {
               <BitcraftlyLogoMark size="xs" />
               <span className="flex min-w-0 flex-col leading-tight">
                 <span className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary">Bitcraftly</span>
+                <span className="mt-0.5 max-w-[20rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary">
+                  {BRAND.headerTagline}
+                </span>
               </span>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">

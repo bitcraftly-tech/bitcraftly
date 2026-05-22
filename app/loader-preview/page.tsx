@@ -77,7 +77,8 @@ export default function LoaderPreviewPage() {
           <code className="text-[#4F46E5]">lib/loader/config.ts</code>.
         </p>
         <p className="text-xs text-[#9CA3AF]">
-          Production: fullscreen loader on every page load; route changes show compact ~420ms.
+          Site-wide: same fullscreen loader on first load, route change, and manual trigger (~
+          {process.env.NODE_ENV === "development" ? "1.8s" : "0.9s"}).
         </p>
       </div>
 

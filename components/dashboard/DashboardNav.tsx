@@ -27,6 +27,7 @@ import {
 } from "@/hooks/useNotifications";
 import { useTenant } from "@/hooks/useTenant";
 import BitcraftlyLogoMark from "@/components/brand/BitcraftlyLogoMark";
+import { BRAND } from "@/lib/siteContent";
 import { LogoutConfirmDialog } from "@/components/ui/LogoutConfirmDialog";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
@@ -125,14 +126,14 @@ export default function DashboardNav() {
       <div className="mx-auto w-full max-w-7xl px-6 lg:px-12">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-8">
-            <Link href="/dashboard" className="flex items-center gap-2.5" title="Bitcraftly — Website & App Development Company in Jamshedpur">
+            <Link href="/dashboard" className="flex items-center gap-2.5" title={`Bitcraftly — ${BRAND.headerTagline}`}>
               <BitcraftlyLogoMark size="nav" />
               <div>
                 <div className="font-[var(--font-playfair)] text-xl font-semibold text-text-primary dark:text-dark-text-primary">
                   Bitcraftly
                 </div>
-                <div className="max-w-[13rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary lg:max-w-[16rem]">
-                  Website &amp; App Development Company in Jamshedpur
+                <div className="max-w-[13rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary lg:max-w-[20rem]">
+                  {BRAND.headerTagline}
                 </div>
               </div>
             </Link>

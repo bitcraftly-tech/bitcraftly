@@ -73,7 +73,10 @@ export const FOUNDER = {
 } as const;
 
 export const BRAND = {
-  tagline: "Founder-led React & Next.js · AI-ready frontend",
+  /** Logo subtitle — navbar, footer, loader, dashboard */
+  headerTagline: "Modern frontend & AI-powered web solutions studio",
+  tagline: "Modern frontend & AI-powered web solutions studio",
+  headerTaglineShort: "Modern frontend & AI-powered web studio",
   location: "Ghaziabad, Uttar Pradesh, India",
   locationShort: "Ghaziabad · India & remote",
   whatsappHours: "10:00 AM – 9:00 PM IST",

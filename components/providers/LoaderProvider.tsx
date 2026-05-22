@@ -77,11 +77,21 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setReady(true);
+
+    if (LOADER_ENABLED && LOADER_ALWAYS_ON) {
+      try {
+        sessionStorage.removeItem(LOADER_STORAGE_KEY);
+      } catch {
+        /* ignore */
+      }
+    }
+
     if (!LOADER_ENABLED || shouldSkipInitialLoader()) {
       setInitialPhase("done");
       return;
     }
 
+    setInitialPhase("loading");
     const start = Date.now();
     let done = false;
 
@@ -105,6 +115,13 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
       window.clearTimeout(fallback);
     };
   }, [finishInitial]);
+
+  /** Fallback if Framer exit callback never fires */
+  useEffect(() => {
+    if (initialPhase !== "exiting") return;
+    const t = window.setTimeout(() => setInitialPhase("done"), LOADER_TIMING.exitMs + 200);
+    return () => window.clearTimeout(t);
+  }, [initialPhase]);
 
   useEffect(() => {
     if (!LOADER_ENABLED || !ready || initialPhase !== "done") return;
@@ -130,25 +147,23 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo(() => ({ showLoader }), [showLoader]);
 
-  const showInitial = LOADER_ENABLED && (initialPhase === "loading" || initialPhase === "exiting");
+  /** Only visible while loading; exiting unmounts loader so fade-out + onExitComplete run */
+  const showInitial = LOADER_ENABLED && initialPhase === "loading";
   const showRoute = LOADER_ENABLED && routeLoading && initialPhase === "done" && !manualLoading;
   const showManual = LOADER_ENABLED && manualLoading && initialPhase === "done";
+  const showOverlay = showInitial || showRoute || showManual;
 
   return (
     <LoaderContext.Provider value={value}>
       {LOADER_ENABLED ? (
-        <>
-          <BitcraftlyLoader
-            show={showInitial}
-            density="fullscreen"
-            theme={theme}
-            onExitComplete={() => {
-              if (initialPhase === "exiting") setInitialPhase("done");
-            }}
-          />
-          <BitcraftlyLoader show={showRoute} density="compact" theme={theme} />
-          <BitcraftlyLoader show={showManual} density="compact" theme={theme} />
-        </>
+        <BitcraftlyLoader
+          show={showOverlay}
+          density="fullscreen"
+          theme={theme}
+          onExitComplete={() => {
+            setInitialPhase((phase) => (phase === "exiting" ? "done" : phase));
+          }}
+        />
       ) : null}
       {children}
     </LoaderContext.Provider>

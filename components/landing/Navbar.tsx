@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import BitcraftlyLogoMark from "@/components/brand/BitcraftlyLogoMark";
 import NavbarProfileMenu from "@/components/landing/NavbarProfileMenu";
 import { CONTAINER } from "@/lib/constants";
+import { BRAND } from "@/lib/siteContent";
 
 const navLinks = [
   { label: "Services", targetId: "services" },
@@ -60,7 +61,7 @@ export default function Navbar() {
         <Link
           href="/"
           className="flex items-center gap-2"
-          title="Bitcraftly — React & Next.js · AI-Powered Frontend Solutions"
+          title={`Bitcraftly — ${BRAND.headerTagline}`}
         >
           <BitcraftlyLogoMark size="nav" />
           <span className="flex flex-col leading-tight">
@@ -68,7 +69,7 @@ export default function Navbar() {
               Bitcraftly
             </span>
             <span className="max-w-[15rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary sm:max-w-[20rem]">
-              React &amp; Next.js · Ghaziabad · India &amp; remote
+              {BRAND.headerTagline}
             </span>
           </span>
         </Link>

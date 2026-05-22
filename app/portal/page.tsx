@@ -7,6 +7,7 @@ import { createAuthOptions } from "@/auth";
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
 import { CONTAINER } from "@/lib/constants";
+import { BRAND } from "@/lib/siteContent";
 
 type PortalCard = {
   title: string;
@@ -163,7 +164,7 @@ export default async function CustomerPortalPage() {
       <div className="border-t border-border-primary bg-bg-primary py-6 dark:border-dark-border-primary dark:bg-dark-bg-primary">
         <div className={`${CONTAINER} text-center`}>
           <p className="text-xs text-text-tertiary dark:text-dark-text-tertiary">
-            Built by Bitcraftly — Website &amp; App Development Company in Jamshedpur.
+            Built by Bitcraftly — {BRAND.headerTagline}
           </p>
           <p className="mt-2 text-xs text-text-tertiary dark:text-dark-text-tertiary">
             Websites, apps &amp; digital projects — one simple client hub.

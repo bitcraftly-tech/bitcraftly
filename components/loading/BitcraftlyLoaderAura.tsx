@@ -202,7 +202,7 @@ export default function BitcraftlyLoaderAura({
                     variants={m(loaderItemVariants)}
                   >
                     <motion.p
-                      className={`w-full text-[11px] font-normal leading-snug sm:text-xs ${tagline}`}
+                      className={`w-full max-w-[17rem] text-[10px] font-normal leading-snug sm:text-[11px] ${tagline}`}
                       variants={m(textVariants)}
                     >
                       {LOADER_COPY.tagline}

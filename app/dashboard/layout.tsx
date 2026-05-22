@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { createAuthOptions } from "@/auth";
 import DashboardNav from "@/components/dashboard/DashboardNav";
 import QueryProvider from "@/components/providers/QueryProvider";
+import { BRAND } from "@/lib/siteContent";
 
 type DashboardLayoutProps = {
   children: ReactNode;
@@ -32,7 +33,7 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
             {children}
             <div className="mt-16 border-t border-border-primary pt-8 text-center dark:border-dark-border-primary">
               <p className="text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
-                Built by Bitcraftly — Website &amp; App Development Company in Jamshedpur.
+                Built by Bitcraftly — {BRAND.headerTagline}
               </p>
               <p className="mt-2 text-xs text-text-tertiary dark:text-dark-text-tertiary">
                 Manage websites, apps and digital projects in one client workspace.
