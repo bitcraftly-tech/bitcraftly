@@ -189,6 +189,98 @@ export function useUpdateContactMetaMutation() {
   });
 }
 
+export type JobApplication = {
+  id: number;
+  full_name: string;
+  email: string;
+  phone: string;
+  city?: string | null;
+  role_applied: string;
+  experience_years?: string | null;
+  current_role?: string | null;
+  notice_period?: string | null;
+  expected_ctc?: string | null;
+  skills?: string | null;
+  portfolio_url?: string | null;
+  github_url?: string | null;
+  linkedin_url?: string | null;
+  behance_url?: string | null;
+  cover_letter?: string | null;
+  resume_filename: string;
+  resume_mime?: string | null;
+  resume_size_bytes?: number | null;
+  source?: string | null;
+  stage: string;
+  assigned_to?: string | null;
+  notes?: string | null;
+  is_contacted: boolean;
+  created_at: string;
+  updated_at?: string | null;
+};
+
+export type JobApplicationsResponse = {
+  total: number;
+  applications: JobApplication[];
+};
+
+export function useJobApplicationsQuery(stage?: string) {
+  const query = stage && stage !== "all" ? `?limit=200&stage=${stage}` : "?limit=200";
+  return useQuery({
+    queryKey: ["job-applications", stage ?? "all"],
+    queryFn: async () => (await apiClient.get<JobApplicationsResponse>(`/api/careers/applications${query}`)).data,
+  });
+}
+
+export function useUpdateJobApplicationMetaMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({
+      applicationId,
+      stage,
+      assignedTo,
+      isContacted,
+    }: {
+      applicationId: number;
+      stage?: string;
+      assignedTo?: string;
+      isContacted?: boolean;
+    }) =>
+      (
+        await apiClient.patch<{ success: boolean }>(`/api/careers/applications/${applicationId}/meta`, {
+          stage,
+          assigned_to: assignedTo?.trim() || null,
+          is_contacted: isContacted,
+        })
+      ).data,
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["job-applications"] });
+    },
+  });
+}
+
+export function useUpdateJobApplicationNotesMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ applicationId, notes }: { applicationId: number; notes: string }) =>
+      (await apiClient.patch<{ success: boolean }>(`/api/careers/applications/${applicationId}/notes`, { notes })).data,
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["job-applications"] });
+    },
+  });
+}
+
+export async function downloadJobApplicationResume(applicationId: number, filename: string) {
+  const response = await apiClient.get(`/api/careers/applications/${applicationId}/resume`, {
+    responseType: "blob",
+  });
+  const url = window.URL.createObjectURL(response.data);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = filename;
+  anchor.click();
+  window.URL.revokeObjectURL(url);
+}
+
 export function useResolveParkingReportMutation() {
   const queryClient = useQueryClient();
   return useMutation({

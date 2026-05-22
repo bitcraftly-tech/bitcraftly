@@ -1,4 +1,6 @@
 from app.models.contact import ContactSubmission
+from app.models.job_application import JobApplication
+from app.models.job_role import JobRole
 from app.models.lead import Lead
 from app.models.notification import Notification
 from app.models.parking_report import ParkingReport
@@ -14,6 +16,8 @@ __all__ = [
     "QRContact",
     "WhatsAppTemplate",
     "ContactSubmission",
+    "JobApplication",
+    "JobRole",
     "User",
     "Notification",
     "ParkingReport",

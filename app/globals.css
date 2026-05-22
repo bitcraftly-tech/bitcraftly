@@ -36,6 +36,15 @@ body {
   @apply bg-bg-primary text-text-primary transition-colors duration-200 dark:bg-dark-bg-primary dark:text-dark-text-primary;
 }
 
+/* Bitcraftly ATS — careers & hiring dashboard */
+.ats-surface {
+  @apply rounded-2xl border border-[#e2e8f0] bg-white shadow-sm dark:border-dark-border-primary dark:bg-dark-bg-card;
+}
+
+.ats-gradient-text {
+  @apply bg-gradient-to-r from-[#4f46e5] via-[#7c3aed] to-[#2b5ce6] bg-clip-text text-transparent;
+}
+
 .dark body {
   color-scheme: dark;
 }

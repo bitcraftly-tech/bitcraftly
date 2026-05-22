@@ -11,6 +11,7 @@ backend/.env.*
 *.sqlite3
 backend/*.db
 backend/*.sqlite3
+backend/uploads/
 
 # Dependencies
 node_modules/

@@ -6,6 +6,7 @@ from app.core.config import settings
 from app.db.base import Base
 from app.db.session import SessionLocal, engine
 from app.models.user import User, UserRole
+from app.services.job_roles_seed import ensure_job_roles_seed
 from app.services.security import hash_password
 
 
@@ -16,6 +17,11 @@ def ensure_dev_schema() -> None:
     import app.models  # noqa: F401 — loads mapped classes onto Base.metadata
 
     Base.metadata.create_all(bind=engine)
+    db = SessionLocal()
+    try:
+        ensure_job_roles_seed(db)
+    finally:
+        db.close()
 
 
 def ensure_sqlite_dev_user() -> None:

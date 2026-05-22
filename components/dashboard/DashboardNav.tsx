@@ -7,10 +7,12 @@ import { signOut, useSession } from "next-auth/react";
 import {
   BarChart3,
   Bell,
+  Briefcase,
   Car,
   ChevronDown,
   CreditCard,
   Globe,
+  ClipboardList,
   LayoutDashboard,
   Menu,
   MessageCircle,
@@ -41,6 +43,8 @@ const navItems: Array<{
 }> = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard, roles: ["admin", "staff", "manager"] },
   { label: "Projects", href: "/dashboard/leads", icon: Users, roles: ["admin", "staff", "manager"] },
+  { label: "Applications", href: "/dashboard/applications", icon: Briefcase, roles: ["admin", "staff", "manager"] },
+  { label: "Job roles", href: "/dashboard/roles", icon: ClipboardList, roles: ["admin", "staff", "manager"] },
   { label: "Websites", href: "/dashboard/templates", icon: Globe, roles: ["admin", "staff", "manager"] },
   { label: "Apps", href: "/dashboard/parking-reports", icon: Car, roles: ["admin", "staff", "manager"] },
   { label: "Support", href: "/contact?intent=support&source=bitcraftly-portal-nav", icon: MessageCircle, roles: ["admin", "staff", "manager"] },

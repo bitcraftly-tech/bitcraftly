@@ -12,7 +12,8 @@ from app.models import contact as contact_model  # noqa: F401
 from app.models import notification as notification_model  # noqa: F401
 from app.models import user as user_model  # noqa: F401
 from app.models import payment as payment_model  # noqa: F401
-from app.routers import contact
+from app.models import job_role as job_role_model  # noqa: F401
+from app.routers import careers, contact
 
 app = FastAPI(title=settings.app_name)
 app.include_router(public_qr_router)
@@ -47,3 +48,4 @@ def health() -> dict[str, str]:
 
 app.include_router(api_router, prefix=settings.api_prefix)
 app.include_router(contact.router)
+app.include_router(careers.router)
