@@ -4,6 +4,7 @@ import { CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 
 import DayalReveal from "@/components/dayal/DayalReveal";
+import { WHY_FAMILY_IMAGE } from "@/lib/dayal/data";
 
 const POINTS = [
   "Founder-led trust with transparent communication",
@@ -20,7 +21,7 @@ export default function DayalWhy() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <DayalReveal className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl lg:aspect-auto lg:min-h-[520px]">
             <Image
-              src="https://images.unsplash.com/photo-1605276374101-dee2a0ed3cd6?auto=format&fit=crop&w=800&q=80"
+              src={WHY_FAMILY_IMAGE}
               alt="Happy family at their new home"
               fill
               className="object-cover"

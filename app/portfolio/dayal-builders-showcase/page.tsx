@@ -6,18 +6,19 @@ import { DAYAL, HERO_DESCRIPTION } from "@/lib/dayal/data";
 import DayalShowcaseLayout from "./DayalShowcaseLayout";
 
 export const metadata: Metadata = {
-  title: `${DAYAL.brand} · Luxury Township Showcase | Bitcraftly Portfolio`,
+  title: `${DAYAL.brand} · Real Estate Showcase | Bitcraftly Portfolio`,
   description:
-    "Premium real-estate showcase for Dayal Builders — Govindpur, Jamshedpur. Township living, world-class amenities, and site visit booking.",
+    "Real-estate showcase for Dayal Builders — Jamshedpur. Ongoing projects, legacy builds, testimonials, and enquiry forms aligned with dayalbuilder.com.",
   keywords: [
     "Dayal Builders",
-    "Dayal City",
-    "luxury real estate Jamshedpur",
-    "Govindpur township",
-    "premium homes Jharkhand",
+    "Dayal Galaxy",
+    "Dayal Vatika",
+    "real estate Jamshedpur",
+    "Govindpur",
+    "Teg Bahadur Block",
   ],
   openGraph: {
-    title: `${DAYAL.brand} — Premium Township`,
+    title: `${DAYAL.brand} — ${DAYAL.tagline}`,
     description: HERO_DESCRIPTION,
     type: "website",
   },

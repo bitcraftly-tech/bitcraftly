@@ -35,8 +35,15 @@ export default function DayalFooter() {
               <li className="flex gap-2">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#c8a46b]" />
                 <span>
-                  <span className="block font-medium text-white/90">Office Address</span>
+                  <span className="block font-medium text-white/90">Head Office</span>
                   {DAYAL.officeAddress}
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#c8a46b]" />
+                <span>
+                  <span className="block font-medium text-white/90">Site Address</span>
+                  {DAYAL.siteAddress}
                 </span>
               </li>
               {DAYAL.phones.map((phone) => (
@@ -62,7 +69,7 @@ export default function DayalFooter() {
         </div>
 
         <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-8 text-center text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between sm:text-left">
-          <p>© 2026 Dayal Builders. All rights reserved.</p>
+          <p>© 2025 Dayal Builders. All rights reserved.</p>
           <p>
             Digital Experience by{" "}
             <Link href="/" className="text-[#c8a46b] hover:underline">

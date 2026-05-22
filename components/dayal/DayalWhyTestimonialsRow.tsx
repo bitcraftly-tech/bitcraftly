@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import DayalReveal from "@/components/dayal/DayalReveal";
-import { TESTIMONIALS, WHY_TRUST } from "@/lib/dayal/data";
+import { TESTIMONIALS, WHY_FAMILY_IMAGE, WHY_TRUST } from "@/lib/dayal/data";
 
 export default function DayalWhyTestimonialsRow() {
   const [index, setIndex] = useState(0);
@@ -21,7 +21,7 @@ export default function DayalWhyTestimonialsRow() {
               Why Dayal Builders
             </p>
             <h2 className="dayal-serif mt-2 text-2xl font-semibold text-[#0b1633] sm:text-3xl">
-              Built on Trust. Designed for Generations.
+              Building Foundations. Creating Futures.
             </h2>
             <ul className="mt-6 space-y-3">
               {WHY_TRUST.map((point) => (
@@ -33,8 +33,8 @@ export default function DayalWhyTestimonialsRow() {
             </ul>
             <div className="relative mt-8 aspect-[16/10] overflow-hidden rounded-2xl shadow-lg">
               <Image
-                src="https://images.unsplash.com/photo-1605276374101-dee2a0ed3cd6?auto=format&fit=crop&w=800&q=80"
-                alt="Happy family at Dayal City"
+                src={WHY_FAMILY_IMAGE}
+                alt="Dayal Builders — quality homes in Jamshedpur"
                 fill
                 className="object-cover"
                 sizes="50vw"
@@ -44,7 +44,7 @@ export default function DayalWhyTestimonialsRow() {
 
           <DayalReveal delay={0.1} id="testimonials">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c8a46b]">
-              Testimonials
+              Satisfied Customers
             </p>
             <h2 className="dayal-serif mt-2 text-2xl font-semibold text-[#0b1633] sm:text-3xl">
               What Our Customers Say

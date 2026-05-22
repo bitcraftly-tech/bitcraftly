@@ -13,12 +13,10 @@ import {
   Zap,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
 
 import DayalReveal from "@/components/dayal/DayalReveal";
-import { AMENITIES } from "@/lib/dayal/data";
+import { AMENITIES, ONGOING_PROJECTS } from "@/lib/dayal/data";
 
 const ICON_MAP: Record<string, LucideIcon> = {
   club: Building,
@@ -33,64 +31,52 @@ const ICON_MAP: Record<string, LucideIcon> = {
   parking: Car,
 };
 
-const ZONES = ["Tower A", "Tower B", "Clubhouse", "Central Greens", "Retail Plaza"] as const;
-
 export default function DayalPlanAmenitiesRow() {
-  const [active, setActive] = useState(0);
+  const legacyImage = ONGOING_PROJECTS[0]?.image;
 
   return (
     <section className="py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
-          <DayalReveal id="master-plan">
+          <DayalReveal>
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c8a46b]">
-              Master Plan
+              Meet Our Legacy
             </p>
             <h2 className="dayal-serif mt-2 text-2xl font-semibold text-[#0b1633] sm:text-3xl">
-              Township Layout
+              Landmarks of Quality Living
             </h2>
-            <div className="relative mt-6 aspect-[4/3] overflow-hidden rounded-2xl bg-[#0b1633] shadow-xl">
-              <Image
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80"
-                alt="Dayal City master plan aerial view"
-                fill
-                className="object-cover opacity-70"
-                sizes="50vw"
-              />
-              {ZONES.map((label, i) => (
-                <button
-                  key={label}
-                  type="button"
-                  className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/90 px-2 py-1 text-[10px] font-semibold text-[#0b1633] shadow-md transition hover:bg-[#c8a46b] hover:text-white"
-                  style={{
-                    left: `${20 + i * 15}%`,
-                    top: `${30 + (i % 3) * 18}%`,
-                  }}
-                  onClick={() => setActive(i)}
-                >
-                  {label}
-                </button>
-              ))}
-              <motion.div
-                className="absolute bottom-4 left-4 rounded-lg bg-[#0b1633]/80 px-3 py-2 text-xs text-white backdrop-blur"
-                key={active}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                Selected: {ZONES[active]}
-              </motion.div>
-            </div>
-            <a href="#contact" className="dayal-btn-outline mt-6 inline-flex">
-              View Master Plan
+            <p className="mt-4 text-sm leading-relaxed text-[#5c6478] sm:text-base">
+              Dayal Galaxy, Dayal Vatika, Dayal Enclave, and Teg Bahadur Block have become symbols of
+              quality living. With every new venture, we continue to raise the bar in design,
+              durability, and community planning.
+            </p>
+            {legacyImage && (
+              <div className="relative mt-6 aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
+                <Image
+                  src={legacyImage}
+                  alt="Dayal Builders ongoing project"
+                  fill
+                  className="object-cover"
+                  sizes="50vw"
+                />
+              </div>
+            )}
+            <a
+              href="https://www.dayalbuilder.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dayal-btn-outline mt-6 inline-flex"
+            >
+              View More Projects
             </a>
           </DayalReveal>
 
           <DayalReveal delay={0.1} id="amenities">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c8a46b]">
-              World-Class Amenities
+              Project Amenities
             </p>
             <h2 className="dayal-serif mt-2 text-2xl font-semibold text-[#0b1633] sm:text-3xl">
-              Everything Inside the Township
+              Thoughtfully Planned Spaces
             </h2>
             <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {AMENITIES.map((item) => {

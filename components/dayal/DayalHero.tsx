@@ -7,16 +7,16 @@ import {
   MapPin,
   Shield,
   Sparkles,
-  Trees,
+  HardHat,
   Building2,
-  Lock,
+  HeartHandshake,
 } from "lucide-react";
 import Image from "next/image";
 
 import DayalReveal from "@/components/dayal/DayalReveal";
-import { DAYAL, HERO_DESCRIPTION, TRUST_HIGHLIGHTS } from "@/lib/dayal/data";
+import { DAYAL, HERO_DESCRIPTION, HERO_IMAGE, TRUST_HIGHLIGHTS } from "@/lib/dayal/data";
 
-const TRUST_ICONS = [Lock, Shield, Sparkles, Trees, Building2] as const;
+const TRUST_ICONS = [HardHat, Building2, Sparkles, Shield, HeartHandshake] as const;
 
 export default function DayalHero() {
   const reduce = useReducedMotion();
@@ -39,13 +39,13 @@ export default function DayalHero() {
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-14 lg:px-8">
         <DayalReveal>
           <span className="inline-flex rounded-full bg-[#0b1633] px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white">
-            Premium Living. Prime Location.
+            {DAYAL.tagline}
           </span>
           <h1 className="dayal-serif mt-6 text-4xl font-bold leading-[1.05] tracking-tight text-[#0b1633] sm:text-5xl lg:text-6xl">
-            DAYAL BUILDERS
+            {DAYAL.brand.toUpperCase()}
           </h1>
-          <p className="dayal-serif mt-2 text-xl font-medium tracking-[0.2em] text-[#c8a46b] sm:text-2xl">
-            PREMIUM TOWNSHIP
+          <p className="dayal-serif mt-2 text-xl font-medium tracking-[0.12em] text-[#c8a46b] sm:text-2xl">
+            {DAYAL.heroHighlight}
           </p>
           <p className="mt-4 flex items-center gap-2 text-sm text-[#5c6478]">
             <MapPin className="h-4 w-4 text-[#c8a46b]" aria-hidden />
@@ -57,11 +57,16 @@ export default function DayalHero() {
           <div className="mt-8 flex flex-wrap gap-4">
             <a href="#contact" className="dayal-btn-primary">
               <Calendar className="h-4 w-4" />
-              Book Site Visit
+              Let&apos;s Connect
             </a>
-            <a href="#contact" className="dayal-btn-outline">
+            <a
+              href={DAYAL.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dayal-btn-outline"
+            >
               <Download className="h-4 w-4" />
-              Download Brochure
+              Visit Official Site
             </a>
           </div>
           <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
@@ -84,8 +89,8 @@ export default function DayalHero() {
         <DayalReveal delay={0.15} className="relative">
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl shadow-[#0b1633]/20 ring-1 ring-[#0b1633]/10">
             <Image
-              src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=85"
-              alt="Dayal City premium township rendering at dusk"
+              src={HERO_IMAGE}
+              alt="Dayal Builders — Char Sahebzade"
               fill
               priority
               className="object-cover"
@@ -94,8 +99,8 @@ export default function DayalHero() {
             <div className="absolute inset-0 bg-gradient-to-tr from-[#0b1633]/50 via-transparent to-transparent" />
           </div>
           <div className="absolute -bottom-4 -left-4 hidden rounded-xl bg-white px-5 py-4 shadow-xl sm:block">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#c8a46b]">RERA</p>
-            <p className="dayal-serif text-lg font-semibold text-[#0b1633]">Approved</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#c8a46b]">Since</p>
+            <p className="dayal-serif text-lg font-semibold text-[#0b1633]">Jamshedpur</p>
           </div>
         </DayalReveal>
       </div>

@@ -1,11 +1,9 @@
 "use client";
 
-import { Play } from "lucide-react";
 import Image from "next/image";
 
-import DayalCounter from "@/components/dayal/DayalCounter";
 import DayalReveal from "@/components/dayal/DayalReveal";
-import { METRICS } from "@/lib/dayal/data";
+import { ABOUT_EXTENDED, ABOUT_INTRO, PROPRIETOR } from "@/lib/dayal/data";
 
 export default function DayalAboutTrust() {
   return (
@@ -14,50 +12,41 @@ export default function DayalAboutTrust() {
         <DayalReveal>
           <div className="overflow-hidden rounded-2xl bg-white shadow-xl shadow-[#0b1633]/8 ring-1 ring-[#0b1633]/5">
             <div className="grid lg:grid-cols-12">
-              <div className="bg-[#0b1633] p-8 text-white lg:col-span-4 lg:p-10">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8a46b]">
-                  About the Project
-                </p>
-                <h2 className="dayal-serif mt-3 text-2xl font-semibold leading-snug sm:text-3xl">
-                  A New Standard of Modern Living
-                </h2>
-                <p className="mt-4 text-sm leading-relaxed text-white/75">
-                  Dayal Builders brings township-scale planning, premium finishes, and family-first
-                  design to Govindpur — where trust meets contemporary architecture.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-6 p-8 sm:grid-cols-4 lg:col-span-5 lg:p-10">
-                {METRICS.map((m) => (
-                  <div key={m.label} className="text-center sm:text-left">
-                    <p className="dayal-serif text-3xl font-bold text-[#0b1633] sm:text-4xl">
-                      <DayalCounter value={m.value} suffix={m.suffix} />
-                    </p>
-                    <p className="mt-1 text-xs font-medium text-[#5c6478]">{m.label}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="relative min-h-[220px] lg:col-span-3">
+              <div className="relative min-h-[280px] lg:col-span-4">
                 <Image
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80"
-                  alt="Dayal City township aerial view"
+                  src={PROPRIETOR.image}
+                  alt={PROPRIETOR.name}
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                   sizes="33vw"
                 />
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0b1633]/40">
-                  <button
-                    type="button"
-                    className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 text-[#0b1633] shadow-lg transition hover:scale-105"
-                    aria-label="Play project video"
-                  >
-                    <Play className="h-7 w-7 fill-[#0b1633]" />
-                  </button>
-                  <p className="mt-3 px-4 text-center text-xs font-medium text-white">
-                    Explore Dayal City in 60 Seconds
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b1633]/80 via-transparent to-transparent lg:bg-gradient-to-r" />
+                <div className="absolute bottom-6 left-6 right-6 text-white lg:bottom-8 lg:left-8">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8a46b]">
+                    {PROPRIETOR.role}
                   </p>
+                  <h2 className="dayal-serif mt-1 text-2xl font-semibold">{PROPRIETOR.name}</h2>
+                  <p className="mt-1 text-sm text-white/80">{PROPRIETOR.company}</p>
                 </div>
+              </div>
+
+              <div className="p-8 lg:col-span-8 lg:p-10">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8a46b]">
+                  About Dayal Builders
+                </p>
+                <h2 className="dayal-serif mt-3 text-2xl font-semibold leading-snug text-[#0b1633] sm:text-3xl">
+                  The Prominent Entities In The Real Estate Industry In Jamshedpur
+                </h2>
+                <p className="mt-5 text-sm leading-relaxed text-[#5c6478] sm:text-base">{ABOUT_INTRO}</p>
+                <p className="mt-4 text-sm leading-relaxed text-[#5c6478] sm:text-base">{ABOUT_EXTENDED}</p>
+                <a
+                  href="https://www.dayalbuilder.com/about-us"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="dayal-btn-outline mt-8 inline-flex"
+                >
+                  Read More
+                </a>
               </div>
             </div>
           </div>

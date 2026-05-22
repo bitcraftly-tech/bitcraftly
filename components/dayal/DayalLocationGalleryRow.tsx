@@ -15,7 +15,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import DayalReveal from "@/components/dayal/DayalReveal";
-import { GALLERY_IMAGES, NEARBY } from "@/lib/dayal/data";
+import { DAYAL, GALLERY_IMAGES, NEARBY } from "@/lib/dayal/data";
 
 const NEARBY_ICONS: Record<string, LucideIcon> = {
   school: GraduationCap,
@@ -35,11 +35,21 @@ export default function DayalLocationGalleryRow() {
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
           <DayalReveal id="location">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c8a46b]">
-              Location Advantage
+              Location
             </p>
             <h2 className="dayal-serif mt-2 text-2xl font-semibold text-[#0b1633] sm:text-3xl">
-              Well Connected. Better Convenience.
+              Head Office & Site Address
             </h2>
+            <ul className="mt-6 space-y-4 text-sm text-[#5c6478]">
+              <li>
+                <span className="font-semibold text-[#0b1633]">Head Office — </span>
+                {DAYAL.officeAddress}
+              </li>
+              <li>
+                <span className="font-semibold text-[#0b1633]">Site Address — </span>
+                {DAYAL.siteAddress}
+              </li>
+            </ul>
             <ul className="mt-6 space-y-3">
               {NEARBY.map((place) => {
                 const Icon = NEARBY_ICONS[place.icon] ?? Route;
@@ -61,12 +71,6 @@ export default function DayalLocationGalleryRow() {
                 );
               })}
             </ul>
-            <div className="relative mt-6 hidden aspect-[16/9] overflow-hidden rounded-xl bg-[#0b1633] sm:block">
-              <div className="absolute inset-0 opacity-40" style={{
-                background: "radial-gradient(circle at 40% 50%, #c8a46b44 0%, transparent 60%)",
-              }} />
-              <div className="absolute left-[35%] top-[45%] h-3 w-3 rounded-full bg-[#c8a46b] shadow-[0_0_20px_#c8a46b]" />
-            </div>
           </DayalReveal>
 
           <DayalReveal delay={0.1} id="gallery">
@@ -74,8 +78,12 @@ export default function DayalLocationGalleryRow() {
               Gallery
             </p>
             <h2 className="dayal-serif mt-2 text-2xl font-semibold text-[#0b1633] sm:text-3xl">
-              A Glimpse of Luxury Living
+              A Glimpse into Our Crafted Spaces
             </h2>
+            <p className="mt-3 text-sm text-[#5c6478]">
+              Explore stunning visuals of our completed and ongoing projects that reflect our
+              commitment to excellence.
+            </p>
             <div className="mt-6 grid auto-rows-[120px] grid-cols-2 gap-2 sm:auto-rows-[140px]">
               {GALLERY_IMAGES.map((item) => (
                 <button
@@ -94,12 +102,6 @@ export default function DayalLocationGalleryRow() {
                 </button>
               ))}
             </div>
-            <a
-              href="#gallery"
-              className="mt-4 inline-flex text-sm font-semibold text-[#c8a46b] hover:underline"
-            >
-              View Full Gallery →
-            </a>
           </DayalReveal>
         </div>
       </div>

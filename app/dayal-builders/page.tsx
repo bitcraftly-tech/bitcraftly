@@ -4,18 +4,20 @@ import DayalShowcaseContent from "@/components/dayal/DayalShowcaseContent";
 import { DAYAL, HERO_DESCRIPTION } from "@/lib/dayal/data";
 
 export const metadata: Metadata = {
-  title: `${DAYAL.brand} | Premium Township in ${DAYAL.location}`,
+  title: `${DAYAL.brand} | Real Estate in ${DAYAL.location}`,
   description: HERO_DESCRIPTION,
   keywords: [
     "Dayal Builders",
-    "Dayal City",
+    "Dayal Galaxy",
+    "Dayal Vatika",
+    "Dayal Enclave",
+    "Teg Bahadur Block",
     "real estate Jamshedpur",
-    "township Govindpur",
-    "premium homes Jamshedpur",
-    "RERA approved",
+    "Dayal Tower Parsudih",
+    "Dayal Residency Karandih",
   ],
   openGraph: {
-    title: `${DAYAL.brand} — Premium Township`,
+    title: `${DAYAL.brand} — ${DAYAL.tagline}`,
     description: HERO_DESCRIPTION,
     type: "website",
   },
