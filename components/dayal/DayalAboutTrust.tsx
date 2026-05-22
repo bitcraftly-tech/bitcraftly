@@ -8,7 +8,7 @@ import { ABOUT_EXTENDED, ABOUT_INTRO, PROPRIETOR } from "@/lib/dayal/data";
 export default function DayalAboutTrust() {
   return (
     <section id="about" className="py-16 lg:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="dayal-container">
         <DayalReveal>
           <div className="overflow-hidden rounded-2xl bg-white shadow-xl shadow-[#0b1633]/8 ring-1 ring-[#0b1633]/5">
             <div className="grid lg:grid-cols-12">
@@ -17,7 +17,7 @@ export default function DayalAboutTrust() {
                   src={PROPRIETOR.image}
                   alt={PROPRIETOR.name}
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-center"
                   sizes="33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0b1633]/80 via-transparent to-transparent lg:bg-gradient-to-r" />
@@ -31,14 +31,14 @@ export default function DayalAboutTrust() {
               </div>
 
               <div className="p-8 lg:col-span-8 lg:p-10">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8a46b]">
+                <p className="dayal-eyebrow tracking-[0.2em]">
                   About Dayal Builders
                 </p>
-                <h2 className="dayal-serif mt-3 text-2xl font-semibold leading-snug text-[#0b1633] sm:text-3xl">
+                <h2 className="dayal-section-title mt-3 leading-snug">
                   The Prominent Entities In The Real Estate Industry In Jamshedpur
                 </h2>
-                <p className="mt-5 text-sm leading-relaxed text-[#5c6478] sm:text-base">{ABOUT_INTRO}</p>
-                <p className="mt-4 text-sm leading-relaxed text-[#5c6478] sm:text-base">{ABOUT_EXTENDED}</p>
+                <p className="dayal-body mt-5">{ABOUT_INTRO}</p>
+                <p className="dayal-body mt-4">{ABOUT_EXTENDED}</p>
                 <a
                   href="https://www.dayalbuilder.com/about-us"
                   target="_blank"

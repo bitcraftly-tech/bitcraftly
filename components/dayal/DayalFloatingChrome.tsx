@@ -19,21 +19,21 @@ export default function DayalFloatingChrome() {
           href={waUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#25D366] text-white shadow-lg transition hover:scale-105"
+          className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#25D366] text-white shadow-lg transition hover:opacity-90"
           aria-label="WhatsApp"
         >
           <MessageCircle className="h-5 w-5" />
         </a>
         <a
           href={`tel:${DAYAL.phones[0].tel}`}
-          className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#0b1633] text-white shadow-lg transition hover:scale-105"
+          className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#c8a46b] text-[#0b1633] shadow-lg transition hover:bg-[#d4b57d]"
           aria-label="Call us"
         >
           <Phone className="h-5 w-5" />
         </a>
         <a
           href="#contact"
-          className="flex h-12 w-12 items-center justify-center rounded-lg border border-[#c8a46b] bg-white text-[#0b1633] shadow-lg transition hover:scale-105"
+          className="flex h-12 w-12 items-center justify-center rounded-lg border border-[#c8a46b] bg-white text-[#0b1633] shadow-lg transition hover:opacity-90"
           aria-label="Brochure"
         >
           <FileText className="h-5 w-5" />

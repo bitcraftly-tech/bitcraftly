@@ -24,7 +24,7 @@ export default function DayalBooking() {
         <DayalReveal>
           <div className="overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-[#0b1633]/8">
             <div className="grid lg:grid-cols-2">
-              <div className="bg-[#0b1633] p-8 text-white lg:p-12">
+              <div className="dayal-on-dark bg-[#0b1633] p-8 text-white lg:p-12">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c8a46b]">
                   Book Your Visit
                 </p>
@@ -36,7 +36,7 @@ export default function DayalBooking() {
                   advisors — we respond within a few hours.
                 </p>
                 <div className="mt-8 flex flex-col gap-4">
-                  <a href={waUrl} target="_blank" rel="noopener noreferrer" className="dayal-btn-outline border-white/40 text-white hover:bg-white/10">
+                  <a href={waUrl} target="_blank" rel="noopener noreferrer" className="dayal-btn-outline inline-flex">
                     <MessageCircle className="h-4 w-4" />
                     Talk on WhatsApp
                   </a>

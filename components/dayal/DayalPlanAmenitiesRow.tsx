@@ -36,16 +36,12 @@ export default function DayalPlanAmenitiesRow() {
 
   return (
     <section className="py-16 lg:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="dayal-container">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
           <DayalReveal>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c8a46b]">
-              Meet Our Legacy
-            </p>
-            <h2 className="dayal-serif mt-2 text-2xl font-semibold text-[#0b1633] sm:text-3xl">
-              Landmarks of Quality Living
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-[#5c6478] sm:text-base">
+            <p className="dayal-eyebrow">Meet Our Legacy</p>
+            <h2 className="dayal-section-title mt-2">Landmarks of Quality Living</h2>
+            <p className="dayal-body mt-4">
               Dayal Galaxy, Dayal Vatika, Dayal Enclave, and Teg Bahadur Block have become symbols of
               quality living. With every new venture, we continue to raise the bar in design,
               durability, and community planning.
@@ -72,12 +68,8 @@ export default function DayalPlanAmenitiesRow() {
           </DayalReveal>
 
           <DayalReveal delay={0.1} id="amenities">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c8a46b]">
-              Project Amenities
-            </p>
-            <h2 className="dayal-serif mt-2 text-2xl font-semibold text-[#0b1633] sm:text-3xl">
-              Thoughtfully Planned Spaces
-            </h2>
+            <p className="dayal-eyebrow">Project Amenities</p>
+            <h2 className="dayal-section-title mt-2">Thoughtfully Planned Spaces</h2>
             <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {AMENITIES.map((item) => {
                 const Icon = ICON_MAP[item.icon] ?? Building;
@@ -89,7 +81,7 @@ export default function DayalPlanAmenitiesRow() {
                     <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#c8a46b]/40 text-[#c8a46b] transition group-hover:bg-[#c8a46b]/10 group-hover:shadow-[0_0_16px_rgba(200,164,107,0.3)]">
                       <Icon className="h-5 w-5" strokeWidth={1.5} />
                     </span>
-                    <p className="mt-3 text-[11px] font-medium leading-tight text-[#0b1633] sm:text-xs">
+                    <p className="dayal-caption mt-3 font-medium leading-tight text-[#0b1633]">
                       {item.name}
                     </p>
                   </div>

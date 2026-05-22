@@ -11,15 +11,30 @@ import {
   Building2,
   HeartHandshake,
 } from "lucide-react";
-import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 import DayalReveal from "@/components/dayal/DayalReveal";
-import { DAYAL, HERO_DESCRIPTION, HERO_IMAGE, TRUST_HIGHLIGHTS } from "@/lib/dayal/data";
+import {
+  DAYAL,
+  HERO_DESCRIPTION,
+  HERO_VIDEO,
+  HERO_VIDEO_POSTER,
+  TRUST_HIGHLIGHTS,
+} from "@/lib/dayal/data";
 
 const TRUST_ICONS = [HardHat, Building2, Sparkles, Shield, HeartHandshake] as const;
 
 export default function DayalHero() {
   const reduce = useReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (reduce) return;
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    void video.play().catch(() => {});
+  }, [reduce]);
 
   return (
     <section id="home" className="relative overflow-hidden pt-24 pb-16 lg:pt-28 lg:pb-24">
@@ -36,7 +51,7 @@ export default function DayalHero() {
           ))}
       </div>
 
-      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-14 lg:px-8">
+      <div className="dayal-container relative grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
         <DayalReveal>
           <span className="inline-flex rounded-full bg-[#0b1633] px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white">
             {DAYAL.tagline}
@@ -77,7 +92,7 @@ export default function DayalHero() {
                   <span className="mb-2 flex h-10 w-10 items-center justify-center rounded-full border border-[#c8a46b]/40 text-[#c8a46b]">
                     <Icon className="h-4 w-4" strokeWidth={1.5} />
                   </span>
-                  <span className="text-[11px] font-medium leading-tight text-[#0b1633]/80">
+                  <span className="dayal-caption font-medium leading-tight text-[#0b1633]/80">
                     {label}
                   </span>
                 </li>
@@ -88,14 +103,28 @@ export default function DayalHero() {
 
         <DayalReveal delay={0.15} className="relative">
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl shadow-[#0b1633]/20 ring-1 ring-[#0b1633]/10">
-            <Image
-              src={HERO_IMAGE}
-              alt="Dayal Builders — Char Sahebzade"
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            {reduce || !HERO_VIDEO ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={HERO_VIDEO_POSTER}
+                alt="Dayal Builders — Char Sahebzade"
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <video
+                ref={videoRef}
+                className="h-full w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster={HERO_VIDEO_POSTER}
+                aria-label="Dayal Builders — Char Sahebzade"
+              >
+                <source src={HERO_VIDEO} type="video/mp4" />
+              </video>
+            )}
             <div className="absolute inset-0 bg-gradient-to-tr from-[#0b1633]/50 via-transparent to-transparent" />
           </div>
           <div className="absolute -bottom-4 -left-4 hidden rounded-xl bg-white px-5 py-4 shadow-xl sm:block">

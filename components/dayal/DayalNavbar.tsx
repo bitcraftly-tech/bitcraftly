@@ -1,19 +1,18 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  Calendar,
-  Menu,
-  X,
-} from "lucide-react";
-import Link from "next/link";
+import { Calendar, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { DAYAL, NAV_LINKS } from "@/lib/dayal/data";
+import DayalLogo from "@/components/dayal/DayalLogo";
+import { NAV_LINKS } from "@/lib/dayal/data";
+
+const SECTION_IDS = NAV_LINKS.map((l) => l.href.replace("#", ""));
 
 export default function DayalNavbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("#home");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -23,58 +22,75 @@ export default function DayalNavbar() {
   }, []);
 
   useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActive(`#${id}`);
+        },
+        { rootMargin: "-35% 0px -55% 0px", threshold: 0 }
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [open]);
 
+  const linkClass = (href: string, mobile = false) => {
+    const isActive = active === href;
+    if (mobile) {
+      return `dayal-serif block rounded-lg px-3 py-3 text-base transition ${
+        isActive ? "font-semibold text-[#c0392b]" : "font-medium text-[#0b1633] hover:bg-[#c8a46b]/10"
+      }`;
+    }
+    return `dayal-serif rounded-md px-2.5 py-2 text-[15px] tracking-wide transition xl:px-3 ${
+      isActive
+        ? "font-semibold text-[#c0392b]"
+        : "font-medium text-[#282626] hover:text-[#c0392b]"
+    }`;
+  };
+
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-500 ${
           scrolled
-            ? "border-b border-[#0b1633]/10 bg-[#f8f6f2]/85 shadow-sm backdrop-blur-xl"
-            : "bg-transparent"
+            ? "border-[#0b1633]/12 bg-[#fffdf9]/95 shadow-sm backdrop-blur-xl"
+            : "border-[#0b1633]/6 bg-[#fffdf9]/80 backdrop-blur-sm"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-          <Link href="#home" className="group flex min-w-0 items-center gap-3">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#c8a46b]/20 text-[#c8a46b]">
-              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
-                <path d="M4 20V9l8-5 8 5v11h-5v-6H9v6H4z" />
-              </svg>
-            </span>
-            <span className="min-w-0">
-              <span className="dayal-serif block truncate text-sm font-bold tracking-wide text-[#0b1633] sm:text-base">
-                {DAYAL.brand.toUpperCase()}
-              </span>
-              <span className="block truncate text-[10px] text-[#5c6478] sm:text-xs">
-                {DAYAL.location}
-              </span>
-            </span>
-          </Link>
+        <div className="dayal-container flex items-center justify-between gap-3 py-3">
+          <DayalLogo priority className="min-w-0" />
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex" aria-label="Main">
             {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="rounded-md px-3 py-2 text-sm font-medium text-[#0b1633]/80 transition hover:text-[#c8a46b]"
-              >
+              <a key={link.href} href={link.href} className={linkClass(link.href)}>
                 {link.label}
               </a>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <a href="#contact" className="dayal-btn-primary hidden sm:inline-flex">
+          <div className="flex shrink-0 items-center gap-2">
+            <a href="#contact" className="dayal-btn-primary hidden text-sm sm:inline-flex">
               <Calendar className="h-4 w-4" aria-hidden />
-              Book Site Visit
+              Let&apos;s Connect
             </a>
             <button
               type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-[#0b1633]/15 text-[#0b1633] lg:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#0b1633]/15 text-[#0b1633] lg:hidden"
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((v) => !v)}
             >
@@ -107,7 +123,7 @@ export default function DayalNavbar() {
               aria-label="Mobile"
             >
               <div className="mb-8 flex items-center justify-between">
-                <span className="dayal-serif text-lg font-semibold text-[#0b1633]">{DAYAL.brand}</span>
+                <DayalLogo className="min-w-0" />
                 <button type="button" onClick={() => setOpen(false)} aria-label="Close">
                   <X className="h-5 w-5" />
                 </button>
@@ -117,7 +133,7 @@ export default function DayalNavbar() {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="block rounded-lg px-3 py-3 text-base font-medium text-[#0b1633] hover:bg-[#c8a46b]/10"
+                      className={linkClass(link.href, true)}
                       onClick={() => setOpen(false)}
                     >
                       {link.label}
@@ -131,7 +147,7 @@ export default function DayalNavbar() {
                 onClick={() => setOpen(false)}
               >
                 <Calendar className="h-4 w-4" />
-                Book Site Visit
+                Let&apos;s Connect
               </a>
             </motion.nav>
           </motion.div>

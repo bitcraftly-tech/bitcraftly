@@ -1,18 +1,172 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Building2, MapPin } from "lucide-react";
 import Image from "next/image";
 
 import DayalReveal from "@/components/dayal/DayalReveal";
-import { ONGOING_PROJECTS, PAST_PROJECTS } from "@/lib/dayal/data";
+import { FUTURE_PROJECTS, ONGOING_PROJECTS, PAST_PROJECTS } from "@/lib/dayal/data";
 
 const STATUS_STYLES: Record<string, string> = {
+  Future: "bg-[#0b1633]/90 text-white",
   Ongoing: "bg-amber-500/90 text-white",
   Completed: "bg-emerald-600/90 text-white",
 };
 
-type Project = (typeof ONGOING_PROJECTS)[number] | (typeof PAST_PROJECTS)[number];
+type RichPart = { readonly text: string; readonly bold?: boolean };
+
+type FeatureProject = {
+  readonly id: string;
+  readonly name: string;
+  readonly image: string;
+  readonly description: string;
+  readonly tagline?: string;
+  readonly headlineSuffix?: string;
+  readonly descriptionRich?: readonly RichPart[];
+  readonly status?: string;
+};
+
+type GridProject =
+  | (typeof FUTURE_PROJECTS)[number]
+  | (typeof ONGOING_PROJECTS)[number]
+  | (typeof PAST_PROJECTS)[number];
+
+function ProjectCard({
+  project,
+  className = "",
+}: {
+  project: GridProject;
+  className?: string;
+}) {
+  return (
+    <article
+      className={`group flex h-full flex-col overflow-hidden bg-white transition-shadow duration-300 hover:shadow-lg ${className}`}
+    >
+      <div className="relative aspect-[16/10] overflow-hidden bg-[#0b1633]/5 sm:aspect-[5/3]">
+        <Image
+          src={project.image}
+          alt={project.name}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 400px"
+        />
+        <span
+          className={`absolute left-3 top-3 z-10 rounded px-2 py-0.5 dayal-micro font-bold uppercase tracking-wide ${STATUS_STYLES[project.status] ?? ""}`}
+        >
+          {project.status}
+        </span>
+      </div>
+      <div className="flex flex-1 flex-col p-4">
+        <h3 className="dayal-serif text-base font-semibold text-[#0b1633] sm:text-lg">{project.name}</h3>
+        <p className="dayal-caption mt-1 flex items-center gap-1">
+          <MapPin className="h-3 w-3 shrink-0 text-[#c8a46b]" />
+          {project.location}
+        </p>
+        <p className="dayal-caption mt-1.5 font-medium text-[#c8a46b]">{project.tagline}</p>
+        <p className="dayal-caption mt-1.5 flex-1">{project.description}</p>
+        <a
+          href="#contact"
+          className="dayal-caption mt-3 inline-flex items-center gap-1 font-semibold text-[#0b1633] transition hover:text-[#c0392b]"
+        >
+          <Building2 className="h-3 w-3" />
+          View Project
+        </a>
+      </div>
+    </article>
+  );
+}
+
+function FeatureProjectIcon() {
+  return (
+    <span
+      className="mb-2 inline-flex h-6 w-6 shrink-0 items-center justify-center text-[#c0392b]"
+      aria-hidden
+    >
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+        <path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm13 0h3v3h-3v-3zm-6 3h3v4h-3v-4zm6 4h3v3h-3v-3z" />
+      </svg>
+    </span>
+  );
+}
+
+function FeatureProjectRow({
+  project,
+  reversed = false,
+}: {
+  project: FeatureProject;
+  reversed?: boolean;
+}) {
+  const rich = project.descriptionRich ?? [{ text: project.description }];
+  const headlineSuffix = project.headlineSuffix ?? project.tagline ?? "";
+
+  return (
+    <article
+      className={`group grid overflow-hidden bg-[#eeedea] shadow-sm ring-1 ring-[#0b1633]/6 ${
+        reversed ? "md:grid-cols-[1fr_minmax(0,32%)]" : "md:grid-cols-[minmax(0,32%)_1fr]"
+      }`}
+    >
+      <div
+        className={`relative min-h-[120px] overflow-hidden sm:min-h-[130px] md:min-h-[150px] ${
+          reversed ? "order-2 md:order-2" : "order-1 md:order-1"
+        }`}
+      >
+        <Image
+          src={project.image}
+          alt={project.name}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 280px"
+        />
+      </div>
+
+      <div
+        className={`flex flex-col justify-center px-4 py-4 sm:px-5 sm:py-5 md:px-6 md:py-6 ${
+          reversed ? "order-1 md:order-1" : "order-2 md:order-2"
+        }`}
+      >
+        <FeatureProjectIcon />
+        <h3 className="text-sm font-normal leading-snug text-[#1a1a1a] sm:text-base">
+          <span className="font-bold">{project.name}</span>
+          {headlineSuffix ? (
+            <>
+              {" – "}
+              {headlineSuffix}
+            </>
+          ) : null}
+        </h3>
+        <p className="dayal-body mt-2 max-w-lg text-[#4a4a4a]">
+          {rich.map((part, i) =>
+            part.bold ? (
+              <strong key={i} className="font-bold text-[#1a1a1a]">
+                {part.text}
+              </strong>
+            ) : (
+              <span key={i}>{part.text}</span>
+            )
+          )}
+        </p>
+        <a
+          href="#contact"
+          className="dayal-caption mt-3 inline-flex items-center gap-1 font-semibold text-[#0b1633] transition hover:text-[#c0392b]"
+        >
+          <Building2 className="h-3 w-3" />
+          View Project
+        </a>
+      </div>
+    </article>
+  );
+}
+
+function FeatureProjectList({ projects }: { projects: readonly FeatureProject[] }) {
+  return (
+    <div className="mt-10 flex w-full flex-col gap-4">
+      {projects.map((project, i) => (
+        <DayalReveal key={project.id} delay={i * 0.08}>
+          <FeatureProjectRow project={project} reversed={i === 1} />
+        </DayalReveal>
+      ))}
+    </div>
+  );
+}
 
 function ProjectGrid({
   projects,
@@ -20,69 +174,44 @@ function ProjectGrid({
   eyebrow,
   title,
   subtitle,
+  featureLayout = false,
 }: {
-  projects: readonly Project[];
+  projects: readonly GridProject[];
   sectionId: string;
   eyebrow: string;
   title: string;
   subtitle: string;
+  featureLayout?: boolean;
 }) {
+  const useFeature = featureLayout && projects.length <= 4;
+
+  const gridClass =
+    "mt-12 flex w-full gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-thin lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible";
+
+  const cardWrapClass = "w-[min(250px,74vw)] shrink-0 snap-start lg:w-auto";
+
   return (
     <div id={sectionId} className="scroll-mt-24">
       <DayalReveal className="text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c8a46b]">{eyebrow}</p>
-        <h2 className="dayal-serif mt-3 text-3xl font-semibold text-[#0b1633] sm:text-4xl">{title}</h2>
-        <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#5c6478] sm:text-base">
-          {subtitle}
-        </p>
+        <p className="dayal-eyebrow">{eyebrow}</p>
+        <h2 className="dayal-section-title">{title}</h2>
+        <p className="dayal-body mx-auto mt-4 max-w-2xl">{subtitle}</p>
       </DayalReveal>
 
-      <div className="mt-12 flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-thin lg:grid lg:grid-cols-4 lg:overflow-visible">
-        {projects.map((project, i) => (
-          <DayalReveal
-            key={project.id}
-            delay={i * 0.06}
-            className="w-[min(280px,78vw)] shrink-0 snap-start lg:w-auto"
-          >
-            <motion.article
-              className="group overflow-hidden rounded-xl bg-white shadow-lg ring-1 ring-[#0b1633]/5"
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="relative aspect-[3/4] overflow-hidden sm:aspect-[4/5]">
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  fill
-                  className="object-cover transition duration-700 group-hover:scale-105"
-                  sizes="220px"
-                />
-                <span
-                  className={`absolute left-3 top-3 rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${STATUS_STYLES[project.status] ?? ""}`}
-                >
-                  {project.status}
-                </span>
-              </div>
-              <div className="p-4">
-                <h3 className="dayal-serif text-lg font-semibold text-[#0b1633]">{project.name}</h3>
-                <p className="mt-1 flex items-center gap-1 text-xs text-[#5c6478]">
-                  <MapPin className="h-3 w-3 text-[#c8a46b]" />
-                  {project.location}
-                </p>
-                <p className="mt-2 text-xs font-medium text-[#c8a46b]">{project.tagline}</p>
-                <p className="mt-2 text-xs leading-relaxed text-[#5c6478]">{project.description}</p>
-                <a
-                  href="#contact"
-                  className="mt-3 flex items-center gap-1 text-xs font-semibold text-[#0b1633] hover:text-[#c8a46b]"
-                >
-                  <Building2 className="h-3.5 w-3.5" />
-                  View Project
-                </a>
-              </div>
-            </motion.article>
-          </DayalReveal>
-        ))}
-      </div>
+      {useFeature ? (
+        <FeatureProjectList projects={projects as readonly FeatureProject[]} />
+      ) : (
+        <div className={gridClass}>
+          {projects.map((project, i) => (
+            <DayalReveal key={project.id} delay={i * 0.06} className={cardWrapClass}>
+              <ProjectCard
+                project={project}
+                className="h-full overflow-hidden rounded-xl shadow-md ring-1 ring-[#0b1633]/5"
+              />
+            </DayalReveal>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -90,7 +219,15 @@ function ProjectGrid({
 export default function DayalProjects() {
   return (
     <section id="projects" className="py-16 lg:py-24">
-      <div className="mx-auto max-w-7xl space-y-20 px-4 sm:px-6 lg:px-8">
+      <div className="dayal-container space-y-20">
+        <ProjectGrid
+          sectionId="future-projects"
+          eyebrow="Future Projects"
+          title="Crafting Tomorrow's Landmarks"
+          subtitle="Discover our upcoming developments designed to elevate modern living and shape the future skyline."
+          projects={FUTURE_PROJECTS}
+          featureLayout
+        />
         <ProjectGrid
           sectionId="ongoing-projects"
           eyebrow="Ongoing Projects"
@@ -104,6 +241,7 @@ export default function DayalProjects() {
           title="Legacy Projects — Foundations of Our Trusted Reputation"
           subtitle="Our past projects showcase a proven track record of quality, commitment, and architectural excellence."
           projects={PAST_PROJECTS}
+          featureLayout
         />
       </div>
     </section>

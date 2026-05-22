@@ -9,6 +9,7 @@ import DayalPlanAmenitiesRow from "@/components/dayal/DayalPlanAmenitiesRow";
 import DayalProjects from "@/components/dayal/DayalProjects";
 import DayalAboutTrust from "@/components/dayal/DayalAboutTrust";
 import DayalTrustBar from "@/components/dayal/DayalTrustBar";
+import DayalBlog from "@/components/dayal/DayalBlog";
 import DayalVisitCta from "@/components/dayal/DayalVisitCta";
 import DayalWhyTestimonialsRow from "@/components/dayal/DayalWhyTestimonialsRow";
 
@@ -24,6 +25,7 @@ export default function DayalShowcaseContent() {
       <DayalPlanAmenitiesRow />
       <DayalLocationGalleryRow />
       <DayalWhyTestimonialsRow />
+      <DayalBlog />
       <DayalVisitCta />
       <DayalFooter />
       <DayalFloatingChrome />

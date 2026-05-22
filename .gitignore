@@ -45,3 +45,6 @@ env/
 *.swp
 *.swo
 .vercel
+
+# Large local media (exceeds GitHub 100MB limit)
+public/dayal-builders/hero.mp4
