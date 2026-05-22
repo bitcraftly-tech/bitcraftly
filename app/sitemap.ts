@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/team", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/demo", priority: 0.7, changeFrequency: "monthly" as const },
     { path: "/careers", priority: 0.5, changeFrequency: "monthly" as const },
+    { path: "/dayal-builders", priority: 0.85, changeFrequency: "weekly" as const },
     { path: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
     { path: "/terms", priority: 0.3, changeFrequency: "yearly" as const },
   ];
@@ -28,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/portfolio/clinic-healthcare-showcase",
     "/portfolio/restaurant-ai-chatbot-showcase",
     "/portfolio/builder-real-estate-showcase",
+    "/portfolio/dayal-builders-showcase",
     "/portfolio/local-services-leads-showcase",
     "/portfolio/society-management-showcase",
     "/portfolio/react-video-demo",

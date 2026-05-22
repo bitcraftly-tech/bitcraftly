@@ -223,7 +223,7 @@ const portfolioExtras: PortfolioItem[] = [
     emoji: "🏗️",
     mockup: "local",
     featureBullets: ["Project highlights", "Lead enquiries", "Mobile friendly"],
-    demoHref: "/portfolio/builder-real-estate-showcase",
+    demoHref: "/portfolio/dayal-builders-showcase",
     ctaLabel: "Open interactive demo →",
     tag: "Website",
     categories: ["business-websites"],

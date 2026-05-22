@@ -25,7 +25,7 @@ const LoaderContext = createContext<LoaderContextValue | null>(null);
 type InitialPhase = "idle" | "loading" | "exiting" | "done";
 
 function loaderTheme(pathname: string, resolvedTheme: "light" | "dark"): LoaderTheme {
-  if (pathname.startsWith("/portfolio/")) return "light";
+  if (pathname.startsWith("/portfolio/") || pathname.startsWith("/dayal-builders")) return "light";
   return resolvedTheme;
 }
 

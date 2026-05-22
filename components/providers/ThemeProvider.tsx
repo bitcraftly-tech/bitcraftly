@@ -28,7 +28,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   const [resolvedTheme, setResolvedTheme] = useState<ThemeValue>("light");
 
   useEffect(() => {
-    const isPortfolio = window.location.pathname.startsWith("/portfolio/");
+    const path = window.location.pathname;
+    const isPortfolio = path.startsWith("/portfolio/") || path.startsWith("/dayal-builders");
     if (isPortfolio) {
       setResolvedTheme("light");
       applyThemeToDom("light");
