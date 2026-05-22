@@ -57,8 +57,8 @@ export const HERO_DESCRIPTION =
 
 export const HERO_IMAGE = "/dayal-builders/projects/char-sahib-zaade.avif";
 
-/** Optional hero MP4 — keep file local only (>100MB); gitignored */
-export const HERO_VIDEO = "";
+/** Optional hero MP4 — web-optimized copy committed for deploy */
+export const HERO_VIDEO = "/dayal-builders/hero.mp4";
 export const HERO_VIDEO_POSTER = HERO_IMAGE;
 
 export const ABOUT_INTRO =
