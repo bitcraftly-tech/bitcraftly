@@ -100,13 +100,13 @@ function FeatureProjectRow({
 
   return (
     <article
-      className={`group grid overflow-hidden bg-[#eeedea] shadow-sm ring-1 ring-[#0b1633]/6 ${
+      className={`group grid overflow-hidden rounded-xl bg-[#eeedea] shadow-sm ring-1 ring-[#0b1633]/6 ${
         reversed ? "md:grid-cols-[1fr_minmax(0,32%)]" : "md:grid-cols-[minmax(0,32%)_1fr]"
       }`}
     >
       <div
-        className={`relative min-h-[120px] overflow-hidden sm:min-h-[130px] md:min-h-[150px] ${
-          reversed ? "order-2 md:order-2" : "order-1 md:order-1"
+        className={`relative aspect-[16/10] overflow-hidden md:aspect-auto md:min-h-[150px] ${
+          reversed ? "order-1 md:order-2" : "order-1 md:order-1"
         }`}
       >
         <Image
@@ -120,7 +120,7 @@ function FeatureProjectRow({
 
       <div
         className={`flex flex-col justify-center px-4 py-4 sm:px-5 sm:py-5 md:px-6 md:py-6 ${
-          reversed ? "order-1 md:order-1" : "order-2 md:order-2"
+          reversed ? "order-2 md:order-1" : "order-2 md:order-2"
         }`}
       >
         <FeatureProjectIcon />
@@ -186,9 +186,9 @@ function ProjectGrid({
   const useFeature = featureLayout && projects.length <= 4;
 
   const gridClass =
-    "mt-12 flex w-full gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-thin lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible";
+    "mt-10 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5";
 
-  const cardWrapClass = "w-[min(250px,74vw)] shrink-0 snap-start lg:w-auto";
+  const cardWrapClass = "min-w-0 w-full";
 
   return (
     <div id={sectionId} className="scroll-mt-24">
@@ -218,8 +218,8 @@ function ProjectGrid({
 
 export default function DayalProjects() {
   return (
-    <section id="projects" className="py-16 lg:py-24">
-      <div className="dayal-container space-y-20">
+    <section id="projects" className="py-12 sm:py-16 lg:py-24">
+      <div className="dayal-container space-y-14 sm:space-y-20">
         <ProjectGrid
           sectionId="future-projects"
           eyebrow="Future Projects"

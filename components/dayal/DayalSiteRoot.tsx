@@ -16,7 +16,7 @@ export default function DayalSiteRoot({ children, className = "" }: Props) {
 
   return (
     <div
-      className={`dayal-site flex min-h-screen flex-col scroll-smooth pb-20 lg:pb-0 ${className}`.trim()}
+      className={`dayal-site flex min-h-screen flex-col scroll-smooth pb-[calc(4.25rem+env(safe-area-inset-bottom,0px))] lg:pb-0 ${className}`.trim()}
     >
       {children}
     </div>

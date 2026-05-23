@@ -39,7 +39,7 @@ export default function DayalWhyTestimonialsRow() {
   }, [paused, total, goNext]);
 
   return (
-    <section className="bg-[#f8f6f2] py-16 lg:py-20">
+    <section className="bg-[#f8f6f2] py-12 sm:py-16 lg:py-20">
       <div className="dayal-container">
         <div className="grid items-stretch gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           {/* Left — Why Dayal */}
@@ -79,7 +79,7 @@ export default function DayalWhyTestimonialsRow() {
 
             <div className="mt-6 flex min-h-0 flex-1 flex-col lg:mt-7">
               <div
-                className="flex min-h-[min(100%,22rem)] flex-1 flex-col overflow-hidden rounded-xl bg-white shadow-[0_12px_40px_rgba(11,22,51,0.1)] ring-1 ring-[#0b1633]/8 sm:min-h-[24rem] lg:min-h-0"
+                className="flex min-h-[18rem] flex-1 flex-col overflow-hidden rounded-xl bg-white shadow-[0_12px_40px_rgba(11,22,51,0.1)] ring-1 ring-[#0b1633]/8 sm:min-h-[22rem] lg:min-h-0"
                 onMouseEnter={() => setPaused(true)}
                 onMouseLeave={() => setPaused(false)}
                 onFocusCapture={() => setPaused(true)}

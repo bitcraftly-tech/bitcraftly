@@ -35,7 +35,7 @@ export default function DayalPlanAmenitiesRow() {
   const legacyImage = ONGOING_PROJECTS[0]?.image;
 
   return (
-    <section className="py-16 lg:py-20">
+    <section className="py-12 sm:py-16 lg:py-20">
       <div className="dayal-container">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
           <DayalReveal>

@@ -31,7 +31,7 @@ const NEARBY_ICONS: Record<string, LucideIcon> = {
 };
 
 function galleryTileClass(index: number): string {
-  if (index === 0) return "col-span-2 row-span-2 min-h-[7.5rem] sm:min-h-0";
+  if (index === 0) return "col-span-2 row-span-2 min-h-[8.5rem] sm:min-h-0";
   if (index === 9) return "col-span-2";
   return "";
 }
@@ -190,9 +190,9 @@ export default function DayalLocationGalleryRow() {
   }, [total]);
 
   return (
-    <section className="bg-white py-16 lg:py-20">
+    <section className="bg-white py-12 sm:py-16 lg:py-20">
       <div className="dayal-container">
-        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-x-14 lg:gap-y-0 xl:gap-x-16">
+        <div className="grid items-start gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-x-14 lg:gap-y-0 xl:gap-x-16">
           <DayalReveal id="location" className="lg:pr-2">
             <ColumnHeader label="Location" title="Head Office & Site Address" />
 
@@ -224,7 +224,7 @@ export default function DayalLocationGalleryRow() {
             <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#0b1633]/55">
               Nearby & connected
             </p>
-            <ul className="mt-3 grid gap-2.5 sm:grid-cols-2">
+            <ul className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {NEARBY.map((place) => {
                 const Icon = NEARBY_ICONS[place.icon] ?? Route;
                 return (
@@ -232,11 +232,11 @@ export default function DayalLocationGalleryRow() {
                     key={place.name}
                     className="flex items-center justify-between gap-2 rounded-lg border border-[#0b1633]/8 bg-[#fffdf9] px-3 py-2.5"
                   >
-                    <div className="flex min-w-0 items-center gap-2.5">
+                    <div className="flex min-w-0 flex-1 items-center gap-2.5">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-[#c8a46b]/12 text-[#c8a46b]">
                         <Icon className="h-3.5 w-3.5" aria-hidden />
                       </span>
-                      <span className="truncate text-sm font-medium text-[#0b1633]">{place.name}</span>
+                      <span className="text-sm font-medium leading-snug text-[#0b1633]">{place.name}</span>
                     </div>
                     <span className="shrink-0 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-700">
                       {place.time}
@@ -255,7 +255,7 @@ export default function DayalLocationGalleryRow() {
             />
 
             <div
-              className="grid min-w-0 grid-cols-3 grid-flow-dense gap-2 auto-rows-[4.75rem] sm:auto-rows-[5.25rem] lg:auto-rows-[5rem]"
+              className="grid min-w-0 grid-cols-2 grid-flow-dense gap-2 auto-rows-[5.25rem] sm:grid-cols-3 sm:auto-rows-[5.25rem] lg:auto-rows-[5rem]"
               role="list"
             >
               {GALLERY_IMAGES.map((item, index) => (

@@ -131,6 +131,60 @@ const IMG = {
   nextProject: "/dayal-builders/projects/next-project.avif",
 } as const;
 
+export type HeroMediaSlide = {
+  readonly id: string;
+  readonly label: string;
+  readonly type: "video" | "image";
+  readonly src: string;
+  readonly thumb: string;
+};
+
+/** Hero carousel — video + flagship project stills */
+export const HERO_MEDIA_SLIDES: readonly HeroMediaSlide[] = [
+  {
+    id: "char-video",
+    label: "Char Sahebzade",
+    type: "video",
+    src: HERO_VIDEO,
+    thumb: IMG.charSahibZaade,
+  },
+  {
+    id: "teg-bahadur",
+    label: "Teg Bahadur Block",
+    type: "image",
+    src: IMG.tegBahadur,
+    thumb: IMG.tegBahadur,
+  },
+  {
+    id: "galaxy",
+    label: "Dayal Galaxy",
+    type: "image",
+    src: IMG.galaxy,
+    thumb: IMG.galaxy,
+  },
+  {
+    id: "vatika",
+    label: "Dayal Vatika",
+    type: "image",
+    src: IMG.vatika,
+    thumb: IMG.vatika,
+  },
+  {
+    id: "enclave",
+    label: "Dayal Enclave",
+    type: "image",
+    src: IMG.enclave,
+    thumb: IMG.enclave,
+  },
+  {
+    id: "skyline",
+    label: "Dayal Skyline",
+    type: "image",
+    src: IMG.dayalSkyline,
+    thumb: IMG.dayalSkyline,
+  },
+] as const;
+
 export const CONTACT_FORM_BG = IMG.nextProject;
 
 export const FUTURE_PROJECTS = [

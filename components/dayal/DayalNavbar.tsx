@@ -72,7 +72,7 @@ export default function DayalNavbar() {
             : "border-[#0b1633]/6 bg-[#fffdf9]/80 backdrop-blur-sm"
         }`}
       >
-        <div className="dayal-container flex items-center justify-between gap-3 py-3">
+        <div className="dayal-container flex items-center justify-between gap-2 py-2.5 sm:gap-3 sm:py-3">
           <DayalLogo priority className="min-w-0" />
 
           <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex" aria-label="Main">
@@ -84,9 +84,13 @@ export default function DayalNavbar() {
           </nav>
 
           <div className="flex shrink-0 items-center gap-2">
-            <a href="#contact" className="dayal-btn-primary hidden text-sm sm:inline-flex">
-              <Calendar className="h-4 w-4" aria-hidden />
-              Let&apos;s Connect
+            <a
+              href="#contact"
+              className="dayal-btn-primary hidden px-3 py-2 text-xs sm:inline-flex sm:px-4 sm:py-2.5 sm:text-sm"
+            >
+              <Calendar className="h-4 w-4 shrink-0" aria-hidden />
+              <span className="hidden md:inline">Let&apos;s Connect</span>
+              <span className="md:hidden">Connect</span>
             </a>
             <button
               type="button"
@@ -115,40 +119,46 @@ export default function DayalNavbar() {
               onClick={() => setOpen(false)}
             />
             <motion.nav
-              className="absolute right-0 top-0 flex h-full w-[min(100%,320px)] flex-col bg-[#fffdf9] p-6 shadow-2xl"
+              className="dayal-mobile-nav absolute right-0 top-0 flex h-[100dvh] max-h-[100dvh] w-[min(100%,320px)] flex-col overflow-hidden bg-[#fffdf9] shadow-2xl"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 280 }}
               aria-label="Mobile"
             >
-              <div className="mb-8 flex items-center justify-between">
+              <div className="flex shrink-0 items-center justify-between border-b border-[#0b1633]/8 px-5 py-4 pt-[max(1rem,env(safe-area-inset-top))]">
                 <DayalLogo className="min-w-0" />
                 <button type="button" onClick={() => setOpen(false)} aria-label="Close">
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              <ul className="flex flex-col gap-1">
-                {NAV_LINKS.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      className={linkClass(link.href, true)}
-                      onClick={() => setOpen(false)}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="#contact"
-                className="dayal-btn-primary mt-8 w-full"
-                onClick={() => setOpen(false)}
-              >
-                <Calendar className="h-4 w-4" />
-                Let&apos;s Connect
-              </a>
+
+              <div className="dayal-mobile-nav__scroll min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-4 touch-pan-y">
+                <ul className="flex flex-col gap-0.5">
+                  {NAV_LINKS.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        className={linkClass(link.href, true)}
+                        onClick={() => setOpen(false)}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="shrink-0 border-t border-[#0b1633]/8 px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+                <a
+                  href="#contact"
+                  className="dayal-btn-primary w-full"
+                  onClick={() => setOpen(false)}
+                >
+                  <Calendar className="h-4 w-4" />
+                  Let&apos;s Connect
+                </a>
+              </div>
             </motion.nav>
           </motion.div>
         )}

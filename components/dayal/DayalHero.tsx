@@ -9,19 +9,23 @@ import {
   HeartHandshake,
   MapPin,
   Maximize2,
+  Play,
   Shield,
   Sparkles,
   X,
 } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import DayalReveal from "@/components/dayal/DayalReveal";
 import {
   DAYAL,
   HERO_DESCRIPTION,
+  HERO_MEDIA_SLIDES,
   HERO_VIDEO,
   HERO_VIDEO_POSTER,
   TRUST_HIGHLIGHTS,
+  type HeroMediaSlide,
 } from "@/lib/dayal/data";
 
 const TRUST_ICONS = [HardHat, Building2, Sparkles, Shield, HeartHandshake] as const;
@@ -36,6 +40,132 @@ function isDocumentFullscreen() {
   return Boolean(doc.fullscreenElement ?? doc.webkitFullscreenElement);
 }
 
+function SincePlaque({ compact }: { compact?: boolean }) {
+  return (
+    <div
+      className={`dayal-since-plaque__inner flex items-center gap-2.5 sm:gap-3 ${
+        compact ? "dayal-since-plaque--compact" : "dayal-since-plaque--desktop"
+      }`}
+    >
+      <span className="dayal-since-plaque__icon flex shrink-0 items-center justify-center rounded-full">
+        <MapPin className={compact ? "h-3.5 w-3.5" : "h-4 w-4"} strokeWidth={2} aria-hidden />
+      </span>
+      <div className="min-w-0">
+        <p className="dayal-since-plaque__eyebrow">Since</p>
+        <p className="dayal-since-plaque__city">Jamshedpur</p>
+        {!compact ? <p className="dayal-since-plaque__sub">Jharkhand, India</p> : null}
+      </div>
+      {!compact ? (
+        <span className="dayal-since-plaque__mark dayal-serif hidden md:block" aria-hidden>
+          DB
+        </span>
+      ) : null}
+    </div>
+  );
+}
+
+/** Corner heritage plaque on hero media */
+function SinceJamshedpurBadge() {
+  return (
+    <div className="dayal-since-plaque pointer-events-none absolute left-0 top-0 z-10" aria-hidden>
+      <div className="sm:hidden">
+        <SincePlaque compact />
+      </div>
+      <div className="hidden sm:block">
+        <SincePlaque />
+      </div>
+    </div>
+  );
+}
+
+function HeroMediaThumbnails({
+  slides,
+  activeId,
+  onSelect,
+}: {
+  slides: readonly HeroMediaSlide[];
+  activeId: string;
+  onSelect: (id: string) => void;
+}) {
+  const stripRef = useRef<HTMLDivElement>(null);
+  const thumbRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+
+  useEffect(() => {
+    const el = thumbRefs.current.get(activeId);
+    if (!el || !stripRef.current) return;
+    el.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }, [activeId]);
+
+  return (
+    <div
+      className="absolute inset-x-0 bottom-0 z-20 pb-3 pt-8 sm:pb-3.5"
+      onClick={(e) => e.stopPropagation()}
+      onKeyDown={(e) => e.stopPropagation()}
+    >
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[5.5rem] bg-gradient-to-t from-[#0b1633]/95 via-[#0b1633]/75 to-transparent sm:h-24"
+        aria-hidden
+      />
+      <div
+        ref={stripRef}
+        className="relative flex gap-2 overflow-x-auto overscroll-x-contain scroll-smooth scroll-px-4 px-4 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:scroll-px-5 sm:px-5"
+        role="tablist"
+        aria-label="Project gallery"
+      >
+        {slides.map((slide) => {
+          const active = slide.id === activeId;
+          return (
+            <button
+              key={slide.id}
+              ref={(node) => {
+                if (node) thumbRefs.current.set(slide.id, node);
+                else thumbRefs.current.delete(slide.id);
+              }}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              aria-label={slide.label}
+              title={slide.label}
+              onClick={() => onSelect(slide.id)}
+              className={`relative h-[3.25rem] w-[4.75rem] shrink-0 snap-center overflow-hidden rounded-lg transition duration-200 sm:h-[3.75rem] sm:w-[5.25rem] ${
+                active
+                  ? "z-10 ring-2 ring-[#c8a46b] shadow-[0_4px_16px_rgba(200,164,107,0.45)]"
+                  : "ring-1 ring-white/25 opacity-80 hover:opacity-100"
+              }`}
+            >
+              <Image
+                src={slide.thumb}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="84px"
+              />
+              {slide.type === "video" ? (
+                <span className="absolute inset-0 flex items-center justify-center bg-[#0b1633]/40">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#c8a46b]/90 text-[#0b1633] shadow-md">
+                    <Play className="h-3.5 w-3.5 fill-current" aria-hidden />
+                  </span>
+                </span>
+              ) : null}
+              {active ? (
+                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0b1633]/90 to-transparent px-1 pb-1 pt-4">
+                  <span className="block truncate text-center text-[8px] font-semibold uppercase tracking-wide text-white/90 sm:text-[9px]">
+                    {slide.label}
+                  </span>
+                </span>
+              ) : null}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export default function DayalHero() {
   const reduce = useReducedMotion();
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -43,6 +173,20 @@ export default function DayalHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const hasVideo = Boolean(HERO_VIDEO) && !reduce;
+
+  const slides = useMemo(
+    () => HERO_MEDIA_SLIDES.filter((s) => s.type !== "video" || hasVideo),
+    [hasVideo]
+  );
+
+  const [activeId, setActiveId] = useState(() => slides[0]?.id ?? "char");
+
+  const activeSlide = useMemo(
+    () => slides.find((s) => s.id === activeId) ?? slides[0],
+    [slides, activeId]
+  );
+
+  const isVideoActive = activeSlide?.type === "video" && hasVideo;
 
   const syncFullscreenState = useCallback(() => {
     const shell = shellRef.current;
@@ -62,9 +206,27 @@ export default function DayalHero() {
   }, []);
 
   useEffect(() => {
+    if (!slides.some((s) => s.id === activeId)) {
+      setActiveId(slides[0]?.id ?? "char");
+    }
+  }, [slides, activeId]);
+
+  useEffect(() => {
     if (!hasVideo) return;
     resetHeroVideo();
   }, [hasVideo, resetHeroVideo]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !hasVideo) return;
+    if (isVideoActive) {
+      video.controls = false;
+      video.muted = true;
+      void video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isVideoActive, hasVideo]);
 
   const openFullscreen = useCallback(async () => {
     const video = videoRef.current;
@@ -142,7 +304,7 @@ export default function DayalHero() {
   }, [hasVideo, resetHeroVideo, syncFullscreenState]);
 
   return (
-    <section id="home" className="relative overflow-hidden pt-24 pb-16 lg:pt-28 lg:pb-24">
+    <section id="home" className="relative overflow-hidden pt-20 pb-12 sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-24">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         {!reduce &&
           Array.from({ length: 12 }).map((_, i) => (
@@ -161,10 +323,10 @@ export default function DayalHero() {
           <span className="inline-flex rounded-full bg-[#0b1633] px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white">
             {DAYAL.tagline}
           </span>
-          <h1 className="dayal-serif mt-6 text-4xl font-bold leading-[1.05] tracking-tight text-[#0b1633] sm:text-5xl lg:text-6xl">
+          <h1 className="dayal-serif mt-4 text-[1.75rem] font-bold leading-[1.08] tracking-tight text-[#0b1633] sm:mt-6 sm:text-5xl lg:text-6xl">
             {DAYAL.brand.toUpperCase()}
           </h1>
-          <p className="dayal-serif mt-2 text-xl font-medium tracking-[0.12em] text-[#c8a46b] sm:text-2xl">
+          <p className="dayal-serif mt-2 text-base font-medium tracking-[0.08em] text-[#c8a46b] sm:text-2xl sm:tracking-[0.12em]">
             {DAYAL.heroHighlight}
           </p>
           <p className="mt-4 flex items-center gap-2 text-sm text-[#5c6478]">
@@ -174,7 +336,7 @@ export default function DayalHero() {
           <p className="mt-6 max-w-lg text-base leading-relaxed text-[#5c6478]">
             {HERO_DESCRIPTION}
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="dayal-btn-stack-mobile mt-6 sm:mt-8 sm:flex sm:flex-wrap sm:gap-4">
             <a href="#contact" className="dayal-btn-primary">
               <Calendar className="h-4 w-4" />
               Let&apos;s Connect
@@ -189,11 +351,15 @@ export default function DayalHero() {
               Visit Official Site
             </a>
           </div>
-          <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          <ul className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
             {TRUST_HIGHLIGHTS.map((label, i) => {
               const Icon = TRUST_ICONS[i] ?? Shield;
+              const isLastOdd = TRUST_HIGHLIGHTS.length % 2 === 1 && i === TRUST_HIGHLIGHTS.length - 1;
               return (
-                <li key={label} className="flex flex-col items-center text-center">
+                <li
+                  key={label}
+                  className={`flex flex-col items-center text-center ${isLastOdd ? "col-span-2 justify-self-center sm:col-span-1" : ""}`}
+                >
                   <span className="mb-2 flex h-10 w-10 items-center justify-center rounded-full border border-[#c8a46b]/40 text-[#c8a46b]">
                     <Icon className="h-4 w-4" strokeWidth={1.5} />
                   </span>
@@ -207,51 +373,85 @@ export default function DayalHero() {
         </DayalReveal>
 
         <DayalReveal delay={0.15} className="relative">
-          {hasVideo ? (
-            <div className="overflow-hidden rounded-2xl shadow-2xl shadow-[#0b1633]/20 ring-1 ring-[#0b1633]/10">
-              <div
-                ref={shellRef}
-                className="dayal-hero-video-shell group relative aspect-[4/3] cursor-pointer overflow-hidden"
-                role="button"
-                tabIndex={0}
-                aria-label={
-                  isFullscreen
+          <div className="overflow-hidden rounded-2xl shadow-2xl shadow-[#0b1633]/20 ring-1 ring-[#0b1633]/10">
+            <div
+              ref={shellRef}
+              className={`dayal-hero-video-shell group relative aspect-[4/3] overflow-hidden ${
+                isVideoActive ? "cursor-pointer" : ""
+              }`}
+              role={isVideoActive ? "button" : undefined}
+              tabIndex={isVideoActive ? 0 : undefined}
+              aria-label={
+                isVideoActive
+                  ? isFullscreen
                     ? "Char Sahebzade video fullscreen"
                     : "Play Char Sahebzade video in fullscreen"
+                  : activeSlide?.label
+              }
+              onClick={() => {
+                if (isVideoActive && !isFullscreen) void openFullscreen();
+              }}
+              onKeyDown={(e) => {
+                if (!isVideoActive || isFullscreen) return;
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  void openFullscreen();
                 }
-                onClick={() => {
-                  if (!isFullscreen) void openFullscreen();
-                }}
-                onKeyDown={(e) => {
-                  if (isFullscreen) return;
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    void openFullscreen();
-                  }
-                }}
-              >
-                <video
-                  ref={videoRef}
-                  className="dayal-hero-video h-full w-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                  poster={HERO_VIDEO_POSTER}
-                  aria-label="Dayal Builders — Char Sahebzade"
-                >
-                  <source src={HERO_VIDEO} type="video/mp4" />
-                </video>
-                <div
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#0b1633]/50 via-transparent to-transparent"
-                  aria-hidden
-                />
-                {isFullscreen ? (
+              }}
+            >
+              <div className="absolute inset-0">
+                {hasVideo ? (
+                  <video
+                    ref={videoRef}
+                    className={`dayal-hero-video absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
+                      isVideoActive ? "z-[1] opacity-100" : "z-0 opacity-0 pointer-events-none"
+                    }`}
+                    autoPlay={isVideoActive}
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    poster={HERO_VIDEO_POSTER}
+                    aria-label="Dayal Builders — Char Sahebzade"
+                    aria-hidden={!isVideoActive}
+                  >
+                    <source src={HERO_VIDEO} type="video/mp4" />
+                  </video>
+                ) : null}
+
+                {!isVideoActive && activeSlide ? (
+                  <Image
+                    key={activeSlide.id}
+                    src={activeSlide.src}
+                    alt={activeSlide.label}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority={activeSlide.id === slides[0]?.id}
+                  />
+                ) : null}
+
+                {!hasVideo && !activeSlide ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={HERO_VIDEO_POSTER}
+                    alt="Dayal Builders"
+                    className="h-full w-full object-cover"
+                  />
+                ) : null}
+              </div>
+
+              <div
+                className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#0b1633]/45 via-transparent to-transparent"
+                aria-hidden
+              />
+
+              {isVideoActive ? (
+                isFullscreen ? (
                   <button
                     type="button"
                     onClick={(e) => void closeFullscreen(e)}
-                    className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-lg bg-[#c8a46b] text-[#0b1633] shadow-lg transition hover:bg-[#d4b57d]"
+                    className="absolute right-3 top-3 z-30 flex h-10 w-10 items-center justify-center rounded-lg bg-[#c8a46b] text-[#0b1633] shadow-lg transition hover:bg-[#d4b57d]"
                     aria-label="Close fullscreen video"
                   >
                     <X className="h-5 w-5" aria-hidden />
@@ -260,27 +460,19 @@ export default function DayalHero() {
                   <span className="pointer-events-none absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-lg bg-black/50 text-white backdrop-blur-sm">
                     <Maximize2 className="h-4 w-4" aria-hidden />
                   </span>
-                )}
-              </div>
-            </div>
-          ) : (
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl shadow-[#0b1633]/20 ring-1 ring-[#0b1633]/10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={HERO_VIDEO_POSTER}
-                alt="Dayal Builders — Char Sahebzade"
-                className="h-full w-full object-cover"
-              />
-              <div
-                className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#0b1633]/50 via-transparent to-transparent"
-                aria-hidden
-              />
-            </div>
-          )}
+                )
+              ) : null}
 
-          <div className="absolute -bottom-4 -left-4 z-10 hidden rounded-xl bg-white px-5 py-4 shadow-xl sm:block">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#c8a46b]">Since</p>
-            <p className="dayal-serif text-lg font-semibold text-[#0b1633]">Jamshedpur</p>
+              <SinceJamshedpurBadge />
+
+              {slides.length > 1 ? (
+                <HeroMediaThumbnails
+                  slides={slides}
+                  activeId={activeId}
+                  onSelect={setActiveId}
+                />
+              ) : null}
+            </div>
           </div>
         </DayalReveal>
       </div>

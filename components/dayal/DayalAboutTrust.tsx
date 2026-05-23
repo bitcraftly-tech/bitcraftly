@@ -7,18 +7,18 @@ import { ABOUT_EXTENDED, ABOUT_INTRO, PROPRIETOR } from "@/lib/dayal/data";
 
 export default function DayalAboutTrust() {
   return (
-    <section id="about" className="py-16 lg:py-24">
+    <section id="about" className="py-12 sm:py-16 lg:py-24">
       <div className="dayal-container">
         <DayalReveal>
           <div className="overflow-hidden rounded-2xl bg-white shadow-xl shadow-[#0b1633]/8 ring-1 ring-[#0b1633]/5">
             <div className="grid lg:grid-cols-12">
-              <div className="relative min-h-[280px] lg:col-span-4">
+              <div className="relative aspect-[5/6] w-full sm:aspect-[5/4] lg:col-span-4 lg:aspect-auto lg:min-h-[300px]">
                 <Image
                   src={PROPRIETOR.image}
                   alt={PROPRIETOR.name}
                   fill
-                  className="object-cover object-center"
-                  sizes="33vw"
+                  className="object-cover object-[center_32%] sm:object-[center_22%] lg:object-center"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0b1633]/80 via-transparent to-transparent lg:bg-gradient-to-r" />
                 <div className="absolute bottom-6 left-6 right-6 text-white lg:bottom-8 lg:left-8">
@@ -30,7 +30,7 @@ export default function DayalAboutTrust() {
                 </div>
               </div>
 
-              <div className="p-8 lg:col-span-8 lg:p-10">
+              <div className="p-5 sm:p-8 lg:col-span-8 lg:p-10">
                 <p className="dayal-eyebrow tracking-[0.2em]">
                   About Dayal Builders
                 </p>

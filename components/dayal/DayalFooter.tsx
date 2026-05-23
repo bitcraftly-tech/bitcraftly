@@ -21,8 +21,8 @@ export default function DayalFooter() {
         aria-hidden
       />
 
-      <div className="dayal-container relative pt-14 pb-0 lg:pt-16">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-10">
+      <div className="dayal-container relative pt-10 pb-0 sm:pt-14 lg:pt-16">
+        <div className="grid gap-10 sm:gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-10">
           {/* Brand + Follow Us */}
           <div className="lg:col-span-4">
             <DayalLogo href="#home" />
@@ -98,7 +98,7 @@ export default function DayalFooter() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-[#0b1633]/10 py-4">
+        <div className="mt-8 border-t border-[#0b1633]/10 py-5 sm:py-4">
           <div className="flex flex-col gap-1.5 text-center text-xs leading-snug text-[#5c6478] sm:flex-row sm:items-center sm:justify-between sm:text-left">
             <p>© 2025 {DAYAL.brand}. All rights reserved.</p>
             <p>

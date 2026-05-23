@@ -8,7 +8,7 @@ import { BLOG, BLOG_PAGE_URL } from "@/lib/dayal/data";
 
 export default function DayalBlog() {
   return (
-    <section id="blog" className="scroll-mt-24 border-t border-[#0b1633]/6 bg-white py-16 lg:py-20">
+    <section id="blog" className="scroll-mt-20 border-t border-[#0b1633]/6 bg-white py-12 sm:scroll-mt-24 sm:py-16 lg:py-20">
       <div className="dayal-container">
         <DayalReveal>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6">

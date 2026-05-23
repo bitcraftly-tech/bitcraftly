@@ -37,12 +37,12 @@ export default function DayalVisitCta() {
   }
 
   const inputClass =
-    "mt-1.5 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40 focus:border-[#c8a46b] sm:text-base";
+    "dayal-form-input mt-1.5 w-full min-h-[44px] rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40 focus:border-[#c8a46b] sm:text-base";
 
   return (
     <section
       id="contact"
-      className="dayal-on-dark relative scroll-mt-24 overflow-hidden border-t border-[#c8a46b]/12 bg-[#0b1633] py-14 sm:py-16 lg:py-20"
+      className="dayal-on-dark relative scroll-mt-20 overflow-hidden border-t border-[#c8a46b]/12 bg-[#0b1633] py-12 sm:scroll-mt-24 sm:py-16 lg:py-20"
     >
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_70%_50%,rgba(227,47,42,0.06),transparent_60%)]"
@@ -50,7 +50,7 @@ export default function DayalVisitCta() {
       />
 
       <div className="dayal-container relative">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:items-stretch lg:gap-8 xl:gap-10">
+        <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-12 lg:items-stretch lg:gap-8 xl:gap-10">
           {/* Left — copy */}
           <DayalReveal className="lg:col-span-4 xl:col-span-4">
             <div>
@@ -87,8 +87,8 @@ export default function DayalVisitCta() {
           </DayalReveal>
 
           {/* Image (40%) + Form (60%) — same row height, image centered */}
-          <div className="flex flex-col gap-10 lg:col-span-8 lg:gap-8">
-            <div className="grid items-stretch gap-10 lg:grid-cols-5 lg:gap-6 xl:gap-10">
+          <div className="flex flex-col gap-8 sm:gap-10 lg:col-span-8 lg:gap-8">
+            <div className="grid items-stretch gap-8 sm:gap-10 lg:grid-cols-5 lg:gap-6 xl:gap-10">
               {/* Building: middle column, vertically centered vs form */}
               <div className="flex items-center justify-center lg:col-span-2 lg:px-2">
                 <motion.div

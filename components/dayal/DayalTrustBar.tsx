@@ -15,7 +15,7 @@ const PILLAR_ICONS: Record<string, LucideIcon> = {
 
 export default function DayalTrustBar() {
   return (
-    <section className="dayal-on-dark relative overflow-hidden border-y border-[#c8a46b]/15 bg-[#0b1633] py-12 lg:py-16">
+    <section className="dayal-on-dark relative overflow-hidden border-y border-[#c8a46b]/15 bg-[#0b1633] py-10 sm:py-12 lg:py-16">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(200,164,107,0.08),transparent_55%)]"
         aria-hidden

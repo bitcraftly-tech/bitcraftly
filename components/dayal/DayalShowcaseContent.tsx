@@ -1,6 +1,6 @@
 "use client";
 
-import DayalFloatingChrome from "@/components/dayal/DayalFloatingChrome";
+import DayalShowcaseChrome from "@/components/dayal/DayalShowcaseChrome";
 import DayalFooter from "@/components/dayal/DayalFooter";
 import DayalHero from "@/components/dayal/DayalHero";
 import DayalLocationGalleryRow from "@/components/dayal/DayalLocationGalleryRow";
@@ -28,7 +28,7 @@ export default function DayalShowcaseContent() {
       <DayalBlog />
       <DayalVisitCta />
       <DayalFooter />
-      <DayalFloatingChrome />
+      <DayalShowcaseChrome />
     </>
   );
 }
