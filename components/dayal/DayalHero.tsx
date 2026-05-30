@@ -15,7 +15,7 @@ import {
   X,
 } from "lucide-react";
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 import DayalReveal from "@/components/dayal/DayalReveal";
 import {
@@ -48,12 +48,16 @@ function configureMobileHeroVideo(video: HTMLVideoElement) {
 }
 
 function attemptHeroVideoPlay(video: HTMLVideoElement | null) {
-  if (!video) return;
+  if (!video) return false;
   configureMobileHeroVideo(video);
+  if (video.readyState < HTMLMediaElement.HAVE_METADATA) {
+    video.load();
+  }
   const playPromise = video.play();
   if (playPromise !== undefined) {
     playPromise.catch(() => {});
   }
+  return !video.paused;
 }
 
 function isDocumentFullscreen() {
@@ -210,7 +214,6 @@ export default function DayalHero() {
   );
 
   const isVideoActive = activeSlide?.type === "video" && hasVideo;
-  const isFirstVideoSlide = slides[0]?.type === "video" && activeId === slides[0]?.id;
 
   const setVideoNode = useCallback((node: HTMLVideoElement | null) => {
     videoRef.current = node;
@@ -236,7 +239,7 @@ export default function DayalHero() {
     attemptHeroVideoPlay(video);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setMounted(true);
   }, []);
 
@@ -262,7 +265,8 @@ export default function DayalHero() {
   useEffect(() => {
     if (!mounted || !hasVideo || !isVideoActive) return;
     const video = videoRef.current;
-    if (!video) return;
+    const shell = shellRef.current;
+    if (!video || !shell) return;
 
     attemptHeroVideoPlay(video);
 
@@ -270,11 +274,37 @@ export default function DayalHero() {
       if (activeSlide?.type === "video") attemptHeroVideoPlay(video);
     };
 
+    video.addEventListener("loadedmetadata", retry);
     video.addEventListener("loadeddata", retry);
     video.addEventListener("canplay", retry);
     video.addEventListener("canplaythrough", retry);
+    video.addEventListener("playing", () => video.removeAttribute("poster"), { once: true });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.2) retry();
+        }
+      },
+      { threshold: [0, 0.2, 0.5, 1] }
+    );
+    observer.observe(shell);
+
+    let cancelled = false;
+    let attempts = 0;
+    const burstRetry = () => {
+      if (cancelled || attempts >= 15) return;
+      attempts += 1;
+      if (video.paused) attemptHeroVideoPlay(video);
+      if (!video.paused) return;
+      window.setTimeout(burstRetry, attempts <= 5 ? 200 : 500);
+    };
+    burstRetry();
 
     return () => {
+      cancelled = true;
+      observer.disconnect();
+      video.removeEventListener("loadedmetadata", retry);
       video.removeEventListener("loadeddata", retry);
       video.removeEventListener("canplay", retry);
       video.removeEventListener("canplaythrough", retry);
@@ -300,18 +330,20 @@ export default function DayalHero() {
   }, [mounted, hasVideo, isVideoActive]);
 
   useEffect(() => {
-    if (!mounted || !hasVideo || !isFirstVideoSlide) return;
+    if (!mounted || !hasVideo) return;
 
     const unlock = () => attemptHeroVideoPlay(videoRef.current);
 
-    window.addEventListener("touchstart", unlock, { once: true, passive: true });
-    window.addEventListener("scroll", unlock, { once: true, passive: true });
+    window.addEventListener("touchstart", unlock, { passive: true });
+    window.addEventListener("pointerdown", unlock, { passive: true });
+    window.addEventListener("scroll", unlock, { passive: true });
 
     return () => {
       window.removeEventListener("touchstart", unlock);
+      window.removeEventListener("pointerdown", unlock);
       window.removeEventListener("scroll", unlock);
     };
-  }, [mounted, hasVideo, isFirstVideoSlide]);
+  }, [mounted, hasVideo]);
 
   useEffect(() => {
     if (!hasVideo) return;
@@ -462,7 +494,7 @@ export default function DayalHero() {
           </ul>
         </DayalReveal>
 
-        <DayalReveal delay={0.15} className="relative">
+        <DayalReveal instant className="relative">
           <div className="overflow-hidden rounded-2xl shadow-2xl shadow-[#0b1633]/20 ring-1 ring-[#0b1633]/10">
             <div
               ref={shellRef}
@@ -480,6 +512,11 @@ export default function DayalHero() {
               }
               onClick={() => {
                 if (isVideoActive && !isFullscreen) void openFullscreen();
+              }}
+              onTouchStart={() => {
+                if (isVideoActive && videoRef.current?.paused) {
+                  attemptHeroVideoPlay(videoRef.current);
+                }
               }}
               onKeyDown={(e) => {
                 if (!isVideoActive || isFullscreen) return;
@@ -504,6 +541,7 @@ export default function DayalHero() {
                 {mounted && hasVideo ? (
                   <video
                     ref={setVideoNode}
+                    src={HERO_VIDEO}
                     className={`dayal-hero-video absolute inset-0 h-full w-full object-cover ${
                       isVideoActive ? "z-[2]" : "z-0 pointer-events-none"
                     }`}
@@ -515,9 +553,7 @@ export default function DayalHero() {
                     poster={HERO_VIDEO_POSTER}
                     aria-label="Dayal Builders — Char Sahebzade"
                     aria-hidden={!isVideoActive}
-                  >
-                    <source src={HERO_VIDEO} type="video/mp4" />
-                  </video>
+                  />
                 ) : null}
 
                 {mounted && activeSlide && !isVideoActive ? (

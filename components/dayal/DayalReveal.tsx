@@ -8,11 +8,13 @@ type Props = {
   className?: string;
   delay?: number;
   id?: string;
+  /** Skip fade-in — required for above-fold video (iOS blocks autoplay in opacity:0 parents) */
+  instant?: boolean;
 };
 
-export default function DayalReveal({ children, className, delay = 0, id }: Props) {
+export default function DayalReveal({ children, className, delay = 0, id, instant = false }: Props) {
   const reduce = useReducedMotion();
-  if (reduce) return <div id={id} className={className}>{children}</div>;
+  if (reduce || instant) return <div id={id} className={className}>{children}</div>;
 
   return (
     <motion.div

@@ -221,6 +221,8 @@
 .dayal-hero-video {
   object-fit: cover;
   background: #0b1633;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .dayal-hero-video-shell:fullscreen {
