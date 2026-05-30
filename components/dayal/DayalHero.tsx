@@ -15,8 +15,9 @@ import {
   X,
 } from "lucide-react";
 import Image from "next/image";
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import DayalHeroBackgroundVideo from "@/components/dayal/DayalHeroBackgroundVideo";
 import DayalReveal from "@/components/dayal/DayalReveal";
 import {
   DAYAL,
@@ -34,31 +35,6 @@ type VideoWithWebkit = HTMLVideoElement & {
   webkitEnterFullscreen?: () => void;
   webkitDisplayingFullscreen?: boolean;
 };
-
-/** iOS / Android WebView — muted inline playback */
-function configureMobileHeroVideo(video: HTMLVideoElement) {
-  video.muted = true;
-  video.defaultMuted = true;
-  video.setAttribute("muted", "");
-  video.playsInline = true;
-  video.setAttribute("playsinline", "");
-  video.setAttribute("webkit-playsinline", "true");
-  video.setAttribute("x5-playsinline", "true");
-  video.setAttribute("x5-video-player-type", "h5");
-}
-
-function attemptHeroVideoPlay(video: HTMLVideoElement | null) {
-  if (!video) return false;
-  configureMobileHeroVideo(video);
-  if (video.readyState < HTMLMediaElement.HAVE_METADATA) {
-    video.load();
-  }
-  const playPromise = video.play();
-  if (playPromise !== undefined) {
-    playPromise.catch(() => {});
-  }
-  return !video.paused;
-}
 
 function isDocumentFullscreen() {
   const doc = document as Document & { webkitFullscreenElement?: Element | null };
@@ -193,12 +169,12 @@ function HeroMediaThumbnails({
 
 export default function DayalHero() {
   const reduce = useReducedMotion();
-  const [mounted, setMounted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const shellRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const hasVideo = Boolean(HERO_VIDEO) && !reduce;
+  const allowAutoplay = !reduce;
+  const hasVideo = Boolean(HERO_VIDEO) && allowAutoplay;
 
   const slides = useMemo(
     () => HERO_MEDIA_SLIDES.filter((s) => s.type !== "video" || hasVideo),
@@ -215,14 +191,6 @@ export default function DayalHero() {
 
   const isVideoActive = activeSlide?.type === "video" && hasVideo;
 
-  const setVideoNode = useCallback((node: HTMLVideoElement | null) => {
-    videoRef.current = node;
-    if (node) {
-      configureMobileHeroVideo(node);
-      attemptHeroVideoPlay(node);
-    }
-  }, []);
-
   const syncFullscreenState = useCallback(() => {
     const shell = shellRef.current;
     const video = videoRef.current;
@@ -236,11 +204,8 @@ export default function DayalHero() {
     const video = videoRef.current;
     if (!video) return;
     video.controls = false;
-    attemptHeroVideoPlay(video);
-  }, []);
-
-  useLayoutEffect(() => {
-    setMounted(true);
+    video.muted = true;
+    void video.play().catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -248,107 +213,6 @@ export default function DayalHero() {
       setActiveId(firstSlideId);
     }
   }, [slides, activeId, firstSlideId]);
-
-  useEffect(() => {
-    if (!mounted || !hasVideo) return;
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (isVideoActive) {
-      video.controls = false;
-      attemptHeroVideoPlay(video);
-    } else {
-      video.pause();
-    }
-  }, [mounted, hasVideo, isVideoActive, activeId]);
-
-  useEffect(() => {
-    if (!mounted || !hasVideo || !isVideoActive) return;
-    const video = videoRef.current;
-    const shell = shellRef.current;
-    if (!video || !shell) return;
-
-    attemptHeroVideoPlay(video);
-
-    const retry = () => {
-      if (activeSlide?.type === "video") attemptHeroVideoPlay(video);
-    };
-
-    video.addEventListener("loadedmetadata", retry);
-    video.addEventListener("loadeddata", retry);
-    video.addEventListener("canplay", retry);
-    video.addEventListener("canplaythrough", retry);
-    video.addEventListener("playing", () => video.removeAttribute("poster"), { once: true });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.2) retry();
-        }
-      },
-      { threshold: [0, 0.2, 0.5, 1] }
-    );
-    observer.observe(shell);
-
-    let cancelled = false;
-    let attempts = 0;
-    const burstRetry = () => {
-      if (cancelled || attempts >= 15) return;
-      attempts += 1;
-      if (video.paused) attemptHeroVideoPlay(video);
-      if (!video.paused) return;
-      window.setTimeout(burstRetry, attempts <= 5 ? 200 : 500);
-    };
-    burstRetry();
-
-    return () => {
-      cancelled = true;
-      observer.disconnect();
-      video.removeEventListener("loadedmetadata", retry);
-      video.removeEventListener("loadeddata", retry);
-      video.removeEventListener("canplay", retry);
-      video.removeEventListener("canplaythrough", retry);
-    };
-  }, [mounted, hasVideo, isVideoActive, activeSlide?.type, activeId]);
-
-  useEffect(() => {
-    if (!mounted || !hasVideo) return;
-
-    const resumeIfNeeded = () => {
-      if (document.visibilityState === "visible" && isVideoActive) {
-        attemptHeroVideoPlay(videoRef.current);
-      }
-    };
-
-    document.addEventListener("visibilitychange", resumeIfNeeded);
-    window.addEventListener("pageshow", resumeIfNeeded);
-
-    return () => {
-      document.removeEventListener("visibilitychange", resumeIfNeeded);
-      window.removeEventListener("pageshow", resumeIfNeeded);
-    };
-  }, [mounted, hasVideo, isVideoActive]);
-
-  useEffect(() => {
-    if (!mounted || !hasVideo) return;
-
-    const unlock = () => attemptHeroVideoPlay(videoRef.current);
-
-    window.addEventListener("touchstart", unlock, { passive: true });
-    window.addEventListener("pointerdown", unlock, { passive: true });
-    window.addEventListener("scroll", unlock, { passive: true });
-
-    return () => {
-      window.removeEventListener("touchstart", unlock);
-      window.removeEventListener("pointerdown", unlock);
-      window.removeEventListener("scroll", unlock);
-    };
-  }, [mounted, hasVideo]);
-
-  useEffect(() => {
-    if (!hasVideo) return;
-    resetHeroVideo();
-  }, [hasVideo, resetHeroVideo]);
 
   const openFullscreen = useCallback(async () => {
     const video = videoRef.current;
@@ -514,8 +378,10 @@ export default function DayalHero() {
                 if (isVideoActive && !isFullscreen) void openFullscreen();
               }}
               onTouchStart={() => {
-                if (isVideoActive && videoRef.current?.paused) {
-                  attemptHeroVideoPlay(videoRef.current);
+                const video = videoRef.current;
+                if (isVideoActive && video?.paused) {
+                  video.muted = true;
+                  void video.play().catch(() => {});
                 }
               }}
               onKeyDown={(e) => {
@@ -527,36 +393,30 @@ export default function DayalHero() {
               }}
             >
               <div className="absolute inset-0">
-                {!mounted ? (
-                  <Image
-                    src={HERO_VIDEO_POSTER}
-                    alt="Dayal Builders — Char Sahebzade"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority
-                  />
-                ) : null}
+                <Image
+                  src={HERO_VIDEO_POSTER}
+                  alt=""
+                  fill
+                  className="z-[1] object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                  aria-hidden
+                />
 
-                {mounted && hasVideo ? (
-                  <video
-                    ref={setVideoNode}
-                    src={HERO_VIDEO}
+                {hasVideo ? (
+                  <DayalHeroBackgroundVideo
+                    active={isVideoActive}
+                    shellRef={shellRef}
+                    onVideoRef={(el) => {
+                      videoRef.current = el;
+                    }}
                     className={`dayal-hero-video absolute inset-0 h-full w-full object-cover ${
-                      isVideoActive ? "z-[2]" : "z-0 pointer-events-none"
+                      isVideoActive ? "z-[2]" : "z-0 pointer-events-none invisible"
                     }`}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
-                    poster={HERO_VIDEO_POSTER}
-                    aria-label="Dayal Builders — Char Sahebzade"
-                    aria-hidden={!isVideoActive}
                   />
                 ) : null}
 
-                {mounted && activeSlide && !isVideoActive ? (
+                {activeSlide && !isVideoActive ? (
                   <Image
                     key={activeSlide.id}
                     src={activeSlide.src}
@@ -568,7 +428,7 @@ export default function DayalHero() {
                   />
                 ) : null}
 
-                {mounted && !hasVideo && !activeSlide ? (
+                {!hasVideo && !activeSlide ? (
                   /* eslint-disable-next-line @next/next/no-img-element */
                   <img
                     src={HERO_VIDEO_POSTER}

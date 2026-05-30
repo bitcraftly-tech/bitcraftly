@@ -59,6 +59,8 @@ export const HERO_IMAGE = "/dayal-builders/projects/char-sahib-zaade.avif";
 
 /** Optional hero MP4 — H.264 + AAC, faststart; web copy at public/dayal-builders/hero.mp4 */
 export const HERO_VIDEO = "/dayal-builders/hero.mp4";
+/** Smaller mobile copy (~720p) — generate with: npm run encode:dayal-hero */
+export const HERO_VIDEO_MOBILE = "/dayal-builders/hero-mobile.mp4";
 export const HERO_VIDEO_POSTER = HERO_IMAGE;
 
 export const ABOUT_INTRO =
