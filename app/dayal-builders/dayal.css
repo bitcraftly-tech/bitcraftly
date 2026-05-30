@@ -218,6 +218,11 @@
 }
 
 /* Hero video — native fullscreen fills screen (no letterbox bars) */
+.dayal-hero-video {
+  object-fit: cover;
+  background: #0b1633;
+}
+
 .dayal-hero-video-shell:fullscreen {
   display: flex;
   width: 100%;
