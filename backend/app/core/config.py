@@ -33,6 +33,11 @@ class Settings(BaseSettings):
     def DB_URL(self) -> str:
         # Prefer explicitly configured DATABASE_URL across environments.
         url = self.DATABASE_URL or self.database_url or self.SQLITE_URL
+        # Render/Heroku use postgresql:// — SQLAlchemy defaults to psycopg2; we ship psycopg v3.
+        if url.startswith("postgresql://"):
+            url = "postgresql+psycopg://" + url.removeprefix("postgresql://")
+        elif url.startswith("postgres://"):
+            url = "postgresql+psycopg://" + url.removeprefix("postgres://")
         # Make local sqlite path stable regardless of working directory.
         if url.startswith("sqlite:///./"):
             db_name = url.replace("sqlite:///./", "", 1)
