@@ -5,7 +5,8 @@
     "dev:backend": "cd backend && python -m uvicorn app.main:app --reload",
     "build": "next build",
     "start": "next start",
-    "encode:dayal-hero": "node scripts/encode-dayal-hero.mjs"
+    "encode:dayal-hero": "node scripts/encode-dayal-hero.mjs",
+    "setup:staging": "node scripts/setup-staging-live.mjs"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.4",

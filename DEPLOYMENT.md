@@ -89,10 +89,23 @@ Use **`staging.bitcraftly.com`** for QA before merging `development` → `main`.
 
 4. Push to `development` — Vercel deploys staging automatically.
 
-### Cloudflare DNS
+### DNS (domain registrar — Namecheap)
 
-- `CNAME` `staging` → `cname.vercel-dns.com` (or Vercel’s target from domain setup)
-- Proxy: **Proxied** (same as production)
+`bitcraftly.com` uses registrar DNS (`dns1.registrar-servers.com`). Add:
+
+| Type | Host | Value |
+|------|------|-------|
+| **CNAME** | `staging` | `cname.vercel-dns.com` |
+
+Namecheap: Domain List → Manage → **Advanced DNS** → Add New Record. Wait 5–30 min.
+
+### Automated setup (one click)
+
+1. [Vercel token](https://vercel.com/account/settings/tokens) create karo.
+2. GitHub → **Settings** → **Secrets** → **Actions** → `VERCEL_TOKEN` add karo.
+3. **Actions** → **Setup staging.bitcraftly.com** → **Run workflow**.
+
+Ya local: `$env:VERCEL_TOKEN="..."; npm run setup:staging`
 
 ### App behaviour
 
