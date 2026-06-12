@@ -140,6 +140,63 @@ export const homePortfolioItems: PortfolioItem[] = [
     }),
   },
   {
+    title: "Swastik Makhana",
+    hint: "Ecommerce UX, pack-size clarity & NCR delivery trust",
+    cardLine: "Live D2C brand — premium makhana store with cart, packs & NCR delivery",
+    mobileCardLine: "Live site · makhana ecommerce + NCR delivery",
+    projectFocus: "Next.js",
+    gradient: "from-emerald-500/20 to-lime-500/10",
+    emoji: "🌿",
+    mockup: "ecommerce",
+    featureBullets: ["Pack-size catalog", "Cart & checkout UX", "GI-tagged brand trust", "NCR delivery messaging"],
+    liveUrl: "https://www.swastikmakhana.co/",
+    ctaLabel: "View live site →",
+    tag: "Ecommerce",
+    categories: ["ecommerce", "business-websites", "react-nextjs"],
+    badge: "Live client",
+    techStack: ["Next.js", "React", "Ecommerce UX", "Mobile-first", "SEO"],
+    resultHighlight: "Premium D2C storefront for GI-tagged makhana — packs, cart & NCR delivery",
+    caseStudy: defaultCaseStudy({
+      problem:
+        "A Bihar-origin makhana brand needed a credible online store — not just social posts — with clear pack sizes, pricing, and delivery trust for NCR buyers.",
+      solution:
+        "Full ecommerce experience with pack-size catalog, coming-soon flavour roadmap, benefits & recipes content, secure checkout cues, and mobile-first brand storytelling from farm to shelf.",
+      results: [
+        "Clear pack-size product grid (100g–250g)",
+        "Brand trust — GI tag, Bihar origin, farmer story",
+        "NCR delivery & secure payment messaging",
+        "Content hub for benefits, recipes & newsletter",
+      ],
+      beforePoints: [
+        "No dedicated ecommerce storefront",
+        "Pack sizes and pricing unclear online",
+        "Weak delivery & payment trust signals",
+      ],
+      afterPoints: [
+        "Structured shop with cart-ready packs",
+        "Premium brand page with Bihar wetland story",
+        "NCR delivery, secure payment & customer reviews",
+      ],
+      performance: [
+        { label: "Catalog", value: "Pack-led", note: "100g–250g sizes with clear MRP & offer pricing" },
+        { label: "Mobile", value: "First", note: "Shopping and storytelling tuned for phone buyers" },
+        { label: "Trust", value: "GI + farm", note: "Bihar origin, farmer partnerships, reviews" },
+      ],
+      overview:
+        "Live ecommerce site for Swastik Makhana — thin plain phool makhana from Bihar's wetlands, with pack-size shopping, flavour roadmap, and NCR delivery.",
+      client: "Swastik Makhana",
+      timeline: "Live production",
+      categoryLabel: "Ecommerce · D2C",
+      services: ["Next.js storefront", "Ecommerce UX", "Brand & content pages", "Mobile optimization"],
+      headlineMetrics: [
+        { value: "4.9★", label: "Customer rating", icon: "users" },
+        { value: "5+", label: "Pack sizes live", icon: "target" },
+        { value: "NCR", label: "Delivery zone", icon: "zap" },
+      ],
+      trustNote: "Production client site at swastikmakhana.co — same ecommerce delivery standards we offer D2C brands.",
+    }),
+  },
+  {
     title: "Gym Website",
     hint: "Plans, trainers, class schedules & trial enquiries",
     cardLine: "Fitness brand demo — trials, classes & membership enquiries",
