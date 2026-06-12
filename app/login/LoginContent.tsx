@@ -1,9 +1,9 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { getSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { showErrorAlert, showSuccessAlert } from "@/lib/sweetAlert";
 
@@ -14,8 +14,18 @@ type LoginContentProps = {
 const authInputClassName =
   "h-11 w-full rounded-lg border border-border-primary bg-bg-card px-3 text-sm text-text-primary outline-none transition placeholder:text-text-tertiary focus:border-violet-500 focus:ring-1 focus:ring-violet-500 dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:placeholder:text-dark-text-tertiary";
 
+function safeCallbackUrl(value: string | null): string {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) return "/dashboard";
+  return value;
+}
+
 export default function LoginContent({ googleEnabled }: LoginContentProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = useMemo(
+    () => safeCallbackUrl(searchParams.get("callbackUrl")),
+    [searchParams],
+  );
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmittingForm, setIsSubmittingForm] = useState(false);
@@ -44,7 +54,7 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
   const handleGoogleLogin = async () => {
     if (!googleEnabled) return;
     setIsLoading(true);
-    await signIn("google", { callbackUrl: "/auth/redirect" });
+    await signIn("google", { callbackUrl: `/auth/redirect?callbackUrl=${encodeURIComponent(callbackUrl)}` });
     setIsLoading(false);
   };
 
@@ -74,7 +84,7 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
           }
           toast.success("Login successful.");
           await showSuccessAlert("Login successful.");
-          router.push("/dashboard");
+          router.push(callbackUrl);
         } else {
           toast.error("Invalid email or password.");
           await showErrorAlert("Invalid email or password.");
@@ -125,7 +135,7 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
         }
         toast.success("Account created successfully.");
         await showSuccessAlert("Account created successfully.");
-        router.push("/dashboard");
+        router.push(callbackUrl);
       } else {
         toast.success("Account created. Please log in.");
         await showSuccessAlert("Account created. Please log in.");
@@ -156,6 +166,12 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
               ? "Manage your websites, projects and business tools in one place."
               : "Sign up with your details or continue with Gmail."}
           </p>
+
+          {callbackUrl.includes("/dashboard/analytics") ? (
+            <p className="mt-3 rounded-lg border border-indigo-500/25 bg-indigo-50 px-3 py-2 text-xs text-indigo-900 dark:bg-indigo-950/30 dark:text-indigo-200">
+              Sign in with your <strong>admin</strong> account to open Website Analytics after login.
+            </p>
+          ) : null}
 
           <div className="mt-5 grid grid-cols-2 rounded-lg border border-border-primary bg-bg-secondary p-1 dark:border-dark-border-primary dark:bg-dark-bg-secondary">
             <button

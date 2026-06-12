@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
@@ -33,7 +34,9 @@ export default function LoginPage() {
             <span className="px-2">/</span> Login
           </div>
         </section>
-        <LoginContent googleEnabled={googleEnabled} />
+        <Suspense fallback={<p className={`${CONTAINER} py-10 text-sm text-text-secondary`}>Loading…</p>}>
+          <LoginContent googleEnabled={googleEnabled} />
+        </Suspense>
       </main>
       <Footer />
     </>

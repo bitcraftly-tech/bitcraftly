@@ -41,7 +41,7 @@ function formatDuration(seconds: number): string {
 
 export default function AnalyticsDashboard() {
   const [range, setRange] = useState<DateRangeKey>("30d");
-  const { data, isLoading, refetch, isFetching } = useAnalyticsOverviewQuery(range);
+  const { data, isLoading, isError, error, refetch, isFetching } = useAnalyticsOverviewQuery(range);
   const { data: realtime } = useAnalyticsRealtimeQuery();
   const { data: leadsData } = useAnalyticsLeadsQuery();
   const updateStatus = useUpdateLeadStatusMutation();
@@ -51,8 +51,19 @@ export default function AnalyticsDashboard() {
     return !data.configured.ga4 && !data.configured.gsc;
   }, [data]);
 
-  if (isLoading || !data) {
+  if (isLoading) {
     return <p className="mt-6 text-sm text-text-secondary dark:text-dark-text-secondary">Loading analytics…</p>;
+  }
+
+  if (isError || !data) {
+    return (
+      <div className="mt-6 rounded-xl border border-red-500/30 bg-red-50 px-4 py-3 text-sm text-red-900 dark:bg-red-950/20 dark:text-red-200">
+        <p className="font-semibold">Could not load analytics</p>
+        <p className="mt-1">
+          {error instanceof Error ? error.message : "Please sign in as admin and try again."}
+        </p>
+      </div>
+    );
   }
 
   return (

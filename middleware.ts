@@ -31,7 +31,10 @@ export async function middleware(request: NextRequest) {
     });
     const role = `${token?.role ?? ""}`.toLowerCase();
     if (!token) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      const loginUrl = new URL("/login", request.url);
+      const returnPath = `${request.nextUrl.pathname}${request.nextUrl.search}`;
+      loginUrl.searchParams.set("callbackUrl", returnPath);
+      return NextResponse.redirect(loginUrl);
     }
     if (!ALLOWED_DASHBOARD_ROLES.has(role)) {
       return NextResponse.redirect(new URL("/portal", request.url));
