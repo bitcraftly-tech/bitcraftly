@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "encode:dayal-hero": "node scripts/encode-dayal-hero.mjs",
-    "setup:staging": "node scripts/setup-staging-live.mjs"
+    "setup:staging": "node scripts/setup-staging-live.mjs",
+    "configure:production": "node scripts/configure-vercel-env.mjs"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.4",
