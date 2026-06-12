@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import BitcraftlyLogoMark from "@/components/brand/BitcraftlyLogoMark";
 import { CONTAINER, FOUNDER_LINKEDIN_URL, PRIMARY_LOCATION, whatsappUrl, WHATSAPP_HOURS } from "@/lib/constants";
@@ -30,20 +29,6 @@ function NavArrowBullet() {
 }
 
 export default function Footer() {
-  const router = useRouter();
-
-  const goToSection = (targetId: string) => {
-    const targetSection = document.getElementById(targetId);
-    if (targetSection) {
-      targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
-    if (typeof window !== "undefined") {
-      window.sessionStorage.setItem("landingTargetSection", targetId);
-    }
-    router.push("/");
-  };
-
   return (
     <footer className="border-t border-border-primary bg-bg-card py-6 dark:border-dark-border-primary dark:bg-dark-bg-card md:py-8">
       <div className={CONTAINER}>
@@ -110,63 +95,39 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm text-text-secondary dark:text-dark-text-secondary">
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />
-                <button
-                  type="button"
-                  onClick={() => goToSection("websites")}
-                  className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
-                >
+                <Link href="/services#websites" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
                   Business Website Development
-                </button>
+                </Link>
               </li>
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />
-                <button
-                  type="button"
-                  onClick={() => goToSection("services")}
-                  className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
-                >
+                <Link href="/services" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
                   Ecommerce Website Development
-                </button>
+                </Link>
               </li>
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />
-                <button
-                  type="button"
-                  onClick={() => goToSection("mobile-apps")}
-                  className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
-                >
+                <Link href="/services#mobile-apps" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
                   Mobile App Development
-                </button>
+                </Link>
               </li>
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />
-                <button
-                  type="button"
-                  onClick={() => goToSection("services")}
-                  className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
-                >
+                <Link href="/services" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
                   AI integrations
-                </button>
+                </Link>
               </li>
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />
-                <button
-                  type="button"
-                  onClick={() => goToSection("fast-packages")}
-                  className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
-                >
+                <Link href="/pricing#fast-packages" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
                   Website Maintenance
-                </button>
+                </Link>
               </li>
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />
-                <button
-                  type="button"
-                  onClick={() => goToSection("services")}
-                  className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
-                >
+                <Link href="/services" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
                   SEO Services
-                </button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -176,13 +137,21 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm text-text-secondary dark:text-dark-text-secondary">
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />
-                <button
-                  type="button"
-                  onClick={() => goToSection("about")}
-                  className="cursor-pointer text-left hover:text-text-primary dark:hover:text-dark-text-primary"
-                >
+                <Link href="/about" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
                   About Us
-                </button>
+                </Link>
+              </li>
+              <li className="group/navitem flex items-start gap-2">
+                <NavArrowBullet />
+                <Link href="/pricing" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
+                  Pricing
+                </Link>
+              </li>
+              <li className="group/navitem flex items-start gap-2">
+                <NavArrowBullet />
+                <Link href="/faq" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
+                  FAQ
+                </Link>
               </li>
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />

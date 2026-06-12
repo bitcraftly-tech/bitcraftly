@@ -2,24 +2,16 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 import BitcraftlyLogoMark from "@/components/brand/BitcraftlyLogoMark";
 import NavbarProfileMenu from "@/components/landing/NavbarProfileMenu";
+import { MARKETING_NAV } from "@/lib/marketingRoutes";
 import { BRAND } from "@/lib/siteContent";
-
-const navLinks = [
-  { label: "Services", targetId: "services" },
-  { label: "Portfolio", targetId: "portfolio" },
-  { label: "Websites", targetId: "websites" },
-  { label: "Mobile Apps", targetId: "mobile-apps" },
-  { label: "Pricing", targetId: "project-cost-calculator" },
-];
 
 export default function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
   const { data: session, status } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -35,38 +27,6 @@ export default function Navbar() {
       document.body.style.overflow = prev;
     };
   }, [isMenuOpen]);
-
-  const scrollToSection = (targetId: string) => {
-    const section = document.getElementById(targetId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
-  const goToSection = (targetId: string) => {
-    if (targetId === "portfolio") {
-      if (pathname === "/") {
-        const targetSection = document.getElementById("portfolio");
-        if (targetSection) {
-          scrollToSection("portfolio");
-          return;
-        }
-      }
-      router.push("/portfolio");
-      return;
-    }
-
-    const targetSection = document.getElementById(targetId);
-
-    if (targetSection) {
-      scrollToSection(targetId);
-      return;
-    }
-    if (typeof window !== "undefined") {
-      window.sessionStorage.setItem("landingTargetSection", targetId);
-    }
-    router.push("/");
-  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-border-primary bg-bg-card/90 backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card/90">
@@ -88,15 +48,14 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden min-w-0 items-center gap-4 lg:flex xl:gap-8">
-          {navLinks.map((link) => (
-            <button
-              key={link.label}
-              type="button"
-              onClick={() => goToSection(link.targetId)}
+          {MARKETING_NAV.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
               className="group relative inline-flex shrink-0 cursor-pointer flex-col items-center text-xs text-text-secondary transition-colors duration-300 ease-out hover:text-[#2B5CE6] xl:text-sm dark:text-dark-text-secondary dark:hover:text-[#7ea0ff]"
             >
               <span className="relative inline-block whitespace-nowrap">{link.label}</span>
-            </button>
+            </Link>
           ))}
         </div>
 
@@ -160,18 +119,15 @@ export default function Navbar() {
           />
           <div className="relative z-50 max-h-[calc(100dvh-3.5rem)] overflow-y-auto border-t border-border-primary bg-bg-card px-4 py-4 dark:border-dark-border-primary dark:bg-dark-bg-card lg:hidden">
             <div className="flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <button
-                  key={link.label}
-                  type="button"
+              {MARKETING_NAV.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
                   className="w-full cursor-pointer rounded-lg px-3 py-3 text-left text-base font-medium text-text-secondary transition-colors duration-300 ease-out hover:bg-bg-secondary hover:text-[#2B5CE6] dark:text-dark-text-secondary dark:hover:bg-dark-bg-secondary dark:hover:text-[#7ea0ff]"
-                  onClick={() => {
-                    goToSection(link.targetId);
-                    setIsMenuOpen(false);
-                  }}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
-                </button>
+                </Link>
               ))}
             </div>
             <div className="mt-4 flex flex-col gap-3 border-t border-border-primary pt-4 dark:border-dark-border-primary">

@@ -6,6 +6,10 @@ import { SITE_URL } from "@/lib/seo";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     { path: "", priority: 1, changeFrequency: "weekly" as const },
+    { path: "/pricing", priority: 0.95, changeFrequency: "weekly" as const },
+    { path: "/services", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/about", priority: 0.85, changeFrequency: "monthly" as const },
+    { path: "/faq", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/contact", priority: 0.9, changeFrequency: "monthly" as const },
     { path: "/portfolio", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/team", priority: 0.8, changeFrequency: "monthly" as const },

@@ -13,8 +13,7 @@ export default function SectionAutoScroll({ sectionId }: SectionAutoScrollProps)
       (typeof window !== "undefined" ? window.sessionStorage.getItem("landingTargetSection") || undefined : undefined);
     if (!pendingSection) return;
 
-    const scrollTarget = pendingSection === "pricing" ? "project-cost-calculator" : pendingSection;
-    const element = document.getElementById(scrollTarget);
+    const element = document.getElementById(pendingSection);
     if (!element) return;
 
     if (typeof window !== "undefined") {
