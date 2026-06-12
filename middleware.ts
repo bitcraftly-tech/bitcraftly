@@ -2,7 +2,7 @@ import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
-const RESERVED_SUBDOMAINS = new Set(["www", "api", "admin"]);
+const RESERVED_SUBDOMAINS = new Set(["www", "api", "admin", "staging", "dev", "test"]);
 
 function extractSubdomain(host: string | null): string | null {
   if (!host) return null;

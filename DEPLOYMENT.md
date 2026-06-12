@@ -62,7 +62,48 @@ Recommended:
 - Tenant resolution:
   - Subdomain extracted by Next middleware + FastAPI middleware for multi-tenant context
 
-## 5) Production Checklist
+## 5) Staging / testing environment (live)
+
+Use **`staging.bitcraftly.com`** for QA before merging `development` → `main`.
+
+| | Production | Staging |
+|---|------------|---------|
+| **Branch** | `main` | `development` |
+| **URL** | `https://bitcraftly.com` | `https://staging.bitcraftly.com` |
+| **Vercel env** | Production | Preview (branch: `development`) |
+
+### Vercel
+
+1. Project → **Settings** → **Domains** → Add `staging.bitcraftly.com`.
+2. Assign the domain to Git branch **`development`** (Preview).
+3. **Settings** → **Environment Variables** — add for **Preview** only:
+
+   | Variable | Value |
+   |----------|--------|
+   | `NEXT_PUBLIC_APP_ENV` | `staging` |
+   | `NEXT_PUBLIC_SITE_URL` | `https://staging.bitcraftly.com` |
+   | `NEXT_PUBLIC_PUBLIC_BASE_URL` | `https://staging.bitcraftly.com` |
+   | `NEXTAUTH_URL` | `https://staging.bitcraftly.com` |
+
+   Copy other production vars (auth, API keys) as needed for Preview.
+
+4. Push to `development` — Vercel deploys staging automatically.
+
+### Cloudflare DNS
+
+- `CNAME` `staging` → `cname.vercel-dns.com` (or Vercel’s target from domain setup)
+- Proxy: **Proxied** (same as production)
+
+### App behaviour
+
+- Amber **“Staging environment”** banner on preview builds
+- `robots.txt` blocks indexing on staging
+- `staging` subdomain is reserved (not treated as a tenant slug)
+
+Until DNS is configured, use the Vercel preview URL:
+`https://bitcraftly-tech-v2-git-development-bitcraftly-techs-projects.vercel.app`
+
+## 6) Production Checklist
 
 - Set strong `DATABASE_URL` for managed Postgres
 - Ensure Render service uses persistent Postgres (not ephemeral)

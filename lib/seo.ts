@@ -1,8 +1,10 @@
 /** Central SEO config — titles, descriptions, keywords for pages & content planning */
 
-export const SITE_URL = "https://bitcraftly.com";
+import { PRODUCTION_URL, SITE_URL as RUNTIME_SITE_URL } from "@/lib/appEnv";
+
+export const SITE_URL = RUNTIME_SITE_URL;
 export const SITE_NAME = "Bitcraftly";
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/icon.png`;
+export const DEFAULT_OG_IMAGE = `${PRODUCTION_URL}/icon.png`;
 
 export const HOME_SEO = {
   title: "Bitcraftly | React.js & Next.js Web Development | AI-Powered Frontend | Ghaziabad",

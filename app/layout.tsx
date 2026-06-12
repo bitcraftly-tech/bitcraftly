@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ReactNode } from "react";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import { IS_STAGING } from "@/lib/appEnv";
 import { HOME_SEO, SITE_NAME, SITE_URL } from "@/lib/seo";
 /** Re-enable when chatbot should ship: uncomment import + <ChatSupportWidget /> below */
 // import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
@@ -9,6 +10,7 @@ import PortfolioFloatingChrome from "@/components/landing/PortfolioFloatingChrom
 import AuthSessionProvider from "@/components/providers/AuthSessionProvider";
 import { LoaderProvider } from "@/components/providers/LoaderProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import StagingEnvironmentBanner from "@/components/ui/StagingEnvironmentBanner";
 import Toaster from "@/components/ui/Toaster";
 
 type RootLayoutProps = {
@@ -46,10 +48,9 @@ export const metadata: Metadata = {
     title: HOME_SEO.title,
     description: HOME_SEO.description,
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: IS_STAGING
+    ? { index: false, follow: false }
+    : { index: true, follow: true },
   alternates: {
     canonical: SITE_URL,
   },
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
       </head>
       <body suppressHydrationWarning className="font-[var(--font-inter)] antialiased">
+        <StagingEnvironmentBanner />
         <ThemeProvider>
           <LoaderProvider>
             <AuthSessionProvider>{children}</AuthSessionProvider>
