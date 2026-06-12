@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import ShowcaseLink from "@/components/portfolio/ShowcaseLink";
 
 import Footer from "@/components/landing/Footer";
@@ -8,14 +7,12 @@ import Navbar from "@/components/landing/Navbar";
 import { CONTAINER } from "@/lib/constants";
 import { PAGE_INTROS } from "@/lib/pageSequences";
 
+import { buildPageMetadata } from "@/lib/seoMetadata";
+
 import PortfolioContent from "./PortfolioContent";
 import PortfolioHashRedirect from "./PortfolioHashRedirect";
 
-export const metadata: Metadata = {
-  title: "Portfolio | React, Next.js & AI Web Projects | Bitcraftly",
-  description:
-    "Live client work and interactive demos — business websites, startups, ecommerce, and AI-powered experiences built for leads, SEO, and mobile.",
-};
+export const metadata = buildPageMetadata("portfolio");
 
 export default function PortfolioPage() {
   const intro = PAGE_INTROS.portfolio;

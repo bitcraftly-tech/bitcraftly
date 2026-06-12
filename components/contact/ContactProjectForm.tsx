@@ -424,7 +424,7 @@ export default function ContactProjectForm({
 
   if (isModal) {
     return (
-      <form id="contact-enquiry-form" onSubmit={onSubmit} noValidate className="min-w-0 space-y-7">
+      <form id="contact-enquiry-form" data-analytics-form="contact" onSubmit={onSubmit} noValidate className="min-w-0 space-y-7">
         {formBody}
       </form>
     );
@@ -444,7 +444,7 @@ export default function ContactProjectForm({
           </span>
         ) : null}
       </div>
-      <form onSubmit={onSubmit} noValidate className={`px-5 py-6 sm:px-6 sm:py-7 ${isQuote ? "space-y-5" : "space-y-7"}`}>
+      <form id="contact-enquiry-form" data-analytics-form="contact" onSubmit={onSubmit} noValidate className={`px-5 py-6 sm:px-6 sm:py-7 ${isQuote ? "space-y-5" : "space-y-7"}`}>
         {formBody}
         {formFooter}
       </form>

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 
 import MarketingNextStep from "@/components/landing/MarketingNextStep";
@@ -6,22 +5,20 @@ import MarketingPageIntro from "@/components/landing/MarketingPageIntro";
 import MarketingPageLayout from "@/components/landing/MarketingPageLayout";
 import FadeInOnView from "@/components/ui/FadeInOnView";
 import { PAGE_INTROS } from "@/lib/pageSequences";
-import { SITE_URL } from "@/lib/seo";
+import FaqJsonLd from "@/components/seo/FaqJsonLd";
+import { buildPageMetadata } from "@/lib/seoMetadata";
 
 const FaqSection = dynamic(() => import("@/components/landing/FaqSection"));
 const FreeConsultationSection = dynamic(() => import("@/components/landing/FreeConsultationSection"));
 
-export const metadata: Metadata = {
-  title: "FAQ",
-  description: "Answers on pricing, timelines, revisions, hosting, and how Bitcraftly delivers website projects.",
-  alternates: { canonical: `${SITE_URL}/faq` },
-};
+export const metadata = buildPageMetadata("faq");
 
 export default function FaqPage() {
   const intro = PAGE_INTROS.faq;
 
   return (
     <MarketingPageLayout>
+      <FaqJsonLd />
       <MarketingPageIntro
         eyebrow={intro.eyebrow}
         title={intro.title}

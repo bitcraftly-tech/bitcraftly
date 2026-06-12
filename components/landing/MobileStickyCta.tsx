@@ -29,6 +29,7 @@ export default function MobileStickyCta() {
           </Link>
           <Link
             href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
+            data-wa-source="mobile-sticky-whatsapp"
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-1 items-center justify-center rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 py-2.5 text-sm font-semibold text-[#128C7E] dark:text-[#25D366]"

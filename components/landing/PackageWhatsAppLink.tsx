@@ -14,7 +14,7 @@ export default function PackageWhatsAppLink({ service, source = "pricing-package
   const href = whatsappUrl(resolveWhatsAppMessage({ service, source }));
 
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+    <a href={href} target="_blank" rel="noopener noreferrer" data-wa-source={source} className={className}>
       {children}
     </a>
   );

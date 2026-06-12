@@ -98,6 +98,7 @@ export default function Hero() {
           </Link>
           <Link
             href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
+            data-wa-source="hero-whatsapp"
             target="_blank"
             rel="noreferrer"
             className="rounded-xl border border-border-secondary px-6 py-3 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"

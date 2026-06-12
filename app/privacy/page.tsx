@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
 import { CONTAINER } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/seoMetadata";
 
 import PrivacyContent from "./PrivacyContent";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | Bitcraftly",
-  description: "How Bitcraftly collects and uses contact and project information when you work with our development agency.",
-};
+export const metadata = buildPageMetadata("privacy");
 
 export default function PrivacyPage() {
   return (

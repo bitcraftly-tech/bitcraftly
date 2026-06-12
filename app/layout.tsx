@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import AnalyticsListener from "@/components/analytics/AnalyticsListener";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import { GSC_VERIFICATION } from "@/lib/analytics";
 import { IS_STAGING } from "@/lib/appEnv";
-import { HOME_SEO, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seoMetadata";
+import { HOME_SEO, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 /** Re-enable when chatbot should ship: uncomment import + <ChatSupportWidget /> below */
 // import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
 import PortfolioFloatingChrome from "@/components/landing/PortfolioFloatingChrome";
@@ -27,6 +31,8 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
+const rootSeo = buildPageMetadata("home");
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -35,25 +41,22 @@ export const metadata: Metadata = {
   },
   description: HOME_SEO.description,
   keywords: [...HOME_SEO.keywords],
+  authors: [{ name: "Sanjay Kr. Singh", url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "technology",
   openGraph: {
-    type: "website",
-    locale: "en_IN",
-    url: SITE_URL,
-    siteName: SITE_NAME,
-    title: HOME_SEO.title,
-    description: HOME_SEO.description,
+    ...rootSeo.openGraph,
+    images: [{ url: DEFAULT_OG_IMAGE, alt: `${SITE_NAME} — React.js & Next.js web development` }],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: HOME_SEO.title,
-    description: HOME_SEO.description,
-  },
+  twitter: rootSeo.twitter,
   robots: IS_STAGING
     ? { index: false, follow: false }
-    : { index: true, follow: true },
+    : { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
   alternates: {
     canonical: SITE_URL,
   },
+  ...(GSC_VERIFICATION ? { verification: { google: GSC_VERIFICATION } } : {}),
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -67,6 +70,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
       </head>
       <body suppressHydrationWarning className="font-[var(--font-inter)] antialiased">
+        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <AnalyticsListener />
+        </Suspense>
         <StagingEnvironmentBanner />
         <ThemeProvider>
           <LoaderProvider>

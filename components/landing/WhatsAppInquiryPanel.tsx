@@ -16,7 +16,7 @@ import {
   Zap,
 } from "lucide-react";
 
-import { whatsappUrl } from "@/lib/constants";
+import { openWhatsApp } from "@/lib/openWhatsApp";
 import { CP_CARD } from "@/lib/contactPageTheme";
 import {
   CONSULTATION_WHATSAPP_CTA,
@@ -71,9 +71,13 @@ export default function WhatsAppInquiryPanel({
     return service ? appendServiceToMessage(base, service) : base;
   }, [searchParams]);
 
-  const openWhatsApp = (key: WhatsAppMessageKey) => {
+  const openInquiryWhatsApp = (key: WhatsAppMessageKey) => {
     const msg = key === "default" ? contextualMessage : WHATSAPP_MESSAGES[key];
-    window.open(whatsappUrl(msg), "_blank", "noopener,noreferrer");
+    openWhatsApp({
+      message: msg,
+      source: key === "default" ? "inquiry-panel-contextual" : `inquiry-panel-${key}`,
+      messageKey: key,
+    });
   };
 
   if (variant === "compact") {
@@ -83,7 +87,7 @@ export default function WhatsAppInquiryPanel({
           <button
             key={opt.id}
             type="button"
-            onClick={() => openWhatsApp(opt.id)}
+            onClick={() => openInquiryWhatsApp(opt.id)}
             className="rounded-full border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-1.5 text-xs font-semibold text-[#128C7E] transition hover:bg-[#25D366]/20"
           >
             {opt.shortLabel}
@@ -133,7 +137,7 @@ export default function WhatsAppInquiryPanel({
         {INSTANT_INQUIRY_OPTIONS.map((opt) => {
           const Icon = OPTION_ICONS[opt.id] ?? MessageCircle;
           return (
-            <button key={opt.id} type="button" onClick={() => openWhatsApp(opt.id)} className={optionCard}>
+            <button key={opt.id} type="button" onClick={() => openInquiryWhatsApp(opt.id)} className={optionCard}>
               <Icon className={`mb-2 size-4 ${isContact ? "text-[#25D366]" : "text-[#128C7E]"}`} aria-hidden />
               <p className={`text-sm font-semibold ${isContact ? "text-[#111827]" : "text-text-primary dark:text-dark-text-primary"}`}>
                 {opt.label}
@@ -149,7 +153,7 @@ export default function WhatsAppInquiryPanel({
 
       <button
         type="button"
-        onClick={() => window.open(whatsappUrl(contextualMessage), "_blank", "noopener,noreferrer")}
+        onClick={() => openInquiryWhatsApp("default")}
         className={`mt-5 flex w-full items-center justify-center gap-2 bg-[#25D366] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#20bd5a] ${isContact ? "" : "rounded-xl shadow-sm"}`}
       >
         <MessageCircle className="size-4" aria-hidden />

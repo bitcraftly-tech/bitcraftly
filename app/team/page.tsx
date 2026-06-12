@@ -1,17 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
 import { CONTAINER } from "@/lib/constants";
 
+import { buildPageMetadata } from "@/lib/seoMetadata";
+
 import TeamContent from "./TeamContent";
 
-export const metadata: Metadata = {
-  title: "Founder | Sanjay Kr. Singh | Bitcraftly",
-  description:
-    "Meet Sanjay Kr. Singh — Tech Lead & Frontend Architect. Founder-led React.js, Next.js, and AI-powered web solutions from Ghaziabad, serving India and remote clients.",
-};
+export const metadata = buildPageMetadata("team");
 
 export default function TeamPage() {
   return (

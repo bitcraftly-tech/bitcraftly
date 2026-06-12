@@ -20,6 +20,7 @@ import {
   CONTACT_FORM,
   TIMELINE_OPTIONS,
 } from "@/lib/leadGen";
+import { trackContactFormSubmit } from "@/lib/analytics";
 import { resolveWhatsAppMessage, WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { showErrorAlert, showSuccessAlert } from "@/lib/sweetAlert";
 
@@ -289,6 +290,14 @@ export default function ContactContent() {
         throw new Error(errorMessage);
       }
       const successMessage = payload?.message || "Your contact form was submitted successfully.";
+      const params = new URLSearchParams(window.location.search);
+      trackContactFormSubmit({
+        pageMode,
+        intent: params.get("intent") || undefined,
+        service: requestType || params.get("service") || undefined,
+        leadSource: values.source || undefined,
+        businessType: values.businessType || undefined,
+      });
       setValues(initialValues);
       setErrors({});
       toast.success(successMessage);

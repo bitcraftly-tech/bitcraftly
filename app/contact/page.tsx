@@ -1,17 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
 import { CONTAINER } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/seoMetadata";
 
 import ContactContent from "./ContactContent";
 
-export const metadata: Metadata = {
-  title: "Contact | Free Consultation & Website Audit | Bitcraftly",
-  description:
-    "Book a free 15-minute consultation or request a free website audit with Sanjay Kr. Singh — React, Next.js & AI-powered web solutions. Ghaziabad, India & remote.",
-};
+export const metadata = buildPageMetadata("contact");
 
 export default function ContactPage() {
   return (

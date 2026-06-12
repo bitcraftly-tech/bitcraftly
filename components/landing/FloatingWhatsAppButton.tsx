@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { whatsappUrl, WHATSAPP_HOURS } from "@/lib/constants";
+import { WHATSAPP_HOURS } from "@/lib/constants";
+import { openWhatsApp } from "@/lib/openWhatsApp";
 import {
   FLOATING_WHATSAPP,
   INSTANT_INQUIRY_OPTIONS,
@@ -34,7 +35,11 @@ export default function FloatingWhatsAppButton() {
   }, [open]);
 
   const openChat = (key: WhatsAppMessageKey = "default") => {
-    window.open(whatsappUrl(WHATSAPP_MESSAGES[key]), "_blank", "noopener,noreferrer");
+    openWhatsApp({
+      message: WHATSAPP_MESSAGES[key],
+      source: key === "default" ? "floating-whatsapp-default" : `floating-whatsapp-${key}`,
+      messageKey: key,
+    });
     setOpen(false);
   };
 

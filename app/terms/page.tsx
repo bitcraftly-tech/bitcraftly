@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
 import { CONTAINER } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/seoMetadata";
 
 import TermsContent from "./TermsContent";
 
-export const metadata: Metadata = {
-  title: "Terms of Service | Bitcraftly",
-  description: "Terms for engaging Bitcraftly as your website and app development agency—projects, payments, and permitted use.",
-};
+export const metadata = buildPageMetadata("terms");
 
 export default function TermsPage() {
   return (

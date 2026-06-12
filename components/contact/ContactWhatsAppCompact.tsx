@@ -18,6 +18,7 @@ export default function ContactWhatsAppCompact({ message, service }: ContactWhat
       </p>
       <a
         href={whatsappUrl(message)}
+        data-wa-source="contact-whatsapp-compact"
         target="_blank"
         rel="noopener noreferrer"
         className="mt-4 inline-flex w-full items-center justify-center gap-2 bg-[#25D366] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#20bd5a]"

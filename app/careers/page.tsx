@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
 import { CONTAINER } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/seoMetadata";
 
 import CareersContent from "./CareersContent";
 
-export const metadata: Metadata = {
-  title: "Careers | Bitcraftly",
-  description: "Join Bitcraftly — build websites, apps, AI workflows, and Smart Parking for Indian SMBs. Remote-friendly, ownership-driven team.",
-};
+export const metadata = buildPageMetadata("careers");
 
 export default function CareersPage() {
   return (
