@@ -1,9 +1,16 @@
 import { CONTAINER } from "@/lib/constants";
 import { EXAMPLE_TESTIMONIAL, WHY_CHOOSE } from "@/lib/siteContent";
 
-export default function WhyChooseUs() {
+type WhyChooseUsProps = {
+  showTopBorder?: boolean;
+};
+
+export default function WhyChooseUs({ showTopBorder = true }: WhyChooseUsProps) {
   return (
-    <section id="why-us" className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-6 dark:border-dark-border-primary lg:py-8`}>
+    <section
+      id="why-us"
+      className={`${CONTAINER} scroll-mt-28 py-6 lg:py-8 ${showTopBorder ? "border-t border-border-primary dark:border-dark-border-primary" : ""}`}
+    >
       <div className="grid items-start gap-10 lg:grid-cols-2">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">Why choose us</p>

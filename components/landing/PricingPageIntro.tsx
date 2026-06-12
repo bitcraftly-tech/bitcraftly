@@ -23,8 +23,8 @@ export default function PricingPageIntro() {
         Website kitne mein banegi? — calculator, packages &amp; clear starting prices
       </h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary sm:text-base">
-        Pehle estimate lo, phir fixed fast-launch package ya standard plan choose karo. Sab prices starting-from hain —
-        final quote written scope ke baad confirm hota hai.
+        Step 1: packages compare karo. Step 2: fixed fast-launch ya standard plan choose karo. Step 3: custom ho to
+        calculator use karo. Sab prices starting-from — final quote written scope ke baad.
       </p>
 
       <div className="mt-6 flex flex-wrap gap-3">
@@ -79,16 +79,16 @@ export default function PricingPageIntro() {
 
       <div className="mt-6 flex flex-wrap gap-3">
         <Link
-          href="#project-cost-calculator"
+          href="#pricing-compare"
           className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700"
         >
-          Start calculator →
+          Compare packages →
         </Link>
         <Link
           href="#fast-packages"
           className="inline-flex items-center justify-center rounded-full border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary"
         >
-          Browse all packages
+          Fast packages
         </Link>
       </div>
     </section>

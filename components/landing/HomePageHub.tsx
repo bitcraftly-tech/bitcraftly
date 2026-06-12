@@ -13,8 +13,8 @@ export default function HomePageHub() {
         Find what you need in one click
       </h2>
       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
-        Start with pricing if you are planning a new website — then explore services, portfolio, or book a free
-        consultation.
+        Recommended path: pricing → services → portfolio → FAQ → contact. Numbers below show the easiest order for new
+        website projects.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -28,9 +28,14 @@ export default function HomePageHub() {
                 : "border-border-primary bg-bg-card hover:border-indigo-500/30 hover:shadow-[0_12px_28px_rgba(79,70,229,0.12)] dark:border-dark-border-primary dark:bg-dark-bg-card"
             }`}
           >
-            {item.featured ? (
-              <span className="mb-1 w-fit rounded-full bg-indigo-600 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
-                Start here
+            {item.step ? (
+              <span
+                className={`mb-1 w-fit rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
+                  item.featured ? "bg-indigo-600 text-white" : "bg-bg-secondary text-text-secondary dark:bg-dark-bg-secondary dark:text-dark-text-secondary"
+                }`}
+              >
+                {item.featured ? "Start here · " : ""}
+                Step {item.step}
               </span>
             ) : null}
             <span className="text-2xl">{item.icon}</span>

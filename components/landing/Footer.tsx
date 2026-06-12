@@ -137,14 +137,26 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm text-text-secondary dark:text-dark-text-secondary">
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />
-                <Link href="/about" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
-                  About Us
+                <Link href="/pricing" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
+                  Pricing
                 </Link>
               </li>
               <li className="group/navitem flex items-start gap-2">
                 <NavArrowBullet />
-                <Link href="/pricing" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
-                  Pricing
+                <Link href="/services" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
+                  Services
+                </Link>
+              </li>
+              <li className="group/navitem flex items-start gap-2">
+                <NavArrowBullet />
+                <Link href="/portfolio" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
+                  Portfolio
+                </Link>
+              </li>
+              <li className="group/navitem flex items-start gap-2">
+                <NavArrowBullet />
+                <Link href="/about" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
+                  About Us
                 </Link>
               </li>
               <li className="group/navitem flex items-start gap-2">
@@ -163,12 +175,6 @@ export default function Footer() {
                 <NavArrowBullet />
                 <Link href="/careers" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
                   Careers
-                </Link>
-              </li>
-              <li className="group/navitem flex items-start gap-2">
-                <NavArrowBullet />
-                <Link href="/portfolio" className="text-left hover:text-text-primary dark:hover:text-dark-text-primary">
-                  Portfolio
                 </Link>
               </li>
               <li className="group/navitem flex items-start gap-2">

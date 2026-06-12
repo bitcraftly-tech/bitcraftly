@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 
+import FounderIntroVideo from "@/components/landing/FounderIntroVideo";
 import HomePageHub from "@/components/landing/HomePageHub";
 import Hero from "@/components/landing/Hero";
 import PricingHomeTeaser from "@/components/landing/PricingHomeTeaser";
@@ -25,14 +26,17 @@ export default function LandingPage({ sectionId }: LandingPageProps) {
       <FadeInOnView delayMs={38}>
         <PricingHomeTeaser />
       </FadeInOnView>
-      <FadeInOnView delayMs={45}>
+      <FadeInOnView delayMs={42}>
+        <FounderIntroVideo />
+      </FadeInOnView>
+      <FadeInOnView delayMs={48}>
         <HomePageHub />
       </FadeInOnView>
       <FadeInOnView delayMs={75}>
-        <WebsiteAuditLeadMagnet />
+        <PortfolioShowcase />
       </FadeInOnView>
       <FadeInOnView delayMs={90}>
-        <PortfolioShowcase />
+        <WebsiteAuditLeadMagnet />
       </FadeInOnView>
       <FadeInOnView delayMs={120}>
         <FinalCTA />

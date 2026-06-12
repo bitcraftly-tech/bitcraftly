@@ -1,9 +1,16 @@
 import { CONTAINER } from "@/lib/constants";
 import { FAQ_ITEMS } from "@/lib/siteContent";
 
-export default function FaqSection() {
+type FaqSectionProps = {
+  showTopBorder?: boolean;
+};
+
+export default function FaqSection({ showTopBorder = true }: FaqSectionProps) {
   return (
-    <section id="faq" className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-6 dark:border-dark-border-primary lg:py-8`}>
+    <section
+      id="faq"
+      className={`${CONTAINER} scroll-mt-28 py-6 lg:py-8 ${showTopBorder ? "border-t border-border-primary dark:border-dark-border-primary" : ""}`}
+    >
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">FAQ</p>
         <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">

@@ -14,10 +14,10 @@ type NavPill = {
 };
 
 const navPills: NavPill[] = [
+  { name: "Pricing", icon: "💳", href: "/pricing", shellClass: "bg-emerald-500/10 border-emerald-500/30 hover:bg-emerald-500/20" },
   { name: "Services", icon: "✨", href: "/services", shellClass: "bg-indigo-500/10 border-indigo-500/30 hover:bg-indigo-500/20" },
   { name: "Portfolio", icon: "🖼️", href: "/portfolio", shellClass: "bg-violet-500/10 border-violet-500/30 hover:bg-violet-500/20" },
   { name: "About", icon: "👤", href: "/about", shellClass: "bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/20" },
-  { name: "Pricing", icon: "💳", href: "/pricing", shellClass: "bg-emerald-500/10 border-emerald-500/30 hover:bg-emerald-500/20" },
 ];
 
 const showcase = [
@@ -67,7 +67,7 @@ export default function Hero() {
 
   return (
     <section
-      id="about"
+      id="hero"
       className={`${CONTAINER} scroll-mt-24 grid min-h-[41vh] items-center gap-6 py-4 lg:grid-cols-2 lg:py-6`}
     >
       <div className="text-center lg:text-left">
