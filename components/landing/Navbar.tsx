@@ -14,7 +14,7 @@ const navLinks = [
   { label: "Portfolio", targetId: "portfolio" },
   { label: "Websites", targetId: "websites" },
   { label: "Mobile Apps", targetId: "mobile-apps" },
-  { label: "Pricing", targetId: "fast-packages" },
+  { label: "Pricing", targetId: "project-cost-calculator" },
 ];
 
 export default function Navbar() {

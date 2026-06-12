@@ -145,8 +145,24 @@ export default function ContactContent() {
         next.source = "Other";
       }
 
+      const budgetParam = params.get("budget");
+      if (budgetParam && BUDGET_OPTIONS.includes(budgetParam as (typeof BUDGET_OPTIONS)[number])) {
+        next.budgetRange = budgetParam;
+      }
+
+      const messageParam = params.get("message");
+      if (messageParam && !next.message.trim()) {
+        next.message = `${messageParam}\n\nMore details about my project: `;
+      }
+
+      if ((source === "price-estimator" || source === "project-cost-calculator") && !next.message.trim()) {
+        next.message = "I used the project cost calculator and would like a written quote.\n\nDetails: ";
+      }
+
       if (source === "smart-parking-cta") {
         next.source = "Smart Parking CTA";
+      } else if (source === "price-estimator" || source === "project-cost-calculator") {
+        next.source = "Pricing Card CTA";
       } else if (source === "pricing-card") {
         next.source = "Pricing Card CTA";
       } else if (source === "fast-package" || source.includes("fast-packages")) {
