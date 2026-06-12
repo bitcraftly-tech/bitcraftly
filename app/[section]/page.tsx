@@ -1,28 +1,13 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
-import LandingPage from "@/components/landing/LandingPage";
 import PortfolioProjectDetailShell from "@/components/landing/PortfolioProjectDetailShell";
+import { SECTION_REDIRECTS } from "@/lib/marketingRoutes";
 import {
   getPortfolioPageItemBySlug,
   portfolioPageItems,
   slugifyPortfolioTitle,
 } from "@/lib/portfolioItems";
-
-const ALLOWED_SECTIONS = [
-  "about",
-  "services",
-  "websites",
-  "mobile-apps",
-  "why-us",
-  "pricing",
-  "contact-cta",
-  "how-parking-works",
-  "process",
-  "founder",
-  "faq",
-] as const;
-type AllowedSection = (typeof ALLOWED_SECTIONS)[number];
 
 type SectionPageProps = {
   params: Promise<{
@@ -31,11 +16,9 @@ type SectionPageProps = {
 };
 
 export function generateStaticParams() {
-  const landing = ALLOWED_SECTIONS.map((section) => ({ section }));
-  const portfolio = portfolioPageItems.map((item) => ({
+  return portfolioPageItems.map((item) => ({
     section: slugifyPortfolioTitle(item.title),
   }));
-  return [...landing, ...portfolio];
 }
 
 export async function generateMetadata({ params }: SectionPageProps): Promise<Metadata> {
@@ -53,14 +36,15 @@ export async function generateMetadata({ params }: SectionPageProps): Promise<Me
 export default async function SectionPage({ params }: SectionPageProps) {
   const { section } = await params;
 
+  const redirectTo = SECTION_REDIRECTS[section];
+  if (redirectTo) {
+    permanentRedirect(redirectTo);
+  }
+
   const portfolioItem = getPortfolioPageItemBySlug(section);
   if (portfolioItem) {
     return <PortfolioProjectDetailShell item={portfolioItem} />;
   }
 
-  if (!ALLOWED_SECTIONS.includes(section as AllowedSection)) {
-    notFound();
-  }
-
-  return <LandingPage sectionId={section as AllowedSection} />;
+  notFound();
 }

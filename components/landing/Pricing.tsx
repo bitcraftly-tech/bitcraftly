@@ -113,11 +113,11 @@ export default function Pricing() {
       </h2>
       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
         Not sure yet? Use the{" "}
-        <a href="#project-cost-calculator" className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
+        <a href="/pricing#project-cost-calculator" className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
           cost calculator
         </a>{" "}
-        above. Fixed fast-launch offers are in{" "}
-        <a href="#fast-packages" className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
+        on the pricing page. Fixed fast-launch offers are in{" "}
+        <a href="/pricing#fast-packages" className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
           fast-launch packages
         </a>
         . Standard starting prices below — final quote depends on pages, features, and content readiness. Scope likh ke confirm hota hai
