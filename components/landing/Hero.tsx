@@ -9,15 +9,15 @@ import { BRAND, HERO, TRUST_CHECKS } from "@/lib/siteContent";
 type NavPill = {
   name: string;
   icon: string;
-  targetId: string;
+  href: string;
   shellClass: string;
 };
 
 const navPills: NavPill[] = [
-  { name: "Services", icon: "✨", targetId: "services", shellClass: "bg-indigo-500/10 border-indigo-500/30 hover:bg-indigo-500/20" },
-  { name: "Portfolio", icon: "🖼️", targetId: "portfolio", shellClass: "bg-violet-500/10 border-violet-500/30 hover:bg-violet-500/20" },
-  { name: "Founder", icon: "👤", targetId: "founder", shellClass: "bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/20" },
-  { name: "Pricing", icon: "💳", targetId: "fast-packages", shellClass: "bg-emerald-500/10 border-emerald-500/30 hover:bg-emerald-500/20" },
+  { name: "Services", icon: "✨", href: "/services", shellClass: "bg-indigo-500/10 border-indigo-500/30 hover:bg-indigo-500/20" },
+  { name: "Portfolio", icon: "🖼️", href: "/portfolio", shellClass: "bg-violet-500/10 border-violet-500/30 hover:bg-violet-500/20" },
+  { name: "About", icon: "👤", href: "/about", shellClass: "bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/20" },
+  { name: "Pricing", icon: "💳", href: "/pricing", shellClass: "bg-emerald-500/10 border-emerald-500/30 hover:bg-emerald-500/20" },
 ];
 
 const showcase = [
@@ -64,13 +64,6 @@ export default function Hero() {
   }, []);
 
   const item = useMemo(() => showcase[active], [active]);
-
-  const scrollToSection = (targetId: string) => {
-    const section = document.getElementById(targetId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
 
   return (
     <section
@@ -126,15 +119,14 @@ export default function Hero() {
 
         <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
           {navPills.map((p) => (
-            <button
+            <Link
               key={p.name}
-              type="button"
-              onClick={() => scrollToSection(p.targetId)}
+              href={p.href}
               className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm text-text-primary transition dark:text-dark-text-primary ${p.shellClass}`}
             >
               <span>{p.icon}</span>
               <span className="font-medium">{p.name}</span>
-            </button>
+            </Link>
           ))}
         </div>
       </div>

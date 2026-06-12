@@ -10,11 +10,11 @@ export default function HomePageHub() {
         Explore Bitcraftly
       </p>
       <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
-        Sab kuch alag pages par — home clean rakha hai
+        Find what you need in one click
       </h2>
       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
-        Services, pricing calculator, about, portfolio, FAQ — har section apni dedicated page par. Yahan se seedha jao jo
-        chahiye.
+        Check pricing with our cost calculator, explore services, read FAQs, or book a free consultation — pick the path
+        that fits you.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -31,7 +31,7 @@ export default function HomePageHub() {
             <p className="mt-2 flex-1 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
               {item.description}
             </p>
-            <span className="mt-4 text-sm font-semibold text-indigo-600 dark:text-indigo-400">Open page →</span>
+            <span className="mt-4 text-sm font-semibold text-indigo-600 dark:text-indigo-400">Learn more →</span>
           </Link>
         ))}
       </div>

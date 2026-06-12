@@ -17,8 +17,8 @@ export const HOME_HUB_LINKS = [
   },
   {
     href: "/pricing",
-    title: "Pricing & calculator",
-    description: "Step-by-step cost estimate, fast-launch packages, and standard pricing.",
+    title: "Pricing & cost calculator",
+    description: "See what your website may cost — packages from ₹8,999 with a step-by-step estimate.",
     icon: "💰",
   },
   {
