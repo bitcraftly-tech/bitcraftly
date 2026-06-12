@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 
 import HomePageHub from "@/components/landing/HomePageHub";
 import Hero from "@/components/landing/Hero";
+import PricingHomeTeaser from "@/components/landing/PricingHomeTeaser";
 import MarketingPageLayout from "@/components/landing/MarketingPageLayout";
 import SectionAutoScroll from "@/components/landing/SectionAutoScroll";
 import FadeInOnView from "@/components/ui/FadeInOnView";
@@ -20,6 +21,9 @@ export default function LandingPage({ sectionId }: LandingPageProps) {
       <SectionAutoScroll sectionId={sectionId} />
       <FadeInOnView delayMs={30}>
         <Hero />
+      </FadeInOnView>
+      <FadeInOnView delayMs={38}>
+        <PricingHomeTeaser />
       </FadeInOnView>
       <FadeInOnView delayMs={45}>
         <HomePageHub />

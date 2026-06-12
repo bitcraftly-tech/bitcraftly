@@ -1,5 +1,14 @@
 /** Marketing site routes — single source for nav and legacy section redirects */
 
+export type HomeHubLink = {
+  href: string;
+  title: string;
+  description: string;
+  icon: string;
+  featured?: boolean;
+  cta?: string;
+};
+
 export const MARKETING_NAV = [
   { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/portfolio" },
@@ -8,18 +17,20 @@ export const MARKETING_NAV = [
   { label: "Pricing", href: "/pricing" },
 ] as const;
 
-export const HOME_HUB_LINKS = [
-  {
-    href: "/services",
-    title: "Services",
-    description: "Websites, mobile apps, AI integrations, and SEO-ready builds.",
-    icon: "✨",
-  },
+export const HOME_HUB_LINKS: HomeHubLink[] = [
   {
     href: "/pricing",
     title: "Pricing & cost calculator",
     description: "See what your website may cost — packages from ₹8,999 with a step-by-step estimate.",
     icon: "💰",
+    featured: true,
+    cta: "Get estimate →",
+  },
+  {
+    href: "/services",
+    title: "Services",
+    description: "Websites, mobile apps, AI integrations, and SEO-ready builds.",
+    icon: "✨",
   },
   {
     href: "/about",
@@ -45,7 +56,7 @@ export const HOME_HUB_LINKS = [
     description: "Free consultation, written scope, and WhatsApp.",
     icon: "📩",
   },
-] as const;
+];
 
 /** Legacy `/{section}` paths → dedicated routes */
 export const SECTION_REDIRECTS: Record<string, string> = {
