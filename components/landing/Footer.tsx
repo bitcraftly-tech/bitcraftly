@@ -97,12 +97,20 @@ export default function Footer() {
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-text-primary dark:text-dark-text-primary">Contact</p>
             <ul className="mt-4 space-y-2.5 text-sm text-text-secondary dark:text-dark-text-secondary">
               <li>
-                <a href="tel:+919667710954" className="font-medium hover:text-text-primary dark:hover:text-dark-text-primary">
+                <a
+                  href="tel:+919667710954"
+                  data-analytics-source="footer-call"
+                  className="font-medium hover:text-text-primary dark:hover:text-dark-text-primary"
+                >
                   +91 96677 10954
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@bitcraftly.com" className="hover:text-text-primary dark:hover:text-dark-text-primary">
+                <a
+                  href="mailto:hello@bitcraftly.com"
+                  data-analytics-source="footer-email"
+                  className="hover:text-text-primary dark:hover:text-dark-text-primary"
+                >
                   hello@bitcraftly.com
                 </a>
               </li>

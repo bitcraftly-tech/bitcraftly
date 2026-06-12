@@ -59,21 +59,37 @@ function gtag(...args: unknown[]): void {
   window.gtag?.(...args);
 }
 
+function mirrorServerEvent(
+  eventName: string,
+  source?: string,
+  pagePath?: string,
+  payload?: Record<string, string | number | boolean | undefined>,
+): void {
+  if (typeof window === "undefined") return;
+  void import("@/lib/logServerEvent").then(({ logServerEvent }) =>
+    logServerEvent({ eventName, source, pagePath, payload }),
+  );
+}
+
 export function trackPageView(path: string, title?: string): void {
-  if (!isAnalyticsEnabledClient()) return;
-  gtag("event", "page_view", {
-    page_path: path,
-    page_title: title ?? document.title,
-    page_location: window.location.href,
-  });
+  if (isAnalyticsEnabledClient()) {
+    gtag("event", "page_view", {
+      page_path: path,
+      page_title: title ?? document.title,
+      page_location: window.location.href,
+    });
+  }
+  mirrorServerEvent("page_view", undefined, path, { page_title: title ?? document.title });
 }
 
 export function trackEvent(eventName: string, params?: Record<string, string | number | boolean | undefined>): void {
-  if (!isAnalyticsEnabledClient()) return;
   const cleaned = params
     ? Object.fromEntries(Object.entries(params).filter(([, value]) => value !== undefined && value !== ""))
     : undefined;
-  gtag("event", eventName, cleaned);
+  if (isAnalyticsEnabledClient()) {
+    gtag("event", eventName, cleaned);
+  }
+  mirrorServerEvent(eventName, cleaned?.source as string | undefined, cleaned?.page_path as string | undefined, cleaned);
 }
 
 /** WhatsApp CTA click — use `data-wa-source` on links or pass source explicitly */
@@ -130,4 +146,32 @@ export function isGa4Configured(): boolean {
 
 export function isGscConfigured(): boolean {
   return Boolean(GSC_VERIFICATION);
+}
+
+export function trackCallClick(source: string, pagePath?: string): void {
+  trackEvent("call_click", { event_category: "engagement", source, page_path: pagePath });
+}
+
+export function trackEmailClick(source: string, pagePath?: string): void {
+  trackEvent("email_click", { event_category: "engagement", source, page_path: pagePath });
+}
+
+export function trackQuoteClick(source: string, pagePath?: string, service?: string): void {
+  trackEvent("quote_click", { event_category: "lead", source, page_path: pagePath, service });
+}
+
+export function trackPricingPageVisit(pagePath = "/pricing"): void {
+  trackEvent("pricing_page_visit", { event_category: "content", page_path: pagePath });
+}
+
+export function trackServicesPageVisit(pagePath = "/services"): void {
+  trackEvent("services_page_visit", { event_category: "content", page_path: pagePath });
+}
+
+export function trackPortfolioView(pagePath = "/portfolio"): void {
+  trackEvent("portfolio_view", { event_category: "content", page_path: pagePath });
+}
+
+export function trackBlogView(pagePath: string): void {
+  trackEvent("blog_view", { event_category: "content", page_path: pagePath });
 }

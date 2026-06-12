@@ -21,6 +21,7 @@ import {
   TIMELINE_OPTIONS,
 } from "@/lib/leadGen";
 import { trackContactFormSubmit } from "@/lib/analytics";
+import { logServerEvent } from "@/lib/logServerEvent";
 import { resolveWhatsAppMessage, WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { showErrorAlert, showSuccessAlert } from "@/lib/sweetAlert";
 
@@ -297,6 +298,22 @@ export default function ContactContent() {
         service: requestType || params.get("service") || undefined,
         leadSource: values.source || undefined,
         businessType: values.businessType || undefined,
+      });
+      logServerEvent({
+        eventName: "form_submit",
+        source: values.source || "contact_form",
+        pagePath: window.location.pathname,
+        payload: {
+          name: values.fullName,
+          phone: values.phone,
+          email: values.email,
+          businessName: values.businessName,
+          businessType: values.businessType,
+          message: fullMessage,
+          service: requestType || params.get("service") || undefined,
+          intent: params.get("intent") || undefined,
+          lead_source: values.source,
+        },
       });
       setValues(initialValues);
       setErrors({});
