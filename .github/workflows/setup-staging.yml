@@ -1,9 +1,11 @@
-# One-click staging setup — run manually after adding VERCEL_TOKEN repo secret.
-# GitHub → Settings → Secrets and variables → Actions → New repository secret
+# Auto-configure staging.bitcraftly.com on every development push (idempotent).
+# One-time: add VERCEL_TOKEN to GitHub Secrets.
 name: Setup staging.bitcraftly.com
 
 on:
   workflow_dispatch:
+  push:
+    branches: [development]
 
 jobs:
   setup-staging:
@@ -15,8 +17,12 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Configure Vercel domain + preview env
+      - name: Configure Vercel domain + preview env (+ optional DNS)
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          NAMECHEAP_API_USER: ${{ secrets.NAMECHEAP_API_USER }}
+          NAMECHEAP_API_KEY: ${{ secrets.NAMECHEAP_API_KEY }}
+          NAMECHEAP_USERNAME: ${{ secrets.NAMECHEAP_USERNAME }}
+          NAMECHEAP_CLIENT_IP: ${{ secrets.NAMECHEAP_CLIENT_IP }}
         run: node scripts/setup-staging-live.mjs

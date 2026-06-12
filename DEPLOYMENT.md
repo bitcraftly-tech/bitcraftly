@@ -99,13 +99,25 @@ Use **`staging.bitcraftly.com`** for QA before merging `development` → `main`.
 
 Namecheap: Domain List → Manage → **Advanced DNS** → Add New Record. Wait 5–30 min.
 
-### Automated setup (one click)
+### Automated setup (ek baar setup, phir auto)
 
-1. [Vercel token](https://vercel.com/account/settings/tokens) create karo.
-2. GitHub → **Settings** → **Secrets** → **Actions** → `VERCEL_TOKEN` add karo.
-3. **Actions** → **Setup staging.bitcraftly.com** → **Run workflow**.
+**Ek baar (5 min):**
 
-Ya local: `$env:VERCEL_TOKEN="..."; npm run setup:staging`
+1. [Vercel token](https://vercel.com/account/settings/tokens) banao.
+2. GitHub → [Secrets](https://github.com/bitcraftly-tech/bitcraftly/settings/secrets/actions) → **New secret** → `VERCEL_TOKEN`
+3. Namecheap → Advanced DNS → CNAME `staging` → `cname.vercel-dns.com` (ek baar)
+
+**Uske baad automatic:**
+
+| Aap kya karte ho | System kya karta hai |
+|------------------|----------------------|
+| `development` branch par code push | Vercel staging deploy |
+| Same push | GitHub Action: domain + env vars sync |
+| `main` par merge (jab ready) | Production `bitcraftly.com` deploy |
+
+Manual workflow run: **Actions** → **Setup staging.bitcraftly.com** → **Run workflow**
+
+Local: `$env:VERCEL_TOKEN="..."; npm run setup:staging`
 
 ### App behaviour
 

@@ -25,12 +25,12 @@ const PREVIEW_ENV = [
 ];
 
 if (!VERCEL_TOKEN) {
-  console.error(
-    "Missing VERCEL_TOKEN.\n" +
-      "Create one: https://vercel.com/account/settings/tokens\n" +
-      'Then: $env:VERCEL_TOKEN="..."; node scripts/setup-staging-live.mjs'
+  console.log(
+    "SKIP: VERCEL_TOKEN not set.\n" +
+      "One-time: GitHub → Settings → Secrets → VERCEL_TOKEN\n" +
+      "https://vercel.com/account/settings/tokens"
   );
-  process.exit(1);
+  process.exit(0);
 }
 
 const vercelBase = `https://api.vercel.com/v10/projects/${PROJECT_ID}`;
@@ -103,15 +103,80 @@ async function ensureEnvVars() {
   }
 }
 
-async function cloudflareDns() {
-  if (!CF_TOKEN) {
-    console.log("\n— Add this DNS record at your domain registrar (Namecheap / Advanced DNS) —");
-    console.log(`  Type:   CNAME`);
-    console.log(`  Host:   staging`);
-    console.log(`  Value:  cname.vercel-dns.com`);
-    console.log(`  Then wait 5–30 min and open https://${DOMAIN}`);
-    return;
+/** Namecheap API — run from a machine whose IP is whitelisted in Namecheap */
+async function namecheapDns() {
+  const apiUser = process.env.NAMECHEAP_API_USER;
+  const apiKey = process.env.NAMECHEAP_API_KEY;
+  const clientIp = process.env.NAMECHEAP_CLIENT_IP;
+  const userName = process.env.NAMECHEAP_USERNAME ?? apiUser;
+
+  if (!apiUser || !apiKey || !clientIp) return false;
+
+  const base = "https://api.namecheap.com/xml.response";
+  const common = new URLSearchParams({
+    ApiUser: apiUser,
+    ApiKey: apiKey,
+    UserName: userName,
+    ClientIp: clientIp,
+  });
+
+  const getUrl = `${base}?${common}&Command=namecheap.domains.dns.getHosts&SLD=bitcraftly&TLD=com`;
+  const getRes = await fetch(getUrl);
+  const getXml = await getRes.text();
+
+  if (getXml.includes('Name="staging"')) {
+    console.log("✓ Namecheap CNAME staging already exists");
+    return true;
   }
+
+  const hosts = [];
+  const hostRe = /<host\s([^>]+)\/>/g;
+  let m;
+  while ((m = hostRe.exec(getXml))) {
+    const attrs = m[1];
+    const pick = (k) => attrs.match(new RegExp(`${k}="([^"]*)"`))?.[1] ?? "";
+    hosts.push({
+      HostName: pick("Name"),
+      RecordType: pick("Type"),
+      Address: pick("Address"),
+      MXPref: pick("MXPref") || "10",
+      TTL: pick("TTL") || "1800",
+    });
+  }
+
+  hosts.push({
+    HostName: "staging",
+    RecordType: "CNAME",
+    Address: "cname.vercel-dns.com.",
+    MXPref: "10",
+    TTL: "1800",
+  });
+
+  const setParams = new URLSearchParams(common);
+  setParams.set("Command", "namecheap.domains.dns.setHosts");
+  setParams.set("SLD", "bitcraftly");
+  setParams.set("TLD", "com");
+  hosts.forEach((h, i) => {
+    const n = i + 1;
+    setParams.set(`HostName${n}`, h.HostName);
+    setParams.set(`RecordType${n}`, h.RecordType);
+    setParams.set(`Address${n}`, h.Address);
+    setParams.set(`TTL${n}`, h.TTL);
+    if (h.RecordType === "MX") setParams.set(`MXPref${n}`, h.MXPref);
+  });
+
+  const setRes = await fetch(`${base}?${setParams}`);
+  const setXml = await setRes.text();
+  if (!setXml.includes('Status="OK"')) {
+    console.log("Namecheap DNS update failed — add CNAME manually.");
+    return false;
+  }
+  console.log("✓ Namecheap CNAME created: staging → cname.vercel-dns.com");
+  return true;
+}
+
+async function cloudflareDns() {
+  if (!CF_TOKEN) return false;
 
   const zonesRes = await fetch(`https://api.cloudflare.com/client/v4/zones?name=${ZONE}`, {
     headers: { Authorization: `Bearer ${CF_TOKEN}` },
@@ -119,8 +184,8 @@ async function cloudflareDns() {
   const zones = await zonesRes.json();
   const zoneId = zones.result?.[0]?.id;
   if (!zoneId) {
-    console.log("Cloudflare zone not found — add CNAME manually (see above).");
-    return;
+    console.log("Cloudflare zone not found — add CNAME manually.");
+    return false;
   }
 
   const recordsRes = await fetch(
@@ -130,7 +195,7 @@ async function cloudflareDns() {
   const records = await recordsRes.json();
   if (records.result?.length) {
     console.log("✓ Cloudflare CNAME already exists");
-    return;
+    return true;
   }
 
   await fetch(`https://api.cloudflare.com/client/v4/zones/${zoneId}/dns_records`, {
@@ -147,15 +212,24 @@ async function cloudflareDns() {
     }),
   });
   console.log("✓ Cloudflare CNAME created: staging → cname.vercel-dns.com");
+  return true;
+}
+
+async function printManualDns() {
+  console.log("\n— One-time DNS at Namecheap (if not automated) —");
+  console.log("  Advanced DNS → CNAME | Host: staging | Value: cname.vercel-dns.com");
+  console.log(`  Then open https://${DOMAIN} (5–30 min)`);
 }
 
 async function main() {
   console.log("Setting up staging.bitcraftly.com …\n");
   await ensureDomain();
   await ensureEnvVars();
-  await cloudflareDns();
-  console.log(`\nDone. After DNS propagates (5–30 min): https://${DOMAIN}`);
-  console.log("Redeploy development branch if needed: git push origin development");
+  const dnsDone =
+    (await namecheapDns()) ||
+    (CF_TOKEN ? await cloudflareDns() && true : false);
+  if (!dnsDone) await printManualDns();
+  console.log(`\nDone. Staging URL: https://${DOMAIN}`);
 }
 
 main().catch((err) => {
