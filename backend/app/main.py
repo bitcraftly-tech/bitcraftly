@@ -41,9 +41,15 @@ def on_startup() -> None:
 
 @app.get("/health")
 def health() -> dict[str, str]:
-    with engine.connect() as connection:
-        connection.execute(text("SELECT 1"))
-    return {"status": "ok", "database": "ok", "environment": settings.ENVIRONMENT}
+    """Liveness probe — must respond quickly for Render deploy health checks."""
+    db_status = "ok"
+    try:
+        with engine.connect() as connection:
+            connection.execute(text("SELECT 1"))
+    except Exception:
+        # App is up; DB may still be linking — return 200 so deploy is not stuck for minutes.
+        db_status = "error"
+    return {"status": "ok", "database": db_status, "environment": settings.ENVIRONMENT}
 
 
 app.include_router(api_router, prefix=settings.api_prefix)

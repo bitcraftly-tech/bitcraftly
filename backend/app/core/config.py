@@ -1,7 +1,7 @@
 from typing import Optional
 from pathlib import Path
 
-from pydantic import field_validator
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -17,7 +17,10 @@ class Settings(BaseSettings):
     cors_origins: str = "http://localhost:3000,http://localhost:3001,https://bitcraftly.com,https://www.bitcraftly.com"
     cors_origin_regex: str = r"^https:\/\/([a-z0-9-]+\.)*bitcraftly\.com$"
     public_base_url: str = "https://bitcraftly.com"
-    auth_secret: str = "change-me-in-production"
+    auth_secret: str = Field(
+        default="change-me-in-production",
+        validation_alias="AUTH_SECRET",
+    )
     access_token_expire_seconds: int = 60 * 60 * 24
 
     # Shared secret for NextAuth → FastAPI Google account sync (server-to-server only). Same value as AUTH_GOOGLE_SYNC_SECRET on the Next.js app.
@@ -67,6 +70,7 @@ class Settings(BaseSettings):
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=False,
+        populate_by_name=True,
     )
 
 
