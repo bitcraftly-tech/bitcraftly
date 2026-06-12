@@ -112,11 +112,15 @@ export default function Pricing() {
         Flexible packages &amp; custom builds
       </h2>
       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
-        Need a fixed fast-launch offer? See{" "}
+        Not sure yet? Use the{" "}
+        <a href="#project-cost-calculator" className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
+          cost calculator
+        </a>{" "}
+        above. Fixed fast-launch offers are in{" "}
         <a href="#fast-packages" className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
           fast-launch packages
-        </a>{" "}
-        above. Standard starting prices below — final quote depends on pages, features, and content readiness. Scope likh ke confirm hota hai
+        </a>
+        . Standard starting prices below — final quote depends on pages, features, and content readiness. Scope likh ke confirm hota hai
         (English ya Hinglish) before work starts. Frontend consulting at{" "}
         <span className="font-semibold text-text-primary dark:text-dark-text-primary">₹1,500/hour</span>.
       </p>

@@ -15,6 +15,7 @@ const PortfolioShowcase = dynamic(() => import("@/components/landing/PortfolioSh
 const IndustriesWeServe = dynamic(() => import("@/components/landing/IndustriesWeServe"));
 const Features = dynamic(() => import("@/components/landing/Features"));
 const WhyChooseUs = dynamic(() => import("@/components/landing/WhyChooseUs"));
+const ProjectCostCalculator = dynamic(() => import("@/components/landing/ProjectCostCalculator"));
 const FastLaunchPackages = dynamic(() => import("@/components/landing/FastLaunchPackages"));
 const Pricing = dynamic(() => import("@/components/landing/Pricing"));
 const HowWeWork = dynamic(() => import("@/components/landing/HowWeWork"));
@@ -71,6 +72,9 @@ export default function LandingPage({ sectionId }: LandingPageProps) {
       </FadeInOnView>
       <FadeInOnView delayMs={195}>
         <HowWeWork />
+      </FadeInOnView>
+      <FadeInOnView delayMs={205}>
+        <ProjectCostCalculator />
       </FadeInOnView>
       <FadeInOnView delayMs={208}>
         <FastLaunchPackages />
