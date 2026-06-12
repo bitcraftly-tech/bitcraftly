@@ -102,7 +102,12 @@ function FeatureChip({
   );
 }
 
-export default function ProjectCostCalculator() {
+type ProjectCostCalculatorProps = {
+  hideTypeGrid?: boolean;
+  showTopBorder?: boolean;
+};
+
+export default function ProjectCostCalculator({ hideTypeGrid = false, showTopBorder = true }: ProjectCostCalculatorProps) {
   const reduceMotion = useReducedMotion();
   const [step, setStep] = useState(0);
   const [state, setState] = useState<CalculatorState>(INITIAL_STATE);
@@ -157,7 +162,7 @@ export default function ProjectCostCalculator() {
   return (
     <section
       id="project-cost-calculator"
-      className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-7 dark:border-dark-border-primary md:py-10`}
+      className={`${CONTAINER} scroll-mt-28 py-7 md:py-10 ${showTopBorder ? "border-t border-border-primary dark:border-dark-border-primary" : ""}`}
     >
       <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
         Project cost calculator
@@ -375,19 +380,21 @@ export default function ProjectCostCalculator() {
         </motion.aside>
       </div>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {[...PERSONAL_PROJECTS, ...BUSINESS_PROJECTS].map((project) => (
-          <div
-            key={project.id}
-            className="rounded-xl border border-border-primary bg-bg-card px-4 py-3 dark:border-dark-border-primary dark:bg-dark-bg-card"
-          >
-            <p className="text-sm font-medium text-text-primary dark:text-dark-text-primary">
-              {project.icon} {project.label}
-            </p>
-            <p className="mt-1 text-xs text-text-tertiary dark:text-dark-text-tertiary">From calculator base tier</p>
-          </div>
-        ))}
-      </div>
+      {hideTypeGrid ? null : (
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {[...PERSONAL_PROJECTS, ...BUSINESS_PROJECTS].map((project) => (
+            <div
+              key={project.id}
+              className="rounded-xl border border-border-primary bg-bg-card px-4 py-3 dark:border-dark-border-primary dark:bg-dark-bg-card"
+            >
+              <p className="text-sm font-medium text-text-primary dark:text-dark-text-primary">
+                {project.icon} {project.label}
+              </p>
+              <p className="mt-1 text-xs text-text-tertiary dark:text-dark-text-tertiary">From calculator base tier</p>
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

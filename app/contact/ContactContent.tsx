@@ -3,12 +3,17 @@
 import { FormEvent, Suspense, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
+import Link from "next/link";
+
 import ContactFormTrigger from "@/components/contact/ContactFormTrigger";
 import ContactMethodCards from "@/components/contact/ContactMethodCards";
+import ContactProjectForm from "@/components/contact/ContactProjectForm";
 import { ContactProjectFormModal } from "@/components/contact/ContactProjectFormModal";
 import ContactSidebar from "@/components/contact/ContactSidebar";
+import ContactWhatsAppCompact from "@/components/contact/ContactWhatsAppCompact";
 import WhatsAppInquiryPanel from "@/components/landing/WhatsAppInquiryPanel";
 import { CONTAINER } from "@/lib/constants";
+import { getContactModeCopy, getContactPageMode, type ContactPageMode } from "@/lib/contactPageModes";
 import { CP_PAGE } from "@/lib/contactPageTheme";
 import {
   BUDGET_OPTIONS,
@@ -44,6 +49,7 @@ const sources = [
   "Free Consultation CTA",
   "WhatsApp Floating CTA",
   "Pricing Card CTA",
+  "Pricing Compare CTA",
   "Fast Package CTA",
   "Smart Parking CTA",
   "Other",
@@ -72,19 +78,12 @@ export default function ContactContent() {
   const [submitLabel, setSubmitLabel] = useState<string>(CONTACT_FORM.submitCta);
   const [whatsappMessage, setWhatsappMessage] = useState(WHATSAPP_MESSAGES.consultation);
   const [formOpen, setFormOpen] = useState(false);
+  const [pageMode, setPageMode] = useState<ContactPageMode>("default");
 
   const openForm = () => setFormOpen(true);
   const closeForm = () => setFormOpen(false);
 
-  const timeline = useMemo(
-    () => [
-      "Fill the form (about 2 min)",
-      "We reply on call/WhatsApp (same day)",
-      "Free 15-min consultation with the founder",
-      "Written scope + timeline before kickoff",
-    ],
-    [],
-  );
+  const modeCopy = useMemo(() => getContactModeCopy(pageMode, requestType || undefined), [pageMode, requestType]);
 
   useEffect(() => {
     const params = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
@@ -94,6 +93,9 @@ export default function ContactContent() {
     const roleParam = params.get("role") || "";
     const source = (params.get("source") || "").toLowerCase();
 
+    const mode = getContactPageMode(intent || null, serviceRaw || null);
+    setPageMode(mode);
+
     if (!service && !intent && !source) return;
     if (serviceRaw) setRequestType(serviceRaw);
 
@@ -101,6 +103,8 @@ export default function ContactContent() {
       setSubmitLabel(CONTACT_FORM.submitAuditCta);
     } else if (intent === "consultation") {
       setSubmitLabel(CONTACT_FORM.submitCta);
+    } else if (intent === "quote") {
+      setSubmitLabel(CONTACT_FORM.submitQuoteCta);
     }
 
     setWhatsappMessage(
@@ -163,8 +167,10 @@ export default function ContactContent() {
         next.source = "Smart Parking CTA";
       } else if (source === "price-estimator" || source === "project-cost-calculator") {
         next.source = "Pricing Card CTA";
-      } else if (source === "pricing-card") {
+      } else if (source === "pricing-card" || source === "featured-package") {
         next.source = "Pricing Card CTA";
+      } else if (source === "pricing-compare") {
+        next.source = "Pricing Compare CTA";
       } else if (source === "fast-package" || source.includes("fast-packages")) {
         next.source = "Fast Package CTA";
       } else if (source.includes("audit")) {
@@ -177,7 +183,11 @@ export default function ContactContent() {
     });
 
     const openParam = params.get("form") || params.get("openForm");
-    if (openParam === "1" || openParam === "true" || window.location.hash === "#contact-form") {
+    const useInlineForm = mode === "quote" && Boolean(serviceRaw);
+    if (
+      !useInlineForm &&
+      (openParam === "1" || openParam === "true" || window.location.hash === "#contact-form")
+    ) {
       setFormOpen(true);
     }
   }, []);
@@ -241,14 +251,17 @@ export default function ContactContent() {
     }
 
     setIsSubmitting(true);
-    const extraLines = [
-      values.websiteUrl.trim() ? `Website: ${values.websiteUrl.trim()}` : "",
-      `Budget: ${values.budgetRange}`,
-      `Timeline: ${values.timeline}`,
-      requestType ? `Service/Request: ${requestType}` : "",
-    ]
-      .filter(Boolean)
-      .join("\n");
+    const isQuoteSubmit = pageMode === "quote" && Boolean(requestType);
+    const extraLines = isQuoteSubmit
+      ? `Package: ${requestType}`
+      : [
+          values.websiteUrl.trim() ? `Website: ${values.websiteUrl.trim()}` : "",
+          `Budget: ${values.budgetRange}`,
+          `Timeline: ${values.timeline}`,
+          requestType ? `Service/Request: ${requestType}` : "",
+        ]
+          .filter(Boolean)
+          .join("\n");
     const fullMessage = [values.message.trim(), extraLines].filter(Boolean).join("\n\n");
 
     try {
@@ -290,41 +303,71 @@ export default function ContactContent() {
     }
   };
 
+  const isFocusedQuote = pageMode === "quote" && Boolean(requestType);
+  const isFocusedFlow = pageMode !== "default";
+
+  const formProps = {
+    values,
+    errors,
+    requestType,
+    submitLabel,
+    whatsappMessage,
+    isSubmitting,
+    businessTypes,
+    sources,
+    onChange: handleChange,
+    onBlur: handleBlur,
+    onSubmit: handleSubmit,
+    formEyebrow: modeCopy.formEyebrow,
+    formTitle: modeCopy.formTitle,
+    formSubheadline: modeCopy.formSubheadline,
+  };
+
   return (
     <main className={`${CP_PAGE} py-8 pb-24 md:py-10 md:pb-12`}>
       <div className={`${CONTAINER} grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10`}>
         <ContactSidebar
-          timeline={timeline}
+          headline={modeCopy.headline}
+          subheadline={modeCopy.subheadline}
+          timeline={modeCopy.timeline}
+          mode={pageMode}
+          serviceName={requestType}
           contactCards={<ContactMethodCards whatsappMessage={whatsappMessage} />}
         />
 
-        <section className="flex w-full min-w-0 flex-col gap-6 lg:col-span-7">
-          <Suspense
-            fallback={
-              <div className="h-48 w-full animate-pulse border border-[#E5E7EB] bg-white" />
-            }
-          >
-            <WhatsAppInquiryPanel variant="contact" className="w-full" />
-          </Suspense>
-          <ContactFormTrigger onOpen={openForm} requestType={requestType} />
+        <section className={`flex w-full min-w-0 flex-col gap-6 lg:col-span-7 ${isFocusedQuote ? "order-1 lg:order-2" : ""}`}>
+          {isFocusedQuote ? (
+            <>
+              <Link
+                href="/pricing#pricing-compare"
+                className="inline-flex text-sm font-semibold text-[#4F46E5] hover:underline"
+              >
+                ← Change package
+              </Link>
+              <ContactProjectForm {...formProps} layout="inline" variant="quote" />
+              <ContactWhatsAppCompact message={whatsappMessage} service={requestType} />
+            </>
+          ) : isFocusedFlow ? (
+            <>
+              <ContactProjectForm {...formProps} layout="inline" />
+              <ContactWhatsAppCompact message={whatsappMessage} service={requestType} />
+            </>
+          ) : (
+            <>
+              <ContactFormTrigger onOpen={openForm} requestType={requestType} />
+              <Suspense
+                fallback={
+                  <div className="h-48 w-full animate-pulse border border-[#E5E7EB] bg-white" />
+                }
+              >
+                <WhatsAppInquiryPanel variant="contact" simplified className="w-full" />
+              </Suspense>
+            </>
+          )}
         </section>
       </div>
 
-      <ContactProjectFormModal
-        open={formOpen}
-        onClose={closeForm}
-        values={values}
-        errors={errors}
-        requestType={requestType}
-        submitLabel={submitLabel}
-        whatsappMessage={whatsappMessage}
-        isSubmitting={isSubmitting}
-        businessTypes={businessTypes}
-        sources={sources}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        onSubmit={handleSubmit}
-      />
+      <ContactProjectFormModal open={formOpen && !isFocusedQuote} onClose={closeForm} {...formProps} />
     </main>
   );
 }

@@ -3,8 +3,9 @@
 import type { ComponentType, FormEvent, ReactNode } from "react";
 import { Building2, MessageSquare, User } from "lucide-react";
 
-import { CP_CARD, CP_INPUT } from "@/lib/contactPageTheme";
+import { CP_BTN_PRIMARY, CP_CARD, CP_INPUT } from "@/lib/contactPageTheme";
 import { BUDGET_OPTIONS, CONTACT_FORM, TIMELINE_OPTIONS } from "@/lib/leadGen";
+import { whatsappUrl } from "@/lib/constants";
 
 const MODAL_INPUT =
   "h-11 w-full min-w-0 rounded-lg border border-[#E5E7EB] bg-white px-4 text-sm text-[#111827] outline-none transition placeholder:text-[#9CA3AF] focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/12";
@@ -45,6 +46,10 @@ type ContactProjectFormProps = {
   onBlur: (field: FieldName) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   layout?: "inline" | "modal";
+  variant?: "full" | "quote";
+  formEyebrow?: string;
+  formTitle?: string;
+  formSubheadline?: string;
 };
 
 function FormSection({
@@ -105,19 +110,97 @@ export default function ContactProjectForm({
   values,
   errors,
   requestType,
+  submitLabel,
+  whatsappMessage,
+  isSubmitting,
   businessTypes,
   sources,
   onChange,
   onBlur,
   onSubmit,
   layout = "inline",
+  variant = "full",
+  formEyebrow = "Written enquiry",
+  formTitle = "Tell us about your project",
+  formSubheadline = CONTACT_FORM.subheadline,
 }: ContactProjectFormProps) {
   const isModal = layout === "modal";
+  const isQuote = variant === "quote";
   const serviceTag = requestType ? requestType.replace(/\s*Development$/i, "").trim() : "";
   const labelClass = "text-sm font-medium text-[#374151]";
+
+  const quoteFormBody = (
+    <div className="space-y-5">
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div className={FIELD_WRAP}>
+          <label className={labelClass} htmlFor="fullName">
+            Full name <span className="text-red-500">*</span>
+          </label>
+          <input
+            id="fullName"
+            autoComplete="name"
+            placeholder="Your name"
+            value={values.fullName}
+            onChange={(e) => onChange("fullName", e.target.value)}
+            onBlur={() => onBlur("fullName")}
+            className={inputClass(errors.fullName, isModal)}
+          />
+          {errors.fullName ? <p className="text-xs text-red-600">{errors.fullName}</p> : null}
+        </div>
+        <div className={FIELD_WRAP}>
+          <label className={labelClass} htmlFor="phone">
+            WhatsApp / phone <span className="text-red-500">*</span>
+          </label>
+          <input
+            id="phone"
+            type="tel"
+            autoComplete="tel"
+            placeholder="10-digit number"
+            value={values.phone}
+            onChange={(e) => onChange("phone", e.target.value)}
+            onBlur={() => onBlur("phone")}
+            className={inputClass(errors.phone, isModal)}
+          />
+          {errors.phone ? <p className="text-xs text-red-600">{errors.phone}</p> : null}
+        </div>
+      </div>
+      <div className={FIELD_WRAP}>
+        <label className={labelClass} htmlFor="businessName">
+          Business name <span className="text-red-500">*</span>
+        </label>
+        <input
+          id="businessName"
+          placeholder="Shop, clinic, brand, or company name"
+          value={values.businessName}
+          onChange={(e) => onChange("businessName", e.target.value)}
+          onBlur={() => onBlur("businessName")}
+          className={inputClass(errors.businessName, isModal)}
+        />
+        {errors.businessName ? <p className="text-xs text-red-600">{errors.businessName}</p> : null}
+      </div>
+      <div className={FIELD_WRAP}>
+        <label className={labelClass} htmlFor="message">
+          Anything else? <span className="font-normal text-[#9CA3AF]">(optional)</span>
+        </label>
+        <textarea
+          id="message"
+          rows={3}
+          placeholder="City, content ready yes/no, deadline…"
+          value={values.message}
+          onChange={(e) => onChange("message", e.target.value)}
+          onBlur={() => onBlur("message")}
+          className={`${inputClass(errors.message, isModal)} min-h-[88px] resize-y rounded-lg py-3`}
+        />
+        {errors.message ? <p className="text-xs text-red-600">{errors.message}</p> : null}
+      </div>
+    </div>
+  );
+
   const optionalClass = "font-normal text-[#9CA3AF]";
 
-  const formBody = (
+  const formBody = isQuote ? (
+    quoteFormBody
+  ) : (
     <>
       <FormSection
         step="01"
@@ -313,6 +396,32 @@ export default function ContactProjectForm({
     </>
   );
 
+  const formFooter = (
+    <div className={isQuote ? "pt-2" : "border-t border-[#F3F4F6] pt-6"}>
+      <p className="text-xs leading-relaxed text-[#6B7280]">
+        {isQuote
+          ? "Same day reply on WhatsApp or call · written quote before payment"
+          : "Submit once — same day reply on WhatsApp or call. No spam, no outsourced sales team."}
+      </p>
+      <button type="submit" disabled={isSubmitting} className={`mt-4 ${CP_BTN_PRIMARY}`}>
+        {isSubmitting ? "Sending…" : submitLabel}
+      </button>
+      <p className="mt-3 text-xs text-[#9CA3AF]">{CONTACT_FORM.privacyNote}</p>
+      {isQuote ? null : (
+        <p className="mt-3 text-center text-sm">
+          <a
+            href={whatsappUrl(whatsappMessage)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-[#4F46E5] hover:underline"
+          >
+            {CONTACT_FORM.whatsappAlternative} →
+          </a>
+        </p>
+      )}
+    </div>
+  );
+
   if (isModal) {
     return (
       <form id="contact-enquiry-form" onSubmit={onSubmit} noValidate className="min-w-0 space-y-7">
@@ -325,11 +434,9 @@ export default function ContactProjectForm({
     <div id="contact-form" className={`w-full scroll-mt-28 ${CP_CARD} overflow-hidden`}>
       <div className="flex flex-col gap-3 border-b border-[#F3F4F6] px-5 py-5 sm:flex-row sm:items-start sm:justify-between sm:px-6 sm:py-6">
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#4F46E5]">Written enquiry</p>
-          <h2 className="mt-1.5 font-[var(--font-playfair)] text-xl font-semibold text-[#111827] sm:text-2xl">
-            Tell us about your project
-          </h2>
-          <p className="mt-1.5 text-xs text-[#6B7280]">{CONTACT_FORM.subheadline}</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#4F46E5]">{formEyebrow}</p>
+          <h2 className="mt-1.5 font-[var(--font-playfair)] text-xl font-semibold text-[#111827] sm:text-2xl">{formTitle}</h2>
+          <p className="mt-1.5 text-xs text-[#6B7280]">{formSubheadline}</p>
         </div>
         {serviceTag ? (
           <span className="inline-flex shrink-0 items-center border border-[#C7D2FE] bg-[#EEF2FF] px-3 py-1 text-xs font-semibold text-[#4F46E5]">
@@ -337,8 +444,9 @@ export default function ContactProjectForm({
           </span>
         ) : null}
       </div>
-      <form onSubmit={onSubmit} noValidate className="space-y-7 px-5 py-6 sm:px-6 sm:py-7">
+      <form onSubmit={onSubmit} noValidate className={`px-5 py-6 sm:px-6 sm:py-7 ${isQuote ? "space-y-5" : "space-y-7"}`}>
         {formBody}
+        {formFooter}
       </form>
     </div>
   );

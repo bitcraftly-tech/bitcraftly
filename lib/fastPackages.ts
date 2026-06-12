@@ -17,11 +17,15 @@ export const FAST_PACKAGES_SECTION = {
   pricingNote: "Prices are starting-from. GST as applicable. Custom pages, copywriting, or integrations quoted in writing.",
 } as const;
 
+export type FastPackageCategory = "quick" | "industry" | "advanced";
+
 export type FastPackage = {
   id: string;
   name: string;
   contactSlug: string;
   icon: string;
+  category: FastPackageCategory;
+  bestFor: string;
   timeline: string;
   timelineShort: string;
   price: string;
@@ -37,12 +41,21 @@ export type FastPackage = {
   popularLabel?: string;
 };
 
+export const FAST_PACKAGE_FILTERS: { id: FastPackageCategory | "all"; label: string }[] = [
+  { id: "all", label: "All packages" },
+  { id: "quick", label: "Quick launch" },
+  { id: "industry", label: "Industry packs" },
+  { id: "advanced", label: "Startup & AI" },
+];
+
 export const FAST_PACKAGES: FastPackage[] = [
   {
     id: "business-5-days",
     name: "Business Website in 5 Days",
     contactSlug: "Business Website in 5 Days",
     icon: "🌐",
+    category: "quick",
+    bestFor: "Shops, agencies & local brands",
     timeline: "5 working days from content handoff",
     timelineShort: "5 days",
     price: "₹12,999",
@@ -62,6 +75,8 @@ export const FAST_PACKAGES: FastPackage[] = [
     name: "Landing Page in 48 Hours",
     contactSlug: "Landing Page in 48 Hours",
     icon: "🚀",
+    category: "quick",
+    bestFor: "Ads, offers & launches",
     timeline: "48 hours from approved brief",
     timelineShort: "48 hrs",
     price: "₹8,999",
@@ -79,6 +94,8 @@ export const FAST_PACKAGES: FastPackage[] = [
     name: "Clinic Website Package",
     contactSlug: "Clinic Website Package",
     icon: "🏥",
+    category: "industry",
+    bestFor: "Doctors & clinics",
     timeline: "5–7 days · clinic content ready",
     timelineShort: "5–7 days",
     price: "₹13,999",
@@ -95,6 +112,8 @@ export const FAST_PACKAGES: FastPackage[] = [
     name: "Gym Website Package",
     contactSlug: "Gym Website Package",
     icon: "💪",
+    category: "industry",
+    bestFor: "Gyms & fitness studios",
     timeline: "5–7 days · gym content ready",
     timelineShort: "5–7 days",
     price: "₹13,999",
@@ -111,6 +130,8 @@ export const FAST_PACKAGES: FastPackage[] = [
     name: "Coaching Website Package",
     contactSlug: "Coaching Website Package",
     icon: "🎯",
+    category: "industry",
+    bestFor: "Coaches & consultants",
     timeline: "5–7 days · coach content ready",
     timelineShort: "5–7 days",
     price: "₹12,999",
@@ -127,6 +148,8 @@ export const FAST_PACKAGES: FastPackage[] = [
     name: "Startup MVP Frontend",
     contactSlug: "Startup MVP Frontend",
     icon: "⚛️",
+    category: "advanced",
+    bestFor: "Startups & SaaS MVPs",
     timeline: "2–3 weeks · scoped sprint",
     timelineShort: "2–3 wks",
     price: "₹34,999+",
@@ -143,6 +166,8 @@ export const FAST_PACKAGES: FastPackage[] = [
     name: "AI Chatbot Integration",
     contactSlug: "AI Chatbot Integration",
     icon: "✨",
+    category: "advanced",
+    bestFor: "FAQ & lead automation",
     timeline: "3–5 days · add-on or standalone",
     timelineShort: "3–5 days",
     price: "₹9,999+",

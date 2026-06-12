@@ -45,9 +45,21 @@ export const CONTACT_FORM = {
   subheadline: "Form takes about 2 minutes. We reply same day on WhatsApp or call.",
   submitCta: "Get My Free Consultation →",
   submitAuditCta: "Request Free Website Audit →",
+  submitQuoteCta: "Request written quote →",
   whatsappAlternative: "Prefer WhatsApp? Message Sanjay directly",
   privacyNote: "Your details stay private — used only to reply about your project.",
 } as const;
+
+/** Contact page with package pre-selected and enquiry form auto-opened */
+export function buildQuoteContactUrl(service: string, source: string): string {
+  const params = new URLSearchParams({
+    service,
+    intent: "quote",
+    source,
+    form: "1",
+  });
+  return `/contact?${params.toString()}`;
+}
 
 export const MOBILE_STICKY_CTA = {
   consultation: "Free consult",

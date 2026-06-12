@@ -49,10 +49,16 @@ const QUAL_ICONS: Record<string, ComponentType<{ className?: string }>> = {
 
 type WhatsAppInquiryPanelProps = {
   variant?: "full" | "compact" | "contact";
+  /** Shorter panel on /contact — hides qualification grids and extra copy */
+  simplified?: boolean;
   className?: string;
 };
 
-export default function WhatsAppInquiryPanel({ variant = "full", className = "" }: WhatsAppInquiryPanelProps) {
+export default function WhatsAppInquiryPanel({
+  variant = "full",
+  simplified = false,
+  className = "",
+}: WhatsAppInquiryPanelProps) {
   const searchParams = useSearchParams();
   const isContact = variant === "contact";
   const contextualMessage = useMemo(() => {
@@ -122,6 +128,7 @@ export default function WhatsAppInquiryPanel({ variant = "full", className = "" 
         </div>
       </div>
 
+      {simplified && isContact ? null : (
       <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
         {INSTANT_INQUIRY_OPTIONS.map((opt) => {
           const Icon = OPTION_ICONS[opt.id] ?? MessageCircle;
@@ -138,6 +145,7 @@ export default function WhatsAppInquiryPanel({ variant = "full", className = "" 
           );
         })}
       </div>
+      )}
 
       <button
         type="button"
@@ -151,6 +159,8 @@ export default function WhatsAppInquiryPanel({ variant = "full", className = "" 
         {CONSULTATION_WHATSAPP_CTA.microcopy}
       </p>
 
+      {simplified ? null : (
+      <>
       <div className={`mt-6 border-t pt-5 ${isContact ? "border-[#E5E7EB]" : "border-border-primary/60 dark:border-dark-border-primary/60"}`}>
         <p className={`text-sm font-semibold ${isContact ? "text-[#111827]" : "text-text-primary dark:text-dark-text-primary"}`}>
           {TRUST_WHATSAPP_COPY.headline}
@@ -215,6 +225,8 @@ export default function WhatsAppInquiryPanel({ variant = "full", className = "" 
           {FOUNDER_RESPONSE_COPY.hinglishNote}
         </p>
       </div>
+      </>
+      )}
     </div>
   );
 }
