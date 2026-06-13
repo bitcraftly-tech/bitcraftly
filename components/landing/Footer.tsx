@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import BitcraftlyLogoMark from "@/components/brand/BitcraftlyLogoMark";
+import BitcraftlyLogoMarkImage from "@/components/brand/BitcraftlyLogoMarkImage";
 import SocialLinks from "@/components/landing/SocialLinks";
 import { CONTAINER, PRIMARY_LOCATION, whatsappUrl, WHATSAPP_HOURS } from "@/lib/constants";
 import { FOOTER_EXPLORE_LINKS, FOOTER_MORE_LINKS, FOOTER_SERVICE_LINKS } from "@/lib/footerLinks";
@@ -76,7 +76,7 @@ export default function Footer() {
         <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-start gap-3">
-              <BitcraftlyLogoMark size="xs" />
+              <BitcraftlyLogoMarkImage size="xs" />
               <span className="flex min-w-0 flex-col leading-tight">
                 <span className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary">Bitcraftly</span>
                 <span className="mt-0.5 text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary">

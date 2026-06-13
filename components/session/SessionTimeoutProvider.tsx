@@ -1,10 +1,15 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useSession } from "next-auth/react";
 import type { ReactNode } from "react";
 
-import { SessionTimeoutModal } from "@/components/session/SessionTimeoutModal";
 import { useSessionExpiryWarning } from "@/hooks/useSessionExpiryWarning";
+
+const SessionTimeoutModal = dynamic(
+  () => import("@/components/session/SessionTimeoutModal").then((m) => ({ default: m.SessionTimeoutModal })),
+  { ssr: false },
+);
 
 type SessionTimeoutProviderProps = {
   children: ReactNode;
@@ -19,14 +24,16 @@ export default function SessionTimeoutProvider({ children }: SessionTimeoutProvi
   return (
     <>
       {children}
-      <SessionTimeoutModal
-        open={expiry.warningOpen}
-        mounted={expiry.mounted}
-        remainingMs={expiry.remainingMs}
-        totalWarningMs={expiry.totalWarningMs}
-        onStayLoggedIn={expiry.stayLoggedIn}
-        onLogoutNow={expiry.logoutNow}
-      />
+      {status === "authenticated" ? (
+        <SessionTimeoutModal
+          open={expiry.warningOpen}
+          mounted={expiry.mounted}
+          remainingMs={expiry.remainingMs}
+          totalWarningMs={expiry.totalWarningMs}
+          onStayLoggedIn={expiry.stayLoggedIn}
+          onLogoutNow={expiry.logoutNow}
+        />
+      ) : null}
     </>
   );
 }

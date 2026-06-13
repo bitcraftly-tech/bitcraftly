@@ -1,23 +1,29 @@
 "use client";
 
+import type { Session } from "next-auth";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { ChevronDown, CreditCard, LayoutDashboard, LayoutGrid, LogOut, Settings, User } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useEffect, useId, useRef, useState } from "react";
 
-import { LogoutConfirmDialog } from "@/components/ui/LogoutConfirmDialog";
 import { formatRoleLabel, isPrivilegedRole, roleBadgeClass } from "@/lib/roleDisplay";
 import { userInitials } from "@/lib/userDisplay";
 
+const LogoutConfirmDialog = dynamic(
+  () => import("@/components/ui/LogoutConfirmDialog").then((m) => ({ default: m.LogoutConfirmDialog })),
+  { ssr: false },
+);
+
 type NavbarProfileMenuProps = {
+  session: Session;
   /** Desktop: compact trigger in navbar row. Mobile: full-width inside sheet */
   variant?: "desktop" | "mobile";
   /** Called after selecting a menu link (e.g. close mobile nav sheet) */
   onNavigate?: () => void;
 };
 
-export default function NavbarProfileMenu({ variant = "desktop", onNavigate }: NavbarProfileMenuProps) {
-  const { data: session } = useSession();
+export default function NavbarProfileMenu({ session, variant = "desktop", onNavigate }: NavbarProfileMenuProps) {
   const [open, setOpen] = useState(false);
   const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -52,9 +58,9 @@ export default function NavbarProfileMenu({ variant = "desktop", onNavigate }: N
     first?.focus();
   }, [open]);
 
-  if (!session) return null;
+  if (!session.user) return null;
 
-  const name = session.user?.name?.trim() || "Account";
+  const name = session.user.name?.trim() || "Account";
   const email = session.user?.email ?? "";
   const initials = userInitials(session.user?.name ?? "", email);
 

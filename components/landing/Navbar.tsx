@@ -1,9 +1,9 @@
 "use client";
 
+import type { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 import BitcraftlyLogoMarkImage from "@/components/brand/BitcraftlyLogoMarkImage";
 import NavbarProfileMenu from "@/components/landing/NavbarProfileMenu";
@@ -13,11 +13,11 @@ import { BRAND } from "@/lib/siteContent";
 type NavbarProps = {
   /** When true, parent controls sticky positioning (e.g. dashboard shell). */
   embedded?: boolean;
+  session?: Session | null;
 };
 
-export default function Navbar({ embedded = false }: NavbarProps) {
+export default function Navbar({ embedded = false, session = null }: NavbarProps) {
   const pathname = usePathname();
-  const { data: session, status } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function Navbar({ embedded = false }: NavbarProps) {
       className={
         embedded
           ? "border-b border-border-primary bg-bg-card/90 backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card/90"
-          : "sticky top-0 z-50 border-b border-border-primary bg-bg-card/90 backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card/90"
+          : "sticky top-0 z-50 border-b border-border-primary bg-bg-card sm:bg-bg-card/90 sm:backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card dark:sm:bg-dark-bg-card/90"
       }
     >
       <nav className="mx-auto flex min-w-0 w-full max-w-7xl items-center justify-between gap-2 px-4 py-2.5 sm:gap-3 sm:px-6 sm:py-3 lg:px-12">
@@ -47,7 +47,7 @@ export default function Navbar({ embedded = false }: NavbarProps) {
           className="flex min-w-0 shrink items-center gap-2"
           title={`Bitcraftly — ${BRAND.headerTagline}`}
         >
-          <BitcraftlyLogoMarkImage size="nav" priority />
+          <BitcraftlyLogoMarkImage size="nav" />
           <span className="flex min-w-0 flex-col leading-tight">
             <span className="truncate font-[var(--font-playfair)] text-lg font-semibold text-text-primary sm:text-xl dark:text-dark-text-primary">
               Bitcraftly
@@ -71,10 +71,8 @@ export default function Navbar({ embedded = false }: NavbarProps) {
         </div>
 
         <div className="hidden shrink-0 items-center gap-2 lg:flex xl:gap-3">
-          {status === "loading" ? (
-            <div className="h-9 w-28 animate-pulse rounded-full bg-border-primary dark:bg-dark-border-primary" aria-hidden />
-          ) : session ? (
-            <NavbarProfileMenu variant="desktop" />
+          {session ? (
+            <NavbarProfileMenu variant="desktop" session={session} />
           ) : (
             <Link
               href="/login"
@@ -143,8 +141,8 @@ export default function Navbar({ embedded = false }: NavbarProps) {
               ))}
             </div>
             <div className="flex flex-col gap-3 border-t border-border-primary px-4 py-4 dark:border-dark-border-primary">
-              {status === "loading" ? null : session ? (
-                <NavbarProfileMenu variant="mobile" onNavigate={() => setIsMenuOpen(false)} />
+              {session ? (
+                <NavbarProfileMenu variant="mobile" session={session} onNavigate={() => setIsMenuOpen(false)} />
               ) : (
                 <Link
                   href="/login"

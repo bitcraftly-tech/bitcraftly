@@ -16,8 +16,9 @@ export const inter = Inter({
 
 export const playfair = Playfair_Display({
   subsets: ["latin"],
+  weight: ["600"],
   variable: "--font-playfair",
-  display: "swap",
-  preload: true,
+  display: "optional",
+  preload: false,
   adjustFontFallback: true,
 });

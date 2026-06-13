@@ -29,7 +29,7 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
     <QueryProvider>
       <div className="min-h-screen overflow-x-hidden bg-bg-primary text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary">
         <header className="sticky top-0 z-50">
-          <Navbar embedded />
+          <Navbar embedded session={session} />
           <DashboardSubNav />
         </header>
         <main className="overflow-x-hidden">

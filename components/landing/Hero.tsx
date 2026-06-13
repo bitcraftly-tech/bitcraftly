@@ -42,7 +42,7 @@ export default function Hero() {
           </span>
         </div>
 
-        <h1 className="mt-6 font-[var(--font-playfair)] text-3xl font-semibold leading-tight text-text-primary dark:text-dark-text-primary sm:text-4xl lg:text-5xl">
+        <h1 className="mt-6 font-sans-brand text-3xl font-semibold leading-tight text-text-primary dark:text-dark-text-primary sm:font-[var(--font-playfair)] sm:text-4xl lg:text-5xl">
           <span className="sm:hidden">{HERO.mobileHeadline}</span>
           <span className="hidden sm:inline">{HERO.headline}</span>
         </h1>

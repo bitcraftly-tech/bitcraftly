@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { ReactNode, Suspense } from "react";
 import "./globals.css";
 import { inter, playfair } from "@/lib/fonts";
-import AnalyticsListener from "@/components/analytics/AnalyticsListener";
+import DeferredAnalyticsListener from "@/components/analytics/DeferredAnalyticsListener";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import { GSC_VERIFICATION } from "@/lib/analytics";
 import { IS_STAGING } from "@/lib/appEnv";
@@ -97,7 +97,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   width={38}
                   height={38}
                   className="bc-static-loader__logo"
-                  fetchPriority="high"
+                  fetchPriority="low"
                 />
               </div>
               <p className="bc-static-loader__brand">{LOADER_COPY.brand}</p>
@@ -111,7 +111,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         ) : null}
         <GoogleAnalytics />
         <Suspense fallback={null}>
-          <AnalyticsListener />
+          <DeferredAnalyticsListener />
         </Suspense>
         <StagingEnvironmentBanner />
         <ThemeProvider>

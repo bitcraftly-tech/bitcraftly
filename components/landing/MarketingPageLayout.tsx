@@ -1,18 +1,23 @@
 import type { ReactNode } from "react";
+import { getServerSession } from "next-auth";
 
+import { createAuthOptions } from "@/auth";
+import DeferredMarketingScroll from "@/components/landing/DeferredMarketingScroll";
 import Footer from "@/components/landing/Footer";
-import HashScrollOnMount from "@/components/landing/HashScrollOnMount";
 import Navbar from "@/components/landing/Navbar";
 
 type MarketingPageLayoutProps = {
   children: ReactNode;
+  sectionId?: string;
 };
 
-export default function MarketingPageLayout({ children }: MarketingPageLayoutProps) {
+export default async function MarketingPageLayout({ children, sectionId }: MarketingPageLayoutProps) {
+  const session = await getServerSession(createAuthOptions());
+
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary">
-      <HashScrollOnMount />
-      <Navbar />
+      <DeferredMarketingScroll sectionId={sectionId} />
+      <Navbar session={session} />
       {children}
       <Footer />
     </main>

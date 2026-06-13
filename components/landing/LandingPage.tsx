@@ -1,13 +1,14 @@
 import dynamic from "next/dynamic";
 
-import FounderIntroVideo from "@/components/landing/FounderIntroVideo";
 import HomePageHub from "@/components/landing/HomePageHub";
 import Hero from "@/components/landing/Hero";
 import PricingHomeTeaser from "@/components/landing/PricingHomeTeaser";
 import MarketingPageLayout from "@/components/landing/MarketingPageLayout";
-import SectionAutoScroll from "@/components/landing/SectionAutoScroll";
 import FadeInOnView from "@/components/ui/FadeInOnView";
 
+const FounderIntroVideo = dynamic(() => import("@/components/landing/FounderIntroVideo"), {
+  loading: () => <section className="mx-auto min-h-[12rem] max-w-7xl px-4 sm:px-6 lg:px-12" aria-hidden />,
+});
 const WebsiteAuditLeadMagnet = dynamic(() => import("@/components/landing/WebsiteAuditLeadMagnet"));
 const PortfolioShowcase = dynamic(() => import("@/components/landing/PortfolioShowcase"));
 const FinalCTA = dynamic(() => import("@/components/landing/FinalCTA"));
@@ -18,10 +19,9 @@ type LandingPageProps = {
 
 export default function LandingPage({ sectionId }: LandingPageProps) {
   return (
-    <MarketingPageLayout>
-      <SectionAutoScroll sectionId={sectionId} />
+    <MarketingPageLayout sectionId={sectionId}>
       <Hero />
-      <FadeInOnView delayMs={38}>
+      <FadeInOnView eager delayMs={38}>
         <PricingHomeTeaser />
       </FadeInOnView>
       <FadeInOnView delayMs={42}>
