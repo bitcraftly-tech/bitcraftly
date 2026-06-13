@@ -6,12 +6,8 @@ import { ChevronDown, CreditCard, LayoutDashboard, LayoutGrid, LogOut, Settings,
 import { useEffect, useId, useRef, useState } from "react";
 
 import { LogoutConfirmDialog } from "@/components/ui/LogoutConfirmDialog";
+import { formatRoleLabel, isPrivilegedRole, roleBadgeClass } from "@/lib/roleDisplay";
 import { userInitials } from "@/lib/userDisplay";
-
-function isPrivilegedRole(role?: string | null) {
-  const r = `${role ?? ""}`.toLowerCase();
-  return r === "admin" || r === "staff" || r === "manager";
-}
 
 type NavbarProfileMenuProps = {
   /** Desktop: compact trigger in navbar row. Mobile: full-width inside sheet */
@@ -123,6 +119,11 @@ export default function NavbarProfileMenu({ variant = "desktop", onNavigate }: N
         <div className="border-b border-border-primary px-4 py-3 dark:border-zinc-800">
           <p className="truncate text-sm font-semibold text-text-primary dark:text-zinc-50">{name}</p>
           <p className="mt-0.5 truncate text-xs text-text-secondary dark:text-zinc-400">{email}</p>
+          <span
+            className={`mt-2 inline-flex rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${roleBadgeClass(session.role)}`}
+          >
+            {formatRoleLabel(session.role)}
+          </span>
         </div>
 
         <div className="p-2">

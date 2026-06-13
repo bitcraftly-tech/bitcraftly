@@ -8,6 +8,7 @@ import { createAuthOptions } from "@/auth";
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
 import { CONTAINER } from "@/lib/constants";
+import { formatRoleLabel, roleBadgeClass } from "@/lib/roleDisplay";
 import { userInitials } from "@/lib/userDisplay";
 
 export const metadata: Metadata = {
@@ -75,8 +76,10 @@ export default async function AccountPage() {
                     <Mail className="h-4 w-4 shrink-0 opacity-80" aria-hidden />
                     <span className="truncate">{email}</span>
                   </div>
-                  <span className="mt-3 inline-flex rounded-full border border-border-primary bg-bg-secondary px-3 py-1 text-xs font-medium text-text-secondary dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-secondary">
-                    Customer account
+                  <span
+                    className={`mt-3 inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide ${roleBadgeClass(role)}`}
+                  >
+                    {formatRoleLabel(role)}
                   </span>
                 </div>
               </div>

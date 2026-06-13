@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { showErrorAlert, showSuccessAlert } from "@/lib/sweetAlert";
+import PasswordInput from "@/components/ui/PasswordInput";
 
 type LoginContentProps = {
   googleEnabled: boolean;
@@ -217,12 +218,9 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
               autoComplete="email"
               className={authInputClassName}
             />
-            <input
-              type="password"
+            <PasswordInput
               value={mode === "login" ? loginPassword : signupPassword}
-              onChange={(event) =>
-                mode === "login" ? setLoginPassword(event.target.value) : setSignupPassword(event.target.value)
-              }
+              onChange={(value) => (mode === "login" ? setLoginPassword(value) : setSignupPassword(value))}
               placeholder="Password"
               autoComplete={mode === "login" ? "current-password" : "new-password"}
               className={authInputClassName}

@@ -32,6 +32,7 @@ import BitcraftlyLogoMark from "@/components/brand/BitcraftlyLogoMark";
 import { BRAND } from "@/lib/siteContent";
 import { LogoutConfirmDialog } from "@/components/ui/LogoutConfirmDialog";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import { formatRoleLabel, roleBadgeClass } from "@/lib/roleDisplay";
 
 type DashboardRole = "admin" | "staff" | "manager" | "customer";
 
@@ -248,8 +249,8 @@ export default function DashboardNav() {
                   <div className="border-b border-border-primary px-4 py-2 dark:border-dark-border-primary">
                     <div className="text-sm font-medium text-text-primary dark:text-dark-text-primary">{userName}</div>
                     <div className="text-xs text-text-tertiary dark:text-dark-text-tertiary">{userEmail}</div>
-                    <div className="mt-1 inline-flex rounded-full bg-bg-secondary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-text-secondary dark:bg-dark-bg-secondary dark:text-dark-text-secondary">
-                      {role}
+                    <div className={`mt-1 inline-flex rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${roleBadgeClass(role)}`}>
+                      {formatRoleLabel(role)}
                     </div>
                   </div>
                   <Link
