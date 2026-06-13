@@ -125,6 +125,7 @@ function AuraProgressBar({
 
 export default function BitcraftlyLoaderAura({
   show,
+  instantEnter = false,
   variant,
   density: densityProp,
   theme: themeProp,
@@ -140,7 +141,7 @@ export default function BitcraftlyLoaderAura({
   const trackClass = theme === "dark" ? "bg-[#2a2a3d]" : "bg-[#e5e7eb]";
 
   const m = (variants: typeof contentVariants) => (motionOn ? variants : undefined);
-  const init = motionOn ? "hidden" : false;
+  const init = motionOn && !instantEnter ? "hidden" : false;
   const anim = motionOn ? "visible" : false;
 
   return (

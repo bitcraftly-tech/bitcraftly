@@ -7,6 +7,8 @@ import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import { GSC_VERIFICATION } from "@/lib/analytics";
 import { IS_STAGING } from "@/lib/appEnv";
 import { buildPageMetadata } from "@/lib/seoMetadata";
+import { LOADER_ENABLED } from "@/lib/loader/config";
+import { loaderBootScript } from "@/lib/loader/bootSnippet";
 import { HOME_SEO, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 /** Re-enable when chatbot should ship: uncomment import + <ChatSupportWidget /> below */
 // import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
@@ -69,6 +71,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${playfair.variable}`}>
       <head>
+        {LOADER_ENABLED ? (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: loaderBootScript(),
+            }}
+          />
+        ) : null}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var p=location.pathname;if(p.indexOf("/portfolio/")===0||p.indexOf("/dayal-builders")===0){document.documentElement.classList.remove("dark");return;}var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.classList.add("dark");}catch(e){}})();`,

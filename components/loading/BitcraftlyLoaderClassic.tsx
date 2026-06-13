@@ -21,6 +21,7 @@ import { LOADER_COPY } from "@/lib/loader/config";
 
 export default function BitcraftlyLoaderClassic({
   show,
+  instantEnter = false,
   variant,
   density: densityProp,
   theme: themeProp,
@@ -34,7 +35,7 @@ export default function BitcraftlyLoaderClassic({
   const logoColorShift = motionOn && !isCompact;
 
   const m = (variants: typeof contentVariants) => (motionOn ? variants : undefined);
-  const init = motionOn ? "hidden" : false;
+  const init = motionOn && !instantEnter ? "hidden" : false;
   const anim = motionOn ? "visible" : false;
 
   return (

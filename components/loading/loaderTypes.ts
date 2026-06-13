@@ -4,6 +4,8 @@ export type LoaderTheme = "light" | "dark";
 
 export type BitcraftlyLoaderProps = {
   show: boolean;
+  /** Initial page load — overlay appears instantly (no fade-in over content). */
+  instantEnter?: boolean;
   variant?: BitcraftlyLoaderVariant;
   density?: LoaderDensity;
   theme?: LoaderTheme;

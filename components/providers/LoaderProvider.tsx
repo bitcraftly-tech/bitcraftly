@@ -40,7 +40,8 @@ function shouldSkipInitialLoader(): boolean {
 }
 
 function initialLoaderPhase(): InitialPhase {
-  return LOADER_ENABLED && !shouldSkipInitialLoader() ? "loading" : "done";
+  if (!LOADER_ENABLED) return "done";
+  return "loading";
 }
 
 export function LoaderProvider({ children }: { children: ReactNode }) {
@@ -152,12 +153,24 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
   const showRoute = LOADER_ENABLED && routeLoading && initialPhase === "done" && !manualLoading;
   const showManual = LOADER_ENABLED && manualLoading && initialPhase === "done";
   const showOverlay = showInitial || showRoute || showManual;
+  const contentReady = !LOADER_ENABLED || initialPhase === "done";
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (LOADER_ENABLED && initialPhase !== "done") {
+      root.classList.add("bc-loader-active");
+    } else {
+      root.classList.remove("bc-loader-active");
+    }
+    return () => root.classList.remove("bc-loader-active");
+  }, [initialPhase]);
 
   return (
     <LoaderContext.Provider value={value}>
       {LOADER_ENABLED ? (
         <BitcraftlyLoader
           show={showOverlay}
+          instantEnter={showInitial}
           density="fullscreen"
           theme={theme}
           onExitComplete={() => {
@@ -165,7 +178,7 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
           }}
         />
       ) : null}
-      {children}
+      <div className={contentReady ? "bc-app-root bc-app-root--ready" : "bc-app-root"}>{children}</div>
     </LoaderContext.Provider>
   );
 }
