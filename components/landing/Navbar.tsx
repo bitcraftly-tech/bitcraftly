@@ -10,7 +10,12 @@ import NavbarProfileMenu from "@/components/landing/NavbarProfileMenu";
 import { MARKETING_NAV } from "@/lib/marketingRoutes";
 import { BRAND } from "@/lib/siteContent";
 
-export default function Navbar() {
+type NavbarProps = {
+  /** When true, parent controls sticky positioning (e.g. dashboard shell). */
+  embedded?: boolean;
+};
+
+export default function Navbar({ embedded = false }: NavbarProps) {
   const pathname = usePathname();
   const { data: session, status } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,7 +34,13 @@ export default function Navbar() {
   }, [isMenuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border-primary bg-bg-card/90 backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card/90">
+    <header
+      className={
+        embedded
+          ? "border-b border-border-primary bg-bg-card/90 backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card/90"
+          : "sticky top-0 z-50 border-b border-border-primary bg-bg-card/90 backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card/90"
+      }
+    >
       <nav className="mx-auto flex min-w-0 w-full max-w-7xl items-center justify-between gap-2 px-4 py-2.5 sm:gap-3 sm:px-6 sm:py-3 lg:px-12">
         <Link
           href="/"
