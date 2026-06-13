@@ -108,7 +108,7 @@ export default function NavbarProfileMenu({ variant = "desktop", onNavigate }: N
         aria-hidden={!open}
         className={`${panelBase} transition-all duration-200 ease-out motion-reduce:transition-none ${
           variant === "mobile"
-            ? `absolute left-0 right-0 top-full z-[60] mt-2 w-full origin-top ${
+            ? `absolute left-0 right-0 bottom-full z-[60] mb-2 w-full origin-bottom ${
                 open ? "pointer-events-auto scale-100 opacity-100" : "pointer-events-none scale-[0.98] opacity-0"
               }`
             : `absolute right-0 top-full z-[70] mt-2 min-w-[280px] origin-top-right ${
