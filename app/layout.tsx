@@ -63,12 +63,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head>
         {LOADER_ENABLED ? (
           <script
+            defer
             dangerouslySetInnerHTML={{
               __html: loaderBootScript(),
             }}
           />
         ) : null}
         <script
+          defer
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var p=location.pathname;if(p.indexOf("/portfolio/")===0||p.indexOf("/dayal-builders")===0){document.documentElement.classList.remove("dark");return;}var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.classList.add("dark");}catch(e){}})();`,
           }}

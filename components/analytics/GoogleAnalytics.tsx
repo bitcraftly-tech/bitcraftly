@@ -8,8 +8,8 @@ export default function GoogleAnalytics() {
 
   return (
     <>
-      <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`} strategy="lazyOnload" />
-      <Script id="bitcraftly-ga4-init" strategy="lazyOnload">
+      <Script defer src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`} strategy="lazyOnload" />
+      <Script defer id="bitcraftly-ga4-init" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

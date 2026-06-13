@@ -43,7 +43,7 @@ function loadRazorpayScript(): Promise<void> {
   return new Promise((resolve, reject) => {
     const s = document.createElement("script");
     s.src = "https://checkout.razorpay.com/v1/checkout.js";
-    s.async = true;
+    s.defer = true;
     s.onload = () => resolve();
     s.onerror = () => reject(new Error("Failed to load Razorpay checkout"));
     document.body.appendChild(s);
