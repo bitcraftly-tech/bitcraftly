@@ -1315,6 +1315,27 @@ html.dark .bc-static-loader__label {
   background: transparent;
 }
 
+/* Invisible scrollbar — scroll works, track/thumb never shown */
+.scrollbar-transparent {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-transparent::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+  background: transparent;
+}
+
+.scrollbar-transparent::-webkit-scrollbar-thumb,
+.scrollbar-transparent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 /* Thin smooth scrollbar on tablet+; hidden on mobile (touch scroll unchanged) */
 .scrollbar-soft {
   scroll-behavior: smooth;

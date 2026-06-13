@@ -61,7 +61,10 @@ export default function NavbarProfileMenu({ variant = "desktop", onNavigate }: N
   const privileged = isPrivilegedRole(session.role);
 
   const panelBase =
-    "overflow-hidden rounded-2xl border border-border-primary bg-bg-card/95 shadow-2xl backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/95";
+    "scrollbar-transparent overflow-x-hidden overflow-y-auto overscroll-contain rounded-2xl border border-border-primary bg-bg-card/95 shadow-2xl backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/95";
+
+  const panelMaxHeight =
+    variant === "mobile" ? "max-h-[min(50dvh,20rem)]" : "max-h-[min(70vh,26rem)]";
 
   const itemClass =
     "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm text-text-primary outline-none transition-colors hover:bg-bg-secondary focus-visible:bg-bg-secondary focus-visible:ring-2 focus-visible:ring-violet-500/40 dark:text-zinc-100 dark:hover:bg-zinc-800/80 dark:focus-visible:bg-zinc-800/80";
@@ -106,7 +109,7 @@ export default function NavbarProfileMenu({ variant = "desktop", onNavigate }: N
         role="menu"
         aria-labelledby={`${menuId}-trigger`}
         aria-hidden={!open}
-        className={`${panelBase} transition-all duration-200 ease-out motion-reduce:transition-none ${
+        className={`${panelBase} ${panelMaxHeight} transition-all duration-200 ease-out motion-reduce:transition-none ${
           variant === "mobile"
             ? open
               ? "mt-2 w-full"
