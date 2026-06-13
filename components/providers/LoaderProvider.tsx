@@ -15,7 +15,6 @@ import { usePathname } from "next/navigation";
 import BitcraftlyLoader, { type LoaderTheme } from "@/components/loading/BitcraftlyLoader";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { LOADER_ALWAYS_ON, LOADER_ENABLED, LOADER_STORAGE_KEY, LOADER_TIMING } from "@/lib/loader/config";
-import { LOADER_MOBILE_MAX_WIDTH_PX, LOADER_SKIP_ON_MOBILE } from "@/lib/loader/mobilePerf";
 
 type LoaderContextValue = {
   showLoader: (opts?: { durationMs?: number }) => void;
@@ -30,14 +29,8 @@ function loaderTheme(pathname: string, resolvedTheme: "light" | "dark"): LoaderT
   return resolvedTheme;
 }
 
-function isMobileViewport(): boolean {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia(`(max-width: ${LOADER_MOBILE_MAX_WIDTH_PX}px)`).matches;
-}
-
 function shouldSkipInitialLoader(): boolean {
   if (!LOADER_ENABLED) return true;
-  if (LOADER_SKIP_ON_MOBILE && isMobileViewport()) return true;
   if (LOADER_ALWAYS_ON) return false;
   try {
     return sessionStorage.getItem(LOADER_STORAGE_KEY) === "1";
@@ -174,12 +167,18 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
     return () => root.classList.remove("bc-loader-active");
   }, [initialPhase]);
 
+  /** Hand off first paint shell to the same React aura loader used on route clicks */
+  useEffect(() => {
+    if (!ready || !showOverlay) return;
+    const staticLoader = document.getElementById("bc-static-loader");
+    if (staticLoader) staticLoader.style.display = "none";
+  }, [ready, showOverlay]);
+
   return (
     <LoaderContext.Provider value={value}>
       {LOADER_ENABLED ? (
         <BitcraftlyLoader
           show={showOverlay}
-          instantEnter={showInitial}
           density="fullscreen"
           theme={theme}
           onExitComplete={() => {

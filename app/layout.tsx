@@ -81,8 +81,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <div id="bc-static-loader" className="bc-static-loader" aria-hidden>
             <div className="bc-static-loader__glow" />
             <div className="bc-static-loader__content">
-              <div className="bc-static-loader__orbit">
-                <span className="bc-static-loader__ring" />
+              <div className="bc-static-loader__orbit" aria-hidden>
+                <span className="bc-static-loader__ring bc-static-loader__ring--1" />
+                <span className="bc-static-loader__ring bc-static-loader__ring--2" />
+                <span className="bc-static-loader__ring bc-static-loader__ring--3" />
+                <div className="bc-static-loader__orbit-spin">
+                  <span className="bc-static-loader__dot" style={{ ["--orbit-deg" as string]: "0deg" }} />
+                  <span className="bc-static-loader__dot" style={{ ["--orbit-deg" as string]: "120deg" }} />
+                  <span className="bc-static-loader__dot" style={{ ["--orbit-deg" as string]: "240deg" }} />
+                </div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/brand/bitcraftly-mark.png"
