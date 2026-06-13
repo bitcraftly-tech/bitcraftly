@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-import BitcraftlyLogoMark from "@/components/brand/BitcraftlyLogoMark";
+import BitcraftlyLogoMarkImage from "@/components/brand/BitcraftlyLogoMarkImage";
 import NavbarProfileMenu from "@/components/landing/NavbarProfileMenu";
 import { MARKETING_NAV } from "@/lib/marketingRoutes";
 import { BRAND } from "@/lib/siteContent";
@@ -36,7 +36,7 @@ export default function Navbar() {
           className="flex min-w-0 shrink items-center gap-2"
           title={`Bitcraftly — ${BRAND.headerTagline}`}
         >
-          <BitcraftlyLogoMark size="nav" />
+          <BitcraftlyLogoMarkImage size="nav" priority />
           <span className="flex min-w-0 flex-col leading-tight">
             <span className="truncate font-[var(--font-playfair)] text-lg font-semibold text-text-primary sm:text-xl dark:text-dark-text-primary">
               Bitcraftly

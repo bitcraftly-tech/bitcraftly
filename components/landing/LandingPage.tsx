@@ -20,9 +20,7 @@ export default function LandingPage({ sectionId }: LandingPageProps) {
   return (
     <MarketingPageLayout>
       <SectionAutoScroll sectionId={sectionId} />
-      <FadeInOnView eager delayMs={30}>
-        <Hero />
-      </FadeInOnView>
+      <Hero />
       <FadeInOnView delayMs={38}>
         <PricingHomeTeaser />
       </FadeInOnView>

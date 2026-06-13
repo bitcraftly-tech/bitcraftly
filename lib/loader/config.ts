@@ -12,8 +12,8 @@ export const LOADER_STORAGE_KEY = "bitcraftly-preloader-done";
 /** Master switch — set NEXT_PUBLIC_LOADER_ENABLED=false in .env to disable */
 export const LOADER_ENABLED = process.env.NEXT_PUBLIC_LOADER_ENABLED !== "false";
 
-/** Fullscreen loader on every page load/refresh — set NEXT_PUBLIC_LOADER_ALWAYS_ON=false for once per session */
-export const LOADER_ALWAYS_ON = process.env.NEXT_PUBLIC_LOADER_ALWAYS_ON !== "false";
+/** Fullscreen loader on every page load/refresh — opt-in via NEXT_PUBLIC_LOADER_ALWAYS_ON=true */
+export const LOADER_ALWAYS_ON = process.env.NEXT_PUBLIC_LOADER_ALWAYS_ON === "true";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -25,11 +25,11 @@ export const LOADER_COPY = {
 
 export const LOADER_TIMING = {
   /** Dev: longer so you can review loader UI on refresh */
-  initialMinMs: isDev ? 1800 : 480,
-  initialMaxMs: isDev ? 4500 : 2400,
-  exitMs: isDev ? 520 : 280,
+  initialMinMs: isDev ? 1800 : 180,
+  initialMaxMs: isDev ? 4500 : 1400,
+  exitMs: isDev ? 520 : 220,
   /** Route / manual — brief transition only */
-  routeMs: isDev ? 1800 : 420,
+  routeMs: isDev ? 1800 : 320,
 } as const;
 
 /** Premium easing — Stripe/Vercel-like */

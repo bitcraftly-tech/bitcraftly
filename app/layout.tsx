@@ -12,7 +12,7 @@ import { loaderBootScript } from "@/lib/loader/bootSnippet";
 import { HOME_SEO, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 /** Re-enable when chatbot should ship: uncomment import + <ChatSupportWidget /> below */
 // import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
-import PortfolioFloatingChrome from "@/components/landing/PortfolioFloatingChrome";
+import DeferredFloatingChrome from "@/components/landing/DeferredFloatingChrome";
 import AuthSessionProvider from "@/components/providers/AuthSessionProvider";
 import { LoaderProvider } from "@/components/providers/LoaderProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
@@ -34,7 +34,7 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
   display: "swap",
-  preload: false,
+  preload: true,
 });
 
 const rootSeo = buildPageMetadata("home");
@@ -75,9 +75,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${playfair.variable}`}>
       <head>
-        {LOADER_ENABLED ? (
-          <link rel="preload" href="/brand/bitcraftly-mark.png" as="image" />
-        ) : null}
         {LOADER_ENABLED ? (
           <script
             dangerouslySetInnerHTML={{
@@ -126,7 +123,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <LoaderProvider>
             <AuthSessionProvider>{children}</AuthSessionProvider>
             {/* <ChatSupportWidget /> */}
-            <PortfolioFloatingChrome />
+            <DeferredFloatingChrome />
             <Toaster />
           </LoaderProvider>
         </ThemeProvider>

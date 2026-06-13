@@ -126,47 +126,29 @@ export default function DashboardNav() {
     }
   };
 
+  const navLinkClass = (isActive: boolean) =>
+    `flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-sm font-medium transition-colors xl:px-3 ${
+      isActive
+        ? "bg-black text-white dark:bg-white dark:text-black"
+        : "text-text-secondary hover:bg-bg-secondary dark:text-dark-text-secondary dark:hover:bg-dark-bg-secondary"
+    }`;
+
   return (
-    <nav className="sticky top-0 z-50 border-b border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card">
-      <div className="mx-auto w-full max-w-7xl px-6 lg:px-12">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center gap-8">
-            <Link href="/dashboard" className="flex items-center gap-2.5" title={`Bitcraftly — ${BRAND.headerTagline}`}>
-              <BitcraftlyLogoMark size="nav" />
-              <div>
-                <div className="font-[var(--font-playfair)] text-xl font-semibold text-text-primary dark:text-dark-text-primary">
-                  Bitcraftly
-                </div>
-                <div className="max-w-[13rem] text-[10px] font-medium leading-snug text-text-tertiary dark:text-dark-text-tertiary lg:max-w-[20rem]">
-                  {BRAND.headerTagline}
-                </div>
-              </div>
-            </Link>
+    <nav className="sticky top-0 z-50 border-b border-border-primary bg-bg-card/95 backdrop-blur-sm dark:border-dark-border-primary dark:bg-dark-bg-card/95">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-12">
+        <div className="flex h-14 items-center justify-between gap-3">
+          <Link
+            href="/dashboard"
+            className="flex min-w-0 shrink-0 items-center gap-2.5"
+            title={`Bitcraftly — ${BRAND.headerTagline}`}
+          >
+            <BitcraftlyLogoMark size="nav" />
+            <span className="truncate font-[var(--font-playfair)] text-lg font-semibold text-text-primary sm:text-xl dark:text-dark-text-primary">
+              Bitcraftly
+            </span>
+          </Link>
 
-            <div className="hidden items-center gap-1 md:flex">
-              {visibleNavItems.map((item) => {
-                const Icon = item.icon;
-                const base = item.href.split("?")[0];
-                const isActive = base === "/contact" ? pathname === "/contact" : pathname === base;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
-                      isActive
-                        ? "bg-black text-white dark:bg-white dark:text-black"
-                        : "text-text-secondary hover:bg-bg-secondary dark:text-dark-text-secondary dark:hover:bg-dark-bg-secondary"
-                    }`}
-                  >
-                    <Icon size={16} />
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             <ThemeToggle />
             <button
               type="button"
@@ -177,7 +159,7 @@ export default function DashboardNav() {
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
 
-            <div className="relative hidden lg:block" ref={tenantMenuRef}>
+            <div className="relative hidden xl:block" ref={tenantMenuRef}>
               <button
                 type="button"
               className="flex items-center gap-2 rounded-lg border border-border-primary px-3 py-1.5 text-sm hover:bg-bg-secondary dark:border-dark-border-primary dark:hover:bg-dark-bg-secondary"
@@ -236,12 +218,12 @@ export default function DashboardNav() {
                   setTenantMenuOpen(false);
                   setNotificationsOpen(false);
                 }}
-                className="flex items-center gap-2 rounded-lg p-1.5 pr-2 hover:bg-gray-100"
+                className="flex items-center gap-2 rounded-lg p-1.5 pr-2 hover:bg-bg-secondary dark:hover:bg-dark-bg-secondary"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
                   {avatarText}
                 </div>
-                <ChevronDown size={14} className="text-gray-400" />
+                <ChevronDown size={14} className="hidden text-text-tertiary sm:block dark:text-dark-text-tertiary" />
               </button>
 
               {userMenuOpen ? (
@@ -286,6 +268,30 @@ export default function DashboardNav() {
                   </button>
                 </div>
               ) : null}
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden border-t border-border-primary md:block dark:border-dark-border-primary">
+          <div className="-mx-4 overflow-x-auto px-4 scrollbar-none sm:-mx-6 sm:px-6 lg:-mx-12 lg:px-12">
+            <div className="flex min-w-max items-center gap-0.5 py-2">
+              {visibleNavItems.map((item) => {
+                const Icon = item.icon;
+                const base = item.href.split("?")[0];
+                const isActive = base === "/contact" ? pathname === "/contact" : pathname === base;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    title={item.label}
+                    aria-label={item.label}
+                    className={navLinkClass(isActive)}
+                  >
+                    <Icon size={16} className="shrink-0" />
+                    <span className="hidden xl:inline">{item.label}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>

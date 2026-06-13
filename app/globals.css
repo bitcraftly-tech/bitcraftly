@@ -58,6 +58,8 @@ body {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 520ms ease, transform 520ms ease;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 480px;
 }
 
 .reveal-section.is-visible {
@@ -103,6 +105,12 @@ html.bc-loader-active .bc-app-root {
   background: #fafaf8;
   color: #111827;
   pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .bc-static-loader {
+    display: none !important;
+  }
 }
 
 html.dark .bc-static-loader {

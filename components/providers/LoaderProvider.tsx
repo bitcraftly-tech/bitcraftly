@@ -15,6 +15,7 @@ import { usePathname } from "next/navigation";
 import BitcraftlyLoader, { type LoaderTheme } from "@/components/loading/BitcraftlyLoader";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { LOADER_ALWAYS_ON, LOADER_ENABLED, LOADER_STORAGE_KEY, LOADER_TIMING } from "@/lib/loader/config";
+import { LOADER_MOBILE_MAX_WIDTH_PX, LOADER_SKIP_ON_MOBILE } from "@/lib/loader/mobilePerf";
 
 type LoaderContextValue = {
   showLoader: (opts?: { durationMs?: number }) => void;
@@ -29,8 +30,14 @@ function loaderTheme(pathname: string, resolvedTheme: "light" | "dark"): LoaderT
   return resolvedTheme;
 }
 
+function isMobileViewport(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia(`(max-width: ${LOADER_MOBILE_MAX_WIDTH_PX}px)`).matches;
+}
+
 function shouldSkipInitialLoader(): boolean {
   if (!LOADER_ENABLED) return true;
+  if (LOADER_SKIP_ON_MOBILE && isMobileViewport()) return true;
   if (LOADER_ALWAYS_ON) return false;
   try {
     return sessionStorage.getItem(LOADER_STORAGE_KEY) === "1";
