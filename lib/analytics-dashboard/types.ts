@@ -116,6 +116,54 @@ export type RealtimeMetrics = {
 
 export type TimeSeriesPoint = { date: string; value: number };
 
+export type TrafficViewMode = "daily" | "weekly" | "monthly";
+
+export type FunnelStep = {
+  label: string;
+  value: number;
+  rate?: number;
+};
+
+export type ServicePerformance = {
+  name: string;
+  views: number;
+  clicks: number;
+  conversions: number;
+};
+
+export type TopPageRow = {
+  name: string;
+  path: string;
+  views: number;
+  leads: number;
+  conversionRate: number;
+};
+
+export type WhatsAppAnalytics = {
+  totalClicks: number;
+  topPages: Array<{ page: string; clicks: number }>;
+  clickTimes: Array<{ hour: string; clicks: number }>;
+  devices: Array<{ name: string; value: number }>;
+};
+
+export type GeographicCity = {
+  name: string;
+  users: number;
+  lat?: number;
+  lng?: number;
+};
+
+export type GeographicData = {
+  cities: GeographicCity[];
+};
+
+export type AiInsight = {
+  id: string;
+  type: "positive" | "neutral" | "warning";
+  title: string;
+  description: string;
+};
+
 export type DashboardCharts = {
   dailyVisitors: TimeSeriesPoint[];
   monthlyVisitors: TimeSeriesPoint[];
