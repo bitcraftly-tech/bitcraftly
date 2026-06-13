@@ -10,7 +10,7 @@ type MarketingPageLayoutProps = {
 
 export default function MarketingPageLayout({ children }: MarketingPageLayoutProps) {
   return (
-    <main className="min-h-screen bg-bg-primary pb-20 text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary md:pb-0">
+    <main className="min-h-screen bg-bg-primary text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary">
       <HashScrollOnMount />
       <Navbar />
       {children}

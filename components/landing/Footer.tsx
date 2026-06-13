@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import BitcraftlyLogoMark from "@/components/brand/BitcraftlyLogoMark";
 import SocialLinks from "@/components/landing/SocialLinks";
 import { CONTAINER, PRIMARY_LOCATION, whatsappUrl, WHATSAPP_HOURS } from "@/lib/constants";
 import { FOOTER_EXPLORE_LINKS, FOOTER_MORE_LINKS, FOOTER_SERVICE_LINKS } from "@/lib/footerLinks";
+import { FOOTER_STICKY_CLEARANCE_CLASS, hasMobileStickyCta } from "@/lib/mobileStickyCta";
 import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { BRAND } from "@/lib/siteContent";
 
@@ -24,8 +26,13 @@ function FooterLinkList({ links }: { links: { href: string; label: string }[] })
 }
 
 export default function Footer() {
+  const pathname = usePathname();
+  const stickyClearance = hasMobileStickyCta(pathname);
+
   return (
-    <footer className="border-t border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card">
+    <footer
+      className={`border-t border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card${stickyClearance ? ` ${FOOTER_STICKY_CLEARANCE_CLASS}` : ""}`}
+    >
       <div className={`${CONTAINER} py-8 md:py-10`}>
         <div className="rounded-2xl border border-indigo-500/20 bg-gradient-to-br from-indigo-50/70 via-bg-card to-bg-card px-5 py-6 dark:from-indigo-950/25 dark:via-dark-bg-card dark:to-dark-bg-card sm:px-8 sm:py-7">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">

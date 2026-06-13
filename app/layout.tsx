@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { ReactNode, Suspense } from "react";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
@@ -57,6 +57,12 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   ...(GSC_VERIFICATION ? { verification: { google: GSC_VERIFICATION } } : {}),
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {

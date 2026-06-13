@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { MOBILE_STICKY_CTA_PATHS } from "@/lib/mobileStickyCta";
 import { whatsappUrl } from "@/lib/constants";
 import { MOBILE_STICKY_CTA } from "@/lib/leadGen";
 import { MOBILE_WHATSAPP_UX, WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
@@ -10,12 +11,12 @@ import { MOBILE_WHATSAPP_UX, WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 /** Mobile-only sticky conversion bar — homepage & key pages */
 export default function MobileStickyCta() {
   const pathname = usePathname();
-  const showOn = pathname === "/" || pathname === "/contact" || pathname === "/portfolio";
+  const showOn = (MOBILE_STICKY_CTA_PATHS as readonly string[]).includes(pathname ?? "");
   if (!showOn) return null;
 
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-[55] border-t border-border-primary bg-bg-card/95 px-4 py-2.5 backdrop-blur-md dark:border-dark-border-primary dark:bg-dark-bg-card/95 md:hidden"
+      className="fixed inset-x-0 bottom-0 z-[55] border-t border-border-primary bg-bg-card/95 px-4 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom,0px))] backdrop-blur-md dark:border-dark-border-primary dark:bg-dark-bg-card/95 md:hidden"
       role="region"
       aria-label="Quick contact"
     >
