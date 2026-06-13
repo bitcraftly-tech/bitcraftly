@@ -26,11 +26,15 @@ type RootLayoutProps = {
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+  preload: true,
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
+  display: "swap",
+  preload: false,
 });
 
 const rootSeo = buildPageMetadata("home");
@@ -85,6 +89,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
       </head>
       <body suppressHydrationWarning className="font-[var(--font-inter)] antialiased">
+        {LOADER_ENABLED ? (
+          <div id="bc-static-loader" className="bc-static-loader" aria-hidden>
+            <span className="bc-static-loader__brand">Bitcraftly</span>
+            <span className="bc-static-loader__label">Loading…</span>
+          </div>
+        ) : null}
         <GoogleAnalytics />
         <Suspense fallback={null}>
           <AnalyticsListener />

@@ -87,23 +87,48 @@ html.bc-loader-active.dark {
   background: #0a0a0f;
 }
 
-/* App shell hidden until initial loader finishes */
-.bc-app-root:not(.bc-app-root--ready) {
-  opacity: 0;
-  visibility: hidden;
+/* Loader covers content visually; keep shell painted for LCP under the overlay */
+html.bc-loader-active .bc-app-root {
   pointer-events: none;
+}
+
+.bc-static-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: #fafaf8;
+  color: #111827;
+  pointer-events: none;
+}
+
+html.dark .bc-static-loader {
+  background: #0a0a0f;
+  color: #f0eff8;
+}
+
+html[data-loader="done"] .bc-static-loader {
+  display: none;
+}
+
+.bc-static-loader__brand {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.bc-static-loader__label {
+  font-size: 0.6875rem;
+  color: #9ca3af;
 }
 
 .bc-app-root--ready {
   opacity: 1;
-  visibility: visible;
-  transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .bc-app-root--ready {
-    transition: none;
-  }
 }
 
 @keyframes footer-nav-arrow {

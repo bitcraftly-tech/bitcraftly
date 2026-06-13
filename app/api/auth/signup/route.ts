@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 
-const authApiBaseUrl = process.env.AUTH_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const authApiBaseUrl =
+  process.env.AUTH_API_BASE_URL ||
+  process.env.NEXT_PUBLIC_API_BASE_URL ||
+  process.env.NEXT_PUBLIC_API_URL ||
+  "http://localhost:8000";
 
 export async function POST(request: Request) {
   try {

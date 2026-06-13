@@ -25,11 +25,11 @@ export const LOADER_COPY = {
 
 export const LOADER_TIMING = {
   /** Dev: longer so you can review loader UI on refresh */
-  initialMinMs: isDev ? 1800 : 900,
-  initialMaxMs: 4500,
-  exitMs: 520,
-  /** Route / manual — same fullscreen UI, match initial min display */
-  routeMs: isDev ? 1800 : 900,
+  initialMinMs: isDev ? 1800 : 480,
+  initialMaxMs: isDev ? 4500 : 2400,
+  exitMs: isDev ? 520 : 280,
+  /** Route / manual — brief transition only */
+  routeMs: isDev ? 1800 : 420,
 } as const;
 
 /** Premium easing — Stripe/Vercel-like */

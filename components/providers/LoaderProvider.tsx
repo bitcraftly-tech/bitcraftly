@@ -104,15 +104,15 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
       window.setTimeout(finishInitial, wait);
     };
 
-    if (document.readyState === "complete") {
-      complete();
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", complete, { once: true });
     } else {
-      window.addEventListener("load", complete, { once: true });
+      complete();
     }
 
     const fallback = window.setTimeout(complete, LOADER_TIMING.initialMaxMs);
     return () => {
-      window.removeEventListener("load", complete);
+      document.removeEventListener("DOMContentLoaded", complete);
       window.clearTimeout(fallback);
     };
   }, [finishInitial]);
@@ -159,8 +159,10 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
     const root = document.documentElement;
     if (LOADER_ENABLED && initialPhase !== "done") {
       root.classList.add("bc-loader-active");
+      delete root.dataset.loader;
     } else {
       root.classList.remove("bc-loader-active");
+      root.dataset.loader = "done";
     }
     return () => root.classList.remove("bc-loader-active");
   }, [initialPhase]);
