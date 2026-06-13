@@ -5,7 +5,7 @@ from sqlalchemy import text
 from app.api.api import api_router
 from app.api.routes.qr import public_qr_router
 from app.core.config import settings
-from app.db.bootstrap import ensure_dev_schema, ensure_sqlite_dev_user
+from app.db.bootstrap import ensure_dev_schema, ensure_prod_admin_user, ensure_sqlite_dev_user
 from app.db.session import engine
 from app.middleware.tenant import TenantMiddleware
 from app.models import contact as contact_model  # noqa: F401
@@ -37,6 +37,7 @@ def on_startup() -> None:
 
     ensure_dev_schema()
     ensure_sqlite_dev_user()
+    ensure_prod_admin_user()
 
 
 @app.get("/health")

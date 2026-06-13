@@ -26,6 +26,11 @@ class Settings(BaseSettings):
     # Shared secret for NextAuth → FastAPI Google account sync (server-to-server only). Same value as AUTH_GOOGLE_SYNC_SECRET on the Next.js app.
     AUTH_GOOGLE_SYNC_SECRET: Optional[str] = None
 
+    # Optional: auto-create admin on production startup (Render env)
+    SEED_ADMIN_EMAIL: Optional[str] = None
+    SEED_ADMIN_PASSWORD: Optional[str] = None
+    SEED_ADMIN_NAME: str = "Analytics Test Admin"
+
     # Razorpay (https://dashboard.razorpay.com/app/keys) — server-side secret must never be exposed to the browser
     RAZORPAY_KEY_ID: Optional[str] = None
     RAZORPAY_KEY_SECRET: Optional[str] = None

@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.db.session import get_db_session
 from app.models.user import User, UserRole
-from app.schemas.auth import AuthResponse, GoogleSyncRequest, LoginRequest, SignupRequest, UserResponse
+from app.schemas.auth import AuthResponse, GoogleSyncRequest, LoginRequest, SeedAdminRequest, SignupRequest, UserResponse
 from app.core.config import settings
 from app.services.security import create_access_token, hash_password, verify_password
 
@@ -82,6 +82,47 @@ def google_sync(
         db.add(user)
         db.commit()
         db.refresh(user)
+
+    access_token = create_access_token(
+        {"sub": str(user.id), "email": user.email, "role": user.role.value},
+        settings.auth_secret,
+        expires_in_seconds=settings.access_token_expire_seconds,
+    )
+    return AuthResponse(
+        access_token=access_token,
+        user=UserResponse(id=user.id, name=user.name, email=user.email, role=user.role),
+    )
+
+
+@router.post("/seed-admin", response_model=AuthResponse)
+def seed_admin(
+    payload: SeedAdminRequest,
+    db: Session = Depends(get_db_session),
+    x_auth_google_sync_secret: str | None = Header(None, alias="x-auth-google-sync-secret"),
+) -> AuthResponse:
+    """Idempotent admin bootstrap — protected by AUTH_GOOGLE_SYNC_SECRET."""
+    expected = settings.AUTH_GOOGLE_SYNC_SECRET
+    if not expected or not x_auth_google_sync_secret or x_auth_google_sync_secret != expected:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
+
+    email = payload.email.strip().lower()
+    user = db.query(User).filter(User.email == email).first()
+    if user:
+        user.name = payload.name.strip()
+        user.password_hash = hash_password(payload.password)
+        user.role = UserRole.ADMIN
+        user.is_active = True
+    else:
+        user = User(
+            name=payload.name.strip(),
+            email=email,
+            password_hash=hash_password(payload.password),
+            role=UserRole.ADMIN,
+            is_active=True,
+        )
+        db.add(user)
+    db.commit()
+    db.refresh(user)
 
     access_token = create_access_token(
         {"sub": str(user.id), "email": user.email, "role": user.role.value},

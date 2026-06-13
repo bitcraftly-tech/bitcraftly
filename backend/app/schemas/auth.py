@@ -19,6 +19,12 @@ class GoogleSyncRequest(BaseModel):
     name: str = Field(min_length=1, max_length=120)
 
 
+class SeedAdminRequest(BaseModel):
+    email: str = Field(min_length=5, max_length=190)
+    password: str = Field(min_length=6, max_length=128)
+    name: str = Field(min_length=2, max_length=120)
+
+
 class UserResponse(BaseModel):
     id: int
     name: str
