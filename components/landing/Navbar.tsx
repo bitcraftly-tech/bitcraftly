@@ -128,22 +128,20 @@ export default function Navbar({ embedded = false }: NavbarProps) {
             className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[1px] lg:hidden"
             onClick={() => setIsMenuOpen(false)}
           />
-          <div className="fixed inset-x-0 top-14 bottom-0 z-50 flex flex-col border-t border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card lg:hidden">
-            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4">
-              <div className="flex flex-col gap-1">
-                {MARKETING_NAV.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="w-full cursor-pointer rounded-lg px-3 py-3 text-left text-base font-medium text-text-secondary transition-colors duration-300 ease-out hover:bg-bg-secondary hover:text-[#2B5CE6] dark:text-dark-text-secondary dark:hover:bg-dark-bg-secondary dark:hover:text-[#7ea0ff]"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
+          <div className="relative z-50 border-t border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card lg:hidden">
+            <div className="flex flex-col gap-1 px-4 pt-4">
+              {MARKETING_NAV.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="w-full cursor-pointer rounded-lg px-3 py-3 text-left text-base font-medium text-text-secondary transition-colors duration-300 ease-out hover:bg-bg-secondary hover:text-[#2B5CE6] dark:text-dark-text-secondary dark:hover:bg-dark-bg-secondary dark:hover:text-[#7ea0ff]"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
-            <div className="flex shrink-0 flex-col gap-3 border-t border-border-primary px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] dark:border-dark-border-primary">
+            <div className="flex flex-col gap-3 border-t border-border-primary px-4 py-4 dark:border-dark-border-primary">
               {status === "loading" ? null : session ? (
                 <NavbarProfileMenu variant="mobile" onNavigate={() => setIsMenuOpen(false)} />
               ) : (
