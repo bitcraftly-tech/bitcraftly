@@ -3,11 +3,9 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
-const AnalyticsListener = dynamic(() => import("@/components/analytics/AnalyticsListener"), {
-  ssr: false,
-});
+const Toaster = dynamic(() => import("@/components/ui/Toaster"), { ssr: false });
 
-export default function DeferredAnalyticsListener() {
+export default function DeferredToaster() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -18,7 +16,7 @@ export default function DeferredAnalyticsListener() {
         () => {
           if (!cancelled) setShow(true);
         },
-        { timeout: 4000 },
+        { timeout: 5000 },
       );
       return () => {
         cancelled = true;
@@ -28,7 +26,7 @@ export default function DeferredAnalyticsListener() {
 
     const timer = window.setTimeout(() => {
       if (!cancelled) setShow(true);
-    }, 1800);
+    }, 2200);
     return () => {
       cancelled = true;
       window.clearTimeout(timer);
@@ -36,5 +34,5 @@ export default function DeferredAnalyticsListener() {
   }, []);
 
   if (!show) return null;
-  return <AnalyticsListener />;
+  return <Toaster />;
 }

@@ -29,6 +29,8 @@ type LoaderContextValue = {
 
 const LoaderContext = createContext<LoaderContextValue | null>(null);
 
+const noopLoader: LoaderContextValue = { showLoader: () => {} };
+
 type InitialPhase = "idle" | "loading" | "exiting" | "done";
 
 function loaderTheme(pathname: string, resolvedTheme: "light" | "dark"): LoaderTheme {
@@ -57,13 +59,20 @@ function initialLoaderPhase(): InitialPhase {
   return "loading";
 }
 
-export function LoaderProvider({ children }: { children: ReactNode }) {
+function LoaderProviderMobile({ children }: { children: ReactNode }) {
+  return (
+    <LoaderContext.Provider value={noopLoader}>
+      <div className="bc-app-root bc-app-root--ready">{children}</div>
+    </LoaderContext.Provider>
+  );
+}
+
+function LoaderProviderDesktop({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { resolvedTheme } = useTheme();
   const theme = loaderTheme(pathname, resolvedTheme);
 
   const [ready, setReady] = useState(false);
-  const [skipMobileLoader, setSkipMobileLoader] = useState(false);
   const [initialPhase, setInitialPhase] = useState<InitialPhase>(initialLoaderPhase);
   const [routeLoading, setRouteLoading] = useState(false);
   const [manualLoading, setManualLoading] = useState(false);
@@ -91,8 +100,6 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useLayoutEffect(() => {
-    const mobile = LOADER_SKIP_ON_MOBILE && isMobileViewport();
-    setSkipMobileLoader(mobile);
     setReady(true);
   }, []);
 
@@ -135,7 +142,6 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
     };
   }, [finishInitial]);
 
-  /** Fallback if Framer exit callback never fires */
   useEffect(() => {
     if (initialPhase !== "exiting") return;
     const t = window.setTimeout(() => setInitialPhase("done"), LOADER_TIMING.exitMs + 200);
@@ -143,7 +149,7 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
   }, [initialPhase]);
 
   useEffect(() => {
-    if (!LOADER_ENABLED || !ready || initialPhase !== "done" || skipMobileLoader) return;
+    if (!LOADER_ENABLED || !ready || initialPhase !== "done") return;
 
     if (isFirstPathEffect.current) {
       isFirstPathEffect.current = false;
@@ -157,30 +163,24 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
     setRouteLoading(true);
     const t = window.setTimeout(() => setRouteLoading(false), LOADER_TIMING.routeMs);
     return () => window.clearTimeout(t);
-  }, [pathname, ready, initialPhase, skipMobileLoader]);
+  }, [pathname, ready, initialPhase]);
 
-  const showLoader = useCallback(
-    (opts?: { durationMs?: number }) => {
-      if (skipMobileLoader) return;
-      setManualLoading(true);
-      window.setTimeout(() => setManualLoading(false), opts?.durationMs ?? LOADER_TIMING.routeMs);
-    },
-    [skipMobileLoader],
-  );
+  const showLoader = useCallback((opts?: { durationMs?: number }) => {
+    setManualLoading(true);
+    window.setTimeout(() => setManualLoading(false), opts?.durationMs ?? LOADER_TIMING.routeMs);
+  }, []);
 
   const value = useMemo(() => ({ showLoader }), [showLoader]);
 
-  /** Only visible while loading; exiting unmounts loader so fade-out + onExitComplete run */
   const showInitial = LOADER_ENABLED && initialPhase === "loading";
   const showRoute = LOADER_ENABLED && routeLoading && initialPhase === "done" && !manualLoading;
   const showManual = LOADER_ENABLED && manualLoading && initialPhase === "done";
-  const showOverlay =
-    ready && !skipMobileLoader && (showInitial || showRoute || showManual);
+  const showOverlay = ready && (showInitial || showRoute || showManual);
   const contentReady = !LOADER_ENABLED || initialPhase === "done";
 
   useEffect(() => {
     const root = document.documentElement;
-    if (LOADER_ENABLED && initialPhase !== "done" && !skipMobileLoader) {
+    if (LOADER_ENABLED && initialPhase !== "done") {
       root.classList.add("bc-loader-active");
       delete root.dataset.loader;
     } else {
@@ -188,9 +188,8 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
       root.dataset.loader = "done";
     }
     return () => root.classList.remove("bc-loader-active");
-  }, [initialPhase, skipMobileLoader]);
+  }, [initialPhase]);
 
-  /** Hand off first paint shell to the same React aura loader used on route clicks */
   useEffect(() => {
     if (!ready || !showOverlay) return;
     const staticLoader = document.getElementById("bc-static-loader");
@@ -212,6 +211,21 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
       <div className={contentReady ? "bc-app-root bc-app-root--ready" : "bc-app-root"}>{children}</div>
     </LoaderContext.Provider>
   );
+}
+
+export function LoaderProvider({ children }: { children: ReactNode }) {
+  const [useDesktopLoader, setUseDesktopLoader] = useState(false);
+
+  useLayoutEffect(() => {
+    const mobile = LOADER_SKIP_ON_MOBILE && isMobileViewport();
+    setUseDesktopLoader(!mobile);
+  }, []);
+
+  if (!useDesktopLoader) {
+    return <LoaderProviderMobile>{children}</LoaderProviderMobile>;
+  }
+
+  return <LoaderProviderDesktop>{children}</LoaderProviderDesktop>;
 }
 
 export function useLoader(): LoaderContextValue {

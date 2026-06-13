@@ -1,7 +1,5 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { headers } from "next/headers";
 
 import BitcraftlyLogoMarkImage from "@/components/brand/BitcraftlyLogoMarkImage";
 import SocialLinks from "@/components/landing/SocialLinks";
@@ -25,8 +23,8 @@ function FooterLinkList({ links }: { links: { href: string; label: string }[] })
   );
 }
 
-export default function Footer() {
-  const pathname = usePathname();
+export default async function Footer() {
+  const pathname = (await headers()).get("x-pathname") ?? "/";
   const stickyClearance = hasMobileStickyCta(pathname);
 
   return (

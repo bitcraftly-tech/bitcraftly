@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
 type ThemeValue = "light" | "dark";
 
@@ -10,6 +10,11 @@ type ThemeContextValue = {
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
+
+const STATIC_LIGHT: ThemeContextValue = {
+  resolvedTheme: "light",
+  setTheme: () => {},
+};
 
 type ThemeProviderProps = {
   children: ReactNode;
@@ -24,7 +29,7 @@ function applyThemeToDom(theme: ThemeValue) {
   }
 }
 
-export function ThemeProvider({ children }: ThemeProviderProps) {
+function ThemeProviderInner({ children }: ThemeProviderProps) {
   const [resolvedTheme, setResolvedTheme] = useState<ThemeValue>("light");
 
   useEffect(() => {
@@ -54,6 +59,41 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+}
+
+export function ThemeProvider({ children }: ThemeProviderProps) {
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(
+        () => {
+          if (!cancelled) setHydrated(true);
+        },
+        { timeout: 3200 },
+      );
+      return () => {
+        cancelled = true;
+        window.cancelIdleCallback(id);
+      };
+    }
+
+    const timer = window.setTimeout(() => {
+      if (!cancelled) setHydrated(true);
+    }, 150);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, []);
+
+  if (!hydrated) {
+    return <ThemeContext.Provider value={STATIC_LIGHT}>{children}</ThemeContext.Provider>;
+  }
+
+  return <ThemeProviderInner>{children}</ThemeProviderInner>;
 }
 
 export function useTheme(): ThemeContextValue {

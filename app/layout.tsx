@@ -17,7 +17,7 @@ import AuthSessionProvider from "@/components/providers/AuthSessionProvider";
 import { LoaderProvider } from "@/components/providers/LoaderProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import StagingEnvironmentBanner from "@/components/ui/StagingEnvironmentBanner";
-import Toaster from "@/components/ui/Toaster";
+import DeferredToaster from "@/components/ui/DeferredToaster";
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -119,7 +119,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <AuthSessionProvider>{children}</AuthSessionProvider>
             {/* <ChatSupportWidget /> */}
             <DeferredFloatingChrome />
-            <Toaster />
+            <DeferredToaster />
           </LoaderProvider>
         </ThemeProvider>
       </body>

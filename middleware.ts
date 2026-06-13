@@ -43,6 +43,7 @@ export async function middleware(request: NextRequest) {
 
   const subdomain = extractSubdomain(request.headers.get("host"));
   const headers = new Headers(request.headers);
+  headers.set("x-pathname", request.nextUrl.pathname);
   const response = NextResponse.next({
     request: {
       headers,
