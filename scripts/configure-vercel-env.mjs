@@ -19,7 +19,7 @@ const ROOT = resolve(__dirname, "..");
 const PROJECT_ID = "prj_TVZDDK6Ef0qKh4rW4pqp3wYrIh5c";
 const TEAM_ID = "team_Glv1ZyRr0IgBU3YmiqJFxQY9";
 const PROD_URL = "https://bitcraftly.com";
-const API_URL = "https://api.bitcraftly.com";
+const API_URL = "https://bitcraftly-api.onrender.com";
 const STAGING_DOMAIN = "staging.bitcraftly.com";
 const STAGING_BRANCH = "development";
 
@@ -78,6 +78,7 @@ function buildProductionEnv(source) {
     AUTH_GOOGLE_ID: pick("AUTH_GOOGLE_ID"),
     AUTH_GOOGLE_SECRET: pick("AUTH_GOOGLE_SECRET"),
     AUTH_GOOGLE_SYNC_SECRET: pick("AUTH_GOOGLE_SYNC_SECRET"),
+    AUTH_ADMIN_EMAILS: pick("AUTH_ADMIN_EMAILS") || "sanjayndls09@gmail.com",
     NEXT_PUBLIC_GSC_VERIFICATION: pick("NEXT_PUBLIC_GSC_VERIFICATION"),
     GA4_PROPERTY_ID: pick("GA4_PROPERTY_ID"),
     GOOGLE_SERVICE_ACCOUNT_JSON: pick("GOOGLE_SERVICE_ACCOUNT_JSON"),
@@ -103,6 +104,7 @@ const PREVIEW_ENV = [
   ["NEXT_PUBLIC_API_BASE_URL", API_URL],
   ["NEXT_PUBLIC_API_URL", API_URL],
   ["AUTH_API_BASE_URL", API_URL],
+  ["AUTH_ADMIN_EMAILS", "sanjayndls09@gmail.com"],
 ];
 
 if (!VERCEL_TOKEN) {

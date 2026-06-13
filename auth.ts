@@ -3,6 +3,7 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 
 import { isGoogleLoginConfigured, resolvedNextAuthSecret } from "@/lib/googleAuthEnv";
+import { roleFromAdminAllowlist } from "@/lib/adminAllowlist";
 
 const authApiBaseUrl = process.env.AUTH_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 const fallbackTestEmail = process.env.AUTH_TEST_EMAIL || "test.user@bitcraftly.local";
@@ -143,6 +144,15 @@ export function createAuthOptions(): NextAuthOptions {
               token.accessToken = account.access_token;
             }
           }
+        }
+
+        const sessionEmail =
+          typeof token.email === "string"
+            ? token.email
+            : user?.email ?? (profile as { email?: string } | undefined)?.email;
+        const allowlistRole = roleFromAdminAllowlist(sessionEmail);
+        if (allowlistRole) {
+          token.role = allowlistRole;
         }
 
         return token;
