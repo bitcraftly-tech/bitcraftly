@@ -34,7 +34,21 @@ html {
 
 body {
   margin: 0;
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   @apply bg-bg-primary text-text-primary transition-colors duration-200 dark:bg-dark-bg-primary dark:text-dark-text-primary;
+}
+
+/* next/font uses font-display: swap — explicit system fallbacks for FOUT while webfonts load */
+.font-sans-brand,
+.font-\[var\(--font-inter\)\] {
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+.font-playfair,
+.font-\[var\(--font-playfair\)\] {
+  font-family: var(--font-playfair), Georgia, "Times New Roman", Times, serif;
 }
 
 /* Bitcraftly ATS — careers & hiring dashboard */
@@ -180,7 +194,8 @@ html.dark .bc-static-loader__glow {
 
 .bc-static-loader__brand {
   margin-top: 0.75rem;
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1;

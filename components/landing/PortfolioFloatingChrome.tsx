@@ -10,7 +10,13 @@ import MobileStickyCta from "@/components/landing/MobileStickyCta";
 /** Site-wide floating controls — hidden on portfolio showcases (they ship their own chrome). */
 export default function PortfolioFloatingChrome() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/portfolio") || pathname?.startsWith("/dayal-builders")) return null;
+  if (
+    pathname?.startsWith("/portfolio") ||
+    pathname?.startsWith("/dayal-builders") ||
+    pathname?.startsWith("/dashboard")
+  ) {
+    return null;
+  }
 
   return (
     <>

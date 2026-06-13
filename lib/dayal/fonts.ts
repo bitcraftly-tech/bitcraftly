@@ -5,4 +5,5 @@ export const dayalCaudex = Caudex({
   weight: ["700"],
   variable: "--font-caudex",
   display: "swap",
+  adjustFontFallback: true,
 });

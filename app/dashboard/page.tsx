@@ -88,7 +88,7 @@ export default function DashboardOverviewPage() {
   const activityItems = (notificationsQuery.data?.items ?? []).slice(0, 6);
 
   return (
-    <div>
+    <div className="min-w-0">
       <PageHeader
         title={`Welcome back, ${firstName} 👋`}
         breadcrumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Overview" }]}

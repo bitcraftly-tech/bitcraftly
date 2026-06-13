@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { ReactNode, Suspense } from "react";
-import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import { inter, playfair } from "@/lib/fonts";
 import AnalyticsListener from "@/components/analytics/AnalyticsListener";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import { GSC_VERIFICATION } from "@/lib/analytics";
@@ -22,20 +22,6 @@ import Toaster from "@/components/ui/Toaster";
 type RootLayoutProps = {
   children: ReactNode;
 };
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  preload: true,
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-  preload: true,
-});
 
 const rootSeo = buildPageMetadata("home");
 
@@ -88,7 +74,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }}
         />
       </head>
-      <body suppressHydrationWarning className="font-[var(--font-inter)] antialiased">
+      <body suppressHydrationWarning className="font-sans-brand antialiased">
         {LOADER_ENABLED ? (
           <div id="bc-static-loader" className="bc-static-loader" aria-hidden>
             <div className="bc-static-loader__glow" />

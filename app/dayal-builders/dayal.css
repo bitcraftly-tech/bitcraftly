@@ -10,13 +10,14 @@
   --dayal-muted: #5c6478;
   background-color: var(--dayal-bg);
   color: var(--dayal-navy);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   overflow-x: clip;
   -webkit-overflow-scrolling: touch;
 }
 
 .dayal-serif {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-playfair), Georgia, "Times New Roman", Times, serif;
 }
 
 /* Official dayalbuilder.com logo mark — rendered 83×54px */
@@ -37,7 +38,7 @@
 
 /* Official site wordmark — Caudex 700, 24px / 22px lh */
 .dayal-logo-text {
-  font-family: var(--font-caudex), caudex, serif;
+  font-family: var(--font-caudex), Georgia, "Times New Roman", Times, serif;
   font-weight: 700;
   font-style: normal;
   font-size: 24px;
@@ -187,7 +188,7 @@
 }
 
 .dayal-since-plaque__city {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-playfair), Georgia, "Times New Roman", Times, serif;
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.15;
@@ -392,7 +393,7 @@
 
 .dayal-section-title {
   margin-top: 0.75rem;
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-playfair), Georgia, "Times New Roman", Times, serif;
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.2;
