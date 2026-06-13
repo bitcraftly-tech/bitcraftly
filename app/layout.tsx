@@ -7,7 +7,7 @@ import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import { GSC_VERIFICATION } from "@/lib/analytics";
 import { IS_STAGING } from "@/lib/appEnv";
 import { buildPageMetadata } from "@/lib/seoMetadata";
-import { LOADER_ENABLED } from "@/lib/loader/config";
+import { LOADER_COPY, LOADER_ENABLED } from "@/lib/loader/config";
 import { loaderBootScript } from "@/lib/loader/bootSnippet";
 import { HOME_SEO, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 /** Re-enable when chatbot should ship: uncomment import + <ChatSupportWidget /> below */
@@ -76,6 +76,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${playfair.variable}`}>
       <head>
         {LOADER_ENABLED ? (
+          <link rel="preload" href="/brand/bitcraftly-mark.png" as="image" />
+        ) : null}
+        {LOADER_ENABLED ? (
           <script
             dangerouslySetInnerHTML={{
               __html: loaderBootScript(),
@@ -91,8 +94,27 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body suppressHydrationWarning className="font-[var(--font-inter)] antialiased">
         {LOADER_ENABLED ? (
           <div id="bc-static-loader" className="bc-static-loader" aria-hidden>
-            <span className="bc-static-loader__brand">Bitcraftly</span>
-            <span className="bc-static-loader__label">Loading…</span>
+            <div className="bc-static-loader__glow" />
+            <div className="bc-static-loader__content">
+              <div className="bc-static-loader__orbit">
+                <span className="bc-static-loader__ring" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/brand/bitcraftly-mark.png"
+                  alt=""
+                  width={38}
+                  height={38}
+                  className="bc-static-loader__logo"
+                  fetchPriority="high"
+                />
+              </div>
+              <p className="bc-static-loader__brand">{LOADER_COPY.brand}</p>
+              <p className="bc-static-loader__tagline">{LOADER_COPY.tagline}</p>
+              <div className="bc-static-loader__bar" aria-hidden>
+                <span className="bc-static-loader__bar-fill" />
+              </div>
+              <p className="bc-static-loader__label">{LOADER_COPY.label}</p>
+            </div>
           </div>
         ) : null}
         <GoogleAnalytics />
