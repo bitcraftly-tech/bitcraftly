@@ -1,9 +1,18 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
 
-import HeroShowcase from "@/components/landing/HeroShowcase";
 import { CONTAINER, whatsappUrl } from "@/lib/constants";
 import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { BRAND, HERO, TRUST_CHECKS } from "@/lib/siteContent";
+
+const HeroShowcase = dynamic(() => import("@/components/landing/HeroShowcase"), {
+  loading: () => (
+    <div
+      className="min-h-[220px] rounded-2xl border border-border-primary bg-bg-card/60 dark:border-dark-border-primary dark:bg-dark-bg-card/60 lg:min-h-[280px]"
+      aria-hidden
+    />
+  ),
+});
 
 type NavPill = {
   name: string;

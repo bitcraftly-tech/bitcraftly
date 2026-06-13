@@ -152,6 +152,12 @@ html.bc-loader-active .bc-app-root {
   pointer-events: none;
 }
 
+@media (max-width: 768px) {
+  .bc-static-loader {
+    display: none !important;
+  }
+}
+
 html.dark .bc-static-loader {
   background: #0a0a0f;
   color: #f0eff8;

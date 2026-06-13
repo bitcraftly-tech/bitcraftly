@@ -1,10 +1,12 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import {
   createContext,
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -12,9 +14,14 @@ import {
 } from "react";
 import { usePathname } from "next/navigation";
 
-import BitcraftlyLoader, { type LoaderTheme } from "@/components/loading/BitcraftlyLoader";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { LOADER_ALWAYS_ON, LOADER_ENABLED, LOADER_STORAGE_KEY, LOADER_TIMING } from "@/lib/loader/config";
+import { LOADER_MOBILE_MAX_WIDTH_PX, LOADER_SKIP_ON_MOBILE } from "@/lib/loader/mobilePerf";
+import type { LoaderTheme } from "@/components/loading/BitcraftlyLoader";
+
+const BitcraftlyLoader = dynamic(() => import("@/components/loading/BitcraftlyLoader"), {
+  ssr: false,
+});
 
 type LoaderContextValue = {
   showLoader: (opts?: { durationMs?: number }) => void;
@@ -29,8 +36,14 @@ function loaderTheme(pathname: string, resolvedTheme: "light" | "dark"): LoaderT
   return resolvedTheme;
 }
 
+function isMobileViewport(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia(`(max-width: ${LOADER_MOBILE_MAX_WIDTH_PX}px)`).matches;
+}
+
 function shouldSkipInitialLoader(): boolean {
   if (!LOADER_ENABLED) return true;
+  if (LOADER_SKIP_ON_MOBILE && isMobileViewport()) return true;
   if (LOADER_ALWAYS_ON) return false;
   try {
     return sessionStorage.getItem(LOADER_STORAGE_KEY) === "1";
@@ -50,6 +63,7 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
   const theme = loaderTheme(pathname, resolvedTheme);
 
   const [ready, setReady] = useState(false);
+  const [skipMobileLoader, setSkipMobileLoader] = useState(false);
   const [initialPhase, setInitialPhase] = useState<InitialPhase>(initialLoaderPhase);
   const [routeLoading, setRouteLoading] = useState(false);
   const [manualLoading, setManualLoading] = useState(false);
@@ -76,9 +90,13 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
     setInitialPhase("exiting");
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const mobile = LOADER_SKIP_ON_MOBILE && isMobileViewport();
+    setSkipMobileLoader(mobile);
     setReady(true);
+  }, []);
 
+  useEffect(() => {
     if (LOADER_ENABLED && LOADER_ALWAYS_ON) {
       try {
         sessionStorage.removeItem(LOADER_STORAGE_KEY);
@@ -125,7 +143,7 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
   }, [initialPhase]);
 
   useEffect(() => {
-    if (!LOADER_ENABLED || !ready || initialPhase !== "done") return;
+    if (!LOADER_ENABLED || !ready || initialPhase !== "done" || skipMobileLoader) return;
 
     if (isFirstPathEffect.current) {
       isFirstPathEffect.current = false;
@@ -139,12 +157,16 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
     setRouteLoading(true);
     const t = window.setTimeout(() => setRouteLoading(false), LOADER_TIMING.routeMs);
     return () => window.clearTimeout(t);
-  }, [pathname, ready, initialPhase]);
+  }, [pathname, ready, initialPhase, skipMobileLoader]);
 
-  const showLoader = useCallback((opts?: { durationMs?: number }) => {
-    setManualLoading(true);
-    window.setTimeout(() => setManualLoading(false), opts?.durationMs ?? LOADER_TIMING.routeMs);
-  }, []);
+  const showLoader = useCallback(
+    (opts?: { durationMs?: number }) => {
+      if (skipMobileLoader) return;
+      setManualLoading(true);
+      window.setTimeout(() => setManualLoading(false), opts?.durationMs ?? LOADER_TIMING.routeMs);
+    },
+    [skipMobileLoader],
+  );
 
   const value = useMemo(() => ({ showLoader }), [showLoader]);
 
@@ -152,12 +174,13 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
   const showInitial = LOADER_ENABLED && initialPhase === "loading";
   const showRoute = LOADER_ENABLED && routeLoading && initialPhase === "done" && !manualLoading;
   const showManual = LOADER_ENABLED && manualLoading && initialPhase === "done";
-  const showOverlay = showInitial || showRoute || showManual;
+  const showOverlay =
+    ready && !skipMobileLoader && (showInitial || showRoute || showManual);
   const contentReady = !LOADER_ENABLED || initialPhase === "done";
 
   useEffect(() => {
     const root = document.documentElement;
-    if (LOADER_ENABLED && initialPhase !== "done") {
+    if (LOADER_ENABLED && initialPhase !== "done" && !skipMobileLoader) {
       root.classList.add("bc-loader-active");
       delete root.dataset.loader;
     } else {
@@ -165,7 +188,7 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
       root.dataset.loader = "done";
     }
     return () => root.classList.remove("bc-loader-active");
-  }, [initialPhase]);
+  }, [initialPhase, skipMobileLoader]);
 
   /** Hand off first paint shell to the same React aura loader used on route clicks */
   useEffect(() => {
