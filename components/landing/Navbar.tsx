@@ -128,7 +128,7 @@ export default function Navbar({ embedded = false }: NavbarProps) {
             className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[1px] lg:hidden"
             onClick={() => setIsMenuOpen(false)}
           />
-          <div className="relative z-50 border-t border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card lg:hidden">
+          <div className="scrollbar-soft relative z-50 max-h-[calc(100dvh-3.5rem)] overflow-y-auto border-t border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card lg:hidden">
             <div className="flex flex-col gap-1 px-4 pt-4">
               {MARKETING_NAV.map((link) => (
                 <Link
