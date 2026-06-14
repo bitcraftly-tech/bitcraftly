@@ -6,6 +6,7 @@ import PricingFaqStrip from "@/components/landing/PricingFaqStrip";
 import PricingPageIntro from "@/components/landing/PricingPageIntro";
 import PricingPageNav from "@/components/landing/PricingPageNav";
 import PricingQuickCompare from "@/components/landing/PricingQuickCompare";
+import PricingWelcomeGuide from "@/components/landing/PricingWelcomeGuide";
 import FadeInOnView from "@/components/ui/FadeInOnView";
 import { buildPageMetadata } from "@/lib/seoMetadata";
 
@@ -20,6 +21,7 @@ export default function PricingPage() {
     <MarketingPageLayout>
       <PricingPageIntro />
       <PricingPageNav />
+      <PricingWelcomeGuide />
       <FadeInOnView delayMs={30}>
         <PricingQuickCompare />
       </FadeInOnView>

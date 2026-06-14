@@ -1,20 +1,27 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
-const MarketingScrollEffects = dynamic(() => import("@/components/landing/MarketingScrollEffects"), {
-  ssr: false,
-});
+import MarketingScrollEffects from "@/components/landing/MarketingScrollEffects";
+import { hasPendingScrollTarget } from "@/lib/scrollToMarketingSection";
 
 type DeferredMarketingScrollProps = {
   sectionId?: string;
 };
 
 export default function DeferredMarketingScroll({ sectionId }: DeferredMarketingScrollProps) {
-  const [show, setShow] = useState(false);
+  const pathname = usePathname();
+  const [show, setShow] = useState(
+    () => Boolean(sectionId) || (typeof window !== "undefined" && hasPendingScrollTarget()),
+  );
 
   useEffect(() => {
+    if (sectionId || hasPendingScrollTarget(pathname)) {
+      setShow(true);
+      return;
+    }
+
     let cancelled = false;
 
     if (typeof window.requestIdleCallback === "function") {
@@ -37,7 +44,7 @@ export default function DeferredMarketingScroll({ sectionId }: DeferredMarketing
       cancelled = true;
       window.clearTimeout(timer);
     };
-  }, []);
+  }, [sectionId, pathname]);
 
   if (!show) return null;
   return <MarketingScrollEffects sectionId={sectionId} />;

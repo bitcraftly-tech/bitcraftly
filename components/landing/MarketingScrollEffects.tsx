@@ -1,36 +1,42 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
+
+import {
+  clearPendingScrollTarget,
+  getPendingScrollTarget,
+  scrollToElementWithRetry,
+} from "@/lib/scrollToMarketingSection";
 
 type MarketingScrollEffectsProps = {
   sectionId?: string;
 };
 
-/** Deferred hash / section scroll — keeps marketing layout off the critical hydration path. */
+/** Runs pending section scroll after route changes — no hash in URL. */
 export default function MarketingScrollEffects({ sectionId }: MarketingScrollEffectsProps) {
+  const pathname = usePathname();
+  const cancelRef = useRef<(() => void) | null>(null);
+
   useEffect(() => {
-    const pendingSection =
-      sectionId || window.sessionStorage.getItem("landingTargetSection") || undefined;
+    cancelRef.current?.();
+    cancelRef.current = null;
 
-    if (pendingSection) {
-      const element = document.getElementById(pendingSection);
-      if (element) {
-        window.sessionStorage.removeItem("landingTargetSection");
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-        return;
-      }
-    }
+    const pendingSection = sectionId || getPendingScrollTarget(pathname);
+    if (!pendingSection) return;
 
-    const hash = window.location.hash.replace("#", "");
-    if (!hash) return;
-
-    const hashTarget = document.getElementById(hash);
-    if (!hashTarget) return;
-
-    window.requestAnimationFrame(() => {
-      hashTarget.scrollIntoView({ behavior: "smooth", block: "start" });
+    cancelRef.current = scrollToElementWithRetry(pendingSection, {
+      startDelayMs: 120,
+      maxWaitMs: 15_000,
+      intervalMs: 100,
+      onSuccess: clearPendingScrollTarget,
     });
-  }, [sectionId]);
+
+    return () => {
+      cancelRef.current?.();
+      cancelRef.current = null;
+    };
+  }, [pathname, sectionId]);
 
   return null;
 }

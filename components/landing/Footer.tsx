@@ -2,9 +2,10 @@ import Link from "next/link";
 import { headers } from "next/headers";
 
 import BitcraftlyLogoMarkImage from "@/components/brand/BitcraftlyLogoMarkImage";
+import FooterServiceLinks from "@/components/landing/FooterServiceLinks";
 import SocialLinks from "@/components/landing/SocialLinks";
 import { CONTAINER, PRIMARY_LOCATION, whatsappUrl, WHATSAPP_HOURS } from "@/lib/constants";
-import { FOOTER_EXPLORE_LINKS, FOOTER_MORE_LINKS, FOOTER_SERVICE_LINKS } from "@/lib/footerLinks";
+import { FOOTER_EXPLORE_LINKS, FOOTER_MORE_LINKS } from "@/lib/footerLinks";
 import { FOOTER_STICKY_CLEARANCE_CLASS, hasMobileStickyCta } from "@/lib/mobileStickyCta";
 import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { BRAND } from "@/lib/siteContent";
@@ -95,7 +96,7 @@ export default async function Footer() {
 
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-text-primary dark:text-dark-text-primary">Services &amp; pricing</p>
-            <FooterLinkList links={FOOTER_SERVICE_LINKS} />
+            <FooterServiceLinks />
           </div>
 
           <div>

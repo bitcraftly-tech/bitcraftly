@@ -2,6 +2,12 @@
 
 export type FooterLink = { href: string; label: string };
 
+export type FooterSectionLink = {
+  label: string;
+  path: string;
+  sectionId: string;
+};
+
 export const FOOTER_EXPLORE_LINKS: FooterLink[] = [
   { href: "/pricing", label: "Pricing & packages" },
   { href: "/services", label: "Services" },
@@ -11,12 +17,12 @@ export const FOOTER_EXPLORE_LINKS: FooterLink[] = [
   { href: "/contact", label: "Contact / quote" },
 ];
 
-export const FOOTER_SERVICE_LINKS: FooterLink[] = [
-  { href: "/services#websites", label: "Business websites" },
-  { href: "/services#mobile-apps", label: "Mobile apps" },
-  { href: "/pricing#fast-packages", label: "Fast-launch packages" },
-  { href: "/pricing#project-cost-calculator", label: "Cost calculator" },
-  { href: "/pricing#pricing-standard", label: "Standard pricing" },
+export const FOOTER_SERVICE_LINKS: FooterSectionLink[] = [
+  { path: "/services", sectionId: "websites", label: "Business websites" },
+  { path: "/services", sectionId: "mobile-apps", label: "Mobile apps" },
+  { path: "/pricing", sectionId: "fast-packages", label: "Fast-launch packages" },
+  { path: "/pricing", sectionId: "project-cost-calculator", label: "Cost calculator" },
+  { path: "/pricing", sectionId: "pricing-standard", label: "Standard pricing" },
 ];
 
 export const FOOTER_MORE_LINKS: FooterLink[] = [

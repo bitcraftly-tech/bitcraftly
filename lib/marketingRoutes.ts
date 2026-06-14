@@ -10,12 +10,18 @@ export type HomeHubLink = {
   step?: number;
 };
 
+export type MarketingNavItem = {
+  label: string;
+  href: string;
+  mobileHint: string;
+};
+
 /** Top nav — matches typical customer decision order */
-export const MARKETING_NAV = [
-  { label: "Pricing", href: "/pricing" },
-  { label: "Services", href: "/services" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "About", href: "/about" },
+export const MARKETING_NAV: readonly MarketingNavItem[] = [
+  { label: "Pricing", href: "/pricing", mobileHint: "Packages, compare & cost calculator" },
+  { label: "Services", href: "/services", mobileHint: "Websites, apps & AI integrations" },
+  { label: "Portfolio", href: "/portfolio", mobileHint: "Live demos & case studies" },
+  { label: "About", href: "/about", mobileHint: "Founder, process & why us" },
 ] as const;
 
 export const HOME_HUB_LINKS: HomeHubLink[] = [

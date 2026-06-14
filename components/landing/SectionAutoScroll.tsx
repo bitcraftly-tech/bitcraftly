@@ -1,27 +1,38 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
+
+import {
+  clearPendingScrollTarget,
+  getPendingScrollTarget,
+  scrollToElementWithRetry,
+} from "@/lib/scrollToMarketingSection";
 
 type SectionAutoScrollProps = {
   sectionId?: string;
 };
 
 export default function SectionAutoScroll({ sectionId }: SectionAutoScrollProps) {
+  const pathname = usePathname();
+  const cancelRef = useRef<(() => void) | null>(null);
+
   useEffect(() => {
-    const pendingSection =
-      sectionId ||
-      (typeof window !== "undefined" ? window.sessionStorage.getItem("landingTargetSection") || undefined : undefined);
+    cancelRef.current?.();
+    cancelRef.current = null;
+
+    const pendingSection = sectionId || getPendingScrollTarget(pathname);
     if (!pendingSection) return;
 
-    const element = document.getElementById(pendingSection);
-    if (!element) return;
+    cancelRef.current = scrollToElementWithRetry(pendingSection, {
+      startDelayMs: 120,
+      onSuccess: clearPendingScrollTarget,
+    });
 
-    if (typeof window !== "undefined") {
-      window.sessionStorage.removeItem("landingTargetSection");
-    }
-
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [sectionId]);
+    return () => {
+      cancelRef.current?.();
+    };
+  }, [pathname, sectionId]);
 
   return null;
 }

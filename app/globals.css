@@ -107,6 +107,175 @@ textarea,
   }
 }
 
+@keyframes founder-wave-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scaleY(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.founder-wave-active {
+  animation: founder-wave-pulse 1.1s ease-in-out infinite;
+}
+
+.founder-wave-active:nth-child(odd) {
+  animation-delay: 0.12s;
+}
+
+.founder-wave-active:nth-child(3n) {
+  animation-delay: 0.24s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .founder-wave-active {
+    animation: none;
+    opacity: 0.85;
+  }
+}
+
+/* Mobile nav — hamburger menu panel + link stagger */
+@keyframes nav-mobile-link-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.45rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-mobile-panel {
+  display: grid;
+  transition:
+    grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 240ms ease;
+}
+
+.nav-mobile-panel[data-open="false"] {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-mobile-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.nav-mobile-backdrop {
+  transition: opacity 280ms ease;
+}
+
+.nav-mobile-backdrop[data-open="false"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-mobile-backdrop[data-open="true"] {
+  opacity: 1;
+}
+
+.nav-mobile-open .nav-mobile-item {
+  animation: nav-mobile-link-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.nav-mobile-open .nav-mobile-item:nth-child(1) {
+  animation-delay: 40ms;
+}
+
+.nav-mobile-open .nav-mobile-item:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.nav-mobile-open .nav-mobile-item:nth-child(3) {
+  animation-delay: 100ms;
+}
+
+.nav-mobile-open .nav-mobile-item:nth-child(4) {
+  animation-delay: 130ms;
+}
+
+.nav-mobile-open .nav-mobile-actions {
+  animation: nav-mobile-link-in 360ms cubic-bezier(0.22, 1, 0.36, 1) 160ms both;
+}
+
+.nav-hamburger-line {
+  transform-origin: center;
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease,
+    top 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Navbar — Pricing CTA highlight (solid pill, high contrast) */
+@keyframes nav-pricing-cta-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 16px rgba(67, 56, 202, 0.45);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow:
+      0 0 0 4px rgba(251, 191, 36, 0.35),
+      0 8px 22px rgba(67, 56, 202, 0.55);
+  }
+}
+
+@keyframes nav-pricing-mobile-glow {
+  0%,
+  100% {
+    box-shadow: 0 8px 20px -10px rgba(67, 56, 202, 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 0 3px rgba(251, 191, 36, 0.28),
+      0 12px 26px -8px rgba(67, 56, 202, 0.5);
+  }
+}
+
+.nav-pricing-cta {
+  animation: nav-pricing-cta-pulse 2.2s ease-in-out infinite;
+}
+
+.nav-pricing-cta:hover {
+  background-color: #4338ca;
+}
+
+.dark .nav-pricing-cta:hover {
+  background-color: #4f46e5;
+}
+
+.nav-pricing-highlight-mobile {
+  animation: nav-pricing-mobile-glow 2.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-pricing-cta,
+  .nav-pricing-highlight-mobile {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-mobile-panel,
+  .nav-mobile-backdrop,
+  .nav-hamburger-line {
+    transition: none;
+  }
+
+  .nav-mobile-open .nav-mobile-item,
+  .nav-mobile-open .nav-mobile-actions {
+    animation: none;
+  }
+}
+
 /* Dashboard notifications — slide in/out from the right */
 .dc-notifications-overlay {
   opacity: 0;

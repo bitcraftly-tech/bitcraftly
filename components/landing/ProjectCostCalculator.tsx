@@ -23,6 +23,7 @@ import {
   type HostingChoice,
   type ProjectType,
 } from "@/lib/projectCostCalculator";
+import { CALCULATOR_STEP_HINTS } from "@/lib/pricingWelcomeGuide";
 
 const INITIAL_STATE: CalculatorState = {
   customerType: null,
@@ -199,6 +200,13 @@ export default function ProjectCostCalculator({ hideTypeGrid = false, showTopBor
               );
             })}
           </div>
+
+          <p className="mb-5 flex items-start gap-2 rounded-xl border border-indigo-500/20 bg-indigo-600/5 px-3.5 py-2.5 text-xs leading-relaxed text-text-secondary dark:border-indigo-400/20 dark:bg-indigo-400/5 dark:text-dark-text-secondary">
+            <span className="mt-0.5 shrink-0 font-bold text-indigo-600 dark:text-indigo-400" aria-hidden>
+              Tip
+            </span>
+            <span>{CALCULATOR_STEP_HINTS[step]}</span>
+          </p>
 
           <AnimatePresence mode="wait">
             {step === 0 ? (
