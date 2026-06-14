@@ -37,7 +37,7 @@ export function scrollToElementWithRetry(sectionId: string, options?: RetryOptio
   const startDelayMs = options?.startDelayMs ?? 80;
   const startedAt = Date.now();
   let cancelled = false;
-  let timer: ReturnType<typeof setTimeout> | undefined;
+  let timer: number | undefined;
 
   const finish = () => {
     options?.onSuccess?.();
