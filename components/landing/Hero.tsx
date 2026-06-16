@@ -38,7 +38,7 @@ export default function Hero() {
       <div className="text-center lg:text-left">
         <div className="inline-flex items-center gap-2 rounded-full border border-border-primary bg-bg-card px-4 py-2 dark:border-dark-border-primary dark:bg-dark-bg-card">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-xs font-medium uppercase tracking-[0.1em] text-text-secondary dark:text-dark-text-secondary">
+          <span className="whitespace-nowrap text-xs font-medium uppercase tracking-[0.1em] text-text-secondary dark:text-dark-text-secondary">
             {HERO.badge}
           </span>
         </div>
