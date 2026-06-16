@@ -45,6 +45,10 @@ function isMobileViewport(): boolean {
 
 function shouldSkipInitialLoader(): boolean {
   if (!LOADER_ENABLED) return true;
+  if (typeof window !== "undefined") {
+    const pathname = window.location.pathname;
+    if (pathname.startsWith("/portfolio/") || pathname.startsWith("/dayal-builders")) return true;
+  }
   if (LOADER_SKIP_ON_MOBILE && isMobileViewport()) return true;
   if (LOADER_ALWAYS_ON) return false;
   try {
@@ -217,8 +221,10 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
   const [useDesktopLoader, setUseDesktopLoader] = useState(false);
 
   useLayoutEffect(() => {
+    const pathname = window.location.pathname;
+    const portfolio = pathname.startsWith("/portfolio/") || pathname.startsWith("/dayal-builders");
     const mobile = LOADER_SKIP_ON_MOBILE && isMobileViewport();
-    setUseDesktopLoader(!mobile);
+    setUseDesktopLoader(!mobile && !portfolio);
   }, []);
 
   if (!useDesktopLoader) {
