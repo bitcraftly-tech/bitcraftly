@@ -506,7 +506,7 @@
 ══════════════════════════════════ */
 .rpyv2-hero {
   background: #fff;
-  padding: 3.5rem 0 0;
+  padding: 1.75rem 0 0;
   overflow: hidden;
   position: relative;
 }
@@ -535,7 +535,7 @@
 }
 
 .rpyv2-hero-left {
-  padding-bottom: 3.5rem;
+  padding-bottom: 1.75rem;
 }
 
 .rpyv2-hero-eyebrow {
@@ -1242,7 +1242,7 @@
    ABOUT — Premium
 ══════════════════════════════════ */
 .rpyv2-about {
-  padding: 5rem 0;
+  padding: 3rem 0;
   background: var(--rpyv2-gray-bg);
   overflow: hidden;
 }
@@ -1356,7 +1356,8 @@
 /* Image frame */
 .rpyv2-about-img-frame {
   position: relative;
-  width: 100%;
+  width: 82%;
+  margin: 0 auto;
   aspect-ratio: 3 / 4;
   border-radius: var(--rpyv2-radius-lg);
   overflow: hidden;
