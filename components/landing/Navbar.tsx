@@ -16,6 +16,7 @@ import type { LucideIcon } from "lucide-react";
 
 import BitcraftlyLogoMarkImage from "@/components/brand/BitcraftlyLogoMarkImage";
 import NavbarProfileMenu from "@/components/landing/NavbarProfileMenu";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { whatsappUrl } from "@/lib/constants";
 import { MARKETING_NAV } from "@/lib/marketingRoutes";
 import { BRAND } from "@/lib/siteContent";
@@ -38,6 +39,11 @@ function isNavLinkActive(href: string, pathname: string | null): boolean {
   if (!pathname) return false;
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function shouldShowHeaderThemeToggle(pathname: string | null): boolean {
+  if (!pathname) return true;
+  return !pathname.startsWith("/portfolio/") && !pathname.startsWith("/interactive-demos");
 }
 
 export default function Navbar({ embedded = false, session = null }: NavbarProps) {
@@ -66,6 +72,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
   }, [isMenuOpen]);
 
   const closeMenu = () => setIsMenuOpen(false);
+  const showThemeToggle = shouldShowHeaderThemeToggle(pathname);
 
   return (
     <header
@@ -124,6 +131,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
         </div>
 
         <div className="hidden shrink-0 items-center gap-2 lg:flex xl:gap-3">
+          {showThemeToggle ? <ThemeToggle /> : null}
           {session ? (
             <NavbarProfileMenu variant="desktop" session={session} />
           ) : (
@@ -143,7 +151,9 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
           </Link>
         </div>
 
-        <button
+        <div className="flex shrink-0 items-center gap-2 lg:hidden">
+          {showThemeToggle ? <ThemeToggle /> : null}
+          <button
           type="button"
           aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isMenuOpen}
@@ -174,6 +184,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
             />
           </div>
         </button>
+        </div>
       </nav>
 
       <button
@@ -266,6 +277,12 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
             </div>
 
             <div className="nav-mobile-actions mt-auto border-t border-border-primary bg-bg-card/95 px-4 py-4 backdrop-blur-sm dark:border-dark-border-primary dark:bg-dark-bg-card/95">
+              {showThemeToggle ? (
+                <div className="mb-3 flex items-center justify-between rounded-xl border border-border-primary/70 bg-bg-primary/40 px-3 py-2.5 dark:border-dark-border-primary/70 dark:bg-dark-bg-primary/30">
+                  <span className="text-sm font-medium text-text-secondary dark:text-dark-text-secondary">Theme</span>
+                  <ThemeToggle />
+                </div>
+              ) : null}
               <Link
                 href="/contact?intent=consultation&source=navbar-mobile"
                 tabIndex={isMenuOpen ? 0 : -1}

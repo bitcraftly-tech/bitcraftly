@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { createLead, logAnalyticsEvent } from "@/lib/analytics-dashboard/firebase";
+import { createLead, logAnalyticsEvent, recordUniqueVisitor } from "@/lib/analytics-dashboard/firebase";
 import { notifyNewLead } from "@/lib/analytics-dashboard/notify";
 import type { AnalyticsEventName, LeadType } from "@/lib/analytics-dashboard/types";
 
@@ -59,13 +59,19 @@ export async function POST(req: NextRequest) {
     const pagePath = (body.pagePath as string) ?? payload.page_path;
     const source = (body.source as string) ?? payload.source;
 
+    const sessionId = body.sessionId as string | undefined;
+
     await logAnalyticsEvent({
       eventName: eventName as AnalyticsEventName,
       source,
       pagePath,
-      sessionId: body.sessionId as string | undefined,
+      sessionId,
       payload,
     });
+
+    if (eventName === "page_view") {
+      await recordUniqueVisitor(sessionId);
+    }
 
     const isLeadEvent =
       eventName === "form_submit" ||

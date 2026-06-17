@@ -3,7 +3,23 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
-import { X, Send, ChevronDown } from "lucide-react";
+import { X, Send, ChevronDown, RotateCcw } from "lucide-react";
+import {
+  type ChatMemory,
+  type StoredMsg,
+  type QuickReply,
+  loadChatMemory,
+  saveChatMemory,
+  clearChatMemory,
+  extractFromUserMessage,
+  recordVisit,
+  hasCompleteLead,
+  hasCompletedOnboarding,
+  isGreetingMessage,
+  parseOnboardingName,
+  wantsToSkipOnboarding,
+  EMPTY_MEMORY,
+} from "@/lib/bitcraftlyChatMemory";
 
 /* ─── Male Robot Avatar SVG ─────────────────────────── */
 function ManBotAvatar({ size = 36, className = "" }: { size?: number; className?: string }) {
@@ -51,9 +67,12 @@ function ManBotAvatar({ size = 36, className = "" }: { size?: number; className?
   );
 }
 
-/* ─── Knowledge base ─────────────────────────────────── */
-type QuickReply = { label: string; value: string };
-type BotReply   = { text: string; quick?: QuickReply[] };
+const NAME_PROMPTS = [
+  "Please apna *name* batayein — bas first name kaafi hai (e.g. Rahul).",
+  "Apna naam share kijiye taaki main aapko personally help kar sakun. Example: *Priya*",
+  "Quick help ke liye apna name bhej dijiye (e.g. *Amit*). Ya *skip* likh kar baad mein bhi de sakte hain.",
+];
+type BotReply = { text: string; quick?: QuickReply[] };
 
 const QUICK_DEFAULT: QuickReply[] = [
   { label: "💰 Pricing",      value: "pricing" },
@@ -62,12 +81,32 @@ const QUICK_DEFAULT: QuickReply[] = [
   { label: "📞 Contact",      value: "contact" },
 ];
 
-function getBotReply(input: string, history: string[]): BotReply {
+function getBotReply(input: string, history: string[], memory: ChatMemory): BotReply {
   const q    = input.toLowerCase().trim();
   const prev = history.join(" ").toLowerCase();
+  const name = memory.userName;
+  const hi   = name ? `${name}, ` : "";
 
-  /* Greeting */
+  /* Greeting — memory-aware */
   if (/^(hi|hello|hey|namaste|helo|hii|hy|good morning|good evening)\b/.test(q)) {
+    if (name && memory.visitCount > 1) {
+      const interestHint = memory.interests.length
+        ? `\n\nPichli baar aapne ${memory.interests.slice(-2).join(" aur ")} ke baare me poocha tha — wahi continue karein ya kuch naya?`
+        : "";
+      const projectHint = memory.projectType
+        ? `\n\nMujhe yaad hai aap ${memory.projectType} ke baare me interested the. 🙂`
+        : "";
+      return {
+        text: `Welcome back, ${name}! 👋 Main Bit hun — aapka Bitcraftly assistant.${projectHint}${interestHint}`,
+        quick: QUICK_DEFAULT,
+      };
+    }
+    if (name) {
+      return {
+        text: `Hello ${name}! 👋 Great to chat again. Website, pricing, services — kya help chahiye aaj?`,
+        quick: QUICK_DEFAULT,
+      };
+    }
     const greets = [
       "Hello! 👋 I'm Bit — Bitcraftly's AI assistant. Looking for a website or frontend solution? I can help with pricing, services, portfolio and more!",
       "Namaste! 🙏 Main Bitcraftly ka AI assistant hun. React/Next.js websites, pricing, ya kuch aur — poochho!",
@@ -76,16 +115,28 @@ function getBotReply(input: string, history: string[]): BotReply {
     return { text: greets[Math.floor(Math.random() * greets.length)], quick: QUICK_DEFAULT };
   }
 
-  /* Pricing */
-  if (/price|pricing|cost|kitna|fee|budget|rupee|rs\.|₹|package|packages|rate/.test(q))
+  /* Name introduction */
+  if (/my name is|i am|i'm|mera naam|naam hai|call me/.test(q) && name) {
     return {
-      text: "Bitcraftly packages start from ₹8,999! 🎯\n\nOur packages:\n💼 Starter — ₹8,999\n🚀 Growth — ₹18,999\n⚡ Pro — ₹34,999\n🏢 Enterprise — Custom\n\nAll packages include written scope before payment, mobile-first design, and SEO-ready structure.\n\nWant a detailed estimate for your specific project?",
+      text: `Nice to meet you, ${name}! 😊 Main yaad rakhunga.\n\nAb bataiye — aap kis type ki website ya project ke baare me soch rahe hain? Gym, school, e-commerce, ya kuch aur?`,
+      quick: QUICK_DEFAULT,
+    };
+  }
+
+  /* Pricing — project-aware */
+  if (/price|pricing|cost|kitna|fee|budget|rupee|rs\.|₹|package|packages|rate/.test(q)) {
+    const projectNote = memory.projectType
+      ? `\n\nAapke ${memory.projectType} ke liye Growth ya Pro package usually best fit hota hai.`
+      : "";
+    return {
+      text: `${hi}Bitcraftly packages start from ₹8,999! 🎯\n\nOur packages:\n💼 Starter — ₹8,999\n🚀 Growth — ₹18,999\n⚡ Pro — ₹34,999\n🏢 Enterprise — Custom\n\nAll packages include written scope before payment, mobile-first design, and SEO-ready structure.${projectNote}\n\nWant a detailed estimate for your specific project?`,
       quick: [
         { label: "🧮 Cost calculator", value: "cost calculator" },
         { label: "✨ What's included",  value: "what is included" },
         { label: "📞 Talk to founder",  value: "contact" },
       ],
     };
+  }
 
   /* Cost calculator */
   if (/calculat|estimate|quote/.test(q))
@@ -97,16 +148,20 @@ function getBotReply(input: string, history: string[]): BotReply {
       ],
     };
 
-  /* Services */
-  if (/service|services|kya karte|kya banate|build|develop|offer/.test(q))
+  /* Services — project-aware */
+  if (/service|services|kya karte|kya banate|build|develop|offer/.test(q)) {
+    const projectNote = memory.projectType
+      ? `\n\n${memory.projectType} ke liye humne similar projects portfolio me bhi kiye hain — demo dekh sakte hain!`
+      : "";
     return {
-      text: "Bitcraftly builds premium frontend solutions: 🛠️\n\n🌐 Business Websites (React/Next.js)\n📱 Mobile-first Web Apps\n🤖 AI-powered Features\n🛒 E-commerce Stores\n📊 Dashboards & SaaS UIs\n🚀 Fast-launch MVPs\n\nEvery project is founder-led by Sanjay — 18+ years of experience, SEO-ready, and mobile-first.",
+      text: `${hi}Bitcraftly builds premium frontend solutions: 🛠️\n\n🌐 Business Websites (React/Next.js)\n📱 Mobile-first Web Apps\n🤖 AI-powered Features\n🛒 E-commerce Stores\n📊 Dashboards & SaaS UIs\n🚀 Fast-launch MVPs\n\nEvery project is founder-led by Sanjay — 18+ years of experience, SEO-ready, and mobile-first.${projectNote}`,
       quick: [
         { label: "💰 Pricing",     value: "pricing" },
         { label: "🖼️ Portfolio",  value: "portfolio" },
         { label: "📞 Get quote",   value: "contact" },
       ],
     };
+  }
 
   /* Portfolio */
   if (/portfolio|work|project|example|demo|client|showcase|previous/.test(q))
@@ -149,8 +204,11 @@ function getBotReply(input: string, history: string[]): BotReply {
       ],
     };
 
-  /* Founder / About */
-  if (/founder|sanjay|about|who|kaun|experience|team|background/.test(q))
+  /* Founder / About — not bare first names like "sanjay" */
+  if (
+    /\b(founder|about|who|kaun|experience|team|background)\b/.test(q) ||
+    /who is sanjay|about sanjay|sanjay singh/i.test(q)
+  )
     return {
       text: "Bitcraftly is led by Sanjay Kr. Singh 👨‍💻\n\n✅ 18+ years frontend experience\n✅ React & Next.js specialist\n✅ Built UI systems for startups, clinics, SaaS, and local brands\n✅ Ghaziabad, UP, India — available India & remote\n\nSeedha founder se baat — no middleman, no agency overhead. 🤝",
       quick: [
@@ -199,17 +257,40 @@ function getBotReply(input: string, history: string[]): BotReply {
       ],
     };
 
-  /* Thank you */
+  /* Thank you — memory-aware */
   if (/thank|thanks|shukriya|ok|done|bye|goodbye|got it|perfect|great/.test(q))
     return {
-      text: "You're welcome! 😊 All the best with your web project!\n\nIf you need anything — pricing, portfolio, or just want to chat about your idea — I'm always here. 🚀\n\nBitcraftly — Seedha founder se baat! 🤝",
+      text: name
+        ? `You're welcome, ${name}! 😊 All the best with your web project!\n\nMain yaad rakhunga — jab bhi wapas aao, hum yahi se continue kar sakte hain. 🚀\n\nBitcraftly — Seedha founder se baat! 🤝`
+        : "You're welcome! 😊 All the best with your web project!\n\nIf you need anything — pricing, portfolio, or just want to chat about your idea — I'm always here. 🚀\n\nBitcraftly — Seedha founder se baat! 🤝",
       quick: [
         { label: "💰 Pricing",   value: "pricing" },
         { label: "📞 Contact",   value: "contact" },
       ],
     };
 
-  /* Context follow-up */
+  /* Context follow-up — uses memory interests */
+  if (/aur|more|detail|batao|tell|continue|wapas|phir se/.test(q)) {
+    const lastInterest = memory.interests[memory.interests.length - 1];
+    if (lastInterest === "pricing" || prev.includes("pric") || prev.includes("cost"))
+      return {
+        text: `${hi}Pricing ke baare me aur detail chahiye? 😊\n\nSabse best approach hai — apna project briefly describe karein (type, features, deadline) aur main ek rough estimate de sakta hun. Ya directly calculator use karein bitcraftly.com pe!`,
+        quick: [
+          { label: "🧮 Calculator",  value: "cost calculator" },
+          { label: "📞 WhatsApp",    value: "whatsapp" },
+        ],
+      };
+    if (lastInterest === "portfolio")
+      return {
+        text: `${hi}Portfolio me gym, school, e-commerce, cloud kitchen — sab demos hain. Kisi specific industry ka demo chahiye?`,
+        quick: [
+          { label: "🖼️ Portfolio", value: "portfolio" },
+          { label: "💰 Pricing",   value: "pricing" },
+        ],
+      };
+  }
+
+  /* Old context follow-up fallback */
   if ((prev.includes("pric") || prev.includes("cost")) && /aur|more|detail|batao|tell/.test(q))
     return {
       text: "Pricing ke baare me aur detail chahiye? 😊\n\nSabse best approach hai — apna project briefly describe karein (type, features, deadline) aur main ek rough estimate de sakta hun. Ya directly calculator use karein bitcraftly.com pe!",
@@ -224,6 +305,10 @@ function getBotReply(input: string, history: string[]): BotReply {
     text: "Thoda clearly poochhen — main samjhunga! 😊\n\nMain in topics pe help kar sakta hun:\n\n• Website pricing & packages\n• Services & tech stack\n• Portfolio & case studies\n• Timeline & process\n• Contact & consultation\n\nKya jaanna chahte hain?",
     quick: QUICK_DEFAULT,
   };
+}
+
+function isDefaultBotReply(reply: BotReply): boolean {
+  return reply.text.startsWith("Thoda clearly poochhen");
 }
 
 /* ─── Types ──────────────────────────────────────────── */
@@ -241,6 +326,25 @@ function nowTime() {
   return new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
 }
 
+function isValidEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
+function normalizePhone(value: string): string | null {
+  const digits = value.replace(/\D/g, "");
+  if (/^[6-9]\d{9}$/.test(digits)) return digits;
+  if (/^91[6-9]\d{9}$/.test(digits)) return digits.slice(2);
+  return null;
+}
+
+function storedToMsg(s: StoredMsg): Msg {
+  return { ...s, displayText: s.text, streaming: false };
+}
+
+function msgToStored(m: Msg): StoredMsg {
+  return { id: m.id, from: m.from, text: m.text, time: m.time, quick: m.quick };
+}
+
 /* ─── Main component ─────────────────────────────────── */
 export default function BitcraftlyChat() {
   const pathname = usePathname();
@@ -254,13 +358,29 @@ export default function BitcraftlyChat() {
   const [msgs, setMsgs]       = useState<Msg[]>([]);
   const [input, setInput]     = useState("");
   const [thinking, setThink]  = useState(false);
-  const [unread, setUnread]   = useState(1);
+  const [unread, setUnread]   = useState(0);
   const [greeted, setGreeted] = useState(false);
-  const [mounted, setMounted]   = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [memory, setMemory]   = useState<ChatMemory>(EMPTY_MEMORY);
   const bottomRef             = useRef<HTMLDivElement>(null);
   const inputRef              = useRef<HTMLInputElement>(null);
   const msgId                 = useRef(0);
   const history               = useRef<string[]>([]);
+  const memoryRef             = useRef<ChatMemory>(EMPTY_MEMORY);
+  const visitRecorded         = useRef(false);
+
+  const syncMemory = useCallback((next: ChatMemory) => {
+    memoryRef.current = next;
+    setMemory(next);
+    saveChatMemory(next);
+  }, []);
+
+  const persistMessages = useCallback((nextMsgs: Msg[]) => {
+    const stored = nextMsgs
+      .filter(m => !m.streaming)
+      .map(msgToStored);
+    syncMemory({ ...memoryRef.current, messages: stored });
+  }, [syncMemory]);
 
   const scrollBottom = () => requestAnimationFrame(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }));
 
@@ -273,12 +393,16 @@ export default function BitcraftlyChat() {
       scrollBottom();
       if (i < fullText.length) setTimeout(tick, speed);
       else {
-        if (quick) setMsgs(prev => prev.map(m => m.id === id ? { ...m, quick } : m));
+        setMsgs(prev => {
+          const done = prev.map(m => m.id === id ? { ...m, quick, streaming: false, displayText: fullText } : m);
+          persistMessages(done);
+          return done;
+        });
         setTimeout(scrollBottom, 50);
       }
     };
     setTimeout(tick, speed);
-  }, []);
+  }, [persistMessages]);
 
   const addBotMsg = useCallback((reply: BotReply) => {
     const id = ++msgId.current;
@@ -286,36 +410,219 @@ export default function BitcraftlyChat() {
     streamMsg(id, reply.text, reply.quick);
   }, [streamMsg]);
 
-  useEffect(() => { setMounted(true); }, []);
+  /* Load memory + restore conversation on mount */
+  useEffect(() => {
+    setMounted(true);
+    const saved = loadChatMemory();
+    const withVisit = visitRecorded.current ? saved : recordVisit(saved);
+    visitRecorded.current = true;
+    memoryRef.current = withVisit;
+    syncMemory(withVisit);
+
+    if (saved.messages.length > 0) {
+      const restored = saved.messages.map(storedToMsg);
+      msgId.current = Math.max(...restored.map(m => m.id), 0);
+      history.current = restored.filter(m => m.from === "user").map(m => m.text).slice(-8);
+      setMsgs(restored);
+      setGreeted(saved.greeted || restored.length > 0);
+      setUnread(0);
+    } else {
+      setUnread(1);
+    }
+
+    setMemory(withVisit);
+  }, [syncMemory]);
 
   useEffect(() => {
     if (open && !greeted) {
       setGreeted(true);
       setUnread(0);
+      const mem = memoryRef.current;
       setTimeout(() => {
-        addBotMsg({
-          text: "Hello! 👋 I'm Bit — your Bitcraftly AI assistant.\n\nWebsite banana hai? Main pricing, services, portfolio sab me help kar sakta hun. Poochho! 🚀",
-          quick: QUICK_DEFAULT,
-        });
+        if (hasCompleteLead(mem) && mem.visitCount > 1) {
+          addBotMsg({
+            text: `Welcome back, ${mem.userName}! 👋 Main Bit hun — aapki pichli chat aur details yaad hain.\n\nKya continue karein ya naya project discuss karein?`,
+            quick: QUICK_DEFAULT,
+          });
+        } else if (!mem.userName) {
+          addBotMsg({
+            text: "Hi! 👋 Start karne se pehle quick details de dijiye.\n\nPlease apna *name* batayein.",
+          });
+        } else if (!mem.userEmail) {
+          addBotMsg({
+            text: `Great ${mem.userName}! Ab apna *email* share kijiye taaki quote bhej sakein.`,
+          });
+        } else if (!mem.userPhone) {
+          addBotMsg({
+            text: "Perfect! Ab apna *phone number* bhejiye (10-digit) — founder callback ke liye.",
+          });
+        } else {
+          addBotMsg({
+            text: "Hello! 👋 I'm Bit — your Bitcraftly AI assistant.\n\nWebsite banana hai? Main pricing, services, portfolio sab me help kar sakta hun. Poochho! 🚀",
+            quick: QUICK_DEFAULT,
+          });
+        }
+        syncMemory({ ...memoryRef.current, greeted: true });
       }, 450);
     }
     if (open) { setUnread(0); setTimeout(() => inputRef.current?.focus(), 300); }
-  }, [open, greeted, addBotMsg]);
+  }, [open, greeted, addBotMsg, syncMemory]);
 
   useEffect(() => { scrollBottom(); }, [msgs, thinking]);
 
   const sendMessage = useCallback((text: string) => {
     if (!text.trim() || thinking) return;
-    const userMsg: Msg = { id: ++msgId.current, from: "user", text: text.trim(), displayText: text.trim(), streaming: false, time: nowTime() };
-    setMsgs(prev => [...prev, userMsg]);
+    const trimmed = text.trim();
+    const userMsg: Msg = { id: ++msgId.current, from: "user", text: trimmed, displayText: trimmed, streaming: false, time: nowTime() };
+    setMsgs(prev => {
+      const next = [...prev, userMsg];
+      persistMessages(next);
+      return next;
+    });
     setInput("");
-    history.current = [...history.current.slice(-6), text.trim()];
+    history.current = [...history.current.slice(-8), trimmed];
+
+    const memBefore = memoryRef.current;
+
     setThink(true);
     setTimeout(() => {
       setThink(false);
-      addBotMsg(getBotReply(text, history.current));
+      let mem = memoryRef.current;
+
+      if (!hasCompletedOnboarding(mem) && !mem.userName) {
+        const possibleName = parseOnboardingName(trimmed);
+        if (possibleName) {
+          mem = { ...mem, userName: possibleName, onboardingNameAttempts: 0 };
+          syncMemory(mem);
+          addBotMsg({
+            text: `Nice to meet you, ${possibleName}! 😊 Ab apna *email* share kijiye.`,
+          });
+          return;
+        }
+      }
+
+      const extracted = extractFromUserMessage(trimmed, memBefore);
+      if (Object.keys(extracted).length > 0) {
+        mem = { ...memBefore, ...extracted };
+        syncMemory(mem);
+      } else {
+        mem = memoryRef.current;
+      }
+
+      if (!hasCompletedOnboarding(mem)) {
+        if (wantsToSkipOnboarding(trimmed)) {
+          syncMemory({ ...mem, onboardingSkipped: true });
+          addBotMsg({
+            text: "Koi baat nahi! 🙂 Ab aap freely poochh sakte hain — pricing, services, portfolio, timeline...\n\nJab convenient ho, name/email/phone share kar dena.",
+            quick: QUICK_DEFAULT,
+          });
+          return;
+        }
+
+        if (!mem.userName) {
+          if (isGreetingMessage(trimmed)) {
+            addBotMsg({
+              text: "Hello! 👋 Main Bit hun — Bitcraftly ka AI assistant.\n\nShuru karne ke liye apna *name* bhej dijiye (e.g. Rahul). Ya pehle *pricing* / *services* poochh sakte hain — *skip* likh kar details baad mein bhi de sakte hain.",
+              quick: [
+                { label: "💰 Pricing", value: "pricing" },
+                { label: "✨ Services", value: "services" },
+                { label: "⏭️ Skip for now", value: "skip" },
+              ],
+            });
+            return;
+          }
+
+          const topicReply = getBotReply(trimmed, history.current, mem);
+          if (!isDefaultBotReply(topicReply)) {
+            addBotMsg({
+              text: `${topicReply.text}\n\n—\n\nJab ready hon, apna *name* share kar dena (e.g. Rahul) — ya *skip* likh dein.`,
+              quick: topicReply.quick,
+            });
+            return;
+          }
+
+          const attempts = mem.onboardingNameAttempts ?? 0;
+          syncMemory({ ...mem, onboardingNameAttempts: attempts + 1 });
+          addBotMsg({
+            text: NAME_PROMPTS[attempts % NAME_PROMPTS.length],
+            quick: [
+              { label: "⏭️ Skip for now", value: "skip" },
+              ...QUICK_DEFAULT.slice(0, 2),
+            ],
+          });
+          return;
+        }
+
+        if (!mem.userEmail) {
+          if (isGreetingMessage(trimmed)) {
+            addBotMsg({
+              text: `Hello ${mem.userName}! 👋 Jab ready hon, apna *email* bhej dijiye — ya *skip* likh kar aage badh sakte hain.`,
+              quick: [{ label: "⏭️ Skip for now", value: "skip" }],
+            });
+            return;
+          }
+
+          const extractedEmail = extractFromUserMessage(trimmed, mem).userEmail;
+          const email = isValidEmail(trimmed) ? trimmed.toLowerCase() : extractedEmail;
+          if (email && isValidEmail(email)) {
+            syncMemory({ ...mem, userEmail: email });
+            addBotMsg({
+              text: "Thanks! ✅ Ab apna *phone number* share kijiye (10-digit).",
+            });
+            return;
+          }
+
+          const topicReply = getBotReply(trimmed, history.current, mem);
+          addBotMsg({
+            text: `${topicReply.text}\n\n—\n\nQuote ke liye valid *email* bhejiye (e.g. name@gmail.com) — ya *skip* likh dein.`,
+            quick: topicReply.quick,
+          });
+          return;
+        }
+
+        if (!mem.userPhone) {
+          if (isGreetingMessage(trimmed)) {
+            addBotMsg({
+              text: `Hi ${mem.userName}! 👋 Callback ke liye 10-digit *phone number* bhejiye — ya *skip* likh kar chat continue karein.`,
+              quick: [{ label: "⏭️ Skip for now", value: "skip" }],
+            });
+            return;
+          }
+
+          const phone = normalizePhone(trimmed);
+          if (phone) {
+            syncMemory({ ...mem, userPhone: phone });
+            addBotMsg({
+              text: `Done ${mem.userName}! 🎉 Your details saved:\n\n• Name: ${mem.userName}\n• Email: ${mem.userEmail}\n• Phone: ${phone}\n\nAb aap kuch bhi poochh sakte hain — pricing, services, portfolio, timeline...`,
+              quick: QUICK_DEFAULT,
+            });
+            return;
+          }
+
+          const topicReply = getBotReply(trimmed, history.current, mem);
+          addBotMsg({
+            text: `${topicReply.text}\n\n—\n\nFounder callback ke liye valid *phone* bhejiye (10-digit) — ya *skip* likh dein.`,
+            quick: topicReply.quick,
+          });
+          return;
+        }
+      }
+
+      addBotMsg(getBotReply(trimmed, history.current, mem));
     }, 750 + Math.random() * 550);
-  }, [thinking, addBotMsg]);
+  }, [thinking, addBotMsg, persistMessages, syncMemory]);
+
+  const handleClearChat = useCallback(() => {
+    const cleared = clearChatMemory();
+    const withVisit = recordVisit(cleared);
+    memoryRef.current = withVisit;
+    setMemory(withVisit);
+    setMsgs([]);
+    setGreeted(false);
+    history.current = [];
+    msgId.current = 0;
+    setUnread(0);
+  }, []);
 
   if (isExcluded || !mounted) return null;
 
@@ -341,13 +648,27 @@ export default function BitcraftlyChat() {
         <div className="bc-chat-header">
           <div className="bc-chat-header-avatar"><ManBotAvatar size={44} /></div>
           <div className="bc-chat-header-info">
-            <p className="bc-chat-header-name">Bit — AI Assistant</p>
+            <p className="bc-chat-header-name">
+              Bit — AI Assistant
+              {memory.userName && <span className="bc-chat-header-you"> · Hi, {memory.userName}</span>}
+            </p>
             <span className="bc-chat-header-status">
               <span className="bc-chat-online-dot" />
-              Bitcraftly · Always online
+              {hasCompletedOnboarding(memory)
+                ? hasCompleteLead(memory)
+                  ? "Remembers your details + chat"
+                  : "Ready to help"
+                : "Quick onboarding in progress"}
             </span>
           </div>
-          <button className="bc-chat-close" onClick={() => setOpen(false)} aria-label="Close chat"><X size={18} /></button>
+          <div className="bc-chat-header-actions">
+            {msgs.length > 0 && (
+              <button className="bc-chat-clear" onClick={handleClearChat} aria-label="Clear chat history" title="Clear chat">
+                <RotateCcw size={15} />
+              </button>
+            )}
+            <button className="bc-chat-close" onClick={() => setOpen(false)} aria-label="Close chat"><X size={18} /></button>
+          </div>
         </div>
 
         {/* Messages */}
@@ -391,7 +712,9 @@ export default function BitcraftlyChat() {
               <div className="bc-chat-msg-wrap">
                 <div className="bc-chat-thinking">
                   <span className="bc-chat-thinking-label">Bit is thinking</span>
-                  <span /><span /><span />
+                  <span className="bc-chat-thinking-dot" aria-hidden />
+                  <span className="bc-chat-thinking-dot" aria-hidden />
+                  <span className="bc-chat-thinking-dot" aria-hidden />
                 </div>
               </div>
             </div>

@@ -2,9 +2,11 @@ import type { Metadata, Viewport } from "next";
 import { ReactNode, Suspense } from "react";
 import "./globals.css";
 import { inter, playfair } from "@/lib/fonts";
+import ConsentGatedGoogleAnalytics from "@/components/analytics/ConsentGatedGoogleAnalytics";
 import DeferredAnalyticsListener from "@/components/analytics/DeferredAnalyticsListener";
-import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import RootBootEffects from "@/components/boot/RootBootEffects";
+import CookieConsentBanner from "@/components/consent/CookieConsentBanner";
+import { CookieConsentProvider } from "@/components/consent/CookieConsentProvider";
 import { GSC_VERIFICATION } from "@/lib/analytics";
 import { IS_STAGING } from "@/lib/appEnv";
 import { buildPageMetadata } from "@/lib/seoMetadata";
@@ -95,20 +97,23 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
           </div>
         ) : null}
-        <GoogleAnalytics />
-        <Suspense fallback={null}>
-          <DeferredAnalyticsListener />
-        </Suspense>
-        <StagingEnvironmentBanner />
-        <ThemeProvider>
-          <LoaderProvider>
-            <AuthSessionProvider>{children}</AuthSessionProvider>
-            {/* <ChatSupportWidget /> */}
-            <BitcraftlyChat />
-            <DeferredFloatingChrome />
-            <DeferredToaster />
-          </LoaderProvider>
-        </ThemeProvider>
+        <CookieConsentProvider>
+          <ConsentGatedGoogleAnalytics />
+          <Suspense fallback={null}>
+            <DeferredAnalyticsListener />
+          </Suspense>
+          <CookieConsentBanner />
+          <StagingEnvironmentBanner />
+          <ThemeProvider>
+            <LoaderProvider>
+              <AuthSessionProvider>{children}</AuthSessionProvider>
+              {/* <ChatSupportWidget /> */}
+              <BitcraftlyChat />
+              <DeferredFloatingChrome />
+              <DeferredToaster />
+            </LoaderProvider>
+          </ThemeProvider>
+        </CookieConsentProvider>
       </body>
     </html>
   );

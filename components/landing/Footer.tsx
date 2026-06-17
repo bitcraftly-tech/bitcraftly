@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { headers } from "next/headers";
 
+import CookieSettingsLink from "@/components/consent/CookieSettingsLink";
+import VisitorCountBadge from "@/components/analytics/VisitorCountBadge";
 import BitcraftlyLogoMarkImage from "@/components/brand/BitcraftlyLogoMarkImage";
 import FooterServiceLinks from "@/components/landing/FooterServiceLinks";
 import SocialLinks from "@/components/landing/SocialLinks";
@@ -146,7 +148,9 @@ export default async function Footer() {
                 {item.label}
               </Link>
             ))}
+            <CookieSettingsLink />
           </nav>
+          <VisitorCountBadge />
           <p className="text-[11px] text-text-tertiary dark:text-dark-text-tertiary">
             © 2026 Bitcraftly · WhatsApp {WHATSAPP_HOURS}
           </p>

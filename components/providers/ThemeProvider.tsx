@@ -2,6 +2,9 @@
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
+import { useCookieConsent } from "@/components/consent/CookieConsentProvider";
+import { isPreferencesConsented } from "@/lib/cookieConsent";
+
 type ThemeValue = "light" | "dark";
 
 type ThemeContextValue = {
@@ -30,9 +33,12 @@ function applyThemeToDom(theme: ThemeValue) {
 }
 
 function ThemeProviderInner({ children }: ThemeProviderProps) {
+  const { ready: consentReady, consent } = useCookieConsent();
   const [resolvedTheme, setResolvedTheme] = useState<ThemeValue>("light");
 
   useEffect(() => {
+    if (!consentReady) return;
+
     const path = window.location.pathname;
     const isPortfolio = path.startsWith("/portfolio/") || path.startsWith("/dayal-builders");
     if (isPortfolio) {
@@ -40,22 +46,25 @@ function ThemeProviderInner({ children }: ThemeProviderProps) {
       applyThemeToDom("light");
       return;
     }
-    const storedTheme = window.localStorage.getItem("theme");
+
+    const storedTheme = isPreferencesConsented(consent) ? window.localStorage.getItem("theme") : null;
     const initialTheme: ThemeValue = storedTheme === "dark" ? "dark" : "light";
     setResolvedTheme(initialTheme);
     applyThemeToDom(initialTheme);
-  }, []);
+  }, [consentReady, consent]);
 
   const value = useMemo<ThemeContextValue>(
     () => ({
       resolvedTheme,
       setTheme: (theme: ThemeValue) => {
         setResolvedTheme(theme);
-        window.localStorage.setItem("theme", theme);
         applyThemeToDom(theme);
+        if (isPreferencesConsented(consent)) {
+          window.localStorage.setItem("theme", theme);
+        }
       },
     }),
-    [resolvedTheme],
+    [resolvedTheme, consent],
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

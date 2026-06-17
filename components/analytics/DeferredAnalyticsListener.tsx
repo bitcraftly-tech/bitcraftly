@@ -3,11 +3,15 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
+import { useCookieConsent } from "@/components/consent/CookieConsentProvider";
+import { isAnalyticsConsented } from "@/lib/cookieConsent";
+
 const AnalyticsListener = dynamic(() => import("@/components/analytics/AnalyticsListener"), {
   ssr: false,
 });
 
 export default function DeferredAnalyticsListener() {
+  const { ready, consent } = useCookieConsent();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -35,6 +39,6 @@ export default function DeferredAnalyticsListener() {
     };
   }, []);
 
-  if (!show) return null;
+  if (!ready || !isAnalyticsConsented(consent) || !show) return null;
   return <AnalyticsListener />;
 }

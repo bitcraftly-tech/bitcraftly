@@ -6,11 +6,9 @@ import { useEffect, useState } from "react";
 
 import FloatingScrollButton from "@/components/landing/FloatingScrollButton";
 import MobileStickyCta from "@/components/landing/MobileStickyCta";
+import { hasMobileStickyCta } from "@/lib/mobileStickyCta";
 
 const FloatingWhatsAppButton = dynamic(() => import("@/components/landing/FloatingWhatsAppButton"), {
-  ssr: false,
-});
-const FloatingThemeTumbler = dynamic(() => import("@/components/landing/FloatingThemeTumbler"), {
   ssr: false,
 });
 
@@ -20,7 +18,6 @@ export default function PortfolioFloatingChrome() {
   const [showHeavyChrome, setShowHeavyChrome] = useState(false);
   const isPortfolio = pathname?.startsWith("/portfolio");
   const isDayal = pathname?.startsWith("/dayal-builders");
-  const isDashboard = pathname?.startsWith("/dashboard");
 
   useEffect(() => {
     let cancelled = false;
@@ -47,31 +44,40 @@ export default function PortfolioFloatingChrome() {
     };
   }, []);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    const mobileMq = window.matchMedia("(max-width: 767px)");
+
+    const syncFloatingLayout = () => {
+      const hasChat =
+        !pathname?.startsWith("/interactive-demos") && !pathname?.startsWith("/portfolio");
+      const mobileSticky = hasMobileStickyCta(pathname) && mobileMq.matches;
+
+      root.toggleAttribute("data-bc-chat", hasChat);
+      root.toggleAttribute("data-bc-mobile-sticky", mobileSticky);
+    };
+
+    syncFloatingLayout();
+    mobileMq.addEventListener("change", syncFloatingLayout);
+
+    return () => {
+      mobileMq.removeEventListener("change", syncFloatingLayout);
+      root.removeAttribute("data-bc-chat");
+      root.removeAttribute("data-bc-mobile-sticky");
+    };
+  }, [pathname]);
+
   const scrollToTop = <FloatingScrollButton />;
 
   if (isPortfolio || isDayal) {
     return scrollToTop;
   }
 
-  if (isDashboard) {
-    return (
-      <>
-        {scrollToTop}
-        {showHeavyChrome ? <FloatingThemeTumbler /> : null}
-      </>
-    );
-  }
-
   return (
     <>
       <MobileStickyCta />
       {scrollToTop}
-      {showHeavyChrome ? (
-        <>
-          <FloatingWhatsAppButton />
-          <FloatingThemeTumbler />
-        </>
-      ) : null}
+      {showHeavyChrome ? <FloatingWhatsAppButton /> : null}
     </>
   );
 }
