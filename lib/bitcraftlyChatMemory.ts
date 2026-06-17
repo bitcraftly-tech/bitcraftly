@@ -103,6 +103,15 @@ const GREETING_WORDS = new Set([
   "ok", "okay", "yes", "no", "thanks", "thank", "bye", "goodbye", "help", "start",
 ]);
 
+/** Quick-reply / topic tokens — never treat as a person's name during onboarding */
+const NON_NAME_WORDS = new Set([
+  ...GREETING_WORDS,
+  "pricing", "price", "services", "service", "portfolio", "contact", "timeline", "technology",
+  "tech", "whatsapp", "email", "estimate", "calculator", "skip", "included", "about", "founder",
+  "demo", "quote", "packages", "package", "website", "build", "react", "nextjs", "next",
+  "ai", "chatbot", "bitcraftly", "bitbot", "bit",
+]);
+
 const SKIP_ONBOARDING_PATTERN = /^(skip|later|not now|baad me|baad mein|abhi nahi|skip karo|baad)/i;
 
 function capitalizeName(name: string): string {
@@ -118,12 +127,12 @@ export function parseOnboardingName(text: string): string | null {
   if (!q || q.length > 40) return null;
 
   const single = q.match(/^([A-Za-z][A-Za-z'-]{1,19})$/);
-  if (single && !GREETING_WORDS.has(single[1].toLowerCase())) {
+  if (single && !NON_NAME_WORDS.has(single[1].toLowerCase())) {
     return capitalizeName(single[1]);
   }
 
   const firstLast = q.match(/^([A-Za-z][A-Za-z'-]{1,19})\s+([A-Za-z][A-Za-z'-]{1,19})$/);
-  if (firstLast && !GREETING_WORDS.has(firstLast[1].toLowerCase())) {
+  if (firstLast && !NON_NAME_WORDS.has(firstLast[1].toLowerCase())) {
     return capitalizeName(firstLast[1]);
   }
 

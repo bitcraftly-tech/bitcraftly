@@ -445,6 +445,36 @@ export default function BitcraftlyChat() {
       let mem = memoryRef.current;
 
       if (!hasCompletedOnboarding(mem) && !mem.userName) {
+        if (wantsToSkipOnboarding(trimmed)) {
+          syncMemory({ ...mem, onboardingSkipped: true });
+          addBotMsg({
+            text: "Koi baat nahi! 🙂 Ab aap freely poochh sakte hain — pricing, services, portfolio, timeline...\n\nJab convenient ho, name/email/phone share kar dena.",
+            quick: QUICK_DEFAULT,
+          });
+          return;
+        }
+
+        if (isGreetingMessage(trimmed)) {
+          addBotMsg({
+            text: "Hello! 👋 Main Bit hun — Bitcraftly ka AI assistant.\n\nShuru karne ke liye apna *name* bhej dijiye (e.g. Rahul). Ya pehle *pricing* / *services* poochh sakte hain — *skip* likh kar details baad mein bhi de sakte hain.",
+            quick: [
+              { label: "💰 Pricing", value: "pricing" },
+              { label: "✨ Services", value: "services" },
+              { label: "⏭️ Skip for now", value: "skip" },
+            ],
+          });
+          return;
+        }
+
+        const topicReply = getBotReply(trimmed, history.current, mem);
+        if (!isDefaultBotReply(topicReply)) {
+          addBotMsg({
+            text: `${topicReply.text}\n\n—\n\nJab ready hon, apna *name* share kar dena (e.g. Rahul) — ya *skip* likh dein.`,
+            quick: topicReply.quick,
+          });
+          return;
+        }
+
         const possibleName = parseOnboardingName(trimmed);
         if (possibleName) {
           mem = { ...mem, userName: possibleName, onboardingNameAttempts: 0 };
@@ -454,6 +484,17 @@ export default function BitcraftlyChat() {
           });
           return;
         }
+
+        const attempts = mem.onboardingNameAttempts ?? 0;
+        syncMemory({ ...mem, onboardingNameAttempts: attempts + 1 });
+        addBotMsg({
+          text: NAME_PROMPTS[attempts % NAME_PROMPTS.length],
+          quick: [
+            { label: "⏭️ Skip for now", value: "skip" },
+            ...QUICK_DEFAULT.slice(0, 2),
+          ],
+        });
+        return;
       }
 
       const extracted = extractFromUserMessage(trimmed, memBefore);
@@ -470,40 +511,6 @@ export default function BitcraftlyChat() {
           addBotMsg({
             text: "Koi baat nahi! 🙂 Ab aap freely poochh sakte hain — pricing, services, portfolio, timeline...\n\nJab convenient ho, name/email/phone share kar dena.",
             quick: QUICK_DEFAULT,
-          });
-          return;
-        }
-
-        if (!mem.userName) {
-          if (isGreetingMessage(trimmed)) {
-            addBotMsg({
-              text: "Hello! 👋 Main Bit hun — Bitcraftly ka AI assistant.\n\nShuru karne ke liye apna *name* bhej dijiye (e.g. Rahul). Ya pehle *pricing* / *services* poochh sakte hain — *skip* likh kar details baad mein bhi de sakte hain.",
-              quick: [
-                { label: "💰 Pricing", value: "pricing" },
-                { label: "✨ Services", value: "services" },
-                { label: "⏭️ Skip for now", value: "skip" },
-              ],
-            });
-            return;
-          }
-
-          const topicReply = getBotReply(trimmed, history.current, mem);
-          if (!isDefaultBotReply(topicReply)) {
-            addBotMsg({
-              text: `${topicReply.text}\n\n—\n\nJab ready hon, apna *name* share kar dena (e.g. Rahul) — ya *skip* likh dein.`,
-              quick: topicReply.quick,
-            });
-            return;
-          }
-
-          const attempts = mem.onboardingNameAttempts ?? 0;
-          syncMemory({ ...mem, onboardingNameAttempts: attempts + 1 });
-          addBotMsg({
-            text: NAME_PROMPTS[attempts % NAME_PROMPTS.length],
-            quick: [
-              { label: "⏭️ Skip for now", value: "skip" },
-              ...QUICK_DEFAULT.slice(0, 2),
-            ],
           });
           return;
         }
