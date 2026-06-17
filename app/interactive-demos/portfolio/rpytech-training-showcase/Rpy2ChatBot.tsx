@@ -1,7 +1,55 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { X, Send, MessageCircle, ChevronDown, Sparkles } from "lucide-react";
+import { X, Send, ChevronDown, MessageCircle } from "lucide-react";
+
+/* ─── Girl robot avatar SVG ─────────────────────────── */
+function GirlBotAvatar({ size = 36, className = "" }: { size?: number; className?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden>
+      {/* Outer glow ring */}
+      <circle cx="40" cy="40" r="38" fill="url(#botGrad)" />
+      {/* Head */}
+      <rect x="20" y="18" width="40" height="34" rx="14" fill="#fff" />
+      {/* Hair */}
+      <path d="M20 26 Q20 14 40 14 Q60 14 60 26 L60 22 Q60 10 40 10 Q20 10 20 22 Z" fill="#2d3a4a" />
+      {/* Hair bangs */}
+      <path d="M20 24 Q25 20 30 24" stroke="#2d3a4a" strokeWidth="3" strokeLinecap="round" fill="none"/>
+      <path d="M50 24 Q55 20 60 24" stroke="#2d3a4a" strokeWidth="3" strokeLinecap="round" fill="none"/>
+      {/* Ear antennas */}
+      <rect x="17" y="28" width="5" height="10" rx="2.5" fill="#e2e8f0" />
+      <rect x="58" y="28" width="5" height="10" rx="2.5" fill="#e2e8f0" />
+      <circle cx="19.5" cy="27" r="3" fill="#22c55e" />
+      <circle cx="60.5" cy="27" r="3" fill="#22c55e" />
+      {/* Eyes */}
+      <ellipse cx="32" cy="34" rx="5" ry="5.5" fill="#1e293b" />
+      <ellipse cx="48" cy="34" rx="5" ry="5.5" fill="#1e293b" />
+      {/* Eye shine */}
+      <circle cx="34" cy="32" r="1.5" fill="#fff" />
+      <circle cx="50" cy="32" r="1.5" fill="#fff" />
+      {/* Eyelashes */}
+      <path d="M27 30 Q28 28 29 29" stroke="#1e293b" strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M43 30 Q44 28 45 29" stroke="#1e293b" strokeWidth="1.2" strokeLinecap="round"/>
+      {/* Blush */}
+      <ellipse cx="27" cy="39" rx="4" ry="2.5" fill="#fca5a5" opacity="0.5" />
+      <ellipse cx="53" cy="39" rx="4" ry="2.5" fill="#fca5a5" opacity="0.5" />
+      {/* Smile */}
+      <path d="M33 43 Q40 48 47 43" stroke="#1e293b" strokeWidth="2" strokeLinecap="round" fill="none" />
+      {/* Body */}
+      <rect x="28" y="50" width="24" height="16" rx="8" fill="#e0f2fe" />
+      {/* Tie / Badge */}
+      <path d="M38 50 L40 58 L42 50 Z" fill="#22c55e" />
+      {/* Body glow dot */}
+      <circle cx="40" cy="60" r="3" fill="#22c55e" opacity="0.6" />
+      <defs>
+        <radialGradient id="botGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#dcfce7" />
+          <stop offset="100%" stopColor="#bbf7d0" />
+        </radialGradient>
+      </defs>
+    </svg>
+  );
+}
 
 /* ─── Knowledge base ────────────────────────────────── */
 type QuickReply = { label: string; value: string };
@@ -322,7 +370,7 @@ export default function Rpy2ChatBot() {
         onClick={() => setOpen(o => !o)}
         aria-label={open ? "Close chat" : "Open RPY Support chat"}
       >
-        {open ? <ChevronDown size={22} /> : <MessageCircle size={22} />}
+        {open ? <ChevronDown size={22} /> : <GirlBotAvatar size={40} className="rpyv2-chat-bubble-avatar" />}
         {!open && unread > 0 && <span className="rpyv2-chat-badge">{unread}</span>}
       </button>
 
@@ -332,7 +380,7 @@ export default function Rpy2ChatBot() {
         {/* Header */}
         <div className="rpyv2-chat-header">
           <div className="rpyv2-chat-header-avatar" aria-hidden>
-            <Sparkles size={18} />
+            <GirlBotAvatar size={42} />
           </div>
           <div className="rpyv2-chat-header-info">
             <p className="rpyv2-chat-header-name">RPY AI Assistant</p>
@@ -359,7 +407,7 @@ export default function Rpy2ChatBot() {
             <div key={msg.id} className={`rpyv2-chat-msg rpyv2-chat-msg--${msg.from}`}>
               {msg.from === "bot" && (
                 <div className="rpyv2-chat-msg-avatar" aria-hidden>
-                  <Sparkles size={13} />
+                  <GirlBotAvatar size={28} />
                 </div>
               )}
               <div className="rpyv2-chat-msg-wrap">
@@ -387,7 +435,7 @@ export default function Rpy2ChatBot() {
           {/* Thinking dots */}
           {thinking && (
             <div className="rpyv2-chat-msg rpyv2-chat-msg--bot">
-              <div className="rpyv2-chat-msg-avatar" aria-hidden><Sparkles size={13} /></div>
+              <div className="rpyv2-chat-msg-avatar" aria-hidden><GirlBotAvatar size={28} /></div>
               <div className="rpyv2-chat-msg-wrap">
                 <div className="rpyv2-chat-thinking">
                   <span className="rpyv2-chat-thinking-label">RPY AI is thinking</span>
@@ -423,7 +471,7 @@ export default function Rpy2ChatBot() {
         </div>
 
         <div className="rpyv2-chat-powered">
-          <Sparkles size={10} /> AI Assistant by <strong>RPY Tech</strong>
+          ✨ AI Assistant by <strong>RPY Tech</strong>
         </div>
       </div>
     </>
