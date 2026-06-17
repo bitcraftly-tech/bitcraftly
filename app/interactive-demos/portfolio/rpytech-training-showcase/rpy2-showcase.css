@@ -3244,21 +3244,23 @@
   position: fixed;
   bottom: 1.75rem;
   left: 1.75rem;
-  width: 58px; height: 58px;
+  width: 62px; height: 62px;
   border-radius: 50%;
-  background: #16a34a;
-  color: #fff;
-  border: none;
+  background: #fff;
+  border: 2.5px solid #22c55e;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 8px 28px rgba(22,163,74,0.45);
+  box-shadow: 0 8px 28px rgba(22,163,74,0.35);
   z-index: 9000;
+  padding: 0;
+  overflow: hidden;
   animation: rpyv2-chat-pop 0.45s cubic-bezier(.175,.885,.32,1.275) both,
              rpyv2-chat-ping 2.5s 1.2s ease-in-out infinite;
-  transition: background 0.2s, transform 0.2s;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
-.rpyv2-chat-bubble:hover { background: #15803d; transform: scale(1.07); }
-.rpyv2-chat-bubble--open  { animation: none; background: #15803d; }
+.rpyv2-chat-bubble:hover { border-color: #16a34a; transform: scale(1.07); box-shadow: 0 12px 36px rgba(22,163,74,0.45); }
+.rpyv2-chat-bubble--open  { animation: none; background: #16a34a; border-color: #16a34a; color: #fff; }
+.rpyv2-chat-bubble-avatar { border-radius: 50%; display: block; }
 
 .rpyv2-chat-badge {
   position: absolute;
@@ -3314,15 +3316,14 @@
   flex-shrink: 0;
 }
 .rpyv2-chat-header-avatar {
-  width: 42px; height: 42px;
+  width: 44px; height: 44px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.25);
-  color: #fff;
-  font-weight: 800;
-  font-size: 1.125rem;
+  background: #fff;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
-  border: 2px solid rgba(255,255,255,0.4);
+  border: 2px solid rgba(255,255,255,0.6);
+  overflow: hidden;
+  padding: 0;
 }
 .rpyv2-chat-header-info { flex: 1; min-width: 0; }
 .rpyv2-chat-header-name {
@@ -3394,12 +3395,12 @@
 .rpyv2-chat-msg-avatar {
   width: 28px; height: 28px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #16a34a, #15803d);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 800;
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
+  padding: 0;
 }
 
 .rpyv2-chat-msg-wrap {
