@@ -26,12 +26,14 @@ type PortfolioShowcaseSectionProps = {
   variant: PortfolioShowcaseVariant;
   items: PortfolioItem[];
   filterLayoutId?: string;
+  revampLayout?: boolean;
 };
 
 export default function PortfolioShowcaseSection({
   variant,
   items,
   filterLayoutId,
+  revampLayout = false,
 }: PortfolioShowcaseSectionProps) {
   const [category, setCategory] = useState<PortfolioCategoryId>("all");
   const [selected, setSelected] = useState<PortfolioProject | null>(null);
@@ -47,7 +49,7 @@ export default function PortfolioShowcaseSection({
   const content = (
     <section
       id={sectionId}
-      className={`${CONTAINER} ${PS_SECTION} scroll-mt-24 py-10 md:py-14 lg:py-16`}
+      className={`${CONTAINER} ${PS_SECTION} scroll-mt-24 bg-white py-10 md:py-14 lg:py-16`}
       aria-labelledby={isHome ? "portfolio-showcase-heading" : "portfolio-page-heading"}
     >
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden>
@@ -55,33 +57,41 @@ export default function PortfolioShowcaseSection({
         <div className="absolute -bottom-32 -left-24 size-80 rounded-full bg-[#3498db]/[0.05] blur-3xl" />
       </div>
 
-      <PortfolioShowcaseHero variant={variant} />
+      <PortfolioShowcaseHero variant={variant} revampLayout={revampLayout} />
 
-      {isHome ? (
+      {isHome && !revampLayout ? (
         <div className="mt-4 flex justify-end">
           <Link href="/portfolio" className="text-sm font-semibold text-[#8e44ad] transition hover:text-[#9b59b6]" {...newTabProps("/portfolio")}>
-            View full portfolio →
+            View all portfolio →
           </Link>
         </div>
       ) : null}
 
       <div className="relative mt-8 md:mt-10">
-        <PortfolioFilterBar active={category} onChange={setCategory} items={items} layoutId={filterId} />
+        <PortfolioFilterBar active={category} onChange={setCategory} items={items} layoutId={filterId} revampLayout={revampLayout} />
       </div>
 
       <div className="relative mt-8">
-        <PortfolioAnimatedGrid projects={filtered} onOpenCaseStudy={setSelected} showFeaturedSeparately={showFeatured} />
+        <PortfolioAnimatedGrid
+          projects={filtered}
+          onOpenCaseStudy={setSelected}
+          showFeaturedSeparately={showFeatured && !revampLayout}
+          revampLayout={revampLayout}
+          maxItems={revampLayout ? 6 : undefined}
+        />
       </div>
 
-      {showFeatured ? (
+      {showFeatured && !revampLayout ? (
         <div className="relative mt-6">
           <PortfolioFeaturedCard />
         </div>
       ) : null}
 
-      <div className="relative mt-10 md:mt-12">
-        <PortfolioShowcaseCta source={isHome ? "portfolio-home" : "portfolio-page"} />
-      </div>
+      {!revampLayout ? (
+        <div className="relative mt-10 md:mt-12">
+          <PortfolioShowcaseCta source={isHome ? "portfolio-home" : "portfolio-page"} />
+        </div>
+      ) : null}
     </section>
   );
 
@@ -90,8 +100,12 @@ export default function PortfolioShowcaseSection({
       <div className={PORTFOLIO_LIGHT_WRAPPER}>
         {content}
         <PortfolioDetailModal project={selected} onClose={() => setSelected(null)} />
-        <PortfolioWhyPerform light />
-        <PortfolioAfterCta />
+        {!revampLayout ? (
+          <>
+            <PortfolioWhyPerform light />
+            <PortfolioAfterCta />
+          </>
+        ) : null}
       </div>
     );
   }

@@ -1,17 +1,46 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { PORTFOLIO } from "@/lib/portfolioContent";
+import { newTabProps } from "@/lib/newTabLink";
 import { PS_EYEBROW, PS_HEADING, PS_HERO_BADGE } from "@/lib/portfolioShowcaseTheme";
 
 type PortfolioShowcaseHeroProps = {
   variant: "home" | "page";
+  revampLayout?: boolean;
 };
 
-export default function PortfolioShowcaseHero({ variant }: PortfolioShowcaseHeroProps) {
+export default function PortfolioShowcaseHero({ variant, revampLayout = false }: PortfolioShowcaseHeroProps) {
   const reduceMotion = useReducedMotion();
   const isPage = variant === "page";
+
+  if (revampLayout && !isPage) {
+    return (
+      <motion.div
+        initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45 }}
+        className="min-w-0 flex-1"
+      >
+        <p className={PS_EYEBROW}>{PORTFOLIO.featuredLabel}</p>
+        <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+          <h2 id="portfolio-showcase-heading" className="text-3xl font-bold tracking-tight text-[#2c3e50] sm:text-4xl">
+            {PORTFOLIO.showcaseHeading}
+          </h2>
+          <Link
+            href="/portfolio"
+            className="shrink-0 text-sm font-semibold text-[#4f46e5] transition hover:text-[#6366f1]"
+            {...newTabProps("/portfolio")}
+          >
+            View all portfolio →
+          </Link>
+        </div>
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#7f8c8d]">{PORTFOLIO.showcaseDescription}</p>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div

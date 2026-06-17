@@ -25,10 +25,10 @@ export const PS = {
 
 /** Wrapper — forces light surfaces even when site is in dark mode */
 export const PORTFOLIO_LIGHT_WRAPPER =
-  "portfolio-showcase-light bg-[#fafbfc] text-[#2c3e50] [&_*]:border-[#e8ecef]";
+  "portfolio-showcase-light bg-white text-[#2c3e50] [&_*]:border-[#e8ecef]";
 
 export const PS_SECTION =
-  "relative overflow-hidden rounded-none bg-[#fafbfc]";
+  "relative overflow-hidden rounded-none bg-white";
 
 export const PS_HERO_BADGE =
   "flex items-center gap-3 rounded-2xl border border-[#e8ecef] bg-white px-4 py-3 shadow-[0_4px_24px_rgba(44,62,80,0.06)] sm:px-5 sm:py-4";
@@ -37,13 +37,13 @@ export const PS_CARD =
   "group relative flex flex-col overflow-hidden rounded-[20px] border border-[#e8ecef] bg-white shadow-[0_4px_24px_rgba(44,62,80,0.06)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[rgba(142,68,173,0.22)] hover:shadow-[0_12px_40px_rgba(142,68,173,0.12)]";
 
 export const PS_FILTER_ACTIVE =
-  "relative z-[1] border-transparent bg-[#8e44ad] text-white shadow-[0_4px_14px_rgba(142,68,173,0.35)]";
+  "relative z-[1] border-transparent bg-[#4f46e5] text-white shadow-[0_4px_14px_rgba(79,70,229,0.35)]";
 
 export const PS_FILTER_IDLE =
   "border-[#e8ecef] bg-white text-[#2c3e50] shadow-sm hover:border-[rgba(142,68,173,0.25)] hover:bg-[#fafbfc]";
 
 export const PS_BTN_PRIMARY =
-  "inline-flex items-center justify-center gap-2 rounded-xl bg-[#8e44ad] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(142,68,173,0.35)] transition hover:bg-[#9b59b6] hover:shadow-[0_6px_20px_rgba(142,68,173,0.4)] active:scale-[0.98]";
+  "inline-flex items-center justify-center gap-2 rounded-xl bg-[#4f46e5] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(79,70,229,0.35)] transition hover:bg-[#4338ca] hover:shadow-[0_6px_20px_rgba(79,70,229,0.4)] active:scale-[0.98]";
 
 export const PS_BTN_GHOST =
   "inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#e8ecef] bg-white px-4 py-2 text-sm font-semibold text-[#2c3e50] transition hover:border-[rgba(142,68,173,0.3)] hover:bg-[#fafbfc]";
@@ -57,7 +57,7 @@ export const PS_FEATURED_CARD =
 export const PS_BOTTOM_CTA =
   "flex flex-col gap-5 rounded-[20px] border border-[#e8ecef] bg-white p-6 shadow-[0_4px_24px_rgba(44,62,80,0.06)] sm:flex-row sm:items-center sm:justify-between sm:p-8";
 
-export const PS_EYEBROW = "text-xs font-bold uppercase tracking-[0.2em] text-[#8e44ad]";
+export const PS_EYEBROW = "text-xs font-bold uppercase tracking-[0.2em] text-[#4f46e5]";
 
 export const PS_HEADING = "font-[var(--font-playfair)] text-3xl font-semibold tracking-tight text-[#2c3e50] sm:text-4xl md:text-[2.75rem]";
 

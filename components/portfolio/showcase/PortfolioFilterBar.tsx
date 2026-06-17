@@ -12,9 +12,17 @@ type PortfolioFilterBarProps = {
   onChange: (id: PortfolioCategoryId) => void;
   items: PortfolioItem[];
   layoutId?: string;
+  revampLayout?: boolean;
 };
 
-export default function PortfolioFilterBar({ active, onChange, items, layoutId = "portfolio-filter" }: PortfolioFilterBarProps) {
+export default function PortfolioFilterBar({
+  active,
+  onChange,
+  items,
+  layoutId = "portfolio-filter",
+  revampLayout = false,
+}: PortfolioFilterBarProps) {
+  const activeBg = revampLayout ? "bg-[#4f46e5]" : "bg-[#8e44ad]";
   return (
     <div
       className="relative -mx-1 flex gap-2 overflow-x-auto pb-2 scrollbar-thin sm:flex-wrap sm:overflow-visible"
@@ -38,7 +46,7 @@ export default function PortfolioFilterBar({ active, onChange, items, layoutId =
             {isActive ? (
               <motion.span
                 layoutId={layoutId}
-                className="absolute inset-0 rounded-full bg-[#8e44ad]"
+                className={`absolute inset-0 rounded-full ${activeBg}`}
                 transition={{ type: "spring", stiffness: 380, damping: 32 }}
               />
             ) : null}

@@ -1,13 +1,13 @@
 import dynamic from "next/dynamic";
 
 import Hero from "@/components/landing/Hero";
-import LandingActionStrip from "@/components/landing/LandingActionStrip";
+import HomeBottomCta from "@/components/landing/HomeBottomCta";
+import HomePageHub from "@/components/landing/HomePageHub";
+import HomePerformanceStrip from "@/components/landing/HomePerformanceStrip";
 import MarketingPageLayout from "@/components/landing/MarketingPageLayout";
 
-const HomePageHub = dynamic(() => import("@/components/landing/HomePageHub"));
 const WebsiteAuditLeadMagnet = dynamic(() => import("@/components/landing/WebsiteAuditLeadMagnet"));
 const PortfolioShowcase = dynamic(() => import("@/components/landing/PortfolioShowcase"));
-const FinalCTA = dynamic(() => import("@/components/landing/FinalCTA"));
 
 type LandingPageProps = {
   sectionId?: string;
@@ -15,13 +15,15 @@ type LandingPageProps = {
 
 export default function LandingPage({ sectionId }: LandingPageProps) {
   return (
-    <MarketingPageLayout sectionId={sectionId}>
-      <Hero />
-      <LandingActionStrip />
-      <HomePageHub />
-      <PortfolioShowcase />
-      <WebsiteAuditLeadMagnet />
-      <FinalCTA />
+    <MarketingPageLayout sectionId={sectionId} variant="landing">
+      <div className="lp-revamp bg-white text-[#1e293b]">
+        <Hero />
+        <HomePageHub />
+        <PortfolioShowcase revampLayout />
+        <HomePerformanceStrip />
+        <WebsiteAuditLeadMagnet />
+        <HomeBottomCta />
+      </div>
     </MarketingPageLayout>
   );
 }

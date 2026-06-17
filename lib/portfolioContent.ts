@@ -44,7 +44,7 @@ export const PORTFOLIO = {
   ] as const,
   performanceSectionTitle: "What we optimize on every engagement",
   performanceMetrics: [
-    { label: "Mobile UX", value: "Thumb-first", note: "Layouts tested for small screens first" },
+    { label: "Mobile UX", value: "Mobile-first", note: "Layouts tested for small screens first" },
     { label: "Lead paths", value: "WhatsApp-ready", note: "Enquiry CTAs above scroll fatigue" },
     { label: "SEO structure", value: "Crawlable", note: "Titles, hierarchy, local discovery basics" },
     { label: "Stack", value: "React / Next", note: "Maintainable frontends, not locked templates" },

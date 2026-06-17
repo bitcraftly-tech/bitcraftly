@@ -29,12 +29,14 @@ function FooterLinkList({ links }: { links: { href: string; label: string }[] })
 export default async function Footer() {
   const pathname = (await headers()).get("x-pathname") ?? "/";
   const stickyClearance = hasMobileStickyCta(pathname);
+  const isHomeLanding = pathname === "/";
 
   return (
     <footer
-      className={`border-t border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card${stickyClearance ? ` ${FOOTER_STICKY_CLEARANCE_CLASS}` : ""}`}
+      className={`border-t border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card${stickyClearance ? ` ${FOOTER_STICKY_CLEARANCE_CLASS}` : ""}${isHomeLanding ? " bg-white dark:bg-white" : ""}`}
     >
       <div className={`${CONTAINER} py-8 md:py-10`}>
+        {!isHomeLanding ? (
         <div className="rounded-2xl border border-indigo-500/20 bg-gradient-to-br from-indigo-50/70 via-bg-card to-bg-card px-5 py-6 dark:from-indigo-950/25 dark:via-dark-bg-card dark:to-dark-bg-card sm:px-8 sm:py-7">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-xl">
@@ -73,8 +75,9 @@ export default async function Footer() {
             </div>
           </div>
         </div>
+        ) : null}
 
-        <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+        <div className={`grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8${isHomeLanding ? "" : " mt-10"}`}>
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-start gap-3">
               <BitcraftlyLogoMarkImage size="xs" />

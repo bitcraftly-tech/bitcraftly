@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 
 import PortfolioShowcaseCard from "@/components/portfolio/showcase/PortfolioShowcaseCard";
+import PortfolioShowcaseCardRevamp from "@/components/portfolio/showcase/PortfolioShowcaseCardRevamp";
 import { PORTFOLIO_FEATURED } from "@/lib/portfolioContent";
 import type { PortfolioProject } from "@/lib/portfolio/projectUtils";
 
@@ -10,18 +11,23 @@ type PortfolioAnimatedGridProps = {
   projects: PortfolioProject[];
   onOpenCaseStudy: (project: PortfolioProject) => void;
   showFeaturedSeparately?: boolean;
+  revampLayout?: boolean;
+  maxItems?: number;
 };
 
 export default function PortfolioAnimatedGrid({
   projects,
   onOpenCaseStudy,
   showFeaturedSeparately = true,
+  revampLayout = false,
+  maxItems,
 }: PortfolioAnimatedGridProps) {
   const gridProjects = showFeaturedSeparately
     ? projects.filter((p) => p.slug !== PORTFOLIO_FEATURED.slug)
     : projects;
+  const visibleProjects = maxItems ? gridProjects.slice(0, maxItems) : gridProjects;
 
-  if (gridProjects.length === 0) {
+  if (visibleProjects.length === 0) {
     return (
       <motion.p
         initial={{ opacity: 0 }}
@@ -40,9 +46,13 @@ export default function PortfolioAnimatedGrid({
   return (
     <motion.div layout className="grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
       <AnimatePresence mode="popLayout">
-        {gridProjects.map((project, index) => (
-          <PortfolioShowcaseCard key={project.slug} project={project} index={index} onOpenCaseStudy={onOpenCaseStudy} />
-        ))}
+        {visibleProjects.map((project, index) =>
+          revampLayout ? (
+            <PortfolioShowcaseCardRevamp key={project.slug} project={project} index={index} />
+          ) : (
+            <PortfolioShowcaseCard key={project.slug} project={project} index={index} onOpenCaseStudy={onOpenCaseStudy} />
+          ),
+        )}
       </AnimatePresence>
     </motion.div>
   );

@@ -1,103 +1,105 @@
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import { CreditCard, LayoutGrid, Sparkles, User } from "lucide-react";
-import type { ReactNode } from "react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 
+import HeroBitBotPromo from "@/components/landing/HeroBitBotPromo";
+import HeroRobotVisual from "@/components/landing/HeroRobotVisual";
 import { CONTAINER, whatsappUrl } from "@/lib/constants";
 import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
-import { BRAND, HERO, TRUST_CHECKS } from "@/lib/siteContent";
+import { HERO, HERO_FEATURE_CHECKS, HERO_TRUST_PILLS } from "@/lib/siteContent";
 
-const HeroShowcase = dynamic(() => import("@/components/landing/HeroShowcase"), {
-  loading: () => (
-    <div
-      className="min-h-[220px] rounded-2xl border border-border-primary bg-bg-card/60 dark:border-dark-border-primary dark:bg-dark-bg-card/60 lg:min-h-[280px]"
-      aria-hidden
-    />
-  ),
-});
+function Headline() {
+  const parts = HERO.headline.split(HERO.headlineAccent);
+  const mobileParts = HERO.mobileHeadline.split(HERO.headlineAccent);
+  const accent = <span className="text-[#7c3aed]">{HERO.headlineAccent}</span>;
 
-type NavPill = {
-  name: string;
-  icon: ReactNode;
-  href: string;
-};
-
-const navPills: NavPill[] = [
-  { name: "Pricing", icon: <CreditCard className="size-3.5" aria-hidden />, href: "/pricing" },
-  { name: "Services", icon: <Sparkles className="size-3.5" aria-hidden />, href: "/services" },
-  { name: "Portfolio", icon: <LayoutGrid className="size-3.5" aria-hidden />, href: "/portfolio" },
-  { name: "About", icon: <User className="size-3.5" aria-hidden />, href: "/about" },
-];
+  return (
+    <h1 className="text-[2rem] font-bold leading-[1.1] tracking-tight text-[#1e293b] sm:text-4xl lg:text-[2.65rem]">
+      <span className="sm:hidden">
+        {mobileParts[0]}
+        {accent}
+        {mobileParts[1] ?? ""}
+      </span>
+      <span className="hidden sm:inline">
+        {parts[0]}
+        {accent}
+        {parts[1] ?? ""}
+      </span>
+    </h1>
+  );
+}
 
 export default function Hero() {
   return (
-    <section
-      id="hero"
-      className={`${CONTAINER} scroll-mt-24 grid min-h-[41vh] items-center gap-6 py-4 lg:grid-cols-2 lg:py-6`}
-    >
-      <div className="text-center lg:text-left">
-        <div className="inline-flex items-center gap-2 rounded-full border border-border-primary bg-bg-card px-4 py-2 dark:border-dark-border-primary dark:bg-dark-bg-card">
-          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="whitespace-nowrap text-xs font-medium uppercase tracking-[0.1em] text-text-secondary dark:text-dark-text-secondary">
-            {HERO.badge}
-          </span>
-        </div>
+    <section id="hero" className={`${CONTAINER} scroll-mt-24 lp-hero py-10 md:py-12 lg:py-14`}>
+      <div className="lp-hero__grid">
+        <div className="text-center lg:text-left">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#bbf7d0] bg-[#ecfdf5] px-4 py-2">
+            <span className="h-2 w-2 rounded-full bg-emerald-500" />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#166534]">{HERO.badge}</span>
+          </div>
 
-        <h1 className="mt-6 font-sans-brand text-3xl font-semibold leading-tight text-text-primary dark:text-dark-text-primary sm:font-[var(--font-playfair)] sm:text-4xl lg:text-5xl">
-          <span className="sm:hidden">{HERO.mobileHeadline}</span>
-          <span className="hidden sm:inline">{HERO.headline}</span>
-        </h1>
-        <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-text-secondary dark:text-dark-text-secondary lg:mx-0 lg:text-lg">
-          {HERO.subheadline}
-        </p>
-        <p className="mx-auto mt-3 max-w-2xl text-sm italic leading-relaxed text-text-tertiary dark:text-dark-text-tertiary lg:mx-0">
-          {HERO.trustLine} — {BRAND.whatsappHours}.
-        </p>
+          <div className="mt-6">
+            <Headline />
+          </div>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
-          <Link
-            href="/contact?intent=consultation&source=hero"
-            className="rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-95"
-          >
-            {HERO.primaryCta}
-          </Link>
-          <Link
-            href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
-            data-wa-source="hero-whatsapp"
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-xl border border-border-secondary px-6 py-3 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"
-          >
-            {HERO.secondaryCta}
-          </Link>
-        </div>
+          <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-[#64748b] lg:mx-0">{HERO.subheadline}</p>
 
-        <ul className="mx-auto mt-5 flex max-w-xl flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-text-secondary dark:text-dark-text-secondary lg:mx-0 lg:justify-start">
-          {TRUST_CHECKS.map((t) => (
-            <li key={t} className="inline-flex items-center gap-1.5">
-              <span className="text-emerald-600 dark:text-emerald-400" aria-hidden>
-                ✔
-              </span>
-              {t}
-            </li>
-          ))}
-        </ul>
+          <div className="mx-auto mt-6 grid max-w-md grid-cols-2 gap-x-6 gap-y-2.5 text-left text-sm text-[#475569] lg:mx-0">
+            {HERO_FEATURE_CHECKS.map((column) => (
+              <div key={column[0]} className="flex flex-col gap-2.5">
+                {column.map((item) => (
+                  <span key={item} className="inline-flex items-center gap-2">
+                    <span className="text-emerald-600" aria-hidden>
+                      ✔
+                    </span>
+                    {item}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
 
-        <div className="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start">
-          {navPills.map((p) => (
+          <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
             <Link
-              key={p.name}
-              href={p.href}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border-primary/80 bg-bg-card/90 px-3 py-2 text-xs font-medium text-text-secondary shadow-sm transition hover:border-indigo-500/35 hover:text-indigo-600 dark:border-dark-border-primary/80 dark:bg-dark-bg-card/90 dark:text-dark-text-secondary dark:hover:border-indigo-400/35 dark:hover:text-indigo-400"
+              href="/contact?intent=consultation&source=hero"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#4f46e5] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_10px_28px_-10px_rgba(79,70,229,0.55)] transition hover:bg-[#4338ca]"
             >
-              {p.icon}
-              <span>{p.name}</span>
+              {HERO.primaryCta}
+              <ArrowRight className="size-4" aria-hidden />
             </Link>
-          ))}
-        </div>
-      </div>
+            <Link
+              href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
+              data-wa-source="hero-whatsapp"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#e2e8f0] bg-white px-6 py-3.5 text-sm font-semibold text-[#1e293b] shadow-sm transition hover:border-[#c7d2fe]"
+            >
+              <MessageCircle className="size-4 text-[#25D366]" aria-hidden />
+              {HERO.secondaryCta}
+            </Link>
+          </div>
 
-      <HeroShowcase />
+          <ul className="mx-auto mt-5 flex max-w-2xl flex-wrap justify-center gap-2 lg:mx-0 lg:justify-start">
+            {HERO_TRUST_PILLS.map((pill) => (
+              <li
+                key={pill}
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#e8ecef] bg-[#f8fafc] px-3 py-1.5 text-[11px] font-medium text-[#64748b]"
+              >
+                <span className="text-emerald-600" aria-hidden>
+                  ✔
+                </span>
+                {pill}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="lp-hero__visual">
+          <HeroRobotVisual />
+        </div>
+
+        <HeroBitBotPromo />
+      </div>
     </section>
   );
 }

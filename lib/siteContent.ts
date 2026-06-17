@@ -89,17 +89,29 @@ export const BRAND = {
 
 /** Homepage hero — single source of truth for headline, CTAs, trust line */
 export const HERO = {
-  badge: "Founder-led · 18+ yrs · Ghaziabad · India & remote",
+  badge: "Founded • 18+ Yrs • Chhatarpur • India & Remote",
   headline: "Premium React & Next.js Websites That Turn Visitors Into Leads",
+  headlineAccent: "Leads",
   subheadline:
     "Bitcraftly is led by Sanjay Kr. Singh — Frontend Architect with 18+ years building scalable UI systems for startups, clinics, gyms, SaaS teams, and local brands. Fast launches, SEO-ready structure, and practical AI where it actually drives enquiries.",
   trustLine:
     "Written scope before payment · Seedha founder se baat · English–Hinglish on WhatsApp",
   primaryCta: "Book Free Consultation",
   secondaryCta: "WhatsApp Sanjay",
-  /** Shorter H1 for very small screens (optional swap via CSS later) */
   mobileHeadline: "React & Next.js Websites That Get You Leads",
 } as const;
+
+export const HERO_FEATURE_CHECKS = [
+  ["WhatsApp Booking Systems", "Quote/Invoice on Docs"],
+  ["Engaging UI", "100% SATISFACTION"],
+] as const;
+
+export const HERO_TRUST_PILLS = [
+  "18+ Years Experience",
+  "Fast & Reliable",
+  "Scalable & SEO-ready",
+  "AI-Powered",
+] as const;
 
 export const TRUST_CHECKS = [
   "18+ Years · Frontend Architect",

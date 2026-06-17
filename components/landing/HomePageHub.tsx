@@ -1,52 +1,33 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
+import LandingSectionEyebrow from "@/components/landing/LandingSectionEyebrow";
 import { CONTAINER } from "@/lib/constants";
 import { HOME_HUB_LINKS } from "@/lib/marketingRoutes";
 
 export default function HomePageHub() {
   return (
-    <section className={`${CONTAINER} scroll-mt-24 py-7 md:py-10`}>
-      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
-        Explore Bitcraftly
-      </p>
-      <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
+    <section className={`${CONTAINER} scroll-mt-24 border-t border-[#eef2f7] bg-white py-12 md:py-14`}>
+      <LandingSectionEyebrow>Explore Bitcraftly</LandingSectionEyebrow>
+      <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#2c3e50] sm:text-4xl">
         Find what you need in one click
       </h2>
-      <p className="mt-4 max-w-3xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
-        Recommended path: pricing → services → portfolio → FAQ → contact. Numbers below show the easiest order for new
-        website projects.
-      </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {HOME_HUB_LINKS.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className={`group flex h-full flex-col rounded-2xl border p-5 transition duration-300 hover:-translate-y-0.5 ${
-              item.featured
-                ? "border-indigo-500/40 bg-indigo-50/50 ring-1 ring-indigo-500/20 hover:border-indigo-500/50 hover:shadow-[0_12px_28px_rgba(79,70,229,0.18)] dark:border-indigo-400/30 dark:bg-indigo-950/25"
-                : "border-border-primary bg-bg-card hover:border-indigo-500/30 hover:shadow-[0_12px_28px_rgba(79,70,229,0.12)] dark:border-dark-border-primary dark:bg-dark-bg-card"
-            }`}
+            className="group relative flex min-h-[156px] flex-col overflow-hidden rounded-[18px] border border-[#e8ecef] bg-white p-5 shadow-[0_4px_24px_rgba(44,62,80,0.06)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(79,70,229,0.1)]"
           >
-            {item.step ? (
-              <span
-                className={`mb-1 w-fit rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
-                  item.featured ? "bg-indigo-600 text-white" : "bg-bg-secondary text-text-secondary dark:bg-dark-bg-secondary dark:text-dark-text-secondary"
-                }`}
-              >
-                {item.featured ? "Start here · " : ""}
-                Step {item.step}
-              </span>
-            ) : null}
-            <span className="text-2xl">{item.icon}</span>
-            <h3 className="mt-3 text-lg font-semibold text-text-primary group-hover:text-indigo-600 dark:text-dark-text-primary dark:group-hover:text-indigo-400">
-              {item.title}
-            </h3>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
-              {item.description}
-            </p>
-            <span className="mt-4 text-sm font-semibold text-indigo-600 dark:text-indigo-400">
-              {item.cta ?? "Learn more →"}
+            <h3 className="pr-20 text-lg font-bold text-[#2c3e50] transition group-hover:text-[#4f46e5]">{item.title}</h3>
+            <p className="mt-2 max-w-[82%] flex-1 text-sm leading-relaxed text-[#7f8c8d]">{item.description}</p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#4f46e5]">
+              {item.cta ?? "Learn more"}
+              <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
+            </span>
+            <span className="pointer-events-none absolute bottom-4 right-4 text-[2.75rem] leading-none opacity-95" aria-hidden>
+              {item.icon}
             </span>
           </Link>
         ))}
