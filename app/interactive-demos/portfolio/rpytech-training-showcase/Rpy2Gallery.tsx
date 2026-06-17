@@ -16,8 +16,66 @@ const IMAGES = [
 
 const CATS = ["All", ...Array.from(new Set(IMAGES.map(i => i.cat)))];
 
+function GalleryTile({
+  img,
+  index,
+  onClick,
+}: {
+  img: typeof IMAGES[number];
+  index: number;
+  onClick: () => void;
+}) {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <button
+      role="listitem"
+      className="rpyv2-gallery-tile"
+      onClick={onClick}
+      aria-label={`View ${img.label}`}
+    >
+      {/* Shimmer skeleton — hidden once image loads */}
+      {!loaded && (
+        <div className="rpyv2-gallery-shimmer" aria-hidden>
+          <div className="rpyv2-gallery-shimmer-sweep" />
+          <div className="rpyv2-gallery-shimmer-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <rect x="3" y="3" width="18" height="18" rx="3" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
+          </div>
+        </div>
+      )}
+
+      {/* Actual image */}
+      <div className={`rpyv2-gallery-tile-img${loaded ? " rpyv2-gallery-tile-img--loaded" : ""}`}>
+        <Image
+          src={img.src}
+          alt={img.alt}
+          fill
+          className="rpyv2-gallery-tile-photo"
+          sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 25vw"
+          onLoad={() => setLoaded(true)}
+        />
+      </div>
+
+      {/* Hover overlay — only when loaded */}
+      {loaded && (
+        <div className="rpyv2-gallery-tile-overlay" aria-hidden>
+          <div className="rpyv2-gallery-tile-zoom"><ZoomIn size={18} /></div>
+          <div className="rpyv2-gallery-tile-info">
+            <span className="rpyv2-gallery-tile-cat">{img.cat}</span>
+            <p className="rpyv2-gallery-tile-label">{img.label}</p>
+          </div>
+        </div>
+      )}
+    </button>
+  );
+}
+
 export default function Rpy2Gallery() {
-  const [filter, setFilter]   = useState("All");
+  const [filter, setFilter]     = useState("All");
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const filtered = filter === "All" ? IMAGES : IMAGES.filter(i => i.cat === filter);
@@ -56,31 +114,12 @@ export default function Rpy2Gallery() {
         {/* Photo grid */}
         <div className="rpyv2-gallery-grid" role="list">
           {filtered.map((img, i) => (
-            <button
+            <GalleryTile
               key={img.src}
-              role="listitem"
-              className="rpyv2-gallery-tile"
+              img={img}
+              index={i}
               onClick={() => setLightbox(i)}
-              aria-label={`View ${img.label}`}
-            >
-              <div className="rpyv2-gallery-tile-img">
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="rpyv2-gallery-tile-photo"
-                  sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 25vw"
-                />
-              </div>
-              {/* Hover overlay */}
-              <div className="rpyv2-gallery-tile-overlay" aria-hidden>
-                <div className="rpyv2-gallery-tile-zoom"><ZoomIn size={18} /></div>
-                <div className="rpyv2-gallery-tile-info">
-                  <span className="rpyv2-gallery-tile-cat">{img.cat}</span>
-                  <p className="rpyv2-gallery-tile-label">{img.label}</p>
-                </div>
-              </div>
-            </button>
+            />
           ))}
         </div>
 
@@ -93,18 +132,15 @@ export default function Rpy2Gallery() {
           role="dialog" aria-modal
           onClick={() => setLightbox(null)}
         >
-          {/* Close */}
           <button className="rpyv2-gallery-lbclose" aria-label="Close" onClick={() => setLightbox(null)}>
             <X size={20} />
           </button>
 
-          {/* Prev */}
           <button className="rpyv2-gallery-lbnav rpyv2-gallery-lbnav--prev" aria-label="Previous"
             onClick={e => { e.stopPropagation(); lbPrev(); }}>
             <ChevronLeft size={28} />
           </button>
 
-          {/* Image */}
           <div className="rpyv2-gallery-lbimg" onClick={e => e.stopPropagation()}>
             <Image
               src={filtered[lightbox].src}
@@ -116,13 +152,11 @@ export default function Rpy2Gallery() {
             />
           </div>
 
-          {/* Next */}
           <button className="rpyv2-gallery-lbnav rpyv2-gallery-lbnav--next" aria-label="Next"
             onClick={e => { e.stopPropagation(); lbNext(); }}>
             <ChevronRight size={28} />
           </button>
 
-          {/* Caption */}
           <div className="rpyv2-gallery-lbfooter" onClick={e => e.stopPropagation()}>
             <p className="rpyv2-gallery-lbcaption">{filtered[lightbox].label}</p>
             <span className="rpyv2-gallery-lbcount">{lightbox + 1} / {filtered.length}</span>
