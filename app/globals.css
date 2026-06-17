@@ -26,6 +26,7 @@ html,
 body {
   min-height: 100%;
   min-height: -webkit-fill-available;
+  overflow-x: clip;
 }
 
 /* Bottom-right floating controls — chat, theme, scroll-to-top stack */
@@ -35,7 +36,7 @@ body {
   --bc-float-gap: 0.5rem;
   --bc-chat-bubble-size: 60px;
   --bc-scroll-btn-size: 2.75rem;
-  --bc-mobile-sticky-h: 4.5rem;
+  --bc-mobile-sticky-h: 6.25rem;
   --bc-float-base-bottom: calc(var(--bc-float-bottom) + env(safe-area-inset-bottom, 0px));
   --bc-float-chat-bottom: var(--bc-float-base-bottom);
   --bc-float-scroll-bottom: var(--bc-float-base-bottom);
@@ -45,6 +46,16 @@ body {
 
 html[data-bc-mobile-sticky] {
   --bc-float-base-bottom: calc(var(--bc-mobile-sticky-h) + env(safe-area-inset-bottom, 0px));
+}
+
+@media (max-width: 767px) {
+  html[data-bc-mobile-sticky] .bc-floating-whatsapp {
+    display: none;
+  }
+
+  html[data-bc-mobile-sticky] .bc-cookie-banner {
+    bottom: calc(var(--bc-mobile-sticky-h) + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 html[data-bc-chat] {

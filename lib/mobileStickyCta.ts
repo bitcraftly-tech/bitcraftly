@@ -8,4 +8,4 @@ export function hasMobileStickyCta(pathname: string | null): boolean {
 
 /** Footer clearance above fixed sticky bar + iOS home indicator (inside footer, not below it). */
 export const FOOTER_STICKY_CLEARANCE_CLASS =
-  "max-md:pb-[calc(4.25rem+env(safe-area-inset-bottom,0px))]";
+  "max-md:pb-[calc(6.75rem+env(safe-area-inset-bottom,0px))]";
