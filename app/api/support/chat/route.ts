@@ -47,7 +47,6 @@ export async function POST(req: NextRequest) {
         role: "assistant" as const,
         content: result.content,
       },
-      quick: result.quick ?? [],
       provider: result.provider,
     });
   } catch {

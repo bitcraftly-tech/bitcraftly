@@ -3,7 +3,6 @@ import { buildStubAssistantReply } from "./stubReply";
 
 export type AssistantResult = {
   content: string;
-  quick?: string[];
   /** `ai` reserved for OPENAI-compatible path */
   provider: "stub" | "proxy" | "ai";
 };
@@ -51,10 +50,8 @@ export async function runSupportAssistant(history: ChatTurnDto[]): Promise<Assis
 function stubFromHistory(history: ChatTurnDto[]): AssistantResult {
   const latestUser = [...history].reverse().find((t) => t.role === "user");
   const text = latestUser?.content ?? "";
-  const result = buildStubAssistantReply(history, text);
   return {
     provider: "stub",
-    content: result.text,
-    quick: result.quick,
+    content: buildStubAssistantReply(history, text),
   };
 }
