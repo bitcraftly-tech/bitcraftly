@@ -17,6 +17,7 @@ import Rpy2Affiliates from "./Rpy2Affiliates";
 import Rpy2Contact from "./Rpy2Contact";
 import Rpy2Footer from "./Rpy2Footer";
 import Rpy2FloatingActions from "./Rpy2FloatingActions";
+import Rpy2ChatBot from "./Rpy2ChatBot";
 
 /**
  * RPY Tech Training Showcase — completely isolated portfolio demo.
@@ -37,6 +38,7 @@ export default function Rpy2Page() {
   return (
     <div className="rpyv2-root">
       <Rpy2FloatingActions />
+      <Rpy2ChatBot />
       <Rpy2Header />
       <main id="main-content">
         <Rpy2Hero />
