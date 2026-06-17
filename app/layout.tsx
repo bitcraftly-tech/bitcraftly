@@ -10,7 +10,9 @@ import { IS_STAGING } from "@/lib/appEnv";
 import { buildPageMetadata } from "@/lib/seoMetadata";
 import { LOADER_COPY, LOADER_ENABLED } from "@/lib/loader/config";
 import { HOME_SEO, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
-import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
+/** Re-enable when chatbot should ship: uncomment import + <ChatSupportWidget /> below */
+// import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
+import BitcraftlyChat from "@/components/chat/BitcraftlyChat";
 import DeferredFloatingChrome from "@/components/landing/DeferredFloatingChrome";
 import AuthSessionProvider from "@/components/providers/AuthSessionProvider";
 import { LoaderProvider } from "@/components/providers/LoaderProvider";
@@ -101,7 +103,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider>
           <LoaderProvider>
             <AuthSessionProvider>{children}</AuthSessionProvider>
-            <ChatSupportWidget />
+            {/* <ChatSupportWidget /> */}
+            <BitcraftlyChat />
             <DeferredFloatingChrome />
             <DeferredToaster />
           </LoaderProvider>
