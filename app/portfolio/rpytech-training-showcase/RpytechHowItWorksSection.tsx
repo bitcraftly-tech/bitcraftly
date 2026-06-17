@@ -24,7 +24,7 @@ const STEP_ICONS = {
   future: Gem,
 } as const;
 
-type HiWStep = (typeof RPYTECH_HOW_IT_WORKS.left)[number];
+type HiWStep = (typeof RPYTECH_HOW_IT_WORKS.left)[number] | (typeof RPYTECH_HOW_IT_WORKS.right)[number];
 
 function HowItWorksStep({
   step,

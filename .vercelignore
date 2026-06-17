@@ -1,0 +1,9 @@
+# Large video files — served via CDN or not needed at build time
+public/dayal-builders/hero-source.mp4
+public/dayal-builders/hero-web.mp4
+public/dayal-builders/hero.mp4
+public/dayal-builders/hero-mobile.mp4
+
+# Build artifacts
+.next/
+node_modules/
