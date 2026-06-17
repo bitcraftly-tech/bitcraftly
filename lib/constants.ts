@@ -1,7 +1,7 @@
 import { BRAND, FOUNDER } from "@/lib/siteContent";
 import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 
-export const CONTAINER = "mx-auto w-full max-w-7xl px-6 lg:px-12";
+export const CONTAINER = "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-12";
 
 /** Support / footer — reused by chat fallback & stub assistant */
 export const SUPPORT_PHONE_DISPLAY = "+91 96677 10954";

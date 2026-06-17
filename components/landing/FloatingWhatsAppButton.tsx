@@ -44,7 +44,7 @@ export default function FloatingWhatsAppButton() {
   };
 
   return (
-    <div ref={panelRef} className="fixed bottom-24 left-5 z-[60] max-md:bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] sm:bottom-20">
+    <div ref={panelRef} className="bc-floating-whatsapp fixed bottom-24 left-5 z-[60] max-md:bottom-[calc(var(--bc-mobile-sticky-h)+env(safe-area-inset-bottom,0px))] sm:bottom-20">
       {open ? (
         <div
           className="mb-3 w-[min(100vw-2.5rem,18rem)] rounded-2xl border border-border-primary bg-bg-card p-4 shadow-lg dark:border-dark-border-primary dark:bg-dark-bg-card"

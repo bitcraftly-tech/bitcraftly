@@ -16,7 +16,7 @@ export default function MobileStickyCta() {
 
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-[55] border-t border-border-primary bg-bg-card/95 px-4 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom,0px))] backdrop-blur-md dark:border-dark-border-primary dark:bg-dark-bg-card/95 md:hidden"
+      className="fixed inset-x-0 bottom-0 z-[55] border-t border-border-primary bg-bg-card/95 px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom,0px))] backdrop-blur-md sm:px-4 dark:border-dark-border-primary dark:bg-dark-bg-card/95 md:hidden"
       role="region"
       aria-label="Quick contact"
     >
@@ -24,7 +24,7 @@ export default function MobileStickyCta() {
         <div className="flex gap-2">
           <Link
             href="/contact?intent=consultation&source=mobile-sticky"
-            className="flex flex-1 items-center justify-center rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] py-2.5 text-sm font-semibold text-white"
+            className="flex min-h-11 flex-1 items-center justify-center rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-2 py-2.5 text-center text-[13px] font-semibold leading-tight text-white sm:text-sm"
           >
             {MOBILE_WHATSAPP_UX.stickyPrimary}
           </Link>
@@ -33,12 +33,12 @@ export default function MobileStickyCta() {
             data-wa-source="mobile-sticky-whatsapp"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-1 items-center justify-center rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 py-2.5 text-sm font-semibold text-[#128C7E] dark:text-[#25D366]"
+            className="flex min-h-11 flex-1 items-center justify-center rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 px-2 py-2.5 text-center text-[13px] font-semibold leading-tight text-[#128C7E] sm:text-sm dark:text-[#25D366]"
           >
-            {MOBILE_WHATSAPP_UX.stickyWhatsApp}
+            WhatsApp
           </Link>
         </div>
-        <p className="mt-1 text-center text-[10px] text-text-tertiary dark:text-dark-text-tertiary">{MOBILE_WHATSAPP_UX.stickyHint}</p>
+        <p className="mt-1 line-clamp-1 text-center text-[10px] text-text-tertiary dark:text-dark-text-tertiary">{MOBILE_WHATSAPP_UX.stickyHint}</p>
       </div>
     </div>
   );

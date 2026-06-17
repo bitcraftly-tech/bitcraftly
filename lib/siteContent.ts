@@ -90,6 +90,7 @@ export const BRAND = {
 /** Homepage hero — single source of truth for headline, CTAs, trust line */
 export const HERO = {
   badge: "Founder-led · 18+ yrs · Ghaziabad · India & remote",
+  mobileBadge: "Founder-led · 18+ yrs · India & remote",
   headline: "Premium React & Next.js Websites That Turn Visitors Into Leads",
   subheadline:
     "Bitcraftly is led by Sanjay Kr. Singh — Frontend Architect with 18+ years building scalable UI systems for startups, clinics, gyms, SaaS teams, and local brands. Fast launches, SEO-ready structure, and practical AI where it actually drives enquiries.",

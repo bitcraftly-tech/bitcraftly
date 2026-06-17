@@ -15,7 +15,7 @@ export default async function MarketingPageLayout({ children, sectionId }: Marke
   const session = await getServerSession(createAuthOptions());
 
   return (
-    <main className="min-h-screen bg-bg-primary text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary">
+    <main className="min-h-screen overflow-x-clip bg-bg-primary text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary">
       <DeferredMarketingScroll sectionId={sectionId} />
       <Navbar session={session} />
       {children}
