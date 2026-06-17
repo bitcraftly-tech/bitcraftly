@@ -1,5 +1,5 @@
 import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
-import { getFirestore, type Firestore } from "firebase-admin/firestore";
+import { FieldValue, getFirestore, type Firestore } from "firebase-admin/firestore";
 
 import {
   FIREBASE_CLIENT_EMAIL,
@@ -17,6 +17,11 @@ import type {
 
 const LEADS_COLLECTION = "leads";
 const EVENTS_COLLECTION = "analytics_events";
+const VISITOR_SESSIONS_COLLECTION = "visitor_sessions";
+const SITE_STATS_COLLECTION = "site_stats";
+const VISITORS_DOC_ID = "visitors";
+
+const DEMO_VISITOR_COUNT = 2_847;
 
 let firestore: Firestore | null = null;
 
@@ -137,4 +142,34 @@ export async function logAnalyticsEvent(event: Omit<AnalyticsEvent, "id" | "crea
     id: ref.id,
     createdAt: new Date().toISOString(),
   });
+}
+
+/** Count each browser session once (deduped by sessionId from analytics). */
+export async function recordUniqueVisitor(sessionId: string | undefined): Promise<void> {
+  if (!sessionId?.trim()) return;
+
+  const db = getFirestoreDb();
+  if (!db) return;
+
+  const trimmed = sessionId.trim();
+  const sessionRef = db.collection(VISITOR_SESSIONS_COLLECTION).doc(trimmed);
+  const statsRef = db.collection(SITE_STATS_COLLECTION).doc(VISITORS_DOC_ID);
+  const now = new Date().toISOString();
+
+  await db.runTransaction(async (tx) => {
+    const sessionSnap = await tx.get(sessionRef);
+    if (sessionSnap.exists) return;
+
+    tx.set(sessionRef, { firstSeen: now });
+    tx.set(statsRef, { count: FieldValue.increment(1), updatedAt: now }, { merge: true });
+  });
+}
+
+export async function getSiteVisitorCount(): Promise<number> {
+  const db = getFirestoreDb();
+  if (!db) return DEMO_VISITOR_COUNT;
+
+  const doc = await db.collection(SITE_STATS_COLLECTION).doc(VISITORS_DOC_ID).get();
+  const count = doc.data()?.count;
+  return typeof count === "number" && Number.isFinite(count) ? Math.max(0, Math.floor(count)) : 0;
 }

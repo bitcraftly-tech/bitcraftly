@@ -1,4 +1,5 @@
 import { IS_STAGING, isStagingHost } from "@/lib/appEnv";
+import { isAnalyticsConsented, readCookieConsent } from "@/lib/cookieConsent";
 
 /** GA4 measurement ID — set `NEXT_PUBLIC_GA4_MEASUREMENT_ID=G-XXXXXXXX` on production */
 export const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID?.trim() ?? "";
@@ -54,8 +55,13 @@ export function isAnalyticsEnabledClient(): boolean {
   return true;
 }
 
+function hasAnalyticsConsent(): boolean {
+  if (typeof window === "undefined") return false;
+  return isAnalyticsConsented(readCookieConsent());
+}
+
 function gtag(...args: unknown[]): void {
-  if (!isAnalyticsEnabledClient()) return;
+  if (!isAnalyticsEnabledClient() || !hasAnalyticsConsent()) return;
   window.gtag?.(...args);
 }
 
@@ -65,13 +71,14 @@ function mirrorServerEvent(
   pagePath?: string,
   payload?: Record<string, string | number | boolean | undefined>,
 ): void {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || !hasAnalyticsConsent()) return;
   void import("@/lib/logServerEvent").then(({ logServerEvent }) =>
     logServerEvent({ eventName, source, pagePath, payload }),
   );
 }
 
 export function trackPageView(path: string, title?: string): void {
+  if (!hasAnalyticsConsent()) return;
   if (isAnalyticsEnabledClient()) {
     gtag("event", "page_view", {
       page_path: path,
@@ -83,6 +90,7 @@ export function trackPageView(path: string, title?: string): void {
 }
 
 export function trackEvent(eventName: string, params?: Record<string, string | number | boolean | undefined>): void {
+  if (!hasAnalyticsConsent()) return;
   const cleaned = params
     ? Object.fromEntries(Object.entries(params).filter(([, value]) => value !== undefined && value !== ""))
     : undefined;
