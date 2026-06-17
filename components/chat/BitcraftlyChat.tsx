@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { X, Send, ChevronDown } from "lucide-react";
 
@@ -255,6 +256,7 @@ export default function BitcraftlyChat() {
   const [thinking, setThink]  = useState(false);
   const [unread, setUnread]   = useState(1);
   const [greeted, setGreeted] = useState(false);
+  const [mounted, setMounted]   = useState(false);
   const bottomRef             = useRef<HTMLDivElement>(null);
   const inputRef              = useRef<HTMLInputElement>(null);
   const msgId                 = useRef(0);
@@ -283,6 +285,8 @@ export default function BitcraftlyChat() {
     setMsgs(prev => [...prev, { id, from: "bot", text: reply.text, displayText: "", streaming: true, time: nowTime() }]);
     streamMsg(id, reply.text, reply.quick);
   }, [streamMsg]);
+
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     if (open && !greeted) {
@@ -313,9 +317,9 @@ export default function BitcraftlyChat() {
     }, 750 + Math.random() * 550);
   }, [thinking, addBotMsg]);
 
-  if (isExcluded) return null;
+  if (isExcluded || !mounted) return null;
 
-  return (
+  return createPortal(
     <>
       {/* Bubble */}
       <button
@@ -415,6 +419,7 @@ export default function BitcraftlyChat() {
 
         <div className="bc-chat-powered">✨ AI Assistant · <strong>Bitcraftly</strong></div>
       </div>
-    </>
+    </>,
+    document.body,
   );
 }

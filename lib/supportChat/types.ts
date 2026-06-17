@@ -9,7 +9,4 @@ export type ClientChatMessage = ChatTurnDto & {
   id: string;
   createdAt: number;
   status?: "sending" | "sent" | "error";
-  quick?: string[];
-  streaming?: boolean;
-  displayContent?: string;
 };
