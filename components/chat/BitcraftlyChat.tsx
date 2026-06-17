@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { X, Send, ChevronDown, RotateCcw } from "lucide-react";
+import { BitBotAvatar, BitBotChatTrigger } from "@/components/chat/BitBotMascot";
 import {
   type ChatMemory,
   type StoredMsg,
@@ -20,52 +21,6 @@ import {
   wantsToSkipOnboarding,
   EMPTY_MEMORY,
 } from "@/lib/bitcraftlyChatMemory";
-
-/* ─── Male Robot Avatar SVG ─────────────────────────── */
-function ManBotAvatar({ size = 36, className = "" }: { size?: number; className?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden>
-      <circle cx="40" cy="40" r="38" fill="url(#bcBotGrad)" />
-      {/* Head */}
-      <rect x="19" y="16" width="42" height="36" rx="13" fill="#fff" />
-      {/* Top antenna */}
-      <rect x="37" y="6" width="6" height="12" rx="3" fill="#818cf8" />
-      <circle cx="40" cy="5" r="4" fill="#6366f1" />
-      <circle cx="40" cy="5" r="2" fill="#a5b4fc" />
-      {/* Ear bolts */}
-      <rect x="15" y="28" width="6" height="12" rx="3" fill="#c7d2fe" />
-      <rect x="59" y="28" width="6" height="12" rx="3" fill="#c7d2fe" />
-      <circle cx="18" cy="34" r="2.5" fill="#6366f1" />
-      <circle cx="62" cy="34" r="2.5" fill="#6366f1" />
-      {/* Eyes — rectangular visor style */}
-      <rect x="25" y="28" width="12" height="9" rx="4" fill="#1e1b4b" />
-      <rect x="43" y="28" width="12" height="9" rx="4" fill="#1e1b4b" />
-      {/* Eye glow */}
-      <rect x="27" y="30" width="8" height="5" rx="2.5" fill="#818cf8" opacity="0.9" />
-      <rect x="45" y="30" width="8" height="5" rx="2.5" fill="#818cf8" opacity="0.9" />
-      {/* Eye shine dots */}
-      <circle cx="33" cy="31.5" r="1.5" fill="#fff" opacity="0.8" />
-      <circle cx="51" cy="31.5" r="1.5" fill="#fff" opacity="0.8" />
-      {/* Mouth — LED panel */}
-      <rect x="28" y="42" width="24" height="6" rx="3" fill="#e0e7ff" />
-      <rect x="30" y="43.5" width="4" height="3" rx="1.5" fill="#6366f1" />
-      <rect x="36" y="43.5" width="4" height="3" rx="1.5" fill="#818cf8" />
-      <rect x="42" y="43.5" width="4" height="3" rx="1.5" fill="#6366f1" />
-      {/* Body */}
-      <rect x="26" y="50" width="28" height="18" rx="9" fill="#e0e7ff" />
-      {/* Chest panel */}
-      <rect x="33" y="55" width="14" height="8" rx="3" fill="#c7d2fe" />
-      <circle cx="37" cy="59" r="2" fill="#6366f1" />
-      <circle cx="43" cy="59" r="2" fill="#818cf8" />
-      <defs>
-        <radialGradient id="bcBotGrad" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#ede9fe" />
-          <stop offset="100%" stopColor="#c7d2fe" />
-        </radialGradient>
-      </defs>
-    </svg>
-  );
-}
 
 const NAME_PROMPTS = [
   "Please apna *name* batayein — bas first name kaafi hai (e.g. Rahul).",
@@ -632,12 +587,9 @@ export default function BitcraftlyChat() {
       <button
         className={`bc-chat-bubble${open ? " bc-chat-bubble--open" : ""}`}
         onClick={() => setOpen(o => !o)}
-        aria-label={open ? "Close Bitcraftly chat" : "Chat with Bitcraftly AI"}
+        aria-label={open ? "Close Bitcraftly chat" : "Ask BitBot"}
       >
-        {open
-          ? <ChevronDown size={22} color="#fff" />
-          : <ManBotAvatar size={44} className="bc-chat-bubble-avatar" />
-        }
+        {open ? <ChevronDown size={22} color="#fff" /> : <BitBotChatTrigger />}
         {!open && unread > 0 && <span className="bc-chat-badge">{unread}</span>}
       </button>
 
@@ -646,7 +598,7 @@ export default function BitcraftlyChat() {
 
         {/* Header */}
         <div className="bc-chat-header">
-          <div className="bc-chat-header-avatar"><ManBotAvatar size={44} /></div>
+          <div className="bc-chat-header-avatar"><BitBotAvatar size={44} /></div>
           <div className="bc-chat-header-info">
             <p className="bc-chat-header-name">
               Bit — AI Assistant
@@ -675,7 +627,7 @@ export default function BitcraftlyChat() {
         <div className="bc-chat-body">
           {msgs.length === 0 && !thinking && (
             <div className="bc-chat-welcome">
-              <div className="bc-chat-welcome-icon">🤖</div>
+              <div className="bc-chat-welcome-icon"><BitBotAvatar size={48} /></div>
               <p>Ask me anything about Bitcraftly — pricing, services, portfolio, or just say hi!</p>
             </div>
           )}
@@ -683,7 +635,7 @@ export default function BitcraftlyChat() {
           {msgs.map(msg => (
             <div key={msg.id} className={`bc-chat-msg bc-chat-msg--${msg.from}`}>
               {msg.from === "bot" && (
-                <div className="bc-chat-msg-avatar"><ManBotAvatar size={28} /></div>
+                <div className="bc-chat-msg-avatar"><BitBotAvatar size={28} /></div>
               )}
               <div className="bc-chat-msg-wrap">
                 <div className="bc-chat-msg-bubble">
@@ -708,7 +660,7 @@ export default function BitcraftlyChat() {
 
           {thinking && (
             <div className="bc-chat-msg bc-chat-msg--bot">
-              <div className="bc-chat-msg-avatar"><ManBotAvatar size={28} /></div>
+              <div className="bc-chat-msg-avatar"><BitBotAvatar size={28} /></div>
               <div className="bc-chat-msg-wrap">
                 <div className="bc-chat-thinking">
                   <span className="bc-chat-thinking-label">Bit is thinking</span>

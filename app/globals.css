@@ -34,7 +34,8 @@ body {
   --bc-float-right: 1.25rem;
   --bc-float-bottom: 0.5rem;
   --bc-float-gap: 0.5rem;
-  --bc-chat-bubble-size: 60px;
+  --bc-chat-bubble-size: 74px;
+  --bc-chat-bubble-width: 66px;
   --bc-scroll-btn-size: 2.75rem;
   --bc-mobile-sticky-h: 6.25rem;
   --bc-float-base-bottom: calc(var(--bc-float-bottom) + env(safe-area-inset-bottom, 0px));
@@ -71,7 +72,7 @@ html:not([data-bc-chat]) .bc-float-scroll {
   position: fixed;
   right: calc(
     var(--bc-float-right) + env(safe-area-inset-right, 0px) +
-    (var(--bc-chat-bubble-size) - var(--bc-scroll-btn-size)) / 2
+    (var(--bc-chat-bubble-width) - var(--bc-scroll-btn-size)) / 2
   );
   bottom: var(--bc-float-scroll-bottom);
   z-index: 9040;
@@ -79,7 +80,8 @@ html:not([data-bc-chat]) .bc-float-scroll {
 
 @media (max-width: 480px) {
   :root {
-    --bc-chat-bubble-size: 56px;
+    --bc-chat-bubble-size: 64px;
+    --bc-chat-bubble-width: 58px;
     --bc-float-right: 0.875rem;
     --bc-float-bottom: 0.5rem;
     --bc-float-gap: 0.4375rem;
@@ -1718,35 +1720,48 @@ html.dark .bc-static-loader__label {
   position: fixed;
   bottom: var(--bc-float-chat-bottom);
   right: calc(var(--bc-float-right) + env(safe-area-inset-right, 0px));
-  width: var(--bc-chat-bubble-size);
+  width: var(--bc-chat-bubble-width);
   height: var(--bc-chat-bubble-size);
-  border-radius: 50%;
-  background: linear-gradient(145deg, #fff 0%, #f5f3ff 100%);
-  border: 2px solid rgba(99, 102, 241, 0.35);
+  border-radius: 0;
+  background: transparent;
+  border: none;
   cursor: pointer;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   padding: 0;
-  overflow: hidden;
-  box-shadow:
-    0 4px 20px rgba(79, 70, 229, 0.28),
-    0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  overflow: visible;
+  box-shadow: none;
   z-index: 9100;
-  animation: bc-chat-pop 0.45s cubic-bezier(.175,.885,.32,1.275) both,
-             bc-chat-ring 2.8s 1.2s ease-in-out infinite;
-  transition: border-color 0.22s, transform 0.22s, box-shadow 0.22s;
+  animation: bc-chat-pop 0.45s cubic-bezier(.175,.885,.32,1.275) both;
+  transition: transform 0.22s;
 }
 .bc-chat-bubble:hover {
-  border-color: #6366f1;
-  transform: scale(1.06) translateY(-2px);
-  box-shadow: 0 10px 32px rgba(79, 70, 229, 0.38);
+  transform: scale(1.03) translateY(-2px);
 }
 .bc-chat-bubble--open {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
   animation: none;
   background: linear-gradient(135deg, #4f46e5, #6366f1);
-  border-color: transparent;
+  border: none;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 8px 28px rgba(79, 70, 229, 0.4);
+}
+.bc-chat-bubble-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: var(--bc-chat-bubble-size);
+  object-fit: contain;
+  background: transparent !important;
+  filter: drop-shadow(0 10px 24px rgba(79, 70, 229, 0.22));
+  pointer-events: none;
+}
+.bc-chat-bubble :is(img, span) {
+  background: transparent !important;
 }
 .bc-chat-bubble-avatar { border-radius: 50%; display: block; }
 
@@ -1828,15 +1843,15 @@ html.dark .bc-static-loader__label {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #fff;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 2px solid rgba(255, 255, 255, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.45);
   overflow: hidden;
   padding: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 14px rgba(49, 46, 129, 0.35);
   position: relative;
   z-index: 1;
 }
@@ -1950,7 +1965,11 @@ html.dark .bc-static-loader__label {
   background: rgba(255, 255, 255, 0.7);
   border: 1px dashed rgba(99, 102, 241, 0.2);
 }
-.bc-chat-welcome-icon { font-size: 1.75rem; margin-bottom: 0.4rem; }
+.bc-chat-welcome-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.4rem;
+}
 .bc-chat-welcome p {
   font-size: 0.78rem;
   line-height: 1.65;
@@ -1969,8 +1988,8 @@ html.dark .bc-static-loader__label {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #ede9fe, #ddd6fe);
-  border: 1.5px solid rgba(99, 102, 241, 0.2);
+  background: transparent;
+  border: 1.5px solid rgba(99, 102, 241, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
