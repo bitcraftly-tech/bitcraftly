@@ -150,11 +150,19 @@ export default function Rpy2Footer() {
           <p className="rpyv2-footer-copy">
             &copy; 2024 RPY Technical &amp; Training Services Pvt. Ltd. All Rights Reserved.
           </p>
-          <nav className="rpyv2-footer-legal" aria-label="Legal links">
-            <a href="#">Privacy Policy</a>
-            <span aria-hidden>·</span>
-            <a href="#">Terms &amp; Conditions</a>
-          </nav>
+          <div className="rpyv2-footer-bottom-right">
+            <nav className="rpyv2-footer-legal" aria-label="Legal links">
+              <a href="#">Privacy Policy</a>
+              <span aria-hidden>·</span>
+              <a href="#">Terms &amp; Conditions</a>
+            </nav>
+            <span className="rpyv2-footer-built" aria-label="Built by Bitcraftly">
+              Built by{" "}
+              <a href="https://bitcraftly.com" target="_blank" rel="noopener noreferrer">
+                Bitcraftly
+              </a>
+            </span>
+          </div>
         </div>
       </div>
 
