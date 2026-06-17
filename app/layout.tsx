@@ -10,8 +10,7 @@ import { IS_STAGING } from "@/lib/appEnv";
 import { buildPageMetadata } from "@/lib/seoMetadata";
 import { LOADER_COPY, LOADER_ENABLED } from "@/lib/loader/config";
 import { HOME_SEO, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
-/** Re-enable when chatbot should ship: uncomment import + <ChatSupportWidget /> below */
-// import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
+import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
 import DeferredFloatingChrome from "@/components/landing/DeferredFloatingChrome";
 import AuthSessionProvider from "@/components/providers/AuthSessionProvider";
 import { LoaderProvider } from "@/components/providers/LoaderProvider";
@@ -102,7 +101,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider>
           <LoaderProvider>
             <AuthSessionProvider>{children}</AuthSessionProvider>
-            {/* <ChatSupportWidget /> */}
+            <ChatSupportWidget />
             <DeferredFloatingChrome />
             <DeferredToaster />
           </LoaderProvider>
