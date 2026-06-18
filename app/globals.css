@@ -64,6 +64,20 @@ html[data-bc-chat] {
   --bc-float-scroll-bottom: calc(var(--bc-float-base-bottom) + var(--bc-chat-bubble-size) + var(--bc-float-gap));
 }
 
+html[data-bc-chat-open] {
+  --bc-chat-panel-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (max-width: 767px) {
+  html[data-bc-chat-open] .bc-mobile-sticky-cta {
+    display: none;
+  }
+
+  html[data-bc-chat-open] .bc-chat-bubble--open {
+    display: none;
+  }
+}
+
 html:not([data-bc-chat]) .bc-float-scroll {
   right: calc(var(--bc-float-right) + env(safe-area-inset-right, 0px));
 }
@@ -1760,30 +1774,10 @@ html.dark .bc-static-loader__label {
   filter: drop-shadow(0 10px 24px rgba(79, 70, 229, 0.22));
   pointer-events: none;
 }
-.bc-chat-bubble :is(img, span) {
+.bc-chat-bubble :is(img) {
   background: transparent !important;
 }
 .bc-chat-bubble-avatar { border-radius: 50%; display: block; }
-
-.bc-chat-badge {
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 5px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-  color: #fff;
-  font-size: 0.62rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #fff;
-  z-index: 1;
-  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
-}
 
 /* Panel — pinned top + bottom so header never clips */
 .bc-chat-panel {
@@ -2175,7 +2169,24 @@ html.dark .bc-static-loader__label {
   font-weight: 700;
 }
 
-/* Responsive */
+/* Responsive — mobile chat fills visible viewport above keyboard */
+@media (max-width: 767px) {
+  .bc-chat-panel--open {
+    top: var(--bc-chat-vv-offset, max(0.5rem, env(safe-area-inset-top, 0px)));
+    right: 0;
+    left: 0;
+    bottom: auto;
+    width: 100%;
+    height: var(--bc-chat-vvh, 100dvh);
+    max-height: var(--bc-chat-vvh, 100dvh);
+    border-radius: 16px 16px 0 0;
+  }
+
+  .bc-chat-input {
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 480px) {
   .bc-chat-panel {
     top: var(--bc-chat-panel-top);
@@ -2185,6 +2196,17 @@ html.dark .bc-static-loader__label {
     bottom: calc(var(--bc-float-chat-bottom) + var(--bc-chat-bubble-size) + 0.65rem);
     height: auto;
     max-height: none;
+  }
+
+  .bc-chat-panel--open {
+    top: var(--bc-chat-vv-offset, max(0.5rem, env(safe-area-inset-top, 0px)));
+    right: 0;
+    left: 0;
+    bottom: auto;
+    width: 100%;
+    height: var(--bc-chat-vvh, 100dvh);
+    max-height: var(--bc-chat-vvh, 100dvh);
+    border-radius: 16px 16px 0 0;
   }
 }
 

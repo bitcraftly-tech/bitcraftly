@@ -16,7 +16,7 @@ export default function MobileStickyCta() {
 
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-[55] border-t border-border-primary bg-bg-card/95 px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom,0px))] backdrop-blur-md sm:px-4 dark:border-dark-border-primary dark:bg-dark-bg-card/95 md:hidden"
+      className="bc-mobile-sticky-cta fixed inset-x-0 bottom-0 z-[55] border-t border-border-primary bg-bg-card/95 px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom,0px))] backdrop-blur-md sm:px-4 dark:border-dark-border-primary dark:bg-dark-bg-card/95 md:hidden"
       role="region"
       aria-label="Quick contact"
     >

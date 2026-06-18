@@ -313,7 +313,6 @@ export default function BitcraftlyChat() {
   const [msgs, setMsgs]       = useState<Msg[]>([]);
   const [input, setInput]     = useState("");
   const [thinking, setThink]  = useState(false);
-  const [unread, setUnread]   = useState(0);
   const [greeted, setGreeted] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [memory, setMemory]   = useState<ChatMemory>(EMPTY_MEMORY);
@@ -380,9 +379,6 @@ export default function BitcraftlyChat() {
       history.current = restored.filter(m => m.from === "user").map(m => m.text).slice(-8);
       setMsgs(restored);
       setGreeted(saved.greeted || restored.length > 0);
-      setUnread(0);
-    } else {
-      setUnread(1);
     }
 
     setMemory(withVisit);
@@ -391,7 +387,6 @@ export default function BitcraftlyChat() {
   useEffect(() => {
     if (open && !greeted) {
       setGreeted(true);
-      setUnread(0);
       const mem = memoryRef.current;
       setTimeout(() => {
         if (hasCompleteLead(mem) && mem.visitCount > 1) {
@@ -420,10 +415,58 @@ export default function BitcraftlyChat() {
         syncMemory({ ...memoryRef.current, greeted: true });
       }, 450);
     }
-    if (open) { setUnread(0); setTimeout(() => inputRef.current?.focus(), 300); }
+    if (open) {
+      setTimeout(() => inputRef.current?.focus(), 300);
+    }
   }, [open, greeted, addBotMsg, syncMemory]);
 
   useEffect(() => { scrollBottom(); }, [msgs, thinking]);
+
+  /* Mobile: sync panel to visual viewport when keyboard opens */
+  useEffect(() => {
+    const root = document.documentElement;
+    root.toggleAttribute("data-bc-chat-open", open);
+
+    if (!open || typeof window === "undefined") {
+      root.style.removeProperty("--bc-chat-vvh");
+      root.style.removeProperty("--bc-chat-vv-offset");
+      return;
+    }
+
+    const mobileMq = window.matchMedia("(max-width: 767px)");
+    const vv = window.visualViewport;
+
+    const syncViewport = () => {
+      if (!mobileMq.matches || !vv) {
+        root.style.removeProperty("--bc-chat-vvh");
+        root.style.removeProperty("--bc-chat-vv-offset");
+        return;
+      }
+      root.style.setProperty("--bc-chat-vvh", `${vv.height}px`);
+      root.style.setProperty("--bc-chat-vv-offset", `${vv.offsetTop}px`);
+    };
+
+    syncViewport();
+    vv?.addEventListener("resize", syncViewport);
+    vv?.addEventListener("scroll", syncViewport);
+    mobileMq.addEventListener("change", syncViewport);
+
+    return () => {
+      root.removeAttribute("data-bc-chat-open");
+      root.style.removeProperty("--bc-chat-vvh");
+      root.style.removeProperty("--bc-chat-vv-offset");
+      vv?.removeEventListener("resize", syncViewport);
+      vv?.removeEventListener("scroll", syncViewport);
+      mobileMq.removeEventListener("change", syncViewport);
+    };
+  }, [open]);
+
+  const handleInputFocus = useCallback(() => {
+    requestAnimationFrame(() => {
+      inputRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      bottomRef.current?.scrollIntoView({ block: "end", behavior: "smooth" });
+    });
+  }, []);
 
   const sendMessage = useCallback((text: string) => {
     if (!text.trim() || thinking) return;
@@ -583,7 +626,6 @@ export default function BitcraftlyChat() {
     setGreeted(false);
     history.current = [];
     msgId.current = 0;
-    setUnread(0);
   }, []);
 
   if (isExcluded || !mounted) return null;
@@ -597,7 +639,6 @@ export default function BitcraftlyChat() {
         aria-label={open ? "Close Bitcraftly chat" : "Ask BitBot"}
       >
         {open ? <ChevronDown size={22} color="#fff" /> : <BitBotChatTrigger />}
-        {!open && unread > 0 && <span className="bc-chat-badge">{unread}</span>}
       </button>
 
       {/* Panel */}
@@ -691,6 +732,7 @@ export default function BitcraftlyChat() {
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={e => e.key === "Enter" && !e.shiftKey && sendMessage(input)}
+            onFocus={handleInputFocus}
             maxLength={300}
             aria-label="Chat message"
           />
