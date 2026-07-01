@@ -109,8 +109,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <LoaderProvider>
               <AuthSessionProvider>{children}</AuthSessionProvider>
               {/* <ChatSupportWidget /> */}
-              <BitcraftlyChat />
-              <DeferredFloatingChrome />
+              {/* <BitcraftlyChat /> */}
+              {/* <DeferredFloatingChrome /> */}
               <DeferredToaster />
             </LoaderProvider>
           </ThemeProvider>
