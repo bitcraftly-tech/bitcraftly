@@ -21,7 +21,9 @@ export default function MobileStickyCta() {
     if (!el) return;
 
     const syncHeight = () => {
-      document.documentElement.style.setProperty("--bc-mobile-sticky-h", `${el.getBoundingClientRect().height}px`);
+      const measured = Math.ceil(el.getBoundingClientRect().height);
+      const height = Math.min(Math.max(measured, 72), 120);
+      document.documentElement.style.setProperty("--bc-mobile-sticky-h", `${height}px`);
     };
 
     syncHeight();
@@ -41,7 +43,7 @@ export default function MobileStickyCta() {
   return (
     <div
       ref={barRef}
-      className="bc-mobile-sticky-cta fixed inset-x-0 bottom-0 z-[9020] border-t border-border-primary bg-bg-card px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom,0px))] shadow-[0_-8px_24px_-12px_rgba(15,23,42,0.18)] sm:px-4 dark:border-dark-border-primary dark:bg-dark-bg-card dark:shadow-[0_-8px_24px_-12px_rgba(0,0,0,0.45)] md:hidden"
+      className="bc-mobile-sticky-cta fixed inset-x-0 bottom-0 z-[9020] border-t border-border-primary bg-bg-card px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom,0px))] shadow-[0_-8px_24px_-12px_rgba(15,23,42,0.18)] [transform:translateZ(0)] sm:px-4 dark:border-dark-border-primary dark:bg-dark-bg-card dark:shadow-[0_-8px_24px_-12px_rgba(0,0,0,0.45)] md:hidden"
       role="region"
       aria-label="Quick contact"
     >
