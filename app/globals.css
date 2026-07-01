@@ -43,11 +43,15 @@ body {
 }
 
 /*
- * iOS Safari/Chrome (WebKit) can visibly lag a `position: fixed` element by
- * a frame or two during a scroll gesture — it looks like the bar is
- * "scrolling with the page" before it snaps back to the bottom. Promoting
- * the bar to its own GPU compositor layer keeps it pinned in sync with the
- * viewport instead of waiting on the next paint.
+ * Mobile sticky conversion bar.
+ *
+ * IMPORTANT (iOS): do NOT add `transform`, `translateZ()`, `translate3d()`,
+ * `will-change: transform`, or `backface-visibility` here. On iOS WebKit
+ * (Safari + Chrome), promoting a `position: fixed` element to its own
+ * compositor layer makes WebKit count that element into the document's
+ * scrollable overflow — adding ~bar-height of phantom scroll space at the
+ * very bottom that reveals the page background (the "white blank area").
+ * A plain, uncomposited fixed bar does not have this problem.
  */
 @media (max-width: 767px) {
   .bc-mobile-sticky-cta {
@@ -56,10 +60,6 @@ body {
     bottom: 0;
     z-index: 9020;
     width: 100%;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    will-change: transform;
-    backface-visibility: hidden;
   }
 }
 
