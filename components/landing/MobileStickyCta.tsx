@@ -6,24 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { MOBILE_STICKY_CTA_PATHS } from "@/lib/mobileStickyCta";
+import { syncMobileVisualViewport } from "@/lib/mobileVisualViewport";
 import { whatsappUrl } from "@/lib/constants";
 import { MOBILE_WHATSAPP_UX, WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
-
-/** Pin fixed bar bottom edge to the visual viewport bottom (iOS Chrome/Safari). */
-function syncStickyToVisualViewport(el: HTMLElement): void {
-  const vv = window.visualViewport;
-  el.style.bottom = "0px";
-  el.style.transform = "translateZ(0)";
-  void el.offsetHeight;
-
-  if (!vv) return;
-
-  const visualBottom = vv.offsetTop + vv.height;
-  const shift = Math.round(visualBottom - el.getBoundingClientRect().bottom);
-  if (Math.abs(shift) > 1) {
-    el.style.transform = `translate3d(0, ${shift}px, 0)`;
-  }
-}
 
 /** Mobile-only sticky conversion bar — homepage & key pages */
 export default function MobileStickyCta() {
@@ -42,48 +27,21 @@ export default function MobileStickyCta() {
     const el = barRef.current;
     if (!el) return;
 
-    const syncLayout = () => {
-      el.style.bottom = "0px";
-      el.style.transform = "translateZ(0)";
+    const syncHeight = () => {
       const height = Math.min(Math.max(el.offsetHeight, 72), 120);
       document.documentElement.style.setProperty("--bc-mobile-sticky-h", `${height}px`);
-      syncStickyToVisualViewport(el);
+      syncMobileVisualViewport();
     };
 
-    const clampScroll = () => {
-      const vv = window.visualViewport;
-      const viewportHeight = vv?.height ?? window.innerHeight;
-      const maxScroll = Math.max(0, document.documentElement.scrollHeight - viewportHeight);
-      if (window.scrollY > maxScroll + 1) {
-        window.scrollTo(0, maxScroll);
-      }
-    };
+    syncHeight();
 
-    const onViewportChange = () => {
-      syncLayout();
-      clampScroll();
-    };
-
-    syncLayout();
-    clampScroll();
-
-    const ro = new ResizeObserver(onViewportChange);
+    const ro = new ResizeObserver(syncHeight);
     ro.observe(el);
-    window.visualViewport?.addEventListener("resize", onViewportChange);
-    window.visualViewport?.addEventListener("scroll", onViewportChange);
-    window.addEventListener("resize", onViewportChange);
-    window.addEventListener("orientationchange", onViewportChange);
-    window.addEventListener("scroll", onViewportChange, { passive: true });
+    window.addEventListener("orientationchange", syncHeight);
 
     return () => {
       ro.disconnect();
-      window.visualViewport?.removeEventListener("resize", onViewportChange);
-      window.visualViewport?.removeEventListener("scroll", onViewportChange);
-      window.removeEventListener("resize", onViewportChange);
-      window.removeEventListener("orientationchange", onViewportChange);
-      window.removeEventListener("scroll", onViewportChange);
-      el.style.bottom = "";
-      el.style.transform = "";
+      window.removeEventListener("orientationchange", syncHeight);
       document.documentElement.style.removeProperty("--bc-mobile-sticky-h");
     };
   }, [showOn]);

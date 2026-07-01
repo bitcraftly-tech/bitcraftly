@@ -131,7 +131,7 @@ export default async function Footer() {
           </div>
         </div>
 
-        <div className="bc-footer-bottom mt-10 flex flex-col items-center gap-3 border-t border-border-primary pt-6 text-center max-md:pb-28 md:pb-0 dark:border-dark-border-primary">
+        <div className="bc-footer-bottom mt-10 flex flex-col items-center gap-3 border-t border-border-primary pt-6 text-center dark:border-dark-border-primary">
           <p className="text-xs text-text-secondary dark:text-dark-text-secondary">
             18+ yrs · React &amp; Next.js · Founder-led · {BRAND.locationShort}
           </p>
