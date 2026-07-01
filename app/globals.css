@@ -24,17 +24,35 @@
 
 html,
 body {
-  min-height: 100%;
-  min-height: 100dvh;
+  height: auto;
+  min-height: 0;
   overflow-x: clip;
 }
 
 html {
   overscroll-behavior-y: none;
+  background-color: var(--color-bg-primary);
 }
 
 body {
   overscroll-behavior-y: none;
+  background-color: var(--color-bg-primary);
+}
+
+.dark html,
+.dark body {
+  background-color: var(--color-dark-bg-primary);
+}
+
+@media (max-width: 767px) {
+  html[data-bc-mobile-sticky] .bc-mobile-sticky-cta {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: var(--bc-visual-bottom-offset, 0px);
+    z-index: 9020;
+    transform: translateZ(0);
+  }
 }
 
 /* Bottom-right floating controls — chat, theme, scroll-to-top stack */
