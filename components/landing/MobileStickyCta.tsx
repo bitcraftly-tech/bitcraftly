@@ -9,10 +9,20 @@ import { MOBILE_STICKY_CTA_PATHS } from "@/lib/mobileStickyCta";
 import { whatsappUrl } from "@/lib/constants";
 import { MOBILE_WHATSAPP_UX, WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 
-function getVisualBottomOffset(): number {
+/** Pin fixed bar bottom edge to the visual viewport bottom (iOS Chrome/Safari). */
+function syncStickyToVisualViewport(el: HTMLElement): void {
   const vv = window.visualViewport;
-  if (!vv) return 0;
-  return Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
+  el.style.bottom = "0px";
+  el.style.transform = "translateZ(0)";
+  void el.offsetHeight;
+
+  if (!vv) return;
+
+  const visualBottom = vv.offsetTop + vv.height;
+  const shift = Math.round(visualBottom - el.getBoundingClientRect().bottom);
+  if (Math.abs(shift) > 1) {
+    el.style.transform = `translate3d(0, ${shift}px, 0)`;
+  }
 }
 
 /** Mobile-only sticky conversion bar — homepage & key pages */
@@ -33,18 +43,17 @@ export default function MobileStickyCta() {
     if (!el) return;
 
     const syncLayout = () => {
-      const measured = Math.ceil(el.getBoundingClientRect().height);
-      const height = Math.min(Math.max(measured, 72), 120);
-      const bottomOffset = getVisualBottomOffset();
-      const root = document.documentElement;
-
-      root.style.setProperty("--bc-mobile-sticky-h", `${height}px`);
-      root.style.setProperty("--bc-visual-bottom-offset", `${bottomOffset}px`);
-      el.style.bottom = `${bottomOffset}px`;
+      el.style.bottom = "0px";
+      el.style.transform = "translateZ(0)";
+      const height = Math.min(Math.max(el.offsetHeight, 72), 120);
+      document.documentElement.style.setProperty("--bc-mobile-sticky-h", `${height}px`);
+      syncStickyToVisualViewport(el);
     };
 
     const clampScroll = () => {
-      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const vv = window.visualViewport;
+      const viewportHeight = vv?.height ?? window.innerHeight;
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - viewportHeight);
       if (window.scrollY > maxScroll + 1) {
         window.scrollTo(0, maxScroll);
       }
@@ -64,7 +73,7 @@ export default function MobileStickyCta() {
     window.visualViewport?.addEventListener("scroll", onViewportChange);
     window.addEventListener("resize", onViewportChange);
     window.addEventListener("orientationchange", onViewportChange);
-    window.addEventListener("scroll", clampScroll, { passive: true });
+    window.addEventListener("scroll", onViewportChange, { passive: true });
 
     return () => {
       ro.disconnect();
@@ -72,9 +81,10 @@ export default function MobileStickyCta() {
       window.visualViewport?.removeEventListener("scroll", onViewportChange);
       window.removeEventListener("resize", onViewportChange);
       window.removeEventListener("orientationchange", onViewportChange);
-      window.removeEventListener("scroll", clampScroll);
+      window.removeEventListener("scroll", onViewportChange);
+      el.style.bottom = "";
+      el.style.transform = "";
       document.documentElement.style.removeProperty("--bc-mobile-sticky-h");
-      document.documentElement.style.removeProperty("--bc-visual-bottom-offset");
     };
   }, [showOn]);
 

@@ -49,9 +49,10 @@ body {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: var(--bc-visual-bottom-offset, 0px);
+    bottom: 0;
     z-index: 9020;
-    transform: translateZ(0);
+    width: 100%;
+    will-change: transform;
   }
 }
 
