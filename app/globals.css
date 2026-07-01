@@ -1868,7 +1868,12 @@ html.dark .bc-static-loader__label {
   overflow: visible;
   box-shadow: none;
   z-index: 9100;
-  animation: bc-chat-pop 0.45s cubic-bezier(.175, .885, .32, 1.275) both;
+  /*
+   * iOS FIX: `backwards` (not `both`) so the pop-in does not hold a transform
+   * on this `position: fixed` bubble after it finishes. A persistent transform
+   * on a fixed element inflates iOS scrollable overflow (see .bc-chat-panel).
+   */
+  animation: bc-chat-pop 0.45s cubic-bezier(.175, .885, .32, 1.275) backwards;
   transition: transform 0.22s;
 }
 
@@ -1930,14 +1935,23 @@ html.dark .bc-static-loader__label {
   z-index: 9099;
   pointer-events: none;
   opacity: 0;
-  transform: translateY(12px) scale(0.98);
-  transition: opacity 0.26s ease, transform 0.26s cubic-bezier(.175, .885, .32, 1.275);
+  /*
+   * iOS FIX: this panel is a tall `position: fixed` element that stays in the
+   * DOM even while the chat is closed. On iOS WebKit, a `position: fixed`
+   * element carrying a NON-identity `transform` is miscounted into the
+   * document's scrollable overflow — and because the phantom box tracks the
+   * scroll offset, `scrollHeight` grows as you scroll, so the page never
+   * stops at the footer and reveals a large blank area at the bottom.
+   * Keep the resting (closed) state transform-free; the open entrance is
+   * animated via `bc-chat-slide` instead.
+   */
+  transform: none;
+  transition: opacity 0.26s ease;
 }
 
 .bc-chat-panel--open {
   pointer-events: all;
   opacity: 1;
-  transform: translateY(0) scale(1);
   animation: bc-chat-slide 0.28s cubic-bezier(.175, .885, .32, 1.275) both;
 }
 
