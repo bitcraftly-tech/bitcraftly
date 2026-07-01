@@ -9,13 +9,6 @@ import { MOBILE_STICKY_CTA_PATHS } from "@/lib/mobileStickyCta";
 import { whatsappUrl } from "@/lib/constants";
 import { MOBILE_WHATSAPP_UX, WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 
-function clampPageScrollEnd(): void {
-  const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-  if (window.scrollY > maxScroll + 1) {
-    window.scrollTo(0, maxScroll);
-  }
-}
-
 /** Mobile-only sticky conversion bar — homepage & key pages */
 export default function MobileStickyCta() {
   const pathname = usePathname();
@@ -43,13 +36,10 @@ export default function MobileStickyCta() {
     const ro = new ResizeObserver(syncHeight);
     ro.observe(el);
     window.addEventListener("orientationchange", syncHeight);
-    window.addEventListener("scroll", clampPageScrollEnd, { passive: true });
-    clampPageScrollEnd();
 
     return () => {
       ro.disconnect();
       window.removeEventListener("orientationchange", syncHeight);
-      window.removeEventListener("scroll", clampPageScrollEnd);
       document.documentElement.style.removeProperty("--bc-mobile-sticky-h");
     };
   }, [showOn]);
