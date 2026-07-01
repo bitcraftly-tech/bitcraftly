@@ -2,6 +2,7 @@
 
 import type { Session } from "next-auth";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -48,46 +49,73 @@ function shouldShowHeaderThemeToggle(pathname: string | null): boolean {
 
 export default function Navbar({ embedded = false, session = null }: NavbarProps) {
   const pathname = usePathname();
-  const headerRef = useRef<HTMLElement>(null);
+  const navRef = useRef<HTMLElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
 
   useEffect(() => {
-    const el = headerRef.current;
-    if (!el) return;
+    const nav = navRef.current;
+    if (!nav) return;
 
-    const syncNavHeight = () => {
-      document.documentElement.style.setProperty("--bc-nav-height", `${el.getBoundingClientRect().height}px`);
+    const syncNavMetrics = () => {
+      const { bottom } = nav.getBoundingClientRect();
+      document.documentElement.style.setProperty("--bc-nav-height", `${bottom}px`);
+      document.documentElement.style.setProperty("--bc-nav-overlay-top", `${bottom}px`);
     };
 
-    syncNavHeight();
-    const ro = new ResizeObserver(syncNavHeight);
-    ro.observe(el);
-    window.addEventListener("orientationchange", syncNavHeight);
+    syncNavMetrics();
+    const ro = new ResizeObserver(syncNavMetrics);
+    ro.observe(nav);
+    window.addEventListener("orientationchange", syncNavMetrics);
 
     return () => {
       ro.disconnect();
-      window.removeEventListener("orientationchange", syncNavHeight);
+      window.removeEventListener("orientationchange", syncNavMetrics);
       document.documentElement.style.removeProperty("--bc-nav-height");
+      document.documentElement.style.removeProperty("--bc-nav-overlay-top");
     };
   }, []);
 
   useEffect(() => {
-    if (!isMenuOpen) return;
+    const root = document.documentElement;
+    if (!isMenuOpen) {
+      root.removeAttribute("data-bc-nav-open");
+      return;
+    }
+
+    root.setAttribute("data-bc-nav-open", "");
+
+    const nav = navRef.current;
+    const syncOverlayTop = () => {
+      if (!nav) return;
+      document.documentElement.style.setProperty("--bc-nav-overlay-top", `${nav.getBoundingClientRect().bottom}px`);
+    };
+
+    syncOverlayTop();
+    window.addEventListener("resize", syncOverlayTop);
+    window.visualViewport?.addEventListener("resize", syncOverlayTop);
+    window.visualViewport?.addEventListener("scroll", syncOverlayTop);
 
     const scrollY = window.scrollY;
-    const prevOverflow = document.body.style.overflow;
-    const prevPosition = document.body.style.position;
-    const prevTop = document.body.style.top;
-    const prevWidth = document.body.style.width;
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevBodyPosition = document.body.style.position;
+    const prevBodyTop = document.body.style.top;
+    const prevBodyWidth = document.body.style.width;
+    const prevHtmlOverflow = root.style.overflow;
 
     document.body.style.overflow = "hidden";
     document.body.style.position = "fixed";
     document.body.style.top = `-${scrollY}px`;
     document.body.style.width = "100%";
+    root.style.overflow = "hidden";
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setIsMenuOpen(false);
@@ -95,10 +123,15 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
     document.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.body.style.overflow = prevOverflow;
-      document.body.style.position = prevPosition;
-      document.body.style.top = prevTop;
-      document.body.style.width = prevWidth;
+      root.removeAttribute("data-bc-nav-open");
+      window.removeEventListener("resize", syncOverlayTop);
+      window.visualViewport?.removeEventListener("resize", syncOverlayTop);
+      window.visualViewport?.removeEventListener("scroll", syncOverlayTop);
+      document.body.style.overflow = prevBodyOverflow;
+      document.body.style.position = prevBodyPosition;
+      document.body.style.top = prevBodyTop;
+      document.body.style.width = prevBodyWidth;
+      root.style.overflow = prevHtmlOverflow;
       window.scrollTo(0, scrollY);
       document.removeEventListener("keydown", onKeyDown);
     };
@@ -109,14 +142,16 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
 
   return (
     <header
-      ref={headerRef}
       className={
         embedded
           ? "border-b border-border-primary bg-bg-card/90 backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card/90"
           : "sticky top-0 z-[9060] border-b border-border-primary bg-bg-card sm:bg-bg-card/90 sm:backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card dark:sm:bg-dark-bg-card/90"
       }
     >
-      <nav className="mx-auto flex min-w-0 w-full max-w-7xl items-center justify-between gap-2 px-4 py-2.5 sm:gap-3 sm:px-6 sm:py-3 lg:px-12">
+      <nav
+        ref={navRef}
+        className="mx-auto flex min-w-0 w-full max-w-7xl items-center justify-between gap-2 px-4 py-2.5 sm:gap-3 sm:px-6 sm:py-3 lg:px-12"
+      >
         <Link
           href="/"
           className="flex min-w-0 shrink items-center gap-2"
@@ -221,21 +256,24 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
         </div>
       </nav>
 
-      <button
-        type="button"
-        aria-label="Close navigation menu"
-        data-open={isMenuOpen ? "true" : "false"}
-        className="nav-mobile-backdrop fixed inset-0 z-40 bg-black/40 backdrop-blur-[2px] lg:hidden"
-        onClick={closeMenu}
-        tabIndex={isMenuOpen ? 0 : -1}
-      />
+      {mounted
+        ? createPortal(
+            <>
+              <button
+                type="button"
+                aria-label="Close navigation menu"
+                data-open={isMenuOpen ? "true" : "false"}
+                className="nav-mobile-backdrop fixed inset-0 bg-black/40 backdrop-blur-[2px] lg:hidden"
+                onClick={closeMenu}
+                tabIndex={isMenuOpen ? 0 : -1}
+              />
 
-      <div
-        id="mobile-nav-panel"
-        data-open={isMenuOpen ? "true" : "false"}
-        aria-hidden={!isMenuOpen}
-        className="nav-mobile-panel border-t border-border-primary bg-bg-card shadow-[0_18px_40px_-20px_rgba(15,23,42,0.35)] dark:border-dark-border-primary dark:bg-dark-bg-card lg:hidden"
-      >
+              <div
+                id="mobile-nav-panel"
+                data-open={isMenuOpen ? "true" : "false"}
+                aria-hidden={!isMenuOpen}
+                className="nav-mobile-panel border-t border-border-primary bg-bg-card shadow-[0_18px_40px_-20px_rgba(15,23,42,0.35)] dark:border-dark-border-primary dark:bg-dark-bg-card lg:hidden"
+              >
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
           <div
             className={`scrollbar-soft flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain ${
@@ -378,7 +416,11 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
             </div>
           </div>
         </div>
-      </div>
+              </div>
+            </>,
+            document.body,
+          )
+        : null}
     </header>
   );
 }
