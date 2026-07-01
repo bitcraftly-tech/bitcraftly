@@ -65,6 +65,6 @@ export const FOUNDER_MESSAGE = {
 export const FOUNDER_AUDIO_LOCALES = ["en", "hi"] as const satisfies readonly FounderAudioLocale[];
 
 /** Shown in UI — English + Hindi founder voice messages */
-export const FOUNDER_AUDIO_VISIBLE_LOCALES = ["en", "hi"] as const satisfies readonly FounderAudioLocale[];
+export const FOUNDER_AUDIO_VISIBLE_LOCALES: readonly FounderAudioLocale[] = ["en", "hi"];
 
 export const FOUNDER_AUDIO_DEFAULT_LOCALE: FounderAudioLocale = "hi";
