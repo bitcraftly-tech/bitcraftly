@@ -19,7 +19,7 @@ export default async function MarketingPageLayout({ children, sectionId }: Marke
 
   return (
     <main className="overflow-x-clip bg-bg-primary text-text-primary md:min-h-screen dark:bg-dark-bg-primary dark:text-dark-text-primary">
-      {/* <DeferredMarketingScroll sectionId={sectionId} /> */}
+      <DeferredMarketingScroll sectionId={sectionId} />
       <Navbar session={session} />
       {children}
       <Footer />
