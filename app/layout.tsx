@@ -16,7 +16,6 @@ import { HOME_SEO, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 // import ChatSupportWidget from "@/components/chat/ChatSupportWidget";
 import BitcraftlyChat from "@/components/chat/BitcraftlyChat";
 import DeferredFloatingChrome from "@/components/landing/DeferredFloatingChrome";
-import MobileVisualViewportSync from "@/components/landing/MobileVisualViewportSync";
 import AuthSessionProvider from "@/components/providers/AuthSessionProvider";
 import { LoaderProvider } from "@/components/providers/LoaderProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
@@ -59,6 +58,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -110,7 +110,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <AuthSessionProvider>{children}</AuthSessionProvider>
               {/* <ChatSupportWidget /> */}
               <BitcraftlyChat />
-              <MobileVisualViewportSync />
               <DeferredFloatingChrome />
               <DeferredToaster />
             </LoaderProvider>

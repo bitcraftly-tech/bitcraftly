@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { MOBILE_STICKY_CTA_PATHS } from "@/lib/mobileStickyCta";
-import { syncMobileVisualViewport } from "@/lib/mobileVisualViewport";
 import { whatsappUrl } from "@/lib/constants";
 import { MOBILE_WHATSAPP_UX, WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 
@@ -30,7 +29,6 @@ export default function MobileStickyCta() {
     const syncHeight = () => {
       const height = Math.min(Math.max(el.offsetHeight, 72), 120);
       document.documentElement.style.setProperty("--bc-mobile-sticky-h", `${height}px`);
-      syncMobileVisualViewport();
     };
 
     syncHeight();
