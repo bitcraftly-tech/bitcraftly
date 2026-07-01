@@ -25,10 +25,14 @@ const ALLOWED_DASHBOARD_ROLES = new Set(["admin", "staff", "manager"]);
 
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith("/dashboard")) {
-    const token = await getToken({
-      req: request,
-      secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
-    });
+    const secret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET;
+    if (!secret) {
+      // No secret configured — block dashboard access safely rather than crashing
+      const loginUrl = new URL("/login", request.url);
+      loginUrl.searchParams.set("callbackUrl", `${request.nextUrl.pathname}${request.nextUrl.search}`);
+      return NextResponse.redirect(loginUrl);
+    }
+    const token = await getToken({ req: request, secret });
     const role = `${token?.role ?? ""}`.toLowerCase();
     if (!token) {
       const loginUrl = new URL("/login", request.url);

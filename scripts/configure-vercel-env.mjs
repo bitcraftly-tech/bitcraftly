@@ -240,6 +240,20 @@ async function main() {
     await upsertEnv(key, value, ["preview"], { gitBranch: STAGING_BRANCH });
   }
 
+  // AUTH_SECRET must also be present in preview / staging — without it next-auth throws
+  // MissingSecretError on every request and the entire site returns 500.
+  const stagingSecret = production.find(([k]) => k === "AUTH_SECRET")?.[1];
+  if (stagingSecret) {
+    await upsertEnv("AUTH_SECRET", stagingSecret, ["preview"], {
+      gitBranch: STAGING_BRANCH,
+      sensitive: true,
+    });
+    await upsertEnv("NEXTAUTH_SECRET", stagingSecret, ["preview"], {
+      gitBranch: STAGING_BRANCH,
+      sensitive: true,
+    });
+  }
+
   reportMissing(source);
   await triggerProductionDeploy();
 
