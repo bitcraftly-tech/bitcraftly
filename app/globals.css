@@ -71,7 +71,11 @@ body {
   --bc-chat-bubble-size: 74px;
   --bc-chat-bubble-width: 66px;
   --bc-scroll-btn-size: 2.75rem;
-  --bc-mobile-sticky-h: 6.75rem;
+  /* 0 by default: footer clearance is reserved only when MobileStickyCta mounts
+     and overrides this with the measured bar height. A non-zero default reserves
+     phantom bottom padding on mobile even when the bar is absent, which shows up
+     as blank document height below the footer. */
+  --bc-mobile-sticky-h: 0px;
   --bc-float-base-bottom: calc(var(--bc-float-bottom) + env(safe-area-inset-bottom, 0px));
   --bc-float-chat-bottom: var(--bc-float-base-bottom);
   --bc-float-scroll-bottom: var(--bc-float-base-bottom);
@@ -276,7 +280,7 @@ textarea,
   pointer-events: none;
   visibility: hidden;
   opacity: 0;
-  transform: translateY(-0.35rem);
+  transform: none;
   transition:
     opacity 240ms ease,
     transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -297,11 +301,19 @@ textarea,
   pointer-events: auto;
   visibility: visible;
   opacity: 1;
-  transform: translateY(0);
+  animation: nav-mobile-panel-in 320ms cubic-bezier(0.22, 1, 0.36, 1);
   transition:
     opacity 240ms ease,
-    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
     visibility 0ms linear 0ms;
+}
+
+@keyframes nav-mobile-panel-in {
+  from {
+    transform: translateY(-0.35rem);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 .nav-mobile-backdrop[data-open="false"] {

@@ -5,6 +5,7 @@ import { inter, playfair } from "@/lib/fonts";
 import ConsentGatedGoogleAnalytics from "@/components/analytics/ConsentGatedGoogleAnalytics";
 import DeferredAnalyticsListener from "@/components/analytics/DeferredAnalyticsListener";
 import RootBootEffects from "@/components/boot/RootBootEffects";
+import IosScrollDebugOverlay from "@/components/debug/IosScrollDebugOverlay";
 import CookieConsentBanner from "@/components/consent/CookieConsentBanner";
 import { CookieConsentProvider } from "@/components/consent/CookieConsentProvider";
 import { GSC_VERIFICATION } from "@/lib/analytics";
@@ -115,6 +116,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </LoaderProvider>
           </ThemeProvider>
         </CookieConsentProvider>
+        <IosScrollDebugOverlay />
       </body>
     </html>
   );
