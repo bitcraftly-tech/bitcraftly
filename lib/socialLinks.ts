@@ -1,5 +1,3 @@
-import { FOUNDER } from "@/lib/siteContent";
-
 /** Override via `NEXT_PUBLIC_INSTAGRAM_URL` in .env.local */
 export const BITCRAFTLY_INSTAGRAM_URL =
   process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "https://www.instagram.com/bitcraftly";
@@ -13,6 +11,10 @@ export const BITCRAFTLY_FACEBOOK_URL =
 export const BITCRAFTLY_YOUTUBE_URL =
   process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_URL ?? "https://www.youtube.com/@bitcraftly";
 
+/** Override via `NEXT_PUBLIC_LINKEDIN_URL` in .env.local */
+export const BITCRAFTLY_LINKEDIN_URL =
+  process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://www.linkedin.com/company/bitcraftly-technologies";
+
 export type SocialPlatform = "instagram" | "facebook" | "youtube" | "linkedin";
 
 export type SocialLink = {
@@ -22,22 +24,16 @@ export type SocialLink = {
 };
 
 /** Public Bitcraftly social profiles for footer, schema, etc. */
-export function getBitcraftlySocialLinks(linkedInUrl?: string | null): SocialLink[] {
-  const links: SocialLink[] = [
+export function getBitcraftlySocialLinks(): SocialLink[] {
+  return [
     { platform: "instagram", href: BITCRAFTLY_INSTAGRAM_URL, label: "Instagram" },
     { platform: "facebook", href: BITCRAFTLY_FACEBOOK_URL, label: "Facebook" },
     { platform: "youtube", href: BITCRAFTLY_YOUTUBE_URL, label: "YouTube" },
+    { platform: "linkedin", href: BITCRAFTLY_LINKEDIN_URL, label: "LinkedIn" },
   ];
-
-  const linkedIn = linkedInUrl ?? FOUNDER.linkedIn;
-  if (linkedIn) {
-    links.push({ platform: "linkedin", href: linkedIn, label: "LinkedIn" });
-  }
-
-  return links;
 }
 
-/** URLs for JSON-LD `sameAs` — excludes founder-only profiles if needed later */
-export function bitcraftlySocialSameAs(linkedInUrl?: string | null): string[] {
-  return getBitcraftlySocialLinks(linkedInUrl).map((item) => item.href);
+/** URLs for JSON-LD `sameAs` — company social profiles */
+export function bitcraftlySocialSameAs(): string[] {
+  return getBitcraftlySocialLinks().map((item) => item.href);
 }

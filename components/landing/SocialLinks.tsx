@@ -1,4 +1,3 @@
-import { FOUNDER_LINKEDIN_URL } from "@/lib/constants";
 import { getBitcraftlySocialLinks, type SocialPlatform } from "@/lib/socialLinks";
 
 function SocialIcon({ platform }: { platform: SocialPlatform }) {
@@ -38,7 +37,7 @@ type SocialLinksProps = {
 };
 
 export default function SocialLinks({ className = "", iconClassName = "" }: SocialLinksProps) {
-  const links = getBitcraftlySocialLinks(FOUNDER_LINKEDIN_URL);
+  const links = getBitcraftlySocialLinks();
 
   return (
     <div className={`flex flex-wrap items-center gap-2 ${className}`} role="group" aria-label="Follow Bitcraftly">

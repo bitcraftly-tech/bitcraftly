@@ -21,8 +21,6 @@ const VISITOR_SESSIONS_COLLECTION = "visitor_sessions";
 const SITE_STATS_COLLECTION = "site_stats";
 const VISITORS_DOC_ID = "visitors";
 
-const DEMO_VISITOR_COUNT = 2_847;
-
 let firestore: Firestore | null = null;
 
 function getFirebaseApp(): App | null {
@@ -165,9 +163,10 @@ export async function recordUniqueVisitor(sessionId: string | undefined): Promis
   });
 }
 
-export async function getSiteVisitorCount(): Promise<number> {
+/** First-party session counter in Firestore — null when Firebase Admin is not configured. */
+export async function getFirestoreVisitorCount(): Promise<number | null> {
   const db = getFirestoreDb();
-  if (!db) return DEMO_VISITOR_COUNT;
+  if (!db) return null;
 
   const doc = await db.collection(SITE_STATS_COLLECTION).doc(VISITORS_DOC_ID).get();
   const count = doc.data()?.count;

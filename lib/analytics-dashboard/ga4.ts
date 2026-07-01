@@ -328,3 +328,24 @@ export async function fetchGa4Realtime(): Promise<RealtimeMetrics> {
     dataSource: "ga4",
   };
 }
+
+/** All-time unique users from GA4 (requires GA4_PROPERTY_ID + service account). */
+export async function fetchGa4AllTimeUsers(): Promise<number | null> {
+  if (!isGa4ApiConfigured()) return null;
+
+  const client = getClient();
+  if (!client) return null;
+
+  try {
+    const [report] = await client.runReport({
+      property: propertyName(),
+      dateRanges: [{ startDate: "2020-01-01", endDate: "today" }],
+      metrics: [{ name: "totalUsers" }],
+    });
+    const raw = Number(report.rows?.[0]?.metricValues?.[0]?.value ?? NaN);
+    if (!Number.isFinite(raw)) return null;
+    return Math.max(0, Math.floor(raw));
+  } catch {
+    return null;
+  }
+}

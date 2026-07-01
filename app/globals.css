@@ -37,25 +37,30 @@ body {
   --bc-chat-bubble-size: 74px;
   --bc-chat-bubble-width: 66px;
   --bc-scroll-btn-size: 2.75rem;
-  --bc-mobile-sticky-h: 6.25rem;
+  --bc-mobile-sticky-h: 6.75rem;
   --bc-float-base-bottom: calc(var(--bc-float-bottom) + env(safe-area-inset-bottom, 0px));
   --bc-float-chat-bottom: var(--bc-float-base-bottom);
   --bc-float-scroll-bottom: var(--bc-float-base-bottom);
+  --bc-mobile-sticky-float-gap: 0.5rem;
   --bc-chat-panel-top: max(0.75rem, env(safe-area-inset-top, 0px));
   --bc-chat-panel-bottom: calc(var(--bc-float-chat-bottom) + var(--bc-chat-bubble-size) + var(--bc-float-gap));
 }
 
 html[data-bc-mobile-sticky] {
-  --bc-float-base-bottom: calc(var(--bc-mobile-sticky-h) + env(safe-area-inset-bottom, 0px));
+  --bc-float-base-bottom: calc(var(--bc-mobile-sticky-h) + var(--bc-mobile-sticky-float-gap));
 }
 
 @media (max-width: 767px) {
+  html[data-bc-mobile-sticky] body {
+    padding-bottom: var(--bc-mobile-sticky-h);
+  }
+
   html[data-bc-mobile-sticky] .bc-floating-whatsapp {
     display: none;
   }
 
   html[data-bc-mobile-sticky] .bc-cookie-banner {
-    bottom: calc(var(--bc-mobile-sticky-h) + env(safe-area-inset-bottom, 0px));
+    bottom: var(--bc-mobile-sticky-h);
   }
 }
 

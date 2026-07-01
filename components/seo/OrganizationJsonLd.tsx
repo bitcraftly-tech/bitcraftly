@@ -36,7 +36,7 @@ export default function OrganizationJsonLd() {
           "Website redesign",
           "Website performance optimization",
         ],
-        sameAs: bitcraftlySocialSameAs(FOUNDER_LINKEDIN_URL),
+        sameAs: bitcraftlySocialSameAs(),
       },
       {
         "@type": "ProfessionalService",
