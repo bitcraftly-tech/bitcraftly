@@ -20,8 +20,8 @@ export const FOUNDER_MESSAGE = {
   eyebrow: "FOUNDER MESSAGE",
   title: "Hear from the founder",
   description:
-    "Sanjay ka short voice message — Hindi mein sunne ke liye tap karein.",
-  languageLabel: "Listen in Hindi",
+    "Sanjay ka short voice message — English ya Hindi mein sunne ke liye language choose karein.",
+  languageLabel: "Listen in your language",
   languageHint: "Tap to play",
   playerHint: "Tap again to pause",
   nowPlaying: "Now playing",
@@ -32,7 +32,7 @@ export const FOUNDER_MESSAGE = {
     en: {
       label: "English",
       shortLabel: "EN",
-      sources: founderAudioSources("founder-message-en"),
+      sources: [{ src: "/audio/founder-message-en.mp3", type: "audio/mpeg" }],
       title: "How Bitcraftly works — English",
       selectAriaLabel: "Play founder message in English",
       pauseAriaLabel: "Pause English founder message",
@@ -64,7 +64,7 @@ export const FOUNDER_MESSAGE = {
 
 export const FOUNDER_AUDIO_LOCALES = ["en", "hi"] as const satisfies readonly FounderAudioLocale[];
 
-/** Shown in UI — add "en" when English track is ready */
-export const FOUNDER_AUDIO_VISIBLE_LOCALES = ["hi"] as const satisfies readonly FounderAudioLocale[];
+/** Shown in UI — English + Hindi founder voice messages */
+export const FOUNDER_AUDIO_VISIBLE_LOCALES = ["en", "hi"] as const satisfies readonly FounderAudioLocale[];
 
 export const FOUNDER_AUDIO_DEFAULT_LOCALE: FounderAudioLocale = "hi";
