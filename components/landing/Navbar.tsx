@@ -1,7 +1,7 @@
 "use client";
 
 import type { Session } from "next-auth";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -48,6 +48,7 @@ function shouldShowHeaderThemeToggle(pathname: string | null): boolean {
 
 export default function Navbar({ embedded = false, session = null }: NavbarProps) {
   const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -55,10 +56,38 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
   }, [pathname]);
 
   useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const syncNavHeight = () => {
+      document.documentElement.style.setProperty("--bc-nav-height", `${el.getBoundingClientRect().height}px`);
+    };
+
+    syncNavHeight();
+    const ro = new ResizeObserver(syncNavHeight);
+    ro.observe(el);
+    window.addEventListener("orientationchange", syncNavHeight);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("orientationchange", syncNavHeight);
+      document.documentElement.style.removeProperty("--bc-nav-height");
+    };
+  }, []);
+
+  useEffect(() => {
     if (!isMenuOpen) return;
 
-    const prev = document.body.style.overflow;
+    const scrollY = window.scrollY;
+    const prevOverflow = document.body.style.overflow;
+    const prevPosition = document.body.style.position;
+    const prevTop = document.body.style.top;
+    const prevWidth = document.body.style.width;
+
     document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setIsMenuOpen(false);
@@ -66,7 +95,11 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
     document.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = prevOverflow;
+      document.body.style.position = prevPosition;
+      document.body.style.top = prevTop;
+      document.body.style.width = prevWidth;
+      window.scrollTo(0, scrollY);
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [isMenuOpen]);
@@ -76,10 +109,11 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
 
   return (
     <header
+      ref={headerRef}
       className={
         embedded
           ? "border-b border-border-primary bg-bg-card/90 backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card/90"
-          : "sticky top-0 z-50 border-b border-border-primary bg-bg-card sm:bg-bg-card/90 sm:backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card dark:sm:bg-dark-bg-card/90"
+          : "sticky top-0 z-[9060] border-b border-border-primary bg-bg-card sm:bg-bg-card/90 sm:backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card dark:sm:bg-dark-bg-card/90"
       }
     >
       <nav className="mx-auto flex min-w-0 w-full max-w-7xl items-center justify-between gap-2 px-4 py-2.5 sm:gap-3 sm:px-6 sm:py-3 lg:px-12">
@@ -200,11 +234,11 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
         id="mobile-nav-panel"
         data-open={isMenuOpen ? "true" : "false"}
         aria-hidden={!isMenuOpen}
-        className="nav-mobile-panel relative z-50 border-t border-border-primary bg-bg-card shadow-[0_18px_40px_-20px_rgba(15,23,42,0.35)] dark:border-dark-border-primary dark:bg-dark-bg-card lg:hidden"
+        className="nav-mobile-panel border-t border-border-primary bg-bg-card shadow-[0_18px_40px_-20px_rgba(15,23,42,0.35)] dark:border-dark-border-primary dark:bg-dark-bg-card lg:hidden"
       >
-        <div className="overflow-hidden">
+        <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
           <div
-            className={`scrollbar-soft flex max-h-[min(78dvh,32rem)] flex-col overflow-y-auto overscroll-contain ${
+            className={`scrollbar-soft flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain ${
               isMenuOpen ? "nav-mobile-open" : ""
             }`}
           >
