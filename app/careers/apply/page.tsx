@@ -5,7 +5,7 @@ import Link from "next/link";
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
 import CareersApplyWizard from "@/components/careers/CareersApplyWizard";
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Apply | Careers | Bitcraftly",
@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 
 export default function CareersApplyPage() {
   return (
-    <div className="portfolio-showcase-light flex min-h-screen flex-col bg-[#fafbfc] text-[#2c3e50]">
+    <div className={`${PAGE_SHELL} portfolio-showcase-light bg-[#fafbfc] text-[#2c3e50]`}>
       <Navbar />
-      <main className="flex-1">
+      <main className={PAGE_MAIN}>
         <section className="border-b border-[#E5E7EB] bg-white py-2 dark:border-dark-border-primary dark:bg-dark-bg-card">
           <div className={`${CONTAINER} text-xs text-[#9CA3AF]`}>
             <Link href="/" className="hover:text-[#6B7280] hover:underline">

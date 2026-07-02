@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 
 import { isGoogleLoginConfigured } from "@/lib/googleAuthEnv";
 
@@ -13,7 +13,7 @@ import LoginContent from "./LoginContent";
 export const metadata: Metadata = {
   title: "Login | Bitcraftly Portal",
   description:
-    "Sign in to the Bitcraftly Portal — manage websites, projects and business tools. Website & app development company in Jamshedpur.",
+    "Sign in to the Bitcraftly Client Portal — manage projects, analytics, leads, and delivery tools from one secure workspace.",
 };
 
 /** Read OAuth env at request time (not baked into static HTML at build). */
@@ -23,9 +23,9 @@ export default function LoginPage() {
   const googleEnabled = isGoogleLoginConfigured();
 
   return (
-    <>
+    <div className={PAGE_SHELL}>
       <Navbar />
-      <main>
+      <main className={PAGE_MAIN}>
         <section className="border-b border-border-primary bg-bg-card py-1.5 dark:border-dark-border-primary dark:bg-dark-bg-card">
           <div className={`${CONTAINER} text-xs text-text-tertiary dark:text-dark-text-tertiary`}>
             <Link href="/" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
@@ -39,6 +39,6 @@ export default function LoginPage() {
         </Suspense>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

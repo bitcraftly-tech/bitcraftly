@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 
 import PackageWhatsAppLink from "@/components/landing/PackageWhatsAppLink";
-import { CONTAINER, whatsappUrl } from "@/lib/constants";
+import { CONTAINER, SECTION_PY, SECTION_SCROLL_MT, whatsappUrl } from "@/lib/constants";
 import { FAST_PACKAGE_FILTERS, FAST_PACKAGES, FAST_PACKAGES_SECTION, type FastPackageCategory } from "@/lib/fastPackages";
 import { buildQuoteContactUrl, WHATSAPP_MESSAGES } from "@/lib/leadGen";
 
@@ -17,7 +17,7 @@ export default function FastLaunchPackages() {
   );
 
   return (
-    <section id={FAST_PACKAGES_SECTION.id} className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-7 dark:border-dark-border-primary md:py-10`}>
+    <section id={FAST_PACKAGES_SECTION.id} className={`${CONTAINER} ${SECTION_SCROLL_MT} border-t border-border-primary ${SECTION_PY} dark:border-dark-border-primary`}>
       <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
         {FAST_PACKAGES_SECTION.eyebrow}
       </p>
@@ -42,11 +42,10 @@ export default function FastLaunchPackages() {
               role="tab"
               aria-selected={active}
               onClick={() => setFilter(item.id)}
-              className={`rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide transition ${
-                active
+              className={`rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide transition ${active
                   ? "bg-indigo-600 text-white"
                   : "border border-border-primary bg-bg-secondary text-text-secondary hover:border-border-secondary dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-secondary"
-              }`}
+                }`}
             >
               {item.label}
             </button>
@@ -58,11 +57,10 @@ export default function FastLaunchPackages() {
         {visiblePackages.map((pkg) => (
           <article
             key={pkg.id}
-            className={`group relative flex h-full transform-gpu flex-col rounded-xl border bg-bg-card p-6 transition-[transform,box-shadow,border-color] duration-300 ease-out will-change-transform hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(2,6,23,0.12)] dark:bg-dark-bg-card dark:hover:shadow-[0_14px_26px_rgba(2,6,23,0.4)] ${
-              pkg.highlight
+            className={`group relative flex h-full transform-gpu flex-col rounded-xl border bg-bg-card p-6 transition-[transform,box-shadow,border-color] duration-300 ease-out will-change-transform hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(2,6,23,0.12)] dark:bg-dark-bg-card dark:hover:shadow-[0_14px_26px_rgba(2,6,23,0.4)] ${pkg.highlight
                 ? "border-indigo-500/40 ring-1 ring-indigo-500/20 dark:border-indigo-400/30"
                 : "border-border-primary hover:border-border-secondary dark:border-dark-border-primary dark:hover:border-dark-border-secondary"
-            }`}
+              }`}
           >
             {pkg.popularLabel ? (
               <span className="absolute -top-2.5 right-4 rounded-full bg-indigo-600 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, FOCUS_RING } from "@/lib/constants";
 import type { PageNavItem } from "@/lib/pageSequences";
 
 type MarketingPageNavProps = {
@@ -40,14 +40,14 @@ export default function MarketingPageNav({ items, ariaLabel }: MarketingPageNavP
       aria-label={ariaLabel}
       className="sticky top-16 z-30 border-b border-border-primary bg-bg-primary/90 backdrop-blur-md dark:border-dark-border-primary dark:bg-dark-bg-primary/90"
     >
-      <div className={`${CONTAINER} flex gap-1 overflow-x-auto py-2.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}>
+      <div className={`${CONTAINER} flex gap-2 overflow-x-auto overscroll-x-contain py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}>
         {items.map((item) => {
           const active = activeId === item.id;
           return (
             <a
               key={item.id}
               href={`#${item.id}`}
-              className={`shrink-0 rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide transition sm:text-[11px] ${
+              className={`inline-flex min-h-11 shrink-0 items-center rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wide transition sm:text-[11px] ${FOCUS_RING} ${
                 active
                   ? "bg-indigo-600 text-white"
                   : "text-text-secondary hover:bg-bg-secondary hover:text-text-primary dark:text-dark-text-secondary dark:hover:bg-dark-bg-secondary dark:hover:text-dark-text-primary"

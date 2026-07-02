@@ -4,7 +4,7 @@ import Footer from "@/components/landing/Footer";
 import MarketingNextStep from "@/components/landing/MarketingNextStep";
 import MarketingPageIntro from "@/components/landing/MarketingPageIntro";
 import Navbar from "@/components/landing/Navbar";
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 import { PAGE_INTROS } from "@/lib/pageSequences";
 
 import { buildPageMetadata } from "@/lib/seoMetadata";
@@ -18,9 +18,9 @@ export default function PortfolioPage() {
   const intro = PAGE_INTROS.portfolio;
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className={PAGE_SHELL}>
       <Navbar />
-      <main className="flex-1">
+      <main className={PAGE_MAIN}>
         <PortfolioHashRedirect />
         <section className="border-b border-[#e8ecef] bg-white py-1.5">
           <div className={`${CONTAINER} text-xs text-[#95a5a6]`}>

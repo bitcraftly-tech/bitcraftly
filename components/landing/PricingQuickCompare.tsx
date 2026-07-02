@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import PackageWhatsAppLink from "@/components/landing/PackageWhatsAppLink";
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, SECTION_PY, SECTION_SCROLL_MT } from "@/lib/constants";
 import { buildQuoteContactUrl } from "@/lib/leadGen";
 import { PRICING_COMPARE_ROWS } from "@/lib/pricingCompare";
 
@@ -28,11 +28,10 @@ function CompareActions({ row }: { row: (typeof PRICING_COMPARE_ROWS)[number] })
 function CompareCard({ row }: { row: (typeof PRICING_COMPARE_ROWS)[number] }) {
   return (
     <article
-      className={`rounded-xl border p-4 ${
-        row.highlight
+      className={`rounded-xl border p-4 ${row.highlight
           ? "border-indigo-500/40 bg-indigo-50/40 ring-1 ring-indigo-500/15 dark:border-indigo-400/30 dark:bg-indigo-950/25"
           : "border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card"
-      }`}
+        }`}
     >
       <div className="flex items-start justify-between gap-3">
         <div>
@@ -75,7 +74,7 @@ function CompareCard({ row }: { row: (typeof PRICING_COMPARE_ROWS)[number] }) {
 
 export default function PricingQuickCompare() {
   return (
-    <section id="pricing-compare" className={`${CONTAINER} scroll-mt-28 border-t border-border-primary py-7 dark:border-dark-border-primary md:py-10`}>
+    <section id="pricing-compare" className={`${CONTAINER} ${SECTION_SCROLL_MT} border-t border-border-primary ${SECTION_PY} dark:border-dark-border-primary`}>
       <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
         Quick compare
       </p>
@@ -122,9 +121,8 @@ export default function PricingQuickCompare() {
             {PRICING_COMPARE_ROWS.map((row) => (
               <tr
                 key={row.id}
-                className={`border-b border-border-primary/70 last:border-0 dark:border-dark-border-primary/70 ${
-                  row.highlight ? "bg-indigo-50/50 dark:bg-indigo-950/20" : "bg-bg-card dark:bg-dark-bg-card"
-                }`}
+                className={`border-b border-border-primary/70 last:border-0 dark:border-dark-border-primary/70 ${row.highlight ? "bg-indigo-50/50 dark:bg-indigo-950/20" : "bg-bg-card dark:bg-dark-bg-card"
+                  }`}
               >
                 <td className="px-4 py-3.5 font-medium text-text-primary dark:text-dark-text-primary">
                   <span className="mr-2" aria-hidden>

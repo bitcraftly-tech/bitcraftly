@@ -3,14 +3,14 @@ import Link from "next/link";
 import { CreditCard, LayoutGrid, Sparkles, User } from "lucide-react";
 import type { ReactNode } from "react";
 
-import { CONTAINER, whatsappUrl } from "@/lib/constants";
+import { CONTAINER, SECTION_SCROLL_MT, whatsappUrl } from "@/lib/constants";
 import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { BRAND, HERO, TRUST_CHECKS } from "@/lib/siteContent";
 
 const HeroShowcase = dynamic(() => import("@/components/landing/HeroShowcase"), {
   loading: () => (
     <div
-      className="min-h-[220px] rounded-2xl border border-border-primary bg-bg-card/60 dark:border-dark-border-primary dark:bg-dark-bg-card/60 lg:min-h-[280px]"
+      className="bc-skeleton min-h-[220px] rounded-2xl border border-border-primary dark:border-dark-border-primary lg:min-h-[280px]"
       aria-hidden
     />
   ),
@@ -33,7 +33,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className={`${CONTAINER} scroll-mt-24 grid min-h-0 items-center gap-6 py-4 sm:min-h-[41vh] lg:grid-cols-2 lg:py-6`}
+      className={`${CONTAINER} ${SECTION_SCROLL_MT} grid min-h-0 items-center gap-6 py-4 sm:min-h-[41vh] lg:grid-cols-2 lg:py-6`}
     >
       <div className="min-w-0 text-center lg:text-left">
         <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-border-primary bg-bg-card px-3 py-2 sm:px-4 dark:border-dark-border-primary dark:bg-dark-bg-card">
@@ -58,7 +58,7 @@ export default function Hero() {
         <div className="mx-auto mt-6 flex w-full max-w-md flex-col gap-3 sm:mt-8 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center lg:mx-0 lg:justify-start">
           <Link
             href="/contact?intent=consultation&source=hero"
-            className="w-full rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-6 py-3 text-center text-sm font-semibold text-white transition hover:opacity-95 sm:w-auto"
+            className="bc-btn bc-btn-primary w-full px-6 py-3 sm:w-auto"
           >
             {HERO.primaryCta}
           </Link>
@@ -67,7 +67,7 @@ export default function Hero() {
             data-wa-source="hero-whatsapp"
             target="_blank"
             rel="noreferrer"
-            className="w-full rounded-xl border border-border-secondary px-6 py-3 text-center text-sm font-semibold text-text-primary transition hover:border-border-primary sm:w-auto dark:border-dark-border-secondary dark:text-dark-text-primary dark:hover:border-dark-border-primary"
+            className="bc-btn bc-btn-secondary w-full px-6 py-3 sm:w-auto"
           >
             {HERO.secondaryCta}
           </Link>
@@ -89,7 +89,7 @@ export default function Hero() {
             <Link
               key={p.name}
               href={p.href}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border-primary/80 bg-bg-card/90 px-3 py-2 text-xs font-medium text-text-secondary shadow-sm transition hover:border-indigo-500/35 hover:text-indigo-600 dark:border-dark-border-primary/80 dark:bg-dark-bg-card/90 dark:text-dark-text-secondary dark:hover:border-indigo-400/35 dark:hover:text-indigo-400"
+              className="inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full border border-border-primary/80 bg-bg-card/90 px-4 py-2 text-xs font-medium text-text-secondary shadow-sm transition hover:border-indigo-500/35 hover:text-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-primary dark:border-dark-border-primary/80 dark:bg-dark-bg-card/90 dark:text-dark-text-secondary dark:hover:border-indigo-400/35 dark:hover:text-indigo-400"
             >
               {p.icon}
               <span>{p.name}</span>

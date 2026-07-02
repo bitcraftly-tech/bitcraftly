@@ -1,24 +1,22 @@
-import { Inter, Playfair_Display } from "next/font/google";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 
-/** System stacks paint immediately; brand fonts swap in when downloaded (font-display: swap). */
+/** Primary UI font — Geist Sans (enterprise SaaS) */
+export const geistSans = GeistSans;
+
+/** Monospace — code, terminal, technical snippets only */
+export const geistMono = GeistMono;
+
+/** Legacy alias — existing imports / CSS vars map to Geist Sans */
+export const inter = GeistSans;
+
+/** Legacy alias — display headings now use Geist Sans (same family) */
+export const playfair = GeistSans;
+
 export const FONT_FALLBACK_SANS =
   'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
 
-export const FONT_FALLBACK_SERIF = 'Georgia, "Times New Roman", Times, serif';
+export const FONT_FALLBACK_MONO =
+  'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
 
-export const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  preload: true,
-  adjustFontFallback: true,
-});
-
-export const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600"],
-  variable: "--font-playfair",
-  display: "optional",
-  preload: false,
-  adjustFontFallback: true,
-});
+export const FONT_FALLBACK_SERIF = FONT_FALLBACK_SANS;

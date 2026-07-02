@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import PackageWhatsAppLink from "@/components/landing/PackageWhatsAppLink";
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, SECTION_PY, SECTION_SCROLL_MT } from "@/lib/constants";
 import { buildQuoteContactUrl } from "@/lib/leadGen";
 import { STANDARD_PRICING_PLANS } from "@/lib/standardPricing";
 
@@ -13,7 +13,7 @@ export default function Pricing({ variant = "section" }: PricingProps) {
   const isPage = variant === "page";
 
   return (
-    <section id={isPage ? "pricing-standard" : "pricing"} className={`${CONTAINER} scroll-mt-28 py-7 md:py-10`}>
+    <section id={isPage ? "pricing-standard" : "pricing"} className={`${CONTAINER} ${SECTION_SCROLL_MT} ${SECTION_PY}`}>
       <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">Standard pricing</p>
       <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
         Flexible packages &amp; custom builds
@@ -44,7 +44,7 @@ export default function Pricing({ variant = "section" }: PricingProps) {
         {STANDARD_PRICING_PLANS.map((plan) => (
           <article
             key={plan.service}
-            className={`group relative flex h-full transform-gpu flex-col rounded-xl border bg-bg-card p-6 transition-[transform,box-shadow,border-color] duration-300 ease-out will-change-transform hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(2,6,23,0.12)] dark:bg-dark-bg-card dark:hover:shadow-[0_14px_26px_rgba(2,6,23,0.4)] ${
+            className={`bc-card group relative flex h-full transform-gpu flex-col p-6 transition-[transform,box-shadow,border-color] duration-300 ease-out will-change-transform hover:-translate-y-0.5 ${
               plan.highlight
                 ? "border-indigo-500/40 ring-1 ring-indigo-500/20 dark:border-indigo-400/30"
                 : "border-border-primary hover:border-border-secondary dark:border-dark-border-primary dark:hover:border-dark-border-secondary"

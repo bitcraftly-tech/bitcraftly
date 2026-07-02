@@ -1,4 +1,4 @@
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, SECTION_PY_COMPACT, SECTION_SCROLL_MT } from "@/lib/constants";
 import { FAQ_ITEMS } from "@/lib/siteContent";
 
 type FaqSectionProps = {
@@ -9,7 +9,7 @@ export default function FaqSection({ showTopBorder = true }: FaqSectionProps) {
   return (
     <section
       id="faq"
-      className={`${CONTAINER} scroll-mt-28 py-6 lg:py-8 ${showTopBorder ? "border-t border-border-primary dark:border-dark-border-primary" : ""}`}
+      className={`${CONTAINER} ${SECTION_SCROLL_MT} ${SECTION_PY_COMPACT} ${showTopBorder ? "border-t border-border-primary dark:border-dark-border-primary" : ""}`}
     >
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">FAQ</p>

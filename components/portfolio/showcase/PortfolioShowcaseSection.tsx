@@ -12,7 +12,7 @@ import PortfolioShowcaseCta from "@/components/portfolio/showcase/PortfolioShowc
 import PortfolioShowcaseHero from "@/components/portfolio/showcase/PortfolioShowcaseHero";
 import PortfolioAfterCta from "@/components/landing/PortfolioAfterCta";
 import PortfolioWhyPerform from "@/components/landing/PortfolioWhyPerform";
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, SECTION_PY_CTA, SECTION_SCROLL_MT } from "@/lib/constants";
 import { PORTFOLIO_FEATURED } from "@/lib/portfolioContent";
 import { filterPortfolioByCategory, type PortfolioCategoryId } from "@/lib/portfolio/categories";
 import { enrichProjects, type PortfolioProject } from "@/lib/portfolio/projectUtils";
@@ -47,7 +47,7 @@ export default function PortfolioShowcaseSection({
   const content = (
     <section
       id={sectionId}
-      className={`${CONTAINER} ${PS_SECTION} scroll-mt-24 py-10 md:py-14 lg:py-16`}
+      className={`${CONTAINER} ${PS_SECTION} ${SECTION_SCROLL_MT} ${SECTION_PY_CTA}`}
       aria-labelledby={isHome ? "portfolio-showcase-heading" : "portfolio-page-heading"}
     >
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden>

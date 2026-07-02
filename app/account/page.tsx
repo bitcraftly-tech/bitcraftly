@@ -7,7 +7,7 @@ import { LayoutGrid, Mail, MessageCircle } from "lucide-react";
 import { createAuthOptions } from "@/auth";
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 import { formatRoleLabel, roleBadgeClass } from "@/lib/roleDisplay";
 import { userInitials } from "@/lib/userDisplay";
 
@@ -34,9 +34,9 @@ export default async function AccountPage() {
   const initials = userInitials(session.user?.name ?? "", email);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className={PAGE_SHELL}>
       <Navbar />
-      <main className="flex-1 min-w-0 w-full overflow-x-hidden">
+      <main className={`${PAGE_MAIN} overflow-x-hidden`}>
         <section className="border-b border-border-primary bg-bg-card py-1.5 dark:border-dark-border-primary dark:bg-dark-bg-card">
           <nav
             aria-label="Breadcrumb"

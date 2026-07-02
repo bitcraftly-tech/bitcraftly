@@ -15,7 +15,14 @@ import {
 import { usePathname } from "next/navigation";
 
 import { useTheme } from "@/components/providers/ThemeProvider";
-import { LOADER_ALWAYS_ON, LOADER_ENABLED, LOADER_STORAGE_KEY, LOADER_TIMING } from "@/lib/loader/config";
+import {
+  LOADER_ALWAYS_ON,
+  LOADER_ENABLED,
+  LOADER_REVEAL,
+  LOADER_STORAGE_KEY,
+  LOADER_TIMING,
+  loaderRevealTotalMs,
+} from "@/lib/loader/config";
 import { LOADER_MOBILE_MAX_WIDTH_PX, LOADER_SKIP_ON_MOBILE } from "@/lib/loader/mobilePerf";
 import type { LoaderTheme } from "@/components/loading/BitcraftlyLoader";
 
@@ -29,9 +36,7 @@ type LoaderContextValue = {
 
 const LoaderContext = createContext<LoaderContextValue | null>(null);
 
-const noopLoader: LoaderContextValue = { showLoader: () => {} };
-
-type InitialPhase = "idle" | "loading" | "exiting" | "done";
+type InitialPhase = "loading" | "revealing" | "done";
 
 function loaderTheme(pathname: string, resolvedTheme: "light" | "dark"): LoaderTheme {
   if (pathname.startsWith("/portfolio/") || pathname.startsWith("/dayal-builders")) return "light";
@@ -45,10 +50,8 @@ function isMobileViewport(): boolean {
 
 function shouldSkipInitialLoader(): boolean {
   if (!LOADER_ENABLED) return true;
-  if (typeof window !== "undefined") {
-    const pathname = window.location.pathname;
-    if (pathname.startsWith("/portfolio/") || pathname.startsWith("/dayal-builders")) return true;
-  }
+  const pathname = window.location.pathname;
+  if (pathname.startsWith("/portfolio/") || pathname.startsWith("/dayal-builders")) return true;
   if (LOADER_SKIP_ON_MOBILE && isMobileViewport()) return true;
   if (LOADER_ALWAYS_ON) return false;
   try {
@@ -58,37 +61,39 @@ function shouldSkipInitialLoader(): boolean {
   }
 }
 
-function initialLoaderPhase(): InitialPhase {
-  if (!LOADER_ENABLED) return "done";
-  return "loading";
+function markLoaderDone(): void {
+  document.documentElement.dataset.loader = "done";
 }
 
-function LoaderProviderMobile({ children }: { children: ReactNode }) {
-  return (
-    <LoaderContext.Provider value={noopLoader}>
-      <div className="bc-app-root bc-app-root--ready">{children}</div>
-    </LoaderContext.Provider>
-  );
+function markLoaderRevealing(): void {
+  const root = document.documentElement;
+  root.classList.remove("bc-loader-active");
+  root.dataset.loader = "revealing";
+  root.style.setProperty("--bc-loader-exit-ms", `${LOADER_TIMING.exitMs}ms`);
+  root.style.setProperty("--bc-reveal-duration-ms", `${LOADER_REVEAL.durationMs}ms`);
 }
 
-function LoaderProviderDesktop({ children }: { children: ReactNode }) {
+function markLoaderActive(): void {
+  const root = document.documentElement;
+  root.classList.add("bc-loader-active");
+  delete root.dataset.loader;
+}
+
+export function LoaderProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { resolvedTheme } = useTheme();
   const theme = loaderTheme(pathname, resolvedTheme);
 
   const [ready, setReady] = useState(false);
-  const [initialPhase, setInitialPhase] = useState<InitialPhase>(initialLoaderPhase);
+  const [initialPhase, setInitialPhase] = useState<InitialPhase>("done");
   const [routeLoading, setRouteLoading] = useState(false);
   const [manualLoading, setManualLoading] = useState(false);
+  const [skipRevealAnimation, setSkipRevealAnimation] = useState(false);
   const prevPath = useRef<string | null>(null);
   const isFirstPathEffect = useRef(true);
+  const bootStarted = useRef(false);
 
   const finishInitial = useCallback(() => {
-    if (!LOADER_ENABLED) {
-      setInitialPhase("done");
-      return;
-    }
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!LOADER_ALWAYS_ON) {
       try {
         sessionStorage.setItem(LOADER_STORAGE_KEY, "1");
@@ -96,18 +101,30 @@ function LoaderProviderDesktop({ children }: { children: ReactNode }) {
         /* ignore */
       }
     }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion) {
+      document.documentElement.classList.remove("bc-loader-active");
+      markLoaderDone();
       setInitialPhase("done");
       return;
     }
-    setInitialPhase("exiting");
+
+    markLoaderRevealing();
+    setInitialPhase("revealing");
+
+    window.setTimeout(() => {
+      markLoaderDone();
+      setInitialPhase("done");
+    }, loaderRevealTotalMs());
   }, []);
 
   useLayoutEffect(() => {
     setReady(true);
-  }, []);
 
-  useEffect(() => {
+    if (bootStarted.current) return;
+    bootStarted.current = true;
+
     if (LOADER_ENABLED && LOADER_ALWAYS_ON) {
       try {
         sessionStorage.removeItem(LOADER_STORAGE_KEY);
@@ -117,11 +134,20 @@ function LoaderProviderDesktop({ children }: { children: ReactNode }) {
     }
 
     if (!LOADER_ENABLED || shouldSkipInitialLoader()) {
+      document.documentElement.classList.remove("bc-loader-active");
+      markLoaderDone();
+      setSkipRevealAnimation(true);
       setInitialPhase("done");
       return;
     }
 
+    markLoaderActive();
     setInitialPhase("loading");
+  }, []);
+
+  useEffect(() => {
+    if (!LOADER_ENABLED || initialPhase !== "loading") return;
+
     const start = Date.now();
     let done = false;
 
@@ -144,13 +170,7 @@ function LoaderProviderDesktop({ children }: { children: ReactNode }) {
       document.removeEventListener("DOMContentLoaded", complete);
       window.clearTimeout(fallback);
     };
-  }, [finishInitial]);
-
-  useEffect(() => {
-    if (initialPhase !== "exiting") return;
-    const t = window.setTimeout(() => setInitialPhase("done"), LOADER_TIMING.exitMs + 200);
-    return () => window.clearTimeout(t);
-  }, [initialPhase]);
+  }, [initialPhase, finishInitial]);
 
   useEffect(() => {
     if (!LOADER_ENABLED || !ready || initialPhase !== "done") return;
@@ -176,62 +196,27 @@ function LoaderProviderDesktop({ children }: { children: ReactNode }) {
 
   const value = useMemo(() => ({ showLoader }), [showLoader]);
 
-  const showInitial = LOADER_ENABLED && initialPhase === "loading";
   const showRoute = LOADER_ENABLED && routeLoading && initialPhase === "done" && !manualLoading;
   const showManual = LOADER_ENABLED && manualLoading && initialPhase === "done";
-  const showOverlay = ready && (showInitial || showRoute || showManual);
-  const contentReady = !LOADER_ENABLED || initialPhase === "done";
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (LOADER_ENABLED && initialPhase !== "done") {
-      root.classList.add("bc-loader-active");
-      delete root.dataset.loader;
-    } else {
-      root.classList.remove("bc-loader-active");
-      root.dataset.loader = "done";
-    }
-    return () => root.classList.remove("bc-loader-active");
-  }, [initialPhase]);
-
-  useEffect(() => {
-    if (!ready || !showOverlay) return;
-    const staticLoader = document.getElementById("bc-static-loader");
-    if (staticLoader) staticLoader.style.display = "none";
-  }, [ready, showOverlay]);
+  const showOverlay = ready && (showRoute || showManual);
+  const contentReady = !LOADER_ENABLED || initialPhase === "revealing" || initialPhase === "done";
 
   return (
     <LoaderContext.Provider value={value}>
       {LOADER_ENABLED ? (
-        <BitcraftlyLoader
-          show={showOverlay}
-          density="fullscreen"
-          theme={theme}
-          onExitComplete={() => {
-            setInitialPhase((phase) => (phase === "exiting" ? "done" : phase));
-          }}
-        />
+        <BitcraftlyLoader show={showOverlay} density="fullscreen" theme={theme} />
       ) : null}
-      <div className={contentReady ? "bc-app-root bc-app-root--ready" : "bc-app-root"}>{children}</div>
+      <div
+        className={
+          contentReady
+            ? `bc-app-root bc-app-root--ready${skipRevealAnimation ? " bc-app-root--instant" : ""}`
+            : "bc-app-root"
+        }
+      >
+        {children}
+      </div>
     </LoaderContext.Provider>
   );
-}
-
-export function LoaderProvider({ children }: { children: ReactNode }) {
-  const [useDesktopLoader, setUseDesktopLoader] = useState(false);
-
-  useLayoutEffect(() => {
-    const pathname = window.location.pathname;
-    const portfolio = pathname.startsWith("/portfolio/") || pathname.startsWith("/dayal-builders");
-    const mobile = LOADER_SKIP_ON_MOBILE && isMobileViewport();
-    setUseDesktopLoader(!mobile && !portfolio);
-  }, []);
-
-  if (!useDesktopLoader) {
-    return <LoaderProviderMobile>{children}</LoaderProviderMobile>;
-  }
-
-  return <LoaderProviderDesktop>{children}</LoaderProviderDesktop>;
 }
 
 export function useLoader(): LoaderContextValue {

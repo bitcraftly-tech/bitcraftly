@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { createAuthOptions } from "@/auth";
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 import { BRAND } from "@/lib/siteContent";
 
 type PortalCard = {
@@ -57,9 +57,9 @@ export default async function CustomerPortalPage() {
   const firstName = session.user?.name?.trim().split(/\s+/)[0] || "Customer";
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className={PAGE_SHELL}>
       <Navbar />
-      <main className="flex-1 min-w-0 w-full overflow-x-hidden">
+      <main className={`${PAGE_MAIN} overflow-x-hidden`}>
         <section className="border-b border-border-primary bg-bg-card py-1.5 dark:border-dark-border-primary dark:bg-dark-bg-card">
           <div className={`${CONTAINER} flex flex-wrap items-center justify-between gap-2 text-xs text-text-tertiary dark:text-dark-text-tertiary`}>
             <div>

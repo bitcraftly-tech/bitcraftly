@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, SECTION_PY, SECTION_SCROLL_MT } from "@/lib/constants";
 
 type NextLink = {
   href: string;
@@ -16,7 +16,7 @@ type MarketingNextStepProps = {
 
 export default function MarketingNextStep({ title, description, links }: MarketingNextStepProps) {
   return (
-    <section className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-7 dark:border-dark-border-primary md:py-10`}>
+    <section className={`${CONTAINER} ${SECTION_SCROLL_MT} border-t border-border-primary ${SECTION_PY} dark:border-dark-border-primary`}>
       <div className="rounded-2xl border border-indigo-500/25 bg-gradient-to-br from-indigo-50/80 via-bg-card to-bg-card p-6 dark:from-indigo-950/30 dark:via-dark-bg-card dark:to-dark-bg-card sm:p-8">
         <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-indigo-600 dark:text-indigo-400">Next step</p>
         <h2 className="mt-2 font-[var(--font-playfair)] text-2xl text-text-primary dark:text-dark-text-primary">{title}</h2>
