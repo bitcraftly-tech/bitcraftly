@@ -39,8 +39,15 @@ type Metrics = {
   bodyClientHeight: number;
   safeAreaInsetBottom: number | null; // measured env(safe-area-inset-bottom)
   screenHeight: number | null;
-  exposedBand: number | null; // screen.height - (vv.height + vv.offsetTop)
+  screenAvailHeight: number | null;
+  chromeEnvelope: number | null; // screen.height - (vv.height + vv.offsetTop) === browser chrome, NOT page gap
+  innerMinusVv: number | null; // window.innerHeight - visualViewport.height
+  gapLayoutVp: number; // innerHeight - (scrollHeight - scrollY) === -overscroll (layout-vp page gap)
+  gapVisualVp: number | null; // vv.height - (scrollHeight - scrollY - vv.offsetTop) (visual-vp page gap)
+  footerBottomClient: number | null; // footer rect bottom in layout-viewport coords
   lineTop: number; // viewport-space y of documentElement.scrollHeight
+  innerLineTop: number; // y of window.innerHeight (layout-viewport bottom)
+  vvLineTop: number | null; // y of visual-viewport bottom (offsetTop + height)
   maxTag: string;
   maxId: string;
   maxClass: string;
@@ -84,9 +91,11 @@ export default function IosScrollDebugOverlay() {
       const scrollingEl = document.scrollingElement as HTMLElement | null;
       const vv = window.visualViewport;
       const footer = document.querySelector("footer");
+      const footerRectBottom = footer ? footer.getBoundingClientRect().bottom : null;
       const footerBottom = footer
-        ? Math.round(footer.getBoundingClientRect().bottom + window.scrollY)
+        ? Math.round((footerRectBottom as number) + window.scrollY)
         : null;
+      const footerBottomClient = footerRectBottom != null ? Math.round(footerRectBottom) : null;
 
       let maxEl: HTMLElement | null = null;
       let maxBottom = -Infinity;
@@ -129,10 +138,20 @@ export default function IosScrollDebugOverlay() {
       }
       const screenHeight =
         typeof window.screen?.height === "number" ? Math.round(window.screen.height) : null;
-      const exposedBand =
+      const screenAvailHeight =
+        typeof window.screen?.availHeight === "number" ? Math.round(window.screen.availHeight) : null;
+      const chromeEnvelope =
         vv && screenHeight != null
           ? Math.round(screenHeight - (vv.height + vv.offsetTop))
           : null;
+      const innerMinusVv = vv ? Math.round(innerHeight - vv.height) : null;
+      // Page-canvas gap between the document's bottom and the viewport bottom,
+      // measured INSIDE the web viewport (this is the real "exposed band").
+      const docBottomInViewport = htmlScrollHeight - scrollY;
+      const gapLayoutVp = Math.round(innerHeight - docBottomInViewport);
+      const gapVisualVp = vv
+        ? Math.round(vv.height - (docBottomInViewport - vv.offsetTop))
+        : null;
 
       setMetrics({
         htmlScrollHeight,
@@ -155,8 +174,15 @@ export default function IosScrollDebugOverlay() {
         bodyClientHeight: document.body.clientHeight,
         safeAreaInsetBottom,
         screenHeight,
-        exposedBand,
+        screenAvailHeight,
+        chromeEnvelope,
+        innerMinusVv,
+        gapLayoutVp,
+        gapVisualVp,
+        footerBottomClient,
         lineTop: htmlScrollHeight - scrollY,
+        innerLineTop: innerHeight,
+        vvLineTop: vv ? Math.round(vv.offsetTop + vv.height) : null,
         maxTag: nextEl ? nextEl.tagName : "-",
         maxId: nextEl && nextEl.id ? nextEl.id : "-",
         maxClass: className || "-",
@@ -198,22 +224,17 @@ export default function IosScrollDebugOverlay() {
 
   const overscrollPositive = metrics.overscroll > 0;
 
-  const band = metrics.exposedBand;
-  const safe = metrics.safeAreaInsetBottom;
-  let bandVerdict = "";
-  let bandColor = "#8affc1";
-  if (band != null && safe != null) {
-    const diff = band - safe;
-    if (band <= 1) {
-      bandVerdict = "no exposed band";
-    } else if (Math.abs(diff) <= 2) {
-      bandVerdict = "== safe-area  → viewport-fit cover CONFIRMED";
-    } else if (diff > 2) {
-      bandVerdict = `> safe-area by ${diff}px  → NOT just safe-area, keep investigating`;
-      bandColor = "#ff3b3b";
+  // Real page-canvas gap inside the web viewport (RED→BLUE distance). This is the
+  // actual "exposed band"; chromeEnvelope below is browser UI, NOT a page gap.
+  const pageGap = metrics.gapVisualVp;
+  let gapVerdict = "";
+  let gapColor = "#8affc1";
+  if (pageGap != null) {
+    if (pageGap <= 1) {
+      gapVerdict = "≤1px → document fills the visible viewport (NO page canvas below)";
     } else {
-      bandVerdict = `< safe-area by ${-diff}px`;
-      bandColor = "#ffd166";
+      gapVerdict = `${pageGap}px of canvas below document INSIDE web viewport`;
+      gapColor = "#ff3b3b";
     }
   }
 
@@ -236,8 +257,14 @@ export default function IosScrollDebugOverlay() {
     ["scrollingEl.scrollH", metrics.scrollingScrollHeight],
     ["html.clientHeight", metrics.htmlClientHeight],
     ["body.clientHeight", metrics.bodyClientHeight],
-    ["── viewport canvas ──", ""],
+    ["── viewport vs page ──", ""],
+    ["gap in VISUAL vp (real)", metrics.gapVisualVp],
+    ["gap in LAYOUT vp (−OS)", metrics.gapLayoutVp],
+    ["footer bottom (client)", metrics.footerBottomClient],
+    ["innerHeight − vv.height", metrics.innerMinusVv],
     ["screen.height", metrics.screenHeight],
+    ["screen.availHeight", metrics.screenAvailHeight],
+    ["chrome envelope (UI)", metrics.chromeEnvelope],
     ["visualViewport.height", metrics.visualViewportHeight],
     ["vv.offsetTop", metrics.vvOffsetTop],
     ["safe-area-inset-bottom", metrics.safeAreaInsetBottom],
@@ -294,14 +321,17 @@ export default function IosScrollDebugOverlay() {
         </div>
         <div
           style={{
-            color: bandColor,
+            color: gapColor,
             fontWeight: 700,
             fontSize: 13,
             marginBottom: 4,
           }}
         >
-          exposedBand = screen−(vv.h+vv.top): {band == null ? "n/a" : band}
-          {bandVerdict ? `  ${bandVerdict}` : ""}
+          PAGE GAP (visual vp): {pageGap == null ? "n/a" : pageGap}
+          {gapVerdict ? `  ${gapVerdict}` : ""}
+        </div>
+        <div style={{ color: "#8ab4ff", fontSize: 10, marginBottom: 4 }}>
+          RED=doc bottom · GREEN=innerHeight · BLUE=visual-vp bottom
         </div>
         {rows.map(([label, value], i) => (
           <div key={`${i}-${label}`} style={{ display: "flex", gap: 8 }}>
@@ -347,6 +377,66 @@ export default function IosScrollDebugOverlay() {
           scrollHeight = {metrics.htmlScrollHeight}
         </span>
       </div>
+
+      {/* Green line at window.innerHeight (layout-viewport bottom). */}
+      <div
+        data-ios-debug
+        style={{
+          position: "fixed",
+          left: 0,
+          right: 0,
+          top: metrics.innerLineTop - 2,
+          height: 0,
+          borderTop: "2px dashed #00ff88",
+          zIndex: 2147483645,
+          pointerEvents: "none",
+        }}
+      >
+        <span
+          style={{
+            position: "absolute",
+            left: 4,
+            top: -14,
+            font: "10px/1 ui-monospace, monospace",
+            color: "#00ff88",
+            background: "rgba(0,0,0,0.6)",
+            padding: "1px 3px",
+          }}
+        >
+          innerHeight = {metrics.innerHeight}
+        </span>
+      </div>
+
+      {/* Blue line at the visual-viewport bottom (offsetTop + height). */}
+      {metrics.vvLineTop != null ? (
+        <div
+          data-ios-debug
+          style={{
+            position: "fixed",
+            left: 0,
+            right: 0,
+            top: metrics.vvLineTop - 2,
+            height: 0,
+            borderTop: "2px solid #3b82f6",
+            zIndex: 2147483644,
+            pointerEvents: "none",
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              left: "40%",
+              top: -14,
+              font: "10px/1 ui-monospace, monospace",
+              color: "#3b82f6",
+              background: "rgba(0,0,0,0.6)",
+              padding: "1px 3px",
+            }}
+          >
+            visual-vp bottom = {metrics.vvLineTop}
+          </span>
+        </div>
+      ) : null}
 
       {/* Off-screen probe: paddingBottom resolves env(safe-area-inset-bottom) so
           we can read the raw inset value in JS. Invisible, no layout impact. */}
