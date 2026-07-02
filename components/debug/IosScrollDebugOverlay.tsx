@@ -6,9 +6,14 @@ import { useEffect, useRef, useState } from "react";
  * TEMPORARY iOS scroll diagnostic overlay.
  *
  * Renders NOTHING unless the URL contains `?debug-ios=1`, so it has zero effect
- * on production behavior. When enabled it shows live document/viewport heights,
- * the footer bottom position, and the element with the maximum bottom coordinate
- * (the node that determines document height) — and outlines that element in red.
+ * on production behavior. When enabled it shows live document/viewport/scroll
+ * metrics, the footer bottom position, the element with the maximum bottom
+ * coordinate (outlined red), and a red line drawn at the document's bottom edge
+ * (documentElement.scrollHeight) in viewport space.
+ *
+ * Purpose: distinguish "an element extends the document" (red line sits below
+ * the footer) from "the browser paints beyond the document" (white appears
+ * below the red line — i.e. iOS overscroll / dynamic-toolbar / viewport gap).
  *
  * Not for production use; safe to leave dormant because it is fully gated.
  */
@@ -20,6 +25,19 @@ type Metrics = {
   visualViewportHeight: number | null;
   footerBottom: number | null;
   spaceBelowFooter: number | null;
+  scrollY: number;
+  scrollingScrollTop: number | null;
+  scrollYPlusInner: number;
+  overscroll: number; // (scrollY + innerHeight) - htmlScrollHeight
+  vvOffsetTop: number | null;
+  vvPageTop: number | null;
+  vvOffsetLeft: number | null;
+  vvScale: number | null;
+  scrollingClientHeight: number | null;
+  scrollingScrollHeight: number | null;
+  htmlClientHeight: number;
+  bodyClientHeight: number;
+  lineTop: number; // viewport-space y of documentElement.scrollHeight
   maxTag: string;
   maxId: string;
   maxClass: string;
@@ -36,6 +54,7 @@ export default function IosScrollDebugOverlay() {
   const [enabled, setEnabled] = useState(false);
   const [metrics, setMetrics] = useState<Metrics | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
   const outlinedRef = useRef<HTMLElement | null>(null);
   const prevOutlineRef = useRef<string>("");
 
@@ -54,6 +73,8 @@ export default function IosScrollDebugOverlay() {
 
     const measure = () => {
       const de = document.documentElement;
+      const scrollingEl = document.scrollingElement as HTMLElement | null;
+      const vv = window.visualViewport;
       const footer = document.querySelector("footer");
       const footerBottom = footer
         ? Math.round(footer.getBoundingClientRect().bottom + window.scrollY)
@@ -63,6 +84,7 @@ export default function IosScrollDebugOverlay() {
       let maxBottom = -Infinity;
 
       document.querySelectorAll<HTMLElement>("body *").forEach((el) => {
+        if (el.hasAttribute("data-ios-debug")) return;
         if (overlayRef.current && overlayRef.current.contains(el)) return;
         const r = el.getBoundingClientRect();
         if (r.width === 0 && r.height === 0) return;
@@ -87,13 +109,30 @@ export default function IosScrollDebugOverlay() {
       const cs = nextEl ? getComputedStyle(nextEl) : null;
       const className = nextEl && typeof nextEl.className === "string" ? nextEl.className : "";
 
+      const htmlScrollHeight = de.scrollHeight;
+      const scrollY = Math.round(window.scrollY);
+      const innerHeight = window.innerHeight;
+
       setMetrics({
-        htmlScrollHeight: de.scrollHeight,
+        htmlScrollHeight,
         bodyScrollHeight: document.body.scrollHeight,
-        innerHeight: window.innerHeight,
-        visualViewportHeight: window.visualViewport ? Math.round(window.visualViewport.height) : null,
+        innerHeight,
+        visualViewportHeight: vv ? Math.round(vv.height) : null,
         footerBottom,
-        spaceBelowFooter: footerBottom != null ? de.scrollHeight - footerBottom : null,
+        spaceBelowFooter: footerBottom != null ? htmlScrollHeight - footerBottom : null,
+        scrollY,
+        scrollingScrollTop: scrollingEl ? Math.round(scrollingEl.scrollTop) : null,
+        scrollYPlusInner: scrollY + innerHeight,
+        overscroll: scrollY + innerHeight - htmlScrollHeight,
+        vvOffsetTop: vv ? Math.round(vv.offsetTop) : null,
+        vvPageTop: vv && "pageTop" in vv ? Math.round((vv as VisualViewport & { pageTop: number }).pageTop) : null,
+        vvOffsetLeft: vv ? Math.round(vv.offsetLeft) : null,
+        vvScale: vv ? Number(vv.scale.toFixed(3)) : null,
+        scrollingClientHeight: scrollingEl ? scrollingEl.clientHeight : null,
+        scrollingScrollHeight: scrollingEl ? scrollingEl.scrollHeight : null,
+        htmlClientHeight: de.clientHeight,
+        bodyClientHeight: document.body.clientHeight,
+        lineTop: htmlScrollHeight - scrollY,
         maxTag: nextEl ? nextEl.tagName : "-",
         maxId: nextEl && nextEl.id ? nextEl.id : "-",
         maxClass: className || "-",
@@ -115,7 +154,7 @@ export default function IosScrollDebugOverlay() {
     window.addEventListener("resize", schedule);
     window.visualViewport?.addEventListener("resize", schedule);
     window.visualViewport?.addEventListener("scroll", schedule);
-    const interval = window.setInterval(measure, 1000);
+    const interval = window.setInterval(measure, 250);
 
     return () => {
       cancelAnimationFrame(raf);
@@ -133,13 +172,27 @@ export default function IosScrollDebugOverlay() {
 
   if (!enabled || !metrics) return null;
 
+  const overscrollPositive = metrics.overscroll > 0;
+
   const rows: Array<[string, string | number | null]> = [
+    ["(scrollY+inner)-scrollH", metrics.overscroll],
     ["html.scrollHeight", metrics.htmlScrollHeight],
     ["body.scrollHeight", metrics.bodyScrollHeight],
-    ["window.innerHeight", metrics.innerHeight],
-    ["visualViewport.height", metrics.visualViewportHeight],
     ["footer bottom", metrics.footerBottom],
     ["space BELOW footer", metrics.spaceBelowFooter],
+    ["window.innerHeight", metrics.innerHeight],
+    ["visualViewport.height", metrics.visualViewportHeight],
+    ["window.scrollY", metrics.scrollY],
+    ["scrollingEl.scrollTop", metrics.scrollingScrollTop],
+    ["scrollY+innerHeight", metrics.scrollYPlusInner],
+    ["vv.offsetTop", metrics.vvOffsetTop],
+    ["vv.pageTop", metrics.vvPageTop],
+    ["vv.offsetLeft", metrics.vvOffsetLeft],
+    ["vv.scale", metrics.vvScale],
+    ["scrollingEl.clientH", metrics.scrollingClientHeight],
+    ["scrollingEl.scrollH", metrics.scrollingScrollHeight],
+    ["html.clientHeight", metrics.htmlClientHeight],
+    ["body.clientHeight", metrics.bodyClientHeight],
     ["── max-bottom element ──", ""],
     ["tag", metrics.maxTag],
     ["id", metrics.maxId],
@@ -152,35 +205,85 @@ export default function IosScrollDebugOverlay() {
   ];
 
   return (
-    <div
-      ref={overlayRef}
-      data-ios-debug
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 2147483647,
-        maxHeight: "45vh",
-        overflow: "auto",
-        padding: "8px 10px",
-        background: "rgba(0,0,0,0.85)",
-        color: "#00ff88",
-        font: "11px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace",
-        pointerEvents: "none",
-        whiteSpace: "pre-wrap",
-        wordBreak: "break-word",
-      }}
-    >
-      <div style={{ color: "#ffd166", fontWeight: 700, marginBottom: 4 }}>iOS scroll debug (?debug-ios=1)</div>
-      {rows.map(([label, value]) => (
-        <div key={label} style={{ display: "flex", gap: 8 }}>
-          <span style={{ color: "#8ab4ff", minWidth: 148, flexShrink: 0 }}>{label}</span>
-          <span style={{ color: label === "space BELOW footer" && Number(value) > 4 ? "#ff5c5c" : "#e6e6e6" }}>
-            {value === null ? "n/a" : String(value)}
-          </span>
+    <>
+      <div
+        ref={overlayRef}
+        data-ios-debug
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 2147483647,
+          maxHeight: "60vh",
+          overflow: "auto",
+          padding: "8px 10px",
+          background: "rgba(0,0,0,0.86)",
+          color: "#00ff88",
+          font: "10px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace",
+          pointerEvents: "none",
+          whiteSpace: "pre-wrap",
+          wordBreak: "break-word",
+        }}
+      >
+        <div style={{ color: "#ffd166", fontWeight: 700, marginBottom: 4 }}>
+          iOS scroll debug (?debug-ios=1) · red line = document bottom
         </div>
-      ))}
-    </div>
+        <div
+          style={{
+            color: overscrollPositive ? "#ff3b3b" : "#8affc1",
+            fontWeight: 700,
+            fontSize: 13,
+            marginBottom: 4,
+          }}
+        >
+          OVERSCROLL (scrollY+inner−scrollH): {metrics.overscroll}
+          {overscrollPositive ? "  ← PAINTING BEYOND DOCUMENT" : ""}
+        </div>
+        {rows.map(([label, value]) => (
+          <div key={label} style={{ display: "flex", gap: 8 }}>
+            <span style={{ color: "#8ab4ff", minWidth: 148, flexShrink: 0 }}>{label}</span>
+            <span
+              style={{
+                color:
+                  label === "space BELOW footer" && Number(value) > 4 ? "#ff5c5c" : "#e6e6e6",
+              }}
+            >
+              {value === null ? "n/a" : String(value)}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Red line drawn at documentElement.scrollHeight, in viewport space. */}
+      <div
+        ref={lineRef}
+        data-ios-debug
+        style={{
+          position: "fixed",
+          left: 0,
+          right: 0,
+          top: metrics.lineTop,
+          height: 0,
+          borderTop: "2px solid red",
+          zIndex: 2147483646,
+          pointerEvents: "none",
+        }}
+      >
+        <span
+          style={{
+            position: "absolute",
+            right: 4,
+            top: -14,
+            font: "10px/1 ui-monospace, monospace",
+            color: "red",
+            background: "rgba(0,0,0,0.6)",
+            padding: "1px 3px",
+          }}
+        >
+          scrollHeight = {metrics.htmlScrollHeight}
+        </span>
+      </div>
+    </>
   );
 }
