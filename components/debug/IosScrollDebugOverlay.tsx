@@ -51,10 +51,8 @@ type Metrics = {
 const RED_OUTLINE = "3px solid red";
 
 // Runtime build id so we can confirm exactly which deploy is serving the overlay.
-// Vercel auto-exposes NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA for Next.js projects; the
-// literal fallback is the commit we expect on the v2 test deployment.
-const BUILD_SHA = (process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || "66f3327").slice(0, 7);
-const EXPECTED_SHA = "66f3327";
+// Vercel auto-exposes NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA for Next.js projects.
+const BUILD_SHA = (process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || "local").slice(0, 7);
 
 export default function IosScrollDebugOverlay() {
   const [enabled, setEnabled] = useState(false);
@@ -236,15 +234,8 @@ export default function IosScrollDebugOverlay() {
         <div style={{ color: "#ffd166", fontWeight: 700, marginBottom: 4 }}>
           iOS scroll debug (?debug-ios=1) · red line = document bottom
         </div>
-        <div
-          style={{
-            color: BUILD_SHA === EXPECTED_SHA ? "#8affc1" : "#ff3b3b",
-            fontWeight: 700,
-            marginBottom: 4,
-          }}
-        >
-          build {BUILD_SHA} (expected {EXPECTED_SHA})
-          {BUILD_SHA === EXPECTED_SHA ? "  ✓" : "  ← STALE / DIFFERENT BUILD"}
+        <div style={{ color: "#ffd166", fontWeight: 700, marginBottom: 4 }}>
+          build {BUILD_SHA}
         </div>
         <div
           style={{
