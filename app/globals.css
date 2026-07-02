@@ -37,7 +37,7 @@ body {
   background-color: var(--color-bg-primary);
 }
 
-.dark html,
+html.dark,
 .dark body {
   background-color: var(--color-dark-bg-primary);
 }
