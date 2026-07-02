@@ -37,6 +37,9 @@ type Metrics = {
   scrollingScrollHeight: number | null;
   htmlClientHeight: number;
   bodyClientHeight: number;
+  safeAreaInsetBottom: number | null; // measured env(safe-area-inset-bottom)
+  screenHeight: number | null;
+  exposedBand: number | null; // screen.height - (vv.height + vv.offsetTop)
   lineTop: number; // viewport-space y of documentElement.scrollHeight
   maxTag: string;
   maxId: string;
@@ -59,6 +62,7 @@ export default function IosScrollDebugOverlay() {
   const [metrics, setMetrics] = useState<Metrics | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
+  const safeAreaProbeRef = useRef<HTMLDivElement>(null);
   const outlinedRef = useRef<HTMLElement | null>(null);
   const prevOutlineRef = useRef<string>("");
 
@@ -117,6 +121,19 @@ export default function IosScrollDebugOverlay() {
       const scrollY = Math.round(window.scrollY);
       const innerHeight = window.innerHeight;
 
+      let safeAreaInsetBottom: number | null = null;
+      if (safeAreaProbeRef.current) {
+        const probePad = getComputedStyle(safeAreaProbeRef.current).paddingBottom;
+        const parsed = parseFloat(probePad);
+        safeAreaInsetBottom = Number.isFinite(parsed) ? Math.round(parsed) : null;
+      }
+      const screenHeight =
+        typeof window.screen?.height === "number" ? Math.round(window.screen.height) : null;
+      const exposedBand =
+        vv && screenHeight != null
+          ? Math.round(screenHeight - (vv.height + vv.offsetTop))
+          : null;
+
       setMetrics({
         htmlScrollHeight,
         bodyScrollHeight: document.body.scrollHeight,
@@ -136,6 +153,9 @@ export default function IosScrollDebugOverlay() {
         scrollingScrollHeight: scrollingEl ? scrollingEl.scrollHeight : null,
         htmlClientHeight: de.clientHeight,
         bodyClientHeight: document.body.clientHeight,
+        safeAreaInsetBottom,
+        screenHeight,
+        exposedBand,
         lineTop: htmlScrollHeight - scrollY,
         maxTag: nextEl ? nextEl.tagName : "-",
         maxId: nextEl && nextEl.id ? nextEl.id : "-",
@@ -178,6 +198,25 @@ export default function IosScrollDebugOverlay() {
 
   const overscrollPositive = metrics.overscroll > 0;
 
+  const band = metrics.exposedBand;
+  const safe = metrics.safeAreaInsetBottom;
+  let bandVerdict = "";
+  let bandColor = "#8affc1";
+  if (band != null && safe != null) {
+    const diff = band - safe;
+    if (band <= 1) {
+      bandVerdict = "no exposed band";
+    } else if (Math.abs(diff) <= 2) {
+      bandVerdict = "== safe-area  → viewport-fit cover CONFIRMED";
+    } else if (diff > 2) {
+      bandVerdict = `> safe-area by ${diff}px  → NOT just safe-area, keep investigating`;
+      bandColor = "#ff3b3b";
+    } else {
+      bandVerdict = `< safe-area by ${-diff}px`;
+      bandColor = "#ffd166";
+    }
+  }
+
   const rows: Array<[string, string | number | null]> = [
     ["(scrollY+inner)-scrollH", metrics.overscroll],
     ["html.scrollHeight", metrics.htmlScrollHeight],
@@ -197,6 +236,11 @@ export default function IosScrollDebugOverlay() {
     ["scrollingEl.scrollH", metrics.scrollingScrollHeight],
     ["html.clientHeight", metrics.htmlClientHeight],
     ["body.clientHeight", metrics.bodyClientHeight],
+    ["── viewport canvas ──", ""],
+    ["screen.height", metrics.screenHeight],
+    ["visualViewport.height", metrics.visualViewportHeight],
+    ["vv.offsetTop", metrics.vvOffsetTop],
+    ["safe-area-inset-bottom", metrics.safeAreaInsetBottom],
     ["── max-bottom element ──", ""],
     ["tag", metrics.maxTag],
     ["id", metrics.maxId],
@@ -248,8 +292,19 @@ export default function IosScrollDebugOverlay() {
           OVERSCROLL (scrollY+inner−scrollH): {metrics.overscroll}
           {overscrollPositive ? "  ← PAINTING BEYOND DOCUMENT" : ""}
         </div>
-        {rows.map(([label, value]) => (
-          <div key={label} style={{ display: "flex", gap: 8 }}>
+        <div
+          style={{
+            color: bandColor,
+            fontWeight: 700,
+            fontSize: 13,
+            marginBottom: 4,
+          }}
+        >
+          exposedBand = screen−(vv.h+vv.top): {band == null ? "n/a" : band}
+          {bandVerdict ? `  ${bandVerdict}` : ""}
+        </div>
+        {rows.map(([label, value], i) => (
+          <div key={`${i}-${label}`} style={{ display: "flex", gap: 8 }}>
             <span style={{ color: "#8ab4ff", minWidth: 148, flexShrink: 0 }}>{label}</span>
             <span
               style={{
@@ -292,6 +347,24 @@ export default function IosScrollDebugOverlay() {
           scrollHeight = {metrics.htmlScrollHeight}
         </span>
       </div>
+
+      {/* Off-screen probe: paddingBottom resolves env(safe-area-inset-bottom) so
+          we can read the raw inset value in JS. Invisible, no layout impact. */}
+      <div
+        ref={safeAreaProbeRef}
+        data-ios-debug
+        aria-hidden
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: 0,
+          height: 0,
+          paddingBottom: "env(safe-area-inset-bottom, 0px)",
+          visibility: "hidden",
+          pointerEvents: "none",
+        }}
+      />
     </>
   );
 }
