@@ -1,0 +1,20 @@
+/* Pricing page — comparison table scroll + sticky column (scoped via import in app/pricing/page.tsx) */
+
+.pricing-compare-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.pricing-compare-sticky-col {
+  box-shadow: 4px 0 14px -10px rgb(15 23 42 / 0.12);
+}
+
+.dark .pricing-compare-sticky-col {
+  box-shadow: 4px 0 14px -10px rgb(0 0 0 / 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-tier-card-hover {
+    transition: none;
+  }
+}

@@ -6,6 +6,7 @@ import { createAuthOptions } from "@/auth";
 import DashboardSubNav from "@/components/dashboard/DashboardSubNav";
 import Footer from "@/components/landing/Footer";
 import Navbar from "@/components/landing/Navbar";
+import { PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 import QueryProvider from "@/components/providers/QueryProvider";
 
 type DashboardLayoutProps = {
@@ -27,12 +28,12 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
 
   return (
     <QueryProvider>
-      <div className="min-h-screen overflow-x-hidden bg-bg-primary text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary">
-        <header className="sticky top-0 z-50">
+      <div className={PAGE_SHELL}>
+        <header className="sticky top-0 z-50 shrink-0">
           <Navbar embedded session={session} />
           <DashboardSubNav />
         </header>
-        <main className="overflow-x-hidden">
+        <main className={`${PAGE_MAIN} overflow-x-hidden`}>
           <div className="mx-auto w-full min-w-0 max-w-7xl px-4 py-4 sm:px-6 lg:px-12">{children}</div>
         </main>
         <Footer />

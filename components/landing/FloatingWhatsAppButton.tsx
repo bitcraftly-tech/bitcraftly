@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { WHATSAPP_HOURS } from "@/lib/constants";
+import { FOCUS_RING, WHATSAPP_HOURS } from "@/lib/constants";
 import { openWhatsApp } from "@/lib/openWhatsApp";
 import {
   FLOATING_WHATSAPP,
@@ -49,17 +49,18 @@ export default function FloatingWhatsAppButton() {
         <div
           className="mb-3 w-[min(100vw-2.5rem,18rem)] rounded-2xl border border-border-primary bg-bg-card p-4 shadow-lg dark:border-dark-border-primary dark:bg-dark-bg-card"
           role="dialog"
+          aria-modal="true"
           aria-label={FLOATING_WHATSAPP.headline}
         >
           <div className="flex items-start justify-between gap-2">
-            <div>
+            <div className="min-w-0">
               <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">{FLOATING_WHATSAPP.headline}</p>
               <p className="mt-0.5 text-xs text-text-secondary dark:text-dark-text-secondary">{FLOATING_WHATSAPP.subline}</p>
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="shrink-0 rounded-md px-1.5 py-0.5 text-xs font-medium text-text-tertiary hover:bg-bg-secondary dark:text-dark-text-tertiary dark:hover:bg-dark-bg-secondary"
+              className={`inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg text-sm font-medium text-text-tertiary transition hover:bg-bg-secondary active:scale-[0.97] dark:text-dark-text-tertiary dark:hover:bg-dark-bg-secondary ${FOCUS_RING}`}
               aria-label={FLOATING_WHATSAPP.closeLabel}
             >
               ✕
@@ -74,7 +75,7 @@ export default function FloatingWhatsAppButton() {
                 <button
                   type="button"
                   onClick={() => openChat(opt.id)}
-                  className="w-full rounded-lg border border-border-primary bg-bg-secondary/50 px-3 py-2 text-left text-xs transition hover:border-[#25D366]/40 dark:border-dark-border-primary dark:bg-dark-bg-secondary/50"
+                  className="flex min-h-11 w-full items-center rounded-lg border border-border-primary bg-bg-secondary/50 px-3 py-2 text-left text-xs transition hover:border-[#25D366]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-primary dark:border-dark-border-primary dark:bg-dark-bg-secondary/50"
                 >
                   <span className="font-semibold text-text-primary dark:text-dark-text-primary">{opt.shortLabel}</span>
                   <span className="mt-0.5 block text-[10px] text-text-tertiary dark:text-dark-text-tertiary">{opt.description}</span>

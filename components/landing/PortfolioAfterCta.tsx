@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-import { CONTAINER, whatsappUrl } from "@/lib/constants";
+import { CONTAINER, SECTION_PY_COMPACT, whatsappUrl } from "@/lib/constants";
 import { WHATSAPP_MESSAGES } from "@/lib/leadGen";
 import { PORTFOLIO } from "@/lib/portfolioContent";
 
 export default function PortfolioAfterCta() {
   return (
-    <div className={`${CONTAINER} border-t border-border-primary py-6 dark:border-dark-border-primary lg:py-8`}>
+    <div className={`${CONTAINER} border-t border-border-primary ${SECTION_PY_COMPACT} dark:border-dark-border-primary`}>
       <div className="flex w-full flex-col gap-4 rounded-2xl border border-border-primary bg-bg-card px-6 py-6 dark:border-dark-border-primary dark:bg-dark-bg-card sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <div className="text-left">
           <p className="font-[var(--font-playfair)] text-lg font-semibold text-text-primary dark:text-dark-text-primary sm:text-xl">

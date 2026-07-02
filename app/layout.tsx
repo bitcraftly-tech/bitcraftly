@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { ReactNode, Suspense } from "react";
 import "./globals.css";
-import { inter, playfair } from "@/lib/fonts";
+import { geistMono, geistSans } from "@/lib/fonts";
 import ConsentGatedGoogleAnalytics from "@/components/analytics/ConsentGatedGoogleAnalytics";
 import DeferredAnalyticsListener from "@/components/analytics/DeferredAnalyticsListener";
 import RootBootEffects from "@/components/boot/RootBootEffects";
-import IosScrollDebugOverlay from "@/components/debug/IosScrollDebugOverlay";
 import CookieConsentBanner from "@/components/consent/CookieConsentBanner";
 import { CookieConsentProvider } from "@/components/consent/CookieConsentProvider";
 import { GSC_VERIFICATION } from "@/lib/analytics";
@@ -58,6 +57,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  minimumScale: 1,
   maximumScale: 1,
   userScalable: false,
   viewportFit: "cover",
@@ -66,7 +66,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
       <body suppressHydrationWarning className="font-sans-brand antialiased">
         <RootBootEffects />
         {LOADER_ENABLED ? (
@@ -112,13 +112,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <LoaderProvider>
               <AuthSessionProvider>{children}</AuthSessionProvider>
               {/* <ChatSupportWidget /> */}
-              {/* <BitcraftlyChat /> */}
-              {/* <DeferredFloatingChrome /> */}
+              <BitcraftlyChat />
+              <DeferredFloatingChrome />
               <DeferredToaster />
             </LoaderProvider>
           </ThemeProvider>
         </CookieConsentProvider>
-        <IosScrollDebugOverlay />
       </body>
     </html>
   );

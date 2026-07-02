@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
-import { CONTAINER, whatsappUrl } from "@/lib/constants";
+import { CONTAINER, SECTION_PY, SECTION_SCROLL_MT, whatsappUrl } from "@/lib/constants";
 import {
   buildCalculatorContactUrl,
   BUSINESS_PROJECTS,
@@ -57,11 +57,10 @@ function StepCard({
       onClick={onClick}
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.98 }}
-      className={`flex h-full w-full flex-col rounded-2xl border p-4 text-left transition-shadow sm:p-5 ${
-        active
+      className={`flex h-full w-full flex-col rounded-2xl border p-4 text-left transition-shadow sm:p-5 ${active
           ? "border-indigo-500 bg-indigo-50/80 shadow-[0_12px_28px_rgba(79,70,229,0.15)] ring-1 ring-indigo-500/25 dark:border-indigo-400 dark:bg-indigo-950/30"
           : "border-border-primary bg-bg-card hover:border-border-secondary hover:shadow-[0_8px_20px_rgba(2,6,23,0.08)] dark:border-dark-border-primary dark:bg-dark-bg-card dark:hover:border-dark-border-secondary"
-      }`}
+        }`}
     >
       <span className="text-2xl">{icon}</span>
       <span className="mt-3 text-base font-semibold text-text-primary dark:text-dark-text-primary">{title}</span>
@@ -88,11 +87,10 @@ function FeatureChip({
       type="button"
       onClick={onClick}
       whileTap={{ scale: 0.97 }}
-      className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-medium transition ${
-        active
+      className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-medium transition ${active
           ? "border-indigo-500 bg-indigo-600 text-white shadow-md"
           : "border-border-primary bg-bg-secondary text-text-secondary hover:border-indigo-300 dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-secondary"
-      }`}
+        }`}
     >
       <span>{icon}</span>
       <span>{label}</span>
@@ -163,7 +161,7 @@ export default function ProjectCostCalculator({ hideTypeGrid = false, showTopBor
   return (
     <section
       id="project-cost-calculator"
-      className={`${CONTAINER} scroll-mt-28 py-7 md:py-10 ${showTopBorder ? "border-t border-border-primary dark:border-dark-border-primary" : ""}`}
+      className={`${CONTAINER} ${SECTION_SCROLL_MT} ${SECTION_PY} ${showTopBorder ? "border-t border-border-primary dark:border-dark-border-primary" : ""}`}
     >
       <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
         Project cost calculator
@@ -187,13 +185,12 @@ export default function ProjectCostCalculator({ hideTypeGrid = false, showTopBor
                   key={label}
                   type="button"
                   onClick={() => index <= step && setStep(index)}
-                  className={`rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-wide transition ${
-                    current
+                  className={`inline-flex min-h-11 items-center rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-primary ${current
                       ? "bg-indigo-600 text-white"
                       : done
                         ? "bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300"
                         : "bg-bg-secondary text-text-tertiary dark:bg-dark-bg-secondary dark:text-dark-text-tertiary"
-                  }`}
+                    }`}
                 >
                   {index + 1}. {label}
                 </button>
@@ -357,9 +354,8 @@ export default function ProjectCostCalculator({ hideTypeGrid = false, showTopBor
               <div className="mt-auto space-y-2 pt-6">
                 <Link
                   href={contactUrl}
-                  className={`inline-flex w-full items-center justify-center rounded-full px-4 py-3 text-sm font-semibold text-white transition ${
-                    complete ? "bg-indigo-600 hover:bg-indigo-700" : "pointer-events-none bg-indigo-400 opacity-70"
-                  }`}
+                  className={`inline-flex w-full items-center justify-center rounded-full px-4 py-3 text-sm font-semibold text-white transition ${complete ? "bg-indigo-600 hover:bg-indigo-700" : "pointer-events-none bg-indigo-400 opacity-70"
+                    }`}
                   aria-disabled={!complete}
                   tabIndex={complete ? 0 : -1}
                 >

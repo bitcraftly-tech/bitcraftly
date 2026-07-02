@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { CONTAINER, whatsappUrl } from "@/lib/constants";
+import { CONTAINER, SECTION_PY_COMPACT, SECTION_SCROLL_MT, whatsappUrl } from "@/lib/constants";
 import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { SERVICES, SERVICES_SECTION } from "@/lib/siteContent";
 
@@ -12,7 +12,7 @@ export default function ServicesGrid({ showTopBorder = true }: ServicesGridProps
   return (
     <section
       id="services"
-      className={`${CONTAINER} scroll-mt-28 py-6 lg:py-8 ${showTopBorder ? "border-t border-border-primary dark:border-dark-border-primary" : ""}`}
+      className={`${CONTAINER} ${SECTION_SCROLL_MT} ${SECTION_PY_COMPACT} ${showTopBorder ? "border-t border-border-primary dark:border-dark-border-primary" : ""}`}
     >
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">{SERVICES_SECTION.eyebrow}</p>
@@ -27,7 +27,7 @@ export default function ServicesGrid({ showTopBorder = true }: ServicesGridProps
         {SERVICES.map((item) => (
           <article
             key={item.title}
-            className="flex flex-col rounded-2xl border border-border-primary bg-bg-card p-5 transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(2,6,23,0.08)] dark:border-dark-border-primary dark:bg-dark-bg-card dark:hover:shadow-[0_12px_26px_rgba(2,6,23,0.35)]"
+            className="bc-card flex flex-col p-5 transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5"
           >
             <div className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border text-xl ${item.accent}`}>
               <span aria-hidden>{item.icon}</span>

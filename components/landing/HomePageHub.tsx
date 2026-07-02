@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, SECTION_PY, SECTION_SCROLL_MT } from "@/lib/constants";
 import { HOME_HUB_LINKS } from "@/lib/marketingRoutes";
 
 export default function HomePageHub() {
   return (
-    <section className={`${CONTAINER} scroll-mt-24 py-7 md:py-10`}>
+    <section className={`${CONTAINER} ${SECTION_SCROLL_MT} ${SECTION_PY}`}>
       <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
         Explore Bitcraftly
       </p>
@@ -22,7 +22,7 @@ export default function HomePageHub() {
           <Link
             key={item.href}
             href={item.href}
-            className={`group flex h-full flex-col rounded-2xl border p-5 transition duration-300 hover:-translate-y-0.5 ${
+            className={`bc-card group flex h-full flex-col p-5 transition duration-300 hover:-translate-y-0.5 ${
               item.featured
                 ? "border-indigo-500/40 bg-indigo-50/50 ring-1 ring-indigo-500/20 hover:border-indigo-500/50 hover:shadow-[0_12px_28px_rgba(79,70,229,0.18)] dark:border-indigo-400/30 dark:bg-indigo-950/25"
                 : "border-border-primary bg-bg-card hover:border-indigo-500/30 hover:shadow-[0_12px_28px_rgba(79,70,229,0.12)] dark:border-dark-border-primary dark:bg-dark-bg-card"

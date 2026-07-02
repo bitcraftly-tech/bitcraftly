@@ -21,38 +21,34 @@ const PRICING_FAQ = [
   },
 ] as const;
 
-export default function PricingFaqStrip() {
+export default function PricingFaq() {
   return (
     <section id="pricing-faq" className={`${CONTAINER} ${SECTION_SCROLL_MT} border-t border-border-primary ${SECTION_PY} dark:border-dark-border-primary`}>
-      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
-        Pricing FAQ
-      </p>
-      <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
-        Common pricing questions
-      </h2>
+      <div className="mx-auto max-w-2xl text-center">
+        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
+          FAQ
+        </p>
+        <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
+          Common pricing questions
+        </h2>
+      </div>
 
-      <div className="mt-6 grid gap-3 md:grid-cols-2">
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
         {PRICING_FAQ.map((item) => (
-          <article
-            key={item.q}
-            className="rounded-xl border border-border-primary bg-bg-card p-5 dark:border-dark-border-primary dark:bg-dark-bg-card"
-          >
+          <article key={item.q} className="bc-card p-5 sm:p-6">
             <h3 className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">{item.q}</h3>
             <p className="mt-2 text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{item.a}</p>
           </article>
         ))}
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center gap-4">
-        <Link
-          href="/faq"
-          className="text-sm font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
-        >
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <Link href="/faq" className="text-sm font-semibold text-accent-primary hover:opacity-90 dark:text-indigo-400">
           More FAQs →
         </Link>
         <Link
           href="/contact?intent=consultation&source=pricing-faq"
-          className="rounded-full border border-border-secondary px-4 py-2 text-sm font-semibold text-text-primary dark:border-dark-border-secondary dark:text-dark-text-primary"
+          className="bc-btn bc-btn-secondary px-5 py-2.5 text-sm"
         >
           Book free consultation
         </Link>

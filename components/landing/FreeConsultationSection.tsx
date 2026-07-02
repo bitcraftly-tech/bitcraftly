@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-import { CONTAINER, whatsappUrl } from "@/lib/constants";
+import { CONTAINER, SECTION_PY_COMPACT, SECTION_SCROLL_MT, whatsappUrl } from "@/lib/constants";
 import { FREE_CONSULTATION, WHATSAPP_MESSAGES } from "@/lib/leadGen";
 
 export default function FreeConsultationSection() {
   return (
-    <section id={FREE_CONSULTATION.id} className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-6 dark:border-dark-border-primary lg:py-8`}>
+    <section id={FREE_CONSULTATION.id} className={`${CONTAINER} ${SECTION_SCROLL_MT} border-t border-border-primary ${SECTION_PY_COMPACT} dark:border-dark-border-primary`}>
       <div className="grid gap-8 rounded-2xl border border-indigo-500/25 bg-gradient-to-br from-indigo-500/8 via-bg-card to-purple-500/8 p-6 dark:from-indigo-500/10 dark:via-dark-bg-card dark:to-purple-500/10 md:grid-cols-[1fr_auto] md:items-center md:p-8">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-indigo-600 dark:text-indigo-400">{FREE_CONSULTATION.eyebrow}</p>

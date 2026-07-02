@@ -219,7 +219,8 @@ export default function FounderAudioMessage({ embedded = false }: { embedded?: b
               src={FOUNDER.photoSrc}
               alt={FOUNDER.photoAlt}
               fill
-              className="object-cover object-top"
+              quality={92}
+              className="object-cover object-[46%_14%] scale-[1.14]"
               sizes={embedded ? "36px" : "40px"}
             />
           </div>

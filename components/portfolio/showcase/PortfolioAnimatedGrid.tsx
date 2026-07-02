@@ -38,7 +38,7 @@ export default function PortfolioAnimatedGrid({
   }
 
   return (
-    <motion.div layout className="grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <motion.div layout className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <AnimatePresence mode="popLayout">
         {gridProjects.map((project, index) => (
           <PortfolioShowcaseCard key={project.slug} project={project} index={index} onOpenCaseStudy={onOpenCaseStudy} />

@@ -1,11 +1,11 @@
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, SECTION_PY_COMPACT } from "@/lib/constants";
 import { PORTFOLIO } from "@/lib/portfolioContent";
 import { PORTFOLIO_STRUCTURE_STEP } from "@/lib/portfolioPalette";
 
 /** How we present projects — trust & case study format (homepage + portfolio page) */
 export default function PortfolioShowcaseStructure() {
   return (
-    <div className={`${CONTAINER} border-t border-[#bdc3c7]/40 py-6 dark:border-[#34495e]/50 lg:py-8`}>
+    <div className={`${CONTAINER} border-t border-[#bdc3c7]/40 ${SECTION_PY_COMPACT} dark:border-[#34495e]/50`}>
       <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
         {PORTFOLIO.structureTitle}
       </p>

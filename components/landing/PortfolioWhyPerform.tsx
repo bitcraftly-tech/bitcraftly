@@ -1,4 +1,4 @@
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, SECTION_PY_COMPACT } from "@/lib/constants";
 import { PORTFOLIO } from "@/lib/portfolioContent";
 import { PORTFOLIO_PERF_METRIC, PORTFOLIO_STRUCTURE_STEP } from "@/lib/portfolioPalette";
 
@@ -19,7 +19,7 @@ export default function PortfolioWhyPerform({ light }: PortfolioWhyPerformProps)
     : `${PORTFOLIO_STRUCTURE_STEP} p-4`;
 
   return (
-    <div className={`${CONTAINER} border-t ${border} py-6 lg:py-8 ${light ? "bg-[#fafbfc]" : ""}`}>
+    <div className={`${CONTAINER} border-t ${border} ${SECTION_PY_COMPACT} ${light ? "bg-[#fafbfc]" : ""}`}>
       <p className={`text-xs font-semibold uppercase tracking-[0.15em] ${eyebrow}`}>{PORTFOLIO.performanceSectionTitle}</p>
       <h2 className={`mt-3 font-[var(--font-playfair)] text-2xl sm:text-3xl ${title}`}>{PORTFOLIO.whyPerformTitle}</h2>
       <p className={`mt-3 max-w-3xl text-sm leading-relaxed ${body}`}>{PORTFOLIO.whyPerformIntro}</p>

@@ -17,9 +17,9 @@ export function BitBotAvatar({ size = 36, className = "" }: BitBotAvatarProps) {
       alt=""
       width={size}
       height={size}
+      sizes={`${size}px`}
       className={`shrink-0 rounded-full object-cover object-center ${className}`}
       style={{ width: size, height: size }}
-      unoptimized
       aria-hidden
     />
   );
@@ -35,11 +35,11 @@ export function BitBotChatTrigger({ className = "" }: BitBotChatTriggerProps) {
     <Image
       src={MASCOT.chat}
       alt="Ask BitBot"
-      width={624}
-      height={701}
+      width={132}
+      height={148}
+      sizes="(max-width: 767px) 58px, 66px"
       className={`bc-chat-bubble-img ${className}`}
-      unoptimized
-      priority
+      loading="lazy"
     />
   );
 }

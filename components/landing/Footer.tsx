@@ -26,9 +26,9 @@ function FooterLinkList({ links }: { links: { href: string; label: string }[] })
 
 export default async function Footer() {
   return (
-    <footer className="border-t border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card">
+    <footer className="bc-site-footer mt-auto w-full shrink-0 border-t border-border-primary bg-bg-card dark:border-dark-border-primary dark:bg-dark-bg-card">
       <div className={`${CONTAINER} py-8 md:py-10`}>
-        <div className="rounded-2xl border border-indigo-500/20 bg-gradient-to-br from-indigo-50/70 via-bg-card to-bg-card px-5 py-6 dark:from-indigo-950/25 dark:via-dark-bg-card dark:to-dark-bg-card sm:px-8 sm:py-7">
+        <div className="rounded-2xl border border-indigo-500/20 bg-gradient-to-br from-indigo-50/70 via-bg-card to-bg-card px-5 py-6 dark:from-indigo-950/25 dark:via-dark-bg-card dark:to-dark-bg-card sm:px-8 sm:py-8">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-xl">
               <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-indigo-600 dark:text-indigo-400">
@@ -44,7 +44,7 @@ export default async function Footer() {
             <div className="flex shrink-0 flex-wrap gap-2.5">
               <Link
                 href="/pricing#pricing-compare"
-                className="rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700"
+                className="bc-btn bc-btn-primary px-5 py-2.5 text-sm"
               >
                 View pricing →
               </Link>
@@ -53,7 +53,7 @@ export default async function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 data-wa-source="footer-cta-whatsapp"
-                className="rounded-full border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary"
+                className="bc-btn bc-btn-secondary px-5 py-2.5 text-sm"
               >
                 WhatsApp
               </Link>
@@ -131,7 +131,7 @@ export default async function Footer() {
           </div>
         </div>
 
-        <div className="bc-footer-bottom mt-10 flex flex-col items-center gap-3 border-t border-border-primary pt-6 text-center max-md:pb-[var(--bc-mobile-sticky-h,0px)] md:pb-0 dark:border-dark-border-primary">
+        <div className="bc-footer-bottom mt-10 flex flex-col items-center gap-3 border-t border-border-primary pt-6 pb-4 text-center dark:border-dark-border-primary md:pb-6">
           <p className="text-xs text-text-secondary dark:text-dark-text-secondary">
             18+ yrs · React &amp; Next.js · Founder-led · {BRAND.locationShort}
           </p>

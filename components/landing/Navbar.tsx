@@ -18,7 +18,7 @@ import type { LucideIcon } from "lucide-react";
 import BitcraftlyLogoMarkImage from "@/components/brand/BitcraftlyLogoMarkImage";
 import NavbarProfileMenu from "@/components/landing/NavbarProfileMenu";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-import { whatsappUrl } from "@/lib/constants";
+import { CONTAINER, FOCUS_RING, whatsappUrl } from "@/lib/constants";
 import { MARKETING_NAV } from "@/lib/marketingRoutes";
 import { BRAND } from "@/lib/siteContent";
 import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
@@ -52,10 +52,19 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
   const navRef = useRef<HTMLElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (embedded) return;
+    const onScroll = () => setScrolled(window.scrollY > 6);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [embedded]);
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -145,12 +154,12 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
       className={
         embedded
           ? "border-b border-border-primary bg-bg-card/90 backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card/90"
-          : "sticky top-0 z-[9060] border-b border-border-primary bg-bg-card sm:bg-bg-card/90 sm:backdrop-blur dark:border-dark-border-primary dark:bg-dark-bg-card dark:sm:bg-dark-bg-card/90"
+          : `bc-site-header sticky top-0 z-[9060] w-full shrink-0 border-b border-border-primary bg-bg-card/95 backdrop-blur-md transition-[background-color,box-shadow,border-color] duration-300 dark:border-dark-border-primary dark:bg-dark-bg-card/95 ${scrolled ? "bc-site-header--scrolled" : ""}`
       }
     >
       <nav
         ref={navRef}
-        className="mx-auto flex min-w-0 w-full max-w-7xl items-center justify-between gap-2 px-4 py-2.5 sm:gap-3 sm:px-6 sm:py-3 lg:px-12"
+        className={`${CONTAINER} flex min-w-0 items-center justify-between gap-2 py-2.5 sm:gap-3 sm:py-3`}
       >
         <Link
           href="/"
@@ -178,12 +187,12 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`group relative inline-flex shrink-0 cursor-pointer flex-col items-center text-xs transition-colors duration-300 ease-out xl:text-sm ${
+                className={`group relative inline-flex shrink-0 cursor-pointer flex-col items-center text-xs transition-colors duration-200 ease-out xl:text-sm ${
                   active
-                    ? "font-semibold text-indigo-600 dark:text-indigo-400"
+                    ? "font-semibold text-accent-primary dark:text-indigo-400"
                     : highlightPricing
-                      ? "nav-pricing-cta rounded-full bg-indigo-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_4px_16px_rgba(67,56,202,0.5)] ring-2 ring-indigo-500/40 xl:px-4 xl:text-sm"
-                      : "text-text-secondary hover:text-[#2B5CE6] dark:text-dark-text-secondary dark:hover:text-[#7ea0ff]"
+                      ? "nav-pricing-cta rounded-full bg-accent-primary px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_4px_16px_rgba(37,99,235,0.35)] ring-2 ring-accent-primary/30 xl:px-4 xl:text-sm"
+                      : "text-text-secondary hover:text-accent-primary dark:text-dark-text-secondary dark:hover:text-indigo-400"
                 }`}
               >
                 <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
@@ -206,14 +215,14 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
           ) : (
             <Link
               href="/login"
-              className="cursor-pointer whitespace-nowrap rounded-full border border-border-primary px-3 py-2 text-xs font-medium text-text-primary transition hover:border-border-secondary xl:px-4 xl:text-sm dark:border-dark-border-primary dark:text-dark-text-primary dark:hover:border-dark-border-secondary"
+              className="bc-btn bc-btn-secondary cursor-pointer whitespace-nowrap px-3 py-2 text-xs xl:px-4 xl:text-sm"
             >
               Log in
             </Link>
           )}
           <Link
             href="/contact?intent=consultation&source=navbar"
-            className="cursor-pointer whitespace-nowrap rounded-full bg-black px-3 py-2 text-xs font-medium text-white transition hover:bg-gray-800 xl:px-4 xl:text-sm dark:bg-white dark:text-black dark:hover:bg-gray-200"
+            className="bc-btn bc-btn-primary cursor-pointer whitespace-nowrap px-3 py-2 text-xs xl:px-4 xl:text-sm"
           >
             <span className="xl:hidden">Consult</span>
             <span className="hidden xl:inline">Get Free Consultation</span>
@@ -227,9 +236,9 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
           aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-nav-panel"
-          className={`inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border transition-all duration-200 active:scale-95 lg:hidden ${
+          className={`bc-nav-hamburger inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl border transition-all duration-200 active:scale-[0.97] lg:hidden ${
             isMenuOpen
-              ? "border-indigo-500/35 bg-indigo-50 dark:border-indigo-400/35 dark:bg-indigo-950/40"
+              ? "border-accent-primary/35 bg-brand-soft dark:border-indigo-400/35 dark:bg-indigo-950/40"
               : "border-border-primary dark:border-dark-border-primary"
           }`}
           onClick={() => setIsMenuOpen((prev) => !prev)}
@@ -263,7 +272,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
                 type="button"
                 aria-label="Close navigation menu"
                 data-open={isMenuOpen ? "true" : "false"}
-                className="nav-mobile-backdrop fixed inset-0 bg-black/40 backdrop-blur-[2px] lg:hidden"
+                className="nav-mobile-backdrop fixed inset-0 bg-slate-900/45 backdrop-blur-md lg:hidden"
                 onClick={closeMenu}
                 tabIndex={isMenuOpen ? 0 : -1}
               />
@@ -272,7 +281,10 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
                 id="mobile-nav-panel"
                 data-open={isMenuOpen ? "true" : "false"}
                 aria-hidden={!isMenuOpen}
-                className="nav-mobile-panel border-t border-border-primary bg-bg-card shadow-[0_18px_40px_-20px_rgba(15,23,42,0.35)] dark:border-dark-border-primary dark:bg-dark-bg-card lg:hidden"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Navigation menu"
+                className="nav-mobile-panel border-border-primary bg-bg-card/98 shadow-2xl dark:border-dark-border-primary dark:bg-dark-bg-card/98 lg:hidden"
               >
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
           <div
@@ -280,10 +292,23 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
               isMenuOpen ? "nav-mobile-open" : ""
             }`}
           >
-            <div className="px-4 pt-3">
+            <div className="flex items-center justify-between gap-3 px-4 pb-1 pt-3">
               <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-text-tertiary dark:text-dark-text-tertiary">
                 Menu
               </p>
+              <button
+                type="button"
+                aria-label="Close menu"
+                tabIndex={isMenuOpen ? 0 : -1}
+                onClick={closeMenu}
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border-primary text-text-secondary transition hover:border-border-secondary hover:bg-bg-secondary active:scale-[0.97] dark:border-dark-border-primary dark:text-dark-text-secondary dark:hover:bg-dark-bg-secondary"
+              >
+                <span className="sr-only">Close</span>
+                <span className="relative block h-3.5 w-3.5" aria-hidden>
+                  <span className="absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rotate-45 bg-current" />
+                  <span className="absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 -rotate-45 bg-current" />
+                </span>
+              </button>
             </div>
 
             <div className="flex flex-col gap-2 px-4 pb-3 pt-2">
@@ -298,7 +323,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
                     href={link.href}
                     tabIndex={isMenuOpen ? 0 : -1}
                     aria-current={active ? "page" : undefined}
-                    className={`nav-mobile-item group flex w-full items-center gap-3 rounded-xl border px-3 py-3 transition-all duration-200 active:scale-[0.99] ${
+                    className={`nav-mobile-item group flex w-full min-h-[3.25rem] items-center gap-3 rounded-xl border px-3 py-3 transition-all duration-200 active:scale-[0.99] ${
                       active
                         ? "border-indigo-500/30 bg-indigo-50/90 shadow-[0_8px_20px_-14px_rgba(79,70,229,0.55)] dark:border-indigo-400/30 dark:bg-indigo-950/35"
                         : highlightPricing
@@ -358,7 +383,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
               <Link
                 href="/contact?intent=consultation&source=navbar-mobile"
                 tabIndex={isMenuOpen ? 0 : -1}
-                className="inline-flex w-full cursor-pointer items-center justify-center rounded-full bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] px-4 py-3.5 text-sm font-semibold text-white shadow-[0_10px_24px_-12px_rgba(79,70,229,0.75)] transition hover:opacity-95 active:scale-[0.99]"
+                className="bc-btn bc-btn-primary inline-flex w-full cursor-pointer items-center justify-center px-4 py-3.5 text-sm"
                 onClick={closeMenu}
               >
                 Get Free Consultation

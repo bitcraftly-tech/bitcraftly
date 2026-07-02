@@ -51,23 +51,45 @@ export default function HeroShowcase() {
     <div className="relative">
       <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br blur-3xl ${item.glow}`} />
       <div className="relative rounded-3xl border border-border-primary bg-bg-card p-6 dark:border-dark-border-primary dark:bg-dark-bg-card">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <p className="text-xs uppercase tracking-[0.12em] text-text-tertiary dark:text-dark-text-tertiary">What we build</p>
-          <div className="flex gap-1.5">
-            {showcase.map((_, idx) => (
-              <span
-                key={idx}
-                className={`h-1.5 w-6 rounded-full ${idx === active ? "bg-accent-primary" : "bg-border-secondary dark:bg-dark-border-secondary"}`}
-              />
+          <div className="flex gap-2" role="tablist" aria-label="Showcase slides">
+            {showcase.map((slide, idx) => (
+              <button
+                key={slide.title}
+                type="button"
+                role="tab"
+                aria-selected={idx === active}
+                aria-label={`Show slide ${idx + 1}: ${slide.title}`}
+                onClick={() => setActive(idx)}
+                className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-primary ${
+                  idx === active ? "" : "opacity-70 hover:opacity-100"
+                }`}
+              >
+                <span
+                  aria-hidden
+                  className={`block h-1.5 w-6 rounded-full ${idx === active ? "bg-accent-primary" : "bg-border-secondary dark:bg-dark-border-secondary"}`}
+                />
+              </button>
             ))}
           </div>
         </div>
-        <div className="mt-5 rounded-2xl border border-border-primary bg-bg-secondary p-5 dark:border-dark-border-primary dark:bg-dark-bg-secondary">
-          <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">{item.title}</p>
-          <p className="mt-2 text-sm leading-6 text-text-secondary dark:text-dark-text-secondary">{item.desc}</p>
-          <div className="mt-4 inline-flex rounded-full bg-bg-card px-3 py-1.5 text-xs font-medium text-text-secondary dark:bg-dark-bg-card dark:text-dark-text-secondary">
-            {item.stat}
-          </div>
+        <div className="mt-5 grid rounded-2xl border border-border-primary bg-bg-secondary dark:border-dark-border-primary dark:bg-dark-bg-secondary">
+          {showcase.map((slide, idx) => (
+            <div
+              key={slide.title}
+              className={`col-start-1 row-start-1 p-5 transition-opacity duration-300 ${
+                idx === active ? "z-10 opacity-100" : "pointer-events-none opacity-0"
+              }`}
+              aria-hidden={idx !== active}
+            >
+              <p className="text-sm font-semibold text-text-primary dark:text-dark-text-primary">{slide.title}</p>
+              <p className="mt-2 text-sm leading-6 text-text-secondary dark:text-dark-text-secondary">{slide.desc}</p>
+              <div className="mt-4 inline-flex rounded-full bg-bg-card px-3 py-1.5 text-xs font-medium text-text-secondary dark:bg-dark-bg-card dark:text-dark-text-secondary">
+                {slide.stat}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

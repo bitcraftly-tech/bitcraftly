@@ -27,10 +27,22 @@ export const LOADER_TIMING = {
   /** Dev: longer so you can review loader UI on refresh */
   initialMinMs: isDev ? 1800 : 180,
   initialMaxMs: isDev ? 4500 : 1400,
-  exitMs: isDev ? 520 : 220,
+  exitMs: isDev ? 520 : 480,
   /** Route / manual — brief transition only */
   routeMs: isDev ? 1800 : 320,
 } as const;
+
+/** Staggered section reveal after the splash loader */
+export const LOADER_REVEAL = {
+  staggerMs: isDev ? 90 : 70,
+  durationMs: isDev ? 680 : 580,
+  /** Navbar + 6 homepage sections + footer */
+  sectionCount: 8,
+} as const;
+
+export function loaderRevealTotalMs(): number {
+  return LOADER_REVEAL.durationMs + LOADER_REVEAL.staggerMs * (LOADER_REVEAL.sectionCount - 1);
+}
 
 /** Premium easing — Stripe/Vercel-like */
 export const LOADER_EASE = [0.22, 1, 0.36, 1] as const;

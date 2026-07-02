@@ -1,4 +1,4 @@
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, SECTION_PY_COMPACT, SECTION_SCROLL_MT } from "@/lib/constants";
 
 const industries = [
   "Restaurants",
@@ -14,7 +14,7 @@ export default function IndustriesWeServe() {
   return (
     <section
       id="industries"
-      className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-6 dark:border-dark-border-primary lg:py-8`}
+      className={`${CONTAINER} ${SECTION_SCROLL_MT} border-t border-border-primary ${SECTION_PY_COMPACT} dark:border-dark-border-primary`}
     >
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">

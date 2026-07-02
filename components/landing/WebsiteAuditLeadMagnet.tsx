@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-import { CONTAINER, whatsappUrl } from "@/lib/constants";
+import { CONTAINER, SECTION_PY_COMPACT, SECTION_SCROLL_MT, whatsappUrl } from "@/lib/constants";
 import { WEBSITE_AUDIT, WHATSAPP_MESSAGES } from "@/lib/leadGen";
 
 export default function WebsiteAuditLeadMagnet() {
   return (
-    <section id={WEBSITE_AUDIT.id} className={`${CONTAINER} scroll-mt-24 border-t border-border-primary py-6 dark:border-dark-border-primary lg:py-8`}>
+    <section id={WEBSITE_AUDIT.id} className={`${CONTAINER} ${SECTION_SCROLL_MT} border-t border-border-primary ${SECTION_PY_COMPACT} dark:border-dark-border-primary`}>
       <div className="rounded-2xl border border-border-primary bg-bg-card p-6 dark:border-dark-border-primary dark:bg-dark-bg-card md:p-8">
         <div className="grid gap-8 md:grid-cols-2 md:items-start">
           <div>

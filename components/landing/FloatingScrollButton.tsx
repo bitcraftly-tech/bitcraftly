@@ -26,14 +26,14 @@ export default function FloatingScrollButton() {
     <button
       type="button"
       aria-label="Scroll to top"
+      aria-hidden={!visible}
+      tabIndex={visible ? 0 : -1}
       onClick={() => {
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
       }}
-      className={`bc-float-scroll inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-border-primary bg-bg-card shadow-[0_4px_18px_-6px_rgba(0,0,0,0.18)] backdrop-blur-sm transition-all duration-300 hover:border-border-secondary hover:bg-bg-secondary hover:shadow-[0_6px_22px_-6px_rgba(0,0,0,0.22)] active:scale-95 dark:border-dark-border-primary dark:bg-dark-bg-card dark:shadow-[0_4px_18px_-6px_rgba(0,0,0,0.45)] dark:hover:border-dark-border-secondary dark:hover:bg-dark-bg-secondary ${
-        visible
-          ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
-          : "pointer-events-none translate-y-2 scale-95 opacity-0"
+      className={`bc-float-scroll inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-border-primary bg-bg-card/95 shadow-card backdrop-blur-sm transition-[opacity,visibility,border-color,background-color,box-shadow] duration-250 ease-out hover:border-border-secondary hover:bg-bg-secondary hover:shadow-card-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-primary dark:border-dark-border-primary dark:bg-dark-bg-card/95 dark:hover:border-dark-border-secondary dark:hover:bg-dark-bg-secondary ${
+        visible ? "bc-float-scroll--visible" : "bc-float-scroll--hidden"
       }`}
     >
       <ArrowUp size={18} strokeWidth={2} className="text-text-secondary dark:text-dark-text-secondary" />
