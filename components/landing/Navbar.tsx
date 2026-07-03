@@ -48,7 +48,6 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
   const navRef = useRef<HTMLElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [menuEntered, setMenuEntered] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
@@ -113,19 +112,6 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
   }, [servicesOpen]);
 
   useEffect(() => {
-    if (!isMenuOpen) {
-      setMenuEntered(false);
-      return;
-    }
-
-    const raf = requestAnimationFrame(() => {
-      requestAnimationFrame(() => setMenuEntered(true));
-    });
-
-    return () => cancelAnimationFrame(raf);
-  }, [isMenuOpen]);
-
-  useEffect(() => {
     const root = document.documentElement;
     if (!isMenuOpen) {
       root.removeAttribute("data-bc-nav-open");
@@ -181,12 +167,8 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
     ? "bc-site-header border-b border-[#E5E7EB] bg-white/90 backdrop-blur-sm dark:border-dark-border-primary dark:bg-dark-bg-card/90"
     : `bc-site-header bc-site-header--fixed w-full shrink-0 border-b border-[#E5E7EB] bg-white/95 backdrop-blur-sm transition-[box-shadow,background-color,border-color] duration-300 dark:border-dark-border-primary dark:bg-dark-bg-card/95 ${scrolled ? "bc-site-header--scrolled" : "shadow-none"}`;
 
-  const mobileMenuOverlay = isMenuOpen ? (
-    <div
-      className="nav-mobile-overlay lg:hidden"
-      data-open={menuEntered ? "true" : "false"}
-      aria-hidden={!menuEntered}
-    >
+  const mobileMenuOverlay = (
+    <div className="nav-mobile-overlay nav-mobile-overlay--open lg:hidden" aria-hidden={false}>
       <button
         type="button"
         aria-label="Close navigation menu"
@@ -204,7 +186,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
       >
         <div className="nav-mobile-panel__ambient" aria-hidden />
 
-        <div className={`nav-mobile-body ${menuEntered ? "nav-mobile-open" : ""}`}>
+        <div className="nav-mobile-body nav-mobile-open">
           <div className="nav-mobile-scroll scrollbar-soft">
             <header className="nav-mobile-head nav-mobile-item">
               <h2 className="nav-mobile-head__title">Where should we go?</h2>
@@ -320,7 +302,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
         </div>
       </div>
     </div>
-  ) : null;
+  );
 
   const headerNode = (
     <header className={headerClassName}>
@@ -455,16 +437,16 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
           </button>
         </div>
       </nav>
-
-      {mobileMenuOverlay}
     </header>
   );
 
   const useMobileHeaderPortal = mounted && !embedded && isMobileLayout;
+  const showMobileMenu = mounted && isMenuOpen && isMobileLayout;
 
   return (
     <>
       {useMobileHeaderPortal ? createPortal(headerNode, document.body) : headerNode}
+      {showMobileMenu ? createPortal(mobileMenuOverlay, document.body) : null}
       <LoginModal open={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
       {!embedded ? <div className="bc-site-header-spacer" aria-hidden /> : null}
     </>
