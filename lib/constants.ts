@@ -8,7 +8,7 @@ export const PAGE_SHELL =
   "flex min-h-dvh w-full min-w-0 flex-1 flex-col bg-bg-primary text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary";
 
 /** Main content region */
-export const PAGE_MAIN = "flex min-w-0 w-full flex-1 flex-col overflow-x-clip";
+export const PAGE_MAIN = "flex min-w-0 w-full flex-1 flex-col";
 
 export const SECTION_PY = "py-8 md:py-12";
 export const SECTION_PY_COMPACT = "py-6 md:py-8";

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import Footer from "@/components/landing/Footer";
+import SiteFooter from "@/components/layout/SiteFooter";
 import Navbar from "@/components/landing/Navbar";
 import PortfolioCaseStudy from "@/components/landing/PortfolioCaseStudy";
 import PortfolioProjectCard from "@/components/landing/PortfolioProjectCard";
@@ -47,7 +47,7 @@ export default function PortfolioProjectDetailShell({ item }: { item: PortfolioI
           </section>
         </div>
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

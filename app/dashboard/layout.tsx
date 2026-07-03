@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 import { createAuthOptions } from "@/auth";
 import DashboardSubNav from "@/components/dashboard/DashboardSubNav";
-import Footer from "@/components/landing/Footer";
+import SiteFooter from "@/components/layout/SiteFooter";
 import Navbar from "@/components/landing/Navbar";
 import { PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 import QueryProvider from "@/components/providers/QueryProvider";
@@ -36,7 +36,7 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
         <main className={`${PAGE_MAIN} overflow-x-hidden`}>
           <div className="mx-auto w-full min-w-0 max-w-7xl px-4 py-4 sm:px-6 lg:px-12">{children}</div>
         </main>
-        <Footer />
+        <SiteFooter />
       </div>
     </QueryProvider>
   );

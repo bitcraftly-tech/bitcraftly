@@ -4,7 +4,7 @@ import MarketingNextStep from "@/components/landing/MarketingNextStep";
 import MarketingPageIntro from "@/components/landing/MarketingPageIntro";
 import MarketingPageLayout from "@/components/landing/MarketingPageLayout";
 import MarketingPageNav from "@/components/landing/MarketingPageNav";
-import FadeInOnView from "@/components/ui/FadeInOnView";
+import SkipScrollReveal from "@/components/landing/SkipScrollReveal";
 import { PAGE_INTROS, SERVICES_PAGE_NAV } from "@/lib/pageSequences";
 import { buildPageMetadata } from "@/lib/seoMetadata";
 
@@ -26,19 +26,13 @@ export default function ServicesPage() {
         description={intro.description}
         steps={intro.steps}
       />
-      <MarketingPageNav items={SERVICES_PAGE_NAV} ariaLabel="Services page sections" />
-      <FadeInOnView delayMs={30}>
-        <ServicesGrid showTopBorder={false} />
-      </FadeInOnView>
-      <FadeInOnView delayMs={60}>
-        <IndustriesWeServe />
-      </FadeInOnView>
-      <FadeInOnView delayMs={90}>
-        <Features />
-      </FadeInOnView>
-      <FadeInOnView delayMs={120}>
-        <DemoStrip />
-      </FadeInOnView>
+      <SkipScrollReveal>
+        <MarketingPageNav items={SERVICES_PAGE_NAV} ariaLabel="Services page sections" />
+      </SkipScrollReveal>
+      <ServicesGrid showTopBorder={false} />
+      <IndustriesWeServe />
+      <Features />
+      <DemoStrip />
       <MarketingNextStep
         title="Ready for pricing?"
         description="Services samajh aa gaye — ab packages compare karo ya seedha quote lo. Portfolio mein similar work bhi dekho."

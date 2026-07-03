@@ -105,19 +105,19 @@ export default function PortfolioDetailModal({ project, onClose }: PortfolioDeta
           />
 
           <motion.div
-            className="relative z-10 flex max-h-[94vh] w-full max-w-4xl flex-col overflow-hidden rounded-t-[20px] border border-[#e8ecef] bg-white shadow-[0_24px_64px_rgba(44,62,80,0.18)] sm:rounded-[20px]"
+            className="relative z-10 flex max-h-[94vh] w-full max-w-4xl flex-col overflow-hidden rounded-t-[20px] border border-[#e8ecef] bg-white shadow-[0_24px_64px_rgba(44,62,80,0.18)] sm:rounded-[20px] dark:border-dark-border-primary dark:bg-dark-bg-card dark:shadow-[0_24px_64px_rgba(0,0,0,0.45)]"
             initial={reduceMotion ? false : { opacity: 0, scale: 0.96, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={reduceMotion ? undefined : { opacity: 0, scale: 0.98, y: 16 }}
             transition={{ type: "spring", stiffness: 340, damping: 30 }}
           >
             {/* Header */}
-            <div className="flex shrink-0 items-center justify-between border-b border-[#e8ecef] px-5 py-3.5 sm:px-6">
-              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9b59b6]">Case Study Overview</p>
+            <div className="flex shrink-0 items-center justify-between border-b border-[#e8ecef] px-5 py-3.5 dark:border-dark-border-primary sm:px-6">
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9b59b6] dark:text-indigo-400">Case Study Overview</p>
               <button
                 type="button"
                 onClick={onClose}
-                className="flex size-8 items-center justify-center rounded-lg text-[#95a5a6] transition hover:bg-[#f4f6f8] hover:text-[#2c3e50]"
+                className="flex size-8 items-center justify-center rounded-lg text-[#95a5a6] transition hover:bg-[#f4f6f8] hover:text-[#2c3e50] dark:text-dark-text-tertiary dark:hover:bg-dark-bg-secondary dark:hover:text-dark-text-primary"
                 aria-label="Close"
               >
                 <X className="size-4" />
@@ -126,7 +126,7 @@ export default function PortfolioDetailModal({ project, onClose }: PortfolioDeta
 
             <div className="overflow-y-auto overscroll-contain">
               {/* Summary + metrics */}
-              <div className="border-b border-[#e8ecef] px-5 py-5 sm:px-6 sm:py-6">
+              <div className="border-b border-[#e8ecef] px-5 py-5 dark:border-dark-border-primary sm:px-6 sm:py-6">
                 <div className="flex min-w-0 gap-4">
                   <div
                     className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#9b59b6]/15 to-[#8e44ad]/10 sm:size-16"
@@ -140,10 +140,10 @@ export default function PortfolioDetailModal({ project, onClose }: PortfolioDeta
                     >
                       {showcaseBadgeLabel(project)}
                     </span>
-                    <h2 id="portfolio-modal-title" className="mt-2 text-xl font-bold text-[#2c3e50] sm:text-2xl">
+                    <h2 id="portfolio-modal-title" className="mt-2 text-xl font-bold text-[#2c3e50] dark:text-dark-text-primary sm:text-2xl">
                       {project.title}
                     </h2>
-                    <p className="mt-2 text-sm leading-relaxed text-[#7f8c8d]">{project.cardLine}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-[#7f8c8d] dark:text-dark-text-secondary">{project.cardLine}</p>
                     <div className="mt-3 flex flex-wrap gap-1.5">
                       {project.techStack.map((tech) => (
                         <span
@@ -161,11 +161,11 @@ export default function PortfolioDetailModal({ project, onClose }: PortfolioDeta
                   {caseStudyHeadlineMetrics(project).map((m) => (
                     <div
                       key={`${m.label}-${m.value}`}
-                      className="flex min-w-0 flex-col items-center overflow-hidden rounded-xl border border-[#e8ecef] bg-[#fafbfc] px-2 py-3 text-center sm:px-3"
+                      className="flex min-w-0 flex-col items-center overflow-hidden rounded-xl border border-[#e8ecef] bg-[#fafbfc] px-2 py-3 text-center dark:border-dark-border-primary dark:bg-dark-bg-secondary sm:px-3"
                     >
                       <MetricIcon icon={m.icon} />
-                      <p className="mt-2 w-full truncate text-sm font-bold text-[#2c3e50] sm:text-base">{m.value}</p>
-                      <p className="mt-0.5 w-full truncate text-[10px] font-medium text-[#95a5a6]">{m.label}</p>
+                      <p className="mt-2 w-full truncate text-sm font-bold text-[#2c3e50] dark:text-dark-text-primary sm:text-base">{m.value}</p>
+                      <p className="mt-0.5 w-full truncate text-[10px] font-medium text-[#95a5a6] dark:text-dark-text-tertiary">{m.label}</p>
                     </div>
                   ))}
                 </div>
@@ -175,21 +175,21 @@ export default function PortfolioDetailModal({ project, onClose }: PortfolioDeta
               <div className="grid gap-6 px-5 py-5 sm:px-6 sm:py-6 lg:grid-cols-[1.35fr_1fr] lg:gap-8">
                 <div className="space-y-6">
                   <section>
-                    <h3 className="flex items-center gap-2 text-sm font-bold text-[#2c3e50]">
+                    <h3 className="flex items-center gap-2 text-sm font-bold text-[#2c3e50] dark:text-dark-text-primary">
                       <BookOpen className="size-4 text-[#8e44ad]" aria-hidden />
                       Overview
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-[#7f8c8d]">{caseStudyOverview(project)}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-[#7f8c8d] dark:text-dark-text-secondary">{caseStudyOverview(project)}</p>
                   </section>
 
                   <section>
-                    <h3 className="flex items-center gap-2 text-sm font-bold text-[#2c3e50]">
+                    <h3 className="flex items-center gap-2 text-sm font-bold text-[#2c3e50] dark:text-dark-text-primary">
                       <Star className="size-4 text-[#8e44ad]" aria-hidden />
                       Key Features
                     </h3>
                     <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                       {caseStudyKeyFeatures(project).map((f) => (
-                        <li key={f} className="flex items-start gap-2 text-sm text-[#7f8c8d]">
+                        <li key={f} className="flex items-start gap-2 text-sm text-[#7f8c8d] dark:text-dark-text-secondary">
                           <span
                             className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-[#9b59b6]/12 text-[10px] font-bold text-[#8e44ad]"
                             aria-hidden
@@ -203,7 +203,7 @@ export default function PortfolioDetailModal({ project, onClose }: PortfolioDeta
                   </section>
                 </div>
 
-                <aside className="h-fit rounded-2xl border border-[#e8ecef] bg-[#f4f6f8]/80 p-4 sm:p-5">
+                <aside className="h-fit rounded-2xl border border-[#e8ecef] bg-[#f4f6f8]/80 p-4 dark:border-dark-border-primary dark:bg-dark-bg-secondary/80 sm:p-5">
                   <dl className="space-y-4">
                     <MetaRow icon={User} label="Client" value={caseStudyClient(project)} />
                     <MetaRow icon={Calendar} label="Timeline" value={caseStudyTimeline(project)} />
@@ -211,7 +211,7 @@ export default function PortfolioDetailModal({ project, onClose }: PortfolioDeta
                     <MetaRow icon={Wrench} label="Services" value={caseStudyServices(project).join(", ")} />
                   </dl>
 
-                  <div className="mt-5 space-y-2 border-t border-[#e8ecef] pt-4">
+                  <div className="mt-5 space-y-2 border-t border-[#e8ecef] pt-4 dark:border-dark-border-primary">
                     {demo ? (
                       <a
                         href={demo}
@@ -246,7 +246,7 @@ export default function PortfolioDetailModal({ project, onClose }: PortfolioDeta
             </div>
 
             {/* Sticky footer */}
-            <div className="flex shrink-0 flex-wrap items-center gap-2 border-t border-[#e8ecef] bg-white px-4 py-3.5 sm:gap-3 sm:px-5">
+            <div className="flex shrink-0 flex-wrap items-center gap-2 border-t border-[#e8ecef] bg-white px-4 py-3.5 dark:border-dark-border-primary dark:bg-dark-bg-card sm:gap-3 sm:px-5">
               <Link
                 href={`/contact?service=${encodeURIComponent(project.title)}&intent=consultation&source=portfolio-modal`}
                 className={PS_BTN_PRIMARY}
@@ -290,8 +290,8 @@ function MetaRow({
     <div className="flex gap-3">
       <Icon className="mt-0.5 size-4 shrink-0 text-[#8e44ad]" aria-hidden />
       <div>
-        <dt className="text-[11px] font-semibold uppercase tracking-wide text-[#95a5a6]">{label}</dt>
-        <dd className="mt-0.5 text-sm font-medium text-[#2c3e50]">{value}</dd>
+        <dt className="text-[11px] font-semibold uppercase tracking-wide text-[#95a5a6] dark:text-dark-text-tertiary">{label}</dt>
+        <dd className="mt-0.5 text-sm font-medium text-[#2c3e50] dark:text-dark-text-primary">{value}</dd>
       </div>
     </div>
   );

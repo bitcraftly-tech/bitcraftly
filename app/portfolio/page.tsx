@@ -1,6 +1,6 @@
 import ShowcaseLink from "@/components/portfolio/ShowcaseLink";
 
-import Footer from "@/components/landing/Footer";
+import SiteFooter from "@/components/layout/SiteFooter";
 import MarketingNextStep from "@/components/landing/MarketingNextStep";
 import MarketingPageIntro from "@/components/landing/MarketingPageIntro";
 import Navbar from "@/components/landing/Navbar";
@@ -22,9 +22,9 @@ export default function PortfolioPage() {
       <Navbar />
       <main className={PAGE_MAIN}>
         <PortfolioHashRedirect />
-        <section className="border-b border-[#e8ecef] bg-white py-1.5">
-          <div className={`${CONTAINER} text-xs text-[#95a5a6]`}>
-            <ShowcaseLink href="/" className="hover:text-[#7f8c8d] hover:underline">
+        <section className="border-b border-border-primary bg-bg-primary py-1.5 dark:border-dark-border-primary dark:bg-dark-bg-primary">
+          <div className={`${CONTAINER} text-xs text-text-tertiary dark:text-dark-text-tertiary`}>
+            <ShowcaseLink href="/" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
               Home
             </ShowcaseLink>
             <span className="px-2">/</span> Portfolio
@@ -46,7 +46,7 @@ export default function PortfolioPage() {
           ]}
         />
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

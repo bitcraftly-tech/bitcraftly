@@ -24,9 +24,9 @@ export default function PricingTierCards() {
         {TIER_DISPLAY.map(({ key, label, plan, support, recommended }) => (
           <article
             key={key}
-            className={`bc-card relative flex h-full flex-col p-6 transition duration-250 hover:-translate-y-0.5 sm:p-8 ${
+            className={`bc-card pricing-tier-card relative flex h-full flex-col p-6 transition duration-250 hover:-translate-y-0.5 sm:p-8 ${
               recommended
-                ? "border-accent-primary/40 ring-2 ring-accent-primary/20 dark:border-indigo-400/40 dark:ring-indigo-400/20"
+                ? "pricing-tier-card--recommended border-accent-primary/40 ring-2 ring-accent-primary/20 dark:border-indigo-400/40 dark:ring-indigo-400/20"
                 : ""
             }`}
           >

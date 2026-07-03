@@ -4,8 +4,9 @@ import { getServerSession } from "next-auth";
 import { createAuthOptions } from "@/auth";
 import { PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 import { resolvedNextAuthSecret } from "@/lib/googleAuthEnv";
+import SiteFooter from "@/components/layout/SiteFooter";
 import DeferredMarketingScroll from "@/components/landing/DeferredMarketingScroll";
-import Footer from "@/components/landing/Footer";
+import MarketingScrollMain from "@/components/landing/MarketingScrollMain";
 import Navbar from "@/components/landing/Navbar";
 
 type MarketingPageLayoutProps = {
@@ -22,8 +23,10 @@ export default async function MarketingPageLayout({ children, sectionId }: Marke
     <div className={PAGE_SHELL}>
       <DeferredMarketingScroll sectionId={sectionId} />
       <Navbar session={session} />
-      <main className={PAGE_MAIN}>{children}</main>
-      <Footer />
+      <main className={PAGE_MAIN}>
+        <MarketingScrollMain>{children}</MarketingScrollMain>
+      </main>
+      <SiteFooter />
     </div>
   );
 }

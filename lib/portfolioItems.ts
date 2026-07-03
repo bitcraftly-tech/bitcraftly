@@ -59,6 +59,8 @@ export type PortfolioItem = {
   gradient: string;
   emoji: string;
   mockup: PortfolioMockup;
+  /** Optional card preview screenshot from /public/products */
+  image?: string;
   featureBullets: string[];
   demoHref?: string;
   liveUrl?: string;
@@ -117,6 +119,7 @@ export const homePortfolioItems: PortfolioItem[] = [
     gradient: "from-orange-500/20 to-amber-500/10",
     emoji: "🍽️",
     mockup: "restaurant",
+    image: "/products/Shrishti Cloud Kitchen.png",
     featureBullets: [...RECENT_PROJECT_TRUST_LINES],
     liveUrl: "https://www.shrishticloud.kitchen/",
     ctaLabel: "View live site →",
@@ -148,6 +151,7 @@ export const homePortfolioItems: PortfolioItem[] = [
     gradient: "from-emerald-500/20 to-lime-500/10",
     emoji: "🌿",
     mockup: "ecommerce",
+    image: "/products/Swastik Makhana.png",
     featureBullets: ["Pack-size catalog", "Cart & checkout UX", "GI-tagged brand trust", "NCR delivery messaging"],
     liveUrl: "https://www.swastikmakhana.co/",
     ctaLabel: "View live site →",
@@ -205,6 +209,7 @@ export const homePortfolioItems: PortfolioItem[] = [
     gradient: "from-rose-500/20 to-fuchsia-500/10",
     emoji: "💪",
     mockup: "gym",
+    image: "/products/Gym Website.png",
     featureBullets: [...RECENT_PROJECT_TRUST_LINES],
     demoHref: "/portfolio/gym-fitness-showcase",
     ctaLabel: "Open interactive demo →",
@@ -228,6 +233,7 @@ export const homePortfolioItems: PortfolioItem[] = [
     gradient: "from-blue-500/20 to-indigo-500/10",
     emoji: "🎓",
     mockup: "school",
+    image: "/products/School Website.png",
     featureBullets: [...RECENT_PROJECT_TRUST_LINES],
     demoHref: "/portfolio/school-website-showcase",
     ctaLabel: "Open interactive demo →",
@@ -251,6 +257,7 @@ export const homePortfolioItems: PortfolioItem[] = [
     gradient: "from-violet-500/20 to-purple-500/10",
     emoji: "🛍️",
     mockup: "ecommerce",
+    image: "/products/Ecommerce Store.png",
     featureBullets: ["Category-led UX", "Checkout clarity", "Mobile shopping", "Trust badges"],
     demoHref: "/portfolio/ecommerce-store-showcase",
     ctaLabel: "Open interactive demo →",
@@ -279,6 +286,7 @@ const portfolioExtras: PortfolioItem[] = [
     gradient: "from-slate-500/18 to-zinc-500/10",
     emoji: "🏗️",
     mockup: "local",
+    image: "/products/Builder Website.png",
     featureBullets: ["Project highlights", "Lead enquiries", "Mobile friendly"],
     demoHref: "/portfolio/dayal-builders-showcase",
     ctaLabel: "Open interactive demo →",
@@ -302,6 +310,7 @@ const portfolioExtras: PortfolioItem[] = [
     gradient: "from-emerald-500/15 to-teal-500/12",
     emoji: "🏘️",
     mockup: "generic",
+    image: "/products/Society Portal.png",
     featureBullets: ["Clear resident UX", "Forms & notices", "WhatsApp-friendly"],
     demoHref: "/portfolio/society-management-showcase",
     ctaLabel: "Open interactive demo →",
@@ -325,6 +334,7 @@ const portfolioExtras: PortfolioItem[] = [
     gradient: "from-indigo-500/15 to-slate-500/15",
     emoji: "💬",
     mockup: "chatbot",
+    image: "/products/AI Chatbot for Restaurant.png",
     featureBullets: ["Quick menu answers", "WhatsApp handoff", "Hours & FAQs"],
     demoHref: "/portfolio/restaurant-ai-chatbot-showcase",
     ctaLabel: "Open AI demo →",
@@ -370,6 +380,7 @@ const portfolioExtras: PortfolioItem[] = [
     gradient: "from-cyan-500/20 to-teal-500/10",
     emoji: "🏥",
     mockup: "clinic",
+    image: "/products/Clinic & Healthcare.png",
     featureBullets: ["Doctor profiles", "Appointment requests", "Mobile friendly"],
     demoHref: "/portfolio/clinic-healthcare-showcase",
     ctaLabel: "Open interactive demo →",
@@ -393,6 +404,7 @@ const portfolioExtras: PortfolioItem[] = [
     gradient: "from-blue-900/25 to-orange-500/15",
     emoji: "🏭",
     mockup: "local",
+    image: "/products/RPY Training Institute.png",
     featureBullets: ["Course catalog", "Certificate verify", "Placement cell"],
     demoHref: "/portfolio/rpytech-training-showcase",
     ctaLabel: "Open interactive demo →",
@@ -416,6 +428,7 @@ const portfolioExtras: PortfolioItem[] = [
     gradient: "from-amber-500/20 to-yellow-500/10",
     emoji: "📍",
     mockup: "local",
+    image: "/products/Local Services Lead Site.png",
     featureBullets: ["Strong CTAs", "WhatsApp contact", "Local-ready pages"],
     demoHref: "/portfolio/local-services-leads-showcase",
     ctaLabel: "Open interactive demo →",
@@ -439,6 +452,7 @@ const portfolioExtras: PortfolioItem[] = [
     gradient: "from-indigo-500/20 to-violet-500/10",
     emoji: "⚛️",
     mockup: "generic",
+    image: "/products/Next-Gen SaaS Platform.png",
     featureBullets: ["Component patterns", "Dashboard-ready UI", "Responsive layouts"],
     demoHref: "/portfolio/react-video-demo",
     ctaLabel: "Open product demo →",

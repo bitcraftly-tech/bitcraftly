@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 import { createAuthOptions } from "@/auth";
-import Footer from "@/components/landing/Footer";
+import SiteFooter from "@/components/layout/SiteFooter";
 import Navbar from "@/components/landing/Navbar";
 import { CONTAINER, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 import { BRAND } from "@/lib/siteContent";
@@ -171,7 +171,7 @@ export default async function CustomerPortalPage() {
           </p>
         </div>
       </div>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

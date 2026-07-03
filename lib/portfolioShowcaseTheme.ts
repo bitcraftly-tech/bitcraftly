@@ -23,8 +23,8 @@ export const PS = {
   shadowHover: "0 12px 40px rgba(142, 68, 173, 0.12)",
 } as const;
 
-/** Wrapper — forces light surfaces even when site is in dark mode */
-export const PORTFOLIO_LIGHT_WRAPPER = "portfolio-showcase-light text-[#2c3e50]";
+/** Wrapper — scoped portfolio shell; follows site dark mode */
+export const PORTFOLIO_LIGHT_WRAPPER = "portfolio-showcase-light text-[#2c3e50] dark:text-dark-text-primary";
 
 export const PS_SECTION =
   "relative overflow-hidden rounded-none bg-[#fafbfc]";
@@ -45,7 +45,7 @@ export const PS_BTN_PRIMARY =
   "inline-flex items-center justify-center gap-2 rounded-xl bg-[#8e44ad] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(142,68,173,0.35)] transition hover:bg-[#9b59b6] hover:shadow-[0_6px_20px_rgba(142,68,173,0.4)] active:scale-[0.98]";
 
 export const PS_BTN_GHOST =
-  "inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#e8ecef] bg-white px-4 py-2 text-sm font-semibold text-[#2c3e50] transition hover:border-[rgba(142,68,173,0.3)] hover:bg-[#fafbfc]";
+  "inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#e8ecef] bg-white px-4 py-2 text-sm font-semibold text-[#2c3e50] transition hover:border-[rgba(142,68,173,0.3)] hover:bg-[#fafbfc] dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:hover:border-indigo-400/30 dark:hover:bg-dark-bg-card";
 
 export const PS_BTN_TEXT =
   "inline-flex items-center gap-1.5 text-sm font-semibold text-[#8e44ad] transition hover:text-[#9b59b6]";
