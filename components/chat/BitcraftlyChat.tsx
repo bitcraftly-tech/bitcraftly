@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { X, Send, ChevronDown, RotateCcw } from "lucide-react";
 import { BitBotAvatar, BitBotChatTrigger } from "@/components/chat/BitBotMascot";
+import { lockBodyScrollForChat, unlockBodyScrollForChat } from "@/lib/scrollLock";
 import {
   type ChatMemory,
   type StoredMsg,
@@ -429,7 +430,6 @@ export default function BitcraftlyChat() {
 
     if (!open || typeof window === "undefined") {
       root.style.removeProperty("--bc-chat-vvh");
-      root.style.removeProperty("--bc-chat-vv-offset");
       return;
     }
 
@@ -439,11 +439,9 @@ export default function BitcraftlyChat() {
     const syncViewport = () => {
       if (!mobileMq.matches || !vv) {
         root.style.removeProperty("--bc-chat-vvh");
-        root.style.removeProperty("--bc-chat-vv-offset");
         return;
       }
       root.style.setProperty("--bc-chat-vvh", `${vv.height}px`);
-      root.style.setProperty("--bc-chat-vv-offset", `${vv.offsetTop}px`);
     };
 
     syncViewport();
@@ -454,10 +452,27 @@ export default function BitcraftlyChat() {
     return () => {
       root.removeAttribute("data-bc-chat-open");
       root.style.removeProperty("--bc-chat-vvh");
-      root.style.removeProperty("--bc-chat-vv-offset");
       vv?.removeEventListener("resize", syncViewport);
       vv?.removeEventListener("scroll", syncViewport);
       mobileMq.removeEventListener("change", syncViewport);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open || typeof window === "undefined") return;
+
+    const mobileMq = window.matchMedia("(max-width: 767px)");
+    const syncLock = () => {
+      if (mobileMq.matches) lockBodyScrollForChat();
+      else unlockBodyScrollForChat();
+    };
+
+    syncLock();
+    mobileMq.addEventListener("change", syncLock);
+
+    return () => {
+      mobileMq.removeEventListener("change", syncLock);
+      unlockBodyScrollForChat();
     };
   }, [open]);
 
