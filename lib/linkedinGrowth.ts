@@ -8,7 +8,7 @@ export const WEBSITE_URL = "https://bitcraftly.com";
 
 /** Option A — recommended (220 char limit for headline; verify in profile editor) */
 export const LINKEDIN_HEADLINE =
-  "Founder @ Bitcraftly | Tech Lead & Frontend Architect | React.js · Next.js · AI-Powered Web Solutions | 18+ Yrs | Ghaziabad · India & Remote";
+  "Founder @ Bitcraftly | Tech Lead & Frontend Architect | React.js · Next.js · AI-Powered Web Solutions | 20+ Yrs | Ghaziabad · India & Remote";
 
 /** Option B — shorter */
 export const LINKEDIN_HEADLINE_SHORT =
@@ -17,7 +17,7 @@ export const LINKEDIN_HEADLINE_SHORT =
 /** Full About section — paste into LinkedIn About */
 export const LINKEDIN_ABOUT = `Most business websites look fine but fail at the one job that matters: turning visitors into enquiries.
 
-I'm Sanjay Kr. Singh — Tech Lead, Frontend Architect, and founder of Bitcraftly. For 18+ years I've shipped interfaces that product teams and local businesses actually run on: React.js, Next.js, performance, and AI only where it earns its place.
+I'm Sanjay Kr. Singh — Tech Lead, Frontend Architect, and founder of Bitcraftly. For 20+ years I've shipped interfaces that product teams and local businesses actually run on: React.js, Next.js, performance, and AI only where it earns its place.
 
 What I do differently:
 → You work with me directly — not a sales handoff to juniors
@@ -73,7 +73,7 @@ export const REACT_AUTHORITY_POSITIONING = {
     "Component architecture, App Router, and maintainable codebases your next dev can extend",
     "SEO-friendly rendering (SSR/SSG) chosen for business growth — explained in plain language",
     "Performance budgets & Core Web Vitals — mobile-first for Indian traffic patterns",
-    "18+ years shipping product UIs — startup speed with enterprise discipline",
+    "20+ years shipping product UIs — startup speed with enterprise discipline",
   ],
   postAngles: [
     "React vs WordPress for Indian SMBs — when each makes money",
@@ -103,7 +103,7 @@ export const DAILY_POSTING_STRATEGY = {
   weeklyRhythm: [
     { day: "Monday", theme: "Authority", example: "React/Next.js tip or myth-bust (short carousel or text)" },
     { day: "Tuesday", theme: "Proof", example: "Portfolio snippet, before/after, or live client mention" },
-    { day: "Wednesday", theme: "Founder story", example: "Lesson from 18 yrs — handoff, scope, or client comms" },
+    { day: "Wednesday", theme: "Founder story", example: "Lesson from 20 yrs — handoff, scope, or client comms" },
     { day: "Thursday", theme: "AI practical", example: "AI + WhatsApp funnel — one use case" },
     { day: "Friday", theme: "Offer", example: "Fast package or free consult CTA — soft, not spammy" },
     { day: "Saturday", theme: "Local / SMB", example: "Ghaziabad/NCR business website insight" },
@@ -136,7 +136,7 @@ export const STARTUP_FOUNDER_OUTREACH = {
   connectionNote: CONNECTION_REQUEST_TEMPLATES.startupFounder,
   dmAfterAccept: `Thanks for connecting, [Name].
 
-Quick context: I run Bitcraftly — founder-led React/Next.js studio. I help startups with MVP frontends, investor demos, and SEO-ready marketing sites (18+ yrs, ex–product team delivery).
+Quick context: I run Bitcraftly — founder-led React/Next.js studio. I help startups with MVP frontends, investor demos, and SEO-ready marketing sites (20+ yrs, ex–product team delivery).
 
 If you're shaping [product/website] this quarter, I can share a 1-page scope template or a 15-min call — no pitch deck.
 
@@ -219,7 +219,7 @@ export const LINKEDIN_30_DAY_PLAN = {
 
 export const PREMIUM_POSITIONING = {
   neverSay: ["Cheap websites", "Best price guaranteed", "Unlimited revisions", "We do everything IT"],
-  alwaysSay: ["Founder-led", "Written scope", "React/Next.js", "Lead-focused", "18+ years", "Practical AI"],
+  alwaysSay: ["Founder-led", "Written scope", "React/Next.js", "Lead-focused", "20+ years", "Practical AI"],
   dmKeywords: {
     SCOPE: "Free 15-min consultation + written ballpark",
     AUDIT: "Free website audit checklist",

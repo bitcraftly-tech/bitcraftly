@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 
 import { CONTAINER, SECTION_PY_COMPACT } from "@/lib/constants";
+import { useMobileStaticEntrance } from "@/hooks/useMobileStaticEntrance";
 import { PORTFOLIO } from "@/lib/portfolioContent";
 
 type PortfolioWhyPerformProps = {
@@ -23,12 +24,15 @@ function PerformCard({
   index: number;
 }) {
   const reduceMotion = useReducedMotion();
+  const staticEntrance = useMobileStaticEntrance();
+  const skipEntrance = reduceMotion || staticEntrance;
 
   return (
     <motion.article
-      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-20px" }}
+      initial={skipEntrance ? false : { opacity: 0, y: 12 }}
+      {...(skipEntrance
+        ? { animate: { opacity: 1, y: 0 } }
+        : { whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.1 } })}
       transition={{ duration: 0.3, delay: Math.min(index * 0.05, 0.25), ease: [0.22, 1, 0.36, 1] }}
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-250 hover:-translate-y-1 hover:border-[#D1D5DB] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] dark:border-dark-border-primary dark:bg-dark-bg-card dark:hover:border-indigo-500/25"
     >

@@ -84,7 +84,7 @@ export const PAGE_SEO = {
     path: "/about",
     title: "About Bitcraftly — Founder-Led Web Studio Ghaziabad",
     description:
-      "Meet Bitcraftly — a founder-led React.js & Next.js studio led by Sanjay Kr. Singh (18+ years). Clear scope, premium frontend craft, and delivery from Ghaziabad across Delhi NCR & India.",
+      "Meet Bitcraftly — a founder-led React.js & Next.js studio led by Sanjay Kr. Singh (20+ years). Clear scope, premium frontend craft, and delivery from Ghaziabad across Delhi NCR & India.",
     keywords: [
       "founder led web development studio",
       "frontend architect India",
@@ -146,7 +146,7 @@ export const PAGE_SEO = {
     path: "/team",
     title: "Founder — Sanjay Kr. Singh",
     description:
-      "Sanjay Kr. Singh — Tech Lead & Frontend Architect at Bitcraftly. 18+ years React.js, Next.js, and AI-powered web solutions from Ghaziabad, serving India and remote clients.",
+      "Sanjay Kr. Singh — Tech Lead & Frontend Architect at Bitcraftly. 20+ years React.js, Next.js, and AI-powered web solutions from Ghaziabad, serving India and remote clients.",
     keywords: [
       "Sanjay Kr Singh frontend architect",
       "React.js developer Ghaziabad",

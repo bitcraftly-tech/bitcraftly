@@ -6,7 +6,7 @@ export const PORTFOLIO = {
   showcaseHeading: "Our Portfolio",
   showcaseDescription:
     "A showcase of modern, fast, and AI-powered digital solutions built with React.js, Next.js & cutting-edge technologies.",
-  experienceBadgeTitle: "18+ Years of Experience",
+  experienceBadgeTitle: "20+ Years of Experience",
   experienceBadgeBody: "Delivering high-quality solutions that drive real business results.",
   heading: "Real builds and production-ready demos — structured for trust",
   intro:
@@ -54,7 +54,7 @@ export const PORTFOLIO = {
   demoProjectTitle: "Interactive demo",
   demoProjectBody: "Click through a scoped industry pattern — we customize layout, copy, and integrations for your brand.",
   trustStoryline:
-    "Founder-led delivery: Sanjay Kr. Singh (18+ yrs) architects the frontend on every engagement — you see how we think before you pay.",
+    "Founder-led delivery: Sanjay Kr. Singh (20+ yrs) architects the frontend on every engagement — you see how we think before you pay.",
   ctaTitle: "Want a project structured like these?",
   ctaBody:
     "Tell us your industry and goal — we’ll recommend React vs Next.js, whether AI helps, timeline, and a written starting estimate. Free 15-minute consultation with the founder.",

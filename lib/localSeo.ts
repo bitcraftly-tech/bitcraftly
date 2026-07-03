@@ -10,7 +10,7 @@ export const GBP_COUNTRY = "India";
 /** Google Business Profile — business description (max ~750 chars; keep under 700) */
 export const GBP_DESCRIPTION = `Bitcraftly is a founder-led web development studio in Ghaziabad, Uttar Pradesh, serving Delhi NCR and clients across India.
 
-Led by Sanjay Kr. Singh (Tech Lead & Frontend Architect, 18+ years), we build fast, mobile-first business websites using React.js, Next.js, and practical AI — designed to generate leads on WhatsApp and Google, not just look good.
+Led by Sanjay Kr. Singh (Tech Lead & Frontend Architect, 20+ years), we build fast, mobile-first business websites using React.js, Next.js, and practical AI — designed to generate leads on WhatsApp and Google, not just look good.
 
 Services: React.js development, Next.js websites, business & clinic/gym/coach websites, website redesign, landing pages, frontend architecture, performance optimization, and AI chatbot integration.
 
@@ -203,7 +203,7 @@ export const LOCAL_RANKING_STRATEGY = {
 export const LOCAL_TRUST_POSITIONING = {
   headline: "Ghaziabad’s founder-led React & Next.js studio — not a template reseller",
   pillars: [
-    "Named founder on every enquiry (Sanjay Kr. Singh, 18+ yrs)",
+    "Named founder on every enquiry (Sanjay Kr. Singh, 20+ yrs)",
     "Written scope & price before advance — trusted by local SMBs",
     "Live client sites + interactive demos — proof before you pay",
     "English / Hinglish support — NCR business culture fit",

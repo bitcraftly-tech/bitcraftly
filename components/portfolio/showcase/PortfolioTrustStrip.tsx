@@ -2,7 +2,7 @@ import { PORTFOLIO } from "@/lib/portfolioContent";
 import { PORTFOLIO_STRUCTURE_STEP } from "@/lib/portfolioPalette";
 
 const TRUST_STATS = [
-  { value: "18+", label: "Years frontend delivery" },
+  { value: "20+", label: "Years frontend delivery" },
   { value: "React", label: "& Next.js specialist" },
   { value: "Founder", label: "Led by Sanjay Kr. Singh" },
   { value: "Written", label: "Scope before payment" },

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 
 import { CONTAINER, SECTION_PY, SECTION_SCROLL_MT } from "@/lib/constants";
+import { useMobileStaticEntrance } from "@/hooks/useMobileStaticEntrance";
 import { HOME_HUB_LINKS, type HomeHubLink } from "@/lib/marketingRoutes";
 
 const STEP_ICONS: Record<string, LucideIcon> = {
@@ -28,15 +29,18 @@ const STEP_ICONS: Record<string, LucideIcon> = {
 
 function HubLinkCard({ item, index }: { item: HomeHubLink; index: number }) {
   const reduceMotion = useReducedMotion();
+  const staticEntrance = useMobileStaticEntrance();
+  const skipEntrance = reduceMotion || staticEntrance;
   const Icon = STEP_ICONS[item.href] ?? Sparkles;
   const stepLabel = String(item.step ?? 0).padStart(2, "0");
   const ctaLabel = (item.cta ?? "Learn more").replace(/\s*[→↗]\s*$/, "");
 
   return (
     <motion.div
-      initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-24px" }}
+      initial={skipEntrance ? false : { opacity: 0, y: 14 }}
+      {...(skipEntrance
+        ? { animate: { opacity: 1, y: 0 } }
+        : { whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.1 } })}
       transition={{ duration: 0.35, delay: Math.min(index * 0.06, 0.28), ease: [0.22, 1, 0.36, 1] }}
       className="h-full"
     >

@@ -9,7 +9,7 @@ export const FAST_PACKAGES_SECTION = {
   urgencyLine: "Founder-led slots are limited each month — book early to reserve your launch window.",
   offerLine: "50% advance to lock your slot · Balance on delivery · Written scope before kickoff",
   founderTrust:
-    "Every package is delivered by Sanjay Kr. Singh — Tech Lead & Frontend Architect (18+ yrs). No junior handoff after the sales call.",
+    "Every package is delivered by Sanjay Kr. Singh — Tech Lead & Frontend Architect (20+ yrs). No junior handoff after the sales call.",
   bottomCtaTitle: "Not sure which package fits?",
   bottomCtaBody: "WhatsApp a one-line brief or book a free 15-min consult — we'll point you to the right package in plain language.",
   bottomCtaPrimary: "Book Free Consultation",

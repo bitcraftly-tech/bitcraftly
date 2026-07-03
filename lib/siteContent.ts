@@ -6,7 +6,7 @@ export const FOUNDER = {
   title: "Tech Lead | Frontend Architect | React.js, Next.js & AI-Powered Web Solutions",
   shortTitle: "Founder · Frontend Architect",
   linkedIn: "https://linkedin.com/in/sanjay-ui-frontend-developer",
-  yearsExperience: "18+",
+  yearsExperience: "20+",
   photoSrc: "/images/founder/sanjay-kr-singh.png",
   photoAlt: "Sanjay Kr. Singh — Tech Lead and Frontend Architect at Bitcraftly",
 
@@ -14,7 +14,7 @@ export const FOUNDER = {
   sectionEyebrow: "Founder-led studio · Bitcraftly",
   introHeadline: "You work with Sanjay — the architect who builds it, not a sales team that disappears",
   introParagraph:
-    "Bitcraftly is a premium, founder-led frontend studio. Sanjay Kr. Singh brings 18+ years of product and delivery experience to every website — React.js, Next.js, performance, and practical AI — so your business gets a fast, trustworthy site that actually drives enquiries.",
+    "Bitcraftly is a premium, founder-led frontend studio. Sanjay Kr. Singh brings 20+ years of product and delivery experience to every website — React.js, Next.js, performance, and practical AI — so your business gets a fast, trustworthy site that actually drives enquiries.",
   story:
     "I have spent nearly two decades inside real product teams — shipping interfaces clinics, gyms, startups, and SaaS products rely on daily. The pattern was always the same: a polished sales call, then a junior team, a slow site, and owners left guessing why leads did not come. I started Bitcraftly so you have one senior thread from first message to launch — the same discipline I use for scalable React and Next.js systems, applied to businesses that need trust, speed, and clarity.",
   authorityHeadline: "Why owners trust Sanjay with their frontend",
@@ -27,9 +27,9 @@ export const FOUNDER = {
     "Written estimates and timelines before kickoff — no surprise invoices mid-project",
   ] as const,
   shortBio:
-    "18+ years · Tech Lead & Frontend Architect · React.js, Next.js & AI-powered solutions for businesses that want leads, not just a pretty homepage.",
+    "20+ years · Tech Lead & Frontend Architect · React.js, Next.js & AI-powered solutions for businesses that want leads, not just a pretty homepage.",
   mobileConcise:
-    "Sanjay Kr. Singh — 18+ yrs frontend architect. Founder-led React/Next.js & AI websites. Seedha baat, likha scope, honest timeline.",
+    "Sanjay Kr. Singh — 20+ yrs frontend architect. Founder-led React/Next.js & AI websites. Seedha baat, likha scope, honest timeline.",
   bioHinglish:
     "Main believe karta hoon: website tabhi premium hai jab business ko result de — zyada trust, faster load, clear WhatsApp enquiries. Isliye Bitcraftly par aap seedha founder se baat karte ho, scope likha milta hai, aur delivery par junior handoff nahi.",
   whyStartedTitle: "Why Bitcraftly exists",
@@ -46,7 +46,7 @@ export const FOUNDER = {
     "Practical AI (chat, smart forms) with WhatsApp handoff — useful for leads, not gimmicks.",
   ] as const,
   experienceHighlights: [
-    { title: "18+ years in frontend & product delivery", detail: "From early responsive web to modern React, Next.js, and AI-ready platforms." },
+    { title: "20+ years in frontend & product delivery", detail: "From early responsive web to modern React, Next.js, and AI-ready platforms." },
     { title: "Tech Lead & Frontend Architect", detail: "UI systems, performance budgets, and scalable patterns — not one-off page hacks." },
     { title: "React.js & Next.js at the core", detail: "SEO-friendly structure, App Router, and mobile-first builds for growth-focused brands." },
     { title: "Conversion & performance mindset", detail: "Core Web Vitals, clear CTAs, and WhatsApp lead flows owners can measure." },
@@ -54,7 +54,7 @@ export const FOUNDER = {
     { title: "Founder-led, India & remote", detail: "Ghaziabad-based · nationwide and international clients · English or Hinglish on calls." },
   ] as const,
   achievements: [
-    { value: "18+", label: "Years shipping real-world frontend & product UIs" },
+    { value: "20+", label: "Years shipping real-world frontend & product UIs" },
     { value: "React · Next.js", label: "Modern stack for SEO, speed & maintainability" },
     { value: "Founder-led", label: "You work with Sanjay — not a handoff chain" },
     { value: "AI-ready", label: "Practical AI that supports leads, not hype" },
@@ -66,10 +66,10 @@ export const FOUNDER = {
   secondaryCta: "WhatsApp Sanjay",
   linkedInLabel: "Connect on LinkedIn",
   linkedInSummary:
-    "Founder @ Bitcraftly · Tech Lead & Frontend Architect (18+ yrs) · React.js, Next.js & AI-powered web solutions. Founder-led websites for startups & SMBs — written scope, WhatsApp leads, India & remote. DM \"SCOPE\" on LinkedIn for free 15-min consultation.",
+    "Founder @ Bitcraftly · Tech Lead & Frontend Architect (20+ yrs) · React.js, Next.js & AI-powered web solutions. Founder-led websites for startups & SMBs — written scope, WhatsApp leads, India & remote. DM \"SCOPE\" on LinkedIn for free 15-min consultation.",
 
   /** Legacy aliases — team page & snippets */
-  bio: "Frontend Architect and Tech Lead with 18+ years of experience building scalable web applications, modern frontend systems, responsive UI architectures, and AI-powered digital solutions. Specialized in React.js, Next.js, frontend engineering, UI/UX implementation, performance optimization, and business-focused web platforms for startups, local businesses, and growing brands.",
+  bio: "Frontend Architect and Tech Lead with 20+ years of experience building scalable web applications, modern frontend systems, responsive UI architectures, and AI-powered digital solutions. Specialized in React.js, Next.js, frontend engineering, UI/UX implementation, performance optimization, and business-focused web platforms for startups, local businesses, and growing brands.",
 } as const;
 
 export const BRAND = {
@@ -89,11 +89,11 @@ export const BRAND = {
 
 /** Homepage hero — single source of truth for headline, CTAs, trust line */
 export const HERO = {
-  badge: "Founder-led · 18+ yrs · Ghaziabad · India & remote",
-  mobileBadge: "Founder-led · 18+ yrs · India & remote",
+  badge: "Founder-led · 20+ yrs · Ghaziabad · India & remote",
+  mobileBadge: "Founder-led · 20+ yrs · India & remote",
   headline: "Premium React & Next.js Websites That Turn Visitors Into Leads",
   subheadline:
-    "Bitcraftly is led by Sanjay Kr. Singh — Frontend Architect with 18+ years building scalable UI systems for startups, clinics, gyms, SaaS teams, and local brands. Fast launches, SEO-ready structure, and practical AI where it actually drives enquiries.",
+    "Bitcraftly is led by Sanjay Kr. Singh — Frontend Architect with 20+ years building scalable UI systems for startups, clinics, gyms, SaaS teams, and local brands. Fast launches, SEO-ready structure, and practical AI where it actually drives enquiries.",
   trustLine:
     "Written scope before payment · Seedha founder se baat · English–Hinglish on WhatsApp",
   primaryCta: "Book Free Consultation",
@@ -103,14 +103,14 @@ export const HERO = {
 } as const;
 
 export const TRUST_CHECKS = [
-  "18+ Years · Frontend Architect",
+  "20+ Years · Frontend Architect",
   "React.js & Next.js",
   "Founder-Led Delivery",
   "AI-Ready · SEO-Focused",
 ] as const;
 
 export const WHY_CHOOSE = [
-  { title: "18+ Years · Frontend Architect", desc: "Battle-tested delivery for startups, SMBs, and product teams — not experiment learning on your budget." },
+  { title: "20+ Years · Frontend Architect", desc: "Battle-tested delivery for startups, SMBs, and product teams — not experiment learning on your budget." },
   { title: "Founder-Led, One Thread", desc: "Sanjay owns architecture, build quality, and communication — no sales-to-junior handoff." },
   { title: "React.js & Next.js Core", desc: "Modern stacks chosen for SEO, speed, and maintainability — explained in plain language." },
   { title: "AI With Purpose", desc: "Chat and automation only when they shorten the path to a lead or sale — always human-backed." },

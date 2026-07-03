@@ -33,7 +33,7 @@ export const WEBSITE_AUDIT = {
 export const TRUST_INQUIRY = {
   title: "Why owners trust Bitcraftly with enquiries",
   points: [
-    "18+ years frontend experience · founder on every call",
+    "20+ years frontend experience · founder on every call",
     "Written estimates before payment — no surprise invoices",
     "React.js, Next.js & practical AI — explained in plain language",
     "Serving Ghaziabad, India-wide & remote clients",
