@@ -630,6 +630,7 @@ textarea,
   right: 0;
   z-index: 9060;
   width: 100%;
+  pointer-events: auto;
 }
 
 .bc-site-header-spacer {
@@ -956,21 +957,19 @@ textarea,
 .nav-mobile-overlay {
   position: fixed;
   inset: 0;
-  z-index: 9070;
-  pointer-events: none;
-  visibility: hidden;
-}
-
-.nav-mobile-overlay[data-open="true"] {
+  z-index: 0;
   pointer-events: auto;
   visibility: visible;
 }
 
 .nav-mobile-backdrop {
   position: absolute;
-  inset: 0;
+  top: var(--bc-nav-height, 4.5rem);
+  inset-inline: 0;
+  bottom: 0;
   z-index: 0;
   touch-action: none;
+  pointer-events: auto;
   opacity: 0;
   background:
     radial-gradient(ellipse 80% 55% at 85% 12%, rgb(99 102 241 / 0.28) 0%, transparent 58%),
@@ -1504,8 +1503,29 @@ textarea,
 }
 
 @media (max-width: 1023px) {
-  html[data-bc-nav-open] .bc-site-header--fixed {
-    z-index: 9090;
+  .bc-site-header--fixed {
+    z-index: 9200;
+    isolation: isolate;
+  }
+
+  .bc-site-header--fixed > nav {
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
+  }
+
+  .bc-mobile-header-controls,
+  .bc-mobile-header-controls > *,
+  .bc-mobile-header-controls button,
+  .bc-nav-hamburger {
+    position: relative;
+    z-index: 3;
+    pointer-events: auto;
+    touch-action: manipulation;
+  }
+
+  .bc-nav-hamburger > .pointer-events-none {
+    pointer-events: none;
   }
 
   .nav-mobile-panel {
@@ -1585,6 +1605,11 @@ html[data-bc-nav-scroll-lock] #mobile-nav-panel {
 .bc-nav-hamburger:focus-visible {
   outline: 2px solid var(--brand-primary);
   outline-offset: 2px;
+}
+
+.bc-nav-hamburger {
+  touch-action: manipulation;
+  pointer-events: auto;
 }
 
 /* Navbar — Pricing CTA highlight (solid pill, high contrast) */

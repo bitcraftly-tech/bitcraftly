@@ -48,14 +48,21 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
   const navRef = useRef<HTMLElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [menuEntered, setMenuEntered] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isMobileLayout, setIsMobileLayout] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    const media = window.matchMedia("(max-width: 1023px)");
+    const syncLayout = () => setIsMobileLayout(media.matches);
+    syncLayout();
+    media.addEventListener("change", syncLayout);
+    return () => media.removeEventListener("change", syncLayout);
   }, []);
 
   useEffect(() => {
@@ -106,6 +113,19 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
   }, [servicesOpen]);
 
   useEffect(() => {
+    if (!isMenuOpen) {
+      setMenuEntered(false);
+      return;
+    }
+
+    const raf = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setMenuEntered(true));
+    });
+
+    return () => cancelAnimationFrame(raf);
+  }, [isMenuOpen]);
+
+  useEffect(() => {
     const root = document.documentElement;
     if (!isMenuOpen) {
       root.removeAttribute("data-bc-nav-open");
@@ -144,6 +164,8 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
 
   const closeMenu = () => setIsMenuOpen(false);
 
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+
   const openLoginModal = () => {
     closeMenu();
     setIsLoginOpen(true);
@@ -155,15 +177,153 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
     return `bc-nav-link whitespace-nowrap px-3 py-2 text-sm ${active ? "bc-nav-link--active" : ""}`;
   };
 
-  return (
-    <>
-    <header
-      className={
-        embedded
-          ? "bc-site-header border-b border-[#E5E7EB] bg-white/90 backdrop-blur-sm dark:border-dark-border-primary dark:bg-dark-bg-card/90"
-          : `bc-site-header bc-site-header--fixed w-full shrink-0 border-b border-[#E5E7EB] bg-white/95 backdrop-blur-sm transition-[box-shadow,background-color,border-color] duration-300 dark:border-dark-border-primary dark:bg-dark-bg-card/95 ${scrolled ? "bc-site-header--scrolled" : "shadow-none"}`
-      }
+  const headerClassName = embedded
+    ? "bc-site-header border-b border-[#E5E7EB] bg-white/90 backdrop-blur-sm dark:border-dark-border-primary dark:bg-dark-bg-card/90"
+    : `bc-site-header bc-site-header--fixed w-full shrink-0 border-b border-[#E5E7EB] bg-white/95 backdrop-blur-sm transition-[box-shadow,background-color,border-color] duration-300 dark:border-dark-border-primary dark:bg-dark-bg-card/95 ${scrolled ? "bc-site-header--scrolled" : "shadow-none"}`;
+
+  const mobileMenuOverlay = isMenuOpen ? (
+    <div
+      className="nav-mobile-overlay lg:hidden"
+      data-open={menuEntered ? "true" : "false"}
+      aria-hidden={!menuEntered}
     >
+      <button
+        type="button"
+        aria-label="Close navigation menu"
+        className="nav-mobile-backdrop"
+        onClick={closeMenu}
+      />
+
+      <div
+        id="mobile-nav-panel"
+        aria-hidden={false}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+        className="nav-mobile-panel"
+      >
+        <div className="nav-mobile-panel__ambient" aria-hidden />
+
+        <div className={`nav-mobile-body ${menuEntered ? "nav-mobile-open" : ""}`}>
+          <div className="nav-mobile-scroll scrollbar-soft">
+            <header className="nav-mobile-head nav-mobile-item">
+              <h2 className="nav-mobile-head__title">Where should we go?</h2>
+              <p className="nav-mobile-head__lead">Services, portfolio & pricing — one tap away.</p>
+            </header>
+
+            <nav className="nav-mobile-routes" aria-label="Primary">
+              <div className={`nav-mobile-item nav-mobile-route nav-mobile-route--group ${mobileServicesOpen ? "nav-mobile-route--open" : ""}`}>
+                <button
+                  type="button"
+                  aria-expanded={mobileServicesOpen}
+                  onClick={() => setMobileServicesOpen((v) => !v)}
+                  className="nav-mobile-route__trigger"
+                >
+                  <span className="nav-mobile-route__index" aria-hidden>
+                    01
+                  </span>
+                  <span className="nav-mobile-route__icon">
+                    <Sparkles className="size-[1.05rem]" aria-hidden />
+                  </span>
+                  <span className="nav-mobile-route__copy">
+                    <span className="nav-mobile-route__title">Services</span>
+                    <span className="nav-mobile-route__hint">Websites, web apps, mobile & AI</span>
+                  </span>
+                  <span className="nav-mobile-route__arrow nav-mobile-route__arrow--down" aria-hidden>
+                    <ChevronDown className={`size-4 transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""}`} />
+                  </span>
+                </button>
+                <div className="nav-mobile-route__sub">
+                  <div>
+                    <div className="nav-mobile-route__sub-inner">
+                      <Link
+                        href="/services"
+                        className="nav-mobile-route__sub-link nav-mobile-route__sub-link--featured"
+                        onClick={closeMenu}
+                      >
+                        All services
+                      </Link>
+                      {HEADER_SERVICES_DROPDOWN.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="nav-mobile-route__sub-link"
+                          onClick={closeMenu}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {MARKETING_NAV.filter((l) => l.label !== "Services").map((link, index) => {
+                const Icon = MOBILE_NAV_ICONS[link.label] ?? Sparkles;
+                const active = isNavLinkActive(link.href, pathname);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    aria-current={active ? "page" : undefined}
+                    className={`nav-mobile-item nav-mobile-route ${active ? "nav-mobile-route--active" : ""}`}
+                    onClick={closeMenu}
+                  >
+                    <span className="nav-mobile-route__index" aria-hidden>
+                      {String(index + 2).padStart(2, "0")}
+                    </span>
+                    <span className={`nav-mobile-route__icon ${active ? "nav-mobile-route__icon--active" : ""}`}>
+                      <Icon className="size-[1.05rem]" aria-hidden />
+                    </span>
+                    <span className="nav-mobile-route__copy">
+                      <span className="nav-mobile-route__title">{link.label}</span>
+                      <span className="nav-mobile-route__hint">{link.mobileHint}</span>
+                    </span>
+                    <span className="nav-mobile-route__arrow" aria-hidden>
+                      <ChevronRight className="size-4" />
+                    </span>
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+
+          <aside className="nav-mobile-actions nav-mobile-dock">
+            <div className={`nav-mobile-dock__grid ${session ? "nav-mobile-dock__grid--auth" : ""}`}>
+              <a
+                href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
+                data-wa-source="navbar-mobile-whatsapp"
+                target="_blank"
+                rel="noreferrer"
+                className="nav-mobile-quick nav-mobile-quick--whatsapp"
+                onClick={closeMenu}
+              >
+                <MessageCircle className="size-4 shrink-0" aria-hidden />
+                <span>WhatsApp</span>
+              </a>
+
+              {session ? (
+                <NavbarProfileMenu variant="mobile" session={session} onNavigate={closeMenu} className="nav-mobile-profile" />
+              ) : (
+                <button type="button" className="nav-mobile-quick nav-mobile-quick--login" onClick={openLoginModal}>
+                  Log in
+                </button>
+              )}
+            </div>
+
+            <Link href={CONSULTATION_MOBILE_HREF} className="nav-mobile-cta" onClick={closeMenu}>
+              <span className="nav-mobile-cta__label">Get Free Consultation</span>
+              <span className="nav-mobile-cta__shine" aria-hidden />
+            </Link>
+            <p className="nav-mobile-dock__note">Free strategy call · No commitment</p>
+          </aside>
+        </div>
+      </div>
+    </div>
+  ) : null;
+
+  const headerNode = (
+    <header className={headerClassName}>
       <nav
         ref={navRef}
         className={`${CONTAINER} flex min-h-[72px] min-w-0 items-center justify-between gap-3 py-0 lg:gap-4`}
@@ -272,7 +432,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
         </div>
 
         {/* Mobile controls */}
-        <div className="flex shrink-0 items-center gap-2 lg:hidden">
+        <div className="bc-mobile-header-controls flex shrink-0 items-center gap-2 lg:hidden">
           {showThemeToggle ? <ThemeToggle /> : null}
           <button
             type="button"
@@ -284,10 +444,10 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
                 ? "border-[#8e44ad]/30 bg-[#8e44ad]/5 dark:border-indigo-400/35 dark:bg-indigo-950/40"
                 : "border-[#E5E7EB] dark:border-dark-border-primary"
             }`}
-            onClick={() => setIsMenuOpen((prev) => !prev)}
+            onClick={toggleMenu}
           >
             <span className="sr-only">{isMenuOpen ? "Close menu" : "Open menu"}</span>
-            <div className="relative h-4 w-5" aria-hidden>
+            <div className="pointer-events-none relative h-4 w-5" aria-hidden>
               <span className={`nav-hamburger-line absolute left-0 block h-0.5 w-5 bg-[#111827] dark:bg-dark-text-primary ${isMenuOpen ? "top-2 rotate-45" : "top-0"}`} />
               <span className={`nav-hamburger-line absolute left-0 top-2 block h-0.5 w-5 bg-[#111827] dark:bg-dark-text-primary ${isMenuOpen ? "scale-x-0 opacity-0" : "scale-x-100 opacity-100"}`} />
               <span className={`nav-hamburger-line absolute left-0 block h-0.5 w-5 bg-[#111827] dark:bg-dark-text-primary ${isMenuOpen ? "top-2 -rotate-45" : "top-4"}`} />
@@ -296,168 +456,17 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
         </div>
       </nav>
 
-      {mounted
-        ? createPortal(
-            <div
-              className="nav-mobile-overlay lg:hidden"
-              data-open={isMenuOpen ? "true" : "false"}
-              aria-hidden={!isMenuOpen}
-            >
-              <button
-                type="button"
-                aria-label="Close navigation menu"
-                className="nav-mobile-backdrop"
-                onClick={closeMenu}
-                tabIndex={isMenuOpen ? 0 : -1}
-              />
-
-              <div
-                id="mobile-nav-panel"
-                aria-hidden={!isMenuOpen}
-                role="dialog"
-                aria-modal="true"
-                aria-label="Navigation menu"
-                className="nav-mobile-panel"
-              >
-                <div className="nav-mobile-panel__ambient" aria-hidden />
-
-                <div className={`nav-mobile-body ${isMenuOpen ? "nav-mobile-open" : ""}`}>
-                  <div className="nav-mobile-scroll scrollbar-soft">
-                    <header className="nav-mobile-head nav-mobile-item">
-                      <h2 className="nav-mobile-head__title">Where should we go?</h2>
-                      <p className="nav-mobile-head__lead">Services, portfolio & pricing — one tap away.</p>
-                    </header>
-
-                    <nav className="nav-mobile-routes" aria-label="Primary">
-                      <div className={`nav-mobile-item nav-mobile-route nav-mobile-route--group ${mobileServicesOpen ? "nav-mobile-route--open" : ""}`}>
-                        <button
-                          type="button"
-                          tabIndex={isMenuOpen ? 0 : -1}
-                          aria-expanded={mobileServicesOpen}
-                          onClick={() => setMobileServicesOpen((v) => !v)}
-                          className="nav-mobile-route__trigger"
-                        >
-                          <span className="nav-mobile-route__index" aria-hidden>
-                            01
-                          </span>
-                          <span className="nav-mobile-route__icon">
-                            <Sparkles className="size-[1.05rem]" aria-hidden />
-                          </span>
-                          <span className="nav-mobile-route__copy">
-                            <span className="nav-mobile-route__title">Services</span>
-                            <span className="nav-mobile-route__hint">Websites, web apps, mobile & AI</span>
-                          </span>
-                          <span className="nav-mobile-route__arrow nav-mobile-route__arrow--down" aria-hidden>
-                            <ChevronDown className={`size-4 transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""}`} />
-                          </span>
-                        </button>
-                        <div className="nav-mobile-route__sub">
-                          <div>
-                            <div className="nav-mobile-route__sub-inner">
-                              <Link
-                                href="/services"
-                                tabIndex={isMenuOpen ? 0 : -1}
-                                className="nav-mobile-route__sub-link nav-mobile-route__sub-link--featured"
-                                onClick={closeMenu}
-                              >
-                                All services
-                              </Link>
-                              {HEADER_SERVICES_DROPDOWN.map((item) => (
-                                <Link
-                                  key={item.label}
-                                  href={item.href}
-                                  tabIndex={isMenuOpen ? 0 : -1}
-                                  className="nav-mobile-route__sub-link"
-                                  onClick={closeMenu}
-                                >
-                                  {item.label}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {MARKETING_NAV.filter((l) => l.label !== "Services").map((link, index) => {
-                        const Icon = MOBILE_NAV_ICONS[link.label] ?? Sparkles;
-                        const active = isNavLinkActive(link.href, pathname);
-                        return (
-                          <Link
-                            key={link.href}
-                            href={link.href}
-                            tabIndex={isMenuOpen ? 0 : -1}
-                            aria-current={active ? "page" : undefined}
-                            className={`nav-mobile-item nav-mobile-route ${active ? "nav-mobile-route--active" : ""}`}
-                            onClick={closeMenu}
-                          >
-                            <span className="nav-mobile-route__index" aria-hidden>
-                              {String(index + 2).padStart(2, "0")}
-                            </span>
-                            <span className={`nav-mobile-route__icon ${active ? "nav-mobile-route__icon--active" : ""}`}>
-                              <Icon className="size-[1.05rem]" aria-hidden />
-                            </span>
-                            <span className="nav-mobile-route__copy">
-                              <span className="nav-mobile-route__title">{link.label}</span>
-                              <span className="nav-mobile-route__hint">{link.mobileHint}</span>
-                            </span>
-                            <span className="nav-mobile-route__arrow" aria-hidden>
-                              <ChevronRight className="size-4" />
-                            </span>
-                          </Link>
-                        );
-                      })}
-                    </nav>
-                  </div>
-
-                  <aside className="nav-mobile-actions nav-mobile-dock">
-                    <div className={`nav-mobile-dock__grid ${session ? "nav-mobile-dock__grid--auth" : ""}`}>
-                      <a
-                        href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
-                        data-wa-source="navbar-mobile-whatsapp"
-                        target="_blank"
-                        rel="noreferrer"
-                        tabIndex={isMenuOpen ? 0 : -1}
-                        className="nav-mobile-quick nav-mobile-quick--whatsapp"
-                        onClick={closeMenu}
-                      >
-                        <MessageCircle className="size-4 shrink-0" aria-hidden />
-                        <span>WhatsApp</span>
-                      </a>
-
-                      {session ? (
-                        <NavbarProfileMenu variant="mobile" session={session} onNavigate={closeMenu} className="nav-mobile-profile" />
-                      ) : (
-                        <button
-                          type="button"
-                          tabIndex={isMenuOpen ? 0 : -1}
-                          className="nav-mobile-quick nav-mobile-quick--login"
-                          onClick={openLoginModal}
-                        >
-                          Log in
-                        </button>
-                      )}
-                    </div>
-
-                    <Link
-                      href={CONSULTATION_MOBILE_HREF}
-                      tabIndex={isMenuOpen ? 0 : -1}
-                      className="nav-mobile-cta"
-                      onClick={closeMenu}
-                    >
-                      <span className="nav-mobile-cta__label">Get Free Consultation</span>
-                      <span className="nav-mobile-cta__shine" aria-hidden />
-                    </Link>
-                    <p className="nav-mobile-dock__note">Free strategy call · No commitment</p>
-                  </aside>
-                </div>
-              </div>
-            </div>,
-            document.body,
-          )
-        : null}
-      <LoginModal open={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+      {mobileMenuOverlay}
     </header>
-    {!embedded ? <div className="bc-site-header-spacer" aria-hidden /> : null}
+  );
+
+  const useMobileHeaderPortal = mounted && !embedded && isMobileLayout;
+
+  return (
+    <>
+      {useMobileHeaderPortal ? createPortal(headerNode, document.body) : headerNode}
+      <LoginModal open={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+      {!embedded ? <div className="bc-site-header-spacer" aria-hidden /> : null}
     </>
   );
 }

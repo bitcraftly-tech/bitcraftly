@@ -32,6 +32,12 @@ function isInsideMobileNavPanel(target: EventTarget | null): boolean {
   return Boolean(panel?.contains(target));
 }
 
+function isMobileHeaderControl(target: EventTarget | null): boolean {
+  if (!(target instanceof Node)) return false;
+  const controls = document.querySelector(".bc-mobile-header-controls");
+  return Boolean(controls?.contains(target));
+}
+
 /** Modal scroll lock — body position fixed. Not for mobile nav (iOS fixed-descendant bug). */
 export function lockBodyScroll(): void {
   if (typeof document === "undefined") return;
@@ -96,7 +102,7 @@ export function lockBodyScrollForNav(): void {
     const scrollY = window.scrollY;
 
     const onTouchMove = (event: TouchEvent) => {
-      if (isInsideMobileNavPanel(event.target)) return;
+      if (isInsideMobileNavPanel(event.target) || isMobileHeaderControl(event.target)) return;
       event.preventDefault();
     };
 
