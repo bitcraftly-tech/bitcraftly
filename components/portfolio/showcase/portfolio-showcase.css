@@ -1,6 +1,8 @@
 /* Portfolio showcase section — premium shell (scoped to .portfolio-showcase-light) */
 
 .portfolio-showcase-light {
+  overflow-x: clip;
+  max-width: 100%;
   background:
     radial-gradient(ellipse 90% 60% at 50% -20%, rgba(142, 68, 173, 0.07), transparent 55%),
     radial-gradient(ellipse 50% 40% at 100% 0%, rgba(52, 152, 219, 0.05), transparent 50%),
@@ -9,6 +11,8 @@
 
 .portfolio-showcase-light .ps-showcase-section {
   position: relative;
+  min-width: 0;
+  overflow-x: clip;
 }
 
 .portfolio-showcase-light .ps-showcase-mesh {
@@ -33,6 +37,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
+  min-width: 0;
 }
 
 @media (min-width: 1024px) {
@@ -40,12 +45,19 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 2.5rem;
+    gap: clamp(1.25rem, 2.5vw, 2.5rem);
   }
 }
 
 .portfolio-showcase-light .ps-showcase-hero-copy {
   max-width: 42rem;
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .portfolio-showcase-light .ps-showcase-hero-copy {
+    flex: 1 1 0%;
+  }
 }
 
 .portfolio-showcase-light .ps-showcase-eyebrow {
@@ -98,12 +110,14 @@
   gap: 0.625rem;
   width: 100%;
   max-width: 22rem;
-  flex-shrink: 0;
+  min-width: 0;
+  flex-shrink: 1;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 1024px) {
   .portfolio-showcase-light .ps-showcase-stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    flex: 0 1 18rem;
+    max-width: min(22rem, 38vw);
   }
 }
 
@@ -155,17 +169,16 @@
 
 .portfolio-showcase-light .ps-filter-scroll {
   display: flex;
+  flex-wrap: nowrap;
   gap: 0.375rem;
   overflow-x: auto;
-  padding-bottom: 0.125rem;
-  scrollbar-width: thin;
+  overscroll-behavior-x: contain;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-@media (min-width: 640px) {
-  .portfolio-showcase-light .ps-filter-scroll {
-    flex-wrap: wrap;
-    overflow: visible;
-  }
+.portfolio-showcase-light .ps-filter-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .portfolio-showcase-light .ps-filter-tab {
@@ -301,4 +314,96 @@
   .portfolio-showcase-light .ps-filter-tab {
     transition: none;
   }
+}
+
+/* Dark mode — portfolio showcase follows site theme */
+.dark .portfolio-showcase-light {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -20%, rgba(142, 68, 173, 0.14), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 100% 0%, rgba(52, 152, 219, 0.1), transparent 50%),
+    var(--color-dark-bg-primary);
+}
+
+.dark .portfolio-showcase-light .ps-showcase-mesh {
+  background-image: radial-gradient(rgba(240, 239, 248, 0.045) 0.55px, transparent 0.55px);
+  opacity: 0.3;
+}
+
+.dark .portfolio-showcase-light .ps-showcase-heading {
+  color: var(--color-dark-text-primary);
+}
+
+.dark .portfolio-showcase-light .ps-showcase-lead {
+  color: var(--color-dark-text-secondary);
+}
+
+.dark .portfolio-showcase-light .ps-showcase-note {
+  color: var(--color-dark-text-tertiary);
+}
+
+.dark .portfolio-showcase-light .ps-showcase-stat {
+  border-color: var(--color-dark-border-primary);
+  background: rgb(28 28 39 / 0.92);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.04) inset,
+    0 4px 16px rgb(0 0 0 / 0.22);
+}
+
+.dark .portfolio-showcase-light .ps-showcase-stat-value {
+  color: var(--color-dark-text-primary);
+}
+
+.dark .portfolio-showcase-light .ps-showcase-stat-label,
+.dark .portfolio-showcase-light .ps-showcase-stat-note {
+  color: var(--color-dark-text-tertiary);
+}
+
+.dark .portfolio-showcase-light .ps-filter-dock {
+  border-color: var(--color-dark-border-primary);
+  background: rgb(28 28 39 / 0.9);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.04) inset,
+    0 8px 28px rgb(0 0 0 / 0.28);
+}
+
+.dark .portfolio-showcase-light .ps-filter-tab--idle {
+  border-color: var(--color-dark-border-primary);
+  background: var(--color-dark-bg-secondary);
+  color: var(--color-dark-text-primary);
+}
+
+.dark .portfolio-showcase-light .ps-filter-tab--idle:hover {
+  border-color: rgb(142 68 173 / 0.35);
+  background: var(--color-dark-bg-card);
+}
+
+.dark .portfolio-showcase-light .ps-filter-count {
+  background: var(--color-dark-bg-secondary);
+  color: var(--color-dark-text-tertiary);
+}
+
+.dark .portfolio-showcase-light .ps-showcase-cta {
+  border-color: rgb(142 68 173 / 0.22);
+  background: linear-gradient(135deg, #1c1c27 0%, #1a1830 48%, #1e1730 100%);
+  box-shadow: 0 12px 40px rgb(0 0 0 / 0.28);
+}
+
+.dark .portfolio-showcase-light .ps-showcase-cta-title {
+  color: var(--color-dark-text-primary);
+}
+
+.dark .portfolio-showcase-light .ps-showcase-cta-body {
+  color: var(--color-dark-text-secondary);
+}
+
+.dark .portfolio-showcase-light .ps-showcase-link {
+  color: #a78bfa;
+}
+
+.dark .portfolio-showcase-light .ps-showcase-link:hover {
+  color: #c4b5fd;
+}
+
+.dark .portfolio-showcase-light .ps-showcase-divider {
+  background: linear-gradient(90deg, transparent, rgb(142 68 173 / 0.25), transparent);
 }

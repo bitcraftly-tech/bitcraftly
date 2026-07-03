@@ -13,7 +13,7 @@ type AuthSessionProviderProps = {
 };
 
 export default function AuthSessionProvider({ children }: AuthSessionProviderProps) {
-  const [enabled, setEnabled] = useState(false);
+  const [timeoutEnabled, setTimeoutEnabled] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -21,7 +21,7 @@ export default function AuthSessionProvider({ children }: AuthSessionProviderPro
     if (typeof window.requestIdleCallback === "function") {
       const id = window.requestIdleCallback(
         () => {
-          if (!cancelled) setEnabled(true);
+          if (!cancelled) setTimeoutEnabled(true);
         },
         { timeout: 2800 },
       );
@@ -32,7 +32,7 @@ export default function AuthSessionProvider({ children }: AuthSessionProviderPro
     }
 
     const timer = window.setTimeout(() => {
-      if (!cancelled) setEnabled(true);
+      if (!cancelled) setTimeoutEnabled(true);
     }, 120);
     return () => {
       cancelled = true;
@@ -40,13 +40,9 @@ export default function AuthSessionProvider({ children }: AuthSessionProviderPro
     };
   }, []);
 
-  if (!enabled) {
-    return <>{children}</>;
-  }
-
   return (
     <SessionProvider refetchInterval={5 * 60} refetchOnWindowFocus>
-      <SessionTimeoutProvider>{children}</SessionTimeoutProvider>
+      {timeoutEnabled ? <SessionTimeoutProvider>{children}</SessionTimeoutProvider> : children}
     </SessionProvider>
   );
 }

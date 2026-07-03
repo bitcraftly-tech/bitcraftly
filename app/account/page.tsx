@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { LayoutGrid, Mail, MessageCircle } from "lucide-react";
 
 import { createAuthOptions } from "@/auth";
-import Footer from "@/components/landing/Footer";
+import SiteFooter from "@/components/layout/SiteFooter";
 import Navbar from "@/components/landing/Navbar";
 import { CONTAINER, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 import { formatRoleLabel, roleBadgeClass } from "@/lib/roleDisplay";
@@ -132,7 +132,7 @@ export default async function AccountPage() {
           </div>
         </div>
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

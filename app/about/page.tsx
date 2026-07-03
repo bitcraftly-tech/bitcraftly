@@ -4,7 +4,7 @@ import MarketingNextStep from "@/components/landing/MarketingNextStep";
 import MarketingPageIntro from "@/components/landing/MarketingPageIntro";
 import MarketingPageLayout from "@/components/landing/MarketingPageLayout";
 import MarketingPageNav from "@/components/landing/MarketingPageNav";
-import FadeInOnView from "@/components/ui/FadeInOnView";
+import SkipScrollReveal from "@/components/landing/SkipScrollReveal";
 import { ABOUT_PAGE_NAV, PAGE_INTROS } from "@/lib/pageSequences";
 import { buildPageMetadata } from "@/lib/seoMetadata";
 
@@ -25,16 +25,12 @@ export default function AboutPage() {
         description={intro.description}
         steps={intro.steps}
       />
-      <MarketingPageNav items={ABOUT_PAGE_NAV} ariaLabel="About page sections" />
-      <FadeInOnView delayMs={30}>
-        <WhyChooseUs showTopBorder={false} />
-      </FadeInOnView>
-      <FadeInOnView delayMs={60}>
-        <HowWeWork />
-      </FadeInOnView>
-      <FadeInOnView delayMs={90}>
-        <FounderSection />
-      </FadeInOnView>
+      <SkipScrollReveal>
+        <MarketingPageNav items={ABOUT_PAGE_NAV} ariaLabel="About page sections" />
+      </SkipScrollReveal>
+      <WhyChooseUs showTopBorder={false} />
+      <HowWeWork />
+      <FounderSection />
       <MarketingNextStep
         title="Ab pricing dekho ya quote lo"
         description="Trust clear hai — agla step package choose karna ya free consultation book karna."

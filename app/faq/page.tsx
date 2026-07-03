@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import MarketingNextStep from "@/components/landing/MarketingNextStep";
 import MarketingPageIntro from "@/components/landing/MarketingPageIntro";
 import MarketingPageLayout from "@/components/landing/MarketingPageLayout";
-import FadeInOnView from "@/components/ui/FadeInOnView";
 import { PAGE_INTROS } from "@/lib/pageSequences";
 import FaqJsonLd from "@/components/seo/FaqJsonLd";
 import { buildPageMetadata } from "@/lib/seoMetadata";
@@ -25,12 +24,8 @@ export default function FaqPage() {
         description={intro.description}
         steps={intro.steps}
       />
-      <FadeInOnView delayMs={30}>
-        <FaqSection showTopBorder={false} />
-      </FadeInOnView>
-      <FadeInOnView delayMs={60}>
-        <FreeConsultationSection />
-      </FadeInOnView>
+      <FaqSection showTopBorder={false} />
+      <FreeConsultationSection />
       <MarketingNextStep
         title="Still deciding?"
         description="FAQ ke baad pricing compare karna sabse fast tareeka hai — package choose karke 1-minute quote form bharo."

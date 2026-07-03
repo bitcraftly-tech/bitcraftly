@@ -19,5 +19,9 @@ export default function FaqJsonLd() {
     name: `${SITE_NAME} — Website Development FAQ`,
   };
 
-  return <JsonLdScript data={schema} />;
+  return (
+    <span data-skip-scroll-reveal hidden>
+      <JsonLdScript data={schema} />
+    </span>
+  );
 }

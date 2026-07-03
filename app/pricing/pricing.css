@@ -13,8 +13,142 @@
   box-shadow: 4px 0 14px -10px rgb(0 0 0 / 0.35);
 }
 
+.dark .pricing-tier-card--recommended.bc-card {
+  background-color: color-mix(in srgb, var(--color-dark-bg-card) 82%, rgb(99 102 241 / 0.18));
+  border-color: rgb(129 140 248 / 0.38);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pricing-tier-card-hover {
     transition: none;
+  }
+
+  .pricing-red-blink,
+  .pricing-red-blink-dot {
+    animation: none;
+  }
+}
+
+/* Sticky bottom calculator prompt — red blink */
+@keyframes pricing-red-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.pricing-red-blink {
+  animation: pricing-red-blink 1.25s ease-in-out infinite;
+}
+
+@keyframes pricing-red-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgb(220 38 38 / 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgb(220 38 38 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(220 38 38 / 0);
+  }
+}
+
+.pricing-red-blink-dot {
+  animation:
+    pricing-red-blink 1.25s ease-in-out infinite,
+    pricing-red-pulse-ring 1.25s ease-out infinite;
+}
+
+.pricing-sticky-spacer {
+  height: calc(4.25rem + env(safe-area-inset-bottom, 0px));
+  pointer-events: none;
+}
+
+/* Hero — premium CTA buttons */
+.pricing-hero-actions {
+  max-width: 100%;
+}
+
+.pricing-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.875rem;
+  width: 100%;
+  padding: 0.625rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+  transition:
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+@media (min-width: 640px) {
+  .pricing-hero-btn {
+    width: auto;
+    min-width: 10.5rem;
+  }
+}
+
+.pricing-hero-btn:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+.pricing-hero-btn:active {
+  transform: scale(0.98);
+}
+
+.pricing-hero-btn--primary {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  color: #fff;
+  box-shadow: 0 4px 14px rgb(79 70 229 / 0.28);
+}
+
+.pricing-hero-btn--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgb(79 70 229 / 0.36);
+}
+
+.pricing-hero-btn--secondary {
+  border: 1px solid rgb(229 231 235);
+  background: rgb(255 255 255 / 0.88);
+  color: rgb(55 65 81);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+}
+
+.pricing-hero-btn--secondary:hover {
+  transform: translateY(-1px);
+  border-color: rgb(209 213 219);
+  background: rgb(249 250 251);
+  box-shadow: 0 4px 12px rgb(15 23 42 / 0.06);
+}
+
+.dark .pricing-hero-btn--secondary {
+  border-color: rgb(51 65 85 / 0.8);
+  background: rgb(30 41 59 / 0.75);
+  color: rgb(241 245 249);
+}
+
+.dark .pricing-hero-btn--secondary:hover {
+  border-color: rgb(71 85 105);
+  background: rgb(30 41 59 / 0.95);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-hero-btn--primary:hover,
+  .pricing-hero-btn--secondary:hover {
+    transform: none;
   }
 }

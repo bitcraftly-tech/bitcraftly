@@ -16,12 +16,19 @@ export type MarketingNavItem = {
   mobileHint: string;
 };
 
-/** Top nav — matches typical customer decision order */
+/** Main header — conversion-focused (3 items only) */
 export const MARKETING_NAV: readonly MarketingNavItem[] = [
-  { label: "Pricing", href: "/pricing", mobileHint: "Packages, compare & cost calculator" },
-  { label: "Services", href: "/services", mobileHint: "Websites, apps & AI integrations" },
+  { label: "Services", href: "/services", mobileHint: "Websites, web apps, mobile & AI" },
   { label: "Portfolio", href: "/portfolio", mobileHint: "Live demos & case studies" },
-  { label: "About", href: "/about", mobileHint: "Founder, process & why us" },
+  { label: "Pricing", href: "/pricing", mobileHint: "Packages, compare & cost calculator" },
+] as const;
+
+/** Services dropdown — max 4 items */
+export const HEADER_SERVICES_DROPDOWN = [
+  { label: "Website Development", href: "/services#websites" },
+  { label: "Web App Development", href: "/services#services" },
+  { label: "Mobile App Development", href: "/services#mobile-apps" },
+  { label: "AI Solutions & Automation", href: "/services#services" },
 ] as const;
 
 export const HOME_HUB_LINKS: HomeHubLink[] = [

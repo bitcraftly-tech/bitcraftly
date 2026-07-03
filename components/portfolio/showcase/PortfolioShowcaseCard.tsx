@@ -19,7 +19,7 @@ const BTN_PRIMARY =
   "inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-[#7C3AED] px-4 text-sm font-semibold text-white transition-colors duration-250 hover:bg-[#6D28D9] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED]";
 
 const BTN_GHOST =
-  "inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 text-sm font-semibold text-[#374151] transition-colors duration-250 hover:border-[#D1D5DB] hover:bg-[#F9FAFB] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED]";
+  "inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 text-sm font-semibold text-[#374151] transition-colors duration-250 hover:border-[#D1D5DB] hover:bg-[#F9FAFB] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED] dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:hover:border-dark-border-secondary dark:hover:bg-dark-bg-card";
 
 export default function PortfolioShowcaseCard({ project, index, onOpenCaseStudy }: PortfolioShowcaseCardProps) {
   const reduceMotion = useReducedMotion();
@@ -36,23 +36,23 @@ export default function PortfolioShowcaseCard({ project, index, onOpenCaseStudy 
     >
       <PortfolioCardThumbnail project={project} variant="card" />
 
-      <div className="flex min-w-0 flex-1 flex-col gap-4">
+      <div className="flex min-w-0 flex-1 flex-col gap-3">
         <div className="min-w-0 space-y-1">
-          <h3 className="text-xl font-bold leading-snug tracking-tight text-[#111827]">{project.title}</h3>
-          <p className="line-clamp-1 text-sm leading-relaxed text-[#6B7280]">{project.cardLine}</p>
+          <h3 className="text-xl font-bold leading-snug tracking-tight text-[#111827] dark:text-dark-text-primary">{project.title}</h3>
+          <p className="line-clamp-1 text-sm leading-relaxed text-[#6B7280] dark:text-dark-text-secondary">{project.cardLine}</p>
         </div>
 
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex min-h-[3.25rem] flex-wrap content-start gap-1.5">
           {project.techStack.slice(0, 5).map((tech) => (
             <span
               key={tech}
-              className="inline-flex rounded-md bg-[#F3F4F6] px-2 py-0.5 text-xs font-medium text-[#4B5563]"
+              className="inline-flex rounded-md bg-[#F3F4F6] px-2 py-0.5 text-xs font-medium text-[#4B5563] dark:bg-dark-bg-secondary dark:text-dark-text-secondary"
             >
               {tech}
             </span>
           ))}
           {project.techStack.length > 5 ? (
-            <span className="inline-flex rounded-md bg-[#F3F4F6] px-2 py-0.5 text-xs font-medium text-[#6B7280]">
+            <span className="inline-flex rounded-md bg-[#F3F4F6] px-2 py-0.5 text-xs font-medium text-[#6B7280] dark:bg-dark-bg-secondary dark:text-dark-text-tertiary">
               +{project.techStack.length - 5}
             </span>
           ) : null}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
 
-import Footer from "@/components/landing/Footer";
+import SiteFooter from "@/components/layout/SiteFooter";
 import Navbar from "@/components/landing/Navbar";
 import CareersApplyWizard from "@/components/careers/CareersApplyWizard";
 import { CONTAINER, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
@@ -41,7 +41,7 @@ export default function CareersApplyPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

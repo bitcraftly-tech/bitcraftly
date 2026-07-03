@@ -8,6 +8,8 @@ import PricingFaq from "./components/PricingFaq";
 import PricingFeatureTable from "./components/PricingFeatureTable";
 import PricingHero from "./components/PricingHero";
 import PricingPageNav from "./components/PricingPageNav";
+import SkipScrollReveal from "@/components/landing/SkipScrollReveal";
+import PricingStickyCalculatorBar from "./components/PricingStickyCalculatorBar";
 import PricingTierCards from "./components/PricingTierCards";
 import "./pricing.css";
 
@@ -20,7 +22,9 @@ export default function PricingPage() {
   return (
     <MarketingPageLayout>
       <PricingHero />
-      <PricingPageNav />
+      <SkipScrollReveal>
+        <PricingPageNav />
+      </SkipScrollReveal>
       <PricingTierCards />
       <PricingFeatureTable />
       <FastLaunchPackages />
@@ -34,6 +38,7 @@ export default function PricingPage() {
           { href: "/contact?intent=consultation&source=pricing-page", label: "Free consultation" },
         ]}
       />
+      <PricingStickyCalculatorBar />
     </MarketingPageLayout>
   );
 }
