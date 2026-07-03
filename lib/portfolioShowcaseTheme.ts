@@ -24,8 +24,7 @@ export const PS = {
 } as const;
 
 /** Wrapper — forces light surfaces even when site is in dark mode */
-export const PORTFOLIO_LIGHT_WRAPPER =
-  "portfolio-showcase-light bg-[#fafbfc] text-[#2c3e50] [&_*]:border-[#e8ecef]";
+export const PORTFOLIO_LIGHT_WRAPPER = "portfolio-showcase-light text-[#2c3e50]";
 
 export const PS_SECTION =
   "relative overflow-hidden rounded-none bg-[#fafbfc]";
@@ -34,7 +33,7 @@ export const PS_HERO_BADGE =
   "flex items-center gap-3 rounded-2xl border border-[#e8ecef] bg-white px-4 py-3 shadow-[0_4px_24px_rgba(44,62,80,0.06)] sm:px-5 sm:py-4";
 
 export const PS_CARD =
-  "ps-card group relative flex flex-col overflow-hidden rounded-[24px] border border-[#e8ecef]/80 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.03),0_8px_28px_-6px_rgba(15,23,42,0.08)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-[rgba(142,68,173,0.14)] hover:shadow-[0_2px_4px_rgba(15,23,42,0.04),0_22px_48px_-14px_rgba(142,68,173,0.16)]";
+  "ps-card group relative flex h-full flex-col";
 
 export const PS_FILTER_ACTIVE =
   "relative z-[1] border-transparent bg-[#8e44ad] text-white shadow-[0_4px_14px_rgba(142,68,173,0.35)]";

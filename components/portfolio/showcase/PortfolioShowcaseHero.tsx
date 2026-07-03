@@ -3,11 +3,14 @@
 import { motion, useReducedMotion } from "framer-motion";
 
 import { PORTFOLIO } from "@/lib/portfolioContent";
-import { PS_EYEBROW, PS_HEADING, PS_HERO_BADGE } from "@/lib/portfolioShowcaseTheme";
+
+import "./portfolio-showcase.css";
 
 type PortfolioShowcaseHeroProps = {
   variant: "home" | "page";
 };
+
+const SHOWCASE_STATS = PORTFOLIO.performanceMetrics.slice(0, 4);
 
 export default function PortfolioShowcaseHero({ variant }: PortfolioShowcaseHeroProps) {
   const reduceMotion = useReducedMotion();
@@ -18,42 +21,31 @@ export default function PortfolioShowcaseHero({ variant }: PortfolioShowcaseHero
       initial={reduceMotion ? false : { opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45 }}
-      className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-8"
+      className="ps-showcase-hero"
     >
-      <div className="max-w-2xl">
-        <p className={PS_EYEBROW}>{PORTFOLIO.featuredLabel}</p>
+      <div className="ps-showcase-hero-copy">
+        <p className="ps-showcase-eyebrow">{PORTFOLIO.featuredLabel}</p>
         {isPage ? (
-          <h1 id="portfolio-page-heading" className={`mt-3 ${PS_HEADING}`}>
+          <h1 id="portfolio-page-heading" className="ps-showcase-heading">
             {PORTFOLIO.showcaseHeading}
           </h1>
         ) : (
-          <h2 id="portfolio-showcase-heading" className={`mt-3 ${PS_HEADING}`}>
+          <h2 id="portfolio-showcase-heading" className="ps-showcase-heading">
             {PORTFOLIO.showcaseHeading}
           </h2>
         )}
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-[#7f8c8d]">
-          {isPage ? PORTFOLIO.showcaseDescription : PORTFOLIO.intro}
-        </p>
-        {isPage ? (
-          <p className="mt-3 text-sm text-[#95a5a6]">{PORTFOLIO.introNote}</p>
-        ) : (
-          <p className="mt-2 text-sm text-[#95a5a6]">{PORTFOLIO.introNote}</p>
-        )}
+        <p className="ps-showcase-lead">{isPage ? PORTFOLIO.showcaseDescription : PORTFOLIO.intro}</p>
+        <p className="ps-showcase-note">{PORTFOLIO.introNote}</p>
       </div>
 
-      <aside className={`${PS_HERO_BADGE} max-w-sm shrink-0 lg:mt-2`}>
-        <div
-          className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#9b59b6] to-[#8e44ad] text-white shadow-[0_4px_14px_rgba(142,68,173,0.35)]"
-          aria-hidden
-        >
-          <svg className="size-5" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L6 21l2.3-7-6-4.6h7.6L12 2z" />
-          </svg>
-        </div>
-        <div>
-          <p className="text-sm font-bold text-[#2c3e50]">{PORTFOLIO.experienceBadgeTitle}</p>
-          <p className="mt-0.5 text-xs leading-relaxed text-[#7f8c8d]">{PORTFOLIO.experienceBadgeBody}</p>
-        </div>
+      <aside className="ps-showcase-stats" aria-label="Portfolio highlights">
+        {SHOWCASE_STATS.map((stat) => (
+          <div key={stat.label} className="ps-showcase-stat">
+            <p className="ps-showcase-stat-value">{stat.value}</p>
+            <p className="ps-showcase-stat-label">{stat.label}</p>
+            <p className="ps-showcase-stat-note">{stat.note}</p>
+          </div>
+        ))}
       </aside>
     </motion.div>
   );

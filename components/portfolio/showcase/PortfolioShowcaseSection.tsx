@@ -18,7 +18,9 @@ import { filterPortfolioByCategory, type PortfolioCategoryId } from "@/lib/portf
 import { enrichProjects, type PortfolioProject } from "@/lib/portfolio/projectUtils";
 import type { PortfolioItem } from "@/lib/portfolioItems";
 import { newTabProps } from "@/lib/newTabLink";
-import { PORTFOLIO_LIGHT_WRAPPER, PS_SECTION } from "@/lib/portfolioShowcaseTheme";
+import { PORTFOLIO_LIGHT_WRAPPER } from "@/lib/portfolioShowcaseTheme";
+
+import "./portfolio-showcase.css";
 
 export type PortfolioShowcaseVariant = "home" | "page";
 
@@ -47,39 +49,33 @@ export default function PortfolioShowcaseSection({
   const content = (
     <section
       id={sectionId}
-      className={`${CONTAINER} ${PS_SECTION} ${SECTION_SCROLL_MT} ${SECTION_PY_CTA}`}
+      className={`ps-showcase-section ${CONTAINER} ${SECTION_SCROLL_MT} ${SECTION_PY_CTA}`}
       aria-labelledby={isHome ? "portfolio-showcase-heading" : "portfolio-page-heading"}
     >
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden>
-        <div className="absolute -right-24 -top-24 size-72 rounded-full bg-[#9b59b6]/[0.06] blur-3xl" />
-        <div className="absolute -bottom-32 -left-24 size-80 rounded-full bg-[#3498db]/[0.05] blur-3xl" />
-      </div>
+      <div className="ps-showcase-mesh" aria-hidden />
 
-      <PortfolioShowcaseHero variant={variant} />
+      <div className="ps-showcase-inner space-y-10 md:space-y-12">
+        <PortfolioShowcaseHero variant={variant} />
 
-      {isHome ? (
-        <div className="mt-4 flex justify-end">
-          <Link href="/portfolio" className="text-sm font-semibold text-[#8e44ad] transition hover:text-[#9b59b6]" {...newTabProps("/portfolio")}>
-            View full portfolio →
-          </Link>
-        </div>
-      ) : null}
+        {isHome ? (
+          <div className="flex justify-end">
+            <Link href="/portfolio" className="ps-showcase-link" {...newTabProps("/portfolio")}>
+              View full portfolio →
+            </Link>
+          </div>
+        ) : null}
 
-      <div className="relative mt-8 md:mt-10">
         <PortfolioFilterBar active={category} onChange={setCategory} items={items} layoutId={filterId} />
-      </div>
 
-      <div className="relative mt-8">
         <PortfolioAnimatedGrid projects={filtered} onOpenCaseStudy={setSelected} showFeaturedSeparately={showFeatured} />
-      </div>
 
-      {showFeatured ? (
-        <div className="relative mt-6">
-          <PortfolioFeaturedCard />
-        </div>
-      ) : null}
+        {showFeatured ? (
+          <div className="space-y-4">
+            <div className="ps-showcase-divider" aria-hidden />
+            <PortfolioFeaturedCard />
+          </div>
+        ) : null}
 
-      <div className="relative mt-10 md:mt-12">
         <PortfolioShowcaseCta source={isHome ? "portfolio-home" : "portfolio-page"} />
       </div>
     </section>
