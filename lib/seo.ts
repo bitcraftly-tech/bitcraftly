@@ -9,7 +9,7 @@ export const DEFAULT_OG_IMAGE = `${PRODUCTION_URL}/icon.png`;
 export const HOME_SEO = {
   title: "Bitcraftly | React.js & Next.js Web Development | AI-Powered Frontend | Ghaziabad",
   description:
-    "Founder-led React.js & Next.js website development, AI-powered business solutions, redesigns & frontend architecture. Sanjay Kr. Singh · 18+ years · Ghaziabad, India & remote.",
+    "Founder-led React.js & Next.js website development, AI-powered business solutions, redesigns & frontend architecture. Sanjay Kr. Singh · 20+ years · Ghaziabad, India & remote.",
   keywords: [
     "React.js development company India",
     "Next.js website development",

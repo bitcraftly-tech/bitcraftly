@@ -8,12 +8,15 @@ import PortfolioMockupInterior from "@/components/portfolio/showcase/PortfolioMo
 import { newTabProps } from "@/lib/newTabLink";
 import { PORTFOLIO_FEATURED } from "@/lib/portfolioContent";
 import { enrichProject } from "@/lib/portfolio/projectUtils";
+import { useMobileStaticEntrance } from "@/hooks/useMobileStaticEntrance";
 import { getPortfolioPageItemBySlug } from "@/lib/portfolioItems";
 
 import "./portfolio-cards.css";
 
 export default function PortfolioFeaturedCard() {
   const reduceMotion = useReducedMotion();
+  const staticEntrance = useMobileStaticEntrance();
+  const skipEntrance = reduceMotion || staticEntrance;
 
   const project = useMemo(() => {
     const item = getPortfolioPageItemBySlug(PORTFOLIO_FEATURED.slug);
@@ -22,9 +25,10 @@ export default function PortfolioFeaturedCard() {
 
   return (
     <motion.article
-      initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
+      initial={skipEntrance ? false : { opacity: 0, y: 8 }}
+      {...(skipEntrance
+        ? { animate: { opacity: 1, y: 0 } }
+        : { whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.1 } })}
       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
       className="group ps-featured-card"
       aria-labelledby="portfolio-featured-title"

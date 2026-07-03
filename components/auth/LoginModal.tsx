@@ -8,6 +8,7 @@ import { X } from "lucide-react";
 
 import LoginSystem from "@/components/auth/LoginSystem";
 import { safeCallbackUrl } from "@/components/auth/loginShared";
+import { lockBodyScroll, unlockBodyScroll } from "@/lib/scrollLock";
 
 export type LoginModalProps = {
   open: boolean;
@@ -27,14 +28,6 @@ function useIsMobileSheet() {
   }, []);
 
   return isMobileSheet;
-}
-
-function releaseBodyScrollLock() {
-  document.body.style.overflow = "";
-  document.body.style.position = "";
-  document.body.style.top = "";
-  document.body.style.width = "";
-  document.documentElement.style.overflow = "";
 }
 
 export default function LoginModal({ open, onClose, callbackUrl = "/dashboard" }: LoginModalProps) {
@@ -57,7 +50,7 @@ export default function LoginModal({ open, onClose, callbackUrl = "/dashboard" }
   useEffect(() => {
     setMounted(true);
     return () => {
-      releaseBodyScrollLock();
+      unlockBodyScroll();
     };
   }, []);
 
@@ -82,7 +75,7 @@ export default function LoginModal({ open, onClose, callbackUrl = "/dashboard" }
     };
 
     document.addEventListener("keydown", handleKey);
-    document.body.style.overflow = "hidden";
+    lockBodyScroll();
 
     return () => {
       document.removeEventListener("keydown", handleKey);
@@ -90,7 +83,7 @@ export default function LoginModal({ open, onClose, callbackUrl = "/dashboard" }
   }, [open, requestClose]);
 
   const releaseScrollLock = useCallback(() => {
-    releaseBodyScrollLock();
+    unlockBodyScroll();
   }, []);
 
   if (!mounted) return null;

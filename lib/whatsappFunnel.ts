@@ -107,7 +107,7 @@ export const QUALIFICATION_QUESTIONS = [
 
 export const TRUST_WHATSAPP_COPY = {
   headline: "Why WhatsApp works with Bitcraftly",
-  body: "You message Sanjay Kr. Singh directly — Tech Lead & founder (18+ yrs). No call-centre, no junior surprise after you pay.",
+  body: "You message Sanjay Kr. Singh directly — Tech Lead & founder (20+ yrs). No call-centre, no junior surprise after you pay.",
   points: [
     "Written scope & starting price before advance",
     "English or Hinglish — voice notes welcome",

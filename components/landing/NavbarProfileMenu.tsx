@@ -21,9 +21,11 @@ type NavbarProfileMenuProps = {
   variant?: "desktop" | "mobile";
   /** Called after selecting a menu link (e.g. close mobile nav sheet) */
   onNavigate?: () => void;
+  /** Optional class on root wrapper (mobile nav dock styling) */
+  className?: string;
 };
 
-export default function NavbarProfileMenu({ session, variant = "desktop", onNavigate }: NavbarProfileMenuProps) {
+export default function NavbarProfileMenu({ session, variant = "desktop", onNavigate, className = "" }: NavbarProfileMenuProps) {
   const [open, setOpen] = useState(false);
   const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -78,7 +80,7 @@ export default function NavbarProfileMenu({ session, variant = "desktop", onNavi
   const iconWrap = "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-bg-secondary text-text-secondary dark:bg-zinc-800 dark:text-zinc-300";
 
   return (
-    <div ref={rootRef} className={variant === "mobile" ? "relative w-full" : "relative"}>
+    <div ref={rootRef} className={`${variant === "mobile" ? "relative w-full" : "relative"} ${className}`.trim()}>
       <button
         type="button"
         id={`${menuId}-trigger`}
@@ -88,7 +90,7 @@ export default function NavbarProfileMenu({ session, variant = "desktop", onNavi
         onClick={() => setOpen((o) => !o)}
         className={
           variant === "mobile"
-            ? "flex w-full items-center justify-between gap-3 rounded-xl border border-border-primary bg-bg-secondary/80 px-3 py-2.5 text-left transition hover:bg-bg-secondary dark:border-dark-border-primary dark:bg-dark-bg-secondary/80 dark:hover:bg-dark-bg-secondary"
+            ? "nav-mobile-profile__trigger"
             : "flex items-center gap-2 rounded-full border border-border-primary py-1 pl-1 pr-2 transition hover:border-border-secondary dark:border-dark-border-primary dark:hover:border-dark-border-secondary"
         }
       >

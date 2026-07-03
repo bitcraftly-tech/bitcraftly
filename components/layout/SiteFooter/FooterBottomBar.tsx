@@ -31,7 +31,7 @@ export default function FooterBottomBar() {
 
           <div className="space-y-1">
             <p className="text-xs leading-relaxed text-text-secondary dark:text-dark-text-secondary">
-              18+ yrs · React &amp; Next.js · Founder-led
+              20+ yrs · React &amp; Next.js · Founder-led
             </p>
             <p className="text-xs leading-relaxed text-text-secondary dark:text-dark-text-secondary">
               {BRAND.locationShort}

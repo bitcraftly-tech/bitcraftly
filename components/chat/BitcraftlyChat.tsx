@@ -109,7 +109,7 @@ function getBotReply(input: string, history: string[], memory: ChatMemory): BotR
       ? `\n\n${memory.projectType} ke liye humne similar projects portfolio me bhi kiye hain — demo dekh sakte hain!`
       : "";
     return {
-      text: `${hi}Bitcraftly builds premium frontend solutions: 🛠️\n\n🌐 Business Websites (React/Next.js)\n📱 Mobile-first Web Apps\n🤖 AI-powered Features\n🛒 E-commerce Stores\n📊 Dashboards & SaaS UIs\n🚀 Fast-launch MVPs\n\nEvery project is founder-led by Sanjay — 18+ years of experience, SEO-ready, and mobile-first.${projectNote}`,
+      text: `${hi}Bitcraftly builds premium frontend solutions: 🛠️\n\n🌐 Business Websites (React/Next.js)\n📱 Mobile-first Web Apps\n🤖 AI-powered Features\n🛒 E-commerce Stores\n📊 Dashboards & SaaS UIs\n🚀 Fast-launch MVPs\n\nEvery project is founder-led by Sanjay — 20+ years of experience, SEO-ready, and mobile-first.${projectNote}`,
       quick: [
         { label: "💰 Pricing",     value: "pricing" },
         { label: "🖼️ Portfolio",  value: "portfolio" },
@@ -165,7 +165,7 @@ function getBotReply(input: string, history: string[], memory: ChatMemory): BotR
     /who is sanjay|about sanjay|sanjay singh/i.test(q)
   )
     return {
-      text: "Bitcraftly is led by Sanjay Kr. Singh 👨‍💻\n\n✅ 18+ years frontend experience\n✅ React & Next.js specialist\n✅ Built UI systems for startups, clinics, SaaS, and local brands\n✅ Ghaziabad, UP, India — available India & remote\n\nSeedha founder se baat — no middleman, no agency overhead. 🤝",
+      text: "Bitcraftly is led by Sanjay Kr. Singh 👨‍💻\n\n✅ 20+ years frontend experience\n✅ React & Next.js specialist\n✅ Built UI systems for startups, clinics, SaaS, and local brands\n✅ Ghaziabad, UP, India — available India & remote\n\nSeedha founder se baat — no middleman, no agency overhead. 🤝",
       quick: [
         { label: "📞 Talk to Sanjay", value: "contact" },
         { label: "🖼️ Portfolio",     value: "portfolio" },

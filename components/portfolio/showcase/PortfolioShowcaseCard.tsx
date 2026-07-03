@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import PortfolioCardThumbnail from "@/components/portfolio/showcase/PortfolioCardThumbnail";
 import { newTabProps } from "@/lib/newTabLink";
 import type { PortfolioProject } from "@/lib/portfolio/projectUtils";
+import { useMobileStaticEntrance } from "@/hooks/useMobileStaticEntrance";
 import { PS_CARD } from "@/lib/portfolioShowcaseTheme";
 
 import "./portfolio-cards.css";
@@ -23,12 +24,14 @@ const BTN_GHOST =
 
 export default function PortfolioShowcaseCard({ project, index, onOpenCaseStudy }: PortfolioShowcaseCardProps) {
   const reduceMotion = useReducedMotion();
+  const staticEntrance = useMobileStaticEntrance();
   const demoUrl = project.externalUrl;
+  const skipEntrance = reduceMotion || staticEntrance;
 
   return (
     <motion.article
       layout
-      initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+      initial={skipEntrance ? false : { opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={reduceMotion ? undefined : { opacity: 0, scale: 0.99 }}
       transition={{ duration: 0.25, delay: Math.min(index * 0.03, 0.18), ease: [0.22, 1, 0.36, 1] }}

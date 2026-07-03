@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import { useReducedMotion } from "framer-motion";
 
 import PortfolioAnimatedGrid from "@/components/portfolio/showcase/PortfolioAnimatedGrid";
@@ -17,7 +16,6 @@ import { PORTFOLIO_FEATURED } from "@/lib/portfolioContent";
 import { filterPortfolioByCategory, type PortfolioCategoryId } from "@/lib/portfolio/categories";
 import { enrichProjects, type PortfolioProject } from "@/lib/portfolio/projectUtils";
 import type { PortfolioItem } from "@/lib/portfolioItems";
-import { newTabProps } from "@/lib/newTabLink";
 import { PORTFOLIO_LIGHT_WRAPPER } from "@/lib/portfolioShowcaseTheme";
 
 import "./portfolio-showcase.css";
@@ -56,14 +54,6 @@ export default function PortfolioShowcaseSection({
 
       <div className="ps-showcase-inner space-y-10 md:space-y-12">
         <PortfolioShowcaseHero variant={variant} />
-
-        {isHome ? (
-          <div className="flex justify-end">
-            <Link href="/portfolio" className="ps-showcase-link" {...newTabProps("/portfolio")}>
-              View full portfolio →
-            </Link>
-          </div>
-        ) : null}
 
         <PortfolioFilterBar active={category} onChange={setCategory} items={items} layoutId={filterId} />
 

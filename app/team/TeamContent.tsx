@@ -21,7 +21,7 @@ const pillars = [
 ];
 
 const stats = [
-  { label: "Years in frontend & product", value: "18+" },
+  { label: "Years in frontend & product", value: "20+" },
   { label: "Focus industries", value: "12+" },
   { label: "Typical first milestone", value: "48 hrs" },
 ];

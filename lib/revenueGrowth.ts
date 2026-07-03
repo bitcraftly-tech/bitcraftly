@@ -102,7 +102,7 @@ export const LOW_FRICTION_OFFERS = [
 
 export const PRICING_STRATEGY = {
   principles: [
-    "Anchor premium with founder + 18 yrs — compete on clarity & speed, not race to bottom",
+    "Anchor premium with founder + 20 yrs — compete on clarity & speed, not race to bottom",
     "Always show starting-from + written scope before payment",
     "50% advance to start · 50% on delivery (projects under ₹30k)",
     "MVP/React: 40/30/30 milestone for ₹30k+",
