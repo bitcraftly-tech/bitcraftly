@@ -22,6 +22,9 @@ let savedStyles: SavedBodyStyles | null = null;
 let navLockCount = 0;
 let navLockState: NavScrollLockState | null = null;
 
+let chatLockCount = 0;
+let chatLockState: NavScrollLockState | null = null;
+
 function scrollbarWidth(): number {
   return window.innerWidth - document.documentElement.clientWidth;
 }
@@ -36,6 +39,12 @@ function isMobileHeaderControl(target: EventTarget | null): boolean {
   if (!(target instanceof Node)) return false;
   const controls = document.querySelector(".bc-mobile-header-controls");
   return Boolean(controls?.contains(target));
+}
+
+function isInsideChatPanel(target: EventTarget | null): boolean {
+  if (!(target instanceof Node)) return false;
+  const panel = document.querySelector(".bc-chat-panel--open");
+  return Boolean(panel?.contains(target));
 }
 
 /** Modal scroll lock — body position fixed. Not for mobile nav (iOS fixed-descendant bug). */
@@ -146,5 +155,62 @@ export function unlockBodyScrollForNav(): void {
   body.style.paddingRight = bodyPaddingRight;
 
   navLockState = null;
+  window.scrollTo(0, scrollY);
+}
+
+/** Mobile chat scroll lock — no body top offset; allow touches inside open chat panel. */
+export function lockBodyScrollForChat(): void {
+  if (typeof document === "undefined") return;
+
+  if (chatLockCount === 0) {
+    const html = document.documentElement;
+    const body = document.body;
+    const scrollY = window.scrollY;
+
+    const onTouchMove = (event: TouchEvent) => {
+      if (isInsideChatPanel(event.target)) return;
+      event.preventDefault();
+    };
+
+    chatLockState = {
+      scrollY,
+      htmlOverflow: html.style.overflow,
+      bodyOverflow: body.style.overflow,
+      bodyPaddingRight: body.style.paddingRight,
+      onTouchMove,
+    };
+
+    const gutter = scrollbarWidth();
+    html.setAttribute("data-bc-chat-scroll-lock", "");
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    if (gutter > 0) {
+      body.style.paddingRight = `${gutter}px`;
+    }
+
+    document.addEventListener("touchmove", onTouchMove, { passive: false });
+  }
+
+  chatLockCount += 1;
+}
+
+export function unlockBodyScrollForChat(): void {
+  if (typeof document === "undefined") return;
+  if (chatLockCount === 0) return;
+
+  chatLockCount -= 1;
+  if (chatLockCount > 0 || !chatLockState) return;
+
+  const html = document.documentElement;
+  const body = document.body;
+  const { scrollY, htmlOverflow, bodyOverflow, bodyPaddingRight, onTouchMove } = chatLockState;
+
+  document.removeEventListener("touchmove", onTouchMove);
+  html.removeAttribute("data-bc-chat-scroll-lock");
+  html.style.overflow = htmlOverflow;
+  body.style.overflow = bodyOverflow;
+  body.style.paddingRight = bodyPaddingRight;
+
+  chatLockState = null;
   window.scrollTo(0, scrollY);
 }
