@@ -11,7 +11,7 @@ export const metadata = buildPageMetadata("contact");
 
 export default function ContactPage() {
   return (
-    <div className={`${PAGE_SHELL} bg-[#F9FAFB]`}>
+    <div className={`${PAGE_SHELL} bg-bg-primary`}>
       <Navbar />
       <main className={PAGE_MAIN}>
         <section className="border-b border-[#E5E7EB] bg-white py-2">

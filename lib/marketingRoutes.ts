@@ -23,12 +23,12 @@ export const MARKETING_NAV: readonly MarketingNavItem[] = [
   { label: "Pricing", href: "/pricing", mobileHint: "Packages, compare & cost calculator" },
 ] as const;
 
-/** Services dropdown — max 4 items */
+/** Services dropdown — max 4 items (path + sectionId; no hash URLs) */
 export const HEADER_SERVICES_DROPDOWN = [
-  { label: "Website Development", href: "/services#websites" },
-  { label: "Web App Development", href: "/services#services" },
-  { label: "Mobile App Development", href: "/services#mobile-apps" },
-  { label: "AI Solutions & Automation", href: "/services#services" },
+  { label: "Website Development", path: "/services", sectionId: "websites" },
+  { label: "Web App Development", path: "/services", sectionId: "services" },
+  { label: "Mobile App Development", path: "/services", sectionId: "mobile-apps" },
+  { label: "AI Solutions & Automation", path: "/services", sectionId: "services" },
 ] as const;
 
 export const HOME_HUB_LINKS: HomeHubLink[] = [
@@ -79,16 +79,16 @@ export const HOME_HUB_LINKS: HomeHubLink[] = [
   },
 ];
 
-/** Legacy `/{section}` paths → dedicated routes */
+/** Legacy `/{section}` paths → dedicated routes (scroll via ?scroll=, not hash) */
 export const SECTION_REDIRECTS: Record<string, string> = {
   about: "/",
   services: "/services",
-  websites: "/services#websites",
-  "mobile-apps": "/services#mobile-apps",
+  websites: "/services?scroll=websites",
+  "mobile-apps": "/services?scroll=mobile-apps",
   pricing: "/pricing",
-  founder: "/about#founder",
-  "why-us": "/about#why-us",
-  process: "/about#process",
+  founder: "/about?scroll=founder",
+  "why-us": "/about?scroll=why-us",
+  process: "/about?scroll=process",
   faq: "/faq",
   "contact-cta": "/contact",
   "how-parking-works": "/contact?service=Smart%20Parking&intent=demo&source=parking-legacy",

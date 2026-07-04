@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
 
+import { MarketingSectionAnchor } from "@/components/landing/MarketingSectionLink";
+import { parseSectionHref } from "@/lib/scrollToMarketingSection";
 import { CONTAINER, SECTION_PY, SECTION_SCROLL_MT } from "@/lib/constants";
 
 type NextLink = {
@@ -22,19 +26,25 @@ export default function MarketingNextStep({ title, description, links }: Marketi
         <h2 className="mt-2 font-[var(--font-playfair)] text-2xl text-text-primary dark:text-dark-text-primary">{title}</h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">{description}</p>
         <div className="mt-5 flex flex-wrap gap-3">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={
-                link.primary
-                  ? "inline-flex items-center justify-center rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700"
-                  : "inline-flex items-center justify-center rounded-full border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary"
-              }
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map((link) => {
+            const className = link.primary
+              ? "inline-flex items-center justify-center rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700"
+              : "inline-flex items-center justify-center rounded-full border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary";
+
+            if (parseSectionHref(link.href)) {
+              return (
+                <MarketingSectionAnchor key={link.href} href={link.href} className={className}>
+                  {link.label}
+                </MarketingSectionAnchor>
+              );
+            }
+
+            return (
+              <Link key={link.href} href={link.href} className={className}>
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

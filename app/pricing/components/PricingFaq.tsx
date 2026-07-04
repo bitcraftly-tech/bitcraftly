@@ -24,14 +24,12 @@ const PRICING_FAQ = [
 export default function PricingFaq() {
   return (
     <section id="pricing-faq" className={`${CONTAINER} ${SECTION_SCROLL_MT} border-t border-border-primary ${SECTION_PY} dark:border-dark-border-primary`}>
-      <div className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
-          FAQ
-        </p>
-        <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
-          Common pricing questions
-        </h2>
-      </div>
+      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
+        FAQ
+      </p>
+      <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
+        Common pricing questions
+      </h2>
 
       <div className="mt-8 grid gap-4 md:grid-cols-2">
         {PRICING_FAQ.map((item) => (
@@ -42,7 +40,7 @@ export default function PricingFaq() {
         ))}
       </div>
 
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <div className="mt-8 flex flex-wrap items-center gap-4">
         <Link href="/faq" className="text-sm font-semibold text-accent-primary hover:opacity-90 dark:text-indigo-400">
           More FAQs →
         </Link>

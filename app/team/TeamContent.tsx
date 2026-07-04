@@ -39,19 +39,21 @@ export default function TeamContent() {
           }}
         />
         <div className={`${CONTAINER} relative py-8 md:py-12`}>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2B5CE6] dark:text-[#7ea0ff]">Founder-led studio</p>
-          <h1 className="mt-3 max-w-3xl font-[var(--font-playfair)] text-4xl font-semibold tracking-tight text-text-primary md:text-5xl dark:text-dark-text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
+            Founder-led studio
+          </p>
+          <h1 className="mt-3 w-full max-w-none font-[var(--font-playfair)] text-3xl font-semibold text-text-primary dark:text-dark-text-primary sm:text-4xl lg:text-[2.65rem] lg:leading-tight">
             One architect,{" "}
             <span className="bg-gradient-to-r from-[#2B5CE6] to-indigo-500 bg-clip-text text-transparent dark:from-[#7ea0ff] dark:to-indigo-300">
               direct delivery
             </span>
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-secondary dark:text-dark-text-secondary">
+          <p className="mt-4 w-full max-w-none text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary sm:text-base">
             Bitcraftly is a founder-led frontend &amp; AI solutions studio — websites, React/Next.js builds, redesigns, and Smart
             Parking from {BRAND.location}. You work directly with {FOUNDER.name}, with trusted specialists brought in only when the
             scope needs it.
           </p>
-          <p className="mt-3 max-w-2xl text-sm text-text-tertiary dark:text-dark-text-tertiary">
+          <p className="mt-3 w-full max-w-none text-sm leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
             Client calls kabhi‑kabhi Hindi–English mix mein chal jaati hain; milestones, timelines, aur handoff docs clear rehte
             hain.
           </p>

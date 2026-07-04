@@ -1,5 +1,6 @@
 "use client";
 
+import DayalSectionLink from "@/components/dayal/DayalSectionLink";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Calendar, ChevronUp, MessageCircle, Phone } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
@@ -93,12 +94,12 @@ export default function DayalActionDock({ onOpenChat, chatOpen }: Props) {
         aria-label="Contact shortcuts"
       >
         <div className="mx-auto grid max-w-lg grid-cols-4">
-          <a href="#contact" className="dayal-dock__item">
+          <DayalSectionLink href="#contact" className="dayal-dock__item">
             <span className="dayal-dock__icon dayal-dock__icon--navy">
               <Calendar className="h-5 w-5" />
             </span>
             <span className="dayal-dock__label">Visit</span>
-          </a>
+          </DayalSectionLink>
           <a href={`tel:${DAYAL.phones[0].tel}`} className="dayal-dock__item">
             <span className="dayal-dock__icon dayal-dock__icon--gold">
               <Phone className="h-5 w-5" />

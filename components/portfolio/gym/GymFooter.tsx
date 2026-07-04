@@ -1,3 +1,4 @@
+import ShowcaseAnchor from "@/components/portfolio/ShowcaseAnchor";
 import Link from "next/link";
 
 import { CONTAINER } from "@/lib/constants";
@@ -27,9 +28,9 @@ export default function GymFooter() {
             <ul className="gym-text-muted mt-4 space-y-2 text-sm">
               {col.links.map((link) => (
                 <li key={link}>
-                  <a href="#formats" className="hover:gym-brand-text hover:underline">
+                  <ShowcaseAnchor href="#formats" className="hover:gym-brand-text hover:underline">
                     {link}
-                  </a>
+                  </ShowcaseAnchor>
                 </li>
               ))}
             </ul>

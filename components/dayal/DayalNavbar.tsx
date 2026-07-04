@@ -5,6 +5,7 @@ import { Calendar, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import DayalLogo from "@/components/dayal/DayalLogo";
+import DayalSectionLink from "@/components/dayal/DayalSectionLink";
 import { NAV_LINKS } from "@/lib/dayal/data";
 
 const SECTION_IDS = NAV_LINKS.map((l) => l.href.replace("#", ""));
@@ -77,21 +78,21 @@ export default function DayalNavbar() {
 
           <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex" aria-label="Main">
             {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className={linkClass(link.href)}>
+              <DayalSectionLink key={link.href} href={link.href} className={linkClass(link.href)}>
                 {link.label}
-              </a>
+              </DayalSectionLink>
             ))}
           </nav>
 
           <div className="flex shrink-0 items-center gap-2">
-            <a
+            <DayalSectionLink
               href="#contact"
               className="dayal-btn-primary hidden px-3 py-2 text-xs sm:inline-flex sm:px-4 sm:py-2.5 sm:text-sm"
             >
               <Calendar className="h-4 w-4 shrink-0" aria-hidden />
               <span className="hidden md:inline">Let&apos;s Connect</span>
               <span className="md:hidden">Connect</span>
-            </a>
+            </DayalSectionLink>
             <button
               type="button"
               className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#0b1633]/15 text-[#0b1633] lg:hidden"
@@ -137,27 +138,27 @@ export default function DayalNavbar() {
                 <ul className="flex flex-col gap-0.5">
                   {NAV_LINKS.map((link) => (
                     <li key={link.href}>
-                      <a
+                      <DayalSectionLink
                         href={link.href}
                         className={linkClass(link.href, true)}
                         onClick={() => setOpen(false)}
                       >
                         {link.label}
-                      </a>
+                      </DayalSectionLink>
                     </li>
                   ))}
                 </ul>
               </div>
 
               <div className="shrink-0 border-t border-[#0b1633]/8 px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-                <a
+                <DayalSectionLink
                   href="#contact"
                   className="dayal-btn-primary w-full"
                   onClick={() => setOpen(false)}
                 >
                   <Calendar className="h-4 w-4" />
                   Let&apos;s Connect
-                </a>
+                </DayalSectionLink>
               </div>
             </motion.nav>
           </motion.div>

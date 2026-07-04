@@ -59,7 +59,8 @@ export const FOUNDER_MESSAGE = {
   primaryCta: "View Pricing",
   primaryCtaHref: "/pricing",
   secondaryCta: "About Founder",
-  secondaryCtaHref: "/about#founder",
+  secondaryCtaHref: "/about",
+  secondaryCtaSectionId: "founder",
 } as const;
 
 export const FOUNDER_AUDIO_LOCALES = ["en", "hi"] as const satisfies readonly FounderAudioLocale[];

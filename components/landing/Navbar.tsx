@@ -10,6 +10,7 @@ import type { LucideIcon } from "lucide-react";
 
 import BitcraftlyLogoMarkImage from "@/components/brand/BitcraftlyLogoMarkImage";
 import LoginModal from "@/components/auth/LoginModal";
+import MarketingSectionLink from "@/components/landing/MarketingSectionLink";
 import NavbarProfileMenu from "@/components/landing/NavbarProfileMenu";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { CONTAINER, whatsappUrl } from "@/lib/constants";
@@ -226,14 +227,15 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
                         All services
                       </Link>
                       {HEADER_SERVICES_DROPDOWN.map((item) => (
-                        <Link
+                        <MarketingSectionLink
                           key={item.label}
-                          href={item.href}
+                          path={item.path}
+                          sectionId={item.sectionId}
                           className="nav-mobile-route__sub-link"
-                          onClick={closeMenu}
+                          onNavigate={closeMenu}
                         >
                           {item.label}
-                        </Link>
+                        </MarketingSectionLink>
                       ))}
                     </div>
                   </div>
@@ -358,14 +360,15 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
                   </Link>
                   <div className="my-1 h-px bg-[#F3F4F6] dark:bg-dark-border-primary" />
                   {HEADER_SERVICES_DROPDOWN.map((item) => (
-                    <Link
+                    <MarketingSectionLink
                       key={item.label}
-                      href={item.href}
+                      path={item.path}
+                      sectionId={item.sectionId}
                       className="block px-4 py-2 text-sm font-medium text-[#6B7280] transition hover:bg-[#F9FAFB] hover:text-[#111827] dark:text-dark-text-secondary dark:hover:bg-dark-bg-secondary dark:hover:text-dark-text-primary"
-                      onClick={() => setServicesOpen(false)}
+                      onNavigate={() => setServicesOpen(false)}
                     >
                       {item.label}
-                    </Link>
+                    </MarketingSectionLink>
                   ))}
                 </div>
               </div>

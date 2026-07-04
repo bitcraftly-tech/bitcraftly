@@ -8,17 +8,15 @@ import { TIER_DISPLAY } from "../pricingMatrix";
 export default function PricingTierCards() {
   return (
     <section id="pricing-plans" className={`${CONTAINER} ${SECTION_SCROLL_MT} ${SECTION_PY}`}>
-      <div className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
-          Standard plans
-        </p>
-        <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
-          Pick the right package
-        </h2>
-        <p className="mt-3 text-sm text-text-secondary dark:text-dark-text-secondary">
-          Side-by-side comparison — prices are starting-from, one-time unless noted.
-        </p>
-      </div>
+      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
+        Standard plans
+      </p>
+      <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
+        Pick the right package
+      </h2>
+      <p className="mt-3 max-w-3xl text-sm text-text-secondary dark:text-dark-text-secondary">
+        Side-by-side comparison — prices are starting-from, one-time unless noted.
+      </p>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-3 lg:items-stretch">
         {TIER_DISPLAY.map(({ key, label, plan, support, recommended }) => (
@@ -108,7 +106,7 @@ export default function PricingTierCards() {
         ))}
       </div>
 
-      <p className="mt-8 text-center text-xs text-text-tertiary dark:text-dark-text-tertiary">
+      <p className="mt-8 text-xs text-text-tertiary dark:text-dark-text-tertiary">
         Maintenance from ₹2,999/month · Frontend consulting ₹1,500/hour · GST as applicable
       </p>
     </section>

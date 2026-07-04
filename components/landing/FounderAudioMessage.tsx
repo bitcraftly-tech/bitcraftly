@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Headphones, Pause, Play } from "lucide-react";
+
+import MarketingSectionLink from "@/components/landing/MarketingSectionLink";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { CONTAINER } from "@/lib/constants";
@@ -341,9 +343,9 @@ export default function FounderAudioMessage({ embedded = false }: { embedded?: b
 
       {!embedded ? (
         <p className="mt-2 text-[10px] text-indigo-100/60">
-          <Link href="/about#founder" className="font-medium text-white/90 hover:underline">
+          <MarketingSectionLink path="/about" sectionId="founder" className="font-medium text-white/90 hover:underline">
             About founder
-          </Link>
+          </MarketingSectionLink>
           <span aria-hidden> · </span>
           <Link href="/pricing" className="font-medium text-white/90 hover:underline">
             Pricing

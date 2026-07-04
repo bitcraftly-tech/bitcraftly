@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import MarketingSectionLink from "@/components/landing/MarketingSectionLink";
 import { whatsappUrl } from "@/lib/constants";
 import { CALENDLY_URL } from "@/lib/leadGen";
 import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
@@ -31,12 +32,13 @@ export default function CalendlyEmbed({ className = "" }: CalendlyEmbedProps) {
             >
               WhatsApp — Book slot
             </a>
-            <Link
-              href="#contact-form"
+            <MarketingSectionLink
+              path="/contact"
+              sectionId="contact-form"
               className="inline-flex h-10 items-center justify-center rounded-lg border border-border-primary bg-bg-secondary px-4 text-xs font-semibold text-text-primary transition hover:border-accent-primary/40 dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary"
             >
               Use form instead
-            </Link>
+            </MarketingSectionLink>
           </div>
         </div>
         <p className="mt-4 border-t border-border-primary/60 pt-3 text-[10px] text-text-tertiary dark:border-dark-border-primary/60 dark:text-dark-text-tertiary">

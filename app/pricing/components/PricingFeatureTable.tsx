@@ -22,17 +22,15 @@ export default function PricingFeatureTable() {
 
   return (
     <section id="pricing-compare" className={`${CONTAINER} ${SECTION_SCROLL_MT} border-t border-border-primary ${SECTION_PY} dark:border-dark-border-primary`}>
-      <div className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
-          Feature comparison
-        </p>
-        <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
-          Compare every feature
-        </h2>
-        <p className="mt-3 text-sm text-text-secondary dark:text-dark-text-secondary">
-          Scan in seconds — ✔ included, — not included, Optional add-on.
-        </p>
-      </div>
+      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
+        Feature comparison
+      </p>
+      <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">
+        Compare every feature
+      </h2>
+      <p className="mt-3 max-w-3xl text-sm text-text-secondary dark:text-dark-text-secondary">
+        Scan in seconds — ✔ included, — not included, Optional add-on.
+      </p>
 
       {/* Mobile: card stack per tier */}
       <div className="mt-8 space-y-4 lg:hidden">

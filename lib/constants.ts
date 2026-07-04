@@ -5,7 +5,7 @@ export const CONTAINER = "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-12";
 
 /** Page shell — flex column, full viewport min-height, sticky footer layout */
 export const PAGE_SHELL =
-  "flex min-h-dvh w-full min-w-0 flex-1 flex-col bg-bg-primary text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary";
+  "flex min-h-dvh w-full min-w-0 flex-1 flex-col bg-transparent text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary";
 
 /** Main content region */
 export const PAGE_MAIN = "flex min-w-0 w-full flex-1 flex-col";

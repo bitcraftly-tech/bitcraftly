@@ -15,7 +15,7 @@ type LandingPageProps = {
 
 export default function LandingPage({ sectionId }: LandingPageProps) {
   return (
-    <MarketingPageLayout sectionId={sectionId}>
+    <MarketingPageLayout sectionId={sectionId} showFooterCta={false}>
       <Hero />
       <LandingActionStrip />
       <HomePageHub />

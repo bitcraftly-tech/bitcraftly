@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import DayalSectionLink from "@/components/dayal/DayalSectionLink";
 import {
   Building2,
   Calendar,
@@ -323,10 +324,10 @@ export default function DayalHero() {
             {HERO_DESCRIPTION}
           </p>
           <div className="dayal-btn-stack-mobile mt-6 sm:mt-8 sm:flex sm:flex-wrap sm:gap-4">
-            <a href="#contact" className="dayal-btn-primary">
+            <DayalSectionLink href="#contact" className="dayal-btn-primary">
               <Calendar className="h-4 w-4" />
               Let&apos;s Connect
-            </a>
+            </DayalSectionLink>
             <a
               href={DAYAL.website}
               target="_blank"

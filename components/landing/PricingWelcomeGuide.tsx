@@ -17,6 +17,7 @@ import {
   PRICING_WELCOME_STEPS,
   type PricingGuideStep,
 } from "@/lib/pricingWelcomeGuide";
+import { scrollToElementWithRetry } from "@/lib/scrollToMarketingSection";
 
 const STEP_ICONS = [GitCompare, Zap, Layers, Calculator] as const;
 
@@ -42,9 +43,10 @@ function GuideStepCard({ step }: { step: PricingGuideStep }) {
   const Icon = STEP_ICONS[step.step - 1] ?? Sparkles;
 
   return (
-    <a
-      href={`#${step.anchorId}`}
-      className="group flex gap-3 rounded-xl border border-border-primary/80 bg-bg-primary/60 p-3 transition hover:border-indigo-500/40 hover:bg-indigo-600/5 dark:border-dark-border-primary dark:bg-dark-bg-primary/40 dark:hover:border-indigo-400/35 dark:hover:bg-indigo-400/5 sm:p-3.5"
+    <button
+      type="button"
+      onClick={() => scrollToElementWithRetry(step.anchorId)}
+      className="group flex w-full gap-3 rounded-xl border border-border-primary/80 bg-bg-primary/60 p-3 text-left transition hover:border-indigo-500/40 hover:bg-indigo-600/5 dark:border-dark-border-primary dark:bg-dark-bg-primary/40 dark:hover:border-indigo-400/35 dark:hover:bg-indigo-400/5 sm:p-3.5"
     >
       <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-indigo-600/10 text-indigo-600 dark:bg-indigo-400/15 dark:text-indigo-300">
         <Icon className="size-4" aria-hidden />
@@ -61,7 +63,7 @@ function GuideStepCard({ step }: { step: PricingGuideStep }) {
         </span>
         <span className="mt-1 block text-xs leading-relaxed text-text-secondary dark:text-dark-text-secondary">{step.hint}</span>
       </span>
-    </a>
+    </button>
   );
 }
 
@@ -161,12 +163,13 @@ export default function PricingWelcomeGuide() {
               </div>
 
               <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-border-primary/70 pt-4 dark:border-dark-border-primary/70">
-                <a
-                  href="#pricing-compare"
+                <button
+                  type="button"
+                  onClick={() => scrollToElementWithRetry("pricing-compare")}
                   className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-700"
                 >
                   Start with compare →
-                </a>
+                </button>
                 <button
                   type="button"
                   onClick={dismissForSession}

@@ -1,6 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
+"use client";
 
+import Image from "next/image";
+
+import DayalSectionLink from "@/components/dayal/DayalSectionLink";
 import { DAYAL, DAYAL_LOGO_MARK } from "@/lib/dayal/data";
 
 /** Matches dayalbuilder.com header logo mark */
@@ -61,12 +63,8 @@ export default function DayalLogo({
   }
 
   return (
-    <Link
-      href={href}
-      className="inline-flex shrink-0 items-center"
-      aria-label={DAYAL.brand}
-    >
+    <DayalSectionLink href={href} className="inline-flex shrink-0 items-center" aria-label={DAYAL.brand}>
       {inner}
-    </Link>
+    </DayalSectionLink>
   );
 }

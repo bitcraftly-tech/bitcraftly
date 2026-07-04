@@ -1,3 +1,4 @@
+import ShowcaseAnchor from "@/components/portfolio/ShowcaseAnchor";
 import Link from "next/link";
 
 import { CONTAINER } from "@/lib/constants";
@@ -25,12 +26,12 @@ const FOOTER_COLS = [
 export default function EcommerceFooter() {
   return (
     <footer>
-      <a
+      <ShowcaseAnchor
         href="#top"
         className="ec-header-nav-bar block py-3.5 text-center text-sm font-medium hover:opacity-90"
       >
         Back to top
-      </a>
+      </ShowcaseAnchor>
 
       <div className="ec-footer-mid text-white">
         <div className={`${CONTAINER} grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4`}>
@@ -40,9 +41,9 @@ export default function EcommerceFooter() {
               <ul className="mt-4 space-y-2">
                 {col.links.map((link) => (
                   <li key={link}>
-                    <a href="#catalog" className="text-sm text-slate-300 hover:underline">
+                    <ShowcaseAnchor href="#catalog" className="text-sm text-slate-300 hover:underline">
                       {link}
-                    </a>
+                    </ShowcaseAnchor>
                   </li>
                 ))}
               </ul>

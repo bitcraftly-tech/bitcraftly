@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { CONTAINER } from "@/lib/constants";
 
 import useSectionNavSpy from "@/hooks/useSectionNavSpy";
+import { scrollToElementWithRetry } from "@/lib/scrollToMarketingSection";
 
 
 
@@ -166,23 +167,16 @@ function SectionPageNav({ items, ariaLabel }: SectionPageNavProps) {
 
                 return (
 
-                  <a
-
+                  <button
                     key={item.id}
-
-                    href={`#${item.id}`}
-
+                    type="button"
                     role="tab"
-
                     aria-selected={active}
-
+                    onClick={() => scrollToElementWithRetry(item.id)}
                     className={`bc-section-nav-tab ${active ? "bc-section-nav-tab--active" : ""}`}
-
                   >
-
                     {item.label}
-
-                  </a>
+                  </button>
 
                 );
 

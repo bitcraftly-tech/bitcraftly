@@ -76,21 +76,14 @@ export default function PortfolioWhyPerform({ light }: PortfolioWhyPerformProps)
 
   return (
     <div className={`${CONTAINER} border-t ${border} ${SECTION_PY_COMPACT} ${light ? "bg-[#fafbfc] dark:bg-dark-bg-primary" : ""}`}>
-      <span
-        className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] ${
-          light
-            ? "border-[#E5E7EB] bg-white text-[#6B7280] shadow-[0_1px_2px_rgba(0,0,0,0.03)] dark:border-dark-border-primary dark:bg-dark-bg-card dark:text-dark-text-secondary"
-            : "border-border-primary bg-bg-card text-text-secondary dark:border-dark-border-primary dark:bg-dark-bg-card dark:text-dark-text-secondary"
-        }`}
-      >
-        <span className="size-1.5 rounded-full bg-[#16a085]" aria-hidden />
+      <p className={`text-xs font-semibold uppercase tracking-[0.15em] ${eyebrow}`}>
         {PORTFOLIO.performanceSectionTitle}
-      </span>
+      </p>
 
-      <h2 className={`mt-4 font-[var(--font-playfair)] text-2xl font-semibold tracking-tight sm:text-3xl ${title}`}>
+      <h2 className={`mt-3 w-full max-w-none font-[var(--font-playfair)] text-3xl font-semibold text-text-primary dark:text-dark-text-primary sm:text-4xl lg:text-[2.65rem] lg:leading-tight ${title}`}>
         {PORTFOLIO.whyPerformTitle}
       </h2>
-      <p className={`mt-3 max-w-3xl text-sm leading-relaxed sm:text-[15px] ${body}`}>{PORTFOLIO.whyPerformIntro}</p>
+      <p className={`mt-4 w-full max-w-none text-sm leading-relaxed sm:text-base ${body}`}>{PORTFOLIO.whyPerformIntro}</p>
 
       <div className="mt-8 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
         {allCards.map((card, index) => (

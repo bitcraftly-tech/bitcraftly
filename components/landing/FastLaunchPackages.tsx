@@ -127,7 +127,7 @@ export default function FastLaunchPackages() {
         ))}
       </div>
 
-      <p className="mt-6 text-center text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
+      <p className="mt-6 text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
         {FAST_PACKAGES_SECTION.pricingNote}
         <span className="block mt-1">*48h / 5-day windows start after brief approval and content handoff.</span>
       </p>
