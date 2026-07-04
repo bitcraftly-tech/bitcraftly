@@ -245,22 +245,30 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
               {MARKETING_NAV.filter((l) => l.label !== "Services").map((link, index) => {
                 const Icon = MOBILE_NAV_ICONS[link.label] ?? Sparkles;
                 const active = isNavLinkActive(link.href, pathname);
+                const isPricing = link.label === "Pricing";
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
                     aria-current={active ? "page" : undefined}
-                    className={`nav-mobile-item nav-mobile-route ${active ? "nav-mobile-route--active" : ""}`}
+                    className={`nav-mobile-item nav-mobile-route ${active ? "nav-mobile-route--active" : ""} ${isPricing ? "nav-mobile-route--pricing" : ""}`}
                     onClick={closeMenu}
                   >
                     <span className="nav-mobile-route__index" aria-hidden>
                       {String(index + 2).padStart(2, "0")}
                     </span>
-                    <span className={`nav-mobile-route__icon ${active ? "nav-mobile-route__icon--active" : ""}`}>
+                    <span className={`nav-mobile-route__icon ${active ? "nav-mobile-route__icon--active" : ""} ${isPricing ? "nav-mobile-route__icon--pricing" : ""}`}>
                       <Icon className="size-[1.05rem]" aria-hidden />
                     </span>
                     <span className="nav-mobile-route__copy">
-                      <span className="nav-mobile-route__title">{link.label}</span>
+                      <span className="nav-mobile-route__title">
+                        {link.label}
+                        {isPricing ? (
+                          <span className="bc-nav-pricing-highlight__badge nav-mobile-route__pricing-badge" aria-hidden>
+                            ₹
+                          </span>
+                        ) : null}
+                      </span>
                       <span className="nav-mobile-route__hint">{link.mobileHint}</span>
                     </span>
                     <span className="nav-mobile-route__arrow" aria-hidden>
@@ -378,8 +386,15 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
           <Link href="/portfolio" aria-current={isNavLinkActive("/portfolio", pathname) ? "page" : undefined} className={navLinkClass("/portfolio")}>
             Portfolio
           </Link>
-          <Link href="/pricing" aria-current={isNavLinkActive("/pricing", pathname) ? "page" : undefined} className={navLinkClass("/pricing")}>
+          <Link
+            href="/pricing"
+            aria-current={isNavLinkActive("/pricing", pathname) ? "page" : undefined}
+            className={`bc-nav-pricing-highlight inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-semibold ${isNavLinkActive("/pricing", pathname) ? "bc-nav-pricing-highlight--active" : ""}`}
+          >
             Pricing
+            <span className="bc-nav-pricing-highlight__badge" aria-hidden>
+              ₹
+            </span>
           </Link>
         </div>
 
@@ -424,11 +439,10 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-nav-panel"
-            className={`bc-nav-hamburger inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-lg border transition-all duration-200 active:scale-[0.97] ${
-              isMenuOpen
+            className={`bc-nav-hamburger inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-lg border transition-all duration-200 active:scale-[0.97] ${isMenuOpen
                 ? "border-[#8e44ad]/30 bg-[#8e44ad]/5 dark:border-indigo-400/35 dark:bg-indigo-950/40"
                 : "border-[#E5E7EB] dark:border-dark-border-primary"
-            }`}
+              }`}
             onClick={toggleMenu}
           >
             <span className="sr-only">{isMenuOpen ? "Close menu" : "Open menu"}</span>
