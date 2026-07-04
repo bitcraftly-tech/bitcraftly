@@ -41,18 +41,18 @@
   --text-button--line-height: 1.5rem;
 
   /* —— Light semantic colors (app-wide Tailwind utilities) —— */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #fafafa;
+  --color-bg-primary: #f7f8fc;
+  --color-bg-secondary: #eef1f8;
   --color-bg-card: #ffffff;
-  --color-bg-section: #f8fafc;
-  --color-bg-hover: #f1f5f9;
+  --color-bg-section: #f3f5fa;
+  --color-bg-hover: #e8ecf4;
   --color-text-primary: #0f172a;
   --color-text-secondary: #334155;
   --color-text-tertiary: #64748b;
   --color-text-disabled: #94a3b8;
-  --color-border-primary: #e2e8f0;
-  --color-border-secondary: #e5e7eb;
-  --color-border-divider: #f1f5f9;
+  --color-border-primary: #dfe4ee;
+  --color-border-secondary: #e2e8f0;
+  --color-border-divider: #eaedf4;
   --color-accent-primary: #2563eb;
   --color-accent-hover: #1d4ed8;
   --color-brand-soft: #dbeafe;
@@ -134,11 +134,11 @@
   --font-weight-button: 600;
 
   /* Background */
-  --background-primary: #ffffff;
-  --background-secondary: #fafafa;
-  --background-section: #f8fafc;
+  --background-primary: #f7f8fc;
+  --background-secondary: #eef1f8;
+  --background-section: #f3f5fa;
   --background-surface: #ffffff;
-  --background-hover: #f1f5f9;
+  --background-hover: #e8ecf4;
 
   /* Text */
   --text-primary: #0f172a;
@@ -152,9 +152,9 @@
   --brand-soft: #dbeafe;
 
   /* Borders */
-  --border-default: #e2e8f0;
-  --border-divider: #f1f5f9;
-  --border-card: #e5e7eb;
+  --border-default: #dfe4ee;
+  --border-divider: #eaedf4;
+  --border-card: #e2e8f0;
 
   /* Status */
   --status-success: #16a34a;
@@ -188,15 +188,28 @@ html {
   touch-action: manipulation;
 }
 
+html:not(.dark) {
+  background-color: var(--color-bg-primary);
+  background-image:
+    radial-gradient(ellipse 110% 70% at 50% -25%, rgb(99 102 241 / 0.07), transparent 58%),
+    radial-gradient(ellipse 70% 55% at 100% 0%, rgb(139 92 246 / 0.05), transparent 52%),
+    radial-gradient(ellipse 55% 45% at 0% 100%, rgb(148 163 184 / 0.06), transparent 48%);
+  background-attachment: fixed;
+}
+
 body {
   overscroll-behavior-y: none;
-  background-color: var(--color-bg-primary);
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
 }
 
-.dark html,
+.dark html {
+  background-color: var(--color-dark-bg-primary);
+  background-image: none;
+}
+
 .dark body {
   background-color: var(--color-dark-bg-primary);
 }
@@ -341,7 +354,7 @@ body {
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   font-weight: var(--font-weight-body);
-  @apply bg-bg-primary text-text-primary transition-colors duration-200 dark:bg-dark-bg-primary dark:text-dark-text-primary;
+  @apply bg-transparent text-text-primary transition-colors duration-200 dark:bg-dark-bg-primary dark:text-dark-text-primary;
 }
 
 /* Geist Sans — global UI */
@@ -2188,8 +2201,8 @@ html.dark .bc-static-loader__label {
 /* Portfolio showcase: in light site mode, remap dark:* utilities to light palette inside this shell */
 html:not(.dark) .portfolio-showcase-light {
   color-scheme: light;
-  --color-dark-bg-primary: #f8fafc;
-  --color-dark-bg-secondary: #f1f5f9;
+  --color-dark-bg-primary: #f7f8fc;
+  --color-dark-bg-secondary: #eef1f8;
   --color-dark-bg-card: #ffffff;
   --color-dark-text-primary: #0f172a;
   --color-dark-text-secondary: #475569;

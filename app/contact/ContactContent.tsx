@@ -11,6 +11,7 @@ import ContactProjectForm from "@/components/contact/ContactProjectForm";
 import { ContactProjectFormModal } from "@/components/contact/ContactProjectFormModal";
 import ContactSidebar from "@/components/contact/ContactSidebar";
 import ContactWhatsAppCompact from "@/components/contact/ContactWhatsAppCompact";
+import MarketingSectionLink from "@/components/landing/MarketingSectionLink";
 import WhatsAppInquiryPanel from "@/components/landing/WhatsAppInquiryPanel";
 import { CONTAINER } from "@/lib/constants";
 import { getContactModeCopy, getContactPageMode, type ContactPageMode } from "@/lib/contactPageModes";
@@ -364,12 +365,13 @@ export default function ContactContent() {
         <section className={`flex w-full min-w-0 flex-col gap-6 lg:col-span-7 ${isFocusedQuote ? "order-1 lg:order-2" : ""}`}>
           {isFocusedQuote ? (
             <>
-              <Link
-                href="/pricing#pricing-compare"
+              <MarketingSectionLink
+                path="/pricing"
+                sectionId="pricing-compare"
                 className="inline-flex text-sm font-semibold text-[#4F46E5] hover:underline"
               >
                 ← Change package
-              </Link>
+              </MarketingSectionLink>
               <ContactProjectForm {...formProps} layout="inline" variant="quote" />
               <ContactWhatsAppCompact message={whatsappMessage} service={requestType} />
             </>

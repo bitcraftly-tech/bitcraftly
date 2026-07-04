@@ -1,5 +1,6 @@
 "use client";
 
+import DayalSectionLink from "@/components/dayal/DayalSectionLink";
 import {
   Baby,
   Car,
@@ -60,13 +61,13 @@ export default function DayalAmenities() {
         </div>
 
         <DayalReveal className="mt-10 text-center">
-          <a
+          <DayalSectionLink
             href="#contact"
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#c8a46b] transition hover:gap-3"
           >
             View All Amenities on Site Visit
             <span aria-hidden>→</span>
-          </a>
+          </DayalSectionLink>
         </DayalReveal>
       </div>
     </section>

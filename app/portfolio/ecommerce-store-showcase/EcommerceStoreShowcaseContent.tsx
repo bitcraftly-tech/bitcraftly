@@ -1,5 +1,6 @@
 import { Star } from "lucide-react";
 
+import ShowcaseAnchor from "@/components/portfolio/ShowcaseAnchor";
 import ShowcaseLink from "@/components/portfolio/ShowcaseLink";
 import { CONTAINER } from "@/lib/constants";
 
@@ -149,7 +150,7 @@ export default function EcommerceStoreShowcaseContent() {
       {/* Hero grid */}
       <section className={`${CONTAINER} py-4 md:py-5`}>
         <div className="grid gap-4 lg:grid-cols-[1.6fr_1fr]">
-          <a
+          <ShowcaseAnchor
             href="#deals"
             className="flex min-h-[220px] flex-col justify-end rounded-sm bg-gradient-to-br from-[#232f3e] via-[#37475a] to-[#485769] p-6 text-white shadow md:min-h-[280px]"
           >
@@ -158,17 +159,17 @@ export default function EcommerceStoreShowcaseContent() {
             <span className="mt-4 inline-flex w-fit rounded-sm bg-[#ffd814] px-4 py-2 text-sm font-medium text-[#0f1111] hover:bg-[#f7ca00]">
               Shop deals
             </span>
-          </a>
+          </ShowcaseAnchor>
           <div className="grid grid-cols-2 gap-4">
             {CATEGORY_TILES.map((t) => (
-              <a
+              <ShowcaseAnchor
                 key={t.label}
                 href={t.href}
                 className={`flex min-h-[130px] flex-col justify-between rounded-sm border border-[#ddd] bg-gradient-to-br p-4 shadow-sm ${t.tone}`}
               >
                 <div className="aspect-[4/3] rounded-sm bg-white/60" />
                 <p className="mt-2 text-sm font-bold text-[#0f1111]">{t.label}</p>
-              </a>
+              </ShowcaseAnchor>
             ))}
           </div>
         </div>
@@ -180,9 +181,9 @@ export default function EcommerceStoreShowcaseContent() {
           <div className="rounded-sm bg-white p-4 shadow-sm md:p-5">
             <div className="mb-4 flex items-center justify-between gap-2">
               <h2 className="text-xl font-bold text-[#0f1111]">{row.title}</h2>
-              <a href="#catalog" className="text-sm text-[#007185] hover:text-[#c7511f] hover:underline">
+              <ShowcaseAnchor href="#catalog" className="text-sm text-[#007185] hover:text-[#c7511f] hover:underline">
                 See more
-              </a>
+              </ShowcaseAnchor>
             </div>
             <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-none">
               {row.products.map((p) => (

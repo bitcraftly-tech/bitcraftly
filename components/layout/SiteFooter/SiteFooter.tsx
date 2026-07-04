@@ -1,5 +1,6 @@
 import { CONTAINER } from "@/lib/constants";
 
+import "@/components/landing/marketing-hero.css";
 import FooterBottomBar from "./FooterBottomBar";
 import FooterCtaBand from "./FooterCtaBand";
 import FooterMainColumns from "./FooterMainColumns";

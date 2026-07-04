@@ -3,6 +3,30 @@
 export const SCROLL_TARGET_STORAGE_KEY = "landingTargetSection";
 export const SCROLL_PATH_STORAGE_KEY = "landingTargetPath";
 
+export type ParsedSectionHref = {
+  path: string;
+  sectionId: string;
+};
+
+/** Split `/pricing#compare` or `#compare` into path + section (no hash in navigated URL). */
+export function parseSectionHref(href: string): ParsedSectionHref | null {
+  if (!href || href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+    return null;
+  }
+
+  if (href.startsWith("#")) {
+    const sectionId = href.slice(1);
+    return sectionId ? { path: "", sectionId } : null;
+  }
+
+  const hashIndex = href.indexOf("#");
+  if (hashIndex === -1) return null;
+
+  const path = href.slice(0, hashIndex) || "/";
+  const sectionId = href.slice(hashIndex + 1).split("?")[0] ?? "";
+  return sectionId ? { path, sectionId } : null;
+}
+
 type ScrollOptions = {
   behavior?: ScrollBehavior;
   block?: ScrollLogicalPosition;

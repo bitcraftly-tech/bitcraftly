@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import PackageWhatsAppLink from "@/components/landing/PackageWhatsAppLink";
+import MarketingSectionLink from "@/components/landing/MarketingSectionLink";
 import { CONTAINER, SECTION_PY, SECTION_SCROLL_MT } from "@/lib/constants";
 import { buildQuoteContactUrl } from "@/lib/leadGen";
 import { STANDARD_PRICING_PLANS } from "@/lib/standardPricing";
@@ -27,13 +28,21 @@ export default function Pricing({ variant = "section" }: PricingProps) {
       ) : (
         <p className="mt-4 max-w-3xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
           Not sure yet? Use the{" "}
-          <a href="/pricing#project-cost-calculator" className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
+          <MarketingSectionLink
+            path="/pricing"
+            sectionId="project-cost-calculator"
+            className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
+          >
             cost calculator
-          </a>{" "}
+          </MarketingSectionLink>{" "}
           on the pricing page. Fixed fast-launch offers are in{" "}
-          <a href="/pricing#fast-packages" className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
+          <MarketingSectionLink
+            path="/pricing"
+            sectionId="fast-packages"
+            className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
+          >
             fast-launch packages
-          </a>
+          </MarketingSectionLink>
           . Standard starting prices below — final quote depends on pages, features, and content readiness. Scope likh ke confirm hota hai
           (English ya Hinglish) before work starts. Frontend consulting at{" "}
           <span className="font-semibold text-text-primary dark:text-dark-text-primary">₹1,500/hour</span>.

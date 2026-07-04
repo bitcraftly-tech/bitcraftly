@@ -13,6 +13,8 @@ export const FOOTER_EXPLORE_LINKS: FooterLink[] = [
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/about", label: "About & process" },
+  { href: "/team", label: "Team" },
+  { href: "/careers", label: "Careers" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact / quote" },
 ];
@@ -26,8 +28,7 @@ export const FOOTER_SERVICE_LINKS: FooterSectionLink[] = [
 ];
 
 export const FOOTER_MORE_LINKS: FooterLink[] = [
-  { href: "/team", label: "Team" },
-  { href: "/careers", label: "Careers" },
+  { href: "/trust", label: "Trust Center" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
 ];

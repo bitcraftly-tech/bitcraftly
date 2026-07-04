@@ -11,15 +11,15 @@ type PricingBottomCtaProps = {
 export default function PricingBottomCta({ title, description, links }: PricingBottomCtaProps) {
   return (
     <section className={`${CONTAINER} ${SECTION_PY}`}>
-      <div className="bc-card mx-auto max-w-3xl p-6 text-center sm:p-8">
+      <div className="bc-card max-w-3xl p-6 sm:p-8">
         <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-accent-primary dark:text-indigo-400">
           Next step
         </p>
         <h2 className="mt-2 font-[var(--font-playfair)] text-2xl text-text-primary dark:text-dark-text-primary">{title}</h2>
-        <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
+        <p className="mt-2 max-w-xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary">
           {description}
         </p>
-        <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
           {links.map((link) => (
             <Link
               key={link.href}

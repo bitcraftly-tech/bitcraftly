@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, Calculator } from "lucide-react";
 
+import MarketingSectionLink from "@/components/landing/MarketingSectionLink";
+
 import { CONTAINER } from "@/lib/constants";
 
 const HIGHLIGHTS = ["2-min estimate", "From ₹8,999", "Written quote first"] as const;
@@ -38,14 +40,15 @@ function TeaserContent({ embedded }: { embedded: boolean }) {
       </ul>
 
       <div className={`flex flex-wrap gap-2 ${embedded ? "mt-3.5" : "mt-4 w-full flex-col sm:w-auto sm:min-w-[12.5rem]"}`}>
-        <Link
-          href="/pricing#project-cost-calculator"
+        <MarketingSectionLink
+          path="/pricing"
+          sectionId="project-cost-calculator"
           className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white px-4 py-2.5 text-sm font-bold text-indigo-900 transition hover:bg-indigo-50 sm:px-5"
         >
           <Calculator className="size-4 shrink-0" aria-hidden />
           Calculate cost
           <ArrowRight className="size-4 shrink-0" aria-hidden />
-        </Link>
+        </MarketingSectionLink>
         <Link
           href="/pricing"
           className="inline-flex items-center justify-center rounded-full border border-white/35 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/15 sm:px-5"

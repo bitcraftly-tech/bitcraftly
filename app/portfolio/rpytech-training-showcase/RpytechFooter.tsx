@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import ShowcaseLink from "@/components/portfolio/ShowcaseLink";
 import { Mail, MapPin, Phone, QrCode } from "lucide-react";
 import { Poppins } from "next/font/google";
 
@@ -123,9 +125,9 @@ export default function RpytechFooter() {
                       );
                     }
                     return (
-                      <Link key={action.label} href="#contact" className="rpytech-footer-action rpytech-footer-action--orange">
+                      <ShowcaseLink key={action.label} href="#contact" className="rpytech-footer-action rpytech-footer-action--orange">
                         {action.label}
-                      </Link>
+                      </ShowcaseLink>
                     );
                   })}
                 </div>

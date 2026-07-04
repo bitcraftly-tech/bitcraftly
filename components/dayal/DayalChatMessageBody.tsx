@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import DayalSectionLink from "@/components/dayal/DayalSectionLink";
 import { DAYAL } from "@/lib/dayal/data";
 
 function tidyHref(raw: string) {
@@ -46,9 +47,9 @@ function formatLineTokens(line: string, lineIx: number, isUser: boolean): ReactN
       );
     } else if (m[2]) {
       nodes.push(
-        <a key={key} href="#contact" className={linkClass(isUser)}>
+        <DayalSectionLink key={key} href="#contact" className={linkClass(isUser)}>
           contact form
-        </a>
+        </DayalSectionLink>
       );
     } else if (m[3] || m[4] || m[5]) {
       const tel = full.replace(/\D/g, "");

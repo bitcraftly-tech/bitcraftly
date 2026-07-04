@@ -13,6 +13,12 @@ backend/*.db
 backend/*.sqlite3
 backend/uploads/
 
+# Internal BDS PDF storage (sync via scripts/sync-bitcraftly-documents.mjs)
+storage/documents/internal/
+storage/documents/.supabase-migration/
+storage/documents/.regeneration-backup/
+storage/documents/.regeneration-output/
+
 # Dependencies
 node_modules/
 

@@ -5,6 +5,7 @@ import { createAuthOptions } from "@/auth";
 import { PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 import { resolvedNextAuthSecret } from "@/lib/googleAuthEnv";
 import SiteFooter from "@/components/layout/SiteFooter";
+import "@/components/landing/marketing-hero.css";
 import DeferredMarketingScroll from "@/components/landing/DeferredMarketingScroll";
 import MarketingScrollMain from "@/components/landing/MarketingScrollMain";
 import Navbar from "@/components/landing/Navbar";
@@ -12,9 +13,15 @@ import Navbar from "@/components/landing/Navbar";
 type MarketingPageLayoutProps = {
   children: ReactNode;
   sectionId?: string;
+  /** Hide footer CTA when the page already ends with a dedicated conversion section (e.g. homepage FinalCTA). */
+  showFooterCta?: boolean;
 };
 
-export default async function MarketingPageLayout({ children, sectionId }: MarketingPageLayoutProps) {
+export default async function MarketingPageLayout({
+  children,
+  sectionId,
+  showFooterCta = true,
+}: MarketingPageLayoutProps) {
   // Only call getServerSession when a secret is configured — calling it with secret:undefined
   // throws MissingSecretError in next-auth and crashes the entire page (even the homepage).
   const session = resolvedNextAuthSecret() ? await getServerSession(createAuthOptions()) : null;
@@ -26,7 +33,7 @@ export default async function MarketingPageLayout({ children, sectionId }: Marke
       <main className={PAGE_MAIN}>
         <MarketingScrollMain>{children}</MarketingScrollMain>
       </main>
-      <SiteFooter />
+      <SiteFooter showCta={showFooterCta} />
     </div>
   );
 }

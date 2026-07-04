@@ -15,12 +15,24 @@ export default function ServicesGrid({ showTopBorder = true }: ServicesGridProps
       className={`${CONTAINER} ${SECTION_SCROLL_MT} ${SECTION_PY_COMPACT} ${showTopBorder ? "border-t border-border-primary dark:border-dark-border-primary" : ""}`}
     >
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">{SERVICES_SECTION.eyebrow}</p>
-        <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary sm:text-4xl">{SERVICES_SECTION.headline}</h2>
-        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary sm:text-base">{SERVICES_SECTION.subheadline}</p>
-        <p className="mt-3 max-w-3xl text-sm font-medium text-indigo-600/90 dark:text-indigo-400/90">{SERVICES_SECTION.premiumLine}</p>
-        <p className="mt-2 max-w-3xl text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">{SERVICES_SECTION.startupMessage}</p>
-        <p className="mt-2 max-w-3xl text-xs leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">{SERVICES_SECTION.aiMessage}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
+          {SERVICES_SECTION.eyebrow}
+        </p>
+        <h2 className="mt-3 w-full max-w-none font-[var(--font-playfair)] text-3xl font-semibold text-text-primary dark:text-dark-text-primary sm:text-4xl lg:text-[2.65rem] lg:leading-tight">
+          {SERVICES_SECTION.headline}
+        </h2>
+        <p className="mt-4 w-full max-w-none text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary sm:text-base">
+          {SERVICES_SECTION.subheadline}
+        </p>
+        <p className="mt-3 w-full max-w-none text-sm font-medium leading-relaxed text-indigo-600/90 dark:text-indigo-400/90">
+          {SERVICES_SECTION.premiumLine}
+        </p>
+        <p className="mt-2 w-full max-w-none text-sm leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
+          {SERVICES_SECTION.startupMessage}
+        </p>
+        <p className="mt-2 w-full max-w-none text-sm leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
+          {SERVICES_SECTION.aiMessage}
+        </p>
       </div>
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

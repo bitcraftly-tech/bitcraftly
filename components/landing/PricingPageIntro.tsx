@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import PackageWhatsAppLink from "@/components/landing/PackageWhatsAppLink";
+import MarketingSectionLink from "@/components/landing/MarketingSectionLink";
 import { CONTAINER } from "@/lib/constants";
 import { buildQuoteContactUrl } from "@/lib/leadGen";
 import { FEATURED_FAST_PACKAGE } from "@/lib/pricingCompare";
@@ -78,18 +79,20 @@ export default function PricingPageIntro() {
       </div>
 
       <div className="mt-6 flex flex-wrap gap-3">
-        <Link
-          href="#pricing-compare"
+        <MarketingSectionLink
+          path="/pricing"
+          sectionId="pricing-compare"
           className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700"
         >
           Compare packages →
-        </Link>
-        <Link
-          href="#fast-packages"
+        </MarketingSectionLink>
+        <MarketingSectionLink
+          path="/pricing"
+          sectionId="fast-packages"
           className="inline-flex items-center justify-center rounded-full border border-border-secondary px-5 py-2.5 text-sm font-semibold text-text-primary transition hover:border-border-primary dark:border-dark-border-secondary dark:text-dark-text-primary"
         >
           Fast packages
-        </Link>
+        </MarketingSectionLink>
       </div>
     </section>
   );

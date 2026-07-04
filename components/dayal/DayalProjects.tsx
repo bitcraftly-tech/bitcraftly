@@ -1,7 +1,9 @@
 "use client";
 
-import { Building2, MapPin } from "lucide-react";
 import Image from "next/image";
+import { Building2, MapPin } from "lucide-react";
+
+import DayalSectionLink from "@/components/dayal/DayalSectionLink";
 
 import DayalReveal from "@/components/dayal/DayalReveal";
 import { FUTURE_PROJECTS, ONGOING_PROJECTS, PAST_PROJECTS } from "@/lib/dayal/data";
@@ -63,13 +65,13 @@ function ProjectCard({
         </p>
         <p className="dayal-caption mt-1.5 font-medium text-[#c8a46b]">{project.tagline}</p>
         <p className="dayal-caption mt-1.5 flex-1">{project.description}</p>
-        <a
+        <DayalSectionLink
           href="#contact"
           className="dayal-caption mt-3 inline-flex items-center gap-1 font-semibold text-[#0b1633] transition hover:text-[#c0392b]"
         >
           <Building2 className="h-3 w-3" />
           View Project
-        </a>
+        </DayalSectionLink>
       </div>
     </article>
   );
@@ -144,13 +146,13 @@ function FeatureProjectRow({
             )
           )}
         </p>
-        <a
+        <DayalSectionLink
           href="#contact"
           className="dayal-caption mt-3 inline-flex items-center gap-1 font-semibold text-[#0b1633] transition hover:text-[#c0392b]"
         >
           <Building2 className="h-3 w-3" />
           View Project
-        </a>
+        </DayalSectionLink>
       </div>
     </article>
   );

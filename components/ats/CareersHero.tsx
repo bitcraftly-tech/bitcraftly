@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+
+import { scrollToElementWithRetry } from "@/lib/scrollToMarketingSection";
 
 import { atsBtnPrimary, atsBtnSecondary } from "@/lib/ats/theme";
 import { CONTAINER } from "@/lib/constants";
@@ -24,21 +26,20 @@ export default function CareersHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <p className="inline-flex items-center gap-2 rounded-full border border-indigo-200/80 bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-indigo-700 dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-300">
-            <Sparkles className="size-3.5" aria-hidden />
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
             Careers at Bitcraftly
           </p>
-          <h1 className="mt-5 max-w-4xl font-[var(--font-playfair)] text-4xl font-semibold tracking-tight text-[#0f172a] md:text-5xl lg:text-[3.25rem] dark:text-dark-text-primary">
+          <h1 className="mt-3 w-full max-w-none font-[var(--font-playfair)] text-3xl font-semibold text-text-primary dark:text-dark-text-primary sm:text-4xl lg:text-[2.65rem] lg:leading-tight">
             Build products that{" "}
             <span className="bg-gradient-to-r from-[#4f46e5] via-[#7c3aed] to-[#2b5ce6] bg-clip-text text-transparent">
               SMBs actually use
             </span>
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#64748b] dark:text-dark-text-secondary">
+          <p className="mt-4 w-full max-w-none text-sm leading-relaxed text-text-secondary dark:text-dark-text-secondary sm:text-base">
             Premium studio hiring — remote-first, founder-led reviews, and a modern stack. Join a small team shipping
             websites, apps, and AI-powered web solutions.
           </p>
-          <p className="mt-3 max-w-xl text-sm text-[#94a3b8] dark:text-dark-text-tertiary">
+          <p className="mt-3 w-full max-w-none text-sm leading-relaxed text-text-tertiary dark:text-dark-text-tertiary">
             Every application is read by Sanjay — no keyword bots, no outsourced recruiters.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -46,9 +47,9 @@ export default function CareersHero() {
               Apply now
               <ArrowRight className="size-4" aria-hidden />
             </Link>
-            <a href="#open-positions" className={atsBtnSecondary}>
+            <button type="button" onClick={() => scrollToElementWithRetry("open-positions")} className={atsBtnSecondary}>
               View open roles
-            </a>
+            </button>
             <Link href="/team" className={atsBtnSecondary}>
               Meet the team
             </Link>
