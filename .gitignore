@@ -18,6 +18,7 @@ storage/documents/internal/
 storage/documents/.supabase-migration/
 storage/documents/.regeneration-backup/
 storage/documents/.regeneration-output/
+storage/database/.supabase-migration/
 
 # Dependencies
 node_modules/

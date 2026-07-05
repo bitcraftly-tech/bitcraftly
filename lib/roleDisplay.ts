@@ -1,4 +1,6 @@
-export type AppRole = "admin" | "staff" | "manager" | "user" | string;
+import { isPrivilegedDashboardRole, type CanonicalAppRole } from "@/lib/roles";
+
+export type AppRole = CanonicalAppRole | string;
 
 const ROLE_META: Record<string, { label: string; badgeClass: string }> = {
   admin: {
@@ -34,6 +36,5 @@ export function roleBadgeClass(role?: string | null): string {
 }
 
 export function isPrivilegedRole(role?: string | null): boolean {
-  const r = `${role ?? ""}`.toLowerCase();
-  return r === "admin" || r === "staff" || r === "manager";
+  return isPrivilegedDashboardRole(role);
 }

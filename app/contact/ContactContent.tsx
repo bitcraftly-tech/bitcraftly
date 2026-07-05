@@ -71,7 +71,7 @@ const initialValues: ContactFormValues = {
   source: "WhatsApp",
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_URL = "/api/contact";
 
 export default function ContactContent() {
   const [values, setValues] = useState<ContactFormValues>(initialValues);
@@ -268,7 +268,7 @@ export default function ContactContent() {
     const fullMessage = [values.message.trim(), extraLines].filter(Boolean).join("\n\n");
 
     try {
-      const response = await fetch(`${API_URL}/api/contact/`, {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -3,6 +3,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { apiClient } from "@/lib/api-client";
+import {
+  fetchContactSubmissions,
+  patchContactContacted,
+  patchContactMeta,
+  patchContactNotes,
+} from "@/lib/contact/contactClient";
 
 export type Lead = {
   id: number;
@@ -14,7 +20,7 @@ export type Lead = {
 };
 
 export type ContactSubmission = {
-  id: number;
+  id: number | string;
   name: string;
   business_name: string;
   business_type: string;
@@ -85,7 +91,8 @@ export function useLeadsQuery() {
 export function useContactSubmissionsQuery() {
   return useQuery({
     queryKey: ["contact-submissions"],
-    queryFn: async () => (await apiClient.get<ContactSubmissionsResponse>("/api/contact/submissions?limit=200")).data,
+    queryFn: async () =>
+      (await fetchContactSubmissions(200)) as ContactSubmissionsResponse,
   });
 }
 
@@ -143,7 +150,7 @@ export function useAutoReplyMutation() {
 export function useMarkContactedMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (contactId: number) => (await apiClient.patch<{ success: boolean }>(`/api/contact/${contactId}/contacted`)).data,
+    mutationFn: async (contactId: number | string) => patchContactContacted(contactId),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ["contact-submissions"] });
     },
@@ -153,12 +160,8 @@ export function useMarkContactedMutation() {
 export function useUpdateContactNotesMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ contactId, notes }: { contactId: number; notes: string }) =>
-      (
-        await apiClient.patch<{ success: boolean; message: string }>(`/api/contact/${contactId}/notes`, {
-          notes,
-        })
-      ).data,
+    mutationFn: async ({ contactId, notes }: { contactId: number | string; notes: string }) =>
+      patchContactNotes(contactId, notes),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ["contact-submissions"] });
     },
@@ -173,16 +176,10 @@ export function useUpdateContactMetaMutation() {
       stage,
       assignedTo,
     }: {
-      contactId: number;
+      contactId: number | string;
       stage: "new" | "in_progress" | "closed";
       assignedTo?: string;
-    }) =>
-      (
-        await apiClient.patch<{ success: boolean; message: string }>(`/api/contact/${contactId}/meta`, {
-          stage,
-          assigned_to: assignedTo?.trim() || null,
-        })
-      ).data,
+    }) => patchContactMeta(contactId, stage, assignedTo),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ["contact-submissions"] });
     },

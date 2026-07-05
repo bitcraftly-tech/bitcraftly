@@ -16,7 +16,7 @@ import {
 
 type LeadRequestRow = {
   rowId: string;
-  id: number;
+  id: number | string;
   channel: "contact" | "lead";
   name: string;
   phone: string;
@@ -178,7 +178,7 @@ export default function DashboardLeadsPage() {
               onViewDetails={(lead) => setSelectedLead(lead)}
               onStageChange={(rowId, stageValue) => {
                 if (rowId.startsWith("contact-")) {
-                  const contactId = Number(rowId.replace("contact-", ""));
+                  const contactId = rowId.replace("contact-", "");
                   const row = leads.find((item) => item.rowId === rowId);
                   updateMetaMutation.mutate(
                     {
@@ -200,7 +200,7 @@ export default function DashboardLeadsPage() {
               }}
               onAssigneeChange={(rowId, assignee) => {
                 if (rowId.startsWith("contact-")) {
-                  const contactId = Number(rowId.replace("contact-", ""));
+                  const contactId = rowId.replace("contact-", "");
                   const row = leads.find((item) => item.rowId === rowId);
                   updateMetaMutation.mutate(
                     {

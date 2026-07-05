@@ -2,15 +2,18 @@ import "server-only";
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-import { getSupabaseServerEnv } from "@/lib/supabase/env";
+import { getSupabaseCoreEnv, getSupabaseServerEnv } from "@/lib/supabase/env";
 
 let cachedClient: SupabaseClient | null = null;
 
-/** Server-only Supabase client using the secret key — never import from client components. */
+/**
+ * Server-only Supabase client (Storage + PostgREST / database API).
+ * Uses the project secret key — never import from client components.
+ */
 export function getSupabaseServerClient(): SupabaseClient {
   if (cachedClient) return cachedClient;
 
-  const { url, secretKey } = getSupabaseServerEnv();
+  const { url, secretKey } = getSupabaseCoreEnv();
   cachedClient = createClient(url, secretKey, {
     auth: {
       persistSession: false,

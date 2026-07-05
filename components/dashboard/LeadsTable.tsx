@@ -1,6 +1,6 @@
 type LeadRequestRow = {
   rowId: string;
-  id: number;
+  id: number | string;
   channel: "contact" | "lead";
   name: string;
   phone: string;
@@ -19,13 +19,13 @@ type LeadRequestRow = {
 
 type LeadsTableProps = {
   leads: LeadRequestRow[];
-  onMarkContacted: (contactId: number) => void;
-  onSaveNotes: (contactId: number, notes: string) => void;
+  onMarkContacted: (contactId: number | string) => void;
+  onSaveNotes: (contactId: number | string, notes: string) => void;
   onViewDetails: (lead: LeadRequestRow) => void;
   onStageChange: (rowId: string, stage: "new" | "in_progress" | "closed") => void;
   onAssigneeChange: (rowId: string, assignee: string) => void;
-  markingContactId?: number | null;
-  savingNotesContactId?: number | null;
+  markingContactId?: number | string | null;
+  savingNotesContactId?: number | string | null;
 };
 
 export default function LeadsTable({
