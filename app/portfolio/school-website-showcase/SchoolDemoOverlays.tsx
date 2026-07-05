@@ -98,15 +98,15 @@ function DemoForm({ type, onClose }: { type: SchoolFormType; onClose: () => void
 
   const submit = () => {
     if (!name.trim() || !phone.trim()) {
-      showToast("Please enter your name and phone number");
+      showToast("Please enter your name and phone number", "error");
       return;
     }
     if (phone.replace(/\D/g, "").length < 10) {
-      showToast("Please enter a valid 10-digit mobile number");
+      showToast("Please enter a valid 10-digit mobile number", "error");
       return;
     }
     onClose();
-    showToast(`${FORM_TITLES[type]} submitted · we will contact you within 24 hours`);
+    showToast(`${FORM_TITLES[type]} submitted · we will contact you within 24 hours`, "success");
     setName("");
     setPhone("");
     setEmail("");
@@ -143,19 +143,6 @@ function DemoForm({ type, onClose }: { type: SchoolFormType; onClose: () => void
         Submit
       </button>
     </ModalShell>
-  );
-}
-
-export function SchoolDemoToast() {
-  const { toast } = useSchoolDemo();
-  if (!toast) return null;
-  return (
-    <div
-      role="status"
-      className="fixed bottom-6 left-1/2 z-[80] max-w-[min(92vw,28rem)] -translate-x-1/2 rounded-full bg-[var(--school-orange)] px-5 py-3 text-center text-sm font-medium text-white shadow-lg"
-    >
-      {toast.message}
-    </div>
   );
 }
 
@@ -243,7 +230,6 @@ export function SchoolDemoOverlays() {
 
   return (
     <>
-      <SchoolDemoToast />
       {admissionOpen ? <DemoForm type="admission" onClose={() => setAdmissionOpen(false)} /> : null}
       {formType ? <DemoForm type={formType} onClose={() => setFormType(null)} /> : null}
       {modalType ? (

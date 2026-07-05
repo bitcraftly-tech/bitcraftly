@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Paperclip, Send, Smile, Sparkles, X } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
-import { toast } from "sonner";
+import { showErrorAlert, showFeedbackAlert } from "@/lib/sweetAlert";
 
 import DayalChatMessageBody, { dayalWhatsAppUrl } from "@/components/dayal/DayalChatMessageBody";
 import { DAYAL, DAYAL_LOGO_MARK } from "@/lib/dayal/data";
@@ -167,7 +167,7 @@ export default function DayalChatWidget({ open: openProp, onOpenChange }: Props 
       const last = payload[payload.length - 1];
       if (!last || last.role !== "user") {
         setTyping(false);
-        toast.error("Could not send — please try again.");
+        showFeedbackAlert("error", "Could not send — please try again.");
         return;
       }
 
@@ -185,21 +185,21 @@ export default function DayalChatWidget({ open: openProp, onOpenChange }: Props 
         };
 
         if (!res.ok) {
-          toast.error(typeof body.error === "string" ? body.error : "Something went wrong.");
+          showFeedbackAlert("error", typeof body.error === "string" ? body.error : "Something went wrong.");
           setMessages((prev) => prev.filter((m) => m.id !== userMsg.id));
           return;
         }
 
         const answer = body.message?.content?.trim();
         if (!answer) {
-          toast.error("Empty reply from assistant.");
+          showFeedbackAlert("error", "Empty reply from assistant.");
           return;
         }
 
         if (body.provider) setLastProvider(body.provider);
         pushAssistant(answer);
       } catch {
-        toast.error("Network error — please try again.");
+        showFeedbackAlert("error", "Network error — please try again.");
         setMessages((prev) => prev.filter((m) => m.id !== userMsg.id));
       } finally {
         setTyping(false);

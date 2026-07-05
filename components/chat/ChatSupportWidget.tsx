@@ -3,7 +3,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useEffect, useId, useRef, useState } from "react";
-import { toast } from "sonner";
+import { showFeedbackAlert, showSuccessAlert } from "@/lib/sweetAlert";
 
 import { clearChatMessages, loadChatMessages, saveChatMessages } from "@/lib/supportChat/persist";
 import type { ClientChatMessage, ChatTurnDto } from "@/lib/supportChat/types";
@@ -163,7 +163,7 @@ export default function ChatSupportWidget() {
     const next = [fresh];
     setMessages(next);
     saveChatMessages(next);
-    toast.success("Chat cleared");
+    showFeedbackAlert("success", "Chat cleared");
   };
 
   async function handleSend() {
@@ -190,7 +190,7 @@ export default function ChatSupportWidget() {
     const lastTurn = payload[payload.length - 1];
     if (!lastTurn || lastTurn.role !== "user") {
       setBusy(false);
-      toast.error("Sync issue — refresh the page and try again.");
+      showFeedbackAlert("error", "Sync issue — refresh the page and try again.");
       return;
     }
 
@@ -204,14 +204,14 @@ export default function ChatSupportWidget() {
       const body = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        toast.error(typeof body?.error === "string" ? body.error : "Server error — please try again.");
+        showFeedbackAlert("error", typeof body?.error === "string" ? body.error : "Server error — please try again.");
         setMessages((prev) => prev.map((x) => (x.id === optimisticUser.id ? { ...x, status: "error" as const } : x)));
         return;
       }
 
       const answerRaw = typeof body?.message?.content === "string" ? body.message.content.trim() : "";
       if (!answerRaw) {
-        toast.error("Empty reply.");
+        showFeedbackAlert("error", "Empty reply.");
         setMessages((prev) => prev.map((x) => (x.id === optimisticUser.id ? { ...x, status: "error" as const } : x)));
         return;
       }
@@ -226,7 +226,7 @@ export default function ChatSupportWidget() {
 
       setMessages((prev) => [...prev, assistantBubble]);
     } catch {
-      toast.error("Network error — please send again.");
+      showFeedbackAlert("error", "Network error — please send again.");
       setMessages((prev) => prev.map((x) => (x.id === optimisticUser.id ? { ...x, status: "error" as const } : x)));
     } finally {
       setBusy(false);

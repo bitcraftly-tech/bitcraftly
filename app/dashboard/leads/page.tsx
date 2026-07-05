@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { toast } from "sonner";
+import { showFeedbackAlert } from "@/lib/sweetAlert";
 
 import LeadsTable from "@/components/dashboard/LeadsTable";
 import PageHeader from "@/components/dashboard/PageHeader";
@@ -187,8 +187,8 @@ export default function DashboardLeadsPage() {
                       assignedTo: row?.assignee ?? "",
                     },
                     {
-                      onSuccess: () => toast.success("Stage updated."),
-                      onError: () => toast.error("Failed to update stage."),
+                      onSuccess: () => showFeedbackAlert("success", "Stage updated."),
+                      onError: () => showFeedbackAlert("error", "Failed to update stage."),
                     },
                   );
                   return;
@@ -209,8 +209,8 @@ export default function DashboardLeadsPage() {
                       assignedTo: assignee,
                     },
                     {
-                      onSuccess: () => toast.success("Assignee updated."),
-                      onError: () => toast.error("Failed to update assignee."),
+                      onSuccess: () => showFeedbackAlert("success", "Assignee updated."),
+                      onError: () => showFeedbackAlert("error", "Failed to update assignee."),
                     },
                   );
                   return;
@@ -229,16 +229,16 @@ export default function DashboardLeadsPage() {
               }
               onMarkContacted={(contactId) => {
                 markContactedMutation.mutate(contactId, {
-                  onSuccess: () => toast.success("Marked as contacted."),
-                  onError: () => toast.error("Failed to update request status."),
+                  onSuccess: () => showFeedbackAlert("success", "Marked as contacted."),
+                  onError: () => showFeedbackAlert("error", "Failed to update request status."),
                 });
               }}
               onSaveNotes={(contactId, notes) => {
                 updateNotesMutation.mutate(
                   { contactId, notes },
                   {
-                    onSuccess: () => toast.success("Notes updated."),
-                    onError: () => toast.error("Failed to update notes."),
+                    onSuccess: () => showFeedbackAlert("success", "Notes updated."),
+                    onError: () => showFeedbackAlert("error", "Failed to update notes."),
                   },
                 );
               }}

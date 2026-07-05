@@ -4,10 +4,8 @@ import { FormEvent, ReactNode, useEffect, useState } from "react";
 import { getSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-
 import PasswordInput from "@/components/ui/PasswordInput";
-import { showErrorAlert, showSuccessAlert } from "@/lib/sweetAlert";
+import { showErrorAlert, showInfoAlert, showSuccessAlert } from "@/lib/sweetAlert";
 
 import { authInputClassName, isPrivilegedRole, portalHighlights } from "./loginShared";
 
@@ -44,7 +42,7 @@ export default function LoginSystem({
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("reason") !== "session_expired") return;
-    toast.info("Your session ended for security. Please sign in again.");
+    void showInfoAlert("Your session ended for security. Please sign in again.");
     const url = new URL(window.location.href);
     url.searchParams.delete("reason");
     const qs = url.searchParams.toString();
@@ -70,7 +68,7 @@ export default function LoginSystem({
     try {
       if (mode === "login") {
         if (!loginEmail.trim() || !loginPassword.trim()) {
-          toast.error("Please enter email and password.");
+          void showErrorAlert("Please enter email and password.");
           return;
         }
         const result = await signIn("credentials", {
@@ -82,28 +80,25 @@ export default function LoginSystem({
           const session = await getSession();
           if (!isPrivilegedRole(session?.role)) {
             await signOut({ redirect: false });
-            toast.error("Only admin, staff, or manager login is allowed.");
             await showErrorAlert("Only admin, staff, or manager login is allowed.");
             router.replace("/login");
             return;
           }
-          toast.success("Login successful.");
           await showSuccessAlert("Login successful.");
           onLoginSuccess?.();
           router.push(callbackUrl);
         } else {
-          toast.error("Invalid email or password.");
           await showErrorAlert("Invalid email or password.");
         }
         return;
       }
 
       if (!signupName.trim() || !signupEmail.trim() || !signupPassword.trim()) {
-        toast.error("Please fill all signup fields.");
+        void showErrorAlert("Please fill all signup fields.");
         return;
       }
       if (signupPassword.length < 6) {
-        toast.error("Password must be at least 6 characters.");
+        void showErrorAlert("Password must be at least 6 characters.");
         return;
       }
 
@@ -121,7 +116,7 @@ export default function LoginSystem({
 
       if (!signupResponse.ok) {
         const errorPayload = await signupResponse.json().catch(() => null);
-        toast.error(errorPayload?.message || "Signup failed. Please try again.");
+        void showErrorAlert(errorPayload?.message || "Signup failed. Please try again.");
         return;
       }
 
@@ -134,24 +129,20 @@ export default function LoginSystem({
         const session = await getSession();
         if (!isPrivilegedRole(session?.role)) {
           await signOut({ redirect: false });
-          toast.error("Only admin, staff, or manager login is allowed.");
           await showErrorAlert("Only admin, staff, or manager login is allowed.");
           router.replace("/login");
           return;
         }
-        toast.success("Account created successfully.");
         await showSuccessAlert("Account created successfully.");
         onLoginSuccess?.();
         router.push(callbackUrl);
       } else {
-        toast.success("Account created. Please log in.");
         await showSuccessAlert("Account created. Please log in.");
         setMode("login");
         setLoginEmail(signupEmail.trim());
         setLoginPassword("");
       }
     } catch (_error) {
-      toast.error("Something went wrong. Please try again.");
       await showErrorAlert("Something went wrong. Please try again.");
     } finally {
       setIsSubmittingForm(false);

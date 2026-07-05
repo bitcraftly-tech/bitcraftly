@@ -3,7 +3,7 @@
 import { useId, useState } from "react";
 import { motion } from "framer-motion";
 import { Lightbulb, ListOrdered, Sparkles } from "lucide-react";
-import { toast } from "sonner";
+import { showInfoAlert } from "@/lib/sweetAlert";
 
 const MIN_CHARS_HINT = 40;
 
@@ -123,9 +123,7 @@ export default function AtsPremiumTextarea({
                 label="Writing tips"
                 tooltip="Be specific: projects, stack, and what kind of work energizes you"
                 onClick={() =>
-                  toast.info("Mention 1–2 real projects, your stack, and what kind of work energizes you.", {
-                    duration: 4000,
-                  })
+                  void showInfoAlert("Mention 1–2 real projects, your stack, and what kind of work energizes you.")
                 }
               >
                 <Lightbulb className="size-4" aria-hidden />

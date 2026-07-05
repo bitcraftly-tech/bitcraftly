@@ -14,6 +14,7 @@ import {
   type RazorpayCheckoutSuccess,
   type ShowcaseRazorpayOrder,
 } from "@/lib/razorpay-showcase";
+import { showFeedbackAlert, type FeedbackModalVariant } from "@/lib/sweetAlert";
 
 import { cartLinesCount, cartLinesSubtotal, mergeCartLine } from "./ecommerce-cart-utils";
 import {
@@ -28,8 +29,6 @@ import {
 } from "./ecommerce-demo-data";
 
 export type CartLine = { product: ShopProduct; qty: number };
-
-export type Toast = { id: number; message: string };
 
 export type DemoOrder = {
   id: string;
@@ -89,8 +88,7 @@ type EcommerceDemoContextValue = {
   checkoutPreviewCount: number;
   startRazorpayCheckout: (opts?: { addProduct?: ShopProduct }) => Promise<void>;
   completeMockRazorpayPayment: (method: "upi" | "card") => void;
-  toast: Toast | null;
-  showToast: (message: string) => void;
+  showToast: (message: string, variant?: FeedbackModalVariant) => void;
   scrollToSection: (id: string) => void;
 };
 
@@ -120,16 +118,13 @@ export function EcommerceDemoProvider({ children }: { children: ReactNode }) {
   const [checkoutBusy, setCheckoutBusy] = useState(false);
   const [razorpayMockOpen, setRazorpayMockOpen] = useState(false);
   const [pendingCheckoutLines, setPendingCheckoutLines] = useState<CartLine[] | null>(null);
-  const [toast, setToast] = useState<Toast | null>(null);
 
   const checkoutPreviewLines = pendingCheckoutLines ?? cart;
   const checkoutPreviewSubtotal = useMemo(() => cartLinesSubtotal(checkoutPreviewLines), [checkoutPreviewLines]);
   const checkoutPreviewCount = useMemo(() => cartLinesCount(checkoutPreviewLines), [checkoutPreviewLines]);
 
-  const showToast = useCallback((message: string) => {
-    const id = Date.now();
-    setToast({ id, message });
-    window.setTimeout(() => setToast((t) => (t?.id === id ? null : t)), 2800);
+  const showToast = useCallback((message: string, variant: FeedbackModalVariant = "info") => {
+    showFeedbackAlert(variant, message);
   }, []);
 
   const scrollToSection = useCallback((id: string) => {
@@ -185,7 +180,7 @@ export function EcommerceDemoProvider({ children }: { children: ReactNode }) {
         }
         return [...prev, { product, qty }];
       });
-      showToast(`Added to cart · ${product.title.slice(0, 42)}…`);
+      showToast(`Added to cart · ${product.title.slice(0, 42)}…`, "success");
     },
     [showToast],
   );
@@ -206,7 +201,7 @@ export function EcommerceDemoProvider({ children }: { children: ReactNode }) {
     (name: string) => {
       setSignedInAs(name.trim() || "Shopper");
       setAccountOpen(false);
-      showToast(`Welcome, ${name.trim() || "Shopper"}!`);
+      showToast(`Welcome, ${name.trim() || "Shopper"}!`, "success");
     },
     [showToast],
   );
@@ -214,7 +209,7 @@ export function EcommerceDemoProvider({ children }: { children: ReactNode }) {
   const signOut = useCallback(() => {
     setSignedInAs(null);
     setAccountOpen(false);
-    showToast("Signed out");
+    showToast("Signed out", "info");
   }, [showToast]);
 
   const completeCheckout = useCallback(
@@ -247,7 +242,7 @@ export function EcommerceDemoProvider({ children }: { children: ReactNode }) {
   const runRazorpayCheckout = useCallback(
     async (lines: CartLine[]) => {
       if (lines.length === 0) {
-        showToast("Your cart is empty");
+        showToast("Your cart is empty", "warning");
         return;
       }
 
@@ -321,9 +316,9 @@ export function EcommerceDemoProvider({ children }: { children: ReactNode }) {
                   lines,
                 });
                 setCartOpen(false);
-                showToast("Payment successful · order placed");
+                showToast("Payment successful · order placed", "success");
               } catch (err) {
-                showToast(err instanceof Error ? err.message : "Verification failed");
+                showToast(err instanceof Error ? err.message : "Verification failed", "error");
               } finally {
                 setCheckoutBusy(false);
                 setPendingCheckoutLines(null);
@@ -341,7 +336,7 @@ export function EcommerceDemoProvider({ children }: { children: ReactNode }) {
 
           const rzp = new RazorpayCtor(options);
           rzp.on("payment.failed", () => {
-            showToast("Payment failed or cancelled");
+            showToast("Payment failed or cancelled", "error");
             setCheckoutBusy(false);
             setPendingCheckoutLines(null);
             resolve();
@@ -349,7 +344,7 @@ export function EcommerceDemoProvider({ children }: { children: ReactNode }) {
           rzp.open();
         });
       } catch (e) {
-        showToast(e instanceof Error ? e.message : "Checkout unavailable");
+        showToast(e instanceof Error ? e.message : "Checkout unavailable", "error");
         setCheckoutBusy(false);
         setPendingCheckoutLines(null);
       }
@@ -378,7 +373,7 @@ export function EcommerceDemoProvider({ children }: { children: ReactNode }) {
       setPendingCheckoutLines(null);
       setRazorpayMockOpen(false);
       setCartOpen(false);
-      showToast(`Payment successful · ${method.toUpperCase()} demo`);
+      showToast(`Payment successful · ${method.toUpperCase()} demo`, "success");
       setCheckoutBusy(false);
     },
     [cart, completeCheckout, pendingCheckoutLines, setCartOpen, showToast],
@@ -428,7 +423,6 @@ export function EcommerceDemoProvider({ children }: { children: ReactNode }) {
       checkoutPreviewCount,
       startRazorpayCheckout,
       completeMockRazorpayPayment,
-      toast,
       showToast,
       scrollToSection,
     }),
@@ -463,7 +457,6 @@ export function EcommerceDemoProvider({ children }: { children: ReactNode }) {
       checkoutPreviewCount,
       startRazorpayCheckout,
       completeMockRazorpayPayment,
-      toast,
       showToast,
       scrollToSection,
     ],

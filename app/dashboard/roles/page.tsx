@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { toast } from "sonner";
+import { showErrorAlert, showFeedbackAlert } from "@/lib/sweetAlert";
 
 import PageHeader from "@/components/dashboard/PageHeader";
 import {
@@ -71,7 +71,7 @@ export default function DashboardJobRolesPage() {
       skills: skillsText.split(",").map((s) => s.trim()).filter(Boolean),
     };
     if (!payload.slug || !payload.title) {
-      toast.error("Slug and title are required");
+      void showErrorAlert("Slug and title are required");
       return;
     }
     if (editing) {
@@ -79,19 +79,19 @@ export default function DashboardJobRolesPage() {
         { id: editing.id, ...payload },
         {
           onSuccess: () => {
-            toast.success("Role updated");
+            showFeedbackAlert("success", "Role updated");
             openCreate();
           },
-          onError: () => toast.error("Could not update role"),
+          onError: () => showFeedbackAlert("error", "Could not update role"),
         },
       );
     } else {
       createMutation.mutate(payload, {
         onSuccess: () => {
-          toast.success("Role created");
+          showFeedbackAlert("success", "Role created");
           openCreate();
         },
-        onError: () => toast.error("Could not create role — check slug is unique"),
+        onError: () => showFeedbackAlert("error", "Could not create role — check slug is unique"),
       });
     }
   };
@@ -224,7 +224,7 @@ export default function DashboardJobRolesPage() {
                       type="button"
                       onClick={() =>
                         deleteMutation.mutate(role.id, {
-                          onSuccess: () => toast.success("Role deactivated"),
+                          onSuccess: () => showFeedbackAlert("success", "Role deactivated"),
                         })
                       }
                       className="text-xs font-semibold text-red-600"

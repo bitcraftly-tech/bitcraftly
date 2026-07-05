@@ -10,7 +10,7 @@ import {
   Star,
   X,
 } from "lucide-react";
-import { toast } from "sonner";
+import { showFeedbackAlert } from "@/lib/sweetAlert";
 
 import AtsBadge from "@/components/ats/AtsBadge";
 import {
@@ -96,7 +96,7 @@ export default function CandidateDetailModal({ candidate, onClose }: CandidateDe
                   onChange={(e) => {
                     updateMeta.mutate(
                       { applicationId: candidate.id, stage: e.target.value },
-                      { onSuccess: () => toast.success("Stage updated") },
+                      { onSuccess: () => showFeedbackAlert("success", "Stage updated") },
                     );
                   }}
                   className="mt-1 h-10 w-full rounded-xl border border-[#e2e8f0] bg-white px-3 text-sm dark:border-dark-border-primary dark:bg-dark-bg-secondary"
@@ -119,7 +119,7 @@ export default function CandidateDetailModal({ candidate, onClose }: CandidateDe
                   type="button"
                   onClick={() =>
                     downloadJobApplicationResume(candidate.id, candidate.resume_filename).catch(() =>
-                      toast.error("Download failed"),
+                      showFeedbackAlert("error", "Download failed"),
                     )
                   }
                   className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-indigo-600"
@@ -242,7 +242,7 @@ export default function CandidateDetailModal({ candidate, onClose }: CandidateDe
                 onClick={() =>
                   updateNotes.mutate(
                     { applicationId: candidate.id, notes },
-                    { onSuccess: () => toast.success("Notes saved") },
+                    { onSuccess: () => showFeedbackAlert("success", "Notes saved") },
                   )
                 }
                 className="flex-1 rounded-xl bg-[#0f172a] py-2.5 text-sm font-semibold text-white dark:bg-white dark:text-black"
@@ -254,7 +254,7 @@ export default function CandidateDetailModal({ candidate, onClose }: CandidateDe
                 onClick={() =>
                   updateMeta.mutate(
                     { applicationId: candidate.id, stage: "rejected" },
-                    { onSuccess: () => toast.success("Marked rejected") },
+                    { onSuccess: () => showFeedbackAlert("success", "Marked rejected") },
                   )
                 }
                 className="rounded-xl border border-red-200 px-4 py-2.5 text-sm font-semibold text-red-600"

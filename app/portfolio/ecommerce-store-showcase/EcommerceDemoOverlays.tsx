@@ -8,19 +8,6 @@ import { formatInr, discountPct, PINCODES } from "./ecommerce-demo-data";
 import { useEcommerceDemo } from "./EcommerceDemoContext";
 import { EcommerceProductImage } from "./EcommerceProductImage";
 
-export function DemoToast() {
-  const { toast } = useEcommerceDemo();
-  if (!toast) return null;
-  return (
-    <div
-      role="status"
-      className="ec-header-bar fixed bottom-6 left-1/2 z-[80] -translate-x-1/2 rounded-lg px-5 py-3 text-sm font-medium shadow-lg"
-    >
-      {toast.message}
-    </div>
-  );
-}
-
 export function CartDrawer() {
   const {
     cartOpen,

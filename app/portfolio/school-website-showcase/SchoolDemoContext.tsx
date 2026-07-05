@@ -2,10 +2,10 @@
 
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 
+import { showFeedbackAlert, type FeedbackModalVariant } from "@/lib/sweetAlert";
+
 import type { QuickLink, UsefulLinkAction } from "./school-demo-data";
 import { SCHOOL_WHATSAPP_URL } from "./school-demo-data";
-
-type Toast = { id: number; message: string };
 
 export type SchoolFormType = "admission" | "preschool" | "career" | "alumni";
 export type SchoolModalType = "principal" | "history" | "sports" | "circular";
@@ -26,8 +26,7 @@ type SchoolDemoContextValue = {
   lightbox: LightboxItem | null;
   setLightbox: (item: LightboxItem | null) => void;
   visitorCount: number;
-  toast: Toast | null;
-  showToast: (message: string) => void;
+  showToast: (message: string, variant?: FeedbackModalVariant) => void;
   scrollToSection: (id: string) => void;
   scrollToEnquiry: () => void;
   scrollToTop: () => void;
@@ -53,12 +52,9 @@ export function SchoolDemoProvider({ children }: { children: ReactNode }) {
   const [galleryIndex, setGalleryIndex] = useState<number | null>(null);
   const [lightbox, setLightbox] = useState<LightboxItem | null>(null);
   const [visitorCount] = useState(7_810_876);
-  const [toast, setToast] = useState<Toast | null>(null);
 
-  const showToast = useCallback((message: string) => {
-    const id = Date.now();
-    setToast({ id, message });
-    window.setTimeout(() => setToast((t) => (t?.id === id ? null : t)), 3200);
+  const showToast = useCallback((message: string, variant: FeedbackModalVariant = "info") => {
+    showFeedbackAlert(variant, message);
   }, []);
 
   const scrollToSection = useCallback((id: string) => {
@@ -79,7 +75,7 @@ export function SchoolDemoProvider({ children }: { children: ReactNode }) {
 
   const bookCampusVisit = useCallback(() => {
     scrollToEnquiry();
-    showToast("Campus visit request noted · admissions will confirm your slot");
+    showToast("Campus visit request noted · admissions will confirm your slot", "success");
   }, [scrollToEnquiry, showToast]);
 
   const handleUsefulLink = useCallback(
@@ -145,7 +141,6 @@ export function SchoolDemoProvider({ children }: { children: ReactNode }) {
       lightbox,
       setLightbox,
       visitorCount,
-      toast,
       showToast,
       scrollToSection,
       scrollToEnquiry,
@@ -163,7 +158,6 @@ export function SchoolDemoProvider({ children }: { children: ReactNode }) {
       galleryIndex,
       lightbox,
       visitorCount,
-      toast,
       showToast,
       scrollToSection,
       scrollToEnquiry,

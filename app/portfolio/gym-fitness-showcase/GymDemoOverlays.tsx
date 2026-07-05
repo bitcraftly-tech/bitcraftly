@@ -7,19 +7,6 @@ import { useGymDemo } from "./GymDemoContext";
 import { APP_DEMO_REEL } from "./gym-demo-data";
 import { GymLazyImage } from "./GymLazyImage";
 
-export function GymDemoToast() {
-  const { toast } = useGymDemo();
-  if (!toast) return null;
-  return (
-    <div
-      role="status"
-      className="fixed bottom-6 left-1/2 z-[80] -translate-x-1/2 rounded-full bg-[var(--gym-dark)] px-5 py-3 text-sm font-medium text-white shadow-lg"
-    >
-      {toast.message}
-    </div>
-  );
-}
-
 function ModalShell({
   title,
   onClose,
@@ -164,8 +151,6 @@ export function GymDemoOverlays() {
 
   return (
     <>
-      <GymDemoToast />
-
       <GymDemoReelModal open={reelOpen} onClose={() => setReelOpen(false)} />
 
       {trialOpen ? (

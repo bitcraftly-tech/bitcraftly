@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, Suspense, useEffect, useMemo, useState } from "react";
-import { toast } from "sonner";
 
 import Link from "next/link";
 
@@ -304,12 +303,10 @@ export default function ContactContent() {
       });
       setValues(initialValues);
       setErrors({});
-      toast.success(successMessage);
       setFormOpen(false);
       await showSuccessAlert(successMessage);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Something went wrong. Please try again.";
-      toast.error(message);
       await showErrorAlert(message);
     } finally {
       setIsSubmitting(false);

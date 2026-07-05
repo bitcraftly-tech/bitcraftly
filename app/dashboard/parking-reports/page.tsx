@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { toast } from "sonner";
+import { showFeedbackAlert } from "@/lib/sweetAlert";
 
 import PageHeader from "@/components/dashboard/PageHeader";
 import SectionCard from "@/components/dashboard/SectionCard";
@@ -120,8 +120,8 @@ export default function DashboardParkingReportsPage() {
                             disabled={resolveMutation.isPending && resolveMutation.variables === row.id}
                             onClick={() => {
                               resolveMutation.mutate(row.id, {
-                                onSuccess: () => toast.success("Parking report marked resolved."),
-                                onError: () => toast.error("Failed to update report."),
+                                onSuccess: () => showFeedbackAlert("success", "Parking report marked resolved."),
+                                onError: () => showFeedbackAlert("error", "Failed to update report."),
                               });
                             }}
                             className="rounded-md border border-accent-primary/35 bg-accent-primary/10 px-3 py-1 text-xs font-semibold text-accent-primary transition hover:bg-accent-primary/15 disabled:cursor-not-allowed disabled:opacity-60"

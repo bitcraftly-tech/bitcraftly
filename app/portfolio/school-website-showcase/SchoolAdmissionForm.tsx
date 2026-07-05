@@ -26,22 +26,22 @@ export function SchoolAdmissionForm({ compact = false, dense = false, hero = fal
     e.preventDefault();
     if (hero) {
       if (!parentName.trim() || !mobile.trim() || !grade) {
-        showToast("Please fill Parent Name, Mobile & Grade");
+        showToast("Please fill Parent Name, Mobile & Grade", "error");
         return;
       }
       if (mobile.replace(/\D/g, "").length < 10) {
-        showToast("Please enter a valid 10-digit mobile number");
+        showToast("Please enter a valid 10-digit mobile number", "error");
         return;
       }
     } else if (!parentName.trim() || !mobile.trim() || !grade) {
-      showToast("Please fill required fields · name, mobile & grade");
+      showToast("Please fill required fields · name, mobile & grade", "error");
       return;
     }
     if (mobile.replace(/\D/g, "").length < 10) {
-      showToast("Please enter a valid 10-digit mobile number");
+      showToast("Please enter a valid 10-digit mobile number", "error");
       return;
     }
-    showToast("Enquiry submitted · admissions team will call within 24 hours");
+    showToast("Enquiry submitted · admissions team will call within 24 hours", "success");
     setParentName("");
     setMobile("");
     setEmail("");

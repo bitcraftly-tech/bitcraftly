@@ -13,7 +13,6 @@ import {
   Link2,
   User,
 } from "lucide-react";
-import { toast } from "sonner";
 
 import AtsPremiumTextarea from "@/components/ats/AtsPremiumTextarea";
 import ResumeDropzone from "@/components/ats/ResumeDropzone";
@@ -194,7 +193,6 @@ export default function CareersApplyWizard() {
       await showSuccessAlert("Application submitted", data.message ?? "We received your profile.");
     } catch (err) {
       const message = err instanceof Error ? err.message : "Something went wrong.";
-      toast.error(message);
       await showErrorAlert("Could not submit", message);
     } finally {
       setIsSubmitting(false);

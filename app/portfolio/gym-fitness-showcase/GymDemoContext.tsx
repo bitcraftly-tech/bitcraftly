@@ -2,9 +2,9 @@
 
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 
-import type { GymCenter, MembershipPass, WorkoutFormat } from "./gym-demo-data";
+import { showFeedbackAlert, type FeedbackModalVariant } from "@/lib/sweetAlert";
 
-type Toast = { id: number; message: string };
+import type { GymCenter, MembershipPass, WorkoutFormat } from "./gym-demo-data";
 
 type GymDemoContextValue = {
   city: string;
@@ -19,8 +19,7 @@ type GymDemoContextValue = {
   setCenterModal: (center: GymCenter | null) => void;
   reelOpen: boolean;
   setReelOpen: (open: boolean) => void;
-  toast: Toast | null;
-  showToast: (message: string) => void;
+  showToast: (message: string, variant?: FeedbackModalVariant) => void;
   scrollToSection: (id: string) => void;
 };
 
@@ -39,12 +38,9 @@ export function GymDemoProvider({ children }: { children: ReactNode }) {
   const [classModal, setClassModal] = useState<WorkoutFormat | null>(null);
   const [centerModal, setCenterModal] = useState<GymCenter | null>(null);
   const [reelOpen, setReelOpen] = useState(false);
-  const [toast, setToast] = useState<Toast | null>(null);
 
-  const showToast = useCallback((message: string) => {
-    const id = Date.now();
-    setToast({ id, message });
-    window.setTimeout(() => setToast((t) => (t?.id === id ? null : t)), 2800);
+  const showToast = useCallback((message: string, variant: FeedbackModalVariant = "success") => {
+    showFeedbackAlert(variant, message);
   }, []);
 
   const scrollToSection = useCallback((id: string) => {
@@ -65,11 +61,10 @@ export function GymDemoProvider({ children }: { children: ReactNode }) {
       setCenterModal,
       reelOpen,
       setReelOpen,
-      toast,
       showToast,
       scrollToSection,
     }),
-    [city, trialOpen, passModal, classModal, centerModal, reelOpen, toast, showToast, scrollToSection],
+    [city, trialOpen, passModal, classModal, centerModal, reelOpen, showToast, scrollToSection],
   );
 
   return <GymDemoContext.Provider value={value}>{children}</GymDemoContext.Provider>;

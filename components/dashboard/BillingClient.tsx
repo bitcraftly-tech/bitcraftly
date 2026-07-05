@@ -2,9 +2,9 @@
 
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
-import { toast } from "sonner";
 
 import { apiClient } from "@/lib/api-client";
+import { showErrorAlert, showSuccessAlert } from "@/lib/sweetAlert";
 
 type CreateOrderResponse = {
   order_id: string;
@@ -76,17 +76,17 @@ export default function BillingClient() {
 
   const pay = useCallback(async () => {
     if (status !== "authenticated" || !session?.accessToken) {
-      toast.error("Please sign in again to pay.");
+      void showErrorAlert("Please sign in again to pay.");
       return;
     }
     const num = Number.parseFloat(rupees.replace(/,/g, "").trim());
     if (!Number.isFinite(num) || num < 1) {
-      toast.error("Enter an amount of at least ₹1.");
+      void showErrorAlert("Enter an amount of at least ₹1.");
       return;
     }
     const amountPaise = Math.round(num * 100);
     if (amountPaise < 100) {
-      toast.error("Amount too small.");
+      void showErrorAlert("Amount too small.");
       return;
     }
 
@@ -117,10 +117,10 @@ export default function BillingClient() {
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
             });
-            toast.success("Payment verified successfully.");
+            void showSuccessAlert("Payment verified successfully.");
             void loadPayments();
           } catch {
-            toast.error("Verification failed. Save your payment ID and contact support.");
+            void showErrorAlert("Verification failed. Save your payment ID and contact support.");
           } finally {
             setBusy(false);
           }
@@ -132,7 +132,7 @@ export default function BillingClient() {
 
       const rzp = new window.Razorpay(options);
       rzp.on("payment.failed", () => {
-        toast.error("Payment failed or was cancelled.");
+        void showErrorAlert("Payment failed or was cancelled.");
         setBusy(false);
       });
       rzp.open();
@@ -144,7 +144,7 @@ export default function BillingClient() {
           : Array.isArray(ax)
             ? ax.map((x: { msg?: string }) => x.msg).join(", ")
             : null;
-      toast.error(msg ?? "Could not start payment. Check Razorpay keys on the API server.");
+      void showErrorAlert(msg ?? "Could not start payment. Check Razorpay keys on the API server.");
       setBusy(false);
     }
   }, [loadPayments, rupees, session, status]);

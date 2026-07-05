@@ -9,7 +9,6 @@ import { ShowcaseScopedThemeProvider } from "@/components/providers/ShowcaseScop
 import {
   AccountModal,
   CartDrawer,
-  DemoToast,
   OrdersPanel,
   PincodeModal,
   ProductModal,
@@ -30,7 +29,6 @@ export default function EcommerceShowcaseLayout({ children }: { children: ReactN
           <PincodeModal />
           <OrdersPanel />
           <ProductModal />
-          <DemoToast />
           <EcommerceRazorpayMockModal />
         </div>
       </ShowcaseScopedThemeProvider>

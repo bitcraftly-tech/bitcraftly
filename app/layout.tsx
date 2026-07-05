@@ -20,7 +20,6 @@ import AuthSessionProvider from "@/components/providers/AuthSessionProvider";
 import { LoaderProvider } from "@/components/providers/LoaderProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import StagingEnvironmentBanner from "@/components/ui/StagingEnvironmentBanner";
-import DeferredToaster from "@/components/ui/DeferredToaster";
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -114,7 +113,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
               {/* <ChatSupportWidget /> */}
               <BitcraftlyChat />
               <DeferredFloatingChrome />
-              <DeferredToaster />
             </LoaderProvider>
           </ThemeProvider>
         </CookieConsentProvider>
