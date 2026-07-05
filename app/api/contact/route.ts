@@ -33,15 +33,23 @@ export async function POST(req: NextRequest) {
   const authorization = req.headers.get("authorization");
 
   if (source === "fastapi") {
-    const { response, payload } = await proxyContactPost(validated.value, authorization);
-    if (!response.ok) {
-      const detail =
-        (payload as { detail?: string } | null)?.detail ??
-        (payload as { message?: string } | null)?.message ??
-        "Something went wrong. Please try again.";
-      return NextResponse.json({ detail }, { status: response.status });
+    try {
+      const { response, payload } = await proxyContactPost(validated.value, authorization);
+      if (!response.ok) {
+        const detail =
+          (payload as { detail?: string } | null)?.detail ??
+          (payload as { message?: string } | null)?.message ??
+          "Something went wrong. Please try again.";
+        return NextResponse.json({ detail }, { status: response.status });
+      }
+      return NextResponse.json(payload, { status: response.status });
+    } catch (error) {
+      console.error(
+        "contact_fastapi_proxy_failed",
+        error instanceof Error ? error.message : "unknown",
+      );
+      return NextResponse.json({ detail: "Contact service is unavailable." }, { status: 503 });
     }
-    return NextResponse.json(payload, { status: response.status });
   }
 
   try {

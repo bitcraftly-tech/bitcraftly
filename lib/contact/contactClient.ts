@@ -2,6 +2,42 @@ import { getSession } from "next-auth/react";
 
 import { isContactSupabaseSourceClient } from "@/lib/contact/contactDataSource";
 
+/** Same-origin Next.js contact API — never use FastAPI URLs in browser code. */
+export const CONTACT_FORM_SUBMIT_URL = "/api/contact";
+
+export type ContactSubmitPayload = {
+  name: string;
+  business_name: string;
+  business_type: string;
+  phone: string;
+  email?: string;
+  message?: string;
+  source?: string;
+};
+
+export type ContactSubmitResponse = {
+  success?: boolean;
+  message?: string;
+  id?: string | number;
+  detail?: string;
+};
+
+export async function submitContactForm(payload: ContactSubmitPayload): Promise<ContactSubmitResponse> {
+  const response = await fetch(CONTACT_FORM_SUBMIT_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    credentials: "same-origin",
+  });
+
+  const data = (await response.json().catch(() => null)) as ContactSubmitResponse | null;
+  if (!response.ok) {
+    throw new Error(data?.detail || data?.message || "Something went wrong. Please try again.");
+  }
+
+  return data ?? {};
+}
+
 async function contactFetch(path: string, init?: RequestInit) {
   const session = await getSession();
   const headers = new Headers(init?.headers ?? {});

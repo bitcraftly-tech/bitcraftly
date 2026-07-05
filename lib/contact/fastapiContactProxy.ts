@@ -1,11 +1,19 @@
-const FASTAPI_BASE =
-  process.env.AUTH_API_BASE_URL ||
-  process.env.NEXT_PUBLIC_API_BASE_URL ||
-  process.env.NEXT_PUBLIC_API_URL ||
-  "http://localhost:8000";
+function getFastApiBaseUrl(): string {
+  const base =
+    process.env.AUTH_API_BASE_URL ||
+    process.env.FASTAPI_BASE_URL ||
+    process.env.API_SERVER_URL ||
+    "";
+
+  return base.replace(/\/$/, "");
+}
 
 function fastApiUrl(path: string): string {
-  return `${FASTAPI_BASE.replace(/\/$/, "")}${path}`;
+  const base = getFastApiBaseUrl();
+  if (!base) {
+    throw new Error("fastapi_base_url_not_configured");
+  }
+  return `${base}${path}`;
 }
 
 export async function proxyContactPost(body: unknown, authorization?: string | null) {

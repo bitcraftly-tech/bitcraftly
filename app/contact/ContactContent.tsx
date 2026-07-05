@@ -22,6 +22,7 @@ import {
   TIMELINE_OPTIONS,
 } from "@/lib/leadGen";
 import { trackContactFormSubmit } from "@/lib/analytics";
+import { submitContactForm } from "@/lib/contact/contactClient";
 import { logServerEvent } from "@/lib/logServerEvent";
 import { resolveWhatsAppMessage, WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { showErrorAlert, showSuccessAlert } from "@/lib/sweetAlert";
@@ -70,8 +71,6 @@ const initialValues: ContactFormValues = {
   message: "",
   source: "WhatsApp",
 };
-
-const API_URL = "/api/contact";
 
 export default function ContactContent() {
   const [values, setValues] = useState<ContactFormValues>(initialValues);
@@ -268,30 +267,17 @@ export default function ContactContent() {
     const fullMessage = [values.message.trim(), extraLines].filter(Boolean).join("\n\n");
 
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: values.fullName,
-          business_name: values.businessName,
-          business_type: values.businessType,
-          phone: values.phone,
-          email: values.email || undefined,
-          message: fullMessage || undefined,
-          source: values.source || undefined,
-        }),
+      const payload = await submitContactForm({
+        name: values.fullName,
+        business_name: values.businessName,
+        business_type: values.businessType,
+        phone: values.phone,
+        email: values.email || undefined,
+        message: fullMessage || undefined,
+        source: values.source || undefined,
       });
 
-      const payload = (await response.json().catch(() => null)) as
-        | { message?: string; detail?: string }
-        | null;
-      if (!response.ok) {
-        const errorMessage = payload?.detail || payload?.message || "Something went wrong. Please try again.";
-        throw new Error(errorMessage);
-      }
-      const successMessage = payload?.message || "Your contact form was submitted successfully.";
+      const successMessage = payload.message || "Your contact form was submitted successfully.";
       const params = new URLSearchParams(window.location.search);
       trackContactFormSubmit({
         pageMode,
