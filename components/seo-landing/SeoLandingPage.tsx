@@ -67,7 +67,7 @@ export default function SeoLandingPage({ config }: SeoLandingPageProps) {
     <div className="seo-landing-page">
       {/* Premium two-column hero */}
       <div className="seo-landing-hero-band">
-        <div className={`${CONTAINER} seo-hero-grid pb-8 pt-5 md:pb-16 md:pt-8`}>
+        <div className={`${CONTAINER} seo-hero-grid pb-8 pt-2 md:pb-16 md:pt-4`}>
           <nav aria-label="Breadcrumb" className="seo-hero-grid__breadcrumb lg:col-span-2">
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-text-secondary dark:text-dark-text-secondary">
               {config.breadcrumb.map((item, index) => {

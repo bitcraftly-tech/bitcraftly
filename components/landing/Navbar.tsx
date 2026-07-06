@@ -14,7 +14,7 @@ import MarketingSectionLink from "@/components/landing/MarketingSectionLink";
 import NavbarProfileMenu from "@/components/landing/NavbarProfileMenu";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { CONTAINER, whatsappUrl } from "@/lib/constants";
-import { HEADER_SERVICES_DROPDOWN, MARKETING_NAV } from "@/lib/marketingRoutes";
+import { HEADER_SERVICES_DROPDOWN, isSeoLandingRoute, MARKETING_NAV } from "@/lib/marketingRoutes";
 import { lockBodyScrollForNav, unlockBodyScrollForNav } from "@/lib/scrollLock";
 import { BRAND } from "@/lib/siteContent";
 import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
@@ -46,6 +46,9 @@ function shouldShowHeaderThemeToggle(pathname: string | null): boolean {
 
 export default function Navbar({ embedded = false, session = null }: NavbarProps) {
   const pathname = usePathname();
+  const isSeoLanding = isSeoLandingRoute(pathname);
+  /** SEO landings use in-flow sticky nav — avoids empty fixed-header spacer gap above hero */
+  const useInFlowHeader = embedded || isSeoLanding;
   const navRef = useRef<HTMLElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -66,12 +69,12 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
   }, []);
 
   useEffect(() => {
-    if (embedded) return;
+    if (embedded && !isSeoLanding) return;
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [embedded]);
+  }, [embedded, isSeoLanding]);
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -164,9 +167,12 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
     return `bc-nav-link whitespace-nowrap px-3 py-2 text-sm ${active ? "bc-nav-link--active" : ""}`;
   };
 
-  const headerClassName = embedded
-    ? "bc-site-header border-b border-[#E5E7EB] bg-white/90 backdrop-blur-sm dark:border-dark-border-primary dark:bg-dark-bg-card/90"
-    : `bc-site-header bc-site-header--fixed w-full shrink-0 border-b border-[#E5E7EB] bg-white/95 backdrop-blur-sm transition-[box-shadow,background-color,border-color] duration-300 dark:border-dark-border-primary dark:bg-dark-bg-card/95 ${scrolled ? "bc-site-header--scrolled" : "shadow-none"}`;
+  const headerClassName =
+    embedded && !isSeoLanding
+      ? "bc-site-header border-b border-[#E5E7EB] bg-white/90 backdrop-blur-sm dark:border-dark-border-primary dark:bg-dark-bg-card/90"
+      : isSeoLanding
+        ? `bc-site-header bc-site-header--sticky w-full shrink-0 border-b border-[#E5E7EB] bg-white/95 backdrop-blur-sm transition-[box-shadow,background-color,border-color] duration-300 dark:border-dark-border-primary dark:bg-dark-bg-card/95 ${scrolled ? "bc-site-header--scrolled" : "shadow-none"}`
+        : `bc-site-header bc-site-header--fixed w-full shrink-0 border-b border-[#E5E7EB] bg-white/95 backdrop-blur-sm transition-[box-shadow,background-color,border-color] duration-300 dark:border-dark-border-primary dark:bg-dark-bg-card/95 ${scrolled ? "bc-site-header--scrolled" : "shadow-none"}`;
 
   const mobileMenuOverlay = (
     <div className="nav-mobile-overlay nav-mobile-overlay--open lg:hidden" aria-hidden={false}>
@@ -457,7 +463,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
     </header>
   );
 
-  const useMobileHeaderPortal = mounted && !embedded && isMobileLayout;
+  const useMobileHeaderPortal = mounted && !useInFlowHeader && isMobileLayout;
   const showMobileMenu = mounted && isMenuOpen && isMobileLayout;
 
   return (
@@ -465,7 +471,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
       {useMobileHeaderPortal ? createPortal(headerNode, document.body) : headerNode}
       {showMobileMenu ? createPortal(mobileMenuOverlay, document.body) : null}
       <LoginModal open={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
-      {!embedded ? <div className="bc-site-header-spacer" aria-hidden /> : null}
+      {!useInFlowHeader ? <div className="bc-site-header-spacer" aria-hidden /> : null}
     </>
   );
 }

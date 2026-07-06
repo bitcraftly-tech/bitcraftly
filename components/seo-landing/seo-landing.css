@@ -145,7 +145,7 @@
 .seo-hero-grid {
   display: grid;
   gap: 1.25rem;
-  align-items: center;
+  align-items: start;
 }
 
 @media (min-width: 1024px) {

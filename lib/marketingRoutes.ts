@@ -79,6 +79,17 @@ export const HOME_HUB_LINKS: HomeHubLink[] = [
   },
 ];
 
+/** Root-level local SEO landing pages — in-flow sticky header (no fixed nav spacer) */
+export const SEO_LANDING_ROUTES = [
+  "/website-development-company-ghaziabad",
+  "/website-development-company-noida",
+] as const;
+
+export function isSeoLandingRoute(pathname: string | null | undefined): boolean {
+  if (!pathname) return false;
+  return (SEO_LANDING_ROUTES as readonly string[]).includes(pathname);
+}
+
 /** Legacy `/{section}` paths → dedicated routes (scroll via ?scroll=, not hash) */
 export const SECTION_REDIRECTS: Record<string, string> = {
   about: "/",
