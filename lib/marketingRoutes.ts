@@ -79,7 +79,7 @@ export const HOME_HUB_LINKS: HomeHubLink[] = [
   },
 ];
 
-/** Root-level local SEO landing pages — in-flow sticky header (no fixed nav spacer) */
+/** Root-level local SEO landing pages */
 export const SEO_LANDING_ROUTES = [
   "/website-development-company-ghaziabad",
   "/website-development-company-noida",

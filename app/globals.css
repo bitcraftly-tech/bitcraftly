@@ -638,17 +638,9 @@ textarea,
 
 .bc-site-header--fixed {
   position: fixed;
-  top: 0;
+  top: var(--bc-staging-banner-height, 0px);
   left: 0;
   right: 0;
-  z-index: 9060;
-  width: 100%;
-  pointer-events: auto;
-}
-
-.bc-site-header--sticky {
-  position: sticky;
-  top: 0;
   z-index: 9060;
   width: 100%;
   pointer-events: auto;

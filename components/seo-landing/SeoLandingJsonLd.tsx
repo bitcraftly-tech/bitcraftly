@@ -7,5 +7,9 @@ type SeoLandingJsonLdProps = {
 };
 
 export default function SeoLandingJsonLd({ config }: SeoLandingJsonLdProps) {
-  return <JsonLdScript data={buildSeoLandingJsonLdGraph(config)} />;
+  return (
+    <span data-skip-scroll-reveal hidden>
+      <JsonLdScript data={buildSeoLandingJsonLdGraph(config)} />
+    </span>
+  );
 }

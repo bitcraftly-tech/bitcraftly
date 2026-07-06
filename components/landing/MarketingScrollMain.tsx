@@ -3,6 +3,8 @@
 import { Children, isValidElement, type ReactElement, type ReactNode } from "react";
 
 import FadeInOnView, { type RevealDirection } from "@/components/ui/FadeInOnView";
+import SeoLandingJsonLd from "@/components/seo-landing/SeoLandingJsonLd";
+import SeoLandingPage from "@/components/seo-landing/SeoLandingPage";
 
 type MarketingScrollMainProps = {
   children: ReactNode;
@@ -14,6 +16,9 @@ const SKIP_SCROLL_REVEAL_NAMES = new Set([
   "SectionPageNav",
   "MarketingPageNav",
   "PricingPageNav",
+  "SeoLandingJsonLd",
+  "SeoLandingPage",
+  "JsonLdScript",
 ]);
 
 function getComponentName(type: unknown): string | null {
@@ -25,6 +30,7 @@ function getComponentName(type: unknown): string | null {
 function shouldSkipScrollReveal(child: ReactElement): boolean {
   if (child.props?.["data-skip-scroll-reveal"]) return true;
   if (child.type === FadeInOnView) return true;
+  if (child.type === SeoLandingJsonLd || child.type === SeoLandingPage) return true;
   const name = getComponentName(child.type);
   if (name && SKIP_SCROLL_REVEAL_NAMES.has(name)) return true;
   return false;
