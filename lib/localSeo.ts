@@ -90,7 +90,7 @@ export const GHAZIABAD_SEO_STRATEGY = {
     "Own “founder-led React/Next.js websites in Ghaziabad” — premium but approachable, WhatsApp-first, written quotes.",
   onPage: [
     "Homepage + contact: Ghaziabad, Uttar Pradesh in title, H1 area, footer, JSON-LD",
-    "Dedicated local page later: /web-development-ghaziabad (service + FAQ + areas served)",
+    "Dedicated local page: /website-development-company-ghaziabad (service + FAQ + areas served)",
     "Portfolio: tag live Ghaziabad/NCR client work when available",
     "FAQ: Hindi–Hinglish questions (timeline, cost, remote clients)",
   ],
