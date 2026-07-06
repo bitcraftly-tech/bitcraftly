@@ -110,6 +110,7 @@ export const ghaziabadSeoLandingConfig: SeoLandingConfig = {
     ],
   },
   local: {
+    eyebrow: "Ghaziabad context",
     title: "Serving Ghaziabad businesses — how we work locally",
     paragraphs: [
       "Bitcraftly is a founder-led studio based in Ghaziabad, Uttar Pradesh. Discovery calls, reviews, and launch support happen over video, WhatsApp, and scheduled on-site meetings when a face-to-face walkthrough genuinely helps — for example reviewing content on a clinic reception tablet or a retail shop’s service menu.",
@@ -228,6 +229,7 @@ export const ghaziabadSeoLandingConfig: SeoLandingConfig = {
       a: "We structure pages for SEO in English and can integrate Hindi or Hinglish body copy you provide, or collaborate on bilingual sections where that helps your audience.",
     },
   ],
+  faqSectionTitle: "Ghaziabad website development — common questions",
   related: [
     { href: "/services", label: "All services", description: "Websites, apps, AI, and redesign overview" },
     { href: "/pricing", label: "Pricing & packages", description: "Fast-launch packages and cost calculator" },

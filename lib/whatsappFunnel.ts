@@ -27,7 +27,7 @@ export const WHATSAPP_MESSAGES: Record<WhatsAppMessageKey, string> = {
   default:
     "Hi Sanjay — enquiry from bitcraftly.com. I need a website/project quote.\n\nBusiness: \nCity: \nWhat I need: \nBudget (approx): \nTimeline: ",
   consultation:
-    "Hi Sanjay — I'd like a FREE 15-min consultation (Bitcraftly website).\n\nBusiness: \nIndustry: \nCurrent website (if any): \nGoal (leads / redesign / new site): \nBudget range: \nTimeline: ",
+    "Hi Sanjay — I'd like a FREE 15-minute consultation about my website/project.\n\nService: \n\nBusiness: \nWhat I need: \nPreferred timeline: ",
   audit:
     "Hi Sanjay — I want the FREE website audit (speed, mobile UX & lead checklist).\n\nMy website URL: \nBusiness type: \nMain problem: ",
   portfolio:
@@ -174,6 +174,13 @@ export type WhatsAppInquiryParams = {
   intent?: string | null;
 };
 
+function buildConsultationMessage(service?: string): string {
+  const template = WHATSAPP_MESSAGES.consultation;
+  const trimmed = service?.trim();
+  if (!trimmed) return template;
+  return template.replace("Service: \n", `Service: ${trimmed}\n`);
+}
+
 /** Map URL params → best prefill message */
 export function resolveWhatsAppMessage(params: WhatsAppInquiryParams): string {
   const intent = (params.intent || "").toLowerCase();
@@ -181,6 +188,10 @@ export function resolveWhatsAppMessage(params: WhatsAppInquiryParams): string {
   const service = (params.service || "").trim();
 
   if (intent === "audit") return WHATSAPP_MESSAGES.audit;
+
+  if (intent === "consultation" || source.includes("consultation") || source.includes("founder")) {
+    return buildConsultationMessage(service);
+  }
 
   if (service) {
     const s = service.toLowerCase();
@@ -197,9 +208,6 @@ export function resolveWhatsAppMessage(params: WhatsAppInquiryParams): string {
     return `${WHATSAPP_MESSAGES.pricing.replace("Package interested in: ", `Package interested in: ${service}`)}`;
   }
 
-  if (intent === "consultation" || source.includes("consultation") || source.includes("founder")) {
-    return WHATSAPP_MESSAGES.consultation;
-  }
   if (source.includes("audit")) return WHATSAPP_MESSAGES.audit;
   if (source.includes("portfolio") || source.includes("case-study")) return WHATSAPP_MESSAGES.caseStudy;
   if (source.includes("pricing") || source.includes("fast-package")) return WHATSAPP_MESSAGES.fastPackage;

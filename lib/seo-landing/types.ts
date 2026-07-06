@@ -57,6 +57,7 @@ export type SeoLandingConfig = {
     items: readonly SeoLandingEditorialItem[];
   };
   local: {
+    eyebrow: string;
     title: string;
     paragraphs: readonly string[];
     audiences: readonly string[];
@@ -79,6 +80,7 @@ export type SeoLandingConfig = {
     footnote: string;
   };
   faqs: readonly SeoLandingFaqItem[];
+  faqSectionTitle: string;
   related: readonly SeoLandingLink[];
   finalCta: {
     title: string;

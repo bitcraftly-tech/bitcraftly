@@ -13,7 +13,7 @@ import type { LucideIcon } from "lucide-react";
 
 import { CONTAINER, SECTION_PY, SECTION_PY_COMPACT, SECTION_SCROLL_MT, whatsappUrl } from "@/lib/constants";
 import type { SeoLandingConfig } from "@/lib/seo-landing/types";
-import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
+import { resolveWhatsAppMessage } from "@/lib/whatsappFunnel";
 
 import SeoLandingHeroVisual from "./SeoLandingHeroVisual";
 import "./seo-landing.css";
@@ -29,6 +29,8 @@ const PROOF_PREVIEW_IMAGES: Record<string, string> = {
   "/portfolio/local-services-leads-showcase": "/products/Local Services Lead Site.png",
   "/portfolio/gym-fitness-showcase": "/products/Gym Website.png",
   "/portfolio/clinic-healthcare-showcase": "/products/Clinic & Healthcare.png",
+  "/portfolio/ecommerce-store-showcase": "/products/Ecommerce Store.png",
+  "/portfolio/react-video-demo": "/products/Next-Gen SaaS Platform.png",
 };
 
 const PORTFOLIO_MOSAIC = [
@@ -47,8 +49,19 @@ function contactHref(config: SeoLandingConfig, intent: "consultation" | "quote" 
   return `/contact?${params.toString()}`;
 }
 
+function whatsappConsultHref(config: SeoLandingConfig): string {
+  return whatsappUrl(
+    resolveWhatsAppMessage({
+      intent: "consultation",
+      source: config.analytics.contactSource,
+      service: config.analytics.serviceParam,
+    }),
+  );
+}
+
 export default function SeoLandingPage({ config }: SeoLandingPageProps) {
   const consultationHref = contactHref(config);
+  const whatsappHref = whatsappConsultHref(config);
 
   return (
     <div className="seo-landing-page">
@@ -98,7 +111,7 @@ export default function SeoLandingPage({ config }: SeoLandingPageProps) {
                 Book free consultation
               </Link>
               <a
-                href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
+                href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="marketing-hero-btn marketing-hero-btn--secondary"
@@ -184,7 +197,7 @@ export default function SeoLandingPage({ config }: SeoLandingPageProps) {
         <section id="local-context" className={`relative ${CONTAINER} ${SECTION_SCROLL_MT} ${SECTION_PY}`}>
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="min-w-0 lg:col-span-7">
-              <p className="seo-eyebrow">Ghaziabad context</p>
+              <p className="seo-eyebrow">{config.local.eyebrow}</p>
               <h2 className="seo-section-title">{config.local.title}</h2>
               <div className="mt-6 space-y-5">
                 {config.local.paragraphs.map((paragraph) => (
@@ -354,7 +367,7 @@ export default function SeoLandingPage({ config }: SeoLandingPageProps) {
         <section id="faq" className={`${CONTAINER} ${SECTION_SCROLL_MT} ${SECTION_PY}`}>
           <div className="max-w-3xl">
             <p className="seo-eyebrow">FAQ</p>
-            <h2 className="seo-section-title">Ghaziabad website development — common questions</h2>
+            <h2 className="seo-section-title">{config.faqSectionTitle}</h2>
           </div>
 
           <div className="mt-10 max-w-3xl space-y-3">
@@ -418,7 +431,7 @@ export default function SeoLandingPage({ config }: SeoLandingPageProps) {
                   Book free consultation
                 </Link>
                 <a
-                  href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
+                  href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bc-btn bc-btn-secondary w-full min-w-[14rem] px-8 py-3.5 sm:w-auto"

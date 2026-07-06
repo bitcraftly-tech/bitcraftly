@@ -108,6 +108,17 @@ export const GHAZIABAD_SEO_STRATEGY = {
   ],
 } as const;
 
+export const NOIDA_SEO_STRATEGY = {
+  positioning:
+    "Own “founder-led React/Next.js websites for competitive Noida businesses” — positioning, performance, and enquiry conversion; remote delivery from Ghaziabad studio.",
+  onPage: [
+    "Dedicated local page: /website-development-company-noida (service + FAQ + areas served)",
+    "Cross-link from Ghaziabad page and services hub where contextually relevant",
+    "Portfolio: SaaS/startup demos + healthcare/ecommerce showcases for Noida buyer intent",
+    "FAQ: cost, timeline, Sector 62/63/Expressway remote service, React/Next.js, redesign",
+  ],
+} as const;
+
 export const DELHI_NCR_STRATEGY = {
   serviceAreas: [
     "Ghaziabad",
