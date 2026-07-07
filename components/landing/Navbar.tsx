@@ -82,12 +82,15 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
   }, [pathname]);
 
   useEffect(() => {
+    if (embedded || !mounted) return;
     const nav = navRef.current;
     if (!nav) return;
 
     const syncNavMetrics = () => {
       const { height } = nav.getBoundingClientRect();
-      document.documentElement.style.setProperty("--bc-nav-height", `${height}px`);
+      if (height > 0) {
+        document.documentElement.style.setProperty("--bc-nav-height", `${height}px`);
+      }
     };
 
     syncNavMetrics();
@@ -100,7 +103,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
       window.removeEventListener("orientationchange", syncNavMetrics);
       document.documentElement.style.removeProperty("--bc-nav-height");
     };
-  }, []);
+  }, [embedded, mounted, isMobileLayout]);
 
   useEffect(() => {
     if (!servicesOpen) return;
@@ -125,7 +128,10 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
     const syncNavHeight = () => {
       const nav = navRef.current;
       if (!nav) return;
-      root.style.setProperty("--bc-nav-height", `${nav.getBoundingClientRect().height}px`);
+      const height = nav.getBoundingClientRect().height;
+      if (height > 0) {
+        root.style.setProperty("--bc-nav-height", `${height}px`);
+      }
     };
 
     syncNavHeight();

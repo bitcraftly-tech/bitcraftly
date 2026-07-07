@@ -649,7 +649,7 @@ textarea,
 .bc-site-header-spacer {
   flex-shrink: 0;
   width: 100%;
-  height: var(--bc-nav-height, 4.5rem);
+  height: max(4.5rem, var(--bc-nav-height, 4.5rem));
   pointer-events: none;
 }
 
@@ -657,12 +657,14 @@ textarea,
 .bc-marketing-breadcrumb {
   position: static;
   z-index: 9050;
+  min-height: 0;
+  line-height: 1;
 }
 
 @media (min-width: 768px) {
   .bc-marketing-breadcrumb {
     position: sticky;
-    top: calc(var(--bc-staging-banner-height, 0px) + var(--bc-nav-height, 4.5rem));
+    top: calc(var(--bc-staging-banner-height, 0px) + max(4.5rem, var(--bc-nav-height, 4.5rem)));
   }
 }
 
