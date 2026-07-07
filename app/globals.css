@@ -649,7 +649,8 @@ textarea,
 .bc-site-header-spacer {
   flex-shrink: 0;
   width: 100%;
-  height: max(4.5rem, var(--bc-nav-height, 4.5rem));
+  /* Geometric clearance from PAGE_SHELL top to fixed header bottom — not raw --bc-nav-height */
+  height: var(--bc-header-clearance, 4.5rem);
   pointer-events: none;
 }
 
@@ -664,7 +665,7 @@ textarea,
 @media (min-width: 768px) {
   .bc-marketing-breadcrumb {
     position: sticky;
-    top: calc(var(--bc-staging-banner-height, 0px) + max(4.5rem, var(--bc-nav-height, 4.5rem)));
+    top: calc(var(--bc-staging-banner-height, 0px) + var(--bc-header-clearance, 4.5rem));
   }
 }
 

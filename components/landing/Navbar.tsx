@@ -47,6 +47,8 @@ function shouldShowHeaderThemeToggle(pathname: string | null): boolean {
 export default function Navbar({ embedded = false, session = null }: NavbarProps) {
   const pathname = usePathname();
   const useInFlowHeader = embedded;
+  const headerRef = useRef<HTMLElement>(null);
+  const spacerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -83,25 +85,35 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
 
   useEffect(() => {
     if (embedded || !mounted) return;
-    const nav = navRef.current;
-    if (!nav) return;
+    const header = headerRef.current;
+    const spacer = spacerRef.current;
+    if (!header || !spacer) return;
 
-    const syncNavMetrics = () => {
-      const { height } = nav.getBoundingClientRect();
-      if (height > 0) {
-        document.documentElement.style.setProperty("--bc-nav-height", `${height}px`);
+    const syncChromeMetrics = () => {
+      const headerRect = header.getBoundingClientRect();
+      const spacerTop = spacer.getBoundingClientRect().top;
+      const chromeHeight = Math.round(headerRect.height);
+      const clearance = Math.round(headerRect.bottom - spacerTop);
+
+      if (chromeHeight > 0) {
+        document.documentElement.style.setProperty("--bc-nav-height", `${chromeHeight}px`);
+      }
+      if (clearance > 0) {
+        document.documentElement.style.setProperty("--bc-header-clearance", `${clearance}px`);
       }
     };
 
-    syncNavMetrics();
-    const ro = new ResizeObserver(syncNavMetrics);
-    ro.observe(nav);
-    window.addEventListener("orientationchange", syncNavMetrics);
+    syncChromeMetrics();
+    const ro = new ResizeObserver(syncChromeMetrics);
+    ro.observe(header);
+    ro.observe(spacer);
+    window.addEventListener("orientationchange", syncChromeMetrics);
 
     return () => {
       ro.disconnect();
-      window.removeEventListener("orientationchange", syncNavMetrics);
+      window.removeEventListener("orientationchange", syncChromeMetrics);
       document.documentElement.style.removeProperty("--bc-nav-height");
+      document.documentElement.style.removeProperty("--bc-header-clearance");
     };
   }, [embedded, mounted, isMobileLayout]);
 
@@ -126,11 +138,19 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
     root.setAttribute("data-bc-nav-open", "");
 
     const syncNavHeight = () => {
-      const nav = navRef.current;
-      if (!nav) return;
-      const height = nav.getBoundingClientRect().height;
-      if (height > 0) {
-        root.style.setProperty("--bc-nav-height", `${height}px`);
+      const header = headerRef.current;
+      const spacer = spacerRef.current;
+      if (!header || !spacer) return;
+
+      const headerRect = header.getBoundingClientRect();
+      const chromeHeight = Math.round(headerRect.height);
+      const clearance = Math.round(headerRect.bottom - spacer.getBoundingClientRect().top);
+
+      if (chromeHeight > 0) {
+        root.style.setProperty("--bc-nav-height", `${chromeHeight}px`);
+      }
+      if (clearance > 0) {
+        root.style.setProperty("--bc-header-clearance", `${clearance}px`);
       }
     };
 
@@ -322,7 +342,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
   );
 
   const headerNode = (
-    <header className={headerClassName}>
+    <header ref={headerRef} className={headerClassName}>
       <nav
         ref={navRef}
         className={`${CONTAINER} flex min-h-[72px] min-w-0 items-center justify-between gap-3 py-0 lg:gap-4`}
@@ -472,7 +492,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
       {useMobileHeaderPortal ? createPortal(headerNode, document.body) : headerNode}
       {showMobileMenu ? createPortal(mobileMenuOverlay, document.body) : null}
       <LoginModal open={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
-      {!useInFlowHeader ? <div className="bc-site-header-spacer" aria-hidden /> : null}
+      {!useInFlowHeader ? <div ref={spacerRef} className="bc-site-header-spacer" aria-hidden /> : null}
     </>
   );
 }
