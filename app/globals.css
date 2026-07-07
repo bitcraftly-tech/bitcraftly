@@ -653,6 +653,19 @@ textarea,
   pointer-events: none;
 }
 
+/* Marketing breadcrumb — normal flow on mobile; sticky below fixed navbar from md (768px) up */
+.bc-marketing-breadcrumb {
+  position: static;
+  z-index: 9050;
+}
+
+@media (min-width: 768px) {
+  .bc-marketing-breadcrumb {
+    position: sticky;
+    top: calc(var(--bc-staging-banner-height, 0px) + var(--bc-nav-height, 4.5rem));
+  }
+}
+
 .bc-site-header--scrolled {
   border-color: var(--border-default);
   background-color: color-mix(in srgb, var(--background-surface) 88%, transparent);

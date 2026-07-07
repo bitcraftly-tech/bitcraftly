@@ -18,7 +18,7 @@ export default function LoginContent({ googleEnabled }: LoginContentProps) {
   );
 
   return (
-    <section className="relative overflow-hidden bg-bg-primary py-10 sm:py-14 dark:bg-dark-bg-primary">
+    <section className="relative overflow-hidden bg-bg-primary pb-10 sm:pb-14 dark:bg-dark-bg-primary">
       <div
         className="pointer-events-none absolute inset-0 opacity-90"
         aria-hidden

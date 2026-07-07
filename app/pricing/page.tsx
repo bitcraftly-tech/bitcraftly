@@ -20,7 +20,7 @@ export const metadata = buildPageMetadata("pricing");
 
 export default function PricingPage() {
   return (
-    <MarketingPageLayout>
+    <MarketingPageLayout breadcrumb={[{ label: "Home", href: "/" }, { label: "Pricing" }]}>
       <PricingHero />
       <SkipScrollReveal>
         <PricingPageNav />

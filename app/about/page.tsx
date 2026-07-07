@@ -18,7 +18,7 @@ export default function AboutPage() {
   const intro = PAGE_INTROS.about;
 
   return (
-    <MarketingPageLayout>
+    <MarketingPageLayout breadcrumb={[{ label: "Home", href: "/" }, { label: "About" }]}>
       <MarketingPageIntro
         eyebrow={intro.eyebrow}
         title={intro.title}

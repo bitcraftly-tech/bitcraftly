@@ -12,6 +12,15 @@ export const PAGE_MAIN = "flex min-w-0 w-full flex-1 flex-col";
 
 export const SECTION_PY = "py-8 md:py-12";
 export const SECTION_PY_COMPACT = "py-6 md:py-8";
+
+/**
+ * Padding-top below the marketing breadcrumb bar — matches /portfolio (MarketingPageHero pt-8 md:pt-10).
+ * Single spacing owner: first content block padding-top, not breadcrumb margin-bottom.
+ */
+export const MARKETING_BELOW_BREADCRUMB_PT = "pt-8 md:pt-10";
+
+/** @deprecated Use MARKETING_BELOW_BREADCRUMB_PT */
+export const MARKETING_AFTER_BREADCRUMB_PT = MARKETING_BELOW_BREADCRUMB_PT;
 export const SECTION_PY_CTA = "py-12 md:py-16";
 export const SECTION_SCROLL_MT = "scroll-mt-24";
 

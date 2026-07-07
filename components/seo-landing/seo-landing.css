@@ -152,14 +152,9 @@
   .seo-hero-grid {
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
     grid-template-areas:
-      "breadcrumb breadcrumb"
       "content visual"
       "trust visual";
     gap: 2rem 4rem;
-  }
-
-  .seo-hero-grid__breadcrumb {
-    grid-area: breadcrumb;
   }
 
   .seo-hero-content {

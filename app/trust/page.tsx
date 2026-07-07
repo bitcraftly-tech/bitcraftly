@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function TrustCenterPage() {
   return (
-    <MarketingPageLayout>
+    <MarketingPageLayout breadcrumb={[{ label: "Home", href: "/" }, { label: "Trust Center" }]}>
       <TrustCenterHero />
       <section className={`${CONTAINER} pb-10 sm:pb-14`}>
         <TrustCenterDocuments />

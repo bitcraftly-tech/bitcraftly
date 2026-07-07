@@ -5,8 +5,9 @@ import { redirect } from "next/navigation";
 
 import { createAuthOptions } from "@/auth";
 import SiteFooter from "@/components/layout/SiteFooter";
+import MarketingBreadcrumb from "@/components/landing/MarketingBreadcrumb";
 import Navbar from "@/components/landing/Navbar";
-import { CONTAINER, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
+import { CONTAINER, MARKETING_BELOW_BREADCRUMB_PT, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 import { BRAND } from "@/lib/siteContent";
 
 type PortalCard = {
@@ -60,19 +61,9 @@ export default async function CustomerPortalPage() {
     <div className={PAGE_SHELL}>
       <Navbar />
       <main className={`${PAGE_MAIN} overflow-x-hidden`}>
-        <section className="border-b border-border-primary bg-bg-card py-1.5 dark:border-dark-border-primary dark:bg-dark-bg-card">
-          <div className={`${CONTAINER} flex flex-wrap items-center justify-between gap-2 text-xs text-text-tertiary dark:text-dark-text-tertiary`}>
-            <div>
-              <Link href="/" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
-                Home
-              </Link>
-              <span className="px-2">/</span>
-              <span aria-current="page">Portal</span>
-            </div>
-          </div>
-        </section>
+        <MarketingBreadcrumb items={[{ label: "Home", href: "/" }, { label: "Portal" }]} />
 
-        <div className="bg-bg-primary pb-10 pt-5 md:pb-14 md:pt-7 dark:bg-dark-bg-primary">
+        <div className={`bg-bg-primary pb-10 md:pb-14 dark:bg-dark-bg-primary ${MARKETING_BELOW_BREADCRUMB_PT}`}>
           <div className={`${CONTAINER} space-y-10`}>
             <header className="border-b border-border-primary pb-8 dark:border-dark-border-primary">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-text-tertiary dark:text-dark-text-tertiary">

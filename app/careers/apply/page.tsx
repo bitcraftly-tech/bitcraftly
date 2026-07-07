@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import Link from "next/link";
 
 import SiteFooter from "@/components/layout/SiteFooter";
+import MarketingBreadcrumb from "@/components/landing/MarketingBreadcrumb";
 import Navbar from "@/components/landing/Navbar";
 import CareersApplyWizard from "@/components/careers/CareersApplyWizard";
-import { CONTAINER, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
+import { CONTAINER, MARKETING_BELOW_BREADCRUMB_PT, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Apply | Careers | Bitcraftly",
@@ -17,19 +17,14 @@ export default function CareersApplyPage() {
     <div className={`${PAGE_SHELL} portfolio-showcase-light bg-[#fafbfc] text-[#2c3e50]`}>
       <Navbar />
       <main className={PAGE_MAIN}>
-        <section className="border-b border-[#E5E7EB] bg-white py-2 dark:border-dark-border-primary dark:bg-dark-bg-card">
-          <div className={`${CONTAINER} text-xs text-[#9CA3AF]`}>
-            <Link href="/" className="hover:text-[#6B7280] hover:underline">
-              Home
-            </Link>
-            <span className="px-2">/</span>
-            <Link href="/careers" className="hover:text-[#6B7280] hover:underline">
-              Careers
-            </Link>
-            <span className="px-2">/</span> Apply
-          </div>
-        </section>
-        <section className="py-8 md:py-12 lg:py-14">
+        <MarketingBreadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Careers", href: "/careers" },
+            { label: "Apply" },
+          ]}
+        />
+        <section className={`pb-8 md:pb-12 lg:pb-14 ${MARKETING_BELOW_BREADCRUMB_PT}`}>
           <div className={`${CONTAINER} w-full`}>
             <Suspense
               fallback={

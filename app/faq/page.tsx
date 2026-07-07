@@ -16,7 +16,7 @@ export default function FaqPage() {
   const intro = PAGE_INTROS.faq;
 
   return (
-    <MarketingPageLayout>
+    <MarketingPageLayout breadcrumb={[{ label: "Home", href: "/" }, { label: "FAQ" }]}>
       <FaqJsonLd />
       <MarketingPageIntro
         eyebrow={intro.eyebrow}

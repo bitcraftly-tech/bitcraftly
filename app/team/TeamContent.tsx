@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import FounderAvatar from "@/components/landing/FounderAvatar";
-import { CONTAINER, FOUNDER_LINKEDIN_URL, whatsappUrl } from "@/lib/constants";
+import { CONTAINER, FOUNDER_LINKEDIN_URL, MARKETING_BELOW_BREADCRUMB_PT, whatsappUrl } from "@/lib/constants";
 import { WHATSAPP_MESSAGES } from "@/lib/whatsappFunnel";
 import { BRAND, FOUNDER, PROCESS_STEPS } from "@/lib/siteContent";
 
@@ -38,7 +38,7 @@ export default function TeamContent() {
               "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(43, 92, 230, 0.22), transparent 55%), radial-gradient(ellipse 60% 40% at 100% 0%, rgba(99, 102, 241, 0.12), transparent 50%)",
           }}
         />
-        <div className={`${CONTAINER} relative py-8 md:py-12`}>
+        <div className={`${CONTAINER} relative pb-8 md:pb-12 ${MARKETING_BELOW_BREADCRUMB_PT}`}>
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
             Founder-led studio
           </p>

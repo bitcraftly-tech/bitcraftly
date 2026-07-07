@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { scrollToElementWithRetry } from "@/lib/scrollToMarketingSection";
 
 import { atsBtnPrimary, atsBtnSecondary } from "@/lib/ats/theme";
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, MARKETING_BELOW_BREADCRUMB_PT } from "@/lib/constants";
 
 export default function CareersHero() {
   return (
@@ -20,7 +20,7 @@ export default function CareersHero() {
             "radial-gradient(ellipse 90% 60% at 50% -30%, rgba(99, 102, 241, 0.18), transparent 60%), radial-gradient(ellipse 50% 40% at 100% 0%, rgba(43, 92, 230, 0.1), transparent 50%)",
         }}
       />
-      <div className={`${CONTAINER} relative py-12 md:py-16`}>
+      <div className={`${CONTAINER} relative pb-12 md:pb-16 ${MARKETING_BELOW_BREADCRUMB_PT}`}>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

@@ -401,7 +401,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
 
         {/* Desktop actions */}
         <div className="hidden shrink-0 items-center gap-2 lg:flex xl:gap-3">
-          {showThemeToggle ? <ThemeToggle /> : null}
+          {showThemeToggle ? <ThemeToggle compact /> : null}
           <a
             href={whatsappUrl(WHATSAPP_MESSAGES.consultation)}
             data-wa-source="navbar-desktop-whatsapp"

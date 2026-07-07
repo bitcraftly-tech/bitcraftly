@@ -12,7 +12,7 @@ import ContactSidebar from "@/components/contact/ContactSidebar";
 import ContactWhatsAppCompact from "@/components/contact/ContactWhatsAppCompact";
 import MarketingSectionLink from "@/components/landing/MarketingSectionLink";
 import WhatsAppInquiryPanel from "@/components/landing/WhatsAppInquiryPanel";
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, MARKETING_BELOW_BREADCRUMB_PT } from "@/lib/constants";
 import { getContactModeCopy, getContactPageMode, type ContactPageMode } from "@/lib/contactPageModes";
 import { CP_PAGE } from "@/lib/contactPageTheme";
 import {
@@ -334,7 +334,7 @@ export default function ContactContent() {
   };
 
   return (
-    <main className={`${CP_PAGE} py-8 pb-24 md:py-10 md:pb-12`}>
+    <main className={`${CP_PAGE} ${MARKETING_BELOW_BREADCRUMB_PT} pb-24 md:pb-12`}>
       <div className={`${CONTAINER} grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10`}>
         <ContactSidebar
           headline={modeCopy.headline}

@@ -5,6 +5,7 @@ import { getSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import PasswordInput from "@/components/ui/PasswordInput";
+import { MARKETING_BELOW_BREADCRUMB_PT } from "@/lib/constants";
 import { showErrorAlert, showInfoAlert, showSuccessAlert } from "@/lib/sweetAlert";
 
 import { authInputClassName, isPrivilegedRole, portalHighlights } from "./loginShared";
@@ -159,11 +160,11 @@ export default function LoginSystem({
 
   const shellClassName = isModal
     ? "flex min-h-0 w-full flex-1 flex-col"
-    : "w-full overflow-hidden rounded-3xl border border-indigo-500/20 bg-bg-card shadow-[0_24px_60px_-28px_rgba(79,70,229,0.35)] dark:border-indigo-500/25 dark:bg-dark-bg-card dark:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.55)]";
+    : "w-full overflow-hidden rounded-3xl border-x border-b border-indigo-500/20 bg-bg-card shadow-[0_24px_60px_-28px_rgba(79,70,229,0.35)] dark:border-indigo-500/25 dark:bg-dark-bg-card dark:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.55)]";
 
   const headerClassName = isModal
     ? "shrink-0 border-b border-indigo-500/10 bg-gradient-to-r from-indigo-500/8 via-violet-500/4 to-transparent dark:from-indigo-500/12 dark:via-violet-500/8"
-    : "border-b border-indigo-500/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/5 to-transparent px-6 py-5 sm:px-7 dark:from-indigo-500/15 dark:via-violet-500/10";
+    : `border-b border-indigo-500/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/5 to-transparent px-6 pb-5 sm:px-7 ${MARKETING_BELOW_BREADCRUMB_PT} dark:from-indigo-500/15 dark:via-violet-500/10`;
 
   const bodyClassName = isModal
     ? "p-5 pb-[max(1rem,env(safe-area-inset-bottom))] sm:p-6"

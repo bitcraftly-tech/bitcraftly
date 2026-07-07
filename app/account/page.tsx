@@ -6,8 +6,9 @@ import { LayoutGrid, Mail, MessageCircle } from "lucide-react";
 
 import { createAuthOptions } from "@/auth";
 import SiteFooter from "@/components/layout/SiteFooter";
+import MarketingBreadcrumb from "@/components/landing/MarketingBreadcrumb";
 import Navbar from "@/components/landing/Navbar";
-import { CONTAINER, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
+import { CONTAINER, MARKETING_BELOW_BREADCRUMB_PT, PAGE_MAIN, PAGE_SHELL } from "@/lib/constants";
 import { formatRoleLabel, roleBadgeClass } from "@/lib/roleDisplay";
 import { userInitials } from "@/lib/userDisplay";
 
@@ -37,22 +38,9 @@ export default async function AccountPage() {
     <div className={PAGE_SHELL}>
       <Navbar />
       <main className={`${PAGE_MAIN} overflow-x-hidden`}>
-        <section className="border-b border-border-primary bg-bg-card py-1.5 dark:border-dark-border-primary dark:bg-dark-bg-card">
-          <nav
-            aria-label="Breadcrumb"
-            className={`${CONTAINER} flex flex-wrap items-center justify-between gap-2 text-xs text-text-tertiary dark:text-dark-text-tertiary`}
-          >
-            <div>
-              <Link href="/" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
-                Home
-              </Link>
-              <span className="px-2">/</span>
-              <span aria-current="page">Profile</span>
-            </div>
-          </nav>
-        </section>
+        <MarketingBreadcrumb items={[{ label: "Home", href: "/" }, { label: "Profile" }]} />
 
-        <div className="bg-bg-primary pb-10 pt-5 md:pb-14 md:pt-7 dark:bg-dark-bg-primary">
+        <div className={`bg-bg-primary pb-10 md:pb-14 dark:bg-dark-bg-primary ${MARKETING_BELOW_BREADCRUMB_PT}`}>
           <div className={CONTAINER}>
             <h1 className="font-[var(--font-playfair)] text-3xl text-text-primary dark:text-dark-text-primary md:text-4xl">
               My account

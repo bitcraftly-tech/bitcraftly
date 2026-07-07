@@ -19,6 +19,7 @@ const SKIP_SCROLL_REVEAL_NAMES = new Set([
   "SeoLandingJsonLd",
   "SeoLandingPage",
   "JsonLdScript",
+  "MarketingBreadcrumb",
 ]);
 
 function getComponentName(type: unknown): string | null {

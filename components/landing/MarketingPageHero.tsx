@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, MARKETING_BELOW_BREADCRUMB_PT } from "@/lib/constants";
 
 export type MarketingPageHeroProps = {
   id?: string;
@@ -23,7 +23,7 @@ export default function MarketingPageHero({
   return (
     <section
       id={id}
-      className={`${CONTAINER} scroll-mt-24 pb-10 pt-8 md:pb-12 md:pt-10 ${className ?? ""}`.trim()}
+      className={`marketing-page-hero ${CONTAINER} scroll-mt-24 pb-10 md:pb-12 ${MARKETING_BELOW_BREADCRUMB_PT} ${className ?? ""}`.trim()}
     >
       <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary dark:text-dark-text-secondary">
         {eyebrow}

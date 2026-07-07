@@ -19,7 +19,7 @@ export default function ServicesPage() {
   const intro = PAGE_INTROS.services;
 
   return (
-    <MarketingPageLayout>
+    <MarketingPageLayout breadcrumb={[{ label: "Home", href: "/" }, { label: "Services" }]}>
       <MarketingPageIntro
         eyebrow={intro.eyebrow}
         title={intro.title}

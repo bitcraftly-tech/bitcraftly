@@ -8,7 +8,7 @@ export const metadata = buildSeoLandingMetadata(noidaSeoLandingConfig);
 
 export default function WebsiteDevelopmentCompanyNoidaPage() {
   return (
-    <MarketingPageLayout showFooterCta={false}>
+    <MarketingPageLayout showFooterCta={false} breadcrumb={noidaSeoLandingConfig.breadcrumb}>
       <SeoLandingJsonLd config={noidaSeoLandingConfig} />
       <SeoLandingPage config={noidaSeoLandingConfig} />
     </MarketingPageLayout>

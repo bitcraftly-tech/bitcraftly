@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import SiteFooter from "@/components/layout/SiteFooter";
+import MarketingBreadcrumb from "@/components/landing/MarketingBreadcrumb";
 import Navbar from "@/components/landing/Navbar";
 import PortfolioCaseStudy from "@/components/landing/PortfolioCaseStudy";
 import PortfolioProjectCard from "@/components/landing/PortfolioProjectCard";
@@ -13,19 +14,13 @@ export default function PortfolioProjectDetailShell({ item }: { item: PortfolioI
     <div className={PAGE_SHELL}>
       <Navbar />
       <main className={PAGE_MAIN}>
-        <section className="border-b border-border-primary bg-bg-card py-1.5 dark:border-dark-border-primary dark:bg-dark-bg-card">
-          <div className={`${CONTAINER} text-xs text-text-tertiary dark:text-dark-text-tertiary`}>
-            <Link href="/" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
-              Home
-            </Link>
-            <span className="px-2">/</span>
-            <Link href="/portfolio" className="hover:text-text-secondary hover:underline dark:hover:text-dark-text-secondary">
-              Portfolio
-            </Link>
-            <span className="px-2">/</span>
-            <span className="text-text-secondary dark:text-dark-text-secondary">{item.title}</span>
-          </div>
-        </section>
+        <MarketingBreadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Portfolio", href: "/portfolio" },
+            { label: item.title },
+          ]}
+        />
 
         <div className="bg-bg-primary text-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary">
           <section className={`${CONTAINER} py-8 md:py-10`}>

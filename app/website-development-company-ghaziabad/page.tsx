@@ -8,7 +8,7 @@ export const metadata = buildSeoLandingMetadata(ghaziabadSeoLandingConfig);
 
 export default function WebsiteDevelopmentCompanyGhaziabadPage() {
   return (
-    <MarketingPageLayout showFooterCta={false}>
+    <MarketingPageLayout showFooterCta={false} breadcrumb={ghaziabadSeoLandingConfig.breadcrumb}>
       <SeoLandingJsonLd config={ghaziabadSeoLandingConfig} />
       <SeoLandingPage config={ghaziabadSeoLandingConfig} />
     </MarketingPageLayout>

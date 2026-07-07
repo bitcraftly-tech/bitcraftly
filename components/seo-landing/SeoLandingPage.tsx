@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import { CONTAINER, SECTION_PY, SECTION_PY_COMPACT, SECTION_SCROLL_MT, whatsappUrl } from "@/lib/constants";
+import { CONTAINER, MARKETING_BELOW_BREADCRUMB_PT, SECTION_PY, SECTION_PY_COMPACT, SECTION_SCROLL_MT, whatsappUrl } from "@/lib/constants";
 import type { SeoLandingConfig } from "@/lib/seo-landing/types";
 import { resolveWhatsAppMessage } from "@/lib/whatsappFunnel";
 
@@ -67,40 +67,7 @@ export default function SeoLandingPage({ config }: SeoLandingPageProps) {
     <div className="seo-landing-page">
       {/* Premium two-column hero */}
       <div className="seo-landing-hero-band">
-        <div className={`${CONTAINER} seo-hero-grid pb-8 pt-2 md:pb-16 md:pt-4`}>
-          <nav aria-label="Breadcrumb" className="seo-hero-grid__breadcrumb lg:col-span-2">
-            <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-text-secondary dark:text-dark-text-secondary">
-              {config.breadcrumb.map((item, index) => {
-                const isLast = index === config.breadcrumb.length - 1;
-
-                return (
-                  <li key={item.label} className="flex min-w-0 items-center gap-2">
-                    {index > 0 ? (
-                      <span aria-hidden className="text-text-tertiary dark:text-dark-text-tertiary">
-                        /
-                      </span>
-                    ) : null}
-                    {item.href && !isLast ? (
-                      <Link
-                        href={item.href}
-                        className="truncate font-medium text-text-secondary transition hover:text-accent-primary dark:text-dark-text-secondary dark:hover:text-indigo-400"
-                      >
-                        {item.label}
-                      </Link>
-                    ) : (
-                      <span
-                        className="truncate font-medium text-text-primary dark:text-dark-text-primary"
-                        aria-current={isLast ? "page" : undefined}
-                      >
-                        {item.label}
-                      </span>
-                    )}
-                  </li>
-                );
-              })}
-            </ol>
-          </nav>
-
+        <div className={`${CONTAINER} seo-hero-grid pb-8 md:pb-16 ${MARKETING_BELOW_BREADCRUMB_PT}`}>
           <div className="seo-hero-content min-w-0">
             <p className="seo-eyebrow">{config.hero.eyebrow}</p>
             <h1>{config.hero.title}</h1>

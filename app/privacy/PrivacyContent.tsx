@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { CONTAINER } from "@/lib/constants";
+import { CONTAINER, MARKETING_BELOW_BREADCRUMB_PT } from "@/lib/constants";
 
 type PrivacySection = {
   id: string;
@@ -84,7 +84,7 @@ export default function PrivacyContent() {
 
   return (
     <main className="bg-bg-primary dark:bg-dark-bg-primary">
-      <section className="bg-text-primary py-7 dark:bg-dark-bg-secondary">
+      <section className={`bg-text-primary pb-7 dark:bg-dark-bg-secondary ${MARKETING_BELOW_BREADCRUMB_PT}`}>
         <div className={CONTAINER}>
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">Legal</p>
           <h1 className="mt-3 font-[var(--font-playfair)] text-4xl text-white sm:text-5xl">Privacy Policy</h1>
@@ -101,11 +101,10 @@ export default function PrivacyContent() {
                   key={section.id}
                   type="button"
                   onClick={() => scrollToSection(section.id)}
-                  className={`block w-full rounded-md px-3 py-2 text-left text-sm transition ${
-                    activeSection === section.id
+                  className={`block w-full rounded-md px-3 py-2 text-left text-sm transition ${activeSection === section.id
                       ? "bg-bg-secondary text-text-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary"
                       : "text-text-tertiary hover:text-text-primary dark:text-dark-text-tertiary dark:hover:text-dark-text-primary"
-                  }`}
+                    }`}
                 >
                   {section.label}
                 </button>
