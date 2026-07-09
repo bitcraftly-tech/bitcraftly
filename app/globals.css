@@ -665,7 +665,7 @@ textarea,
 @media (min-width: 768px) {
   .bc-marketing-breadcrumb {
     position: sticky;
-    top: calc(var(--bc-staging-banner-height, 0px) + var(--bc-header-clearance, 4.5rem));
+    top: calc(var(--bc-staging-banner-height, 0px) + var(--bc-nav-height, 4.5rem));
   }
 }
 
