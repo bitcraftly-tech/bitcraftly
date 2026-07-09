@@ -50,10 +50,8 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
   const headerRef = useRef<HTMLElement>(null);
   const spacerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
-  const servicesRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isMobileLayout, setIsMobileLayout] = useState(false);
@@ -79,7 +77,6 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
   useEffect(() => {
     setIsMenuOpen(false);
     setIsLoginOpen(false);
-    setServicesOpen(false);
     setMobileServicesOpen(false);
   }, [pathname]);
 
@@ -116,17 +113,6 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
       document.documentElement.style.removeProperty("--bc-header-clearance");
     };
   }, [embedded, mounted, isMobileLayout]);
-
-  useEffect(() => {
-    if (!servicesOpen) return;
-    const onPointerDown = (e: MouseEvent) => {
-      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
-        setServicesOpen(false);
-      }
-    };
-    document.addEventListener("pointerdown", onPointerDown);
-    return () => document.removeEventListener("pointerdown", onPointerDown);
-  }, [servicesOpen]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -364,53 +350,13 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
 
         {/* Desktop nav — 3 items */}
         <div className="hidden min-w-0 flex-1 items-center justify-center gap-1 lg:flex">
-          {/* Services + dropdown */}
-          <div
-            ref={servicesRef}
-            className="relative"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
+          <Link
+            href="/services"
+            aria-current={isNavLinkActive("/services", pathname) ? "page" : undefined}
+            className={navLinkClass("/services")}
           >
-            <button
-              type="button"
-              aria-expanded={servicesOpen}
-              aria-haspopup="true"
-              onClick={() => setServicesOpen((v) => !v)}
-              className={`bc-nav-link inline-flex items-center gap-1 rounded-lg ${navLinkClass("/services")}`}
-            >
-              Services
-              <ChevronDown
-                className={`size-3.5 opacity-60 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}
-                aria-hidden
-              />
-            </button>
-
-            {servicesOpen ? (
-              <div className="absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-2">
-                <div className="overflow-hidden rounded-xl border border-[#E5E7EB] bg-white py-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.08)] dark:border-dark-border-primary dark:bg-dark-bg-card">
-                  <Link
-                    href="/services"
-                    className="block px-4 py-2 text-sm font-semibold text-[#111827] transition hover:bg-[#F9FAFB] dark:text-dark-text-primary dark:hover:bg-dark-bg-secondary"
-                    onClick={() => setServicesOpen(false)}
-                  >
-                    All services
-                  </Link>
-                  <div className="my-1 h-px bg-[#F3F4F6] dark:bg-dark-border-primary" />
-                  {HEADER_SERVICES_DROPDOWN.map((item) => (
-                    <MarketingSectionLink
-                      key={item.label}
-                      path={item.path}
-                      sectionId={item.sectionId}
-                      className="block px-4 py-2 text-sm font-medium text-[#6B7280] transition hover:bg-[#F9FAFB] hover:text-[#111827] dark:text-dark-text-secondary dark:hover:bg-dark-bg-secondary dark:hover:text-dark-text-primary"
-                      onNavigate={() => setServicesOpen(false)}
-                    >
-                      {item.label}
-                    </MarketingSectionLink>
-                  ))}
-                </div>
-              </div>
-            ) : null}
-          </div>
+            Services
+          </Link>
 
           <Link href="/portfolio" aria-current={isNavLinkActive("/portfolio", pathname) ? "page" : undefined} className={navLinkClass("/portfolio")}>
             Portfolio
