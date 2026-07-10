@@ -58,3 +58,4 @@ public/dayal-builders/hero-source.mp4
 public/dayal-builders/hero-web.mp4
 
 .vercel
+.env*

@@ -88,9 +88,8 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
 
     const syncChromeMetrics = () => {
       const headerRect = header.getBoundingClientRect();
-      const spacerTop = spacer.getBoundingClientRect().top;
       const chromeHeight = Math.round(headerRect.height);
-      const clearance = Math.round(headerRect.bottom - spacerTop);
+      const clearance = chromeHeight;
 
       if (chromeHeight > 0) {
         document.documentElement.style.setProperty("--bc-nav-height", `${chromeHeight}px`);
@@ -130,9 +129,7 @@ export default function Navbar({ embedded = false, session = null }: NavbarProps
 
       const headerRect = header.getBoundingClientRect();
       const chromeHeight = Math.round(headerRect.height);
-      const clearance = Math.round(
-        headerRect.bottom - spacer.getBoundingClientRect().top
-      );
+      const clearance = chromeHeight;
 
       if (chromeHeight > 0) {
         root.style.setProperty("--bc-nav-height", `${chromeHeight}px`);

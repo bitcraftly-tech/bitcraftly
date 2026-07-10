@@ -528,48 +528,21 @@ textarea,
   @apply transition-colors duration-150;
 }
 
-.reveal-section {
-  opacity: 0;
-  transition:
-    opacity 480ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
-  content-visibility: auto;
-  contain-intrinsic-size: auto 480px;
-  will-change: opacity, transform;
-}
-
-.reveal-section--up {
-  transform: translateY(2rem);
-}
-
-.reveal-section--down {
-  transform: translateY(-2rem);
-}
-
-.reveal-section--left {
-  transform: translateX(-2rem);
-}
-
-.reveal-section--right {
-  transform: translateX(2rem);
-}
-
+.reveal-section,
+.reveal-section--up,
+.reveal-section--down,
+.reveal-section--left,
+.reveal-section--right,
 .reveal-section.is-visible {
   opacity: 1;
-  transform: translate(0, 0);
+  transform: none;
+  transition: none;
+  content-visibility: visible;
+  contain-intrinsic-size: unset;
   will-change: auto;
 }
 
 @media (max-width: 767px) {
-  .reveal-section {
-    opacity: 1;
-    transform: none;
-    transition: none;
-    content-visibility: visible;
-    contain-intrinsic-size: unset;
-    will-change: auto;
-  }
-
   .bc-app-root,
   html.bc-route-loading .bc-app-root {
     opacity: 1 !important;
@@ -581,16 +554,6 @@ textarea,
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-  .reveal-section,
-  .reveal-section.is-visible {
-    opacity: 1;
-    transform: none;
-    transition: none;
   }
 }
 
@@ -1898,7 +1861,7 @@ html.bc-route-loading body {
 }
 
 html.bc-route-loading .bc-app-root {
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
 }
 
@@ -1916,7 +1879,7 @@ html.bc-route-loading .bc-app-root {
 html[data-loader="revealing"] .bc-app-root,
 html[data-loader="done"] .bc-app-root {
   opacity: 1;
-  transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: none;
 }
 
 .bc-app-root--instant {

@@ -23,11 +23,7 @@ import {
   LOADER_TIMING,
   loaderRevealTotalMs,
 } from "@/lib/loader/config";
-import {
-  isInternalRouteNavigation,
-  markRouteLoadingActive,
-  markRouteLoadingDone,
-} from "@/lib/loader/navigation";
+import { markRouteLoadingActive, markRouteLoadingDone } from "@/lib/loader/navigation";
 import { LOADER_MOBILE_MAX_WIDTH_PX, LOADER_SKIP_ON_MOBILE } from "@/lib/loader/mobilePerf";
 import type { LoaderTheme } from "@/components/loading/BitcraftlyLoader";
 
@@ -93,8 +89,6 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
   const [initialPhase, setInitialPhase] = useState<InitialPhase>("done");
   const [routeLoading, setRouteLoading] = useState(false);
   const [skipRevealAnimation, setSkipRevealAnimation] = useState(false);
-  const prevPath = useRef<string | null>(null);
-  const isFirstPathEffect = useRef(true);
   const bootStarted = useRef(false);
   const routeStartedAt = useRef<number | null>(null);
   const initialPhaseRef = useRef(initialPhase);
@@ -193,64 +187,6 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
       window.clearTimeout(fallback);
     };
   }, [initialPhase, finishInitial]);
-
-  /** Start loader on nav click — before Next.js swaps the page. */
-  useEffect(() => {
-    if (!LOADER_ENABLED || !ready) return;
-
-    const onNavigateIntent = (event: MouseEvent) => {
-      if (initialPhaseRef.current !== "done") return;
-      if (event.defaultPrevented) return;
-      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-
-      const anchor = (event.target as Element | null)?.closest("a[href]");
-      if (!(anchor instanceof HTMLAnchorElement)) return;
-      if (!isInternalRouteNavigation(anchor)) return;
-
-      beginRouteLoading();
-    };
-
-    const onPopState = () => {
-      beginRouteLoading();
-    };
-
-    document.addEventListener("click", onNavigateIntent, true);
-    window.addEventListener("popstate", onPopState);
-    return () => {
-      document.removeEventListener("click", onNavigateIntent, true);
-      window.removeEventListener("popstate", onPopState);
-    };
-  }, [ready, beginRouteLoading]);
-
-  /** Finish loader after the new route is active. */
-  useEffect(() => {
-    if (!LOADER_ENABLED || !ready || initialPhase !== "done") return;
-
-    if (isFirstPathEffect.current) {
-      isFirstPathEffect.current = false;
-      prevPath.current = pathname;
-      return;
-    }
-
-    if (prevPath.current === pathname) return;
-    prevPath.current = pathname;
-
-    if (routeStartedAt.current === null) {
-      beginRouteLoading();
-    }
-
-    const startedAt = routeStartedAt.current ?? Date.now();
-    const elapsed = Date.now() - startedAt;
-    const wait = Math.max(0, LOADER_TIMING.routeMs - elapsed);
-
-    const finishTimer = window.setTimeout(finishRouteLoading, wait);
-    const safetyTimer = window.setTimeout(finishRouteLoading, LOADER_TIMING.routeMs + 800);
-
-    return () => {
-      window.clearTimeout(finishTimer);
-      window.clearTimeout(safetyTimer);
-    };
-  }, [pathname, ready, initialPhase, beginRouteLoading, finishRouteLoading]);
 
   const showLoader = useCallback((opts?: { durationMs?: number }) => {
     beginRouteLoading();
