@@ -1,6 +1,14 @@
 export { Button } from "./button";
 export type { ButtonProps, ButtonSize, ButtonType, ButtonVariant } from "./button";
 
+export { Card } from "./card";
+export type {
+  CardElement,
+  CardPadding,
+  CardProps,
+  CardVariant,
+} from "./card";
+
 export {
   Caption,
   Heading,

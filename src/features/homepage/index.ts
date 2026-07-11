@@ -3,10 +3,13 @@ export { HomepageShell } from "./Homepage";
 export { HeaderSection } from "./Header";
 
 export {
+  HeroActions,
+  HeroAssistant,
   HeroContent,
+  HeroDashboard,
   HeroIllustration,
+  HeroMetrics,
   HeroSection,
-  HeroTrustIndicators,
 } from "./Hero";
 
 export { TrustedBySection } from "./TrustedBy";

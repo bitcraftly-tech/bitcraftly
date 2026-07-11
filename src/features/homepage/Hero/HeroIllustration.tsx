@@ -1,25 +1,21 @@
-import { Text } from "@/components/ui/typography";
+import { HeroAssistant } from "./HeroAssistant";
+import { HeroDashboard } from "./HeroDashboard";
 
 export function HeroIllustration() {
   return (
-    <div className="relative w-full">
+    <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
       <div
-        className="pointer-events-none absolute inset-0 overflow-hidden rounded-lg"
+        className="pointer-events-none absolute -inset-[var(--space-6)] -z-10 rounded-[var(--space-8)] hero-brand-gradient opacity-30 blur-3xl"
         aria-hidden="true"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-surface to-accent/10" />
-        <div className="absolute -right-[var(--space-6)] top-[var(--space-2)] size-[var(--space-16)] rounded-full bg-primary/15 blur-[var(--space-2)]" />
-        <div className="absolute bottom-[var(--space-2)] left-[var(--space-1)] size-[var(--space-12)] rounded-full bg-accent/15 blur-[var(--space-2)]" />
-      </div>
+      />
 
       <div
-        className="relative z-10 flex aspect-[4/3] w-full items-center justify-center rounded-lg border border-border bg-surface/80"
+        className="pointer-events-none absolute -left-[var(--space-3)] -top-[var(--space-5)] z-10 hidden size-[var(--space-8)] rounded-xl hero-brand-gradient shadow-lg sm:block lg:-left-[var(--space-4)] lg:-top-[var(--space-6)]"
         aria-hidden="true"
-      >
-        <Text as="span" size="sm" muted>
-          Illustration placeholder
-        </Text>
-      </div>
+      />
+
+      <HeroDashboard />
+      <HeroAssistant />
     </div>
   );
 }

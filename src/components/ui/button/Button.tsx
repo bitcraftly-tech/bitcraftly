@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { cn } from "@/lib/cn";
 import type { ButtonProps, ButtonSize, ButtonVariant } from "./types";
 import type { ReactNode } from "react";
@@ -61,10 +62,28 @@ function ButtonIcon({ children }: { children: ReactNode }) {
   );
 }
 
+function getButtonClassName({
+  variant = "primary",
+  size = "md",
+  fullWidth = false,
+  className,
+}: Pick<ButtonProps, "variant" | "size" | "fullWidth" | "className">) {
+  return cn(
+    "inline-flex items-center justify-center rounded-md font-medium transition-colors",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+    "disabled:pointer-events-none disabled:opacity-50",
+    variantStyles[variant],
+    sizeStyles[size],
+    fullWidth && "w-full",
+    className,
+  );
+}
+
 export function Button({
   variant = "primary",
   size = "md",
   type = "button",
+  href,
   loading = false,
   disabled = false,
   fullWidth = false,
@@ -75,28 +94,44 @@ export function Button({
   ...props
 }: ButtonProps) {
   const isDisabled = disabled || loading;
+  const buttonClassName = getButtonClassName({
+    variant,
+    size,
+    fullWidth,
+    className,
+  });
+
+  const content = (
+    <>
+      {loading ? <ButtonSpinner size={size} /> : null}
+      {loading ? <span className="sr-only">Loading</span> : null}
+      {!loading && iconLeft ? <ButtonIcon>{iconLeft}</ButtonIcon> : null}
+      {children}
+      {!loading && iconRight ? <ButtonIcon>{iconRight}</ButtonIcon> : null}
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        aria-disabled={isDisabled || undefined}
+        className={cn(buttonClassName, isDisabled && "pointer-events-none opacity-50")}
+      >
+        {content}
+      </Link>
+    );
+  }
 
   return (
     <button
       type={type}
       disabled={isDisabled}
       aria-busy={loading || undefined}
-      className={cn(
-        "inline-flex items-center justify-center rounded-md font-medium transition-colors",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        "disabled:pointer-events-none disabled:opacity-50",
-        variantStyles[variant],
-        sizeStyles[size],
-        fullWidth && "w-full",
-        className,
-      )}
+      className={buttonClassName}
       {...props}
     >
-      {loading ? <ButtonSpinner size={size} /> : null}
-      {loading ? <span className="sr-only">Loading</span> : null}
-      {!loading && iconLeft ? <ButtonIcon>{iconLeft}</ButtonIcon> : null}
-      {children}
-      {!loading && iconRight ? <ButtonIcon>{iconRight}</ButtonIcon> : null}
+      {content}
     </button>
   );
 }
