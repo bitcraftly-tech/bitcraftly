@@ -4,4 +4,4 @@ export type {
   SectionElement,
   SectionProps,
   SectionSpacing,
-} from "./section.types";
+} from "./types";

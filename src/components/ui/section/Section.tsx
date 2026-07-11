@@ -1,19 +1,22 @@
 import { cn } from "@/lib/cn";
+import { Container } from "../container";
+import { buildResponsiveClasses } from "../typography/utils";
 import type {
   SectionBackground,
   SectionElement,
   SectionProps,
   SectionSpacing,
-} from "./section.types";
+} from "./types";
 
 const backgroundStyles: Record<SectionBackground, string> = {
   default: "bg-background text-foreground",
   surface: "bg-surface text-surface-foreground",
   muted: "bg-surface text-muted-foreground",
-  none: "",
+  primary: "bg-primary text-primary-foreground",
 };
 
 const spacingStyles: Record<SectionSpacing, string> = {
+  none: "py-0",
   sm: "py-[var(--space-4)]",
   md: "py-[var(--space-6)]",
   lg: "py-[var(--space-8)]",
@@ -34,12 +37,12 @@ export function Section({
     <Element
       className={cn(
         backgroundStyles[background],
-        spacingStyles[spacing],
+        buildResponsiveClasses(spacing, spacingStyles, "lg"),
         className,
       )}
       {...props}
     >
-      {children}
+      <Container>{children}</Container>
     </Element>
   );
 }
