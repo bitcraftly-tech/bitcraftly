@@ -25,6 +25,13 @@ export type {
   IconSize,
 } from "./icon";
 
+export { IconBox } from "./icon-box";
+export type {
+  IconBoxProps,
+  IconBoxSize,
+  IconBoxVariant,
+} from "./icon-box";
+
 export {
   Caption,
   Heading,
