@@ -1,0 +1,89 @@
+---
+description: 
+alwaysApply: true
+---
+
+# Bitcraftly Platform Engineering Standards
+
+You are working on the Bitcraftly Platform.
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- FastAPI (Backend)
+- PostgreSQL
+- JWT Authentication
+
+## Architecture
+
+- Follow feature-based architecture.
+- Keep UI, business logic, services, and utilities separated.
+- Prefer reusable components over duplication.
+- Do not introduce unnecessary abstractions.
+
+## React
+
+- Prefer Server Components.
+- Use Client Components only when required.
+- Keep components focused on a single responsibility.
+- Avoid prop drilling when better patterns exist.
+
+## TypeScript
+
+- Never use `any`.
+- Prefer explicit interfaces and types.
+- Keep strict typing enabled.
+
+## Styling
+
+- Use Tailwind CSS utilities.
+- Avoid custom CSS unless necessary.
+- Never hardcode colors or spacing.
+- Follow the Bitcraftly Design System.
+
+## Code Quality
+
+- Keep code modular and readable.
+- Prefer composition over inheritance.
+- Remove dead code.
+- Avoid duplicated logic.
+
+## Accessibility
+
+- Use semantic HTML.
+- Ensure keyboard accessibility.
+- Add ARIA attributes only when needed.
+- Maintain sufficient color contrast.
+
+## Performance
+
+- Optimize images.
+- Minimize unnecessary client components.
+- Lazy load heavy components.
+- Avoid unnecessary re-renders.
+
+## Git
+
+Use Conventional Commits:
+
+- feat:
+- fix:
+- refactor:
+- docs:
+- test:
+- chore:
+
+## Before Every Change
+
+Always:
+
+1. Understand the existing code.
+2. Explain your implementation plan.
+3. Implement the smallest safe change.
+4. Verify nothing else is broken.
+5. Suggest improvements separately instead of making unrelated changes.
+
+Never rewrite large parts of the project unless explicitly requested.
