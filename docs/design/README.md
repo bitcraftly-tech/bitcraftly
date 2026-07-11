@@ -16,8 +16,8 @@ This directory defines **how the platform looks and feels**. It is the source of
 
 | Document | Description |
 |----------|-------------|
+| Component specs | [UI_COMPONENT_SPECIFICATION.md](./UI_COMPONENT_SPECIFICATION.md) — primitives API, accessibility, patterns |
 | Design tokens | [DESIGN_TOKEN_GUIDE.md](./DESIGN_TOKEN_GUIDE.md) — naming, usage, examples |
-| Component specs | Anatomy, states, and variants for UI primitives |
 | Layout guidelines | Grid, spacing, and breakpoint conventions |
 | Brand assets | Logos, icons, and imagery standards |
 
