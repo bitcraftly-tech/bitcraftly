@@ -16,7 +16,12 @@ export type IconName =
   | "brain"
   | "code"
   | "database"
-  | "cloud";
+  | "cloud"
+  | "trending-up"
+  | "bot"
+  | "workflow"
+  | "zap"
+  | "message";
 
 export type IconSize = "sm" | "md" | "lg" | "xl";
 
@@ -64,4 +69,9 @@ export const ICON_NAMES = [
   "code",
   "database",
   "cloud",
+  "trending-up",
+  "bot",
+  "workflow",
+  "zap",
+  "message",
 ] as const satisfies readonly IconName[];

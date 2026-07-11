@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Heading, Text } from "@/components/ui/typography";
 import { cn } from "@/lib/cn";
 import {
@@ -18,16 +19,18 @@ export function HeroContent() {
         "md:items-start md:text-left",
       )}
     >
-      <div
+      <Badge
+        as="div"
+        variant="outline"
+        size="sm"
+        role="doc-subtitle"
         className={cn(
-          "inline-flex flex-wrap items-center justify-center gap-[var(--space-1)]",
-          "rounded-full border border-border/80 bg-background/70",
-          "px-[var(--space-2)] py-[var(--space-1)]",
+          "inline-flex w-auto flex-wrap items-center justify-center gap-[var(--space-1)]",
+          "border-border/80 bg-background/70 px-[var(--space-2)] py-[var(--space-1)]",
           "text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground",
           "shadow-sm backdrop-blur-md",
           "md:justify-start",
         )}
-        role="doc-subtitle"
       >
         {HERO_EYEBROW.map((segment, index) => (
           <span key={segment.text} className="inline-flex items-center gap-[var(--space-1)]">
@@ -56,7 +59,7 @@ export function HeroContent() {
             )}
           </span>
         ))}
-      </div>
+      </Badge>
 
       <Heading
         id={HERO_HEADING_ID}

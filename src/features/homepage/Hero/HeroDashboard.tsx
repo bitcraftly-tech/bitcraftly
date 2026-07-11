@@ -1,3 +1,7 @@
+import { Badge } from "@/components/ui/badge";
+import { Icon } from "@/components/ui/icon";
+import type { IconName } from "@/components/ui/icon";
+import { IconBox } from "@/components/ui/icon-box";
 import { Text } from "@/components/ui/typography";
 import { cn } from "@/lib/cn";
 import {
@@ -6,16 +10,8 @@ import {
   HERO_DASHBOARD,
   HERO_DASHBOARD_STATS,
 } from "./hero.constants";
-import {
-  BrainIcon,
-  CheckIcon,
-  MessageIcon,
-  TrendingUpIcon,
-  WorkflowIcon,
-  ZapIcon,
-} from "./HeroIcons";
 
-const automationIcons = [ZapIcon, BrainIcon, MessageIcon, CheckIcon] as const;
+const automationIcons = ["zap", "brain", "message", "check"] as const satisfies readonly IconName[];
 
 function HeroSparkline() {
   return (
@@ -103,9 +99,7 @@ export function HeroDashboard() {
 
         <div className="flex items-center justify-between gap-[var(--space-2)]">
           <div className="flex items-center gap-[var(--space-2)]">
-            <div className="grid size-[var(--space-5)] place-items-center rounded-xl hero-brand-gradient shadow-md">
-              <TrendingUpIcon className="size-4 text-primary-foreground" />
-            </div>
+            <IconBox icon="trending-up" variant="primary" size="md" />
             <div>
               <Text as="span" size="sm" className="block font-bold">
                 {HERO_DASHBOARD.title}
@@ -115,10 +109,14 @@ export function HeroDashboard() {
               </Text>
             </div>
           </div>
-          <span className="inline-flex items-center gap-[var(--space-0-5)] rounded-full border border-success/20 bg-success-subtle px-[var(--space-1)] py-[var(--space-0-5)] text-[0.625rem] font-bold text-success">
-            <TrendingUpIcon className="size-2.5" />
+          <Badge
+            variant="success"
+            size="sm"
+            className="gap-[var(--space-0-5)] text-[0.625rem]"
+          >
+            <Icon name="trending-up" size="sm" aria-hidden className="size-2.5" />
             {HERO_DASHBOARD.growth}
-          </span>
+          </Badge>
         </div>
 
         <div className="mt-[var(--space-3)] flex items-end justify-between gap-[var(--space-3)]">
@@ -172,9 +170,12 @@ export function HeroDashboard() {
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-[var(--space-2)]">
-            <div className="grid size-[var(--space-4)] place-items-center rounded-lg hero-brand-gradient-soft">
-              <WorkflowIcon className="text-primary" />
-            </div>
+            <IconBox
+              icon="workflow"
+              variant="default"
+              size="sm"
+              className="[&>div]:hero-brand-gradient-soft [&>div]:border-border"
+            />
             <div className="leading-tight">
               <Text as="span" size="sm" className="block font-bold">
                 {HERO_AUTOMATION.title}
@@ -184,25 +185,29 @@ export function HeroDashboard() {
               </Text>
             </div>
           </div>
-          <span className="inline-flex items-center gap-[var(--space-0-5)] rounded-full border border-primary/20 bg-primary/10 px-[var(--space-1)] py-[var(--space-0-5)] text-[0.5625rem] font-bold uppercase tracking-wider text-primary">
+          <Badge
+            variant="primary"
+            size="sm"
+            className="gap-[var(--space-0-5)] text-[0.5625rem] uppercase tracking-wider"
+          >
             <span className="size-[var(--space-1)] animate-pulse rounded-full bg-primary" />
             {HERO_AUTOMATION.status}
-          </span>
+          </Badge>
         </div>
 
         <div className="mt-[var(--space-3)] flex items-center justify-between gap-[var(--space-1)]">
           {HERO_AUTOMATION_STEPS.map((step, index) => {
-            const Icon = automationIcons[index] ?? CheckIcon;
+            const iconName = automationIcons[index] ?? "check";
             const isLast = index === HERO_AUTOMATION_STEPS.length - 1;
 
             return (
               <div key={step.label} className="flex flex-1 items-center gap-[var(--space-1)]">
                 <div className="flex flex-col items-center gap-[var(--space-1)]">
-                  <div className="relative grid size-[var(--space-5)] place-items-center rounded-xl hero-brand-gradient text-primary-foreground shadow-md">
-                    <Icon className="size-4" />
+                  <div className="relative">
+                    <IconBox icon={iconName} variant="primary" size="md" />
                     {step.completed ? (
                       <span className="absolute -right-1 -top-1 grid size-[var(--space-2)] place-items-center rounded-full border-2 border-background bg-success text-success-foreground">
-                        <CheckIcon className="size-2" />
+                        <Icon name="check" size="sm" className="size-2" aria-hidden />
                       </span>
                     ) : null}
                   </div>

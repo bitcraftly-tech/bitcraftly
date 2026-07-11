@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/cn";
 import { HERO_CTAS } from "./hero.constants";
-import { ArrowRightIcon, ArrowUpRightIcon } from "./HeroIcons";
 
 export function HeroActions() {
   return (
@@ -29,7 +29,11 @@ export function HeroActions() {
                 "border-border-strong bg-background/80 backdrop-blur-sm hover:border-primary/50 hover:text-primary",
             )}
             iconRight={
-              isPrimary ? <ArrowRightIcon /> : <ArrowUpRightIcon />
+              isPrimary ? (
+                <Icon name="arrow-right" size="md" aria-hidden />
+              ) : (
+                <Icon name="arrow-up-right" size="md" aria-hidden />
+              )
             }
           >
             {cta.label}

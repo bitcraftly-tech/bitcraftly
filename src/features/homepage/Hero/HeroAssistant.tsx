@@ -1,10 +1,12 @@
+import { Badge } from "@/components/ui/badge";
+import { Icon } from "@/components/ui/icon";
+import { IconBox } from "@/components/ui/icon-box";
 import { Text } from "@/components/ui/typography";
 import { cn } from "@/lib/cn";
 import {
   HERO_ASSISTANT,
   HERO_ASSISTANT_SUGGESTIONS,
 } from "./hero.constants";
-import { ArrowRightIcon, BotIcon } from "./HeroIcons";
 
 export function HeroAssistant() {
   return (
@@ -18,8 +20,8 @@ export function HeroAssistant() {
       aria-hidden="true"
     >
       <div className="flex items-center gap-[var(--space-2)]">
-        <div className="relative grid size-[var(--space-4)] place-items-center rounded-lg hero-brand-gradient shadow-md">
-          <BotIcon className="size-4 text-primary-foreground" />
+        <div className="relative">
+          <IconBox icon="bot" variant="primary" size="sm" className="shadow-md" />
           <span className="absolute -bottom-0.5 -right-0.5 size-[var(--space-1)] rounded-full border-2 border-background bg-success" />
         </div>
         <div className="leading-tight">
@@ -30,10 +32,14 @@ export function HeroAssistant() {
             {HERO_ASSISTANT.version}
           </Text>
         </div>
-        <span className="ml-auto inline-flex items-center gap-[var(--space-0-5)] text-[0.625rem] font-semibold text-success">
+        <Badge
+          variant="success"
+          size="sm"
+          className="ml-auto gap-[var(--space-0-5)] border-0 bg-transparent px-0 text-[0.625rem] shadow-none"
+        >
           <span className="size-[var(--space-1)] animate-pulse rounded-full bg-success" />
           {HERO_ASSISTANT.status}
-        </span>
+        </Badge>
       </div>
 
       <div className="mt-[var(--space-2)] rounded-xl rounded-tl-sm bg-surface px-[var(--space-2)] py-[var(--space-2)] shadow-sm">
@@ -62,7 +68,7 @@ export function HeroAssistant() {
           >
             <Text as="span" size="sm" className="inline-flex w-full items-center justify-between font-semibold">
               {suggestion.text}
-              <ArrowRightIcon className="size-3 opacity-40" />
+              <Icon name="arrow-right" size="sm" aria-hidden className="opacity-40" />
             </Text>
           </div>
         ))}

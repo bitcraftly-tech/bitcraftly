@@ -84,4 +84,24 @@ export const iconRegistry: Record<IconName, IconDefinition> = {
   cloud: {
     paths: ["M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"],
   },
+  "trending-up": {
+    paths: ["M16 7h6v6", "m22 7-8.5 8.5-5-5L2 17"],
+  },
+  bot: {
+    paths: ["M12 8V4H8", "M2 14h2", "M20 14h2", "M15 13v2", "M9 13v2"],
+    rects: [{ x: 4, y: 8, width: 16, height: 12, rx: 2 }],
+  },
+  workflow: {
+    paths: ["M7 11v4a2 2 0 0 0 2 2h4"],
+    rects: [
+      { x: 3, y: 3, width: 8, height: 8, rx: 2 },
+      { x: 13, y: 13, width: 8, height: 8, rx: 2 },
+    ],
+  },
+  zap: {
+    paths: ["M13 2 3 14h9l-1 8 10-12h-9l1-8z"],
+  },
+  message: {
+    paths: ["M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"],
+  },
 };
