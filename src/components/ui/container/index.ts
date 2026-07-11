@@ -3,4 +3,4 @@ export type {
   ContainerElement,
   ContainerProps,
   ContainerSize,
-} from "./container.types";
+} from "./types";

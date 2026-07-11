@@ -1,16 +1,12 @@
 import { cn } from "@/lib/cn";
-import type {
-  ContainerElement,
-  ContainerProps,
-  ContainerSize,
-} from "./container.types";
+import { buildResponsiveClasses } from "../typography/utils";
+import type { ContainerElement, ContainerProps, ContainerSize } from "./types";
 
 const sizeStyles: Record<ContainerSize, string> = {
   sm: "max-w-[var(--container-sm)]",
   md: "max-w-[var(--container-md)]",
   lg: "max-w-[var(--container-lg)]",
   xl: "max-w-[var(--container-xl)]",
-  "2xl": "max-w-[var(--container-2xl)]",
   full: "max-w-full",
 };
 
@@ -27,7 +23,7 @@ export function Container({
     <Element
       className={cn(
         "mx-auto w-full px-[var(--container-padding)]",
-        sizeStyles[size],
+        buildResponsiveClasses(size, sizeStyles, "xl"),
         className,
       )}
       {...props}
