@@ -1,0 +1,141 @@
+/**
+ * Bitcraftly Typography
+ *
+ * Base typographic styles and utility classes.
+ * Font families are loaded via next/font in src/app/layout.tsx.
+ */
+
+/* -------------------------------------------------------------------------- */
+/* Base typography                                                             */
+/* -------------------------------------------------------------------------- */
+
+body {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Headings                                                                    */
+/* -------------------------------------------------------------------------- */
+
+h1,
+.text-display {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.025em;
+}
+
+h2,
+.text-heading-lg {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.025em;
+}
+
+h3,
+.text-heading-md {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+}
+
+h4,
+.text-heading-sm {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+}
+
+h5 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}
+
+h6 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Body text variants                                                          */
+/* -------------------------------------------------------------------------- */
+
+.text-body-lg {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+}
+
+.text-body {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+}
+
+.text-body-sm {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.text-caption {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
+  color: var(--muted-foreground);
+}
+
+.text-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Monospace                                                                   */
+/* -------------------------------------------------------------------------- */
+
+code,
+kbd,
+pre,
+samp,
+.text-mono {
+  font-family: var(--font-family-mono);
+  font-size: 0.9em;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Links                                                                       */
+/* -------------------------------------------------------------------------- */
+
+a {
+  color: var(--primary);
+  text-decoration-line: underline;
+  text-underline-offset: 0.15em;
+  transition: color var(--duration-fast) var(--ease-default);
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Text utilities                                                              */
+/* -------------------------------------------------------------------------- */
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}

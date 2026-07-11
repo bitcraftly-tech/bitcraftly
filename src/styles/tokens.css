@@ -1,0 +1,265 @@
+/**
+ * Bitcraftly Design Tokens
+ *
+ * Raw CSS custom properties. Tailwind utility mappings are in globals.css
+ * via @theme inline using the --color-* / --spacing-* namespace.
+ *
+ * Contrast targets: WCAG 2.1 AA (4.5:1 body text, 3:1 large text / UI).
+ */
+
+/* -------------------------------------------------------------------------- */
+/* Light theme (default)                                                       */
+/* -------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  /* Colors — brand & neutral */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-foreground: #ffffff;
+
+  --secondary: #64748b;
+  --secondary-hover: #475569;
+  --secondary-foreground: #ffffff;
+
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-foreground: #ffffff;
+
+  --background: #ffffff;
+  --foreground: #0f172a;
+
+  --surface: #f8fafc;
+  --surface-hover: #f1f5f9;
+  --surface-foreground: #0f172a;
+
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  --muted: #64748b;
+  --muted-foreground: #475569;
+
+  /* Colors — semantic feedback */
+  --success: #16a34a;
+  --success-foreground: #ffffff;
+  --success-subtle: #f0fdf4;
+
+  --warning: #d97706;
+  --warning-foreground: #ffffff;
+  --warning-subtle: #fffbeb;
+
+  --error: #dc2626;
+  --error-foreground: #ffffff;
+  --error-subtle: #fef2f2;
+
+  --info: #0284c7;
+  --info-foreground: #ffffff;
+  --info-subtle: #f0f9ff;
+
+  /* Typography — families (injected by next/font in layout.tsx) */
+  --font-family-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-family-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Typography — size */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+
+  /* Typography — line height */
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+
+  /* Typography — weight */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Spacing — 8px base scale */
+  --space-0: 0;
+  --space-0-5: 0.25rem; /* 4px — half-step for fine adjustments */
+  --space-1: 0.5rem; /* 8px */
+  --space-2: 1rem; /* 16px */
+  --space-3: 1.5rem; /* 24px */
+  --space-4: 2rem; /* 32px */
+  --space-5: 2.5rem; /* 40px */
+  --space-6: 3rem; /* 48px */
+  --space-8: 4rem; /* 64px */
+  --space-10: 5rem; /* 80px */
+  --space-12: 6rem; /* 96px */
+  --space-16: 8rem; /* 128px */
+
+  /* Radius */
+  --token-radius-none: 0;
+  --token-radius-sm: 0.25rem; /* 4px */
+  --token-radius-md: 0.5rem; /* 8px */
+  --token-radius-lg: 0.75rem; /* 12px */
+  --token-radius-xl: 1rem; /* 16px */
+  --token-radius-full: 9999px;
+
+  /* Shadow */
+  --token-shadow-xs: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+  --token-shadow-sm: 0 1px 3px 0 rgb(15 23 42 / 0.1), 0 1px 2px -1px rgb(15 23 42 / 0.1);
+  --token-shadow-md: 0 4px 6px -1px rgb(15 23 42 / 0.1), 0 2px 4px -2px rgb(15 23 42 / 0.1);
+  --token-shadow-lg: 0 10px 15px -3px rgb(15 23 42 / 0.1), 0 4px 6px -4px rgb(15 23 42 / 0.1);
+  --token-shadow-xl: 0 20px 25px -5px rgb(15 23 42 / 0.1), 0 8px 10px -6px rgb(15 23 42 / 0.1);
+
+  /* Container */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+  --container-padding: var(--space-4);
+
+  /* Breakpoints (reference values — Tailwind uses these in @theme) */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* Z-index */
+  --z-base: 0;
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-fixed: 1200;
+  --z-modal-backdrop: 1300;
+  --z-modal: 1400;
+  --z-popover: 1500;
+  --z-tooltip: 1600;
+
+  /* Motion — duration */
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+
+  /* Motion — easing */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Dark theme — prefers-color-scheme                                           */
+/* -------------------------------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --primary: #3b82f6;
+    --primary-hover: #60a5fa;
+    --primary-foreground: #0f172a;
+
+    --secondary: #94a3b8;
+    --secondary-hover: #cbd5e1;
+    --secondary-foreground: #0f172a;
+
+    --accent: #8b5cf6;
+    --accent-hover: #a78bfa;
+    --accent-foreground: #0f172a;
+
+    --background: #09090b;
+    --foreground: #fafafa;
+
+    --surface: #18181b;
+    --surface-hover: #27272a;
+    --surface-foreground: #fafafa;
+
+    --border: #27272a;
+    --border-strong: #3f3f46;
+
+    --muted: #a1a1aa;
+    --muted-foreground: #d4d4d8;
+
+    --success: #22c55e;
+    --success-foreground: #052e16;
+    --success-subtle: #14532d;
+
+    --warning: #f59e0b;
+    --warning-foreground: #451a03;
+    --warning-subtle: #78350f;
+
+    --error: #ef4444;
+    --error-foreground: #450a0a;
+    --error-subtle: #7f1d1d;
+
+    --info: #0ea5e9;
+    --info-foreground: #082f49;
+    --info-subtle: #0c4a6e;
+
+    --token-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --token-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+    --token-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+    --token-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+    --token-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Dark theme — explicit class / data attribute (future toggle support)      */
+/* -------------------------------------------------------------------------- */
+
+.dark,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --primary: #3b82f6;
+  --primary-hover: #60a5fa;
+  --primary-foreground: #0f172a;
+
+  --secondary: #94a3b8;
+  --secondary-hover: #cbd5e1;
+  --secondary-foreground: #0f172a;
+
+  --accent: #8b5cf6;
+  --accent-hover: #a78bfa;
+  --accent-foreground: #0f172a;
+
+  --background: #09090b;
+  --foreground: #fafafa;
+
+  --surface: #18181b;
+  --surface-hover: #27272a;
+  --surface-foreground: #fafafa;
+
+  --border: #27272a;
+  --border-strong: #3f3f46;
+
+  --muted: #a1a1aa;
+  --muted-foreground: #d4d4d8;
+
+  --success: #22c55e;
+  --success-foreground: #052e16;
+  --success-subtle: #14532d;
+
+  --warning: #f59e0b;
+  --warning-foreground: #451a03;
+  --warning-subtle: #78350f;
+
+  --error: #ef4444;
+  --error-foreground: #450a0a;
+  --error-subtle: #7f1d1d;
+
+  --info: #0ea5e9;
+  --info-foreground: #082f49;
+  --info-subtle: #0c4a6e;
+
+  --token-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --token-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --token-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --token-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+  --token-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+}
