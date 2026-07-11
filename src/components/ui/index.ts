@@ -9,6 +9,14 @@ export type {
   CardVariant,
 } from "./card";
 
+export { Badge } from "./badge";
+export type {
+  BadgeElement,
+  BadgeProps,
+  BadgeSize,
+  BadgeVariant,
+} from "./badge";
+
 export {
   Caption,
   Heading,
