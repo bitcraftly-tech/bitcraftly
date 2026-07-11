@@ -17,6 +17,14 @@ export type {
   BadgeVariant,
 } from "./badge";
 
+export { Icon, ICON_NAMES, iconRegistry } from "./icon";
+export type {
+  IconDefinition,
+  IconName,
+  IconProps,
+  IconSize,
+} from "./icon";
+
 export {
   Caption,
   Heading,
