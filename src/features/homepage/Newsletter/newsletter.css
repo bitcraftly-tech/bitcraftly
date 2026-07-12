@@ -1,0 +1,104 @@
+/**
+ * Newsletter band — token-based decorative styles only.
+ */
+
+.newsletter-subscribe {
+  background-image: linear-gradient(
+    to right,
+    var(--primary),
+    var(--accent)
+  );
+  color: var(--primary-foreground);
+  box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--primary) 42%, transparent);
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.newsletter-subscribe:hover {
+  opacity: 0.95;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 8px 18px -8px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.newsletter-subscribe:active {
+  transform: translateY(1px);
+}
+
+.newsletter-input {
+  color: var(--foreground);
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.newsletter-input::placeholder {
+  color: var(--muted);
+}
+
+.newsletter-input:hover {
+  border-color: var(--border-strong);
+}
+
+.newsletter-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+.newsletter-form-shell {
+  border: 1px solid var(--border);
+  background-color: var(--background);
+  box-shadow: var(--token-shadow-sm);
+}
+
+.newsletter-form-shell:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.newsletter-form-shell .newsletter-input {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.newsletter-form-shell .newsletter-input:hover,
+.newsletter-form-shell .newsletter-input:focus {
+  border: 0;
+  box-shadow: none;
+}
+
+.newsletter-error {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: #fca5a5;
+}
+
+.newsletter-success {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--token-radius-xl);
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  background-color: color-mix(in srgb, var(--primary) 18%, transparent);
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--inverse-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .newsletter-subscribe,
+  .newsletter-subscribe:hover,
+  .newsletter-subscribe:active {
+    transform: none;
+    transition: none;
+  }
+}

@@ -13,8 +13,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bitcraftly Platform",
-  description: "Enterprise platform for Bitcraftly",
+  title: {
+    default: "Bitcraftly | AI & Digital Engineering Partner",
+    template: "%s | Bitcraftly",
+  },
+  description:
+    "Bitcraftly builds AI-powered websites, SaaS, and automation — founder-led delivery with clear scope and measurable outcomes.",
+  icons: {
+    icon: [{ url: "/brand/icon.png", type: "image/png" }],
+    shortcut: "/brand/favicon.ico",
+    apple: "/brand/icon.png",
+  },
+  metadataBase: new URL("https://bitcraftly.com"),
 };
 
 export default function RootLayout({

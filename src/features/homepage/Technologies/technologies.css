@@ -1,0 +1,118 @@
+/**
+ * Homepage Technologies section — token-based decorative styles.
+ */
+
+.technologies-label {
+  color: var(--primary);
+}
+
+.technologies-card {
+  border: 1px solid var(--hp-card-border, #eef2ff);
+  background-color: var(--background);
+  box-shadow: var(--hp-card-shadow, 0 1px 2px 0 rgb(15 23 42 / 0.04));
+  transition:
+    transform var(--hp-card-transition, 220ms var(--ease-out)),
+    border-color var(--hp-card-transition, 220ms var(--ease-out)),
+    box-shadow var(--hp-card-transition, 220ms var(--ease-out));
+}
+
+.technologies-card:hover,
+.technologies-card:focus-within {
+  transform: translateY(var(--hp-card-lift, -6px));
+  border-color: color-mix(in srgb, var(--primary) 45%, #eef2ff);
+  box-shadow: var(--hp-card-shadow-hover);
+}
+
+.technologies-card-logo {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  filter: grayscale(0.35);
+  opacity: 0.92;
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    filter var(--duration-normal) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out);
+}
+
+.technologies-card:hover .technologies-card-logo,
+.technologies-card:focus-within .technologies-card-logo {
+  transform: scale(1.08);
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.technologies-marquee {
+  overflow: hidden;
+  width: 100%;
+}
+
+.technologies-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 12px;
+  padding-block: 4px;
+  animation: technologies-marquee-scroll 55s linear infinite;
+}
+
+.technologies-marquee:hover .technologies-marquee-track,
+.technologies-marquee:focus-within .technologies-marquee-track {
+  animation-play-state: paused;
+}
+
+.technologies-marquee-item {
+  flex: 0 0 auto;
+  width: 168px;
+}
+
+@media (min-width: 640px) {
+  .technologies-marquee-item {
+    width: 188px;
+  }
+}
+
+@keyframes technologies-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.technologies-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
+}
+
+.technologies-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .technologies-card,
+  .technologies-card:hover,
+  .technologies-card:focus-within,
+  .technologies-card-logo,
+  .technologies-reveal,
+  .technologies-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .technologies-marquee {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .technologies-marquee-track {
+    animation: none;
+  }
+}

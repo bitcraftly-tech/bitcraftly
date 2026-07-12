@@ -1,0 +1,137 @@
+/**
+ * Final CTA — large premium gradient card (Process side CTA language).
+ */
+
+.final-cta-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  padding: 32px;
+  background: linear-gradient(135deg, #0e144a 0%, #1c2885 100%);
+  color: var(--primary-foreground);
+  box-shadow:
+    var(--token-shadow-md),
+    0 24px 48px -24px rgb(14 20 74 / 0.6);
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.final-cta-card::before {
+  content: "";
+  position: absolute;
+  inset: -40% auto auto 40%;
+  width: 280px;
+  height: 280px;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 35%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.final-cta-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    var(--token-shadow-md),
+    0 28px 56px -22px rgb(14 20 74 / 0.68);
+}
+
+@media (min-width: 640px) {
+  .final-cta-card {
+    padding: 40px 48px;
+  }
+}
+
+.final-cta-title {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--primary-foreground);
+}
+
+@media (min-width: 640px) {
+  .final-cta-title {
+    font-size: 34px;
+  }
+}
+
+.final-cta-description {
+  margin: 12px 0 0;
+  max-width: 540px;
+  font-family: var(--font-family-sans);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--primary-foreground) 82%, transparent);
+}
+
+@media (min-width: 640px) {
+  .final-cta-description {
+    font-size: 16px;
+  }
+}
+
+.final-cta-button-primary {
+  background-color: #ffffff;
+  color: #0e144a;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.final-cta-button-primary:hover {
+  background-color: color-mix(in srgb, #ffffff 92%, #0e144a);
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 10px 24px -14px rgb(255 255 255 / 0.55);
+}
+
+.final-cta-button-secondary {
+  border: 1px solid color-mix(in srgb, #ffffff 35%, transparent);
+  background-color: transparent;
+  color: #ffffff;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.final-cta-button-secondary:hover {
+  border-color: color-mix(in srgb, #ffffff 60%, transparent);
+  background-color: color-mix(in srgb, #ffffff 10%, transparent);
+  transform: translateY(-1px) scale(1.02);
+}
+
+.final-cta-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
+}
+
+.final-cta-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .final-cta-card,
+  .final-cta-card:hover,
+  .final-cta-button-primary,
+  .final-cta-button-primary:hover,
+  .final-cta-button-secondary,
+  .final-cta-button-secondary:hover,
+  .final-cta-reveal,
+  .final-cta-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

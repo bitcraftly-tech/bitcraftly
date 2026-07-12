@@ -1,6 +1,37 @@
 export { Button } from "./button";
 export type { ButtonProps, ButtonSize, ButtonType, ButtonVariant } from "./button";
 
+export { Card } from "./card";
+export type {
+  CardElement,
+  CardPadding,
+  CardProps,
+  CardVariant,
+} from "./card";
+
+export { Badge } from "./badge";
+export type {
+  BadgeElement,
+  BadgeProps,
+  BadgeSize,
+  BadgeVariant,
+} from "./badge";
+
+export { Icon, ICON_NAMES, iconRegistry } from "./icon";
+export type {
+  IconDefinition,
+  IconName,
+  IconProps,
+  IconSize,
+} from "./icon";
+
+export { IconBox } from "./icon-box";
+export type {
+  IconBoxProps,
+  IconBoxSize,
+  IconBoxVariant,
+} from "./icon-box";
+
 export {
   Caption,
   Heading,

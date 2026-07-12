@@ -40,6 +40,13 @@
   --muted: #64748b;
   --muted-foreground: #475569;
 
+  /* Inverse surface — marketing chrome (footer) */
+  --inverse: #0b1220;
+  --inverse-foreground: #ffffff;
+  --inverse-muted: #94a3b8;
+  --inverse-border: color-mix(in srgb, var(--inverse-muted) 20%, transparent);
+  --inverse-elevated: color-mix(in srgb, var(--inverse-muted) 14%, transparent);
+
   /* Colors — semantic feedback */
   --success: #16a34a;
   --success-foreground: #ffffff;
