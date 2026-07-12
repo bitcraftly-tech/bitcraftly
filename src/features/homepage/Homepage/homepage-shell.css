@@ -1,0 +1,76 @@
+/**
+ * Homepage shell — section rhythm + shared premium polish tokens.
+ * Founder + Cost Calculator are a paired conversion block — no divider between them.
+ */
+
+.homepage-sections > * + * {
+  border-top: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+}
+
+.homepage-sections > #founder-message + #cost-calculator {
+  border-top: none;
+}
+
+/**
+ * Between-section rhythm:
+ * mobile 72px (36+36), tablet 96px (48+48), desktop 120px (60+60)
+ */
+.homepage-section {
+  padding-block: 36px;
+}
+
+@media (min-width: 768px) {
+  .homepage-section {
+    padding-block: 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .homepage-section {
+    padding-block: 60px;
+  }
+}
+
+/* Paired Founder ↔ Calculator: tighter join, still premium */
+.homepage-sections > #founder-message.homepage-section {
+  padding-bottom: 24px;
+}
+
+.homepage-sections > #cost-calculator.homepage-section {
+  padding-top: 24px;
+}
+
+@media (min-width: 768px) {
+  .homepage-sections > #founder-message.homepage-section {
+    padding-bottom: 28px;
+  }
+
+  .homepage-sections > #cost-calculator.homepage-section {
+    padding-top: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .homepage-sections > #founder-message.homepage-section {
+    padding-bottom: 32px;
+  }
+
+  .homepage-sections > #cost-calculator.homepage-section {
+    padding-top: 32px;
+  }
+}
+
+/**
+ * Shared card hover language (Stripe/Linear-like lift).
+ */
+.homepage-sections {
+  --hp-card-radius: 16px;
+  --hp-card-padding: 24px;
+  --hp-card-border: #eef2ff;
+  --hp-card-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.04);
+  --hp-card-shadow-hover:
+    var(--token-shadow-md),
+    0 16px 36px -20px color-mix(in srgb, var(--primary) 28%, transparent);
+  --hp-card-lift: -6px;
+  --hp-card-transition: 220ms var(--ease-out);
+}

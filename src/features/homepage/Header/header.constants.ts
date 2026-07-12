@@ -1,23 +1,19 @@
-import type { HeaderActionLink, HeaderNavLink } from "./header.types";
+import {
+  NAVIGATION,
+  type SiteNavAction,
+  type SiteNavLink,
+} from "@/constants/navigation";
 
 export const HEADER_ID = "header";
 export const HEADER_NAV_ID = "header-main-navigation";
 export const HEADER_MOBILE_MENU_ID = "header-mobile-menu";
 
-export const HEADER_NAV_LINKS: HeaderNavLink[] = [
-  { label: "Services", href: "#services" },
-  { label: "Solutions", href: "#industries" },
-  { label: "Process", href: "#development-process" },
-  { label: "Work", href: "#testimonials" },
-  { label: "About", href: "#why-bitcraftly" },
-];
+/** Approved header chrome height (72–76px band). */
+export const HEADER_HEIGHT_PX = 74;
 
-export const HEADER_BOOK_CALL: HeaderActionLink = {
-  label: "Book a Call",
-  href: "#final-cta",
-};
+/** Data-driven primary nav — sourced from NAVIGATION config. */
+export const HEADER_NAV_LINKS: readonly SiteNavLink[] = NAVIGATION.primary;
 
-export const HEADER_CTA: HeaderActionLink = {
-  label: "Get Consultation",
-  href: "#final-cta",
-};
+export const HEADER_BOOK_CALL: SiteNavAction = NAVIGATION.actions.bookCall;
+
+export const HEADER_CTA: SiteNavAction = NAVIGATION.actions.freeConsultation;

@@ -9,13 +9,13 @@ export function HeroSection() {
   return (
     <Section
       id={HERO_ID}
-      spacing="xl"
+      spacing="none"
       aria-labelledby={HERO_HEADING_ID}
       className={cn(
         "relative overflow-hidden hero-surface",
-        "pt-[var(--space-8)] pb-[var(--space-10)]",
-        "md:pt-[var(--space-10)] md:pb-[var(--space-12)]",
-        "lg:pt-[var(--space-12)] lg:pb-[var(--space-16)]",
+        "pt-[20px] pb-[24px]",
+        "md:pt-[28px] md:pb-[32px]",
+        "lg:pt-[32px] lg:pb-[40px]",
       )}
     >
       <div
@@ -43,11 +43,15 @@ export function HeroSection() {
         className={cn(
           "relative grid grid-cols-1 items-center gap-[var(--space-8)]",
           "md:gap-[var(--space-10)]",
-          "lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-[var(--space-8)]",
+          "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-center lg:gap-[var(--space-3)]",
         )}
       >
-        <HeroContent />
-        <HeroIllustration />
+        <div className="min-w-0">
+          <HeroContent />
+        </div>
+        <div className="min-w-0">
+          <HeroIllustration />
+        </div>
       </div>
     </Section>
   );

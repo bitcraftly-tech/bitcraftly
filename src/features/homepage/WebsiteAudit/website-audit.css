@@ -1,0 +1,109 @@
+/**
+ * Free Website Audit CTA band.
+ */
+
+.website-audit-label {
+  color: var(--primary);
+}
+
+.website-audit-badges {
+  margin: 0;
+}
+
+.website-audit-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, #eef2ff);
+  background-color: #f0f4ff;
+  font-family: var(--font-family-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.website-audit-card {
+  border: 1px solid #eef2ff;
+  background-color: var(--background);
+  box-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.04);
+}
+
+.website-audit-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.website-audit-check-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background-color: #f0f4ff;
+  color: var(--primary);
+}
+
+.website-audit-button-primary {
+  background-image: linear-gradient(to right, var(--primary), var(--accent));
+  color: var(--primary-foreground);
+  box-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.08);
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.website-audit-button-primary:hover {
+  opacity: 0.95;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 10px 22px -14px color-mix(in srgb, var(--primary) 55%, transparent);
+}
+
+.website-audit-button-outline {
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+  background-color: var(--background);
+  color: var(--foreground);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.website-audit-button-outline:hover {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.website-audit-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
+}
+
+.website-audit-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .website-audit-reveal,
+  .website-audit-reveal.is-visible,
+  .website-audit-button-primary,
+  .website-audit-button-primary:hover {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

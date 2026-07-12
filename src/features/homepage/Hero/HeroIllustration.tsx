@@ -1,21 +1,33 @@
-import { HeroAssistant } from "./HeroAssistant";
-import { HeroDashboard } from "./HeroDashboard";
+import Image from "next/image";
+import { cn } from "@/lib/cn";
 
+/** Cache-bust so public asset swaps show up immediately in dev. */
+const HERO_IMAGE_SRC = "/hero-new.png?v=20260713-3";
+
+/**
+ * Keeps its own aspect box so the graphic stays large and fully visible.
+ */
 export function HeroIllustration() {
   return (
-    <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
+    <div
+      className={cn(
+        "relative mx-auto w-full min-w-0 max-w-xl aspect-[5/4]",
+        "lg:mx-0 lg:max-w-none lg:aspect-[4/3] lg:min-h-[420px]",
+      )}
+    >
       <div
-        className="pointer-events-none absolute -inset-[var(--space-6)] -z-10 rounded-[var(--space-8)] hero-brand-gradient opacity-30 blur-3xl"
-        aria-hidden="true"
+        className="pointer-events-none absolute inset-[8%] -z-10 rounded-[32px] hero-brand-gradient opacity-40 blur-3xl"
+        aria-hidden
       />
-
-      <div
-        className="pointer-events-none absolute -left-[var(--space-3)] -top-[var(--space-5)] z-10 hidden size-[var(--space-8)] rounded-xl hero-brand-gradient shadow-lg sm:block lg:-left-[var(--space-4)] lg:-top-[var(--space-6)]"
-        aria-hidden="true"
+      <Image
+        src={HERO_IMAGE_SRC}
+        alt="Bitcraftly product dashboard — AI, revenue, projects and analytics overview"
+        fill
+        priority
+        unoptimized
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        className="hero-illustration-image object-contain object-center"
       />
-
-      <HeroDashboard />
-      <HeroAssistant />
     </div>
   );
 }

@@ -111,17 +111,16 @@ samp,
 
 /* -------------------------------------------------------------------------- */
 /* Links                                                                       */
+/* Components (TextLink, NavigationLink, Button, Logo) own color/underline.    */
 /* -------------------------------------------------------------------------- */
 
 a {
-  color: var(--primary);
-  text-decoration-line: underline;
-  text-underline-offset: 0.15em;
+  text-decoration-line: none;
   transition: color var(--duration-fast) var(--ease-default);
 }
 
 a:hover {
-  color: var(--primary-hover);
+  text-decoration-line: none;
 }
 
 /* -------------------------------------------------------------------------- */

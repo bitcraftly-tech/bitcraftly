@@ -1,17 +1,12 @@
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@/components/ui/icon";
-import type { IconName } from "@/components/ui/icon";
 import { IconBox } from "@/components/ui/icon-box";
 import { Text } from "@/components/ui/typography";
 import { cn } from "@/lib/cn";
 import {
-  HERO_AUTOMATION,
-  HERO_AUTOMATION_STEPS,
   HERO_DASHBOARD,
   HERO_DASHBOARD_STATS,
 } from "./hero.constants";
-
-const automationIcons = ["zap", "brain", "message", "check"] as const satisfies readonly IconName[];
 
 function HeroSparkline() {
   return (
@@ -76,26 +71,37 @@ function HeroDashboardStatBars({ index }: { index: number }) {
   );
 }
 
-export function HeroDashboard() {
+export function HeroDashboard({
+  decorative = true,
+  showBrowserChrome = true,
+  className,
+}: {
+  decorative?: boolean;
+  /** Window dots + URL bar (e.g. app.bitcraftly.com/analytics). */
+  showBrowserChrome?: boolean;
+  className?: string;
+}) {
   return (
-    <div className="space-y-[var(--space-3)]">
-      <div
-        className={cn(
-          "relative rounded-xl border border-border-strong bg-background",
-          "p-[var(--space-4)] shadow-lg",
-        )}
-        aria-hidden="true"
-      >
-        <div className="mb-[var(--space-3)] flex items-center gap-[var(--space-1)]">
-          <span className="size-[var(--space-1)] rounded-full bg-error/60" />
-          <span className="size-[var(--space-1)] rounded-full bg-warning/70" />
-          <span className="size-[var(--space-1)] rounded-full bg-success/70" />
-          <div className="ml-[var(--space-2)] flex-1 rounded-md border border-border bg-surface px-[var(--space-2)] py-[var(--space-0-5)]">
-            <Text as="span" size="sm" muted className="text-[0.625rem] font-medium">
-              {HERO_DASHBOARD.url}
-            </Text>
+    <div
+      className={cn(
+        "relative flex h-auto w-full flex-col overflow-visible rounded-xl border border-border-strong bg-background",
+        "p-[var(--space-4)] shadow-lg sm:p-[var(--space-5)]",
+        className,
+      )}
+      aria-hidden={decorative ? true : undefined}
+    >
+        {showBrowserChrome ? (
+          <div className="mb-[var(--space-3)] flex items-center gap-[var(--space-1)]">
+            <span className="size-[var(--space-1)] rounded-full bg-error/60" />
+            <span className="size-[var(--space-1)] rounded-full bg-warning/70" />
+            <span className="size-[var(--space-1)] rounded-full bg-success/70" />
+            <div className="ml-[var(--space-2)] flex-1 rounded-md border border-border bg-surface px-[var(--space-2)] py-[var(--space-0-5)]">
+              <Text as="span" size="sm" muted className="text-[0.625rem] font-medium">
+                {HERO_DASHBOARD.url}
+              </Text>
+            </div>
           </div>
-        </div>
+        ) : null}
 
         <div className="flex items-center justify-between gap-[var(--space-2)]">
           <div className="flex items-center gap-[var(--space-2)]">
@@ -119,15 +125,15 @@ export function HeroDashboard() {
           </Badge>
         </div>
 
-        <div className="mt-[var(--space-3)] flex items-end justify-between gap-[var(--space-3)]">
-          <div>
+        <div className="mt-[var(--space-3)] flex flex-col gap-[var(--space-3)] sm:flex-row sm:items-end sm:justify-between">
+          <div className="min-w-0">
             <Text as="span" size="sm" muted className="text-[0.6875rem] font-medium">
               {HERO_DASHBOARD.revenueLabel}
             </Text>
-            <p className="hero-revenue-value mt-[var(--space-1)] text-[2.125rem] font-extrabold leading-none tracking-tight">
+            <p className="hero-revenue-value mt-[var(--space-1)] text-[2.125rem] font-extrabold leading-none tracking-tight sm:text-[2.375rem]">
               {HERO_DASHBOARD.revenueValue}
             </p>
-            <Text as="span" size="sm" muted className="mt-[var(--space-1)] text-[0.625rem] font-semibold">
+            <Text as="span" size="sm" muted className="mt-[var(--space-1)] block text-[0.625rem] font-semibold">
               vs{" "}
               <span className="text-foreground">{HERO_DASHBOARD.previousValue}</span>{" "}
               prev.
@@ -140,7 +146,7 @@ export function HeroDashboard() {
           {HERO_DASHBOARD_STATS.map((stat, index) => (
             <div
               key={stat.label}
-              className="relative overflow-hidden rounded-xl border border-border hero-brand-gradient-soft p-[var(--space-2)] shadow-sm"
+              className="relative overflow-hidden rounded-xl border border-border hero-brand-gradient-soft p-[var(--space-2)] shadow-sm sm:p-[var(--space-3)]"
             >
               <Text
                 as="span"
@@ -150,7 +156,7 @@ export function HeroDashboard() {
               >
                 {stat.label}
               </Text>
-              <p className="mt-[var(--space-1)] text-[1.1875rem] font-extrabold tracking-tight text-foreground">
+              <p className="mt-[var(--space-1)] text-[1.1875rem] font-extrabold tracking-tight text-foreground sm:text-[1.375rem]">
                 {stat.value}
               </p>
               <div className="mt-[var(--space-1)] flex items-center gap-[var(--space-0-5)]">
@@ -162,67 +168,6 @@ export function HeroDashboard() {
             </div>
           ))}
         </div>
-      </div>
-
-      <div
-        className="relative rounded-xl border border-border-strong bg-background p-[var(--space-3)] shadow-md"
-        aria-hidden="true"
-      >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-[var(--space-2)]">
-            <IconBox
-              icon="workflow"
-              variant="default"
-              size="sm"
-              className="[&>div]:hero-brand-gradient-soft [&>div]:border-border"
-            />
-            <div className="leading-tight">
-              <Text as="span" size="sm" className="block font-bold">
-                {HERO_AUTOMATION.title}
-              </Text>
-              <Text as="span" size="sm" muted className="text-[0.5625rem] font-medium">
-                {HERO_AUTOMATION.subtitle}
-              </Text>
-            </div>
-          </div>
-          <Badge
-            variant="primary"
-            size="sm"
-            className="gap-[var(--space-0-5)] text-[0.5625rem] uppercase tracking-wider"
-          >
-            <span className="size-[var(--space-1)] animate-pulse rounded-full bg-primary" />
-            {HERO_AUTOMATION.status}
-          </Badge>
-        </div>
-
-        <div className="mt-[var(--space-3)] flex items-center justify-between gap-[var(--space-1)]">
-          {HERO_AUTOMATION_STEPS.map((step, index) => {
-            const iconName = automationIcons[index] ?? "check";
-            const isLast = index === HERO_AUTOMATION_STEPS.length - 1;
-
-            return (
-              <div key={step.label} className="flex flex-1 items-center gap-[var(--space-1)]">
-                <div className="flex flex-col items-center gap-[var(--space-1)]">
-                  <div className="relative">
-                    <IconBox icon={iconName} variant="primary" size="md" />
-                    {step.completed ? (
-                      <span className="absolute -right-1 -top-1 grid size-[var(--space-2)] place-items-center rounded-full border-2 border-background bg-success text-success-foreground">
-                        <Icon name="check" size="sm" className="size-2" aria-hidden />
-                      </span>
-                    ) : null}
-                  </div>
-                  <Text as="span" size="sm" muted className="text-[0.5625rem] font-semibold">
-                    {step.label}
-                  </Text>
-                </div>
-                {!isLast ? (
-                  <div className="relative h-px flex-1 hero-automation-connector" aria-hidden="true" />
-                ) : null}
-              </div>
-            );
-          })}
-        </div>
-      </div>
     </div>
   );
 }

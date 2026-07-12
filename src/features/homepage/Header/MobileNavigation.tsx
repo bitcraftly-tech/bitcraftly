@@ -1,33 +1,38 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/cn";
 import {
   HEADER_BOOK_CALL,
   HEADER_CTA,
+  HEADER_HEIGHT_PX,
   HEADER_MOBILE_MENU_ID,
   HEADER_NAV_LINKS,
 } from "./header.constants";
+import { MobileNavAccordion } from "./MobileNavAccordion";
 import { NavigationLink } from "./NavigationLink";
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export function MobileNavigation() {
-  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const [openForPath, setOpenForPath] = useState<string | null>(null);
+  const open = openForPath === pathname;
   const menuLabelId = useId();
   const panelId = HEADER_MOBILE_MENU_ID;
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
   const closeMenu = useCallback(() => {
-    setOpen(false);
+    setOpenForPath(null);
   }, []);
 
   const toggleMenu = useCallback(() => {
-    setOpen((current) => !current);
-  }, []);
+    setOpenForPath((current) => (current === pathname ? null : pathname));
+  }, [pathname]);
 
   useEffect(() => {
     if (!open) {
@@ -91,8 +96,8 @@ export function MobileNavigation() {
         ref={triggerRef}
         type="button"
         className={cn(
-          "inline-flex size-10 items-center justify-center rounded-lg lg:hidden",
-          "text-foreground transition-colors hover:bg-surface",
+          "inline-flex size-[40px] items-center justify-center rounded-lg xl:hidden",
+          "text-foreground transition-colors duration-200 hover:bg-surface",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         )}
         aria-expanded={open}
@@ -110,42 +115,37 @@ export function MobileNavigation() {
           role="dialog"
           aria-modal="true"
           aria-labelledby={menuLabelId}
-          className="header-mobile-menu fixed inset-x-0 top-16 z-[calc(var(--z-sticky)-1)] border-t border-border bg-background/95 backdrop-blur-xl lg:hidden"
+          className="header-mobile-menu fixed inset-x-0 z-[calc(var(--z-sticky)-1)] overflow-y-auto border-t border-border bg-background/95 backdrop-blur-xl xl:hidden"
+          style={{
+            top: HEADER_HEIGHT_PX,
+            maxHeight: `calc(100dvh - ${HEADER_HEIGHT_PX}px)`,
+          }}
         >
           <div className="mx-auto w-full max-w-[var(--container-xl)] px-[var(--container-padding)] py-[var(--space-4)]">
             <p id={menuLabelId} className="sr-only">
               Mobile navigation menu
             </p>
 
-            <nav
-              aria-label="Mobile navigation"
-              className="flex flex-col gap-[var(--space-1)]"
-            >
-              {HEADER_NAV_LINKS.map((link) => (
-                <NavigationLink
-                  key={link.href}
-                  href={link.href}
-                  label={link.label}
-                  onClick={closeMenu}
-                  className="px-[var(--space-2)] py-[var(--space-2)] text-base"
-                />
-              ))}
-            </nav>
+            <MobileNavAccordion
+              links={HEADER_NAV_LINKS}
+              pathname={pathname}
+              onNavigate={closeMenu}
+            />
 
             <div className="mt-[var(--space-4)] flex flex-col gap-[var(--space-2)] border-t border-border pt-[var(--space-4)]">
               <NavigationLink
                 href={HEADER_BOOK_CALL.href}
                 label={HEADER_BOOK_CALL.label}
                 onClick={closeMenu}
-                className="justify-center px-[var(--space-2)] py-[var(--space-2)] text-center text-base font-semibold"
+                className="justify-center px-[var(--space-2)] py-[var(--space-2)] text-center text-base font-semibold after:hidden"
               />
               <NavigationLink
                 href={HEADER_CTA.href}
                 label={HEADER_CTA.label}
                 onClick={closeMenu}
                 className={cn(
-                  "header-brand-gradient flex items-center justify-center gap-[var(--space-1)]",
-                  "rounded-xl px-[var(--space-4)] py-[var(--space-3)] text-base font-semibold text-primary-foreground shadow-lg",
+                  "header-brand-gradient flex items-center justify-center gap-[var(--space-1)] after:hidden",
+                  "rounded-lg px-6 py-3 text-base font-semibold text-primary-foreground shadow-md",
                 )}
               />
             </div>

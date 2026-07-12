@@ -1,42 +1,80 @@
 import type {
   HeroAssistantSuggestion,
   HeroAutomationStep,
+  HeroCapabilityTag,
   HeroCta,
   HeroDashboardStat,
-  HeroEyebrowSegment,
   HeroMetric,
 } from "./hero.types";
+import { getServiceHref } from "@/constants/services";
+import { NAV_ACTIONS, ROUTES, SECTION_IDS } from "@/constants/navigation";
 
-export const HERO_ID = "hero";
+export const HERO_ID = SECTION_IDS.hero;
 export const HERO_HEADING_ID = "hero-heading";
 
-export const HERO_EYEBROW: HeroEyebrowSegment[] = [
-  { text: "AI-Powered", highlight: true },
-  { text: "Performance" },
-  { text: "Results Driven" },
-];
+export const HERO_EYEBROW_LABEL =
+  "AI-Powered • Performance Focused • Results Driven";
 
 export const HERO_HEADING = {
-  prefix: "We build",
-  highlight: "AI-powered",
-  suffix: "digital products that drive business growth",
+  prefix: "We Build AI-Powered Digital Products That Drive",
+  highlight: "Business Growth",
+  suffix: "",
 } as const;
 
 export const HERO_DESCRIPTION =
-  "From high-performance websites to AI automation and custom software — Bitcraftly helps ambitious teams launch, scale, and lead in the digital era.";
+  "From high-performance websites to AI automation and custom software, we help businesses launch, scale, and lead in the digital era.";
 
 export const HERO_CTAS: HeroCta[] = [
   {
-    label: "Get Free Consultation",
-    href: "#cta",
+    label: NAV_ACTIONS.freeConsultation.label,
+    href: NAV_ACTIONS.freeConsultation.href,
     variant: "primary",
   },
   {
-    label: "View Our Work",
-    href: "#projects",
+    label: NAV_ACTIONS.viewWork.label,
+    href: NAV_ACTIONS.viewWork.href,
     variant: "outline",
   },
 ];
+
+export const HERO_CAPABILITY_TAGS: readonly HeroCapabilityTag[] = [
+  {
+    id: "ai-solutions",
+    label: "AI Solutions",
+    icon: "brain",
+    href: getServiceHref("ai-solutions"),
+  },
+  {
+    id: "erp",
+    label: "ERP",
+    icon: "trending-up",
+    href: getServiceHref("custom-software-development"),
+  },
+  {
+    id: "crm",
+    label: "CRM",
+    icon: "bot",
+    href: getServiceHref("custom-software-development"),
+  },
+  {
+    id: "cms",
+    label: "CMS",
+    icon: "layout-grid",
+    href: getServiceHref("website-development"),
+  },
+  {
+    id: "saas",
+    label: "SaaS",
+    icon: "cloud",
+    href: getServiceHref("web-application-development"),
+  },
+  {
+    id: "automation",
+    label: "Automation",
+    icon: "workflow",
+    href: getServiceHref("ai-solutions"),
+  },
+] as const;
 
 export const HERO_METRICS: HeroMetric[] = [
   { value: "18+", label: "Years of Experience" },
@@ -63,15 +101,24 @@ export const HERO_DASHBOARD_STATS: HeroDashboardStat[] = [
 
 export const HERO_ASSISTANT = {
   name: "Bitcraftly AI",
-  version: "Assistant · v2.4",
+  version: "Assistant · Bitcraftly",
   status: "Online",
-  message: "Hi! How can I help you today?",
+  message: "Tell us what you need — website, AI, or automation.",
 } as const;
 
 export const HERO_ASSISTANT_SUGGESTIONS: HeroAssistantSuggestion[] = [
-  { text: "Need a website" },
-  { text: "Need AI solution" },
-  { text: "Need automation" },
+  {
+    text: "Need a website",
+    href: `${ROUTES.contact}?intent=website&source=ask-ai`,
+  },
+  {
+    text: "Need AI solution",
+    href: `${ROUTES.contact}?intent=ai&source=ask-ai`,
+  },
+  {
+    text: "Need automation",
+    href: `${ROUTES.contact}?intent=automation&source=ask-ai`,
+  },
 ];
 
 export const HERO_AUTOMATION = {

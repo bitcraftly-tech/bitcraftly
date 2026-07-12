@@ -1,0 +1,120 @@
+/**
+ * Featured Portfolio — premium cards matching homepage language.
+ */
+
+.portfolio-label {
+  color: var(--primary);
+}
+
+.portfolio-filter {
+  border: 1px solid #eef2ff;
+  background-color: var(--background);
+  color: var(--foreground);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.portfolio-filter:hover {
+  border-color: color-mix(in srgb, var(--primary) 35%, #eef2ff);
+  color: var(--primary);
+}
+
+.portfolio-filter.is-active {
+  border-color: transparent;
+  background-image: linear-gradient(to right, var(--primary), var(--accent));
+  color: var(--primary-foreground);
+}
+
+.portfolio-card {
+  border: 1px solid var(--hp-card-border, #eef2ff);
+  background-color: var(--background);
+  box-shadow: var(--hp-card-shadow, 0 1px 2px 0 rgb(15 23 42 / 0.04));
+  transition:
+    transform var(--hp-card-transition, 220ms var(--ease-out)),
+    border-color var(--hp-card-transition, 220ms var(--ease-out)),
+    box-shadow var(--hp-card-transition, 220ms var(--ease-out));
+}
+
+.portfolio-card:hover,
+.portfolio-card:focus-within {
+  transform: translateY(var(--hp-card-lift, -6px));
+  border-color: color-mix(in srgb, var(--primary) 45%, #eef2ff);
+  box-shadow: var(--hp-card-shadow-hover);
+}
+
+.portfolio-card-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  aspect-ratio: 16 / 10;
+}
+
+.portfolio-card-media-visual {
+  position: absolute;
+  inset: 0;
+  background-color: #eef2ff;
+  transition: transform 0.55s var(--ease-out);
+}
+
+.portfolio-card:hover .portfolio-card-media-visual,
+.portfolio-card:focus-within .portfolio-card-media-visual {
+  transform: scale(1.06);
+}
+
+.portfolio-card-media-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(
+    to top,
+    rgb(15 23 42 / 0.35),
+    rgb(15 23 42 / 0.05) 45%,
+    transparent
+  );
+  opacity: 0.9;
+  transition: opacity var(--duration-normal) var(--ease-out);
+  pointer-events: none;
+}
+
+.portfolio-card:hover .portfolio-card-media-overlay,
+.portfolio-card:focus-within .portfolio-card-media-overlay {
+  opacity: 1;
+}
+
+.portfolio-card-actions {
+  opacity: 0.92;
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.portfolio-card:hover .portfolio-card-actions,
+.portfolio-card:focus-within .portfolio-card-actions {
+  opacity: 1;
+}
+
+.portfolio-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
+}
+
+.portfolio-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-card,
+  .portfolio-card:hover,
+  .portfolio-card:focus-within,
+  .portfolio-card-media-visual,
+  .portfolio-reveal,
+  .portfolio-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

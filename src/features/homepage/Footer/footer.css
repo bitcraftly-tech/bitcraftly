@@ -1,0 +1,64 @@
+/**
+ * Footer surface — maps approved inverse chrome to semantic utilities.
+ * Colors come only from design tokens (`--inverse*`, `--primary*`, `--background`).
+ */
+
+.footer-surface {
+  background-color: var(--inverse);
+  color: var(--inverse-foreground);
+}
+
+/**
+ * Footer column labels (Services, Solutions, Resources, Company, Contact Us).
+ * Not page headings — explicit label typography, not h1–h6 / Heading styles.
+ */
+.footer-heading {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm); /* 14px */
+  font-weight: var(--font-weight-semibold); /* 600 */
+  line-height: 20px;
+  letter-spacing: 0;
+  color: var(--inverse-foreground);
+}
+
+.footer-muted {
+  color: var(--inverse-muted);
+}
+
+.footer-link {
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  font-weight: var(--font-weight-normal); /* 400 */
+  line-height: var(--line-height-snug);
+  color: var(--inverse-muted);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.footer-link:hover {
+  color: var(--inverse-foreground);
+}
+
+.footer-social-link {
+  color: var(--inverse-foreground);
+  background-color: var(--inverse-elevated);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.footer-social-link:hover {
+  background-color: color-mix(in srgb, var(--inverse-muted) 28%, transparent);
+  color: var(--inverse-foreground);
+  transform: translateY(-3px) scale(1.04);
+}
+
+.footer-focus-ring {
+  outline: none;
+}
+
+.footer-focus-ring:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}

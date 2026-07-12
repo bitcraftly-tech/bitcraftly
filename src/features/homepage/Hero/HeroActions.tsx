@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/cn";
 import { HERO_CTAS } from "./hero.constants";
@@ -15,29 +15,17 @@ export function HeroActions() {
         const isPrimary = cta.variant === "primary";
 
         return (
-          <Button
+          <Link
             key={cta.label}
             href={cta.href}
-            variant={isPrimary ? "primary" : "outline"}
-            size="lg"
-            fullWidth
             className={cn(
-              "rounded-xl sm:w-auto",
-              isPrimary &&
-                "hero-brand-gradient border-0 text-primary-foreground shadow-lg hover:opacity-95",
-              !isPrimary &&
-                "border-border-strong bg-background/80 backdrop-blur-sm hover:border-primary/50 hover:text-primary",
+              "hero-cta",
+              isPrimary ? "hero-cta-primary" : "hero-cta-outline",
             )}
-            iconRight={
-              isPrimary ? (
-                <Icon name="arrow-right" size="md" aria-hidden />
-              ) : (
-                <Icon name="arrow-up-right" size="md" aria-hidden />
-              )
-            }
           >
             {cta.label}
-          </Button>
+            <Icon name="arrow-right" size="sm" aria-hidden />
+          </Link>
         );
       })}
     </div>

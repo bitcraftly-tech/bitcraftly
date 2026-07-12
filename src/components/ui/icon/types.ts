@@ -21,8 +21,20 @@ export type IconName =
   | "bot"
   | "workflow"
   | "zap"
-  | "message";
-
+  | "message"
+  | "calendar"
+  | "linkedin"
+  | "github"
+  | "x"
+  | "instagram"
+  | "youtube"
+  | "mail"
+  | "phone"
+  | "map-pin"
+  | "layout-grid"
+  | "smartphone"
+  | "search"
+  | "headset";
 export type IconSize = "sm" | "md" | "lg" | "xl";
 
 export interface IconDefinition {
@@ -74,4 +86,17 @@ export const ICON_NAMES = [
   "workflow",
   "zap",
   "message",
+  "calendar",
+  "linkedin",
+  "github",
+  "x",
+  "instagram",
+  "youtube",
+  "mail",
+  "phone",
+  "map-pin",
+  "layout-grid",
+  "smartphone",
+  "search",
+  "headset",
 ] as const satisfies readonly IconName[];

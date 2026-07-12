@@ -1,1 +1,3 @@
-export { HomepageShell } from "./HomepageShell";
+import { HomepageShell } from "./HomepageShell";
+
+export { HomepageShell };
