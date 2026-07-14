@@ -11,6 +11,8 @@ import "./ask-ai.css";
 export function AskAiTab() {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const tabRef = useRef<HTMLButtonElement>(null);
+  const wasOpenRef = useRef(false);
   const panelId = useId();
 
   useEffect(() => {
@@ -38,6 +40,23 @@ export function AskAiTab() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (open) {
+      wasOpenRef.current = true;
+      const frame = requestAnimationFrame(() => {
+        rootRef.current
+          ?.querySelector<HTMLButtonElement>(".ask-ai-panel-close")
+          ?.focus();
+      });
+      return () => cancelAnimationFrame(frame);
+    }
+
+    if (wasOpenRef.current) {
+      wasOpenRef.current = false;
+      tabRef.current?.focus();
+    }
+  }, [open]);
+
   return (
     <div ref={rootRef} className="ask-ai-root">
       {open ? (
@@ -45,6 +64,7 @@ export function AskAiTab() {
       ) : null}
 
       <button
+        ref={tabRef}
         type="button"
         className="ask-ai-tab"
         aria-label={open ? "Close Ask AI" : "Ask AI"}

@@ -1,0 +1,1 @@
+export { MarketingFinalCtaBand } from "./MarketingFinalCtaBand";

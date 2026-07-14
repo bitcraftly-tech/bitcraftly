@@ -1,6 +1,7 @@
 /**
- * Homepage shell — section rhythm + shared premium polish tokens.
- * Founder + Cost Calculator are a paired conversion block — no divider between them.
+ * Homepage shell — section dividers + card tokens.
+ * Vertical rhythm (`.homepage-section`) lives in `@/lib/layout/page-shell.css`
+ * so every marketing route shares the same spacing.
  */
 
 .homepage-sections > * + * {
@@ -9,26 +10,6 @@
 
 .homepage-sections > #founder-message + #cost-calculator {
   border-top: none;
-}
-
-/**
- * Between-section rhythm:
- * mobile 72px (36+36), tablet 96px (48+48), desktop 120px (60+60)
- */
-.homepage-section {
-  padding-block: 36px;
-}
-
-@media (min-width: 768px) {
-  .homepage-section {
-    padding-block: 48px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .homepage-section {
-    padding-block: 60px;
-  }
 }
 
 /* Paired Founder ↔ Calculator: tighter join, still premium */

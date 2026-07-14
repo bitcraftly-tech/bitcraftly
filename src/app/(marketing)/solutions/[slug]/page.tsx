@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { MarketingPageShell } from "@/components/patterns/marketing-page-shell";
 import {
   getSolutionBySlug,
   getSolutionHref,
   SOLUTION_SLUGS,
 } from "@/constants/navigation";
+import {
+  getSolutionPageContent,
+  SolutionDetailPage,
+} from "@/features/solutions";
 import { createPageMetadata } from "@/lib/seo/createPageMetadata";
 
 interface SolutionSlugPageProps {
@@ -20,9 +23,10 @@ export async function generateMetadata({
   params,
 }: SolutionSlugPageProps): Promise<Metadata> {
   const { slug } = await params;
+  const content = getSolutionPageContent(slug);
   const solution = getSolutionBySlug(slug);
 
-  if (!solution) {
+  if (!content || !solution) {
     return createPageMetadata({
       title: "Solution",
       description: "Bitcraftly business and AI solutions.",
@@ -31,9 +35,10 @@ export async function generateMetadata({
   }
 
   return createPageMetadata({
-    title: solution.label,
-    description: solution.description,
+    title: content.label,
+    description: content.metaDescription,
     path: getSolutionHref(slug),
+    keywords: content.keywords,
   });
 }
 
@@ -41,17 +46,11 @@ export default async function SolutionSlugPage({
   params,
 }: SolutionSlugPageProps) {
   const { slug } = await params;
-  const solution = getSolutionBySlug(slug);
+  const content = getSolutionPageContent(slug);
 
-  if (!solution) {
+  if (!content) {
     notFound();
   }
 
-  return (
-    <MarketingPageShell
-      title={solution.label}
-      description={solution.description}
-      headingId={`${solution.slug}-page-heading`}
-    />
-  );
+  return <SolutionDetailPage content={content} />;
 }

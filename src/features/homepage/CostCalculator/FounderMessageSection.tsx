@@ -16,7 +16,7 @@ export function FounderMessageSection() {
       aria-labelledby={content.headingId}
       className="bg-background text-foreground homepage-section"
     >
-      <Container size="xl" className="max-w-[1280px] px-[var(--space-4)]">
+      <Container size="xl">
         <HomepageReveal name="founder-message">
           <FounderMessageExperience content={content} />
         </HomepageReveal>

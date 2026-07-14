@@ -34,7 +34,6 @@ export function trackCostCalculatorEvent(
   window.dataLayer.push(entry);
 
   if (process.env.NODE_ENV === "development") {
-    // eslint-disable-next-line no-console -- intentional local analytics debug
     console.info("[analytics]", entry);
   }
 }

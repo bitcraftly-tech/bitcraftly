@@ -1,53 +1,42 @@
-import Link from "next/link";
-import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
-import { Heading, Text } from "@/components/ui/typography";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { NAV_ACTIONS, WORK_PAGE_SECTIONS } from "@/constants/navigation";
+import { MarketingIllustratedHero } from "@/components/patterns/hero-compositions";
+import {
+  PageShell,
+  Section,
+  SectionContent,
+  SectionHeader,
+} from "@/components/patterns/marketing-layout";
+import { NAV_ACTIONS, ROUTES, WORK_PAGE_SECTIONS } from "@/constants/navigation";
 import { buildWorkBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { cn } from "@/lib/cn";
+import { WorkHeroVisual } from "./WorkHeroVisual";
 
 export function WorkLandingPage() {
   const breadcrumbs = buildWorkBreadcrumbs();
 
   return (
-    <div className="flex flex-1 flex-col">
-      <Section
-        spacing="xl"
-        aria-labelledby="work-page-heading"
-        className="border-b border-border/60"
-      >
-        <Container size="xl" className="max-w-[1280px] px-[32px]">
-          <MarketingBreadcrumbs items={breadcrumbs} className="mb-[var(--space-4)]" />
-          <Heading id="work-page-heading" level={1} className="max-w-3xl">
-            Work
-          </Heading>
-          <Text muted className="mt-[var(--space-2)] max-w-2xl">
-            Explore Bitcraftly projects, case studies, portfolio work, and
-            measurable business outcomes across industries.
-          </Text>
-          <div className="mt-[var(--space-5)] flex flex-wrap gap-[12px]">
-            <Link
-              href="/work/featured-projects"
-              className={cn(
-                "inline-flex h-[40px] items-center justify-center rounded-[10px] px-[14px]",
-                "bg-gradient-to-r from-primary to-accent text-[13px] font-medium text-primary-foreground no-underline",
-              )}
-            >
-              Featured Projects
-            </Link>
-            <Link
-              href={NAV_ACTIONS.bookCall.href}
-              className={cn(
-                "inline-flex h-[40px] items-center justify-center rounded-[10px] border border-border px-[14px]",
-                "bg-background text-[13px] font-medium text-foreground no-underline hover:bg-surface",
-              )}
-            >
-              {NAV_ACTIONS.bookCall.label}
-            </Link>
-          </div>
-        </Container>
-      </Section>
+    <PageShell>
+      <MarketingIllustratedHero
+        breadcrumbs={breadcrumbs}
+        headingId="work-page-heading"
+        eyebrow="Our work"
+        title="Portfolio, case studies, and outcomes that prove the craft"
+        titleHighlight="outcomes"
+        description="Explore Bitcraftly projects across industries — product builds, websites, and enterprise systems with measurable results."
+        supporting="Browse featured work, case studies, and delivery notes before we scope your next build."
+        primaryCta={{
+          label: "Featured projects",
+          href: "/work/featured-projects",
+        }}
+        secondaryCta={{
+          label: NAV_ACTIONS.bookCall.label,
+          href: NAV_ACTIONS.bookCall.href,
+        }}
+        trustItems={[
+          "Real client outcomes",
+          "Cross-industry delivery",
+          "Founder-led quality",
+        ]}
+        visual={<WorkHeroVisual />}
+      />
 
       {WORK_PAGE_SECTIONS.filter((section) => section.id !== "hero").map(
         (section) => (
@@ -58,20 +47,23 @@ export function WorkLandingPage() {
             aria-labelledby={`${section.id}-heading`}
             className="border-b border-border/40 last:border-b-0"
           >
-            <Container size="xl" className="max-w-[1280px] px-[32px]">
-              <Heading id={`${section.id}-heading`} level={2}>
-                {section.title}
-              </Heading>
-              <Text muted className="mt-[var(--space-2)] max-w-2xl">
-                {section.description}
-              </Text>
-              <Text as="p" size="sm" muted className="mt-[var(--space-3)]">
+            <SectionContent>
+              <SectionHeader
+                id={`${section.id}-heading`}
+                title={section.title}
+                description={section.description}
+              />
+              <p className="mt-[var(--space-3)] m-0 font-sans text-[13px] text-muted-foreground">
                 Section content coming soon.
-              </Text>
-            </Container>
+              </p>
+            </SectionContent>
           </Section>
         ),
       )}
-    </div>
+    </PageShell>
   );
 }
+
+export const WORK_LANDING_META = {
+  path: ROUTES.work,
+} as const;

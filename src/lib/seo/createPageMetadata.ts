@@ -21,20 +21,23 @@ export function createPageMetadata({
   image = DEFAULT_OG_IMAGE,
 }: CreatePageMetadataInput): Metadata {
   const url = `${SITE_URL}${path}`;
-  const fullTitle = title.includes(SITE_NAME)
-    ? title
-    : `${title} | ${SITE_NAME}`;
+  const alreadyBranded = title.includes(SITE_NAME);
+  /** Absolute title when input already includes the brand (avoids `| Bitcraftly | Bitcraftly`). */
+  const metadataTitle = alreadyBranded
+    ? ({ absolute: title } as const)
+    : title;
+  const socialTitle = alreadyBranded ? title : `${title} | ${SITE_NAME}`;
   const imageUrl = image.startsWith("http") ? image : `${SITE_URL}${image}`;
 
   return {
-    title: fullTitle,
+    title: metadataTitle,
     description,
     keywords: keywords ? [...keywords] : undefined,
     alternates: {
       canonical: path,
     },
     openGraph: {
-      title: fullTitle,
+      title: socialTitle,
       description,
       url,
       siteName: SITE_NAME,
@@ -45,13 +48,13 @@ export function createPageMetadata({
           url: imageUrl,
           width: 1200,
           height: 630,
-          alt: fullTitle,
+          alt: socialTitle,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: fullTitle,
+      title: socialTitle,
       description,
       images: [imageUrl],
     },

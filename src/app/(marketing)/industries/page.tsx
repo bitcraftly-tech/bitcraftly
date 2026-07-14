@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MarketingPageShell } from "@/components/patterns/marketing-page-shell";
+import { IndustriesLandingPage } from "@/features/industries";
 import { ROUTES } from "@/constants/navigation";
 import { createPageMetadata } from "@/lib/seo/createPageMetadata";
 
@@ -11,11 +11,5 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function IndustriesPage() {
-  return (
-    <MarketingPageShell
-      title="Industries"
-      description="See how Bitcraftly partners with teams across industries to ship reliable, AI-ready digital products."
-      headingId="industries-page-heading"
-    />
-  );
+  return <IndustriesLandingPage />;
 }

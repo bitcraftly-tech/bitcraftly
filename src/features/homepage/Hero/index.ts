@@ -1,9 +1,7 @@
 export { HeroActions } from "./HeroActions";
-export { HeroAssistant } from "./HeroAssistant";
 export { HeroContent } from "./HeroContent";
 export { HeroDashboard } from "./HeroDashboard";
 export { HeroIllustration } from "./HeroIllustration";
-export { HeroMetrics } from "./HeroMetrics";
 export { HeroSection } from "./HeroSection";
 export { HeroTags } from "./HeroTags";
 export {

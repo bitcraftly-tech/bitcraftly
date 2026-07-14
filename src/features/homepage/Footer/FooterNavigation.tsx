@@ -27,7 +27,7 @@ export function FooterNavigation({
     return (
       <div
         className={cn(
-          "grid grid-cols-2 gap-x-[var(--space-2)] gap-y-[var(--space-3)]",
+          "grid grid-cols-2 gap-x-[var(--space-2)] gap-y-[var(--space-3)] md:grid-cols-4",
           className,
         )}
       >

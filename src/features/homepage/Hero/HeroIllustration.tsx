@@ -6,6 +6,7 @@ const HERO_IMAGE_SRC = "/hero-new.png?v=20260713-3";
 
 /**
  * Keeps its own aspect box so the graphic stays large and fully visible.
+ * Matches `feature/homepage` — cube only (Ask AI lives in AskAiTab).
  */
 export function HeroIllustration() {
   return (

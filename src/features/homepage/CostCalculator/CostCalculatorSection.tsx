@@ -41,7 +41,7 @@ export function CostCalculatorSection() {
       className="bg-background text-foreground homepage-section"
     >
       <CostCalculatorJsonLd />
-      <Container size="xl" className="max-w-[1280px] px-[var(--space-4)]">
+      <Container size="xl">
         <HomepageReveal name="cost-calculator">
           <CostCalculatorExperience content={content} />
         </HomepageReveal>

@@ -18,7 +18,7 @@ export function PortfolioSection() {
       aria-labelledby={PORTFOLIO_HEADING_ID}
       className="bg-background text-foreground homepage-section"
     >
-      <Container size="xl" className="max-w-[1280px] px-[var(--space-4)]">
+      <Container size="xl">
         <HomepageReveal
           name="portfolio"
           className="mx-auto max-w-[640px] text-center"

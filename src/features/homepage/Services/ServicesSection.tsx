@@ -20,7 +20,7 @@ export function ServicesSection() {
       aria-labelledby={SERVICES_HEADING_ID}
       className="bg-background text-foreground homepage-section"
     >
-      <Container size="xl" className="max-w-[1280px] px-[var(--space-4)]">
+      <Container size="xl">
         <ServicesReveal className="mx-auto max-w-[640px] text-center">
           <p
             className={cn(
@@ -67,7 +67,7 @@ export function ServicesSection() {
           {HOMEPAGE_SERVICES.map((service, index) => (
             <li key={service.id} className="min-w-0">
               <ServicesReveal delayMs={index * 70} className="h-full">
-                <ServiceCard service={service} />
+                <ServiceCard service={service} variant="homepage" />
               </ServicesReveal>
             </li>
           ))}

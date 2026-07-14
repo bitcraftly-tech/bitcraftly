@@ -58,10 +58,7 @@ export function NewsletterSection() {
         "py-[16px]",
       )}
     >
-      <Container
-        size="xl"
-        className="max-w-[var(--container-xl)] px-[var(--space-4)]"
-      >
+      <Container size="xl">
         <div className="mx-auto flex w-full max-w-[560px] flex-col items-center text-center">
           <p
             id={headingId}
@@ -78,7 +75,7 @@ export function NewsletterSection() {
             className={cn(
               "footer-muted m-0 mb-[var(--space-2)]",
               "font-sans text-[length:var(--font-size-sm)] font-[var(--font-weight-normal)]",
-              "leading-[var(--line-height-snug)] sm:whitespace-nowrap",
+              "leading-[var(--line-height-snug)] md:whitespace-nowrap",
             )}
           >
             {NEWSLETTER_COPY.description}
@@ -97,13 +94,16 @@ export function NewsletterSection() {
               onSubmit={onSubmit}
               noValidate
               aria-busy={isLoading}
-              className="newsletter-form-shell flex h-[48px] w-full items-stretch overflow-hidden rounded-[var(--token-radius-xl)] p-0"
+              className={cn(
+                "newsletter-form-shell flex w-full flex-col overflow-hidden rounded-[var(--token-radius-xl)] p-0",
+                "sm:h-[48px] sm:flex-row sm:items-stretch",
+              )}
             >
               <label htmlFor="newsletter-section-email" className="sr-only">
                 {NEWSLETTER_COPY.emailLabel}
               </label>
 
-              <div className="relative min-w-0 flex-1">
+              <div className="relative min-h-[48px] min-w-0 flex-1 sm:min-h-0">
                 <span
                   className="pointer-events-none absolute top-1/2 left-[12px] -translate-y-1/2 text-muted"
                   aria-hidden
@@ -146,8 +146,9 @@ export function NewsletterSection() {
                 disabled={isLoading}
                 className={cn(
                   "newsletter-subscribe group/newsletter",
-                  "inline-flex h-full shrink-0 items-center justify-center gap-[6px]",
-                  "rounded-none rounded-r-[calc(var(--token-radius-xl)-1px)] px-[16px]",
+                  "inline-flex min-h-[44px] w-full shrink-0 items-center justify-center gap-[6px] sm:h-full sm:w-auto",
+                  "rounded-none rounded-b-[calc(var(--token-radius-xl)-1px)] px-[16px]",
+                  "sm:rounded-b-none sm:rounded-r-[calc(var(--token-radius-xl)-1px)]",
                   "border-0 font-sans text-[13px] font-[var(--font-weight-semibold)]",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
                   "disabled:cursor-not-allowed disabled:opacity-80",

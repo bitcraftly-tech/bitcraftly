@@ -227,7 +227,7 @@ export function DesktopNavigation() {
           onMouseEnter={() => openMenu(openLink.href, true)}
           onMouseLeave={() => closeMenu()}
         >
-          <div className="mx-auto w-full max-w-[1280px] px-[32px]">
+          <div className="mx-auto w-full max-w-[var(--container-xl)] px-[var(--container-padding)]">
             <MegaMenuPanel
               link={openLink}
               menuId={`${baseId}-${openLink.href}-menu`}

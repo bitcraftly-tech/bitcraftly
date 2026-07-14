@@ -19,7 +19,7 @@ export function TestimonialsSection() {
       aria-labelledby={TESTIMONIALS_HEADING_ID}
       className="bg-surface text-foreground homepage-section"
     >
-      <Container size="xl" className="max-w-[1280px] px-[var(--space-4)]">
+      <Container size="xl">
         <HomepageReveal
           name="testimonials"
           className="mx-auto w-full max-w-[760px] text-center"

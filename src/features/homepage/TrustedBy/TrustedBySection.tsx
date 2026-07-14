@@ -18,7 +18,7 @@ export function TrustedBySection() {
       aria-labelledby={TRUSTED_BY_HEADING_ID}
       className="trusted-by-section text-foreground"
     >
-      <Container size="xl" className="max-w-[1280px] px-[var(--space-4)]">
+      <Container size="xl">
         <TrustedByReveal>
           <div
             className={cn(

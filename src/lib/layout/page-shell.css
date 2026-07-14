@@ -1,0 +1,58 @@
+/**
+ * Marketing layout system — section rhythm + shared shell utilities.
+ * Imported once from `(marketing)/layout.tsx` so every route inherits it.
+ *
+ * `.page-shell`     → non-homepage marketing sections (equal top/bottom).
+ * `.homepage-section` → homepage only (owned separately; do not couple edits).
+ */
+
+/* Non-homepage section vertical rhythm — equal padding-block */
+.page-shell {
+  padding-block: 36px;
+}
+
+@media (min-width: 768px) {
+  .page-shell {
+    padding-block: 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-shell {
+    padding-block: 60px;
+  }
+}
+
+/* Homepage section vertical rhythm — unchanged from established homepage design */
+.homepage-section {
+  padding-block: 36px;
+}
+
+@media (min-width: 768px) {
+  .homepage-section {
+    padding-block: 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .homepage-section {
+    padding-block: 60px;
+  }
+}
+
+/* Compact section (sticky toolbars only — not content sections) */
+.page-shell-sm {
+  padding-block: 20px;
+}
+
+@media (min-width: 768px) {
+  .page-shell-sm {
+    padding-block: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-shell-sm {
+    padding-block: 32px;
+  }
+}

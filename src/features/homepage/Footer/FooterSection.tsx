@@ -16,10 +16,7 @@ export function FooterSection() {
       id={FOOTER_ID}
       className={cn("footer-surface", "pt-[var(--space-2)] pb-[var(--space-2)]")}
     >
-      <Container
-        size="xl"
-        className="max-w-[var(--container-xl)] px-[var(--space-4)]"
-      >
+      <Container size="xl">
         {/* Mobile / tablet */}
         <div className="flex flex-col gap-[var(--space-3)] xl:hidden">
           <FooterBrand />
@@ -34,7 +31,7 @@ export function FooterSection() {
         <div
           className={cn(
             "hidden items-start xl:grid",
-            "xl:grid-cols-[250px_170px_170px_170px_170px_180px]",
+            "xl:grid-cols-[minmax(200px,1.2fr)_repeat(4,minmax(0,1fr))_minmax(160px,0.9fr)]",
             "xl:gap-x-[var(--space-1)] xl:justify-between",
           )}
         >

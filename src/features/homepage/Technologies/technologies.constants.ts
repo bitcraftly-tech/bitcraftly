@@ -6,8 +6,8 @@ import type {
 
 const TECHNOLOGIES_BASE = ROUTES.services;
 
-export function getTechnologyHref(_slug: string): string {
-  return ROUTES.services;
+export function getTechnologyHref(slug: string): string {
+  return `${TECHNOLOGIES_BASE}?tech=${encodeURIComponent(slug)}`;
 }
 
 export const TECHNOLOGIES_SECTION_ID = "technologies";

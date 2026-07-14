@@ -1,11 +1,25 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 interface AnimatedNumberProps {
   value: number;
   format: (value: number) => string;
   className?: string;
+}
+
+function subscribeReducedMotion(onStoreChange: () => void): () => void {
+  const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+  media.addEventListener("change", onStoreChange);
+  return () => media.removeEventListener("change", onStoreChange);
+}
+
+function getReducedMotionSnapshot(): boolean {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function getReducedMotionServerSnapshot(): boolean {
+  return false;
 }
 
 /** Lightweight price counter — no framer dependency. */
@@ -14,17 +28,17 @@ export function AnimatedNumber({
   format,
   className,
 }: AnimatedNumberProps) {
+  const reduceMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot,
+  );
   const [display, setDisplay] = useState(value);
   const frameRef = useRef<number | null>(null);
   const fromRef = useRef(value);
 
   useEffect(() => {
-    const reduceMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
     if (reduceMotion) {
-      setDisplay(value);
       fromRef.current = value;
       return;
     }
@@ -52,7 +66,9 @@ export function AnimatedNumber({
         cancelAnimationFrame(frameRef.current);
       }
     };
-  }, [value]);
+  }, [value, reduceMotion]);
 
-  return <span className={className}>{format(display)}</span>;
+  const shown = reduceMotion ? value : display;
+
+  return <span className={className}>{format(shown)}</span>;
 }

@@ -22,7 +22,7 @@ export function ProcessSection() {
       aria-labelledby={PROCESS_HEADING_ID}
       className="scroll-mt-[80px] bg-background text-foreground homepage-section"
     >
-      <Container size="xl" className="max-w-[1280px] px-[var(--space-4)]">
+      <Container size="xl">
         <ProcessReveal className="mx-auto max-w-[640px] text-center">
           <p
             className={cn(

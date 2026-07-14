@@ -26,3 +26,69 @@ export function buildWorkBreadcrumbs(
     ...crumbs,
   ]);
 }
+
+/** Home → Services → … service crumbs. */
+export function buildServicesBreadcrumbs(
+  crumbs: readonly BreadcrumbItem[] = [],
+): BreadcrumbItem[] {
+  return buildBreadcrumbs([
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    ...crumbs,
+  ]);
+}
+
+/** Home → Solutions → … solution crumbs. */
+export function buildSolutionsBreadcrumbs(
+  crumbs: readonly BreadcrumbItem[] = [],
+): BreadcrumbItem[] {
+  return buildBreadcrumbs([
+    { label: "Home", href: "/" },
+    { label: "Solutions", href: "/solutions" },
+    ...crumbs,
+  ]);
+}
+
+/** Home → Industries → … industry crumbs. */
+export function buildIndustriesBreadcrumbs(
+  crumbs: readonly BreadcrumbItem[] = [],
+): BreadcrumbItem[] {
+  return buildBreadcrumbs([
+    { label: "Home", href: "/" },
+    { label: "Industries", href: "/industries" },
+    ...crumbs,
+  ]);
+}
+
+/** Home → Case Studies → … crumbs. */
+export function buildCaseStudiesBreadcrumbs(
+  crumbs: readonly BreadcrumbItem[] = [],
+): BreadcrumbItem[] {
+  return buildBreadcrumbs([
+    { label: "Home", href: "/" },
+    { label: "Case Studies", href: "/case-studies" },
+    ...crumbs,
+  ]);
+}
+
+/** Home → Pricing. */
+export function buildPricingBreadcrumbs(
+  crumbs: readonly BreadcrumbItem[] = [],
+): BreadcrumbItem[] {
+  return buildBreadcrumbs([
+    { label: "Home", href: "/" },
+    { label: "Pricing", href: "/pricing" },
+    ...crumbs,
+  ]);
+}
+
+/** Home → Contact. */
+export function buildContactBreadcrumbs(
+  crumbs: readonly BreadcrumbItem[] = [],
+): BreadcrumbItem[] {
+  return buildBreadcrumbs([
+    { label: "Home", href: "/" },
+    { label: "Contact", href: "/contact" },
+    ...crumbs,
+  ]);
+}

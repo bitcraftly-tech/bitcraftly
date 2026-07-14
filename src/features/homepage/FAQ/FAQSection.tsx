@@ -1,7 +1,7 @@
+import { FaqAccordion } from "@/components/patterns/faq-accordion";
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/cn";
 import { HomepageReveal } from "../shared/HomepageReveal";
-import { FaqAccordion } from "./FaqAccordion";
 import {
   FAQ_DESCRIPTION,
   FAQ_HEADING,
@@ -42,7 +42,7 @@ export function FAQSection() {
       className="bg-background text-foreground homepage-section"
     >
       <FaqJsonLd />
-      <Container size="xl" className="max-w-[1280px] px-[var(--space-4)]">
+      <Container size="xl">
         <HomepageReveal name="faq" className="mx-auto max-w-[640px] text-center">
           <p
             className={cn(
@@ -78,7 +78,7 @@ export function FAQSection() {
 
         <div className="mt-[var(--space-6)]">
           <HomepageReveal name="faq" delayMs={80}>
-            <FaqAccordion />
+            <FaqAccordion items={FAQ_ITEMS} />
           </HomepageReveal>
         </div>
       </Container>

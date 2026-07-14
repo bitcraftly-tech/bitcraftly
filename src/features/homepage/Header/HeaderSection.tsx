@@ -21,7 +21,7 @@ export function HeaderSection() {
     <HeaderRoot>
       <Container
         size="xl"
-        className="grid h-full max-w-[1280px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-[20px] px-[32px] xl:gap-x-[24px]"
+        className="grid h-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-[20px] xl:gap-x-[24px]"
       >
         <div className="min-w-0 shrink-0">
           <Logo />

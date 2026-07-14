@@ -1,11 +1,9 @@
+import type { ReactNode } from "react";
+
 /**
- * Services segment layout — reserved for shared chrome around
- * /services and future /services/[slug] child pages.
+ * Services segment layout — chrome comes from the marketing layout.
+ * Reserved for future shared services-only wrappers.
  */
-export default function ServicesLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function ServicesLayout({ children }: { children: ReactNode }) {
   return children;
 }

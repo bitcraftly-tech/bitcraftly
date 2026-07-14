@@ -15,18 +15,25 @@ const backgroundStyles: Record<SectionBackground, string> = {
   primary: "bg-primary text-primary-foreground",
 };
 
+/**
+ * Vertical rhythm for non-homepage marketing sections.
+ * `lg` / `xl` → `.page-shell` (equal 36 / 48 / 60 top & bottom).
+ * `sm` / `md` → compact toolbars only (`.page-shell-sm`).
+ * Homepage sections use `.homepage-section` separately — do not couple.
+ */
 const spacingStyles: Record<SectionSpacing, string> = {
   none: "py-0",
-  sm: "py-[var(--space-4)]",
-  md: "py-[var(--space-6)]",
-  lg: "py-[var(--space-8)]",
-  xl: "py-[var(--space-12)]",
+  sm: "page-shell-sm",
+  md: "page-shell-sm",
+  lg: "page-shell",
+  xl: "page-shell",
 };
 
 export function Section({
   background = "default",
   spacing = "lg",
   as: Component = "section",
+  contained = true,
   className,
   children,
   ...props
@@ -42,7 +49,11 @@ export function Section({
       )}
       {...props}
     >
-      <Container>{children}</Container>
+      {contained ? (
+        <Container size="xl">{children}</Container>
+      ) : (
+        children
+      )}
     </Element>
   );
 }

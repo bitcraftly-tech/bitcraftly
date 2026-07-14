@@ -20,7 +20,7 @@ export function PerformanceSection() {
       aria-labelledby={PERFORMANCE_HEADING_ID}
       className="bg-surface text-foreground homepage-section"
     >
-      <Container size="xl" className="max-w-[1280px] px-[var(--space-4)]">
+      <Container size="xl">
         <HomepageReveal
           name="performance"
           className="mx-auto w-full text-center"

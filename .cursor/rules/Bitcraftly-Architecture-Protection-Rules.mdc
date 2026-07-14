@@ -1,0 +1,65 @@
+---
+description: Bitcraftly Architecture Protection Rules — frozen pages, page isolation, pre-change Task Summary gate
+alwaysApply: true
+---
+
+# Bitcraftly Architecture Protection Rules
+
+Before making **ANY** change, follow these mandatory rules.
+
+## Isolation
+
+1. Modify **ONLY** the target page mentioned in the prompt.
+2. Do **NOT** modify any other page.
+3. Do **NOT** modify Homepage.
+4. Do **NOT** modify Services.
+5. Do **NOT** modify Solutions.
+6. Do **NOT** modify any frozen page.
+
+## Frozen pages (read-only)
+
+| Page | Route | Paths |
+|------|-------|--------|
+| Homepage | `/` | `src/features/homepage/**` |
+| Services | `/services` | `src/features/services/**` |
+| Solutions | `/solutions` | `src/features/solutions/**` |
+
+Treat as read-only. Bug fixes only when the user explicitly requests them for that page.
+
+## Shared components
+
+7. Never edit a shared component if the change affects existing pages.
+8. If a shared component must change → create a **new page-specific** component instead.
+
+## Pre-change gate (required)
+
+9. Before coding, print:
+
+```
+Task Summary
+Target Page: <page name>
+Files to Modify:
+Files to Create:
+Shared Components Modified:
+Frozen Pages Affected:
+```
+
+If **Frozen Pages Affected** is not `None` → **STOP** and do not continue (unless the user explicitly instructed editing that frozen page).
+
+## Reuse
+
+10. Reuse only: Container, Section, Buttons, Cards, Typography, Spacing, Animations, Design Tokens.
+
+Never reuse complete Hero layouts. Every page owns its own Hero.
+
+## Post-completion verify
+
+- Homepage unchanged
+- Services unchanged
+- Solutions unchanged
+- No visual / layout regression
+- No broken routes or imports
+
+## PR policy
+
+One feature = one branch = one PR. Never mix features.
