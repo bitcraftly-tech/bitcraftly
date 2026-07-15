@@ -19,6 +19,30 @@ export const metadata: Metadata = {
   },
   description:
     "Bitcraftly builds AI-powered websites, SaaS, and automation — founder-led delivery with clear scope and measurable outcomes.",
+  openGraph: {
+    type: "website",
+    url: "https://bitcraftly.com",
+    siteName: "Bitcraftly",
+    title: "Bitcraftly | AI & Digital Engineering Partner",
+    description:
+      "Bitcraftly builds AI-powered websites, SaaS, and automation — founder-led delivery with clear scope and measurable outcomes.",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Bitcraftly - AI & Digital Engineering Partner",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Bitcraftly | AI & Digital Engineering Partner",
+    description:
+      "Bitcraftly builds AI-powered websites, SaaS, and automation — founder-led delivery with clear scope and measurable outcomes.",
+    images: ["/twitter-image.png"],
+  },
   icons: {
     icon: [{ url: "/brand/icon.png", type: "image/png" }],
     shortcut: "/brand/favicon.ico",
