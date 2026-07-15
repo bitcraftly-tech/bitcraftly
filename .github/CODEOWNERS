@@ -3,48 +3,48 @@
 # ----------------------------------------------------------
 
 # Default owner
-* @your-github-username
+* @uideveloper09
 
 # Documentation
-README.md @your-github-username
-CONTRIBUTING.md @your-github-username
-CHANGELOG.md @your-github-username
-SECURITY.md @your-github-username
+README.md @uideveloper09
+CONTRIBUTING.md @uideveloper09
+CHANGELOG.md @uideveloper09
+SECURITY.md @uideveloper09
 
 # AI Documentation
-AGENTS.md @your-github-username
-CLAUDE.md @your-github-username
-PROJECT_CONTEXT.md @your-github-username
-PROJECT_FOUNDATION_REVIEW.md @your-github-username
+AGENTS.md @uideveloper09
+CLAUDE.md @uideveloper09
+PROJECT_CONTEXT.md @uideveloper09
+PROJECT_FOUNDATION_REVIEW.md @uideveloper09
 
 # Cursor Rules
-.cursor/ @your-github-username
+.cursor/ @uideveloper09
 
 # Documentation
-docs/ @your-github-username
+docs/ @uideveloper09
 
 # Source Code
-src/ @your-github-username
+src/ @uideveloper09
 
 # Components
-src/components/ @your-github-username
+src/components/ @uideveloper09
 
 # Features
-src/features/ @your-github-username
+src/features/ @uideveloper09
 
 # Services
-src/services/ @your-github-username
+src/services/ @uideveloper09
 
 # Hooks
-src/hooks/ @your-github-username
+src/hooks/ @uideveloper09
 
 # Types
-src/types/ @your-github-username
+src/types/ @uideveloper09
 
 # Utils
-src/utils/ @your-github-username
+src/utils/ @uideveloper09
 
 # Configuration
-package.json @your-github-username
-tsconfig.json @your-github-username
-next.config.ts @your-github-username
+package.json @uideveloper09
+tsconfig.json @uideveloper09
+next.config.ts @uideveloper09
