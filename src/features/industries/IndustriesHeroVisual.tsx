@@ -13,9 +13,8 @@ export function IndustriesHeroVisual() {
   return (
     <div
       className={cn(
-        "industries-hero__visual relative mx-auto w-full min-w-0 max-w-xl",
-        "min-h-[420px] h-[420px]",
-        "md:mx-0 md:max-w-none md:min-h-[560px] md:h-auto",
+        "industries-hero__visual relative mx-auto h-full w-full min-h-[420px] min-w-0 max-w-xl",
+        "md:mx-0 md:max-w-none md:min-h-[560px]",
         "lg:mx-0 lg:h-full lg:min-h-full lg:max-w-none lg:self-stretch",
       )}
       aria-hidden="true"

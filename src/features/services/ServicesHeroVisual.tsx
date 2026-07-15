@@ -13,9 +13,9 @@ export function ServicesHeroVisual() {
   return (
     <div
       className={cn(
-        "services-hero-visual relative mx-auto w-full min-w-0 max-w-xl aspect-[1/1] min-h-[400px]",
-        "md:mx-0 md:max-w-none md:aspect-auto md:min-h-[580px] md:h-[620px]",
-        "lg:min-h-[640px] lg:h-[680px]",
+        "services-hero-visual relative mx-auto h-full w-full min-h-[400px] min-w-0 max-w-xl aspect-[1/1]",
+        "md:mx-0 md:max-w-none md:aspect-auto md:min-h-[480px]",
+        "lg:h-full lg:min-h-full",
       )}
       aria-hidden="true"
     >
@@ -26,7 +26,7 @@ export function ServicesHeroVisual() {
         priority
         unoptimized
         sizes="(max-width: 1024px) 100vw, 50vw"
-        className="services-hero-visual__image object-contain object-top"
+        className="services-hero-visual__image object-contain object-center"
       />
     </div>
   );

@@ -1,0 +1,236 @@
+---
+description: Bitcraftly Performance Standards
+alwaysApply: false
+---
+
+# Bitcraftly Performance Standards
+
+Apply these standards whenever implementing or modifying performance-sensitive code.
+
+This rule complements:
+
+- Bitcraftly-Engineering-Standards.mdc
+- Bitcraftly-Architecture-Protection-Rules.mdc
+- Bitcraftly-Accessibility-Standards.mdc
+
+---
+
+# Performance Goals
+
+Every implementation should aim to:
+
+- Minimize JavaScript shipped to the browser.
+- Prefer server-side rendering when appropriate.
+- Reduce unnecessary rendering.
+- Keep bundles as small as possible.
+- Maintain excellent Core Web Vitals.
+- Avoid performance regressions.
+
+---
+
+# Next.js Standards
+
+Prefer:
+
+- Server Components
+- Streaming
+- Route-level code splitting
+- Dynamic imports for heavy components
+- Metadata API
+- Optimized fonts
+- Optimized images
+- Static rendering whenever possible
+
+Avoid:
+
+- Unnecessary Client Components
+- Client-side rendering by default
+- Blocking rendering with unnecessary JavaScript
+
+---
+
+# React Standards
+
+Prefer:
+
+- Small focused components
+- Composition
+- Suspense where appropriate
+- Lazy loading for large components
+
+Avoid:
+
+- Deep component trees
+- Large monolithic components
+- Excessive prop drilling
+
+---
+
+# Rendering
+
+Minimize unnecessary rendering.
+
+Avoid:
+
+- unnecessary state
+- duplicated state
+- unnecessary useEffect
+- unnecessary useMemo
+- unnecessary useCallback
+
+Use memoization only when measurable performance benefits exist.
+
+---
+
+# Data Fetching
+
+Prefer:
+
+- Server-side fetching
+- Parallel requests
+- Cached requests
+- Incremental revalidation when appropriate
+
+Avoid:
+
+- Sequential request waterfalls
+- Duplicate API calls
+- Client-side fetching unless required
+
+---
+
+# Bundle Optimization
+
+Always:
+
+- Remove dead code
+- Remove unused imports
+- Prefer tree-shakeable libraries
+- Dynamically import heavy modules
+- Avoid unnecessary dependencies
+
+Never add a dependency when existing project utilities solve the problem.
+
+---
+
+# Images
+
+Use Next.js Image component whenever possible.
+
+Always:
+
+- Specify width and height
+- Use responsive sizes
+- Optimize large assets
+- Lazy load non-critical images
+
+Avoid oversized images.
+
+---
+
+# Fonts
+
+Prefer:
+
+- next/font
+- Variable fonts
+- Font subsets
+
+Avoid render-blocking fonts.
+
+---
+
+# CSS
+
+Prefer:
+
+- Tailwind utilities
+- Shared design tokens
+- Minimal custom CSS
+
+Avoid:
+
+- duplicated styles
+- unused classes
+- excessive nesting
+
+---
+
+# Animations
+
+Animations should:
+
+- remain smooth
+- avoid layout thrashing
+- respect prefers-reduced-motion
+
+Prefer:
+
+- transform
+- opacity
+
+Avoid animating layout properties.
+
+---
+
+# Lists
+
+Large collections should:
+
+- paginate
+- virtualize when appropriate
+- lazy render
+
+Avoid rendering very large lists unnecessarily.
+
+---
+
+# Core Web Vitals
+
+Protect:
+
+- LCP
+- CLS
+- INP
+- FCP
+- TTFB
+
+Never introduce avoidable regressions.
+
+---
+
+# AI Behaviour
+
+When generating code:
+
+- Prefer performance-friendly patterns.
+- Prefer Server Components.
+- Prefer existing optimized components.
+- Do not optimize prematurely.
+- Do not sacrifice readability for micro-optimizations.
+- Explain significant performance trade-offs.
+
+---
+
+# Verification Checklist
+
+Before completing a task verify:
+
+- No unnecessary Client Components introduced.
+- No unnecessary JavaScript shipped.
+- Bundle size remains reasonable.
+- Images are optimized.
+- Data fetching is efficient.
+- Existing performance is preserved.
+
+---
+
+# Definition of Done
+
+Performance requirements are satisfied when:
+
+- No measurable regressions are introduced.
+- Rendering remains efficient.
+- Existing caching strategy is preserved.
+- Core Web Vitals are not negatively affected.
+- Bundle size has not unnecessarily increased.

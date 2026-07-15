@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { MarketingPageShell } from "@/components/patterns/marketing-page-shell";
-import { Text } from "@/components/ui/typography";
+import { PageShell } from "@/components/patterns/marketing-layout";
 import {
-  getRelatedServicesForWork,
   getWorkPageBySlug,
   WORK_STATIC_SLUGS,
 } from "@/constants/navigation";
-import { buildWorkBreadcrumbs } from "@/lib/seo/breadcrumbs";
+import { getWorkHubBySlug, WorkHubPage } from "@/features/work";
 import { createPageMetadata } from "@/lib/seo/createPageMetadata";
+import "@/features/work/work.css";
 
 interface WorkCategoryPageProps {
   params: Promise<{ slug: string }>;
@@ -24,8 +21,16 @@ export async function generateMetadata({
   params,
 }: WorkCategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const item = getWorkPageBySlug(slug);
+  const hub = getWorkHubBySlug(slug);
+  if (hub) {
+    return createPageMetadata({
+      title: hub.seoTitle,
+      description: hub.seoDescription,
+      path: `/work/${hub.slug}`,
+    });
+  }
 
+  const item = getWorkPageBySlug(slug);
   if (!item) {
     return createPageMetadata({
       title: "Work",
@@ -45,54 +50,23 @@ export default async function WorkCategoryPage({
   params,
 }: WorkCategoryPageProps) {
   const { slug } = await params;
-  const item = getWorkPageBySlug(slug);
+  const hub = getWorkHubBySlug(slug);
+  if (hub) {
+    return (
+      <PageShell className="work-page">
+        <WorkHubPage title={hub.title} description={hub.description} />
+      </PageShell>
+    );
+  }
 
+  const item = getWorkPageBySlug(slug);
   if (!item) {
     notFound();
   }
 
-  const relatedServices = getRelatedServicesForWork(slug);
-  const breadcrumbs = buildWorkBreadcrumbs([{ label: item.label }]);
-
   return (
-    <MarketingPageShell
-      title={item.label}
-      description={item.description}
-      headingId={`work-${item.slug}-heading`}
-      breadcrumbs={<MarketingBreadcrumbs items={breadcrumbs} />}
-    >
-      <div className="mt-[var(--space-5)]">
-        <Text as="p" size="sm" muted>
-          Category content coming soon.
-        </Text>
-        {relatedServices.length > 0 ? (
-          <div className="mt-[var(--space-4)]">
-            <Text as="p" className="text-[13px] font-semibold text-foreground">
-              Related services
-            </Text>
-            <ul className="mt-[8px] flex flex-col gap-[6px]">
-              {relatedServices.map((href) => (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    className="text-[13px] font-medium text-primary no-underline hover:underline"
-                  >
-                    {href}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-        <div className="mt-[var(--space-4)]">
-          <Link
-            href="/contact"
-            className="text-[13px] font-semibold text-primary no-underline hover:underline"
-          >
-            Book Consultation →
-          </Link>
-        </div>
-      </div>
-    </MarketingPageShell>
+    <PageShell className="work-page">
+      <WorkHubPage title={item.label} description={item.description} />
+    </PageShell>
   );
 }

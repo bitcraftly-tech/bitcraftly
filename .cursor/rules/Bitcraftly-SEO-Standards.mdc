@@ -1,0 +1,229 @@
+---
+description: Bitcraftly SEO Standards
+alwaysApply: false
+---
+
+# Bitcraftly SEO Standards
+
+Apply these standards whenever implementing or modifying pages that impact search engine visibility.
+
+This rule complements:
+
+- Bitcraftly-Engineering-Standards.mdc
+- Bitcraftly-Architecture-Protection-Rules.mdc
+- Bitcraftly-Accessibility-Standards.mdc
+- Bitcraftly-Performance-Standards.mdc
+
+---
+
+# SEO Goals
+
+Every public page should:
+
+- Be crawlable
+- Load quickly
+- Be accessible
+- Have unique metadata
+- Provide meaningful content
+- Support structured data where appropriate
+
+---
+
+# Metadata
+
+Every public page should define:
+
+- title
+- description
+- keywords (when useful)
+- canonical URL
+- robots directives
+
+Prefer Next.js Metadata API.
+
+Avoid duplicate titles and descriptions.
+
+---
+
+# Open Graph
+
+Include:
+
+- og:title
+- og:description
+- og:image
+- og:url
+- og:type
+
+Ensure previews look correct when shared.
+
+---
+
+# Twitter Cards
+
+Provide:
+
+- twitter:card
+- twitter:title
+- twitter:description
+- twitter:image
+
+---
+
+# Structured Data
+
+Use JSON-LD whenever appropriate.
+
+Examples:
+
+- Organization
+- LocalBusiness
+- Service
+- FAQ
+- Breadcrumb
+- Article
+- WebSite
+
+Do not add fake structured data.
+
+---
+
+# Headings
+
+Every page should have:
+
+- One H1
+- Logical H2-H6 hierarchy
+- Descriptive section headings
+
+Avoid keyword stuffing.
+
+---
+
+# URLs
+
+Prefer:
+
+- short
+- readable
+- lowercase
+- hyphen-separated
+
+Avoid:
+
+- random IDs
+- unnecessary query parameters
+- duplicate routes
+
+---
+
+# Internal Linking
+
+Prefer:
+
+- descriptive anchor text
+- logical navigation
+- contextual links
+
+Avoid:
+
+- "Click here"
+- "Read more"
+- orphan pages
+
+---
+
+# Images
+
+Every image should:
+
+- have meaningful alt text
+- use optimized formats
+- define dimensions
+- lazy load when appropriate
+
+Decorative images:
+
+- alt=""
+
+---
+
+# Content
+
+Content should:
+
+- answer user intent
+- remain unique
+- be easy to scan
+- use meaningful headings
+- avoid duplication
+
+Never generate filler content.
+
+---
+
+# Performance & SEO
+
+Protect:
+
+- Core Web Vitals
+- Mobile usability
+- Accessibility
+- Crawlability
+
+Performance improvements should never reduce SEO quality.
+
+---
+
+# Technical SEO
+
+Support:
+
+- sitemap.xml
+- robots.txt
+- canonical URLs
+- metadata
+- Open Graph
+- structured data
+
+Avoid duplicate canonical URLs.
+
+---
+
+# AI Behaviour
+
+When generating pages:
+
+- Preserve metadata.
+- Do not remove structured data.
+- Do not create duplicate titles.
+- Prefer semantic HTML.
+- Keep URLs SEO friendly.
+- Explain SEO trade-offs when relevant.
+
+---
+
+# Verification Checklist
+
+Before completing a task verify:
+
+- Metadata exists.
+- Title is unique.
+- Description is unique.
+- Heading hierarchy is correct.
+- Images include appropriate alt text.
+- Structured data remains valid.
+- Accessibility remains compliant.
+- Internal links remain functional.
+
+---
+
+# Definition of Done
+
+SEO requirements are satisfied when:
+
+- Metadata is complete.
+- Structured data is valid.
+- Accessibility is preserved.
+- Core Web Vitals are not negatively affected.
+- The page remains crawlable and indexable.

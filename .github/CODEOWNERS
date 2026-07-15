@@ -1,0 +1,50 @@
+# ----------------------------------------------------------
+# Bitcraftly Platform CODEOWNERS
+# ----------------------------------------------------------
+
+# Default owner
+* @your-github-username
+
+# Documentation
+README.md @your-github-username
+CONTRIBUTING.md @your-github-username
+CHANGELOG.md @your-github-username
+SECURITY.md @your-github-username
+
+# AI Documentation
+AGENTS.md @your-github-username
+CLAUDE.md @your-github-username
+PROJECT_CONTEXT.md @your-github-username
+PROJECT_FOUNDATION_REVIEW.md @your-github-username
+
+# Cursor Rules
+.cursor/ @your-github-username
+
+# Documentation
+docs/ @your-github-username
+
+# Source Code
+src/ @your-github-username
+
+# Components
+src/components/ @your-github-username
+
+# Features
+src/features/ @your-github-username
+
+# Services
+src/services/ @your-github-username
+
+# Hooks
+src/hooks/ @your-github-username
+
+# Types
+src/types/ @your-github-username
+
+# Utils
+src/utils/ @your-github-username
+
+# Configuration
+package.json @your-github-username
+tsconfig.json @your-github-username
+next.config.ts @your-github-username

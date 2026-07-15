@@ -12,8 +12,8 @@ export function HeroIllustration() {
   return (
     <div
       className={cn(
-        "relative mx-auto w-full min-w-0 max-w-xl aspect-[5/4]",
-        "lg:mx-0 lg:max-w-none lg:aspect-[4/3] lg:min-h-[420px]",
+        "relative mx-auto h-full w-full min-h-[360px] min-w-0 max-w-xl aspect-[5/4]",
+        "lg:mx-0 lg:h-full lg:min-h-full lg:max-w-none lg:aspect-auto",
       )}
     >
       <div
@@ -27,7 +27,7 @@ export function HeroIllustration() {
         priority
         unoptimized
         sizes="(max-width: 1024px) 100vw, 50vw"
-        className="hero-illustration-image object-contain object-center"
+        className="hero-illustration-image h-full w-full object-contain object-center"
       />
     </div>
   );

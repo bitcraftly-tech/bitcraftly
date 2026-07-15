@@ -1,0 +1,326 @@
+---
+description: Bitcraftly Global Accessibility (A11y) Standards
+alwaysApply: true
+---
+
+# Bitcraftly Global Accessibility (A11y) Standards
+
+Accessibility is a mandatory engineering requirement for the Bitcraftly Platform.
+
+These standards always apply together with:
+
+- Bitcraftly-Engineering-Standards.mdc
+- Bitcraftly-Architecture-Protection-Rules.mdc
+
+Accessibility must be implemented during development, not added during QA.
+
+A feature is not complete until accessibility requirements are satisfied.
+
+---
+
+# Target Standard
+
+Target **WCAG 2.2 AA** compliance wherever practical.
+
+Accessibility applies to:
+
+- Marketing pages
+- Product pages
+- Dashboard
+- CMS
+- CRM
+- AI modules
+- Shared UI components
+- Future features
+
+---
+
+# Semantic HTML
+
+Always use semantic elements whenever possible.
+
+Preferred elements:
+
+- header
+- nav
+- main
+- section
+- article
+- aside
+- footer
+- button
+- form
+- label
+- fieldset
+- legend
+
+Do not replace semantic elements with generic `div` or `span` when native HTML provides the correct meaning.
+
+---
+
+# Headings
+
+- Exactly one `h1` per page.
+- Follow a logical heading hierarchy.
+- Never skip heading levels.
+- Headings should describe the section content.
+
+---
+
+# Landmarks
+
+Prefer native landmarks:
+
+- header
+- nav
+- main
+- aside
+- footer
+
+Use ARIA landmark roles only when native HTML cannot express the structure.
+
+---
+
+# Keyboard Accessibility
+
+Every interactive element must be usable with a keyboard.
+
+Support:
+
+- Tab
+- Shift + Tab
+- Enter
+- Space
+- Escape
+- Arrow Keys (where applicable)
+
+Never create keyboard traps.
+
+---
+
+# Focus Management
+
+- Always provide visible focus.
+- Never remove outlines unless replaced with a stronger `:focus-visible` style.
+- Restore focus after closing dialogs, drawers, and menus.
+- Preserve logical focus order.
+
+---
+
+# ARIA
+
+Prefer semantic HTML over ARIA.
+
+Use ARIA only when required.
+
+Common attributes:
+
+- aria-label
+- aria-labelledby
+- aria-describedby
+- aria-expanded
+- aria-controls
+- aria-current
+- aria-live
+- aria-hidden
+
+Never add unnecessary ARIA attributes.
+
+---
+
+# Images & Icons
+
+Informative images:
+
+- Meaningful alt text.
+
+Decorative images:
+
+- alt=""
+- or aria-hidden="true"
+
+Icon-only controls:
+
+- Visible label
+- or aria-label
+
+---
+
+# Buttons & Links
+
+Buttons must:
+
+- Have accessible names.
+- Indicate loading with `aria-busy` where appropriate.
+- Use native `disabled`.
+
+Links must:
+
+- Clearly describe the destination.
+- Avoid vague labels like:
+  - Click here
+  - Read more
+  - Learn more
+
+---
+
+# Forms
+
+Every form should:
+
+- Use labels for every input.
+- Associate errors with `aria-describedby`.
+- Clearly announce required fields.
+- Preserve keyboard usability.
+
+---
+
+# Color & Contrast
+
+- Never rely on color alone.
+- Pair status with text and/or icons.
+- Maintain WCAG contrast ratios.
+- Preserve readability in light and dark themes.
+
+---
+
+# Motion
+
+Respect `prefers-reduced-motion`.
+
+Reduce or disable:
+
+- Large animations
+- Auto scrolling
+- Parallax
+- Heavy transforms
+
+Avoid flashing or seizure-inducing effects.
+
+---
+
+# Common UI Patterns
+
+## Accordion
+
+- aria-expanded
+- aria-controls
+- Keyboard support
+
+## Modal
+
+- Focus trap
+- Escape closes
+- Restore focus
+- aria-modal="true"
+
+## Drawer
+
+- Keyboard accessible
+- Escape closes
+- Restore focus
+
+## Tooltip
+
+- Available on hover
+- Available on keyboard focus
+
+## Tabs
+
+- Arrow key navigation
+- Proper ARIA relationships
+
+## Tables
+
+- caption
+- thead
+- tbody
+- th
+- scope
+
+## Carousel
+
+- Keyboard navigation
+- Pause control
+- Screen-reader friendly
+
+---
+
+# Responsive Design
+
+Support:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+- 200% browser zoom
+
+Layouts must remain usable without horizontal scrolling where practical.
+
+---
+
+# React & Next.js
+
+- Prefer semantic JSX.
+- Server Components should preserve semantic structure.
+- Client Components must remain keyboard accessible after hydration.
+- Interactive components must preserve focus correctly after state updates.
+
+---
+
+# Performance
+
+Accessibility improvements should not introduce unnecessary JavaScript or significant rendering overhead.
+
+Prefer native browser behavior whenever possible.
+
+---
+
+# AI Behaviour
+
+When generating UI:
+
+- Prefer semantic HTML first.
+- Never sacrifice accessibility for animation.
+- Never remove accessibility attributes to simplify code.
+- Follow existing accessibility patterns already present in the project.
+
+---
+
+# Verification Checklist
+
+Before completing a task verify:
+
+- Keyboard navigation works.
+- Screen reader order is logical.
+- Focus is visible.
+- Heading hierarchy is correct.
+- Contrast requirements are satisfied.
+- Reduced motion is respected.
+- Semantic HTML is used.
+- Responsive layout remains accessible.
+- Interactive components remain accessible after hydration.
+
+---
+
+# Definition of Done
+
+Accessibility is complete only when:
+
+- WCAG requirements are satisfied.
+- Keyboard navigation works.
+- Screen readers receive meaningful information.
+- Focus management is correct.
+- Responsive layouts remain accessible.
+- Existing accessibility standards are preserved.
+
+Required validation:
+
+```bash
+npm run lint
+npm run typecheck
+npm run build
+```
+
+Accessibility review must pass before the feature is considered complete.

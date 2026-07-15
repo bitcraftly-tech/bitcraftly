@@ -23,6 +23,109 @@ The repository is an early-stage Next.js 16 scaffold with **good architectural i
 
 **Bottom line:** Before feature development, resolve the dual `app/` vs `src/app/` conflict, commit the intended foundation, and replace boilerplate documentation with Bitcraftly-specific guidance.
 
+## AI Development Foundation
+
+This project uses:
+
+- AGENTS.md
+- PROJECT_CONTEXT.md
+- CLAUDE.md
+- Cursor Rules
+
+AI workflow:
+
+PROJECT_CONTEXT.md
+        ↓
+Relevant Rules
+        ↓
+Feature Development
+        ↓
+Code Review
+
+## Current Architecture Status
+
+Architecture: Stable
+
+App Router: Stable
+
+Feature Architecture: Stable
+
+Design System: In Progress
+
+Authentication: Planned
+
+AI Integration: Planned
+
+Documentation: Enterprise
+
+## Current Architecture Status
+
+Architecture: Stable
+
+App Router: Stable
+
+Feature Architecture: Stable
+
+Design System: In Progress
+
+Authentication: Planned
+
+AI Integration: Planned
+
+Documentation: Enterprise
+
+## AI Rules
+
+Always
+
+Engineering
+
+Architecture
+
+Accessibility
+
+When Needed
+
+Performance
+
+SEO
+
+Code Review
+
+Foundation
+
+↓
+
+Design System
+
+↓
+
+Authentication
+
+↓
+
+Dashboard
+
+↓
+
+CRM
+
+↓
+
+CMS
+
+↓
+
+AI
+
+↓
+
+Production
+
+↓
+
+Scaling
+
 ---
 
 ## 1. Folder Structure

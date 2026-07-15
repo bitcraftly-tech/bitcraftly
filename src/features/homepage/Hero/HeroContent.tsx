@@ -39,7 +39,7 @@ export function HeroContent() {
       <h1
         id={HERO_HEADING_ID}
         className={cn(
-          "hero-heading m-0 max-w-3xl font-sans font-extrabold text-foreground text-balance",
+          "hero-heading m-0 max-w-3xl font-sans font-semibold text-foreground text-balance",
           "leading-[1.1] tracking-[-0.04em]",
         )}
       >

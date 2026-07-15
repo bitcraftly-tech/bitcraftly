@@ -43,13 +43,13 @@ export function HeroSection() {
         className={cn(
           "relative grid grid-cols-1 items-center gap-[var(--space-8)]",
           "md:gap-[var(--space-10)]",
-          "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-center lg:gap-[var(--space-3)]",
+          "lg:grid-cols-[minmax(0,60%)_minmax(0,1fr)] lg:items-stretch lg:gap-[calc(var(--space-3)/2)]",
         )}
       >
         <div className="min-w-0">
           <HeroContent />
         </div>
-        <div className="min-w-0">
+        <div className="min-w-0 h-full min-h-full">
           <HeroIllustration />
         </div>
       </div>

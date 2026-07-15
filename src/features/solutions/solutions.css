@@ -18,9 +18,9 @@
 
 @media (min-width: 1024px) {
   .solutions-hero__grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-columns: minmax(0, 60%) minmax(0, 1fr);
     align-items: stretch;
-    gap: var(--space-4);
+    gap: calc(var(--space-4) / 2);
   }
 }
 
@@ -31,12 +31,30 @@
   gap: var(--space-2);
 }
 
+.solutions-hero__eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: var(--token-radius-full);
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--border));
+  background: color-mix(in srgb, var(--primary) 8%, var(--background));
+  font-family: var(--font-family-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
 .solutions-hero__title {
   margin: 0;
   max-width: 36rem;
   font-family: var(--font-family-sans);
-  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
-  font-weight: 800;
+  font-size: 45px;
+  font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.04em;
   color: var(--foreground);
@@ -286,15 +304,15 @@
   min-width: 0;
   width: 100%;
   height: 100%;
+  min-height: 100%;
   display: flex;
   align-items: stretch;
 }
 
 @media (min-width: 1024px) {
   .solutions-hero__visual {
-    padding-inline-start: var(--space-2);
-    /* Keep illustration optically balanced with the left stack */
-    padding-block: var(--space-1);
+    padding-inline-start: calc(var(--space-2) / 2);
+    padding-block: 0;
   }
 }
 

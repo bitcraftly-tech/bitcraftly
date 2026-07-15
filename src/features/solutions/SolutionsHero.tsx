@@ -94,6 +94,16 @@ export function SolutionsHero({ breadcrumbs }: SolutionsHeroProps) {
         <div className="solutions-hero__content">
           <MarketingBreadcrumbs items={breadcrumbs} className="mb-0" />
 
+          <p className="solutions-hero__eyebrow">
+            <Icon
+              name="workflow"
+              size="sm"
+              aria-hidden
+              className="h-[14px] w-[14px]"
+            />
+            {SOLUTIONS_LANDING.eyebrow}
+          </p>
+
           <h1 id="solutions-page-heading" className="solutions-hero__title">
             {titleParts[0]}
             <span className="solutions-hero__title-accent">

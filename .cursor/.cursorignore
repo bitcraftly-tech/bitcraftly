@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Build
+.next/
+dist/
+build/
+coverage/
+out/
+
+# Git
+.git/
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log
+
+# Archives
+*.zip
+
+# Maps
+*.map
+
+# Generated
+public/generated/
+public/uploads/
+public/videos/
+
+# Docs (rarely needed)
+docs/database/
+docs/reviews/
+
+# OS
+.DS_Store
+Thumbs.db

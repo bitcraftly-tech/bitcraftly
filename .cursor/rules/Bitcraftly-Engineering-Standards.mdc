@@ -1,89 +1,180 @@
 ---
-description: 
+description: Bitcraftly Engineering Standards
 alwaysApply: true
 ---
 
 # Bitcraftly Platform Engineering Standards
 
-You are working on the Bitcraftly Platform.
+You are developing the **Bitcraftly Platform**.
 
-## Tech Stack
+Follow these engineering standards for every implementation.
+
+---
+
+# Tech Stack
 
 - Next.js 16 (App Router)
 - React 19
-- TypeScript
+- TypeScript (Strict Mode)
 - Tailwind CSS v4
-- FastAPI (Backend)
+- FastAPI Backend
 - PostgreSQL
 - JWT Authentication
 
-## Architecture
+Always use the latest stable APIs and follow official framework recommendations.
 
-- Follow feature-based architecture.
-- Keep UI, business logic, services, and utilities separated.
-- Prefer reusable components over duplication.
-- Do not introduce unnecessary abstractions.
+---
 
-## React
+# Architecture
 
-- Prefer Server Components.
-- Use Client Components only when required.
+- Follow the feature-based architecture.
+- Keep routing, UI, business logic, services, and utilities separated.
+- Prefer reusable components over duplicated implementations.
+- Extend existing patterns before introducing new abstractions.
+- Keep route files (`page.tsx`, `layout.tsx`) thin.
+- Keep business logic inside feature modules.
+- Protect shared architecture unless explicitly requested.
+
+---
+
+# React
+
+- Prefer Server Components by default.
+- Use Client Components only when interactivity requires them.
 - Keep components focused on a single responsibility.
-- Avoid prop drilling when better patterns exist.
+- Prefer composition over inheritance.
+- Avoid unnecessary prop drilling.
+- Reuse existing shared components whenever possible.
 
-## TypeScript
+---
+
+# TypeScript
 
 - Never use `any`.
 - Prefer explicit interfaces and types.
 - Keep strict typing enabled.
+- Prefer readonly values where appropriate.
+- Avoid unnecessary type assertions.
+- Keep shared types inside `src/types`.
 
-## Styling
+---
 
-- Use Tailwind CSS utilities.
-- Avoid custom CSS unless necessary.
-- Never hardcode colors or spacing.
+# Styling
+
+- Use Tailwind CSS v4 utilities.
 - Follow the Bitcraftly Design System.
+- Never hardcode colors, spacing, typography, or shadows.
+- Prefer reusable UI components.
+- Avoid custom CSS unless there is no suitable Tailwind solution.
 
-## Code Quality
+---
 
-- Keep code modular and readable.
-- Prefer composition over inheritance.
+# Code Quality
+
+- Keep code modular and maintainable.
 - Remove dead code.
 - Avoid duplicated logic.
+- Write self-explanatory code.
+- Keep functions small and focused.
+- Do not introduce unnecessary complexity.
 
-## Accessibility
+---
 
-- Use semantic HTML.
-- Ensure keyboard accessibility.
-- Add ARIA attributes only when needed.
-- Maintain sufficient color contrast.
+# Accessibility
 
-## Performance
+Follow **Bitcraftly-Accessibility-Standards.mdc**.
+
+Minimum requirements:
+
+- Semantic HTML
+- Keyboard accessibility
+- Correct focus management
+- ARIA only when necessary
+- Sufficient color contrast
+
+A feature is not complete until accessibility requirements are satisfied.
+
+---
+
+# Performance
 
 - Optimize images.
-- Minimize unnecessary client components.
+- Prefer Server Components.
 - Lazy load heavy components.
 - Avoid unnecessary re-renders.
+- Avoid unnecessary client-side JavaScript.
+- Keep bundle size as small as possible.
 
-## Git
+---
 
-Use Conventional Commits:
+# Git
+
+Follow Conventional Commits.
+
+Examples:
 
 - feat:
 - fix:
 - refactor:
 - docs:
+- style:
 - test:
+- perf:
 - chore:
 
-## Before Every Change
+---
+
+# Working Principles
 
 Always:
 
-1. Understand the existing code.
-2. Explain your implementation plan.
+1. Understand the existing implementation before making changes.
+2. Reuse existing components, utilities, and patterns.
 3. Implement the smallest safe change.
-4. Verify nothing else is broken.
-5. Suggest improvements separately instead of making unrelated changes.
+4. Preserve backward compatibility whenever possible.
+5. Verify that unrelated functionality is not affected.
+6. Suggest improvements separately instead of making unrelated changes.
 
-Never rewrite large parts of the project unless explicitly requested.
+---
+
+# Scope
+
+- Work only within the requested scope.
+- Modify only the requested files.
+- Never modify unrelated features or pages.
+- Never scan unrelated folders unless explicitly requested.
+- Never modify generated files, build artifacts, or lock files unless requested.
+
+---
+
+# Planning
+
+For multi-file, architecture, or cross-feature changes:
+
+1. Explain the implementation plan.
+2. Wait for confirmation if the change affects shared architecture.
+3. Then proceed with implementation.
+
+---
+
+# AI Behaviour
+
+- Never guess missing project structure.
+- Read existing code before generating new code.
+- Follow existing project conventions.
+- Prefer extending existing implementations over rewriting them.
+- Ask for clarification when requirements are ambiguous.
+- Avoid introducing new dependencies unless explicitly approved.
+
+---
+
+# Definition of Done
+
+A task is complete only when:
+
+- Requirements are fully implemented.
+- TypeScript remains strict.
+- Accessibility requirements are met.
+- Existing architecture is preserved.
+- No unrelated files are modified.
+- The solution remains clean, maintainable, and production-ready.

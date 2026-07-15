@@ -1,65 +1,181 @@
 ---
-description: Bitcraftly Architecture Protection Rules — frozen pages, page isolation, pre-change Task Summary gate
+description: Bitcraftly Architecture Protection Rules
 alwaysApply: true
 ---
 
 # Bitcraftly Architecture Protection Rules
 
-Before making **ANY** change, follow these mandatory rules.
+These rules protect the Bitcraftly Platform architecture, shared components, and existing features from unintended changes.
 
-## Isolation
+Always apply these rules together with:
 
-1. Modify **ONLY** the target page mentioned in the prompt.
-2. Do **NOT** modify any other page.
-3. Do **NOT** modify Homepage.
-4. Do **NOT** modify Services.
-5. Do **NOT** modify Solutions.
-6. Do **NOT** modify any frozen page.
+- Bitcraftly-Engineering-Standards.mdc
+- Bitcraftly-Accessibility-Standards.mdc
 
-## Frozen pages (read-only)
+---
 
-| Page | Route | Paths |
-|------|-------|--------|
+# Scope Protection
+
+- Work only within the requested scope.
+- Modify only the requested files, folders, or features.
+- Never modify unrelated pages, layouts, or modules.
+- Never refactor unrelated code while implementing a task.
+
+---
+
+# Protected Pages
+
+The following pages are protected:
+
+| Page | Route | Path |
+|------|-------|------|
 | Homepage | `/` | `src/features/homepage/**` |
 | Services | `/services` | `src/features/services/**` |
 | Solutions | `/solutions` | `src/features/solutions/**` |
 
-Treat as read-only. Bug fixes only when the user explicitly requests them for that page.
+Protected pages must remain unchanged **unless the user explicitly requests modifications**.
 
-## Shared components
+Bug fixes are allowed only when explicitly requested.
 
-7. Never edit a shared component if the change affects existing pages.
-8. If a shared component must change → create a **new page-specific** component instead.
+---
 
-## Pre-change gate (required)
+# Shared Architecture
 
-9. Before coding, print:
+Do not modify shared architecture unless requested.
 
-```
+This includes:
+
+- Shared Layouts
+- Global Providers
+- Routing Structure
+- Design Tokens
+- Theme Configuration
+- Authentication Flow
+- API Layer
+- Shared Utilities
+
+Prefer extending existing architecture instead of replacing it.
+
+---
+
+# Shared Components
+
+Shared components should remain stable.
+
+Never modify a shared component if the change affects existing pages.
+
+If only one feature requires different behavior:
+
+- Extend the existing component
+- Create a wrapper component
+- Or create a feature-specific component
+
+Avoid introducing breaking changes.
+
+---
+
+# Before Implementation
+
+Before writing code, identify:
+
+```text
 Task Summary
-Target Page: <page name>
+
+Target Feature:
+
 Files to Modify:
+
 Files to Create:
+
 Shared Components Modified:
-Frozen Pages Affected:
+
+Protected Pages Affected:
+
+Architecture Changes:
 ```
 
-If **Frozen Pages Affected** is not `None` → **STOP** and do not continue (unless the user explicitly instructed editing that frozen page).
+If a protected page or shared architecture will be modified without explicit approval:
 
-## Reuse
+- STOP
+- Explain why the change is required.
+- Ask for confirmation before continuing.
 
-10. Reuse only: Container, Section, Buttons, Cards, Typography, Spacing, Animations, Design Tokens.
+---
 
-Never reuse complete Hero layouts. Every page owns its own Hero.
+# Reuse Strategy
 
-## Post-completion verify
+Reuse existing:
 
-- Homepage unchanged
-- Services unchanged
-- Solutions unchanged
-- No visual / layout regression
-- No broken routes or imports
+- Container
+- Section
+- Typography
+- Buttons
+- Cards
+- Forms
+- Spacing
+- Icons
+- Design Tokens
 
-## PR policy
+Avoid copying complete page layouts.
 
-One feature = one branch = one PR. Never mix features.
+Each feature owns its own implementation.
+
+---
+
+# Multi-file Changes
+
+Before making architecture-level or multi-file changes:
+
+1. Explain the implementation plan.
+2. Identify affected features.
+3. Request confirmation if shared architecture will change.
+
+---
+
+# Verification Checklist
+
+After implementation verify:
+
+- No unrelated files were modified.
+- No broken imports.
+- No routing regressions.
+- No layout regressions.
+- No shared component regressions.
+- Build and type safety remain unaffected.
+- Accessibility standards remain satisfied.
+- Existing architecture is preserved.
+
+---
+
+# Pull Request Policy
+
+- One feature per branch.
+- One feature per pull request.
+- Keep commits focused.
+- Never mix unrelated work.
+
+---
+
+# AI Behaviour
+
+- Never rewrite large parts of the project.
+- Never restructure folders unless requested.
+- Never rename shared modules without approval.
+- Never introduce new dependencies without explicit approval.
+- Prefer extension over replacement.
+- Preserve backward compatibility whenever possible.
+- Never guess project structure.
+- Read existing code before generating new code.
+
+---
+
+# Definition of Done
+
+Architecture is considered safe only when:
+
+- Requested scope is respected.
+- Protected pages remain unchanged unless explicitly approved.
+- Shared architecture remains stable.
+- No regressions are introduced.
+- Existing project conventions are preserved.
+- Verification checklist has been satisfied.

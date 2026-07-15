@@ -1,0 +1,233 @@
+---
+description: Bitcraftly Code Review Standards
+alwaysApply: false
+---
+
+# Bitcraftly Code Review Standards
+
+Apply these standards whenever reviewing, refactoring, or generating production code.
+
+This rule complements:
+
+- Bitcraftly-Engineering-Standards.mdc
+- Bitcraftly-Architecture-Protection-Rules.mdc
+- Bitcraftly-Accessibility-Standards.mdc
+- Bitcraftly-Performance-Standards.mdc
+- Bitcraftly-SEO-Standards.mdc
+
+---
+
+# Review Goals
+
+Every implementation should be:
+
+- Correct
+- Maintainable
+- Readable
+- Type-safe
+- Accessible
+- Performant
+- Production-ready
+
+Never approve code that introduces unnecessary complexity.
+
+---
+
+# Scope Review
+
+Verify:
+
+- Only requested files were modified.
+- No unrelated features changed.
+- No protected pages were modified unintentionally.
+- Existing architecture remains intact.
+
+---
+
+# Architecture Review
+
+Check for:
+
+- Feature-based architecture
+- Proper separation of concerns
+- Reusable components
+- Shared utilities
+- Consistent folder structure
+
+Reject unnecessary architectural changes.
+
+---
+
+# Code Quality
+
+Verify:
+
+- No duplicated logic.
+- No dead code.
+- No unused imports.
+- No unused variables.
+- Clear function names.
+- Small, focused components.
+- Self-explanatory code.
+
+Prefer readability over clever implementations.
+
+---
+
+# TypeScript Review
+
+Check:
+
+- No use of `any`
+- Proper interfaces
+- Strict typing
+- No unnecessary type assertions
+- Reusable shared types
+
+---
+
+# React Review
+
+Prefer:
+
+- Server Components
+- Small components
+- Composition
+- Proper key usage
+- Stable rendering
+
+Avoid:
+
+- Deep nesting
+- Large components
+- Excessive state
+- Unnecessary effects
+
+---
+
+# Performance Review
+
+Verify:
+
+- No unnecessary Client Components.
+- Efficient rendering.
+- Optimized images.
+- No duplicate API requests.
+- Bundle size remains reasonable.
+
+---
+
+# Accessibility Review
+
+Verify:
+
+- Semantic HTML
+- Keyboard navigation
+- Focus visibility
+- Proper labels
+- Accessible forms
+- Meaningful alt text
+- Correct heading hierarchy
+
+Accessibility regressions are not acceptable.
+
+---
+
+# SEO Review
+
+For public pages verify:
+
+- Metadata
+- Open Graph
+- Structured Data
+- Heading hierarchy
+- Canonical URL
+- Crawlability
+
+---
+
+# Security Review
+
+Check for:
+
+- Input validation
+- Safe rendering
+- No exposed secrets
+- No hardcoded credentials
+- Proper authentication boundaries
+
+Never introduce sensitive information into source code.
+
+---
+
+# Error Handling
+
+Verify:
+
+- Meaningful error handling
+- Graceful fallbacks
+- Loading states
+- Empty states
+- Error boundaries where appropriate
+
+---
+
+# Testing Mindset
+
+Before approving code ask:
+
+- What could break?
+- What are the edge cases?
+- What happens if the API fails?
+- What happens with empty data?
+- What happens on slow networks?
+
+---
+
+# AI Behaviour
+
+Before considering a task complete:
+
+Review your own implementation.
+
+Ask yourself:
+
+- Is this the smallest safe change?
+- Can existing code be reused?
+- Did I preserve architecture?
+- Did I introduce unnecessary complexity?
+- Did I modify unrelated files?
+- Is this production ready?
+
+If the answer is "No" to any of these, improve the implementation before finishing.
+
+---
+
+# Review Checklist
+
+Verify:
+
+- Requirements satisfied
+- No TypeScript errors
+- No ESLint issues
+- No broken imports
+- No dead code
+- No accessibility regressions
+- No performance regressions
+- No SEO regressions
+- Existing architecture preserved
+- Only requested files modified
+
+---
+
+# Definition of Done
+
+Code is considered production-ready only when:
+
+- Requirements are fully implemented.
+- Existing architecture is preserved.
+- Type safety is maintained.
+- Accessibility requirements are satisfied.
+- Performance is preserved.
+- No unnecessary complexity has been introduced.
+- No unrelated files have been modified.

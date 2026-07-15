@@ -8,6 +8,7 @@ System architecture, technical design documents, and Architecture Decision Recor
 |----------|-------------|
 | [ADR-001-src-directory.md](./ADR-001-src-directory.md) | Decision to adopt the `src/` directory layout |
 | [industries-page.md](./industries-page.md) | Industries marketing page — architecture & implementation plan |
+| [work-page.md](./work-page.md) | Work / Portfolio — Sprint 5 architecture (planning) |
 
 ## Purpose
 
