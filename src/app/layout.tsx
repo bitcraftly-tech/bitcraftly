@@ -1,6 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import StructuredData from "@/components/seo/StructuredData";
 import "@/styles/globals.css";
+
+const SITE_TITLE = "Bitcraftly | AI & Digital Engineering Partner";
+
+const SITE_DESCRIPTION =
+  "Bitcraftly builds AI-powered websites, SaaS, and automation — founder-led delivery with clear scope and measurable outcomes.";
+
+const SITE_URL = "https://bitcraftly.com";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,22 +21,60 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+
   title: {
-    default: "Bitcraftly | AI & Digital Engineering Partner",
+    default: SITE_TITLE,
     template: "%s | Bitcraftly",
   },
-  description:
-    "Bitcraftly builds AI-powered websites, SaaS, and automation — founder-led delivery with clear scope and measurable outcomes.",
+
+  description: SITE_DESCRIPTION,
+
+  keywords: [
+    "Bitcraftly",
+    "AI Development",
+    "Web Development",
+    "Next.js",
+    "React",
+    "SaaS Development",
+    "Automation",
+    "Digital Engineering",
+    "Enterprise Software",
+  ],
+
+  authors: [
+    {
+      name: "Bitcraftly",
+      url: SITE_URL,
+    },
+  ],
+
+  creator: "Bitcraftly",
+
+  publisher: "Bitcraftly",
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
   openGraph: {
     type: "website",
-    url: "https://bitcraftly.com",
+    url: SITE_URL,
     siteName: "Bitcraftly",
-    title: "Bitcraftly | AI & Digital Engineering Partner",
-    description:
-      "Bitcraftly builds AI-powered websites, SaaS, and automation — founder-led delivery with clear scope and measurable outcomes.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image.webp",
         width: 1200,
         height: 630,
         alt: "Bitcraftly - AI & Digital Engineering Partner",
@@ -38,22 +84,22 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Bitcraftly | AI & Digital Engineering Partner",
-    description:
-      "Bitcraftly builds AI-powered websites, SaaS, and automation — founder-led delivery with clear scope and measurable outcomes.",
-    images: ["/twitter-image.png"],
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/twitter-image.webp"],
   },
+
   icons: {
     icon: [{ url: "/brand/icon.png", type: "image/png" }],
     shortcut: "/brand/favicon.ico",
     apple: "/brand/icon.png",
   },
-  metadataBase: new URL("https://bitcraftly.com"),
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: "#0B1220",
 };
 
 export default function RootLayout({
@@ -66,7 +112,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <StructuredData />
+        {children}
+      </body>
     </html>
   );
 }

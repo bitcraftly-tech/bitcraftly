@@ -16,7 +16,7 @@ export const metadata: Metadata = createPageMetadata({
     "founder-led web studio",
     "Delhi NCR web development",
   ],
-  image: "/hero-new.png",
+  image: "/hero.webp",
 });
 
 const homepageJsonLd = {
