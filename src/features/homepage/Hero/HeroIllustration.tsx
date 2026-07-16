@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 
-/** Cache-bust so public asset swaps show up immediately in dev. */
-const HERO_IMAGE_SRC = "/hero-new.png?v=20260713-3";
+const HERO_IMAGE_SRC = "/hero.webp";
 
 /**
  * Keeps its own aspect box so the graphic stays large and fully visible.
@@ -25,7 +24,6 @@ export function HeroIllustration() {
         alt="Bitcraftly product dashboard — AI, revenue, projects and analytics overview"
         fill
         priority
-        unoptimized
         sizes="(max-width: 1024px) 100vw, 50vw"
         className="hero-illustration-image h-full w-full object-contain object-center"
       />

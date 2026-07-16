@@ -3,8 +3,7 @@ import { cn } from "@/lib/cn";
 import "@/features/homepage/Hero/hero.css";
 import "./industries.css";
 
-/** Cache-bust so public asset swaps show up immediately in dev. */
-const INDUSTRIES_HERO_IMAGE_SRC = "/industries-hero.png?v=20260714-1";
+const INDUSTRIES_HERO_IMAGE_SRC = "/industries-hero.webp";
 
 /**
  * Industries-only hero visual — illustration only (no orbital background rings).
@@ -24,7 +23,6 @@ export function IndustriesHeroVisual() {
         alt=""
         fill
         priority
-        unoptimized
         sizes="(max-width: 1024px) 100vw, 50vw"
         className="industries-hero-visual__image hero-illustration-image h-full w-full object-contain object-center"
       />

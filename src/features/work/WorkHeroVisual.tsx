@@ -16,7 +16,7 @@ export function WorkHeroVisual() {
       )}
     >
       <Image
-        src="/portfolio-hero.png"
+        src="/portfolio-hero.webp"
         alt="Bitcraftly portfolio product showcase"
         fill
         priority

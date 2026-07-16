@@ -16,7 +16,7 @@ interface IndustriesHeroProps {
 
 /**
  * Industries-only hero — matches approved Industries marketing mock.
- * Right column uses `/industries-hero.png` like Services / Solutions.
+ * Right column uses `/industries-hero.webp` like Services / Solutions.
  * Background layers match Services / Solutions (`hero-surface` + grids + aurora).
  */
 export function IndustriesHero({ breadcrumbs }: IndustriesHeroProps) {

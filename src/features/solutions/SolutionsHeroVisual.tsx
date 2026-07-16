@@ -2,8 +2,7 @@ import Image from "next/image";
 import { cn } from "@/lib/cn";
 import "@/features/homepage/Hero/hero.css";
 
-/** Cache-bust so public asset swaps show up immediately in dev. */
-const SOLUTIONS_HERO_IMAGE_SRC = "/solutions-hero.png?v=20260714-2";
+const SOLUTIONS_HERO_IMAGE_SRC = "/solutions-hero.webp";
 
 /**
  * Solutions-only hero visual — full column height, centered, float animation.
@@ -23,7 +22,6 @@ export function SolutionsHeroVisual() {
         alt=""
         fill
         priority
-        unoptimized
         sizes="(max-width: 1024px) 100vw, 50vw"
         className="hero-illustration-image h-full w-full object-contain object-center"
       />

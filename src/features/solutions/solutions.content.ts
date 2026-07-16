@@ -606,7 +606,7 @@ export const SOLUTIONS_LANDING = {
       description:
         "Sales pipelines, follow-ups, and WhatsApp-ready workflows your team will actually use.",
       imageLabel: "CRM",
-      imageSrc: "/business-solutions-crm.png",
+      imageSrc: "/business-solutions-crm.webp",
       features: [
         "Lead & deal stages",
         "Automated reminders",
@@ -625,7 +625,7 @@ export const SOLUTIONS_LANDING = {
       description:
         "Multi-tenant products with billing-ready architecture, roles, and scalable delivery.",
       imageLabel: "SaaS",
-      imageSrc: "/business-solutions-saas.png",
+      imageSrc: "/business-solutions-saas.webp",
       features: [
         "Tenant isolation",
         "Role-based access",
@@ -644,7 +644,7 @@ export const SOLUTIONS_LANDING = {
       description:
         "Rule + LLM automation that removes repetitive work and routes exceptions to humans.",
       imageLabel: "AI",
-      imageSrc: "/business-solutions-ai.png",
+      imageSrc: "/business-solutions-ai.webp",
       features: [
         "Workflow orchestration",
         "Human escalation paths",

@@ -2,8 +2,7 @@ import Image from "next/image";
 import { cn } from "@/lib/cn";
 import "./services.css";
 
-/** Cache-bust so public asset swaps show up immediately in dev. */
-const SERVICES_HERO_IMAGE_SRC = "/services-hero.png?v=20260714-5";
+const SERVICES_HERO_IMAGE_SRC = "/services-hero.webp";
 
 /**
  * Services-only hero visual — single premium illustration with Homepage-style float.
@@ -24,7 +23,6 @@ export function ServicesHeroVisual() {
         alt=""
         fill
         priority
-        unoptimized
         sizes="(max-width: 1024px) 100vw, 50vw"
         className="services-hero-visual__image object-contain object-center"
       />
