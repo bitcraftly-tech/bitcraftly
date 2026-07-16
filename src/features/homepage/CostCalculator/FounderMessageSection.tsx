@@ -13,7 +13,6 @@ export function FounderMessageSection() {
   return (
     <section
       id={content.sectionId}
-      aria-labelledby={content.headingId}
       className="bg-background text-foreground homepage-section"
     >
       <Container size="xl">

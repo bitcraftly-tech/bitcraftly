@@ -6,12 +6,19 @@ import type { HomepageTechnology } from "./technologies.types";
 interface TechnologyCardProps {
   technology: HomepageTechnology;
   className?: string;
+  /** Use `-1` for decorative marquee duplicates so they are not keyboard-focusable. */
+  tabIndex?: number;
 }
 
-export function TechnologyCard({ technology, className }: TechnologyCardProps) {
+export function TechnologyCard({
+  technology,
+  className,
+  tabIndex,
+}: TechnologyCardProps) {
   return (
     <Link
       href={technology.href}
+      tabIndex={tabIndex}
       className={cn(
         "technologies-card group flex h-full flex-col items-center text-center",
         "rounded-[16px] p-[24px] no-underline",

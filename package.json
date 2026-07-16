@@ -18,6 +18,7 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@axe-core/cli": "^4.12.1",
     "@next/bundle-analyzer": "^16.2.10",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
@@ -26,6 +27,7 @@
     "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "lighthouse": "^13.4.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

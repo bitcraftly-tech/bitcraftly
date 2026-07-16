@@ -13,15 +13,24 @@ export function TechnologiesMarquee() {
   return (
     <div className="technologies-marquee" aria-label="Technologies we build with">
       <div className="technologies-marquee-track">
-        {loop.map((technology, index) => (
-          <div
-            key={`${technology.id}-${index}`}
-            className="technologies-marquee-item"
-            aria-hidden={index >= HOMEPAGE_TECHNOLOGIES.length}
-          >
-            <TechnologyCard technology={technology} />
-          </div>
-        ))}
+        {loop.map((technology, index) => {
+          const isDuplicate = index >= HOMEPAGE_TECHNOLOGIES.length;
+
+          return (
+            <div
+              key={`${technology.id}-${index}`}
+              className="technologies-marquee-item"
+              // Duplicate set is animation-only: hide from AT and remove from tab order.
+              aria-hidden={isDuplicate ? true : undefined}
+              {...(isDuplicate ? { inert: true } : {})}
+            >
+              <TechnologyCard
+                technology={technology}
+                tabIndex={isDuplicate ? -1 : undefined}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
