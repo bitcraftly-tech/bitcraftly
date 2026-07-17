@@ -11,8 +11,6 @@ import {
   WHY_LABEL,
   WHY_SECTION_ID,
 } from "./why-bitcraftly.constants";
-import "./why-bitcraftly.css";
-
 export function WhyBitcraftlySection() {
   return (
     <section

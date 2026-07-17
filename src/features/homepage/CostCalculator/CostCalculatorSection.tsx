@@ -1,9 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { HomepageReveal } from "../shared/HomepageReveal";
 import { COST_CALCULATOR_CONTENT } from "./cost-calculator.content";
-import { CostCalculatorExperience } from "./CostCalculatorExperience";
-import "./cost-calculator.css";
-
+import { CostCalculatorExperienceLazy } from "./CostCalculatorExperienceLazy";
 function CostCalculatorJsonLd() {
   const schema = {
     "@context": "https://schema.org",
@@ -37,13 +35,14 @@ export function CostCalculatorSection() {
   return (
     <section
       id={content.sectionId}
-      aria-labelledby={content.headingId}
+      role="region"
+      aria-label={content.intro.heading}
       className="bg-background text-foreground homepage-section"
     >
       <CostCalculatorJsonLd />
       <Container size="xl">
         <HomepageReveal name="cost-calculator">
-          <CostCalculatorExperience content={content} />
+          <CostCalculatorExperienceLazy />
         </HomepageReveal>
       </Container>
     </section>

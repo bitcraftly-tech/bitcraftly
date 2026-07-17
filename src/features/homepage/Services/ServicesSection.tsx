@@ -11,8 +11,6 @@ import {
   SERVICES_LABEL,
   SERVICES_SECTION_ID,
 } from "./services.constants";
-import "./services.css";
-
 export function ServicesSection() {
   return (
     <section

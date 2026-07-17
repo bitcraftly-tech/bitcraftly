@@ -1,49 +1,62 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { ROUTES } from "@/constants/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import {
-  getWorkCaseStudyBySlug,
-  WORK_CASE_STUDIES,
-  WorkHubPage,
-} from "@/features/work";
+  getAllCaseStudySlugs,
+  getCaseStudyBySlug,
+  getCaseStudyHref,
+} from "@/content/case-studies";
 import { createPageMetadata } from "@/lib/seo/createPageMetadata";
-import "@/features/work/work.css";
 
-interface WorkCaseStudyPageProps {
+/** Older `/work/case-studies/*` slugs → canonical `/work/[slug]` case studies. */
+const LEGACY_CASE_STUDY_REDIRECTS: Record<string, string> = {
+  "next-gen-saas-platform": "saaspro-analytics-platform",
+};
+
+interface LegacyCaseStudyPageProps {
   params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
-  return WORK_CASE_STUDIES.map((item) => ({ slug: item.slug }));
+  const contentSlugs = getAllCaseStudySlugs();
+  const legacySlugs = Object.keys(LEGACY_CASE_STUDY_REDIRECTS);
+  return Array.from(new Set([...contentSlugs, ...legacySlugs])).map((slug) => ({
+    slug,
+  }));
 }
 
 export async function generateMetadata({
   params,
-}: WorkCaseStudyPageProps): Promise<Metadata> {
+}: LegacyCaseStudyPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const study = getWorkCaseStudyBySlug(slug);
+  const canonicalSlug = LEGACY_CASE_STUDY_REDIRECTS[slug] ?? slug;
+  const study = getCaseStudyBySlug(canonicalSlug);
+
+  if (!study) {
+    return createPageMetadata({
+      title: "Case Study | Work",
+      description: "Bitcraftly case study detail page.",
+      path: getCaseStudyHref(canonicalSlug),
+    });
+  }
 
   return createPageMetadata({
-    title: study ? `${study.title} | Case Study` : "Case Study | Work",
-    description: study?.description ?? "Bitcraftly case study detail page.",
-    path: `${ROUTES.workCaseStudies}/${slug}`,
+    title: study.seoTitle ?? `${study.title} | Case Study`,
+    description: study.seoDescription ?? study.description,
+    path: getCaseStudyHref(study.slug),
+    image: study.coverImage,
   });
 }
 
-export default async function WorkCaseStudyPage({
+export default async function LegacyWorkCaseStudyPage({
   params,
-}: WorkCaseStudyPageProps) {
+}: LegacyCaseStudyPageProps) {
   const { slug } = await params;
-  const study = getWorkCaseStudyBySlug(slug);
+  const canonicalSlug = LEGACY_CASE_STUDY_REDIRECTS[slug] ?? slug;
+  const study = getCaseStudyBySlug(canonicalSlug);
 
   if (!study) {
     notFound();
   }
 
-  return (
-    <PageShell className="work-page">
-      <WorkHubPage title={study.title} description={study.description} />
-    </PageShell>
-  );
+  permanentRedirect(getCaseStudyHref(study.slug));
 }

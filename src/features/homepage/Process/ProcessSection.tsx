@@ -13,8 +13,6 @@ import {
   PROCESS_SIDE_CTA,
   PROCESS_STEPS,
 } from "./process.constants";
-import "./process.css";
-
 export function ProcessSection() {
   return (
     <section

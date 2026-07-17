@@ -10,6 +10,7 @@ import { FinalCTASection } from "@/features/homepage/FinalCTA";
 import { ServiceFaqAccordion } from "@/features/services/ServiceFaqAccordion";
 import { cn } from "@/lib/cn";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
+import "@/features/homepage/FAQ/faq.css";
 import "@/features/homepage/Hero/hero.css";
 import "@/features/services/services.css";
 

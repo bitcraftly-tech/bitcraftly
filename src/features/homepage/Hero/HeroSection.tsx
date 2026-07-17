@@ -1,7 +1,6 @@
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/cn";
 import { HERO_HEADING_ID, HERO_ID } from "./hero.constants";
-import "./hero.css";
 import { HeroContent } from "./HeroContent";
 import { HeroIllustration } from "./HeroIllustration";
 

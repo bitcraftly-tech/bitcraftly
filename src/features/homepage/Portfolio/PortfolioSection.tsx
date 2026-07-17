@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/cn";
 import { HomepageReveal } from "../shared/HomepageReveal";
-import { PortfolioGrid } from "./PortfolioGrid";
+import { PortfolioGridLazy } from "./PortfolioGridLazy";
 import {
   PORTFOLIO_DESCRIPTION,
   PORTFOLIO_HEADING,
@@ -9,8 +9,6 @@ import {
   PORTFOLIO_LABEL,
   PORTFOLIO_SECTION_ID,
 } from "./portfolio.constants";
-import "./portfolio.css";
-
 export function PortfolioSection() {
   return (
     <section
@@ -56,7 +54,7 @@ export function PortfolioSection() {
         </HomepageReveal>
 
         <div className="mt-[var(--space-6)]">
-          <PortfolioGrid />
+          <PortfolioGridLazy />
         </div>
       </Container>
     </section>

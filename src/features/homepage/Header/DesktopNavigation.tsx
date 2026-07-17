@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import {
   useCallback,
   useEffect,
@@ -17,8 +18,12 @@ import {
 } from "@/constants/navigation";
 import { cn } from "@/lib/cn";
 import { HEADER_HEIGHT_PX, HEADER_NAV_ID, HEADER_NAV_LINKS } from "./header.constants";
-import { MegaMenuPanel } from "./MegaMenuPanel";
 import { NavigationLink } from "./NavigationLink";
+
+const MegaMenuPanel = dynamic(
+  () => import("./MegaMenuPanel").then((mod) => mod.MegaMenuPanel),
+  { ssr: false },
+);
 
 const HOVER_DELAY_MS = 100;
 const FOCUSABLE_SELECTOR =

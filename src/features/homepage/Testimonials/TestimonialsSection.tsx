@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/cn";
 import { HomepageReveal } from "../shared/HomepageReveal";
-import { TestimonialsCarousel } from "./TestimonialsCarousel";
+import { TestimonialsCarouselLazy } from "./TestimonialsCarouselLazy";
 import {
   TESTIMONIALS_DESCRIPTION_LINE_1,
   TESTIMONIALS_DESCRIPTION_LINE_2,
@@ -10,8 +10,6 @@ import {
   TESTIMONIALS_LABEL,
   TESTIMONIALS_SECTION_ID,
 } from "./testimonials.constants";
-import "./testimonials.css";
-
 export function TestimonialsSection() {
   return (
     <section
@@ -59,7 +57,7 @@ export function TestimonialsSection() {
 
         <div className="mt-[var(--space-6)]">
           <HomepageReveal name="testimonials" delayMs={80}>
-            <TestimonialsCarousel />
+            <TestimonialsCarouselLazy />
           </HomepageReveal>
         </div>
       </Container>

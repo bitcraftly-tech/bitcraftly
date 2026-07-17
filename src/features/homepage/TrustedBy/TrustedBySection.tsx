@@ -9,8 +9,6 @@ import {
 } from "./trusted-by.constants";
 import { TrustedByReveal } from "./TrustedByReveal";
 import { TrustedByValueItem } from "./TrustedByValueItem";
-import "./trusted-by.css";
-
 export function TrustedBySection() {
   return (
     <section

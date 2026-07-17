@@ -1,0 +1,421 @@
+/** Homepage critical — hero + shell (ATF only). */
+
+/* --- src/features/homepage/Hero/hero.css --- */
+/**
+ * Hero section utilities — token-based decorative styles only.
+ */
+
+.hero-surface {
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--primary) 6%, var(--background)),
+    var(--background) 45%
+  );
+}
+
+.hero-eyebrow {
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, white);
+  background-color: color-mix(in srgb, var(--accent) 10%, white);
+  color: var(--accent);
+}
+
+.hero-heading {
+  font-size: 45px;
+  font-weight: 600;
+}
+
+.hero-description {
+  margin-top: -2px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+@media (min-width: 640px) {
+  .hero-description {
+    font-size: 13px;
+  }
+}
+
+.hero-dot-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in srgb, var(--muted) 35%, transparent) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
+  mask-image: radial-gradient(
+    ellipse 90% 70% at 50% 20%,
+    black 40%,
+    transparent 85%
+  );
+}
+
+.hero-line-grid {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--border) 60%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--border) 60%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at top, black 20%, transparent 75%);
+}
+
+.hero-aurora-accent {
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--accent) 55%, transparent),
+    transparent 70%
+  );
+}
+
+.hero-aurora-primary {
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--primary) 55%, transparent),
+    transparent 70%
+  );
+}
+
+.hero-aurora-blend {
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--primary) 35%, transparent),
+    transparent 70%
+  );
+}
+
+.hero-brand-gradient {
+  background-image: linear-gradient(
+    to right,
+    var(--primary),
+    var(--accent)
+  );
+}
+
+.hero-cta {
+  box-sizing: border-box;
+  display: inline-flex;
+  width: 100%;
+  height: 44px;
+  min-height: 44px;
+  max-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 20px;
+  border-radius: 12px;
+  border-width: 1px;
+  border-style: solid;
+  font-family: var(--font-family-sans);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+@media (min-width: 640px) {
+  .hero-cta {
+    width: auto;
+  }
+}
+
+.hero-cta-primary {
+  border-color: transparent;
+  background-image: linear-gradient(to right, var(--primary), var(--accent));
+  color: var(--primary-foreground);
+}
+
+.hero-cta:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.hero-cta-primary:hover {
+  opacity: 0.95;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 10px 22px -12px color-mix(in srgb, var(--primary) 55%, transparent);
+}
+
+.hero-cta-outline {
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
+  background-color: color-mix(in srgb, var(--background) 90%, transparent);
+  color: var(--foreground);
+}
+
+.hero-cta-outline:hover {
+  transform: translateY(-1px) scale(1.02);
+  border-color: color-mix(in srgb, var(--primary) 50%, var(--border));
+  color: var(--primary);
+  box-shadow: 0 8px 18px -14px color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+.hero-brand-gradient-soft {
+  background-image: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--primary) 12%, var(--surface)),
+    var(--background)
+  );
+}
+
+.hero-gradient-text {
+  background-image: linear-gradient(
+    to right,
+    var(--primary),
+    var(--accent)
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-metric-value {
+  background-image: linear-gradient(
+    to bottom right,
+    var(--foreground),
+    color-mix(in srgb, var(--foreground) 70%, transparent)
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-sparkline-fill {
+  stop-color: var(--accent);
+}
+
+.hero-sparkline-stroke-start {
+  stop-color: var(--primary);
+}
+
+.hero-sparkline-stroke-end {
+  stop-color: var(--accent);
+}
+
+.hero-revenue-value {
+  background-image: linear-gradient(
+    to bottom right,
+    var(--foreground),
+    color-mix(in srgb, var(--foreground) 75%, transparent)
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-automation-connector {
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--primary) 60%, transparent),
+    color-mix(in srgb, var(--accent) 60%, transparent),
+    color-mix(in srgb, var(--primary) 60%, transparent)
+  );
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 4px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, white);
+  background-color: var(--background);
+  box-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.04);
+  text-decoration: none;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.hero-tag:hover {
+  border-color: color-mix(in srgb, var(--primary) 35%, white);
+  box-shadow: var(--token-shadow-sm);
+  transform: translateY(-1px);
+}
+
+.hero-tag:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.hero-tag-icon {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background-color: #f0f4ff;
+  color: var(--accent);
+}
+
+.hero-tag-label {
+  font-family: var(--font-family-sans);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+  white-space: nowrap;
+}
+
+.hero-illustration-image {
+  animation: hero-illustration-float 7.5s ease-in-out infinite;
+  filter: drop-shadow(0 18px 36px rgb(14 20 74 / 0.14));
+  will-change: transform;
+}
+
+@keyframes hero-illustration-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-illustration-image,
+  .hero-cta-primary:hover,
+  .hero-cta-outline:hover,
+  .hero-tag:hover {
+    animation: none;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* --- src/features/homepage/Homepage/homepage-shell.css --- */
+/**
+ * Homepage shell — section dividers + card tokens.
+ * Vertical rhythm (`.homepage-section`) lives in `@/lib/layout/page-shell.css`
+ * so every marketing route shares the same spacing.
+ */
+
+.homepage-sections > * + * {
+  border-top: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+}
+
+.homepage-sections > #founder-message + #cost-calculator {
+  border-top: none;
+}
+
+/* Paired Founder ↔ Calculator: tighter join, still premium */
+.homepage-sections > #founder-message.homepage-section {
+  padding-bottom: 24px;
+}
+
+.homepage-sections > #cost-calculator.homepage-section {
+  padding-top: 24px;
+}
+
+@media (min-width: 768px) {
+  .homepage-sections > #founder-message.homepage-section {
+    padding-bottom: 28px;
+  }
+
+  .homepage-sections > #cost-calculator.homepage-section {
+    padding-top: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .homepage-sections > #founder-message.homepage-section {
+    padding-bottom: 32px;
+  }
+
+  .homepage-sections > #cost-calculator.homepage-section {
+  padding-top: 32px;
+  }
+}
+
+/**
+ * Shared card hover language (Stripe/Linear-like lift).
+ */
+.homepage-sections {
+  --hp-card-radius: 16px;
+  --hp-card-padding: 24px;
+  --hp-card-border: #eef2ff;
+  --hp-card-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.04);
+  --hp-card-shadow-hover:
+    var(--token-shadow-md),
+    0 16px 36px -20px color-mix(in srgb, var(--primary) 28%, transparent);
+  --hp-card-lift: -6px;
+  --hp-card-transition: 220ms var(--ease-out);
+}
+
+/**
+ * Scroll reveals without IntersectionObserver (TBT).
+ * Progressive enhancement: CSS scroll-driven animation when supported;
+ * otherwise content stays visible immediately.
+ */
+@keyframes hp-reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hp-scroll-reveal {
+  /* Fail-open: content must stay visible. Scroll motion is optional enhancement. */
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/**
+ * Fail-open for legacy `.*-reveal { opacity: 0 }` (expected JS `.is-visible`).
+ * Must live in critical CSS so mid-page stays visible before deferred CSS loads.
+ */
+[class*="-reveal"],
+[class*="-reveal"].hp-scroll-reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hp-scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/**
+ * ATF: skip style/layout for off-screen homepage sections.
+ * Preserves HTML for SEO; reduces main-thread work that delays LCP.
+ * contain-intrinsic-size reserves space to keep CLS ~0.
+ */
+.homepage-sections > section:not(#hero) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
+@media (min-width: 768px) {
+  .homepage-sections > section:not(#hero) {
+    contain-intrinsic-size: auto 640px;
+  }
+}
+
+/** Reserves approximate below-fold space before client mount (CLS guard). */
+.homepage-btf-reserve {
+  min-height: 220vh;
+}
+
+

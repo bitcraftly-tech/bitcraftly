@@ -117,6 +117,8 @@ export const ROUTES = {
   packages: "/packages",
   about: "/about",
   contact: "/contact",
+  assistant: "/assistant",
+  admin: "/admin",
 } as const;
 
 export type AppRoute = (typeof ROUTES)[keyof typeof ROUTES];

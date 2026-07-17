@@ -8,7 +8,6 @@ import {
   FooterCompanyColumn,
   FooterNavigation,
 } from "./FooterNavigation";
-import "./footer.css";
 
 export function FooterSection() {
   return (

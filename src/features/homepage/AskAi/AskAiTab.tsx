@@ -1,12 +1,26 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useId, useRef, useState } from "react";
 import { Icon } from "@/components/ui/icon";
-import { AskAiPanel } from "./AskAiPanel";
-import "./ask-ai.css";
+/* ask-ai.css loaded post-paint via MarketingDeferredCss */
+
+const AskAiPanel = dynamic(
+  () =>
+    import("./AskAiPanel")
+      .then((mod) => mod.AskAiPanel)
+      .catch(() => {
+        function AskAiPanelUnavailable() {
+          return null;
+        }
+        return AskAiPanelUnavailable;
+      }),
+  { ssr: false },
+);
 
 /**
  * Fixed right-edge Ask AI launcher that toggles the Bitcraftly AI panel.
+ * Panel code loads only when opened to keep first-load JS smaller.
  */
 export function AskAiTab() {
   const [open, setOpen] = useState(false);

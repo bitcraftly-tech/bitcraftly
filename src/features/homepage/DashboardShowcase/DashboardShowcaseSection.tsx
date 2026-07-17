@@ -5,10 +5,8 @@ import { Icon } from "@/components/ui/icon";
 import { ROUTES } from "@/constants/navigation";
 import { cn } from "@/lib/cn";
 import { HeroDashboard } from "../Hero/HeroDashboard";
-import "../Hero/hero.css";
 import { HomepageReveal } from "../shared/HomepageReveal";
 import { bitcraftlyProductImage } from "../shared/contact-links";
-import "./dashboard-showcase.css";
 
 export const DASHBOARD_SECTION_ID = "enterprise-dashboard";
 export const DASHBOARD_HEADING_ID = "enterprise-dashboard-heading";

@@ -1,4 +1,4 @@
-import { FaqAccordion } from "@/components/patterns/faq-accordion";
+import { FaqAccordionLazy } from "./FaqAccordionLazy";
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/cn";
 import { HomepageReveal } from "../shared/HomepageReveal";
@@ -10,29 +10,7 @@ import {
   FAQ_LABEL,
   FAQ_SECTION_ID,
 } from "./faq.constants";
-import "./faq.css";
-
-function FaqJsonLd() {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQ_ITEMS.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
-}
+/* FAQ styles: homepage-deferred.css (post-paint). JSON-LD lives on HomepageShell (ATF SEO). */
 
 export function FAQSection() {
   return (
@@ -41,7 +19,6 @@ export function FAQSection() {
       aria-labelledby={FAQ_HEADING_ID}
       className="bg-background text-foreground homepage-section"
     >
-      <FaqJsonLd />
       <Container size="xl">
         <HomepageReveal name="faq" className="mx-auto max-w-[640px] text-center">
           <p
@@ -78,7 +55,7 @@ export function FAQSection() {
 
         <div className="mt-[var(--space-6)]">
           <HomepageReveal name="faq" delayMs={80}>
-            <FaqAccordion items={FAQ_ITEMS} />
+            <FaqAccordionLazy items={FAQ_ITEMS} />
           </HomepageReveal>
         </div>
       </Container>

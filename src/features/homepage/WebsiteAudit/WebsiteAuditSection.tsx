@@ -13,8 +13,6 @@ import {
   WEBSITE_AUDIT_LABEL,
   WEBSITE_AUDIT_SECTION_ID,
 } from "./website-audit.constants";
-import "./website-audit.css";
-
 export function WebsiteAuditSection() {
   return (
     <section

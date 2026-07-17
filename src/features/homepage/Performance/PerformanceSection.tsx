@@ -11,8 +11,6 @@ import {
   PERFORMANCE_LABEL,
   PERFORMANCE_SECTION_ID,
 } from "./performance.constants";
-import "./performance.css";
-
 export function PerformanceSection() {
   return (
     <section

@@ -33,12 +33,28 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: projectRoot,
 
   /**
+   * Prefer modern JS output — drop legacy polyfills for evergreen browsers.
+   */
+  compiler: {
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? { exclude: ["error", "warn"] }
+        : false,
+  },
+
+  /**
    * Image Optimization
    */
   images: {
     formats: ["image/avif", "image/webp"],
 
+    /** Explicit list — Logo (80) and Hero (55) use non-default qualities. */
+    qualities: [55, 75, 80],
+
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
+
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
 
     remotePatterns: [
       {

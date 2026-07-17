@@ -9,7 +9,7 @@ const variantStyles: Record<BadgeVariant, string> = {
   secondary:
     "border border-transparent bg-secondary text-secondary-foreground",
   success:
-    "border border-success/20 bg-success-subtle text-success",
+    "border border-success/20 bg-success-subtle text-[#14532d] dark:text-[#bbf7d0]",
   warning:
     "border border-warning/20 bg-warning-subtle text-warning",
   outline:

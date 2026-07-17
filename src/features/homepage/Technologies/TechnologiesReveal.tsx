@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 interface TechnologiesRevealProps {
@@ -9,43 +7,21 @@ interface TechnologiesRevealProps {
   delayMs?: number;
 }
 
+/** Server Component — CSS scroll reveal, no client hydration. */
 export function TechnologiesReveal({
   children,
   className,
   delayMs = 0,
 }: TechnologiesRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.08, rootMargin: "0px 0px -4% 0px" },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  const style =
+    delayMs > 0
+      ? ({ "--reveal-delay": `${delayMs}ms` } as CSSProperties)
+      : undefined;
 
   return (
     <div
-      ref={ref}
-      className={cn("technologies-reveal", visible && "is-visible", className)}
-      style={
-        visible && delayMs > 0
-          ? { transitionDelay: `${delayMs}ms` }
-          : undefined
-      }
+      className={cn("technologies-reveal", "hp-scroll-reveal", className)}
+      style={style}
     >
       {children}
     </div>

@@ -10,8 +10,6 @@ import {
   FINAL_CTA_SECONDARY,
   FINAL_CTA_SECTION_ID,
 } from "./final-cta.constants";
-import "./final-cta.css";
-
 const focusRing = cn(
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground",
   "focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e144a]",

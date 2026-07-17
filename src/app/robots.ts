@@ -1,8 +1,12 @@
 import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/seo/site";
 
+/**
+ * Production robots.txt — standard directives only.
+ * Do not emit `Host:` (non-standard; fails Lighthouse robots validity).
+ */
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_APP_URL || "https://bitcraftly.com";
+  const baseUrl = getSiteUrl();
 
   return {
     rules: [
@@ -12,12 +16,12 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           "/api/",
           "/admin/",
+          "/assistant/",
           "/dashboard/",
           "/private/",
         ],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
   };
 }

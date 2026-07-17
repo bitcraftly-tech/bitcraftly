@@ -2,12 +2,11 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/cn";
-import { DesktopNavigation } from "./DesktopNavigation";
+import { DesktopNavSlot } from "./DesktopNavSlot";
 import { HEADER_BOOK_CALL, HEADER_CTA } from "./header.constants";
-import "./header.css";
 import { HeaderRoot } from "./HeaderRoot";
 import { Logo } from "./Logo";
-import { MobileNavigation } from "./MobileNavigation";
+import { MobileNavSlot } from "./MobileNavSlot";
 
 const headerButtonBase = cn(
   "inline-flex h-[44px] w-auto shrink-0 items-center justify-center",
@@ -28,7 +27,7 @@ export function HeaderSection() {
         </div>
 
         <div className="relative flex min-w-0 items-center justify-center px-[4px]">
-          <DesktopNavigation />
+          <DesktopNavSlot />
         </div>
 
         <div className="relative z-10 flex shrink-0 items-center gap-[12px]">
@@ -67,7 +66,7 @@ export function HeaderSection() {
             />
           </Link>
 
-          <MobileNavigation />
+          <MobileNavSlot />
         </div>
       </Container>
     </HeaderRoot>

@@ -1,3 +1,12 @@
+# =============================================================================
+# Bitcraftly Platform — Continuous Integration
+# =============================================================================
+# Jobs:
+#   1. quality   — lint · typecheck · vitest (+ coverage) · build
+#   2. e2e       — Playwright (Chromium desktop + mobile)
+#   3. lighthouse — Lighthouse CI against production server
+# =============================================================================
+
 name: Bitcraftly CI
 
 on:
@@ -10,28 +19,133 @@ on:
       - main
       - develop
 
+concurrency:
+  group: bitcraftly-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
-  quality-checks:
+  quality:
+    name: Lint · Typecheck · Unit · Build
     runs-on: ubuntu-latest
+    timeout-minutes: 25
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "22"
           cache: npm
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm ci
 
       - name: Run ESLint
         run: npm run lint
 
-      - name: Run TypeScript
+      - name: Run TypeScript typecheck
         run: npm run typecheck
 
-      - name: Build Project
+      - name: Run unit tests with coverage
+        run: npm run test:coverage
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 14
+
+      - name: Build Next.js application
         run: npm run build
+        env:
+          CI: true
+          NODE_ENV: production
+
+  e2e:
+    name: Playwright E2E
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js application
+        run: npm run build
+        env:
+          CI: true
+          NODE_ENV: production
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright tests
+        run: npm run test:e2e
+        env:
+          CI: true
+          PLAYWRIGHT_PORT: "3000"
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+
+  lighthouse:
+    name: Lighthouse CI
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js application
+        run: npm run build
+        env:
+          CI: true
+          NODE_ENV: production
+
+      - name: Run Lighthouse CI
+        run: npm run lighthouse:ci
+        env:
+          CI: true
+
+      - name: Upload Lighthouse results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: .lighthouseci/
+          retention-days: 14

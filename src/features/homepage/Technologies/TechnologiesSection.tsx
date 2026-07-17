@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/cn";
 import { TechnologiesCtaLink } from "./TechnologiesCtaLink";
-import { TechnologiesMarquee } from "./TechnologiesMarquee";
+import { TechnologiesMarqueeLazy } from "./TechnologiesMarqueeLazy";
 import { TechnologiesReveal } from "./TechnologiesReveal";
 import {
   TECHNOLOGIES_DESCRIPTION,
@@ -12,8 +12,6 @@ import {
   TECHNOLOGIES_LABEL,
   TECHNOLOGIES_SECTION_ID,
 } from "./technologies.constants";
-import "./technologies.css";
-
 export function TechnologiesSection() {
   return (
     <section
@@ -63,7 +61,7 @@ export function TechnologiesSection() {
           delayMs={80}
           className="mt-[var(--space-6)] w-full"
         >
-          <TechnologiesMarquee />
+          <TechnologiesMarqueeLazy />
         </TechnologiesReveal>
       </Container>
     </section>

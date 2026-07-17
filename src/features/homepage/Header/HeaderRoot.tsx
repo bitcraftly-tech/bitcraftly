@@ -16,14 +16,51 @@ export function HeaderRoot({ children }: HeaderRootProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    function updateScrolled() {
-      setScrolled(window.scrollY > 12);
+    // Non-home routes are always solid — skip scroll work and listeners.
+    if (!isHome) {
+      return;
     }
 
-    updateScrolled();
-    window.addEventListener("scroll", updateScrolled, { passive: true });
-    return () => window.removeEventListener("scroll", updateScrolled);
-  }, [pathname]);
+    let frame = 0;
+    let idleId = 0;
+    let timeoutId = 0;
+    let attached = false;
+
+    function updateScrolled() {
+      const next = window.scrollY > 12;
+      setScrolled((prev) => (prev === next ? prev : next));
+    }
+
+    function onScroll() {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateScrolled);
+    }
+
+    function attach() {
+      if (attached) return;
+      attached = true;
+      window.addEventListener("scroll", onScroll, { passive: true });
+      frame = requestAnimationFrame(updateScrolled);
+    }
+
+    // Defer scroll listener until idle so it does not compete with LCP/TBT.
+    if (typeof window.requestIdleCallback === "function") {
+      idleId = window.requestIdleCallback(attach, { timeout: 1200 });
+    } else {
+      timeoutId = window.setTimeout(attach, 200);
+    }
+
+    return () => {
+      if (idleId && typeof window.cancelIdleCallback === "function") {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId) window.clearTimeout(timeoutId);
+      cancelAnimationFrame(frame);
+      if (attached) {
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
+  }, [pathname, isHome]);
 
   // Homepage: transparent over hero, solid on scroll.
   // Other pages: always solid so chrome matches the home scrolled state.

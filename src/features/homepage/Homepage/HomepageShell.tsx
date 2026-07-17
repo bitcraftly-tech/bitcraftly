@@ -1,45 +1,43 @@
-import { CostCalculatorSection, FounderMessageSection } from "../CostCalculator";
-import { DashboardShowcaseSection } from "../DashboardShowcase";
-import { FAQSection } from "../FAQ";
-import { FinalCTASection } from "../FinalCTA";
 import { HeroSection } from "../Hero";
-import { PerformanceSection } from "../Performance";
-import { PortfolioSection } from "../Portfolio";
-import { ProcessSection } from "../Process";
-import { ServicesSection } from "../Services";
-import { TechnologiesSection } from "../Technologies";
-import { TestimonialsSection } from "../Testimonials";
-import { TrustedBySection } from "../TrustedBy";
-import { WebsiteAuditSection } from "../WebsiteAudit";
-import { WhyBitcraftlySection } from "../WhyBitcraftly";
-import "./homepage-shell.css";
+import { FAQ_ITEMS } from "../FAQ/faq.constants";
+import { HomepageBelowFoldClient } from "./HomepageBelowFoldClient";
+import { HomepageDeferredCss } from "./HomepageDeferredCss";
+import "./homepage-critical.css";
+
+function HomepageFaqJsonLd() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
 
 /**
- * Homepage landing content.
- * Site chrome (Header / Footer) lives in the marketing layout.
- *
- * Conversion stack order (after Hero / Trusted By / Services):
- * Technologies → Portfolio → Dashboard → Founder Message → Cost Calculator →
- * Process → Performance → Audit → Why → Testimonials → FAQ → Final CTA
+ * Homepage ATF architecture:
+ * - Critical path: Hero + critical CSS + FAQ JSON-LD (SEO)
+ * - Below-ATF: idle-mounted client stack (cuts initial HTML / main-thread)
  */
 export function HomepageShell() {
   return (
     <div className="homepage-sections">
+      <HomepageDeferredCss />
+      <HomepageFaqJsonLd />
       <HeroSection />
-      <TrustedBySection />
-      <ServicesSection />
-      <TechnologiesSection />
-      <PortfolioSection />
-      <DashboardShowcaseSection />
-      <FounderMessageSection />
-      <CostCalculatorSection />
-      <ProcessSection />
-      <PerformanceSection />
-      <WebsiteAuditSection />
-      <WhyBitcraftlySection />
-      <TestimonialsSection />
-      <FAQSection />
-      <FinalCTASection />
+      <HomepageBelowFoldClient />
     </div>
   );
 }

@@ -1,9 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { HomepageReveal } from "../shared/HomepageReveal";
 import { COST_CALCULATOR_CONTENT } from "./cost-calculator.content";
-import { FounderMessageExperience } from "./FounderMessageExperience";
-import "./cost-calculator.css";
-
+import { FounderMessageExperienceLazy } from "./FounderMessageExperienceLazy";
 /**
  * Standalone founder audio section — sits above the cost calculator.
  */
@@ -17,7 +15,7 @@ export function FounderMessageSection() {
     >
       <Container size="xl">
         <HomepageReveal name="founder-message">
-          <FounderMessageExperience content={content} />
+          <FounderMessageExperienceLazy />
         </HomepageReveal>
       </Container>
     </section>

@@ -10,8 +10,7 @@ import {
   NEWSLETTER_COPY,
   NEWSLETTER_TRUST_ITEMS,
 } from "./newsletter.constants";
-import "./newsletter.css";
-import "@/features/homepage/Footer/footer.css";
+/* newsletter.css loaded post-paint via MarketingDeferredCss */
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 

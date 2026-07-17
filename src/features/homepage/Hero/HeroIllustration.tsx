@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 
-const HERO_IMAGE_SRC = "/hero.webp";
+const HERO_IMAGE_SRC = "/hero-opt.webp";
 
 /**
  * Keeps its own aspect box so the graphic stays large and fully visible.
@@ -24,7 +24,9 @@ export function HeroIllustration() {
         alt="Bitcraftly product dashboard — AI, revenue, projects and analytics overview"
         fill
         priority
-        sizes="(max-width: 1024px) 100vw, 50vw"
+        fetchPriority="high"
+        quality={55}
+        sizes="(max-width: 768px) 92vw, (max-width: 1280px) 42vw, 640px"
         className="hero-illustration-image h-full w-full object-contain object-center"
       />
     </div>

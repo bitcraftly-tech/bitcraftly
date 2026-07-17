@@ -4,7 +4,6 @@ import { useCallback, useId, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/cn";
-import "@/features/homepage/FAQ/faq.css";
 
 export interface FaqAccordionItem {
   id: string;
@@ -18,6 +17,8 @@ interface FaqAccordionProps {
 
 /**
  * Shared FAQ accordion — Homepage / Services / Solutions visual treatment.
+ * Consumers must import `@/features/homepage/FAQ/faq.css` (or equivalent)
+ * so FAQ styles are not forced onto unrelated critical routes.
  */
 export function FaqAccordion({ items }: FaqAccordionProps) {
   const baseId = useId();

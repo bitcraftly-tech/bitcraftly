@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { RootDeferredCss } from "@/components/patterns/root-deferred-css/RootDeferredCss";
 import StructuredData from "@/components/seo/StructuredData";
 import "@/styles/globals.css";
 
@@ -13,11 +14,17 @@ const SITE_URL = "https://bitcraftly.com";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -90,9 +97,12 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: [{ url: "/brand/icon.png", type: "image/png" }],
+    icon: [
+      { url: "/brand/icon.webp", type: "image/webp" },
+      { url: "/brand/icon.png", type: "image/png", sizes: "96x96" },
+    ],
     shortcut: "/brand/favicon.ico",
-    apple: "/brand/icon.png",
+    apple: "/brand/apple-touch-icon.png",
   },
 };
 
@@ -111,8 +121,10 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <RootDeferredCss />
         <StructuredData />
         {children}
       </body>

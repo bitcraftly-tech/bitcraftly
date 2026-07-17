@@ -37,7 +37,7 @@
   }
 
   .homepage-sections > #cost-calculator.homepage-section {
-    padding-top: 32px;
+  padding-top: 32px;
   }
 }
 
@@ -54,4 +54,36 @@
     0 16px 36px -20px color-mix(in srgb, var(--primary) 28%, transparent);
   --hp-card-lift: -6px;
   --hp-card-transition: 220ms var(--ease-out);
+}
+
+/**
+ * Scroll reveals without IntersectionObserver (TBT).
+ * Progressive enhancement: CSS scroll-driven animation when supported;
+ * otherwise content stays visible immediately.
+ */
+@keyframes hp-reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hp-scroll-reveal {
+  /* Fail-open: content must stay visible. Scroll motion is optional enhancement. */
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hp-scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
 }

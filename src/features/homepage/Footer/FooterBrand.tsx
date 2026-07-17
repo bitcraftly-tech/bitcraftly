@@ -22,10 +22,12 @@ export function FooterBrand({ className }: { className?: string }) {
         )}
       >
         <Image
-          src="/brand/icon.png"
+          src="/brand/icon.webp"
           alt=""
           width={36}
           height={36}
+          loading="lazy"
+          quality={75}
           className="h-[36px] w-[36px] shrink-0"
         />
         <span

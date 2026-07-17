@@ -20,6 +20,7 @@ import {
   getSolutionCardModels,
 } from "./solutions.content";
 import type { SolutionCardModel } from "./solutions.types";
+import "@/features/homepage/FAQ/faq.css";
 import "@/features/homepage/Hero/hero.css";
 import "@/features/services/services.css";
 import "./solutions.css";

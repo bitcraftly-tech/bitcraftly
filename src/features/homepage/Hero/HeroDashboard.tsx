@@ -160,7 +160,11 @@ export function HeroDashboard({
                 {stat.value}
               </p>
               <div className="mt-[var(--space-1)] flex items-center gap-[var(--space-0-5)]">
-                <Text as="span" size="sm" className="text-[0.625rem] font-bold text-success">
+                <Text
+                  as="span"
+                  size="sm"
+                  className="text-[0.625rem] font-bold text-[#14532d]"
+                >
                   {stat.change}
                 </Text>
                 <HeroDashboardStatBars index={index} />
