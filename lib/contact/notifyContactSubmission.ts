@@ -4,11 +4,11 @@ import { ANALYTICS_LEAD_NOTIFY_EMAIL } from "@/lib/analytics-dashboard/config";
 import { createLead } from "@/lib/analytics-dashboard/firebase";
 import { notifyNewLead } from "@/lib/analytics-dashboard/notify";
 import type { ContactCreateInput } from "@/lib/contact/contactValidation";
+import { SUPPORT_EMAIL } from "@/lib/constants";
 
 /**
  * Last-resort persistence when FastAPI/Supabase are unavailable:
- * write to Firestore analytics leads (if configured) and/or email ops.
- * Returns an id when at least one channel succeeds.
+ * Firestore analytics leads → Resend → FormSubmit email relay.
  */
 export async function persistContactFallback(
   input: ContactCreateInput,
@@ -53,8 +53,7 @@ export async function persistContactFallback(
   return null;
 }
 
-async function sendContactEmailFallback(input: ContactCreateInput): Promise<boolean> {
-  const resendKey = process.env.RESEND_API_KEY?.trim();
+function contactEmailBody(input: ContactCreateInput): { subject: string; body: string } {
   const subject = `New contact form — ${input.name}`;
   const body = [
     `Name: ${input.name}`,
@@ -67,35 +66,67 @@ async function sendContactEmailFallback(input: ContactCreateInput): Promise<bool
   ]
     .filter(Boolean)
     .join("\n");
+  return { subject, body };
+}
 
-  if (!resendKey) {
-    console.info("[contact-email-fallback]", subject, body);
-    // Without Resend we cannot guarantee delivery — treat as failure.
-    return false;
+async function sendContactEmailFallback(input: ContactCreateInput): Promise<boolean> {
+  const { subject, body } = contactEmailBody(input);
+  const resendKey = process.env.RESEND_API_KEY?.trim();
+
+  if (resendKey) {
+    try {
+      const response = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${resendKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: "Bitcraftly Contact <noreply@bitcraftly.com>",
+          to: [ANALYTICS_LEAD_NOTIFY_EMAIL],
+          subject,
+          text: body,
+        }),
+      });
+      if (response.ok) return true;
+      console.error("contact_fallback_resend_failed", response.status);
+    } catch (error) {
+      console.error(
+        "contact_fallback_resend_failed",
+        error instanceof Error ? error.message : "unknown",
+      );
+    }
   }
 
+  // No-key email relay so public contact keeps working when DB backends are down.
   try {
-    const response = await fetch("https://api.resend.com/emails", {
+    const response = await fetch(`https://formsubmit.co/ajax/${SUPPORT_EMAIL}`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${resendKey}`,
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
-        from: "Bitcraftly Contact <noreply@bitcraftly.com>",
-        to: [ANALYTICS_LEAD_NOTIFY_EMAIL],
-        subject,
-        text: body,
+        name: input.name,
+        phone: input.phone,
+        email: input.email || SUPPORT_EMAIL,
+        business_name: input.business_name,
+        business_type: input.business_type,
+        source: input.source ?? "contact",
+        message: body,
+        _subject: subject,
+        _template: "table",
       }),
+      signal: AbortSignal.timeout(10_000),
     });
     if (!response.ok) {
-      console.error("contact_fallback_email_failed", response.status);
+      console.error("contact_fallback_formsubmit_failed", response.status);
       return false;
     }
     return true;
   } catch (error) {
     console.error(
-      "contact_fallback_email_failed",
+      "contact_fallback_formsubmit_failed",
       error instanceof Error ? error.message : "unknown",
     );
     return false;

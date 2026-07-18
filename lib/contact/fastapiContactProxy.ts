@@ -16,7 +16,7 @@ function fastApiUrl(path: string): string {
   return `${base}${path}`;
 }
 
-const FASTAPI_TIMEOUT_MS = 8_000;
+const FASTAPI_TIMEOUT_MS = 5_000;
 
 export async function proxyContactPost(body: unknown, authorization?: string | null) {
   const headers: Record<string, string> = { "Content-Type": "application/json" };
