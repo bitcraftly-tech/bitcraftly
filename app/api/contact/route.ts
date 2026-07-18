@@ -27,18 +27,27 @@ export async function POST(req: NextRequest) {
   }
 
   const authorization = req.headers.get("authorization");
-  const created = await persistContactSubmission(validated.value, authorization);
 
-  if (!created) {
+  try {
+    const created = await persistContactSubmission(validated.value, authorization);
+
+    if (!created) {
+      return NextResponse.json({ detail: "Database error. Please try again." }, { status: 500 });
+    }
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: created.message,
+        id: created.id,
+      },
+      { status: 201 },
+    );
+  } catch (error) {
+    console.error(
+      "contact_persist_unhandled",
+      error instanceof Error ? error.message : "unknown",
+    );
     return NextResponse.json({ detail: "Database error. Please try again." }, { status: 500 });
   }
-
-  return NextResponse.json(
-    {
-      success: true,
-      message: created.message,
-      id: created.id,
-    },
-    { status: 201 },
-  );
 }

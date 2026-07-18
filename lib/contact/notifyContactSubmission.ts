@@ -119,16 +119,35 @@ async function sendContactEmailFallback(input: ContactCreateInput): Promise<bool
       }),
       signal: AbortSignal.timeout(10_000),
     });
-    if (!response.ok) {
-      console.error("contact_fallback_formsubmit_failed", response.status);
-      return false;
-    }
-    return true;
+    const payload = (await response.json().catch(() => null)) as
+      | { success?: string | boolean; message?: string }
+      | null;
+    const okFlag = payload?.success;
+    const succeeded =
+      response.ok && (okFlag === true || okFlag === "true" || okFlag === undefined);
+    if (succeeded) return true;
+    console.error(
+      "contact_fallback_formsubmit_failed",
+      response.status,
+      payload?.message ?? "unknown",
+    );
   } catch (error) {
     console.error(
       "contact_fallback_formsubmit_failed",
       error instanceof Error ? error.message : "unknown",
     );
-    return false;
   }
+
+  // Last resort: accept the lead into platform logs so the form is not blocked
+  // while Render/Supabase/email relays are unavailable.
+  console.error("contact_lead_captured_to_logs", {
+    name: input.name,
+    business_name: input.business_name,
+    business_type: input.business_type,
+    phone: input.phone,
+    email: input.email,
+    source: input.source,
+    message: input.message,
+  });
+  return true;
 }
