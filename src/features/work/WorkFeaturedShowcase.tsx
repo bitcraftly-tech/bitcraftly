@@ -51,7 +51,7 @@ export function WorkFeaturedShowcase({ project }: WorkFeaturedShowcaseProps) {
         <div className="work-pf-showcase__actions">
           <Link href={caseHref} className="work-pf-card__btn work-pf-card__btn--primary">
             {isFuture ? "Discuss this build" : "View Case Study"}
-            <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
+            <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
           </Link>
           <Link
             href={WORK_WHATSAPP_HREF}

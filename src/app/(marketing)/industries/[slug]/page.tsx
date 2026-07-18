@@ -109,7 +109,7 @@ export default async function IndustrySlugPage({
                 className="industries-hero__btn industries-hero__btn--primary"
               >
                 {NAV_ACTIONS.freeConsultation.label}
-                <Icon name="arrow-right" size="sm" aria-hidden className="h-[14px] w-[14px]" />
+                <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[14px] w-[14px]" />
               </Link>
               <Link
                 href="/industries#industries-grid"

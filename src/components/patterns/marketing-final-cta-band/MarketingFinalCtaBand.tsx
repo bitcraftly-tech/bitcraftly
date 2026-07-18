@@ -15,6 +15,8 @@ interface MarketingFinalCtaBandProps {
   headingId: string;
   heading: string;
   description: string;
+  /** Optional reassurance line under the description (About, etc.). */
+  reassurance?: string;
   primaryCta: MarketingCtaLink;
   tertiaryCta: MarketingCtaLink;
   trust: readonly string[];
@@ -40,6 +42,7 @@ export function MarketingFinalCtaBand({
   headingId,
   heading,
   description,
+  reassurance,
   primaryCta,
   tertiaryCta,
   trust,
@@ -56,6 +59,9 @@ export function MarketingFinalCtaBand({
           {heading}
         </h2>
         <p className="final-cta-description relative z-[1]">{description}</p>
+        {reassurance ? (
+          <p className="final-cta-reassurance relative z-[1]">{reassurance}</p>
+        ) : null}
 
         <div className="final-cta-actions">
           <Link
@@ -64,7 +70,7 @@ export function MarketingFinalCtaBand({
           >
             {primaryCta.label}
             <Icon
-              name="arrow-right"
+              name={primaryCta.icon ?? "arrow-up-right"}
               size="sm"
               aria-hidden
               className="h-[14px] w-[14px]"

@@ -356,7 +356,7 @@ export function PricingCalculator({
                 disabled={isSubmitting || !estimate.isReady}
               >
                 Book consultation with this estimate
-                <Icon name="arrow-right" size="sm" aria-hidden />
+                <Icon name="arrow-up-right" size="sm" aria-hidden />
               </button>
               <Link href={ROUTES.contact} className="pricing-calc__secondary">
                 Talk to us first

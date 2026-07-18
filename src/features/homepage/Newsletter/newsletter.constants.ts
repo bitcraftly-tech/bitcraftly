@@ -6,7 +6,7 @@ export const NEWSLETTER_COPY = {
   emailPlaceholder: "Enter your work email",
   submitLabel: "Subscribe",
   loadingLabel: "Subscribing…",
-  successMessage: "Thanks — redirecting you to continue…",
+  successMessage: "Thanks — you're subscribed. Look out for our next update.",
 } as const;
 
 export const NEWSLETTER_TRUST_ITEMS = [

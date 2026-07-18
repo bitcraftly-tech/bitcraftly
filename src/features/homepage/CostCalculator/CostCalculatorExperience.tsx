@@ -92,7 +92,7 @@ export function CostCalculatorExperience({
               />
               {content.intro.calculateCtaLabel}
               <Icon
-                name="arrow-right"
+                name="arrow-up-right"
                 size="sm"
                 aria-hidden
                 className="h-[14px] w-[14px]"

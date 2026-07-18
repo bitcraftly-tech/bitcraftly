@@ -28,7 +28,7 @@ export function WorkPageCta() {
           >
             {WORK_CTA_COPY.primaryCta.label}
             <Icon
-              name="arrow-right"
+              name="arrow-up-right"
               size="sm"
               aria-hidden
               className="h-[14px] w-[14px]"

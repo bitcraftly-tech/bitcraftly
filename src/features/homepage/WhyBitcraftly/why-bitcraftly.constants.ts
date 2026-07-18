@@ -21,7 +21,7 @@ export const WHY_DESCRIPTION = `${WHY_DESCRIPTION_LINE_1} ${WHY_DESCRIPTION_LINE
 export const WHY_CARDS: readonly WhyBitcraftlyCard[] = [
   {
     id: "years-experience",
-    title: "18+ Years · Frontend Architect",
+    title: "20+ Years · Frontend Architect",
     description:
       "Battle-tested delivery for startups, SMBs, and product teams — not experiment learning on your budget.",
     icon: "rocket",

@@ -79,7 +79,7 @@ export function WorkProjectCard({
       <div className="work-pf-card__actions">
         <Link href={caseHref} className="work-pf-card__btn work-pf-card__btn--primary">
           {isFuture ? "Discuss build" : "Case Study"}
-          <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
+          <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
         </Link>
         {!isFuture ? (
           <Link

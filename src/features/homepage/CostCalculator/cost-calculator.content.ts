@@ -32,7 +32,7 @@ export const COST_CALCULATOR_CONTENT: CostCalculatorCmsContent = {
     founderPhotoSrc: `${BITCRAFTLY_LEGACY_ORIGIN}/images/founder/sanjay-kr-singh.png`,
     founderPhotoAlt:
       "Sanjay Kr. Singh — Tech Lead and Frontend Architect at Bitcraftly",
-    trustBadges: ["Verified Founder", "18+ Years Experience", "Direct Access"],
+    trustBadges: ["Verified Founder", "20+ Years Experience", "Direct Access"],
     languages: [
       {
         id: "hi",

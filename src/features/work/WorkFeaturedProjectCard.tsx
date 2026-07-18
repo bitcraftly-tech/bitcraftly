@@ -127,7 +127,7 @@ export function WorkFeaturedProjectCard({
         <Link href={href} className="work-feat__cta">
           {ctaLabel}
           <Icon
-            name="arrow-right"
+            name="arrow-up-right"
             size="sm"
             aria-hidden
             className="h-[13px] w-[13px]"

@@ -104,9 +104,9 @@
   min-height: 44px;
   max-height: 44px;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 0 20px;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 8px 0 18px;
   border-radius: 12px;
   border-width: 1px;
   border-style: solid;
@@ -158,6 +158,27 @@
   border-color: color-mix(in srgb, var(--primary) 50%, var(--border));
   color: var(--primary);
   box-shadow: 0 8px 18px -14px color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+/** Trailing CTA arrow — no chip; tilted up-right like product CTAs. */
+.hero-cta-arrow {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.hero-cta-primary .hero-cta-arrow {
+  color: var(--primary-foreground);
+}
+
+.hero-cta-outline .hero-cta-arrow {
+  color: var(--primary);
+}
+
+.hero-cta:hover .hero-cta-arrow {
+  transform: translate(2px, -2px);
 }
 
 .hero-brand-gradient-soft {
@@ -290,5 +311,9 @@
     animation: none;
     transform: none;
     filter: none;
+  }
+
+  .hero-cta:hover .hero-cta-arrow {
+    transform: none;
   }
 }

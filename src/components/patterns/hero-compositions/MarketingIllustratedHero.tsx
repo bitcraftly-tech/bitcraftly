@@ -242,8 +242,10 @@ export function MarketingIllustratedHero({
             )}
           >
             <Link href={primaryCta.href} className="hero-cta hero-cta-primary">
-              {primaryCta.label}
-              <Icon name="arrow-right" size="sm" aria-hidden />
+              <span>{primaryCta.label}</span>
+              <span className="hero-cta-arrow" aria-hidden>
+                <Icon name="arrow-up-right" size="sm" className="h-[14px] w-[14px]" />
+              </span>
             </Link>
             {secondaryCta ? (
               <Link
@@ -256,7 +258,10 @@ export function MarketingIllustratedHero({
                   : {})}
                 className="hero-cta hero-cta-outline"
               >
-                {secondaryCta.label}
+                <span>{secondaryCta.label}</span>
+                <span className="hero-cta-arrow" aria-hidden>
+                  <Icon name="arrow-up-right" size="sm" className="h-[14px] w-[14px]" />
+                </span>
               </Link>
             ) : null}
           </div>

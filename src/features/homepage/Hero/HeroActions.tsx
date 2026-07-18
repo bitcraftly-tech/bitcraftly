@@ -23,8 +23,10 @@ export function HeroActions() {
               isPrimary ? "hero-cta-primary" : "hero-cta-outline",
             )}
           >
-            {cta.label}
-            <Icon name="arrow-right" size="sm" aria-hidden />
+            <span>{cta.label}</span>
+            <span className="hero-cta-arrow" aria-hidden>
+              <Icon name="arrow-up-right" size="sm" className="h-[14px] w-[14px]" />
+            </span>
           </Link>
         );
       })}

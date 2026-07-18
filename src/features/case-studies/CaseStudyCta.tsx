@@ -35,7 +35,7 @@ export function CaseStudyCta() {
             )}
           >
             {NAV_ACTIONS.freeConsultation.label}
-            <Icon name="arrow-right" size="sm" aria-hidden />
+            <Icon name="arrow-up-right" size="sm" aria-hidden />
           </Link>
           <Link
             href={ROUTES.work}

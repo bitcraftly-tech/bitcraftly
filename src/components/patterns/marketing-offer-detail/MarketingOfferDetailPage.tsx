@@ -138,11 +138,13 @@ export function MarketingOfferDetailPage({
 
             <div className="mt-[28px] flex w-full flex-col gap-[var(--space-2)] sm:flex-row sm:flex-wrap">
               <Link href={contactHref} className="hero-cta hero-cta-primary">
-                {primaryCtaLabel}
-                <Icon name="arrow-right" size="sm" aria-hidden />
+                <span>{primaryCtaLabel}</span>
+                <span className="hero-cta-arrow" aria-hidden>
+                  <Icon name="arrow-up-right" size="sm" className="h-[14px] w-[14px]" />
+                </span>
               </Link>
               <Link href={secondaryCtaHref} className="hero-cta hero-cta-outline">
-                {secondaryCtaLabel}
+                <span>{secondaryCtaLabel}</span>
               </Link>
             </div>
           </div>

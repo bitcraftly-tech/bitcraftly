@@ -77,7 +77,7 @@ export const HERO_CAPABILITY_TAGS: readonly HeroCapabilityTag[] = [
 ] as const;
 
 export const HERO_METRICS: HeroMetric[] = [
-  { value: "18+", label: "Years of Experience" },
+  { value: "20+", label: "Years of Experience" },
   { value: "200+", label: "Projects Delivered" },
   { value: "98%", label: "Client Satisfaction" },
   { value: "24/7", label: "Support & Maintenance" },

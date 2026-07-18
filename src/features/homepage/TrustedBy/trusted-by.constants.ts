@@ -53,7 +53,7 @@ export const TRUSTED_BY_VALUES: readonly TrustedByValue[] = [
 
 /** Homepage metrics — available for reuse below the trust bar if needed. */
 export const TRUSTED_BY_STATS: readonly TrustedByStat[] = [
-  { value: "18+", label: "Years Experience" },
+  { value: "20+", label: "Years Experience" },
   { value: "200+", label: "Projects Delivered" },
   { value: "98%", label: "Client Satisfaction" },
   { value: "24/7", label: "Support" },

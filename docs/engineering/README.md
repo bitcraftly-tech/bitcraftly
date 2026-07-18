@@ -11,6 +11,8 @@ This directory defines **how we build software**. It covers coding conventions, 
 | Document | Description |
 |----------|-------------|
 | [coding-standards.md](./coding-standards.md) | Naming, folder, component, TypeScript, React, and Git conventions |
+| [lead-capture-production-deployment-checklist.md](./lead-capture-production-deployment-checklist.md) | Production deploy checklist for Sprint 002 lead capture |
+| [lead-capture-staging-verification-checklist.md](./lead-capture-staging-verification-checklist.md) | Staging/manual smoke verification for contact form and newsletter |
 
 ## Related resources
 

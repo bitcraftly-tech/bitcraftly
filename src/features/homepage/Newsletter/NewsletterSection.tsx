@@ -1,11 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/cn";
+import { LeadHoneypotField } from "@/features/lead-funnel/components/LeadHoneypotField";
+import {
+  mapSubmitLeadFailureToUserMessage,
+  submitLeadFromClient,
+} from "@/features/lead-funnel/submit-lead.client";
+import { trackLeadEvent } from "@/features/lead-funnel/analytics";
 import {
   NEWSLETTER_COPY,
   NEWSLETTER_TRUST_ITEMS,
@@ -17,11 +23,27 @@ type FormStatus = "idle" | "loading" | "success" | "error";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function NewsletterSection() {
-  const router = useRouter();
+  const formId = useId();
+  const pathname = usePathname();
   const headingId = "newsletter-section-heading";
+  const errorRef = useRef<HTMLParagraphElement>(null);
+  const successRef = useRef<HTMLParagraphElement>(null);
   const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (status === "error" && errorMessage) {
+      errorRef.current?.focus();
+    }
+  }, [errorMessage, status]);
+
+  useEffect(() => {
+    if (status === "success") {
+      successRef.current?.focus();
+    }
+  }, [status]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -36,13 +58,28 @@ export function NewsletterSection() {
     setStatus("loading");
     setErrorMessage(null);
 
-    // Brief loading state, then route to contact with prefilled email.
-    await new Promise((resolve) => {
-      window.setTimeout(resolve, 450);
+    const result = await submitLeadFromClient({
+      leadType: "newsletter",
+      email: trimmed,
+      _honeypot: honeypot,
+      source: "newsletter",
+      pagePath: pathname || "/",
+    });
+
+    if (!result.ok) {
+      setStatus("error");
+      setErrorMessage(mapSubmitLeadFailureToUserMessage(result));
+      return;
+    }
+
+    trackLeadEvent("form_submit_success", {
+      source: "newsletter",
+      page_path: pathname || "/",
     });
 
     setStatus("success");
-    router.push(`/contact?email=${encodeURIComponent(trimmed)}&source=newsletter`);
+    setEmail("");
+    setHoneypot("");
   }
 
   const isLoading = status === "loading";
@@ -82,9 +119,11 @@ export function NewsletterSection() {
 
           {isSuccess ? (
             <p
+              ref={successRef}
               className="newsletter-success m-0"
               role="status"
               aria-live="polite"
+              tabIndex={-1}
             >
               {NEWSLETTER_COPY.successMessage}
             </p>
@@ -98,6 +137,12 @@ export function NewsletterSection() {
                 "sm:h-[48px] sm:flex-row sm:items-stretch",
               )}
             >
+              <LeadHoneypotField
+                id={`${formId}-honeypot`}
+                value={honeypot}
+                onChange={setHoneypot}
+              />
+
               <label htmlFor="newsletter-section-email" className="sr-only">
                 {NEWSLETTER_COPY.emailLabel}
               </label>
@@ -158,10 +203,10 @@ export function NewsletterSection() {
                   : NEWSLETTER_COPY.submitLabel}
                 {!isLoading ? (
                   <Icon
-                    name="arrow-right"
+                    name="arrow-up-right"
                     size="sm"
                     aria-hidden
-                    className="h-[14px] w-[14px] transition-transform duration-[var(--duration-fast)] group-hover/newsletter:translate-x-[2px]"
+                    className="h-[14px] w-[14px] transition-transform duration-[var(--duration-fast)] group-hover/newsletter:translate-x-[2px] group-hover/newsletter:-translate-y-[2px]"
                   />
                 ) : null}
               </button>
@@ -170,9 +215,11 @@ export function NewsletterSection() {
 
           {errorMessage ? (
             <p
+              ref={errorRef}
               id="newsletter-section-error"
               className="newsletter-error m-0 mt-[8px]"
               role="alert"
+              tabIndex={-1}
             >
               {errorMessage}
             </p>

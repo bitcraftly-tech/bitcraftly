@@ -59,7 +59,7 @@ export function HeaderSection() {
           >
             {HEADER_CTA.label}
             <Icon
-              name="arrow-right"
+              name="arrow-up-right"
               size="sm"
               aria-hidden
               className="h-[16px] w-[16px]"

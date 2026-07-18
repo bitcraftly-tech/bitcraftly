@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,11 @@ import {
   type ContactLeadFormValues,
 } from "../contact-form.schema";
 import type { LeadFunnelDefaults } from "../types";
+import { LeadHoneypotField } from "./LeadHoneypotField";
+import {
+  mapSubmitLeadFailureToUserMessage,
+  submitLeadFromClient,
+} from "../submit-lead.client";
 
 interface ContactLeadFormProps {
   defaults?: LeadFunnelDefaults;
@@ -30,8 +36,12 @@ export function ContactLeadForm({
   headingId = "contact-lead-form-heading",
 }: ContactLeadFormProps) {
   const formId = useId();
+  const pathname = usePathname();
   const successRef = useRef<HTMLDivElement>(null);
+  const submitErrorRef = useRef<HTMLDivElement>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState("");
 
   const {
     register,
@@ -66,35 +76,53 @@ export function ContactLeadForm({
     }
   }, [submitted]);
 
-  async function onSubmit(values: ContactLeadFormValues) {
-    try {
-      // Architecture-ready: replace with API / server action when backend is wired.
-      await new Promise((resolve) => setTimeout(resolve, 450));
-
-      trackLeadEvent("form_submit_success", {
-        source: defaults?.source ?? "contact-form",
-        intent: values.intent,
-        has_phone: Boolean(values.phone),
-        has_company: Boolean(values.company),
-        has_website: Boolean(values.website),
-      });
-
-      setSubmitted(true);
-      reset({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        intent: "consultation",
-        message: "",
-        website: "",
-      });
-    } catch {
-      trackLeadEvent("form_submit_error", {
-        source: defaults?.source ?? "contact-form",
-        intent: values.intent,
-      });
+  useEffect(() => {
+    if (submitError) {
+      submitErrorRef.current?.focus();
     }
+  }, [submitError]);
+
+  async function onSubmit(values: ContactLeadFormValues) {
+    setSubmitError(null);
+
+    const result = await submitLeadFromClient({
+      leadType: "contact",
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      company: values.company,
+      intent: values.intent,
+      message: values.message,
+      website: values.website,
+      _honeypot: honeypot,
+      source: defaults?.source ?? "contact-form",
+      pagePath: pathname || "/contact",
+    });
+
+    if (!result.ok) {
+      setSubmitError(mapSubmitLeadFailureToUserMessage(result));
+      return;
+    }
+
+    trackLeadEvent("form_submit_success", {
+      source: defaults?.source ?? "contact-form",
+      intent: values.intent,
+      has_phone: Boolean(values.phone),
+      has_company: Boolean(values.company),
+      has_website: Boolean(values.website),
+    });
+
+    setSubmitted(true);
+    setHoneypot("");
+    reset({
+      name: "",
+      email: "",
+      phone: "",
+      company: "",
+      intent: "consultation",
+      message: "",
+      website: "",
+    });
   }
 
   if (submitted) {
@@ -130,6 +158,23 @@ export function ContactLeadForm({
       onSubmit={handleSubmit(onSubmit)}
       aria-labelledby={headingId}
     >
+      <LeadHoneypotField
+        id={`${formId}-honeypot`}
+        value={honeypot}
+        onChange={setHoneypot}
+      />
+
+      {submitError ? (
+        <div
+          ref={submitErrorRef}
+          className="lead-funnel__error lead-funnel__field--full"
+          role="alert"
+          tabIndex={-1}
+        >
+          {submitError}
+        </div>
+      ) : null}
+
       <div className="lead-funnel__form-grid">
         <div className="lead-funnel__field">
           <Label htmlFor={`${formId}-name`} required>

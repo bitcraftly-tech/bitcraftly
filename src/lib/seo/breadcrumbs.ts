@@ -93,6 +93,17 @@ export function buildContactBreadcrumbs(
   ]);
 }
 
+/** Home → About. */
+export function buildAboutBreadcrumbs(
+  crumbs: readonly BreadcrumbItem[] = [],
+): BreadcrumbItem[] {
+  return buildBreadcrumbs([
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    ...crumbs,
+  ]);
+}
+
 /** Home → Blog → … post crumbs. */
 export function buildBlogBreadcrumbs(
   crumbs: readonly BreadcrumbItem[] = [],
