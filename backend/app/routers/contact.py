@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 import logging
 
-from app.core.database import get_db
+from app.db.session import get_db_session
 from app.crud.contact import create_contact, get_all_contacts, mark_as_contacted, update_meta, update_notes
 from app.models.notification import NotificationType
 from app.schemas.notification import NotificationRead
@@ -17,11 +17,12 @@ logger = logging.getLogger(__name__)
 @router.post("/", response_model=dict)
 async def submit_contact(
     contact: ContactCreate,
-    db: Session = Depends(get_db),
+    db: Session = Depends(get_db_session),
 ):
     try:
         db_contact = create_contact(db, contact)
     except Exception as exc:
+        logger.exception("contact_create_failed: %s", exc)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Database error. Please try again.",
@@ -57,7 +58,7 @@ async def list_contacts(
     skip: int = 0,
     limit: int = 50,
     pending_only: bool = False,
-    db: Session = Depends(get_db),
+    db: Session = Depends(get_db_session),
 ):
     is_contacted = False if pending_only else None
     total, submissions = get_all_contacts(db, skip, limit, is_contacted)
@@ -67,7 +68,7 @@ async def list_contacts(
 @router.patch("/{contact_id}/contacted")
 async def mark_contacted(
     contact_id: int,
-    db: Session = Depends(get_db),
+    db: Session = Depends(get_db_session),
 ):
     contact = mark_as_contacted(db, contact_id)
     if not contact:
@@ -79,7 +80,7 @@ async def mark_contacted(
 async def add_notes(
     contact_id: int,
     payload: ContactNotesUpdate,
-    db: Session = Depends(get_db),
+    db: Session = Depends(get_db_session),
 ):
     contact = update_notes(db, contact_id, payload.notes)
     if not contact:
@@ -91,7 +92,7 @@ async def add_notes(
 async def update_contact_meta(
     contact_id: int,
     payload: ContactMetaUpdate,
-    db: Session = Depends(get_db),
+    db: Session = Depends(get_db_session),
 ):
     contact = update_meta(db, contact_id, payload.stage, payload.assigned_to)
     if not contact:

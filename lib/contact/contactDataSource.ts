@@ -2,8 +2,9 @@ export type ContactDataSource = "fastapi" | "supabase";
 
 /**
  * Contact write/read provider for server routes.
- * Default: fastapi (preserves local dev unless explicitly configured).
- * Production should set CONTACT_DATA_SOURCE explicitly (e.g. supabase on staging).
+ * Default: fastapi (Render Postgres).
+ * Set CONTACT_DATA_SOURCE=supabase to prefer Supabase; the submit route
+ * automatically falls back across FastAPI → Supabase → Firestore/email.
  */
 export function getContactDataSource(): ContactDataSource {
   const raw = `${process.env.CONTACT_DATA_SOURCE ?? ""}`.trim().toLowerCase();

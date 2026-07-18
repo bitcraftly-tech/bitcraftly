@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { isContactRateLimited, rejectOversizedContactRequest } from "@/lib/contact/contactAbuseGuard";
-import { getContactDataSource } from "@/lib/contact/contactDataSource";
-import { proxyContactPost } from "@/lib/contact/fastapiContactProxy";
 import { validateContactCreate } from "@/lib/contact/contactValidation";
-import { createContactSubmission } from "@/lib/supabase/contacts";
-import { SupabaseContactQueryError } from "@/lib/supabase/contactQueries";
+import { persistContactSubmission } from "@/lib/contact/persistContactSubmission";
 
 export async function POST(req: NextRequest) {
   if (rejectOversizedContactRequest(req)) {
@@ -29,45 +26,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ detail }, { status: 422 });
   }
 
-  const source = getContactDataSource();
   const authorization = req.headers.get("authorization");
+  const created = await persistContactSubmission(validated.value, authorization);
 
-  if (source === "fastapi") {
-    try {
-      const { response, payload } = await proxyContactPost(validated.value, authorization);
-      if (!response.ok) {
-        const detail =
-          (payload as { detail?: string } | null)?.detail ??
-          (payload as { message?: string } | null)?.message ??
-          "Something went wrong. Please try again.";
-        return NextResponse.json({ detail }, { status: response.status });
-      }
-      return NextResponse.json(payload, { status: response.status });
-    } catch (error) {
-      console.error(
-        "contact_fastapi_proxy_failed",
-        error instanceof Error ? error.message : "unknown",
-      );
-      return NextResponse.json({ detail: "Contact service is unavailable." }, { status: 503 });
-    }
-  }
-
-  try {
-    const created = await createContactSubmission(validated.value);
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Your message has been received. We will contact you shortly.",
-        id: created.id,
-      },
-      { status: 201 },
-    );
-  } catch (error) {
-    if (error instanceof SupabaseContactQueryError) {
-      console.error("contact_create_failed", error.operation, error.sanitized.code, error.sanitized.message);
-    } else {
-      console.error("contact_create_failed", error instanceof Error ? error.message : "unknown");
-    }
+  if (!created) {
     return NextResponse.json({ detail: "Database error. Please try again." }, { status: 500 });
   }
+
+  return NextResponse.json(
+    {
+      success: true,
+      message: created.message,
+      id: created.id,
+    },
+    { status: 201 },
+  );
 }
