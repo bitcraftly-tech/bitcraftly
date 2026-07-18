@@ -11,6 +11,8 @@ const SUBMIT_LEAD_USER_MESSAGES: Record<SubmitLeadErrorCode, string> = {
   HONEYPOT: "Unable to submit your request. Please try again.",
   RATE_LIMIT:
     "Too many submissions in a short time. Please wait a few minutes and try again.",
+  PERSISTENCE:
+    "We could not save your request right now. Please try again or contact us on WhatsApp.",
   DELIVERY:
     "We could not deliver your message right now. Please try again or contact us on WhatsApp.",
   UNKNOWN: "Something went wrong. Please try again.",

@@ -2,6 +2,7 @@ import type { ZodError } from "zod";
 import type { SubmitLeadActionInput } from "./lead-action.input";
 import { guardLeadSubmission } from "./lead-guard.service";
 import { sendLeadNotification } from "./lead-notification.service";
+import { saveLead, markNotificationFailed, markNotificationSent } from "./lead.repository";
 import {
   createLeadRecordFromContactInput,
   createLeadRecordFromNewsletterInput,
@@ -35,6 +36,17 @@ function resolveEmailForGuard(input: SubmitLeadActionInput): string {
 const DELIVERY_FAILURE_MESSAGE =
   "We could not deliver your message right now. Please try again or contact us on WhatsApp.";
 
+const PERSISTENCE_FAILURE_MESSAGE =
+  "We could not save your request right now. Please try again or contact us on WhatsApp.";
+
+function persistenceFailure(): SubmitLeadFailure {
+  return {
+    ok: false,
+    code: "PERSISTENCE",
+    message: PERSISTENCE_FAILURE_MESSAGE,
+  };
+}
+
 function deliveryFailure(message: string = DELIVERY_FAILURE_MESSAGE): SubmitLeadFailure {
   return {
     ok: false,
@@ -47,10 +59,15 @@ async function deliverLeadRecord(record: LeadRecord): Promise<SubmitLeadResult> 
   const notification = await sendLeadNotification(record);
 
   if (!notification.ok) {
-    return deliveryFailure(
-      notification.message.trim() || DELIVERY_FAILURE_MESSAGE,
-    );
+    const deliveryMessage =
+      notification.message.trim() || DELIVERY_FAILURE_MESSAGE;
+
+    await markNotificationFailed(record.id, deliveryMessage);
+
+    return deliveryFailure(deliveryMessage);
   }
+
+  await markNotificationSent(record.id, new Date());
 
   return {
     ok: true,
@@ -58,9 +75,21 @@ async function deliverLeadRecord(record: LeadRecord): Promise<SubmitLeadResult> 
   };
 }
 
+async function persistAndDeliverLeadRecord(
+  record: LeadRecord,
+): Promise<SubmitLeadResult> {
+  const persisted = await saveLead(record);
+
+  if (!persisted.ok) {
+    return persistenceFailure();
+  }
+
+  return deliverLeadRecord(record);
+}
+
 /**
  * Lead submission orchestration — guards, validation, LeadRecord assembly,
- * and notification delivery.
+ * persistence, and notification delivery.
  */
 export async function processLeadSubmission(
   input: SubmitLeadActionInput,
@@ -100,7 +129,7 @@ export async function processLeadSubmission(
     };
     const record = createLeadRecordFromContactInput(parsed.data, recordMeta);
 
-    return deliverLeadRecord(record);
+    return persistAndDeliverLeadRecord(record);
   }
 
   const parsed = submitNewsletterLeadInputSchema.safeParse(input);
@@ -116,7 +145,7 @@ export async function processLeadSubmission(
   };
   const record = createLeadRecordFromNewsletterInput(parsed.data, recordMeta);
 
-  return deliverLeadRecord(record);
+  return persistAndDeliverLeadRecord(record);
 }
 
 export async function submitLead(

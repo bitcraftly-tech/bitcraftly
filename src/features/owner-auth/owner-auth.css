@@ -1,0 +1,86 @@
+.owner-auth-page {
+  min-height: calc(100dvh - 2rem);
+  display: grid;
+  place-items: center;
+  padding: var(--space-5, 1.25rem);
+}
+
+.owner-auth-card {
+  width: min(100%, 28rem);
+  border: 1px solid color-mix(in oklab, var(--color-border, #e5e7eb) 90%, transparent);
+  border-radius: var(--token-radius-lg, 0.75rem);
+  background: var(--color-surface, hsl(var(--surface)));
+  padding: var(--space-6, 1.5rem);
+  display: grid;
+  gap: var(--space-5, 1.25rem);
+}
+
+.owner-auth-card__title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.owner-auth-card__description {
+  margin: 0.5rem 0 0;
+  color: var(--color-muted-foreground, hsl(var(--muted-foreground)));
+}
+
+.owner-auth-form {
+  display: grid;
+  gap: var(--space-4, 1rem);
+}
+
+.owner-auth-form__field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.owner-auth-form__field label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.owner-auth-form__field input {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid var(--color-border, hsl(var(--border)));
+  border-radius: var(--token-radius-md, 0.5rem);
+  background: var(--color-background, hsl(var(--background)));
+  padding: 0.65rem 0.75rem;
+  color: inherit;
+}
+
+.owner-auth-form__field input:focus-visible {
+  outline: 2px solid var(--color-primary, hsl(var(--primary)));
+  outline-offset: 2px;
+}
+
+.owner-auth-form__error {
+  margin: 0;
+  color: var(--color-error, hsl(var(--error)));
+  font-size: 0.875rem;
+}
+
+.owner-shell__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.owner-shell__logout {
+  border: 1px solid var(--color-border, hsl(var(--border)));
+  border-radius: var(--token-radius-md, 0.5rem);
+  background: transparent;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: inherit;
+}
+
+.owner-shell__logout:focus-visible {
+  outline: 2px solid var(--color-primary, hsl(var(--primary)));
+  outline-offset: 2px;
+}

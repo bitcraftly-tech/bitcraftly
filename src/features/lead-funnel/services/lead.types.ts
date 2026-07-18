@@ -44,6 +44,7 @@ export type SubmitLeadErrorCode =
   | "VALIDATION"
   | "HONEYPOT"
   | "RATE_LIMIT"
+  | "PERSISTENCE"
   | "DELIVERY"
   | "UNKNOWN";
 

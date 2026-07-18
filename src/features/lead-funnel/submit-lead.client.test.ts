@@ -1,4 +1,11 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+vi.mock("@/features/lead-funnel/services/lead.repository", () => ({
+  saveLead: vi.fn(),
+  markNotificationSent: vi.fn(),
+  markNotificationFailed: vi.fn(),
+}));
+
 import { mapSubmitLeadFailureToUserMessage } from "@/features/lead-funnel/submit-lead.client";
 
 describe("mapSubmitLeadFailureToUserMessage", () => {
@@ -21,6 +28,18 @@ describe("mapSubmitLeadFailureToUserMessage", () => {
       }),
     ).toBe(
       "We could not deliver your message right now. Please try again or contact us on WhatsApp.",
+    );
+  });
+
+  it("never exposes internal persistence errors", () => {
+    expect(
+      mapSubmitLeadFailureToUserMessage({
+        ok: false,
+        code: "PERSISTENCE",
+        message: "Database is unavailable.",
+      }),
+    ).toBe(
+      "We could not save your request right now. Please try again or contact us on WhatsApp.",
     );
   });
 
