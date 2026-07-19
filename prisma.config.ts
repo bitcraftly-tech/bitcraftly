@@ -17,6 +17,8 @@ function resolveDirectUrl(): string {
   );
 }
 
+const shadowDatabaseUrl = process.env.SHADOW_DATABASE_URL?.trim();
+
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
@@ -24,7 +26,6 @@ export default defineConfig({
   },
   datasource: {
     url: resolveDirectUrl(),
-    shadowDatabaseUrl:
-      process.env.SHADOW_DATABASE_URL?.trim() ?? resolveDirectUrl(),
+    ...(shadowDatabaseUrl ? { shadowDatabaseUrl } : {}),
   },
 });
