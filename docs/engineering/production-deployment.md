@@ -91,6 +91,17 @@ Validation is skipped during:
 
 Owner session cookie flags: `httpOnly`, `secure` (production), `sameSite: strict`, `path: /owner`.
 
+### Observability & health (Sprint 004.3)
+
+| Endpoint / Hook | Purpose |
+|-----------------|---------|
+| `GET /api/health` | Liveness probe + build metadata |
+| `instrumentation.ts` → `onRequestError` | Structured SSR/server-action error logging |
+| `src/lib/observability/report-error.ts` | Server error reporter (Sentry-ready) |
+| Error boundaries | Client errors reported via `reportClientError()` |
+
+Set `SENTRY_DSN` when connecting `@sentry/nextjs` in a future sprint. CSP allows Sentry ingest when DSN is configured.
+
 ---
 
 ## Build pipeline

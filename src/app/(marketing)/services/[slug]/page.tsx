@@ -10,6 +10,7 @@ import {
   ServiceDetailPage,
 } from "@/features/services";
 import { createPageMetadata } from "@/lib/seo/createPageMetadata";
+import { createNoIndexMetadata } from "@/lib/seo/noindex-metadata";
 
 interface ServiceSlugPageProps {
   params: Promise<{ slug: string }>;
@@ -27,11 +28,7 @@ export async function generateMetadata({
   const service = getServiceBySlug(slug);
 
   if (!content || !service) {
-    return createPageMetadata({
-      title: "Service",
-      description: "Bitcraftly digital engineering services.",
-      path: getServiceHref(slug),
-    });
+    return createNoIndexMetadata();
   }
 
   return createPageMetadata({

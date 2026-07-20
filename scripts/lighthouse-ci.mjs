@@ -16,6 +16,7 @@ const OUT_DIR = path.resolve(".lighthouseci");
 
 const URLS = [
   { id: "home", url: `${BASE}/` },
+  { id: "services", url: `${BASE}/services` },
   { id: "pricing", url: `${BASE}/pricing` },
   { id: "contact", url: `${BASE}/contact` },
 ];
@@ -24,7 +25,7 @@ const URLS = [
 const GATES = {
   accessibility: { min: 0.85, level: "error" },
   seo: { min: 0.85, level: "error" },
-  performance: { min: 0.35, level: "warn" },
+  performance: { min: 0.5, level: "warn" },
   "best-practices": { min: 0.7, level: "warn" },
 };
 

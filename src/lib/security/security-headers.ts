@@ -8,6 +8,10 @@ export function buildSecurityHeaders(): ReadonlyArray<{
   key: string;
   value: string;
 }> {
+  const sentryConnectSrc = process.env.SENTRY_DSN
+    ? " https://*.ingest.sentry.io"
+    : "";
+
   const contentSecurityPolicy = [
     "default-src 'self'",
     "base-uri 'self'",
@@ -18,7 +22,7 @@ export function buildSecurityHeaders(): ReadonlyArray<{
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https:",
     "font-src 'self' data:",
-    "connect-src 'self' https:",
+    `connect-src 'self' https:${sentryConnectSrc}`,
     "worker-src 'self' blob:",
     "manifest-src 'self'",
     ...(isProduction ? ["upgrade-insecure-requests"] : []),

@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+import { createNoIndexMetadata } from "@/lib/seo/noindex-metadata";
+
+export const metadata: Metadata = createNoIndexMetadata({
+  title: "Page not found",
+  description: "The requested page could not be found on Bitcraftly.",
+});
 
 export default function NotFound() {
   return (

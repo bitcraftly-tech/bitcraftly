@@ -8,6 +8,7 @@ import {
   WorkProjectDetailPage,
 } from "@/features/work";
 import { createPageMetadata } from "@/lib/seo/createPageMetadata";
+import { createNoIndexMetadata } from "@/lib/seo/noindex-metadata";
 import "@/features/work/work.css";
 
 interface WorkProjectPageProps {
@@ -24,11 +25,15 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getWorkProjectBySlug(slug);
 
+  if (!project) {
+    return createNoIndexMetadata();
+  }
+
   return createPageMetadata({
-    title: project?.seoTitle ?? (project ? `${project.title} | Work` : "Project | Work"),
+    title: project.seoTitle ?? `${project.title} | Work`,
     description:
-      project?.seoDescription ??
-      project?.summary ??
+      project.seoDescription ??
+      project.summary ??
       "Bitcraftly project case detail page.",
     path: `${ROUTES.workProjects}/${slug}`,
   });

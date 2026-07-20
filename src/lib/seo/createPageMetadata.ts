@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { getSiteUrl } from "./site";
+
 interface CreatePageMetadataInput {
   title: string;
   description: string;
@@ -10,24 +12,24 @@ interface CreatePageMetadataInput {
 }
 
 const SITE_NAME = "Bitcraftly";
-const SITE_URL = "https://bitcraftly.com";
-const DEFAULT_OG_IMAGE = `${SITE_URL}/brand/icon.png`;
+const DEFAULT_OG_IMAGE_PATH = "/opengraph-image.webp";
 
 export function createPageMetadata({
   title,
   description,
   path,
   keywords,
-  image = DEFAULT_OG_IMAGE,
+  image = DEFAULT_OG_IMAGE_PATH,
 }: CreatePageMetadataInput): Metadata {
-  const url = `${SITE_URL}${path}`;
+  const siteUrl = getSiteUrl();
+  const url = `${siteUrl}${path}`;
   const alreadyBranded = title.includes(SITE_NAME);
   /** Absolute title when input already includes the brand (avoids `| Bitcraftly | Bitcraftly`). */
   const metadataTitle = alreadyBranded
     ? ({ absolute: title } as const)
     : title;
   const socialTitle = alreadyBranded ? title : `${title} | ${SITE_NAME}`;
-  const imageUrl = image.startsWith("http") ? image : `${SITE_URL}${image}`;
+  const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
 
   return {
     title: metadataTitle,

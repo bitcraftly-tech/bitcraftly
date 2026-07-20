@@ -10,6 +10,7 @@ import {
   SolutionDetailPage,
 } from "@/features/solutions";
 import { createPageMetadata } from "@/lib/seo/createPageMetadata";
+import { createNoIndexMetadata } from "@/lib/seo/noindex-metadata";
 
 interface SolutionSlugPageProps {
   params: Promise<{ slug: string }>;
@@ -27,11 +28,7 @@ export async function generateMetadata({
   const solution = getSolutionBySlug(slug);
 
   if (!content || !solution) {
-    return createPageMetadata({
-      title: "Solution",
-      description: "Bitcraftly business and AI solutions.",
-      path: getSolutionHref(slug),
-    });
+    return createNoIndexMetadata();
   }
 
   return createPageMetadata({

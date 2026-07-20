@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { RootDeferredCss } from "@/components/patterns/root-deferred-css/RootDeferredCss";
 import StructuredData from "@/components/seo/StructuredData";
+import { getSiteUrl } from "@/lib/seo/site";
 import "@/styles/globals.css";
 
 const SITE_TITLE = "Bitcraftly | AI & Digital Engineering Partner";
@@ -9,7 +10,7 @@ const SITE_TITLE = "Bitcraftly | AI & Digital Engineering Partner";
 const SITE_DESCRIPTION =
   "Bitcraftly builds AI-powered websites, SaaS, and automation — founder-led delivery with clear scope and measurable outcomes.";
 
-const SITE_URL = "https://bitcraftly.com";
+const SITE_URL = getSiteUrl();
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

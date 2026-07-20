@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect } from "react";
 
+import { reportClientError } from "@/lib/observability/report-client-error";
+
 interface AppErrorProps {
   readonly error: Error & { digest?: string };
   readonly reset: () => void;
@@ -10,7 +12,7 @@ interface AppErrorProps {
 
 export default function AppError({ error, reset }: AppErrorProps) {
   useEffect(() => {
-    console.error(error);
+    reportClientError(error, { boundary: "route" });
   }, [error]);
 
   return (

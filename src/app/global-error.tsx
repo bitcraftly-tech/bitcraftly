@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect } from "react";
 
+import { reportClientError } from "@/lib/observability/report-client-error";
+
 interface GlobalErrorProps {
   readonly error: Error & { digest?: string };
   readonly reset: () => void;
@@ -10,7 +12,7 @@ interface GlobalErrorProps {
 
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
   useEffect(() => {
-    console.error(error);
+    reportClientError(error, { boundary: "global" });
   }, [error]);
 
   return (

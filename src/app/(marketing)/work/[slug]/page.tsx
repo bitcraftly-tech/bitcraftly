@@ -13,6 +13,7 @@ import {
 import { CaseStudyDetailPage } from "@/features/case-studies";
 import { getWorkHubBySlug, WorkHubPage } from "@/features/work";
 import { createPageMetadata } from "@/lib/seo/createPageMetadata";
+import { createNoIndexMetadata } from "@/lib/seo/noindex-metadata";
 import "@/features/work/work.css";
 
 interface WorkSlugPageProps {
@@ -70,11 +71,7 @@ export async function generateMetadata({
 
   const item = getWorkPageBySlug(slug);
   if (!item) {
-    return createPageMetadata({
-      title: "Work",
-      description: "Bitcraftly work and project showcase.",
-      path: `/work/${slug}`,
-    });
+    return createNoIndexMetadata();
   }
 
   return createPageMetadata({

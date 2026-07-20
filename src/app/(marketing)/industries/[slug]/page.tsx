@@ -7,6 +7,7 @@ import { Icon } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import { NAV_ACTIONS } from "@/constants/navigation";
 import { createPageMetadata } from "@/lib/seo/createPageMetadata";
+import { createNoIndexMetadata } from "@/lib/seo/noindex-metadata";
 import { buildIndustriesBreadcrumbs } from "@/lib/seo/breadcrumbs";
 import {
   getIndustryModelBySlug,
@@ -31,11 +32,7 @@ export async function generateMetadata({
   const industry = getIndustryModelBySlug(slug);
 
   if (!industry) {
-    return createPageMetadata({
-      title: "Industry",
-      description: "Bitcraftly industry solutions.",
-      path: industryDetailHref(slug),
-    });
+    return createNoIndexMetadata();
   }
 
   return createPageMetadata({

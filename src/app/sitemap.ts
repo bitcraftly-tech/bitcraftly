@@ -1,12 +1,35 @@
 import type { MetadataRoute } from "next";
 import { BLOG_POSTS } from "@/content/blog";
 import { CASE_STUDIES, getCaseStudyHref } from "@/content/case-studies";
-import { INDUSTRY_SLUGS } from "@/constants/industries";
+import {
+  getServiceHref,
+  SERVICE_SLUGS,
+} from "@/constants/services";
+import {
+  getSolutionHref,
+  SOLUTION_SLUGS,
+} from "@/constants/solutions";
+import { WORK_STATIC_SLUGS } from "@/constants/work";
 import { getBlogPostHref } from "@/features/blog/blog.utils";
+import { INDUSTRIES_CATALOG } from "@/features/industries/industries.content";
+import {
+  getWorkProjectHref,
+  WORK_PROJECTS,
+} from "@/features/work/work.content";
 import { getSiteUrl } from "@/lib/seo/site";
 
 const BASE_URL = getSiteUrl();
 const LAST_MODIFIED = new Date("2026-07-16");
+
+function mapStaticRoutes(routes: readonly string[]): MetadataRoute.Sitemap {
+  return routes.map((route) => ({
+    url: `${BASE_URL}${route}`,
+    lastModified: LAST_MODIFIED,
+    changeFrequency: route === "" || route === "/blog" ? "daily" : "weekly",
+    priority:
+      route === "" ? 1.0 : route === "/blog" || route === "/work" ? 0.9 : 0.8,
+  }));
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -22,22 +45,47 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/privacy",
     "/terms",
+    "/case-studies",
   ];
 
-  const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
-    url: `${BASE_URL}${route}`,
+  const industryEntries: MetadataRoute.Sitemap = INDUSTRIES_CATALOG.map(
+    (industry) => ({
+      url: `${BASE_URL}/industries/${industry.slug}`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.75,
+    }),
+  );
+
+  const serviceEntries: MetadataRoute.Sitemap = SERVICE_SLUGS.map((slug) => ({
+    url: `${BASE_URL}${getServiceHref(slug)}`,
     lastModified: LAST_MODIFIED,
-    changeFrequency: route === "" || route === "/blog" ? "daily" : "weekly",
-    priority:
-      route === "" ? 1.0 : route === "/blog" || route === "/work" ? 0.9 : 0.8,
+    changeFrequency: "monthly",
+    priority: 0.8,
   }));
 
-  const industryEntries: MetadataRoute.Sitemap = INDUSTRY_SLUGS.map((slug) => ({
-    url: `${BASE_URL}/industries/${slug}`,
+  const solutionEntries: MetadataRoute.Sitemap = SOLUTION_SLUGS.map((slug) => ({
+    url: `${BASE_URL}${getSolutionHref(slug)}`,
+    lastModified: LAST_MODIFIED,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  const workEntries: MetadataRoute.Sitemap = WORK_STATIC_SLUGS.map((slug) => ({
+    url: `${BASE_URL}/work/${slug}`,
     lastModified: LAST_MODIFIED,
     changeFrequency: "monthly",
     priority: 0.75,
   }));
+
+  const workProjectEntries: MetadataRoute.Sitemap = WORK_PROJECTS.map(
+    (project) => ({
+      url: `${BASE_URL}${getWorkProjectHref(project.slug)}`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    }),
+  );
 
   const blogEntries: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: `${BASE_URL}${getBlogPostHref(post.slug)}`,
@@ -54,8 +102,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   return [
-    ...staticEntries,
+    ...mapStaticRoutes(staticRoutes),
     ...industryEntries,
+    ...serviceEntries,
+    ...solutionEntries,
+    ...workEntries,
+    ...workProjectEntries,
     ...blogEntries,
     ...caseStudyEntries,
   ];

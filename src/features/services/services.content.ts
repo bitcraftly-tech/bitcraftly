@@ -1043,10 +1043,10 @@ export const SERVICES_LANDING = {
           icon: "rocket" as const,
         },
         {
-          label: "Enterprise",
-          href: "/industries/enterprise",
-          description: "Secure, governed AI for complex orgs.",
-          icon: "shield" as const,
+          label: "SaaS",
+          href: "/industries/saas",
+          description: "Multi-tenant products with billing-ready architecture.",
+          icon: "cloud" as const,
         },
       ],
       blog: [
