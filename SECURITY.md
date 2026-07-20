@@ -116,16 +116,23 @@ Avoid publicly sharing security vulnerabilities until they have been reviewed an
 
 # Future Security Roadmap
 
+Implemented in Sprint 004.2:
+
+- Content Security Policy (CSP)
+- Rate limiting (lead submission + owner login)
+- Security headers (HSTS, COOP, CORP, frame denial)
+- Owner route defense-in-depth session checks
+- Branded error boundaries (`error.tsx`, `global-error.tsx`, `not-found.tsx`)
+
 Future security improvements may include:
 
 - Role-Based Access Control (RBAC)
 - Multi-Factor Authentication (MFA)
-- Content Security Policy (CSP)
-- Rate Limiting
+- Distributed rate limiting (Redis/Upstash)
 - Audit Logging
-- Security Headers
 - Automated Dependency Scanning
 - Secrets Scanning
+- Admin panel authentication
 
 ---
 

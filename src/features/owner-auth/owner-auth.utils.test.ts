@@ -15,7 +15,9 @@ describe("owner auth utils", () => {
 
   it("identifies login and protected owner paths", () => {
     expect(isOwnerLoginPath("/owner/login")).toBe(true);
+    expect(isOwnerLoginPath("/owner/login/extra")).toBe(true);
     expect(isOwnerProtectedPath("/owner/login")).toBe(false);
+    expect(isOwnerProtectedPath("/owner/login/extra")).toBe(false);
     expect(isOwnerProtectedPath("/owner/leads")).toBe(true);
   });
 });

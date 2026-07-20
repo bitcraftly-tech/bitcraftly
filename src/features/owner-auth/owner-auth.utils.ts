@@ -17,7 +17,10 @@ export function resolveOwnerNextPath(next: string | null | undefined): string {
 }
 
 export function isOwnerLoginPath(pathname: string): boolean {
-  return pathname === OWNER_AUTH_ROUTES.login;
+  return (
+    pathname === OWNER_AUTH_ROUTES.login ||
+    pathname.startsWith(`${OWNER_AUTH_ROUTES.login}/`)
+  );
 }
 
 export function isOwnerProtectedPath(pathname: string): boolean {

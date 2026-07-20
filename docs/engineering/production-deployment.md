@@ -55,8 +55,12 @@ Copy `.env.example` to `.env.local` for local development. In production, set va
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `LEAD_RATE_LIMIT_MAX` | `5` | Max submissions per IP per window |
+| `LEAD_RATE_LIMIT_MAX` | `5` | Max submissions per IP+email per window |
+| `LEAD_RATE_LIMIT_IP_MAX` | `30` | Max submissions per IP across all emails |
 | `LEAD_RATE_LIMIT_WINDOW_MS` | `900000` | Rate limit window (15 min) |
+| `OWNER_LOGIN_RATE_LIMIT_MAX` | `10` | Max login attempts per IP per window |
+| `OWNER_LOGIN_ACCOUNT_RATE_LIMIT_MAX` | `5` | Max login attempts per account per window |
+| `OWNER_LOGIN_RATE_LIMIT_WINDOW_MS` | `900000` | Owner login rate limit window |
 | `NEXT_PUBLIC_CALENDLY_URL` | — | Calendly link; CTAs fall back to contact |
 | `SHADOW_DATABASE_URL` | — | Shadow DB for `db:migrate` (local dev only) |
 | `SKIP_ENV_VALIDATION` | — | Emergency bypass — **never use in production** |
@@ -70,6 +74,22 @@ Validation is skipped during:
 - `next build` (CI and local builds)
 - Development (`NODE_ENV !== "production"`)
 - When `SKIP_ENV_VALIDATION=true` (CI only)
+
+---
+
+## Production security (Sprint 004.2)
+
+| Control | Implementation |
+|---------|----------------|
+| Owner route protection | Middleware + `requireOwnerSession()` in dashboard layout and CRM loaders |
+| Owner login rate limiting | IP + account sliding windows (`owner-login-rate-limit.ts`) |
+| Lead bot protection | Honeypot field + server-side Zod validation |
+| Lead rate limiting | Per IP+email and per-IP limits (`lead-guard.service.ts`) |
+| Security headers | CSP, HSTS, COOP, CORP, X-Frame-Options, Permissions-Policy |
+| Error boundaries | `error.tsx`, `global-error.tsx`, `not-found.tsx` |
+| Secret exposure | Server secrets are server-only; `NEXT_PUBLIC_*` vars are site URL and Calendly only |
+
+Owner session cookie flags: `httpOnly`, `secure` (production), `sameSite: strict`, `path: /owner`.
 
 ---
 

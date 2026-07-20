@@ -1,7 +1,10 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
+
+import { resolveClientIp } from "@/lib/security/client-ip";
+
 import {
   OWNER_SESSION_COOKIE,
   OWNER_SESSION_MAX_AGE_SECONDS,
@@ -10,6 +13,7 @@ import {
   readOwnerAuthConfig,
   verifyOwnerCredentials,
 } from "../owner-auth.config";
+import { checkOwnerLoginRateLimit } from "../owner-login-rate-limit";
 import { createOwnerSessionToken } from "../owner-session";
 import { resolveOwnerNextPath } from "../owner-auth.utils";
 
@@ -18,6 +22,9 @@ export interface OwnerLoginState {
   readonly message: string;
 }
 
+const LOGIN_RATE_LIMIT_MESSAGE =
+  "Too many login attempts. Please wait a few minutes and try again.";
+
 export async function loginOwnerAction(
   _previousState: OwnerLoginState | null,
   formData: FormData,
@@ -25,6 +32,17 @@ export async function loginOwnerAction(
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
   const nextPath = resolveOwnerNextPath(String(formData.get("next") ?? ""));
+
+  const headerStore = await headers();
+  const clientIp = resolveClientIp(headerStore);
+  const rateLimit = checkOwnerLoginRateLimit({ clientIp, email });
+
+  if (!rateLimit.allowed) {
+    return {
+      ok: false,
+      message: LOGIN_RATE_LIMIT_MESSAGE,
+    };
+  }
 
   let config;
 
@@ -53,7 +71,7 @@ export async function loginOwnerAction(
   cookieStore.set(OWNER_SESSION_COOKIE, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+    sameSite: "strict",
     path: "/owner",
     maxAge: OWNER_SESSION_MAX_AGE_SECONDS,
   });

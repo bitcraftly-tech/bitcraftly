@@ -4,6 +4,7 @@ import {
   type LeadStatusCounts,
   type PersistedLeadRecord,
 } from "@/features/lead-funnel/services/lead.repository";
+import { requireOwnerSession } from "@/features/owner-auth/require-owner-session";
 import type { OwnerLeadsFilters } from "./owner-crm.types";
 import {
   formatOwnerLeadSubmittedAt,
@@ -47,6 +48,8 @@ function mapLeadToTableRow(lead: PersistedLeadRecord): OwnerLeadTableRow {
 export async function loadOwnerLeadsDashboard(
   filters: OwnerLeadsFilters,
 ): Promise<OwnerLeadsDashboardResult> {
+  await requireOwnerSession();
+
   const [countsResult, leadsResult] = await Promise.all([
     getLeadStatusCounts(),
     listLeads(filters),

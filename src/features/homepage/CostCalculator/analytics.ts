@@ -32,8 +32,4 @@ export function trackCostCalculatorEvent(
 
   window.dataLayer = window.dataLayer ?? [];
   window.dataLayer.push(entry);
-
-  if (process.env.NODE_ENV === "development") {
-    console.info("[analytics]", entry);
-  }
 }

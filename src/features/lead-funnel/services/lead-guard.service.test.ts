@@ -65,6 +65,27 @@ describe("lead rate limit", () => {
     expect(blocked?.ok).toBe(false);
     expect(blocked?.code).toBe("RATE_LIMIT");
   });
+
+  it("blocks excessive submissions from a single IP across emails", () => {
+    const clientIp = "203.0.113.55";
+
+    for (let attempt = 0; attempt < 30; attempt += 1) {
+      expect(
+        guardLeadSubmission({
+          email: `lead-${attempt}@example.com`,
+          clientIp,
+        }),
+      ).toBeNull();
+    }
+
+    const blocked = guardLeadSubmission({
+      email: "lead-next@example.com",
+      clientIp,
+    });
+
+    expect(blocked?.ok).toBe(false);
+    expect(blocked?.code).toBe("RATE_LIMIT");
+  });
 });
 
 describe("buildLeadRateLimitKey", () => {

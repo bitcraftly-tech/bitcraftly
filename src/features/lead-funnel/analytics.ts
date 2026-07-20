@@ -40,8 +40,4 @@ export function trackLeadEvent(
 
   window.dataLayer = window.dataLayer ?? [];
   window.dataLayer.push(entry);
-
-  if (process.env.NODE_ENV === "development") {
-    console.info("[lead-funnel]", entry);
-  }
 }

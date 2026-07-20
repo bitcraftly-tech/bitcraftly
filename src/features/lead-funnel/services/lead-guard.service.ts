@@ -1,6 +1,8 @@
 import { isHoneypotTripped } from "./lead-payload.schema";
 import {
+  buildLeadIpRateLimitKey,
   buildLeadRateLimitKey,
+  checkLeadIpRateLimit,
   checkLeadRateLimit,
 } from "./lead-rate-limit";
 import type { SubmitLeadFailure } from "./lead.types";
@@ -31,6 +33,13 @@ const RATE_LIMIT_FAILURE: SubmitLeadFailure = {
 export function guardLeadSubmission(input: LeadGuardInput): SubmitLeadFailure | null {
   if (isHoneypotTripped(input.honeypot)) {
     return HONEYPOT_FAILURE;
+  }
+
+  const ipRateLimitKey = buildLeadIpRateLimitKey(input.clientIp);
+  const ipRateLimit = checkLeadIpRateLimit(ipRateLimitKey);
+
+  if (!ipRateLimit.allowed) {
+    return RATE_LIMIT_FAILURE;
   }
 
   const rateLimitKey = buildLeadRateLimitKey({
