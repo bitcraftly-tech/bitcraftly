@@ -1,20 +1,23 @@
 # Lead Capture — Production Deployment Checklist
 
-**Sprint:** 002 — Production Lead Capture  
-**Scope:** Contact form + newsletter → Resend notification delivery  
-**Last updated:** 2026-07-18
+**Sprint:** 002 — Production Lead Capture (updated Sprint 004.1)  
+**Scope:** Contact form + newsletter → Resend notification + Prisma persistence + Owner CRM  
+**Last updated:** 2026-07-20
 
 Use this checklist before merging to `main` and deploying to production.
+
+For the full deploy workflow, see [Production Deployment Guide](./production-deployment.md).
 
 ---
 
 ## Pre-merge (repository)
 
-- [ ] Lead capture changes are on **`feature/lead-capture`** (not mixed with About or unrelated polish)
+- [ ] Changes are on the correct release branch (e.g. `release/v1.0-launch`)
 - [ ] `npm run lint` passes
 - [ ] `npm run typecheck` passes
-- [ ] `npm run test:unit -- src/features/lead-funnel` passes (23 tests)
-- [ ] `npm run build` passes
+- [ ] `npm run test:unit` passes
+- [ ] `npm run build` passes (`prebuild` runs `db:generate` automatically)
+- [ ] CI green on `main`, `develop`, or `release/**`
 - [ ] No secrets committed (`.env.local`, API keys, etc.)
 - [ ] `.env.example` documents all required variables
 
@@ -34,30 +37,40 @@ Use this checklist before merging to `main` and deploying to production.
 
 Set in the hosting provider (e.g. Vercel → Project → Settings → Environment Variables).
 
+Startup validation (`src/instrumentation.ts`) enforces these at production server boot.
+
 | Variable | Required | Scope | Notes |
 |----------|----------|-------|-------|
+| `DATABASE_URL` | **Yes** | Server only | Neon pooled PostgreSQL connection |
+| `DIRECT_URL` | **Yes** | Server / CLI | Direct Neon connection for Prisma CLI |
 | `RESEND_API_KEY` | **Yes** | Server only | Resend API key (`re_…`) |
 | `LEAD_NOTIFICATION_TO` | **Yes** | Server only | Team inbox for lead alerts |
 | `LEAD_FROM_EMAIL` | **Yes** | Server only | Verified sender, e.g. `Bitcraftly <notifications@domain.com>` |
 | `NEXT_PUBLIC_SITE_URL` | **Yes** | Public | Canonical production URL, no trailing slash |
+| `OWNER_AUTH_EMAIL` | **Yes** | Server only | Owner CRM login email |
+| `OWNER_AUTH_PASSWORD` | **Yes** | Server only | Min 12 characters |
+| `OWNER_SESSION_SECRET` | **Yes** | Server only | Min 32 characters — session signing |
 | `LEAD_RATE_LIMIT_MAX` | No | Server only | Default: `5` |
 | `LEAD_RATE_LIMIT_WINDOW_MS` | No | Server only | Default: `900000` (15 min) |
 | `NEXT_PUBLIC_CALENDLY_URL` | No | Public | Optional; CTAs fall back to contact if unset |
 
-- [ ] All three Resend variables set for **Production** environment
+- [ ] All required variables set for **Production** environment
 - [ ] `NEXT_PUBLIC_SITE_URL` matches live domain (e.g. `https://bitcraftly.com`)
-- [ ] Variables are **not** prefixed with `NEXT_PUBLIC_` for secrets (Resend key stays server-only)
+- [ ] Variables are **not** prefixed with `NEXT_PUBLIC_` for secrets
 - [ ] Redeploy triggered after env var changes
+- [ ] Production server starts without env validation errors
 
 ---
 
 ## Deployment steps
 
-1. [ ] Merge approved PR to `main`
-2. [ ] Confirm CI green (lint, typecheck, unit tests, build, E2E, Lighthouse per pipeline)
-3. [ ] Deploy to production (or promote staging → production)
-4. [ ] Verify deployment logs show no Resend/env errors on cold start
-5. [ ] Run [Staging Verification Checklist](./lead-capture-staging-verification-checklist.md) against **production** URLs
+1. [ ] Merge approved PR to `main` or deploy from release branch
+2. [ ] Confirm CI green (lint, typecheck, unit tests, build, E2E, Lighthouse)
+3. [ ] Run **Database Migrate Deploy** GitHub Action (or `npm run db:deploy` manually)
+4. [ ] Confirm no pending migrations (`prisma migrate status`)
+5. [ ] Deploy to production (build runs `prebuild` → `db:generate` → `next build`)
+6. [ ] Verify deployment logs show no env validation errors on cold start
+7. [ ] Run [Staging Verification Checklist](./lead-capture-staging-verification-checklist.md) against **production** URLs
 
 ---
 
@@ -67,6 +80,7 @@ Set in the hosting provider (e.g. Vercel → Project → Settings → Environmen
 |-------|------|
 | `/contact` loads; form visible | ☐ |
 | Contact submit → success UI (with valid data + Resend configured) | ☐ |
+| Lead row persisted in database | ☐ |
 | Notification email received at `LEAD_NOTIFICATION_TO` | ☐ |
 | Homepage newsletter submit → success UI | ☐ |
 | Newsletter notification email received | ☐ |
@@ -124,7 +138,9 @@ User-facing messages must **never** expose internal config or Resend errors.
 
 | Item | Status |
 |------|--------|
-| Lead persistence (CRM/DB) | Not implemented — email is sole delivery channel |
+| Lead persistence (CRM/DB) | **Implemented** — Prisma + Neon; verify with owner CRM at `/owner/leads` |
+| Build pipeline | `prebuild` runs `prisma generate` before every build |
+| DB migrations | Use GitHub **Database Migrate Deploy** workflow or `npm run db:deploy` — never `db:migrate` in prod |
 | Rate limiter | In-memory per instance — not suitable for multi-instance scale |
 | E2E automated lead tests | Not yet in Playwright suite — manual smoke required |
 | `form_submit_error` analytics | Intentionally removed — failures not tracked |

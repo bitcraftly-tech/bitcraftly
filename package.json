@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "dev:turbo": "next dev",
+    "prebuild": "npm run db:generate",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

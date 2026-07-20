@@ -1,0 +1,75 @@
+# =============================================================================
+# Bitcraftly Platform — Production Database Migration
+# =============================================================================
+# Applies pending Prisma migrations with `prisma migrate deploy`.
+#
+# SAFETY:
+#   - Manual trigger only (workflow_dispatch)
+#   - Requires typing "deploy" to confirm
+#   - Uses GitHub Environment "production" for secret protection
+#   - NEVER runs `prisma migrate dev` (dev-only command)
+#
+# Required GitHub secrets (production environment):
+#   - DATABASE_URL  — runtime/pooled connection (used by migrate deploy)
+#   - DIRECT_URL    — direct Neon connection (recommended for migrations)
+# =============================================================================
+
+name: Database Migrate Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "deploy" to apply pending migrations to production'
+        required: true
+        type: string
+
+concurrency:
+  group: bitcraftly-db-deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  migrate:
+    name: Prisma migrate deploy (production)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+    if: github.event.inputs.confirm == 'deploy'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Apply pending migrations
+        run: npm run db:deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
+
+      - name: Verify migration status
+        run: npx prisma migrate status
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
+
+  rejected:
+    name: Confirmation rejected
+    runs-on: ubuntu-latest
+    if: github.event.inputs.confirm != 'deploy'
+    steps:
+      - name: Abort — confirmation text did not match
+        run: |
+          echo "Migration aborted. You must type exactly: deploy"
+          exit 1
