@@ -1,0 +1,186 @@
+{
+  "documentVersion": "2026-07-22",
+  "project": {
+    "name": "Bitcraftly Platform",
+    "packageVersion": "0.1.0",
+    "status": "pre-release-active-development",
+    "productionReadiness": "conditional-go-pending-dns-and-env"
+  },
+  "release": {
+    "currentBranch": "release/v1.0-launch",
+    "latestCommit": "6af0a1e",
+    "latestCommitMessage": "feat(lead-funnel): send submitter confirmation emails via Resend",
+    "tags": {
+      "launchCandidate": "v1.0-launch-candidate",
+      "latestRc": "v1.0.0-rc5",
+      "previousRc": "v1.0.0-rc4"
+    }
+  },
+  "techStack": {
+    "nextjs": "16.2.10",
+    "react": "19.2.4",
+    "typescript": "5.x strict",
+    "tailwindcss": "4.x",
+    "prisma": "7.8.0",
+    "postgresql": "Neon",
+    "email": "Resend",
+    "testing": {
+      "unit": "vitest 4.1.10",
+      "e2e": "playwright 1.61.1",
+      "lighthouse": "lighthouse 13.4.0"
+    },
+    "plannedBackend": "FastAPI + JWT (not implemented in this repo)"
+  },
+  "repositories": {
+    "active": {
+      "name": "bitcraftly",
+      "url": "https://github.com/bitcraftly-tech/bitcraftly.git",
+      "remote": "origin",
+      "purpose": "Primary production monorepo — Next.js platform"
+    },
+    "secondary": {
+      "name": "bitcraftly-platform",
+      "url": "https://github.com/uideveloper09/bitcraftly-platform.git",
+      "remote": "personal",
+      "purpose": "Developer mirror / personal remote — not primary deploy source"
+    },
+    "deprecated": [
+      {
+        "note": "Legacy origin branches (feat/*, development) on bitcraftly-tech/bitcraftly — superseded by release/v1.0-launch",
+        "examples": ["origin/development", "origin/release/v2-platform"]
+      }
+    ]
+  },
+  "branchStrategy": {
+    "productionRelease": "release/v1.0-launch",
+    "integration": "main",
+    "development": "develop",
+    "featurePrefix": "feature/*",
+    "ciTriggers": ["main", "develop", "release/**"]
+  },
+  "completedSprints": [
+    {
+      "id": "001",
+      "name": "Platform Foundation & Marketing Scaffold",
+      "status": "complete",
+      "keyCommits": ["1ba49d6", "70ee7eb"]
+    },
+    {
+      "id": "002",
+      "name": "Production Lead Capture",
+      "status": "complete",
+      "documentation": "docs/engineering/lead-capture-production-deployment-checklist.md"
+    },
+    {
+      "id": "003",
+      "name": "Lead Intelligence Platform",
+      "status": "complete",
+      "commit": "5def6fe"
+    },
+    {
+      "id": "004.1",
+      "name": "Production Infrastructure",
+      "status": "complete",
+      "commit": "b738466",
+      "doc": "docs/release/Sprint-004.1.md"
+    },
+    {
+      "id": "004.2",
+      "name": "Production Security & Hardening",
+      "status": "complete",
+      "commit": "83db2a3",
+      "doc": "docs/release/Sprint-004.2.md"
+    },
+    {
+      "id": "004.3-A",
+      "name": "Performance SEO Observability",
+      "status": "complete",
+      "commit": "8f57e69",
+      "doc": "docs/release/Sprint-004.3.md"
+    },
+    {
+      "id": "004.3-B",
+      "name": "Performance Optimization Phase B",
+      "status": "complete",
+      "commit": "8c25779",
+      "doc": "docs/release/Sprint-004.3-Phase-B.md"
+    }
+  ],
+  "postSprintWork": [
+    {
+      "date": "2026-07-22",
+      "commit": "6af0a1e",
+      "summary": "Lead submitter confirmation emails + confirmationSent UI flag"
+    }
+  ],
+  "deployment": {
+    "hosting": "Vercel",
+    "database": "Neon PostgreSQL",
+    "email": "Resend",
+    "dns": {
+      "registrar": "Namecheap",
+      "dnsProvider": "Cloudflare (migration in progress 2026-07-22)",
+      "domains": ["bitcraftly.com", "staging.bitcraftly.com"]
+    },
+    "ci": ".github/workflows/ci.yml",
+    "cd": "Vercel Git integration",
+    "dbMigrations": ".github/workflows/db-deploy.yml"
+  },
+  "security": {
+    "ownerAuth": "HMAC session cookie + middleware + requireOwnerSession",
+    "rateLimiting": "in-memory (lead + owner login) — Redis deferred",
+    "headers": "CSP, HSTS, COOP, CORP, Permissions-Policy",
+    "envValidation": "instrumentation.ts production startup"
+  },
+  "performance": {
+    "lighthousePhaseB": {
+      "home": 73,
+      "services": 73,
+      "pricing": 74,
+      "contact": 75,
+      "accessibility": 100,
+      "seo": 100,
+      "bestPractices": 100
+    },
+    "performanceTargetMet": false,
+    "target": 90,
+    "primaryBottleneck": "LCP ~3.2s on /services"
+  },
+  "testing": {
+    "unitTests": {
+      "count": 90,
+      "files": 19,
+      "status": "passing"
+    },
+    "coverageScoped": {
+      "statements": 85.33,
+      "branches": 70.45,
+      "functions": 85,
+      "lines": 84.61
+    },
+    "e2e": "Playwright — marketing + admin specs",
+    "lighthouseCi": "scripts/lighthouse-ci.mjs"
+  },
+  "knownIssues": [
+    "Resend domain bitcraftly.com pending full verification until Cloudflare bounces MX/TXT propagate",
+    "onboarding@resend.dev sandbox limits outbound email to account owner address only",
+    "Lighthouse performance 73-75 vs 90 target — Phase C deferred",
+    "In-memory rate limiter not suitable for multi-instance scale",
+    "Sentry hooks ready but @sentry/nextjs not integrated",
+    "Admin panel routes unauthenticated",
+    "PROJECT_STATUS.md (2026-07-18) partially stale vs current lead capture implementation"
+  ],
+  "nextPriorities": [
+    "Complete Cloudflare DNS activation and Resend domain verification",
+    "Set LEAD_FROM_EMAIL=hello@bitcraftly.com in Vercel Production and Preview",
+    "Run lead capture smoke tests on staging and production",
+    "Sprint 004.3 Phase C — LCP and render-blocking CSS",
+    "Distributed rate limiting (Redis/Upstash)",
+    "Sentry integration",
+    "Mobile Lighthouse in CI"
+  ],
+  "protectedAreas": {
+    "pages": ["/ (homepage)", "/services", "/solutions"],
+    "paths": ["src/features/homepage/**", "src/features/services/**", "src/features/solutions/**"]
+  }
+}
