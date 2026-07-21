@@ -1,9 +1,12 @@
+import { LEAD_FUNNEL_CONFIG, LEAD_INTENT_OPTIONS } from "../lead-funnel.config";
+import { getSiteUrl } from "@/lib/seo/site";
 import type { LeadRecord } from "./lead.types";
 
 const RESEND_API_URL = "https://api.resend.com/emails";
 
 export interface LeadNotificationSuccess {
   readonly ok: true;
+  readonly confirmationSent: boolean;
 }
 
 export interface LeadNotificationFailure {
@@ -25,6 +28,15 @@ interface LeadEmailContent {
   readonly subject: string;
   readonly html: string;
   readonly text: string;
+}
+
+interface ResendEmailPayload {
+  readonly from: string;
+  readonly to: readonly string[];
+  readonly subject: string;
+  readonly html: string;
+  readonly text: string;
+  readonly replyTo?: string;
 }
 
 function readResendConfig():
@@ -77,6 +89,115 @@ function displayValue(value: string | undefined, fallback = "—"): string {
 
 function formatLeadType(leadType: LeadRecord["leadType"]): string {
   return leadType === "newsletter" ? "Newsletter" : "Contact form";
+}
+
+function formatIntent(intent: LeadRecord["intent"]): string {
+  const match = LEAD_INTENT_OPTIONS.find((option) => option.value === intent);
+  return match?.label ?? intent;
+}
+
+function greetingName(name: string): string {
+  const trimmed = name.trim();
+  if (!trimmed || trimmed === "Newsletter visitor") {
+    return "there";
+  }
+
+  return trimmed.split(/\s+/)[0] ?? trimmed;
+}
+
+function buildConfirmationShell(
+  subject: string,
+  eyebrow: string,
+  heading: string,
+  bodyHtml: string,
+  bodyText: string,
+): LeadEmailContent {
+  const siteUrl = getSiteUrl();
+
+  const text = [bodyText, "", siteUrl, "", "— The Bitcraftly team"].join("\n");
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${escapeHtml(subject)}</title>
+  </head>
+  <body style="margin:0;padding:0;background-color:#f4f6fb;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#f4f6fb;padding:24px 12px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background-color:#ffffff;border:1px solid #dbe2f0;border-radius:16px;overflow:hidden;">
+            <tr>
+              <td style="padding:24px 28px;background:linear-gradient(135deg,#0b1220,#1d4ed8);color:#ffffff;">
+                <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;opacity:0.82;">${escapeHtml(eyebrow)}</p>
+                <h1 style="margin:0;font-size:24px;line-height:1.3;font-weight:700;">${escapeHtml(heading)}</h1>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:28px;font-size:15px;line-height:1.6;color:#0f172a;">
+                ${bodyHtml}
+                <p style="margin:24px 0 0;font-size:12px;color:#64748b;">— The Bitcraftly team<br /><a href="${escapeHtml(siteUrl)}" style="color:#1d4ed8;text-decoration:none;">${escapeHtml(siteUrl.replace(/^https?:\/\//, ""))}</a></p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+
+  return { subject, html, text };
+}
+
+function buildLeadConfirmationEmailContent(record: LeadRecord): LeadEmailContent {
+  const firstName = greetingName(displayValue(record.name, ""));
+
+  if (record.leadType === "newsletter") {
+    const subject = "You're subscribed — Bitcraftly";
+    const bodyText = [
+      `Hi ${firstName},`,
+      "",
+      "Thanks for subscribing to Bitcraftly updates.",
+      "You'll hear from us with weekly insights on AI, engineering, automation, and digital growth.",
+    ].join("\n");
+    const bodyHtml = `<p style="margin:0 0 16px;">Hi ${escapeHtml(firstName)},</p>
+<p style="margin:0 0 16px;">Thanks for subscribing to Bitcraftly updates.</p>
+<p style="margin:0;">You'll hear from us with weekly insights on AI, engineering, automation, and digital growth.</p>`;
+
+    return buildConfirmationShell(
+      subject,
+      "Bitcraftly Newsletter",
+      "You're subscribed",
+      bodyHtml,
+      bodyText,
+    );
+  }
+
+  const intent = formatIntent(record.intent);
+  const whatsappHref = LEAD_FUNNEL_CONFIG.whatsappConsultationHref;
+  const subject = "We received your message — Bitcraftly";
+  const bodyText = [
+    `Hi ${firstName},`,
+    "",
+    "Thanks for reaching out to Bitcraftly. We received your message and a founder will reply within one business day.",
+    "",
+    `Your request: ${intent}`,
+    "",
+    `For a faster chat, message us on WhatsApp: ${whatsappHref}`,
+  ].join("\n");
+  const bodyHtml = `<p style="margin:0 0 16px;">Hi ${escapeHtml(firstName)},</p>
+<p style="margin:0 0 16px;">Thanks for reaching out to Bitcraftly. We received your message and a founder will reply within one business day.</p>
+<p style="margin:0 0 16px;"><strong>Your request:</strong> ${escapeHtml(intent)}</p>
+<p style="margin:0;">For a faster chat, <a href="${escapeHtml(whatsappHref)}" style="color:#1d4ed8;text-decoration:none;">message us on WhatsApp</a>.</p>`;
+
+  return buildConfirmationShell(
+    subject,
+    "Bitcraftly Contact",
+    "Message received",
+    bodyHtml,
+    bodyText,
+  );
 }
 
 function buildLeadEmailContent(record: LeadRecord): LeadEmailContent {
@@ -171,33 +292,33 @@ function renderRow(label: string, value: string): string {
 }
 
 async function postResendEmail(
-  config: ResendConfig,
-  record: LeadRecord,
-  content: LeadEmailContent,
+  apiKey: string,
+  payload: ResendEmailPayload,
+  failureMessage: string,
 ): Promise<LeadNotificationResult> {
   try {
     const response = await fetch(RESEND_API_URL, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${config.apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: config.from,
-        to: [config.to],
-        subject: content.subject,
-        html: content.html,
-        text: content.text,
-        reply_to: record.email,
+        from: payload.from,
+        to: payload.to,
+        subject: payload.subject,
+        html: payload.html,
+        text: payload.text,
+        ...(payload.replyTo ? { reply_to: payload.replyTo } : {}),
       }),
     });
 
     if (!response.ok) {
-      let detail = "Unable to deliver lead notification email.";
+      let detail = failureMessage;
       try {
-        const payload = (await response.json()) as { message?: string };
-        if (payload.message?.trim()) {
-          detail = payload.message.trim();
+        const responsePayload = (await response.json()) as { message?: string };
+        if (responsePayload.message?.trim()) {
+          detail = responsePayload.message.trim();
         }
       } catch {
         // Keep generic delivery message when response body is not JSON.
@@ -210,7 +331,7 @@ async function postResendEmail(
   } catch {
     return {
       ok: false,
-      message: "Unable to deliver lead notification email.",
+      message: failureMessage,
     };
   }
 }
@@ -224,8 +345,42 @@ export async function sendLeadNotification(
     return configResult;
   }
 
-  const content = buildLeadEmailContent(record);
-  return postResendEmail(configResult.config, record, content);
+  const { config } = configResult;
+  const teamContent = buildLeadEmailContent(record);
+  const teamResult = await postResendEmail(
+    config.apiKey,
+    {
+      from: config.from,
+      to: [config.to],
+      subject: teamContent.subject,
+      html: teamContent.html,
+      text: teamContent.text,
+      replyTo: record.email,
+    },
+    "Unable to deliver lead notification email.",
+  );
+
+  if (!teamResult.ok) {
+    return teamResult;
+  }
+
+  const confirmationContent = buildLeadConfirmationEmailContent(record);
+  const confirmationResult = await postResendEmail(
+    config.apiKey,
+    {
+      from: config.from,
+      to: [record.email],
+      subject: confirmationContent.subject,
+      html: confirmationContent.html,
+      text: confirmationContent.text,
+    },
+    "Unable to deliver lead confirmation email.",
+  );
+
+  return {
+    ok: true,
+    confirmationSent: confirmationResult.ok,
+  };
 }
 
 /** @internal Test helper for email content assertions. */
@@ -233,6 +388,13 @@ export function buildLeadNotificationEmailForTests(
   record: LeadRecord,
 ): LeadEmailContent {
   return buildLeadEmailContent(record);
+}
+
+/** @internal Test helper for confirmation email content assertions. */
+export function buildLeadConfirmationEmailForTests(
+  record: LeadRecord,
+): LeadEmailContent {
+  return buildLeadConfirmationEmailContent(record);
 }
 
 /** @internal Test helper for config validation. */

@@ -51,6 +51,7 @@ export type SubmitLeadErrorCode =
 export interface SubmitLeadSuccess {
   readonly ok: true;
   readonly leadId: string;
+  readonly confirmationSent: boolean;
 }
 
 export interface SubmitLeadFailure {

@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { LeadRecord } from "@/features/lead-funnel/services/lead.types";
 import {
+  buildLeadConfirmationEmailForTests,
   buildLeadNotificationEmailForTests,
   readLeadNotificationConfigForTests,
   sendLeadNotification,
@@ -72,6 +73,31 @@ describe("lead notification email content", () => {
   });
 });
 
+describe("lead confirmation email content", () => {
+  it("includes a personalized contact confirmation", () => {
+    const content = buildLeadConfirmationEmailForTests(SAMPLE_RECORD);
+
+    expect(content.subject).toBe("We received your message — Bitcraftly");
+    expect(content.text).toContain("Hi Ada,");
+    expect(content.text).toContain("Your request: Free consultation");
+    expect(content.text).toContain("message us on WhatsApp");
+    expect(content.html).toContain("Hi Ada,");
+    expect(content.html).toContain("Free consultation");
+  });
+
+  it("includes a newsletter confirmation", () => {
+    const content = buildLeadConfirmationEmailForTests({
+      ...SAMPLE_RECORD,
+      leadType: "newsletter",
+      name: "Newsletter visitor",
+    });
+
+    expect(content.subject).toBe("You're subscribed — Bitcraftly");
+    expect(content.text).toContain("Hi there,");
+    expect(content.text).toContain("Thanks for subscribing to Bitcraftly updates.");
+  });
+});
+
 describe("sendLeadNotification", () => {
   const originalEnv = { ...process.env };
   const fetchMock = vi.fn();
@@ -92,7 +118,7 @@ describe("sendLeadNotification", () => {
     vi.unstubAllGlobals();
   });
 
-  it("posts to the Resend API with html and text payloads", async () => {
+  it("posts team and confirmation emails to the Resend API", async () => {
     fetchMock.mockResolvedValue({
       ok: true,
       json: async () => ({ id: "email_123" }),
@@ -100,28 +126,58 @@ describe("sendLeadNotification", () => {
 
     const result = await sendLeadNotification(SAMPLE_RECORD);
 
-    expect(result).toEqual({ ok: true });
-    expect(fetchMock).toHaveBeenCalledOnce();
+    expect(result).toEqual({ ok: true, confirmationSent: true });
+    expect(fetchMock).toHaveBeenCalledTimes(2);
 
-    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
-    expect(url).toBe("https://api.resend.com/emails");
-    expect(init.method).toBe("POST");
-    expect(init.headers).toMatchObject({
+    const [teamUrl, teamInit] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(teamUrl).toBe("https://api.resend.com/emails");
+    expect(teamInit.method).toBe("POST");
+    expect(teamInit.headers).toMatchObject({
       Authorization: "Bearer re_test_key",
       "Content-Type": "application/json",
     });
 
-    const body = JSON.parse(String(init.body)) as {
+    const teamBody = JSON.parse(String(teamInit.body)) as {
       to: string[];
       html: string;
       text: string;
       reply_to: string;
     };
 
-    expect(body.to).toEqual(["hello@bitcraftly.com"]);
-    expect(body.reply_to).toBe("ada@example.com");
-    expect(body.html).toContain("Ada Lovelace");
-    expect(body.text).toContain("Ada Lovelace");
+    expect(teamBody.to).toEqual(["hello@bitcraftly.com"]);
+    expect(teamBody.reply_to).toBe("ada@example.com");
+    expect(teamBody.html).toContain("Ada Lovelace");
+    expect(teamBody.text).toContain("Ada Lovelace");
+
+    const [, confirmationInit] = fetchMock.mock.calls[1] as [string, RequestInit];
+    const confirmationBody = JSON.parse(String(confirmationInit.body)) as {
+      to: string[];
+      subject: string;
+      html: string;
+      text: string;
+    };
+
+    expect(confirmationBody.to).toEqual(["ada@example.com"]);
+    expect(confirmationBody.subject).toBe("We received your message — Bitcraftly");
+    expect(confirmationBody.html).toContain("Hi Ada,");
+    expect(confirmationBody.text).toContain("Hi Ada,");
+  });
+
+  it("returns success when only the confirmation email fails", async () => {
+    fetchMock
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ id: "email_team" }),
+      })
+      .mockResolvedValueOnce({
+        ok: false,
+        json: async () => ({ message: "You can only send testing emails to your own email address." }),
+      });
+
+    const result = await sendLeadNotification(SAMPLE_RECORD);
+
+    expect(result).toEqual({ ok: true, confirmationSent: false });
+    expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
   it("returns typed failure when Resend rejects the request", async () => {

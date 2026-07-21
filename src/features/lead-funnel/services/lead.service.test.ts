@@ -4,7 +4,10 @@ import { processLeadSubmission } from "@/features/lead-funnel/services/lead.serv
 import { resetLeadRateLimitStoreForTests } from "@/features/lead-funnel/services/lead-rate-limit";
 
 vi.mock("@/features/lead-funnel/services/lead-notification.service", () => ({
-  sendLeadNotification: vi.fn(async () => ({ ok: true as const })),
+  sendLeadNotification: vi.fn(async () => ({
+    ok: true as const,
+    confirmationSent: true,
+  })),
 }));
 
 vi.mock("@/features/lead-funnel/services/lead.repository", () => ({
@@ -63,7 +66,10 @@ describe("processLeadSubmission", () => {
   beforeEach(() => {
     resetLeadRateLimitStoreForTests();
     vi.mocked(sendLeadNotification).mockClear();
-    vi.mocked(sendLeadNotification).mockResolvedValue({ ok: true });
+    vi.mocked(sendLeadNotification).mockResolvedValue({
+      ok: true,
+      confirmationSent: true,
+    });
     vi.mocked(saveLead).mockClear();
     vi.mocked(saveLead).mockResolvedValue({
       ok: true,
@@ -91,6 +97,7 @@ describe("processLeadSubmission", () => {
     expect(result).toEqual({
       ok: true,
       leadId: expect.any(String),
+      confirmationSent: true,
     });
     expect(saveLead).toHaveBeenCalledOnce();
     expect(sendLeadNotification).toHaveBeenCalledOnce();

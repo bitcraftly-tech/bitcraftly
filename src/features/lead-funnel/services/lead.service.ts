@@ -72,6 +72,7 @@ async function deliverLeadRecord(record: LeadRecord): Promise<SubmitLeadResult> 
   return {
     ok: true,
     leadId: record.id,
+    confirmationSent: notification.confirmationSent,
   };
 }
 

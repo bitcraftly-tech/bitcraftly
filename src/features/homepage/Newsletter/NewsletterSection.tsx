@@ -31,6 +31,7 @@ export function NewsletterSection() {
   const [email, setEmail] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<FormStatus>("idle");
+  const [confirmationSent, setConfirmationSent] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -77,6 +78,7 @@ export function NewsletterSection() {
       page_path: pathname || "/",
     });
 
+    setConfirmationSent(result.confirmationSent);
     setStatus("success");
     setEmail("");
     setHoneypot("");
@@ -84,6 +86,9 @@ export function NewsletterSection() {
 
   const isLoading = status === "loading";
   const isSuccess = status === "success";
+  const successMessage = confirmationSent
+    ? NEWSLETTER_COPY.successMessageWithConfirmation
+    : NEWSLETTER_COPY.successMessage;
 
   return (
     <section
@@ -125,7 +130,7 @@ export function NewsletterSection() {
               aria-live="polite"
               tabIndex={-1}
             >
-              {NEWSLETTER_COPY.successMessage}
+              {successMessage}
             </p>
           ) : (
             <form

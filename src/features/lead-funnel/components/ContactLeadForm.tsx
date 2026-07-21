@@ -40,6 +40,7 @@ export function ContactLeadForm({
   const successRef = useRef<HTMLDivElement>(null);
   const submitErrorRef = useRef<HTMLDivElement>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [confirmationSent, setConfirmationSent] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [honeypot, setHoneypot] = useState("");
 
@@ -112,6 +113,7 @@ export function ContactLeadForm({
       has_website: Boolean(values.website),
     });
 
+    setConfirmationSent(result.confirmationSent);
     setSubmitted(true);
     setHoneypot("");
     reset({
@@ -136,14 +138,18 @@ export function ContactLeadForm({
       >
         <h3 className="lead-funnel__success-title">Message received</h3>
         <p className="lead-funnel__success-text">
-          Thanks — a Bitcraftly founder will reply within one business day. You
-          can also continue on WhatsApp if you prefer a faster chat.
+          {confirmationSent
+            ? "Thanks — we've sent a confirmation to your email. A Bitcraftly founder will reply within one business day. You can also continue on WhatsApp if you prefer a faster chat."
+            : "Thanks — a Bitcraftly founder will reply within one business day. You can also continue on WhatsApp if you prefer a faster chat."}
         </p>
         <Button
           type="button"
           variant="outline"
           size="md"
-          onClick={() => setSubmitted(false)}
+          onClick={() => {
+            setSubmitted(false);
+            setConfirmationSent(false);
+          }}
         >
           Send another message
         </Button>
