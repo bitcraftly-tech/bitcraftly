@@ -3,7 +3,7 @@ import { PageShell } from "@/components/patterns/marketing-layout";
 import { Section } from "@/components/ui/section";
 import { NAV_ACTIONS, ROUTES } from "@/constants/navigation";
 import { buildPricingBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { PricingCalculator } from "./calculator";
+import { PricingCalculatorLazy } from "./calculator/PricingCalculatorLazy";
 import { PricingHeroVisual } from "./PricingHeroVisual";
 
 export function PricingLandingPage() {
@@ -39,10 +39,10 @@ export function PricingLandingPage() {
         id="pricing-calculator"
         spacing="lg"
         background="default"
-        aria-labelledby="pricing-calculator-heading"
+        aria-label="Pricing calculator"
         className="border-t border-border/60"
       >
-        <PricingCalculator headingId="pricing-calculator-heading" />
+        <PricingCalculatorLazy headingId="pricing-calculator-heading" />
       </Section>
     </PageShell>
   );

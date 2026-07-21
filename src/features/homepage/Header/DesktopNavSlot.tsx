@@ -6,7 +6,6 @@ import { DesktopNavFallback } from "./DesktopNavFallback";
 const DesktopNavigation = dynamic(
   () => import("./DesktopNavigation").then((mod) => mod.DesktopNavigation),
   {
-    ssr: false,
     loading: () => <DesktopNavFallback />,
   },
 );

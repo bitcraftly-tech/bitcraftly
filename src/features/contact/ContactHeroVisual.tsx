@@ -44,7 +44,7 @@ export function ContactHeroVisual() {
           {["BC", "AI", "UX", "BE"].map((initials) => (
             <span
               key={initials}
-              className="grid size-[32px] place-items-center rounded-full border-2 border-background bg-[color-mix(in_srgb,var(--primary)_10%,var(--background))] font-sans text-[10px] font-bold text-primary"
+              className="mh-avatar-initial grid size-[32px] place-items-center rounded-full border-2 border-background bg-[color-mix(in_srgb,var(--primary)_10%,var(--background))] font-sans text-[10px] font-bold"
             >
               {initials}
             </span>

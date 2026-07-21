@@ -4,7 +4,7 @@ import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/cn";
 import { DesktopNavSlot } from "./DesktopNavSlot";
 import { HEADER_BOOK_CALL, HEADER_CTA } from "./header.constants";
-import { HeaderRoot } from "./HeaderRoot";
+import { HeaderElement } from "./HeaderElement";
 import { Logo } from "./Logo";
 import { MobileNavSlot } from "./MobileNavSlot";
 
@@ -17,7 +17,7 @@ const headerButtonBase = cn(
 
 export function HeaderSection() {
   return (
-    <HeaderRoot>
+    <HeaderElement>
       <Container
         size="xl"
         className="grid h-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-[20px] xl:gap-x-[24px]"
@@ -69,6 +69,6 @@ export function HeaderSection() {
           <MobileNavSlot />
         </div>
       </Container>
-    </HeaderRoot>
+    </HeaderElement>
   );
 }

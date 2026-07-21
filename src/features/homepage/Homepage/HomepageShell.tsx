@@ -1,6 +1,6 @@
 import { HeroSection } from "../Hero";
 import { FAQ_ITEMS } from "../FAQ/faq.constants";
-import { HomepageBelowFoldClient } from "./HomepageBelowFoldClient";
+import { HomepageBelowFold } from "./HomepageBelowFold";
 import { HomepageDeferredCss } from "./HomepageDeferredCss";
 import "./homepage-critical.css";
 
@@ -29,7 +29,7 @@ function HomepageFaqJsonLd() {
 /**
  * Homepage ATF architecture:
  * - Critical path: Hero + critical CSS + FAQ JSON-LD (SEO)
- * - Below-ATF: idle-mounted client stack (cuts initial HTML / main-thread)
+ * - Below-ATF: SSR HTML with content-visibility; interactive islands hydrate lazily
  */
 export function HomepageShell() {
   return (
@@ -37,7 +37,7 @@ export function HomepageShell() {
       <HomepageDeferredCss />
       <HomepageFaqJsonLd />
       <HeroSection />
-      <HomepageBelowFoldClient />
+      <HomepageBelowFold />
     </div>
   );
 }

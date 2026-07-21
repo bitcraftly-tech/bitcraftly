@@ -1,18 +1,20 @@
 #!/usr/bin/env node
 /**
  * Bitcraftly Lighthouse CI runner (filesystem reports + score gates).
- * Starts `next start` when needed, audits key routes, writes `.lighthouseci/`.
+ * Requires a production build; always starts `next start` (never reuses `next dev`).
  */
 import { spawn } from "node:child_process";
-import { mkdir, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import lighthouse from "lighthouse";
 import * as chromeLauncher from "chrome-launcher";
 
-const PORT = Number(process.env.LHCI_PORT ?? 3000);
+/** Dedicated port avoids colliding with `next dev` on 3000. */
+const PORT = Number(process.env.LHCI_PORT ?? 3099);
 const HOST = "127.0.0.1";
 const BASE = `http://${HOST}:${PORT}`;
 const OUT_DIR = path.resolve(".lighthouseci");
+const BUILD_ID_PATH = path.resolve(".next/BUILD_ID");
 
 const URLS = [
   { id: "home", url: `${BASE}/` },
@@ -33,29 +35,114 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+async function ensureProductionBuild() {
+  try {
+    await access(BUILD_ID_PATH);
+  } catch {
+    throw new Error(
+      "Production build not found. Run `npm run build` before `npm run lighthouse:ci`.",
+    );
+  }
+}
+
 async function waitForServer(url, timeoutMs = 180_000) {
   const started = Date.now();
   while (Date.now() - started < timeoutMs) {
     try {
       const response = await fetch(url, { redirect: "manual" });
-      if (response.status > 0 && response.status < 500) {
+      if (response.status >= 200 && response.status < 400) {
         return;
       }
-    } catch {
-      // retry
+      if (response.status >= 500) {
+        const body = await response.text();
+        if (body.includes("environment validation failed")) {
+          throw new Error(
+            "Production server failed env validation. Set SKIP_ENV_VALIDATION=true for Lighthouse CI " +
+              "(CI workflow already does this) or provide required .env values.",
+          );
+        }
+      }
+    } catch (error) {
+      if (error instanceof Error && error.message.includes("env validation")) {
+        throw error;
+      }
+      // retry transient errors
     }
     await sleep(1000);
   }
   throw new Error(`Server not ready at ${url} within ${timeoutMs}ms`);
 }
 
+/**
+ * Reject dev-server responses (e.g. webpack HMR, unversioned dev chunks).
+ * @param {string} base
+ */
+async function assertProductionServer(base) {
+  const response = await fetch(`${base}/`, { redirect: "manual" });
+  const html = await response.text();
+
+  if (!response.ok && response.status !== 304) {
+    throw new Error(
+      `Production server check failed: ${base}/ returned HTTP ${response.status}.`,
+    );
+  }
+
+  const devMarkers = [
+    "/_next/webpack-hmr",
+    "__NEXT_DEV",
+    "next/dist/client/dev",
+    "webpack-internal://",
+  ];
+
+  for (const marker of devMarkers) {
+    if (html.includes(marker)) {
+      throw new Error(
+        `Refusing to audit ${base}: detected dev server marker "${marker}". ` +
+          "Stop `next dev` and run `npm run build` before Lighthouse CI.",
+      );
+    }
+  }
+
+  if (/\/_next\/static\/chunks\/[^"'\\s]+\?v=\d+/.test(html)) {
+    throw new Error(
+      `Refusing to audit ${base}: HTML references dev-style versioned chunks (?v=). ` +
+        "Ensure `next start` is serving a production build.",
+    );
+  }
+
+  process.stdout.write(`Verified production server at ${base}\n`);
+}
+
+async function isPortInUse(port) {
+  try {
+    const response = await fetch(`http://${HOST}:${port}/`, {
+      redirect: "manual",
+      signal: AbortSignal.timeout(1500),
+    });
+    return response.status > 0;
+  } catch {
+    return false;
+  }
+}
+
 function startNextServer() {
   const nextBin = path.resolve("node_modules/next/dist/bin/next");
-  const child = spawn(process.execPath, [nextBin, "start", "-H", HOST, "-p", String(PORT)], {
-    shell: false,
-    stdio: ["ignore", "pipe", "pipe"],
-    env: { ...process.env, NODE_ENV: "production" },
-  });
+  const child = spawn(
+    process.execPath,
+    [nextBin, "start", "-H", HOST, "-p", String(PORT)],
+    {
+      shell: false,
+      stdio: ["ignore", "pipe", "pipe"],
+      env: {
+        ...process.env,
+        NODE_ENV: "production",
+        PORT: String(PORT),
+        /** Lighthouse audits public marketing routes — no owner secrets required. */
+        SKIP_ENV_VALIDATION:
+          process.env.SKIP_ENV_VALIDATION ?? "true",
+      },
+    },
+  );
 
   child.stdout?.on("data", (chunk) => {
     process.stdout.write(`[next] ${chunk}`);
@@ -113,6 +200,16 @@ function fmt(score) {
 
 async function main() {
   await mkdir(OUT_DIR, { recursive: true });
+  await ensureProductionBuild();
+
+  const buildId = (await readFile(BUILD_ID_PATH, "utf8")).trim();
+  process.stdout.write(`Using production build ${buildId} on port ${PORT}\n`);
+
+  if (await isPortInUse(PORT)) {
+    throw new Error(
+      `Port ${PORT} is already in use. Stop the process on that port or set LHCI_PORT to a free port.`,
+    );
+  }
 
   /** @type {import('node:child_process').ChildProcess | null} */
   let server = null;
@@ -120,13 +217,9 @@ async function main() {
   let chrome = null;
 
   try {
-    try {
-      await waitForServer(`${BASE}/`, 3_000);
-      process.stdout.write(`Reusing existing server at ${BASE}\n`);
-    } catch {
-      server = startNextServer();
-      await waitForServer(`${BASE}/`);
-    }
+    server = startNextServer();
+    await waitForServer(`${BASE}/`);
+    await assertProductionServer(BASE);
 
     chrome = await chromeLauncher.launch({
       chromeFlags: [
@@ -160,6 +253,7 @@ async function main() {
       summary.push({
         id: target.id,
         url: target.url,
+        buildId,
         scores,
         failures,
         warnings,

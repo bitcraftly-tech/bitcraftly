@@ -1,5 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+vi.mock("@/features/owner-auth/require-owner-session", () => ({
+  requireOwnerSession: vi.fn().mockResolvedValue(undefined),
+}));
+
 vi.mock("@/features/lead-funnel/services/lead.repository", () => ({
   getLeadStatusCounts: vi.fn(),
   listLeads: vi.fn(),

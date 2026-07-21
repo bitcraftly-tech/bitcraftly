@@ -6,7 +6,6 @@ import { Icon } from "@/components/ui/icon";
 const MobileNavigation = dynamic(
   () => import("./MobileNavigation").then((mod) => mod.MobileNavigation),
   {
-    ssr: false,
     loading: () => (
       <button
         type="button"

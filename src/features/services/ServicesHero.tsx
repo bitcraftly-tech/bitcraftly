@@ -228,24 +228,34 @@ export function ServicesHero({ breadcrumbs }: ServicesHeroProps) {
               </ul>
             </div>
 
-            <dl className="services-hero-stats" aria-label="Company highlights">
+            <div
+              className="services-hero-stats"
+              role="list"
+              aria-label="Company highlights"
+            >
               {HERO_STATS.map((stat) => (
-                <div key={stat.id} className="services-hero-stats__item">
-                  <div className="services-hero-stats__head">
-                    <span
-                      className={`services-hero-stats__icon services-hero-stats__icon--${stat.tone}`}
-                      aria-hidden
-                    >
-                      <Icon name={stat.icon} size="sm" />
-                    </span>
+                <div
+                  key={stat.id}
+                  role="listitem"
+                  className="services-hero-stats__item"
+                >
+                  <dl className="services-hero-stats__pair m-0">
                     <dt className="services-hero-stats__value">
-                      <AnimatedStat value={stat.value} />
+                      <span className="services-hero-stats__head">
+                        <span
+                          className={`services-hero-stats__icon services-hero-stats__icon--${stat.tone}`}
+                          aria-hidden
+                        >
+                          <Icon name={stat.icon} size="sm" />
+                        </span>
+                        <AnimatedStat value={stat.value} />
+                      </span>
                     </dt>
-                  </div>
-                  <dd className="services-hero-stats__label">{stat.label}</dd>
+                    <dd className="services-hero-stats__label">{stat.label}</dd>
+                  </dl>
                 </div>
               ))}
-            </dl>
+            </div>
           </div>
 
           <div className="services-hero__visual">

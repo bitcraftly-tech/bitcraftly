@@ -47,6 +47,22 @@
   filter: blur(32px);
 }
 
+.mh-status-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--token-radius-full);
+  padding: 4px 8px;
+  font-family: var(--font-family-sans);
+  font-size: 10px;
+  font-weight: 600;
+  background: color-mix(in srgb, var(--primary) 14%, var(--background));
+  color: color-mix(in srgb, var(--primary) 72%, black);
+}
+
+.mh-avatar-initial {
+  color: color-mix(in srgb, var(--primary) 72%, black);
+}
+
 .mh-float {
   position: absolute;
   z-index: 3;

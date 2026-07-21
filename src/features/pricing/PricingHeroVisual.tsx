@@ -32,9 +32,7 @@ export function PricingHeroVisual() {
               Project estimate
             </p>
           </div>
-          <span className="rounded-full bg-[color-mix(in_srgb,var(--primary)_10%,var(--background))] px-[8px] py-[4px] font-sans text-[10px] font-semibold text-primary">
-            Live preview
-          </span>
+          <span className="mh-status-badge">Live preview</span>
         </div>
 
         <div className="grid grid-cols-3 gap-[8px]">

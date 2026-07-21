@@ -1,5 +1,5 @@
 import { Section } from "@/components/ui/section";
-import { ContactLeadForm } from "./components/ContactLeadForm";
+import { ContactLeadFormLazy } from "./components/ContactLeadFormLazy";
 import { LeadChannelGrid } from "./components/LeadChannelGrid";
 import type { LeadFunnelDefaults } from "./types";
 import "./lead-funnel.css";
@@ -32,7 +32,7 @@ export function ContactLeadSection({ defaults }: ContactLeadSectionProps) {
               steps — consultation, audit, or a written estimate.
             </p>
           </header>
-          <ContactLeadForm defaults={defaults} />
+          <ContactLeadFormLazy defaults={defaults} />
         </div>
         <LeadChannelGrid source={defaults?.source ?? "contact-page"} />
       </div>
