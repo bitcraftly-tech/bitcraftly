@@ -46,7 +46,7 @@ export function AboutLandingPage() {
         stats={[...ABOUT_HERO.stats]}
         statsAriaLabel="Bitcraftly highlights"
         metaLayout="stats-first"
-        visual={<AboutHeroVisual />}
+        renderVisual={() => <AboutHeroVisual />}
       />
 
       <AboutStorySection />

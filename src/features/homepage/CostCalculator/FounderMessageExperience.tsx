@@ -10,7 +10,7 @@ const FounderAudioPlayer = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="founder-audio-skeleton" aria-hidden>
+      <div className="founder-audio-skeleton" aria-hidden="true">
         Loading founder message…
       </div>
     ),
@@ -50,7 +50,7 @@ export function FounderMessageExperience({
       {visible ? (
         <FounderAudioPlayer content={content} active />
       ) : (
-        <div className="founder-audio-skeleton" aria-hidden>
+        <div className="founder-audio-skeleton" aria-hidden="true">
           Founder message
         </div>
       )}

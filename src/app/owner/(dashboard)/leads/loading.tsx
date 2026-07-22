@@ -1,3 +1,6 @@
+import "@/styles/route-loading.css";
+import { LeadListSkeleton } from "@/components/patterns/skeletons";
+
 export default function OwnerLeadsLoading() {
   return (
     <div
@@ -18,30 +21,14 @@ export default function OwnerLeadsLoading() {
         <h2 id="owner-leads-loading-stats" className="admin-section__title">
           Pipeline snapshot
         </h2>
-        <div className="owner-leads-loading__stats">
-          {Array.from({ length: 6 }, (_, index) => (
-            <div
-              key={`owner-leads-stat-${index}`}
-              className="owner-leads-loading__card"
-              aria-hidden="true"
-            />
-          ))}
-        </div>
+        <LeadListSkeleton statCount={6} rowCount={0} />
       </section>
 
       <section aria-labelledby="owner-leads-loading-table" className="admin-section">
         <h2 id="owner-leads-loading-table" className="admin-section__title">
           Leads
         </h2>
-        <div className="owner-leads-loading__table">
-          {Array.from({ length: 5 }, (_, index) => (
-            <div
-              key={`owner-leads-row-${index}`}
-              className="owner-leads-loading__row"
-              aria-hidden="true"
-            />
-          ))}
-        </div>
+        <LeadListSkeleton statCount={0} rowCount={5} />
       </section>
     </div>
   );

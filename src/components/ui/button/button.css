@@ -1,0 +1,20 @@
+.button--loading {
+  animation: button-loading-pulse var(--duration-normal) ease-in-out infinite;
+}
+
+@keyframes button-loading-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.82;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button--loading {
+    animation: none;
+    opacity: 0.9;
+  }
+}

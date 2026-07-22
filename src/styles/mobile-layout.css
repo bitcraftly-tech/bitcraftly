@@ -1,0 +1,21 @@
+/**
+ * Sprint 004.4 — global responsive guards (layout only, no brand changes).
+ */
+
+@media (max-width: 767px) {
+  #main-content {
+    overflow-x: clip;
+  }
+
+  .marketing-hero--compact {
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-4);
+  }
+}
+
+@supports (padding: max(0px)) {
+  .header-adaptive {
+    padding-left: max(var(--container-padding), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--container-padding), env(safe-area-inset-right, 0px));
+  }
+}

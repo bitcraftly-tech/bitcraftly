@@ -29,7 +29,7 @@ export function ContactLeadFormLazy({ defaults }: ContactLeadFormLazyProps) {
       fallback={
         <div
           className="min-h-[24rem] w-full rounded-[var(--token-radius-lg)] bg-background/60"
-          aria-hidden
+          aria-hidden="true"
         />
       }
     />

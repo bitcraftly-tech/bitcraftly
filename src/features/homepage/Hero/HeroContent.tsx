@@ -2,6 +2,7 @@ import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/cn";
 import {
   HERO_DESCRIPTION,
+  HERO_DESCRIPTION_MOBILE,
   HERO_EYEBROW_LABEL,
   HERO_HEADING,
   HERO_HEADING_ID,
@@ -9,7 +10,11 @@ import {
 import { HeroActions } from "./HeroActions";
 import { HeroTags } from "./HeroTags";
 
-export function HeroContent() {
+interface HeroContentProps {
+  compactMobile?: boolean;
+}
+
+export function HeroContent({ compactMobile = false }: HeroContentProps) {
   return (
     <div
       className={cn(
@@ -19,22 +24,24 @@ export function HeroContent() {
         "md:gap-[16px]",
       )}
     >
-      <p
-        role="doc-subtitle"
-        className={cn(
-          "hero-eyebrow m-0 inline-flex items-center gap-[8px]",
-          "rounded-full px-[14px] py-[8px]",
-          "font-sans text-[11px] font-semibold uppercase tracking-[0.14em]",
-        )}
-      >
-        <Icon
-          name="sparkles"
-          size="sm"
-          aria-hidden
-          className="h-[14px] w-[14px] shrink-0"
-        />
-        <span>{HERO_EYEBROW_LABEL}</span>
-      </p>
+      {!compactMobile ? (
+        <p
+          role="doc-subtitle"
+          className={cn(
+            "hero-eyebrow m-0 inline-flex items-center gap-[8px]",
+            "rounded-full px-[14px] py-[8px]",
+            "font-sans text-[11px] font-semibold uppercase tracking-[0.14em]",
+          )}
+        >
+          <Icon
+            name="sparkles"
+            size="sm"
+            aria-hidden
+            className="h-[14px] w-[14px] shrink-0"
+          />
+          <span>{HERO_EYEBROW_LABEL}</span>
+        </p>
+      ) : null}
 
       <h1
         id={HERO_HEADING_ID}
@@ -52,12 +59,12 @@ export function HeroContent() {
           "hero-description m-0 max-w-xl font-sans text-muted-foreground",
         )}
       >
-        {HERO_DESCRIPTION}
+        {compactMobile ? HERO_DESCRIPTION_MOBILE : HERO_DESCRIPTION}
       </p>
 
       <div className="flex w-full flex-col gap-[var(--space-3)]">
         <HeroActions />
-        <HeroTags />
+        {!compactMobile ? <HeroTags /> : null}
       </div>
     </div>
   );

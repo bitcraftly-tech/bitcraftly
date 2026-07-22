@@ -24,6 +24,10 @@ export const HERO_HEADING = {
 export const HERO_DESCRIPTION =
   "From high-performance websites to AI automation and custom software, we help businesses launch, scale, and lead in the digital era.";
 
+/** Shorter hero copy for mobile ATF (Sprint 004.4). */
+export const HERO_DESCRIPTION_MOBILE =
+  "AI-powered websites, automation, and custom software built to launch and scale your business.";
+
 export const HERO_CTAS: HeroCta[] = [
   {
     label: NAV_ACTIONS.freeConsultation.label,

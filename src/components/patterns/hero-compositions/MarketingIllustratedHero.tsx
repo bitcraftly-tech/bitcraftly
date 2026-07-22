@@ -4,6 +4,7 @@ import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumb
 import { Icon, type IconName } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/cn";
+import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import "@/features/homepage/Hero/hero.css";
 import "@/features/services/services.css";
@@ -30,7 +31,10 @@ interface MarketingIllustratedHeroProps {
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   headingId: string;
-  visual: ReactNode;
+  /** @deprecated Prefer renderVisual for mobile-safe lazy instantiation */
+  visual?: ReactNode;
+  /** Renders hero artwork only on non-mobile requests (server UA gate). */
+  renderVisual?: () => ReactNode;
   className?: string;
   trustItems?: readonly string[];
   chips?: readonly MarketingHeroChip[];
@@ -48,7 +52,7 @@ interface MarketingIllustratedHeroProps {
  * Shared two-column marketing hero shell.
  * Spacing, type, and CTAs match Homepage HeroSection.
  */
-export function MarketingIllustratedHero({
+export async function MarketingIllustratedHero({
   breadcrumbs,
   eyebrow,
   eyebrowIcon = "sparkles",
@@ -60,6 +64,7 @@ export function MarketingIllustratedHero({
   secondaryCta,
   headingId,
   visual,
+  renderVisual,
   className,
   trustItems,
   chips,
@@ -71,6 +76,18 @@ export function MarketingIllustratedHero({
   afterDescription,
   afterCtas,
 }: MarketingIllustratedHeroProps) {
+  const isMobile = await isMobileUserAgent();
+  const visualNode = isMobile
+    ? null
+    : renderVisual
+      ? renderVisual()
+      : (visual ?? null);
+  const resolvedTrustItems = isMobile
+    ? trustItems?.slice(0, 2)
+    : trustItems;
+  const showSupporting = Boolean(supporting) && !isMobile;
+  const showMeta = !isMobile;
+  const showDecorations = !isMobile;
   const titleNode =
     titleHighlight && title.includes(titleHighlight) ? (
       <>
@@ -83,7 +100,7 @@ export function MarketingIllustratedHero({
     );
 
   const chipsNode =
-    chips && chips.length > 0 ? (
+    showMeta && chips && chips.length > 0 ? (
       <ul
         className="m-0 flex list-none flex-wrap gap-[8px] p-0"
         aria-label={chipsAriaLabel}
@@ -105,7 +122,7 @@ export function MarketingIllustratedHero({
     ) : null;
 
   const statsNode =
-    stats && stats.length > 0 ? (
+    showMeta && stats && stats.length > 0 ? (
       <dl
         className={cn(
           "m-0 grid w-full max-w-xl grid-cols-2 gap-[10px]",
@@ -154,30 +171,35 @@ export function MarketingIllustratedHero({
       className={cn(
         "relative overflow-hidden hero-surface",
         "border-b border-border/60",
+        isMobile && "marketing-hero--compact",
         className,
       )}
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-55 hero-dot-grid"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-25 hero-line-grid"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -top-[var(--space-16)] -right-[12%] size-[680px] rounded-full blur-3xl hero-aurora-accent"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -bottom-[var(--space-10)] -left-[14%] size-[560px] rounded-full blur-3xl hero-aurora-primary"
-        aria-hidden
-      />
-      {showCenterAurora ? (
-        <div
-          className="pointer-events-none absolute top-1/3 left-1/2 size-[420px] -translate-x-1/2 rounded-full opacity-40 blur-3xl hero-aurora-blend"
-          aria-hidden
-        />
+      {showDecorations ? (
+        <>
+          <div
+            className="pointer-events-none absolute inset-0 opacity-55 hero-dot-grid"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 opacity-25 hero-line-grid"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -top-[var(--space-16)] -right-[12%] size-[680px] rounded-full blur-3xl hero-aurora-accent"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -bottom-[var(--space-10)] -left-[14%] size-[560px] rounded-full blur-3xl hero-aurora-primary"
+            aria-hidden
+          />
+          {showCenterAurora ? (
+            <div
+              className="pointer-events-none absolute top-1/3 left-1/2 size-[420px] -translate-x-1/2 rounded-full opacity-40 blur-3xl hero-aurora-blend"
+              aria-hidden
+            />
+          ) : null}
+        </>
       ) : null}
 
       <div
@@ -197,21 +219,23 @@ export function MarketingIllustratedHero({
             <MarketingBreadcrumbs items={breadcrumbs} className="mb-0" />
           ) : null}
 
-          <p
-            className={cn(
-              "hero-eyebrow m-0 inline-flex items-center gap-[8px]",
-              "rounded-full px-[14px] py-[8px]",
-              "font-sans text-[11px] font-semibold uppercase tracking-[0.14em]",
-            )}
-          >
-            <Icon
-              name={eyebrowIcon}
-              size="sm"
-              aria-hidden
-              className="h-[14px] w-[14px] shrink-0"
-            />
-            <span>{eyebrow}</span>
-          </p>
+          {!isMobile ? (
+            <p
+              className={cn(
+                "hero-eyebrow m-0 inline-flex items-center gap-[8px]",
+                "rounded-full px-[14px] py-[8px]",
+                "font-sans text-[11px] font-semibold uppercase tracking-[0.14em]",
+              )}
+            >
+              <Icon
+                name={eyebrowIcon}
+                size="sm"
+                aria-hidden
+                className="h-[14px] w-[14px] shrink-0"
+              />
+              <span>{eyebrow}</span>
+            </p>
+          ) : null}
 
           <h1
             id={headingId}
@@ -227,7 +251,7 @@ export function MarketingIllustratedHero({
             {description}
           </p>
 
-          {supporting ? (
+          {showSupporting ? (
             <p className="m-0 max-w-xl font-sans text-[12px] leading-[1.6] text-muted-foreground sm:text-[13px]">
               {supporting}
             </p>
@@ -266,12 +290,12 @@ export function MarketingIllustratedHero({
             ) : null}
           </div>
 
-          {trustItems && trustItems.length > 0 ? (
+          {resolvedTrustItems && resolvedTrustItems.length > 0 ? (
             <ul
               className="m-0 flex list-none flex-wrap gap-x-[16px] gap-y-[8px] p-0"
               aria-label="Trust indicators"
             >
-              {trustItems.map((item) => (
+              {resolvedTrustItems.map((item) => (
                 <li
                   key={item}
                   className="inline-flex items-center gap-[6px] font-sans text-[12px] font-medium text-muted-foreground sm:text-[13px]"
@@ -295,7 +319,9 @@ export function MarketingIllustratedHero({
           {afterCtas}
         </div>
 
-        <div className="min-w-0 h-full w-full">{visual}</div>
+        {visualNode ? (
+          <div className="min-w-0 h-full w-full">{visualNode}</div>
+        ) : null}
       </div>
     </Section>
   );

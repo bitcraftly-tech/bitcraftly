@@ -15,7 +15,7 @@ const PricingCalculatorWizard = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="pricing-wizard-skeleton" aria-busy>
+      <div className="pricing-wizard-skeleton" aria-busy="true">
         Loading calculator…
       </div>
     ),

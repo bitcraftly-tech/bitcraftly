@@ -13,7 +13,7 @@ export function TestimonialsCarouselLazy() {
       fallback={
         <div
           className="min-h-[22rem] w-full rounded-[var(--token-radius-lg)] bg-background/60"
-          aria-hidden
+          aria-hidden="true"
         />
       }
     />

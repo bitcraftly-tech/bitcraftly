@@ -27,7 +27,7 @@ export function HeroIllustration() {
         fetchPriority="high"
         quality={55}
         sizes="(max-width: 768px) 92vw, (max-width: 1280px) 42vw, 640px"
-        className="hero-illustration-image h-full w-full object-contain object-center"
+        className="hero-illustration-image hero-illustration-reveal h-full w-full object-contain object-center"
       />
     </div>
   );

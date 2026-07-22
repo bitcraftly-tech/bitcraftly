@@ -27,6 +27,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: ButtonType;
   href?: string;
   loading?: boolean;
+  /** Visible label while loading (default: "Loading…"). */
+  loadingText?: string;
   disabled?: boolean;
   fullWidth?: boolean;
   iconLeft?: ReactNode;

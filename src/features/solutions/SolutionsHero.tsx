@@ -4,6 +4,7 @@ import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumb
 import { Icon, type IconName } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/cn";
+import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import "@/features/homepage/Hero/hero.css";
 import { SOLUTIONS_LANDING } from "./solutions.content";
@@ -55,10 +56,15 @@ const HERO_CHIPS: readonly { id: string; label: string; icon: IconName }[] = [
 /**
  * Solutions-only premium hero — left column matches approved Solutions mock.
  */
-export function SolutionsHero({ breadcrumbs }: SolutionsHeroProps) {
+export async function SolutionsHero({ breadcrumbs }: SolutionsHeroProps) {
+  const isMobile = await isMobileUserAgent();
   const titleParts = SOLUTIONS_LANDING.title.split(
     SOLUTIONS_LANDING.titleHighlight,
   );
+
+  const resolvedTrust = isMobile
+    ? SOLUTIONS_LANDING.trustIndicators.slice(0, 2)
+    : SOLUTIONS_LANDING.trustIndicators;
 
   return (
     <Section
@@ -67,28 +73,33 @@ export function SolutionsHero({ breadcrumbs }: SolutionsHeroProps) {
       className={cn(
         "solutions-hero relative overflow-hidden hero-surface",
         "border-b border-border/60",
+        isMobile && "marketing-hero--compact",
       )}
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-55 hero-dot-grid"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-25 hero-line-grid"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -top-[var(--space-16)] -right-[12%] size-[680px] rounded-full blur-3xl hero-aurora-accent"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -bottom-[var(--space-10)] -left-[14%] size-[560px] rounded-full blur-3xl hero-aurora-primary"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute top-1/3 left-1/2 size-[420px] -translate-x-1/2 rounded-full opacity-40 blur-3xl hero-aurora-blend"
-        aria-hidden
-      />
+      {!isMobile ? (
+        <>
+          <div
+            className="pointer-events-none absolute inset-0 opacity-55 hero-dot-grid"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 opacity-25 hero-line-grid"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -top-[var(--space-16)] -right-[12%] size-[680px] rounded-full blur-3xl hero-aurora-accent"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -bottom-[var(--space-10)] -left-[14%] size-[560px] rounded-full blur-3xl hero-aurora-primary"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute top-1/3 left-1/2 size-[420px] -translate-x-1/2 rounded-full opacity-40 blur-3xl hero-aurora-blend"
+            aria-hidden
+          />
+        </>
+      ) : null}
 
       <div className="solutions-hero__grid">
         <div className="solutions-hero__content">
@@ -134,7 +145,7 @@ export function SolutionsHero({ breadcrumbs }: SolutionsHeroProps) {
           </div>
 
           <ul className="solutions-hero__trust" aria-label="Trust indicators">
-            {SOLUTIONS_LANDING.trustIndicators.map((item) => (
+            {resolvedTrust.map((item) => (
               <li key={item} className="solutions-hero__trust-item">
                 <span className="solutions-hero__trust-check" aria-hidden>
                   <Icon
@@ -148,46 +159,52 @@ export function SolutionsHero({ breadcrumbs }: SolutionsHeroProps) {
             ))}
           </ul>
 
-          <dl className="solutions-hero__stats" aria-label="Trust metrics">
-            {HERO_STATS.map((stat) => (
-              <div key={stat.id} className="solutions-hero__stat">
-                <div className="solutions-hero__stat-head">
-                  <span
-                    className={`solutions-hero__stat-icon solutions-hero__stat-icon--${stat.tone}`}
-                    aria-hidden
-                  >
-                    <Icon name={stat.icon} size="sm" />
-                  </span>
-                  <dt className="solutions-hero__stat-value">
-                    <AnimatedStat value={stat.value} />
-                  </dt>
+          {!isMobile ? (
+            <dl className="solutions-hero__stats" aria-label="Trust metrics">
+              {HERO_STATS.map((stat) => (
+                <div key={stat.id} className="solutions-hero__stat">
+                  <div className="solutions-hero__stat-head">
+                    <span
+                      className={`solutions-hero__stat-icon solutions-hero__stat-icon--${stat.tone}`}
+                      aria-hidden
+                    >
+                      <Icon name={stat.icon} size="sm" />
+                    </span>
+                    <dt className="solutions-hero__stat-value">
+                      <AnimatedStat value={stat.value} />
+                    </dt>
+                  </div>
+                  <dd className="solutions-hero__stat-label">{stat.label}</dd>
                 </div>
-                <dd className="solutions-hero__stat-label">{stat.label}</dd>
-              </div>
-            ))}
-          </dl>
+              ))}
+            </dl>
+          ) : null}
 
-          <ul className="solutions-hero__chips" aria-label="Solution focus">
-            {HERO_CHIPS.map((chip) => (
-              <li key={chip.id}>
-                <span className="solutions-hero__chip">
-                  <span className="solutions-hero__chip-icon" aria-hidden>
-                    <Icon
-                      name={chip.icon}
-                      size="sm"
-                      className="h-[13px] w-[13px]"
-                    />
+          {!isMobile ? (
+            <ul className="solutions-hero__chips" aria-label="Solution focus">
+              {HERO_CHIPS.map((chip) => (
+                <li key={chip.id}>
+                  <span className="solutions-hero__chip">
+                    <span className="solutions-hero__chip-icon" aria-hidden>
+                      <Icon
+                        name={chip.icon}
+                        size="sm"
+                        className="h-[13px] w-[13px]"
+                      />
+                    </span>
+                    {chip.label}
                   </span>
-                  {chip.label}
-                </span>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
 
-        <div className="solutions-hero__visual">
-          <SolutionsHeroVisual />
-        </div>
+        {!isMobile ? (
+          <div className="solutions-hero__visual">
+            <SolutionsHeroVisual />
+          </div>
+        ) : null}
       </div>
     </Section>
   );

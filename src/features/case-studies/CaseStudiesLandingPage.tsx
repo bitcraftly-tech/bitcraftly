@@ -33,7 +33,7 @@ export function CaseStudiesLandingPage() {
           "Written delivery notes",
           "Measurable ROI",
         ]}
-        visual={<CaseStudiesHeroVisual />}
+        renderVisual={() => <CaseStudiesHeroVisual />}
       />
 
       <Section

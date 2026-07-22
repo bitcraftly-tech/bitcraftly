@@ -23,7 +23,7 @@ export function PricingCalculatorLazy({ headingId }: PricingCalculatorLazyProps)
       fallback={
         <div
           className="min-h-[28rem] w-full rounded-[var(--token-radius-lg)] bg-surface/40"
-          aria-hidden
+          aria-hidden="true"
         />
       }
     />

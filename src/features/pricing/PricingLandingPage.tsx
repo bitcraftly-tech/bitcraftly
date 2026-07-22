@@ -32,7 +32,7 @@ export function PricingLandingPage() {
           "Milestone billing",
           "No obligation consult",
         ]}
-        visual={<PricingHeroVisual />}
+        renderVisual={() => <PricingHeroVisual />}
       />
 
       <Section

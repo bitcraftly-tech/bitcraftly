@@ -96,7 +96,7 @@ export function MobileNavigation() {
         ref={triggerRef}
         type="button"
         className={cn(
-          "inline-flex size-[40px] items-center justify-center rounded-lg xl:hidden",
+          "inline-flex size-[44px] min-h-[44px] min-w-[44px] items-center justify-center rounded-lg xl:hidden",
           "text-foreground transition-colors duration-200 hover:bg-surface",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         )}

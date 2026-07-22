@@ -1,0 +1,81 @@
+/**
+ * Skeleton shimmer — Sprint 004.5 premium loading primitives.
+ * Uses design tokens only; respects prefers-reduced-motion.
+ */
+
+:root {
+  --skeleton-base: color-mix(in srgb, var(--border) 55%, var(--surface));
+  --skeleton-highlight: color-mix(in srgb, var(--border) 20%, var(--background));
+  --skeleton-duration: 1.4s;
+}
+
+.skeleton {
+  background-color: var(--skeleton-base);
+  border-radius: var(--token-radius-md);
+}
+
+.skeleton--circle {
+  border-radius: var(--token-radius-full);
+  aspect-ratio: 1 / 1;
+}
+
+.skeleton--text {
+  border-radius: var(--token-radius-sm);
+  height: 0.875rem;
+}
+
+.skeleton--shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton--shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--skeleton-highlight) 48%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: skeleton-shimmer var(--skeleton-duration) ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes skeleton-pulse-opacity {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.72;
+  }
+}
+
+@keyframes skeleton-pulse-opacity {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton--shimmer::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  .skeleton--shimmer {
+    animation: skeleton-pulse-opacity var(--skeleton-duration) ease-in-out infinite;
+  }
+}

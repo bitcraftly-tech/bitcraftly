@@ -82,3 +82,6 @@ export type {
   GridProps,
   GridResponsiveColumns,
 } from "./grid";
+
+export { Skeleton } from "./skeleton";
+export type { SkeletonProps, SkeletonVariant } from "./skeleton";

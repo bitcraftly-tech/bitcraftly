@@ -82,7 +82,7 @@ export function ContactLandingPage({
           "Free consultation",
           "No obligation",
         ]}
-        visual={<ContactHeroVisual />}
+        renderVisual={() => <ContactHeroVisual />}
       />
 
       <ContactLeadSection defaults={defaults} />

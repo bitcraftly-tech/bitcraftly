@@ -2,6 +2,7 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 import type { ButtonProps, ButtonSize, ButtonVariant } from "./types";
 import type { ReactNode } from "react";
+import "./button.css";
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
@@ -22,38 +23,6 @@ const sizeStyles: Record<ButtonSize, string> = {
   lg: "h-12 gap-2.5 px-6 text-lg",
 };
 
-const spinnerSizeStyles: Record<ButtonSize, string> = {
-  sm: "size-3.5",
-  md: "size-4",
-  lg: "size-5",
-};
-
-function ButtonSpinner({ size }: { size: ButtonSize }) {
-  return (
-    <svg
-      className={cn("shrink-0 animate-spin", spinnerSizeStyles[size])}
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-      />
-      <path
-        className="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-      />
-    </svg>
-  );
-}
-
 function ButtonIcon({ children }: { children: ReactNode }) {
   return (
     <span className="inline-flex shrink-0 items-center" aria-hidden="true">
@@ -66,12 +35,14 @@ function getButtonClassName({
   variant = "primary",
   size = "md",
   fullWidth = false,
+  loading = false,
   className,
-}: Pick<ButtonProps, "variant" | "size" | "fullWidth" | "className">) {
+}: Pick<ButtonProps, "variant" | "size" | "fullWidth" | "loading" | "className">) {
   return cn(
     "inline-flex items-center justify-center rounded-md font-medium no-underline transition-colors",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-50",
+    loading && "button--loading",
     variantStyles[variant],
     sizeStyles[size],
     fullWidth && "w-full",
@@ -85,6 +56,7 @@ export function Button({
   type = "button",
   href,
   loading = false,
+  loadingText = "Loading…",
   disabled = false,
   fullWidth = false,
   iconLeft,
@@ -98,16 +70,17 @@ export function Button({
     variant,
     size,
     fullWidth,
+    loading,
     className,
   });
 
-  const content = (
+  const content = loading ? (
+    <span>{loadingText}</span>
+  ) : (
     <>
-      {loading ? <ButtonSpinner size={size} /> : null}
-      {loading ? <span className="sr-only">Loading</span> : null}
-      {!loading && iconLeft ? <ButtonIcon>{iconLeft}</ButtonIcon> : null}
+      {iconLeft ? <ButtonIcon>{iconLeft}</ButtonIcon> : null}
       {children}
-      {!loading && iconRight ? <ButtonIcon>{iconRight}</ButtonIcon> : null}
+      {iconRight ? <ButtonIcon>{iconRight}</ButtonIcon> : null}
     </>
   );
 
