@@ -18,6 +18,10 @@ export type LeadNotificationResult =
   | LeadNotificationSuccess
   | LeadNotificationFailure;
 
+type ResendDeliveryResult =
+  | { readonly ok: true }
+  | { readonly ok: false; readonly message: string };
+
 interface ResendConfig {
   readonly apiKey: string;
   readonly to: string;
@@ -295,7 +299,7 @@ async function postResendEmail(
   apiKey: string,
   payload: ResendEmailPayload,
   failureMessage: string,
-): Promise<LeadNotificationResult> {
+): Promise<ResendDeliveryResult> {
   try {
     const response = await fetch(RESEND_API_URL, {
       method: "POST",

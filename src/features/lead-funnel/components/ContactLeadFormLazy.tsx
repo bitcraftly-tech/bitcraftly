@@ -1,11 +1,16 @@
 "use client";
 
 import { MountWhenVisible } from "@/components/patterns/mount-when-visible";
+import { submitLeadAction } from "../actions/submit-lead.action";
 import type { LeadFunnelDefaults } from "../types";
 
 interface ContactLeadFormLazyProps {
   defaults?: LeadFunnelDefaults;
 }
+
+/** Keeps the contact server action in the route's static module graph. */
+const registerContactLeadAction = submitLeadAction;
+void registerContactLeadAction;
 
 const loadContactLeadForm = (defaults?: LeadFunnelDefaults) =>
   import("./ContactLeadForm").then((mod) => {
