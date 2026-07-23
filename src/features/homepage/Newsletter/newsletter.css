@@ -3,21 +3,26 @@
  */
 
 .newsletter-subscribe {
-  background-image: linear-gradient(to right,
-      var(--primary),
-      var(--accent));
+  /* Solid fallback + oklab stops — avoids sRGB banding stripes on the CTA. */
+  background-color: var(--primary);
+  background-image: linear-gradient(
+    to right in oklab,
+    var(--primary) 0%,
+    color-mix(in oklab, var(--primary) 55%, var(--accent)) 52%,
+    var(--accent) 100%
+  );
   color: var(--primary-foreground);
-  box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--primary) 42%, transparent);
+  box-shadow: none;
   transition:
     opacity var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-fast) var(--ease-out),
+    filter var(--duration-fast) var(--ease-out),
     transform var(--duration-fast) var(--ease-out);
 }
 
 .newsletter-subscribe:hover {
-  opacity: 0.95;
-  transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 8px 18px -8px color-mix(in srgb, var(--accent) 45%, transparent);
+  opacity: 0.96;
+  transform: translateY(-1px);
+  filter: brightness(1.04);
 }
 
 .newsletter-subscribe:active {
@@ -113,6 +118,7 @@
   .newsletter-subscribe:hover,
   .newsletter-subscribe:active {
     transform: none;
+    filter: none;
     transition: none;
   }
 }
