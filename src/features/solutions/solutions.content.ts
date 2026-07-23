@@ -17,21 +17,25 @@ const DEFAULT_PROCESS = [
     title: "Discover",
     description:
       "Map current workflows, stakeholders, and success metrics before we design anything.",
+    icon: "search" as const,
   },
   {
     title: "Design the system",
     description:
       "Architecture, UX, integrations, and a written rollout plan with clear ownership.",
+    icon: "layout-grid" as const,
   },
   {
     title: "Build & validate",
     description:
       "Founder-led delivery with staged releases and real-user feedback loops.",
+    icon: "code" as const,
   },
   {
     title: "Operate & improve",
     description:
       "Launch, train teams, monitor adoption, and iterate on measurable outcomes.",
+    icon: "trending-up" as const,
   },
 ] as const;
 

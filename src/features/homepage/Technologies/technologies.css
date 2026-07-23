@@ -18,7 +18,8 @@
 
 .technologies-card:hover,
 .technologies-card:focus-within {
-  transform: translateY(var(--hp-card-lift, -6px));
+  /* Lift stays inside marquee padding gutter — do not increase without padding. */
+  transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--primary) 45%, #eef2ff);
   box-shadow: var(--hp-card-shadow-hover);
 }
@@ -38,16 +39,22 @@
 
 .technologies-card:hover .technologies-card-logo,
 .technologies-card:focus-within .technologies-card-logo {
-  transform: scale(1.08);
+  transform: scale(1.06);
   filter: grayscale(0);
   opacity: 1;
 }
 
-/* Mobile/tablet: horizontal swipe. Desktop: auto-marquee. */
+/*
+ * Marquee clip: overflow-x must stay non-visible for swipe/marquee.
+ * CSS then forces overflow-y to clip too — so hover lift needs padding
+ * on THIS overflow box (padding edge is the clip edge).
+ */
 .technologies-marquee {
   overflow-x: auto;
   overflow-y: hidden;
   width: 100%;
+  padding-block: 16px;
+  margin-block: -8px;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   touch-action: pan-x;
@@ -66,7 +73,7 @@
   width: max-content;
   flex-wrap: nowrap;
   gap: 12px;
-  padding-block: 4px;
+  padding-block: 0;
   padding-inline: 2px;
 }
 
@@ -84,7 +91,8 @@
 
 @media (min-width: 1024px) {
   .technologies-marquee {
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
     scroll-snap-type: none;
   }
 

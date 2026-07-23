@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { AppBootShell } from "@/components/patterns/app-boot-splash";
 import { RootDeferredCss } from "@/components/patterns/root-deferred-css/RootDeferredCss";
 import StructuredData from "@/components/seo/StructuredData";
 import { getSiteUrl } from "@/lib/seo/site";
@@ -121,10 +122,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} bc-booting h-full antialiased`}
+      aria-busy="true"
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <AppBootShell />
         <RootDeferredCss />
         <StructuredData />
         {children}

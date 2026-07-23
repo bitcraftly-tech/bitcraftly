@@ -28,6 +28,7 @@ export type IconName =
   | "x"
   | "instagram"
   | "youtube"
+  | "facebook"
   | "mail"
   | "phone"
   | "map-pin"
@@ -92,6 +93,7 @@ export const ICON_NAMES = [
   "x",
   "instagram",
   "youtube",
+  "facebook",
   "mail",
   "phone",
   "map-pin",

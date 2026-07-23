@@ -13,6 +13,7 @@ import {
   CAREER_BENEFITS,
   CAREER_CULTURE,
   CAREER_PROCESS_STEPS,
+  CAREER_ROLES,
   getCareersApplyHref,
 } from "./careers.content";
 import { CareersHero } from "./CareersHero";
@@ -40,6 +41,15 @@ const BENEFIT_ICONS: readonly IconName[] = [
   "trending-up",
 ];
 
+const PROCESS_ICONS: readonly IconName[] = [
+  "mail",
+  "search",
+  "message",
+  "code",
+  "zap",
+  "check",
+];
+
 /**
  * Careers landing — Services-style layout + bitcraftly.com/careers content.
  */
@@ -48,6 +58,7 @@ export function CareersLandingPage() {
     { label: "Home", href: ROUTES.home },
     { label: "Careers" },
   ]);
+  const hasOpenings = CAREER_ROLES.length > 0;
 
   return (
     <PageShell className="careers-page">
@@ -64,8 +75,14 @@ export function CareersLandingPage() {
           <MarketingSectionIntro
             eyebrow="Open positions"
             headingId="open-roles-heading"
-            title="Roles we are hiring for"
-            description="Engineering, design, and product — filter by team, search skills, and apply in minutes."
+            title={
+              hasOpenings ? "Roles we are hiring for" : "Current openings"
+            }
+            description={
+              hasOpenings
+                ? "Engineering, design, and product — filter by team, search skills, and apply in minutes."
+                : "There are no open roles at the moment. Leave a general application and we will reach out when hiring resumes."
+            }
           />
           <Link
             href={getCareersApplyHref("general")}
@@ -100,7 +117,12 @@ export function CareersLandingPage() {
         />
 
         <div className="careers-remote-banner">
-          <p className="careers-remote-banner__title">Remote-first</p>
+          <div className="careers-remote-banner__head">
+            <span className="careers-remote-banner__icon" aria-hidden>
+              <Icon name="globe" size="sm" className="h-[16px] w-[16px]" />
+            </span>
+            <p className="careers-remote-banner__title">Remote-first</p>
+          </div>
           <p>
             Work from anywhere · Ghaziabad / NCR overlap for sync when clients
             need it
@@ -121,14 +143,16 @@ export function CareersLandingPage() {
               style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
             >
               <article className="careers-page-card">
-                <span className="careers-page-card__icon" aria-hidden>
-                  <Icon
-                    name={CULTURE_ICONS[index] ?? "sparkles"}
-                    size="sm"
-                    className="h-[16px] w-[16px]"
-                  />
-                </span>
-                <h3 className="careers-page-card__title">{item.title}</h3>
+                <div className="careers-page-card__head">
+                  <span className="careers-page-card__icon" aria-hidden>
+                    <Icon
+                      name={CULTURE_ICONS[index] ?? "sparkles"}
+                      size="sm"
+                      className="h-[16px] w-[16px]"
+                    />
+                  </span>
+                  <h3 className="careers-page-card__title">{item.title}</h3>
+                </div>
                 <p className="careers-page-card__body">{item.body}</p>
               </article>
             </li>
@@ -163,14 +187,16 @@ export function CareersLandingPage() {
               style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
             >
               <article className="careers-page-card">
-                <span className="careers-page-card__icon" aria-hidden>
-                  <Icon
-                    name={BENEFIT_ICONS[index] ?? "check"}
-                    size="sm"
-                    className="h-[16px] w-[16px]"
-                  />
-                </span>
-                <h3 className="careers-page-card__title">{item.title}</h3>
+                <div className="careers-page-card__head">
+                  <span className="careers-page-card__icon" aria-hidden>
+                    <Icon
+                      name={BENEFIT_ICONS[index] ?? "check"}
+                      size="sm"
+                      className="h-[16px] w-[16px]"
+                    />
+                  </span>
+                  <h3 className="careers-page-card__title">{item.title}</h3>
+                </div>
                 <p className="careers-page-card__body">{item.body}</p>
               </article>
             </li>
@@ -230,7 +256,16 @@ export function CareersLandingPage() {
                     <span className="careers-page-card__optional">Optional</span>
                   ) : null}
                 </div>
-                <h3 className="careers-page-card__title">{step.title}</h3>
+                <div className="careers-page-card__head">
+                  <span className="careers-page-card__icon" aria-hidden>
+                    <Icon
+                      name={PROCESS_ICONS[index] ?? "check"}
+                      size="sm"
+                      className="h-[16px] w-[16px]"
+                    />
+                  </span>
+                  <h3 className="careers-page-card__title">{step.title}</h3>
+                </div>
                 <p className="careers-page-card__body">{step.body}</p>
               </article>
             </li>
@@ -244,12 +279,12 @@ export function CareersLandingPage() {
         description="Apply in under five minutes — resume, links, and role fit. Founder reviews every profile personally."
         reassurance="Prefer email? hello@bitcraftly.com"
         primaryCta={{
-          label: "Apply now",
+          label: hasOpenings ? "Apply now" : "Send general application",
           href: getCareersApplyHref("general"),
         }}
         tertiaryCta={{
-          label: "View open roles",
-          href: "#open-roles",
+          label: hasOpenings ? "View open roles" : "See hiring process",
+          href: hasOpenings ? "#open-roles" : "#careers-process-heading",
         }}
         trust={[
           "Founder-led review",

@@ -79,21 +79,21 @@ export function SolutionDetailPage({ content }: SolutionDetailPageProps) {
           title="How we deliver"
           description="A clear path from discovery to launch — with ownership, reviews, and handoff built in."
         />
-        <ol className="solution-detail-process solutions-process">
+        <ol className="solution-detail-process solutions-process m-0 list-none p-0">
           {content.process.map((step, index) => (
-            <li key={step.title} className="solutions-process__item">
-              <div className="solutions-process__card">
+            <li key={step.title} className="solutions-process__item min-w-0">
+              <article className="solutions-process__card">
                 <div className="solutions-process__top">
+                  <span className="solutions-process__number" aria-hidden>
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                   <span className="solutions-process__icon" aria-hidden>
                     <Icon name={step.icon ?? "workflow"} size="sm" />
-                  </span>
-                  <span className="solutions-process__number">
-                    {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
                 <h3 className="solutions-process__title">{step.title}</h3>
                 <p className="solutions-process__desc">{step.description}</p>
-              </div>
+              </article>
             </li>
           ))}
         </ol>

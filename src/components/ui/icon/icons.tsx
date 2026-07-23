@@ -141,6 +141,9 @@ export const iconRegistry: Record<IconName, IconDefinition> = {
       "m10 15 5-3-5-3z",
     ],
   },
+  facebook: {
+    paths: ["M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"],
+  },
   mail: {
     paths: [
       "m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7",

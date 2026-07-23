@@ -13,25 +13,13 @@ export const FOOTER_BRAND: FooterBrandCopy = {
     "AI & Digital Engineering Partner helping businesses build, automate and grow with modern technology.",
 };
 
-/** Order matches approved footer design: LinkedIn, X, GitHub, YouTube, Website */
+/** Order: Instagram, YouTube, Twitter/X, Facebook */
 export const FOOTER_SOCIAL_LINKS: readonly FooterSocialLink[] = [
   {
-    id: "linkedin",
-    label: "Bitcraftly on LinkedIn",
-    href: "https://www.linkedin.com/company/bitcraftly",
-    icon: "linkedin",
-  },
-  {
-    id: "x",
-    label: "Bitcraftly on X",
-    href: "https://x.com/bitcraftly",
-    icon: "x",
-  },
-  {
-    id: "github",
-    label: "Bitcraftly on GitHub",
-    href: "https://github.com/bitcraftly",
-    icon: "github",
+    id: "instagram",
+    label: "Bitcraftly on Instagram",
+    href: "https://www.instagram.com/bitcraftly",
+    icon: "instagram",
   },
   {
     id: "youtube",
@@ -40,10 +28,16 @@ export const FOOTER_SOCIAL_LINKS: readonly FooterSocialLink[] = [
     icon: "youtube",
   },
   {
-    id: "website",
-    label: "Bitcraftly website",
-    href: "https://bitcraftly.com",
-    icon: "globe",
+    id: "twitter",
+    label: "Bitcraftly on Twitter",
+    href: "https://x.com/bitcraftly",
+    icon: "x",
+  },
+  {
+    id: "facebook",
+    label: "Bitcraftly on Facebook",
+    href: "https://www.facebook.com/bitcraftly",
+    icon: "facebook",
   },
 ];
 

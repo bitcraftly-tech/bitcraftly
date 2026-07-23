@@ -54,7 +54,7 @@ const focusRing = cn(
 );
 
 /**
- * Roles browser — shared sliding pill tabs + role cards.
+ * Roles browser — empty-state message when hiring is paused.
  */
 export function CareersRolesBoard() {
   const [team, setTeam] = useState<"all" | CareerTeam>("all");
@@ -62,6 +62,7 @@ export function CareersRolesBoard() {
   const [query, setQuery] = useState("");
   const teamPill = useSlidingPillIndicator(team);
   const levelPill = useSlidingPillIndicator(level);
+  const hasOpenings = CAREER_ROLES.length > 0;
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -80,6 +81,37 @@ export function CareersRolesBoard() {
       return haystack.includes(q);
     });
   }, [team, level, query]);
+
+  if (!hasOpenings) {
+    return (
+      <div className="careers-roles-empty" role="status">
+        <div className="careers-roles-empty__head">
+          <span className="careers-roles-empty__icon" aria-hidden>
+            <Icon name="calendar" size="sm" className="h-[18px] w-[18px]" />
+          </span>
+          <h3 className="careers-roles-empty__title">
+            No open positions right now
+          </h3>
+        </div>
+        <p className="careers-roles-empty__body">
+          We are not actively hiring at the moment. You can still send a general
+          application — we review every profile when roles reopen.
+        </p>
+        <Link
+          href={getCareersApplyHref("general")}
+          className={cn("careers-roles-empty__cta", focusRing)}
+        >
+          Send general application
+          <Icon
+            name="arrow-right"
+            size="sm"
+            aria-hidden
+            className="h-[13px] w-[13px]"
+          />
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="careers-roles">

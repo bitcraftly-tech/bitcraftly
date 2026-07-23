@@ -1,11 +1,19 @@
 import Link from "next/link";
+import { AnimatedStat } from "@/components/patterns/animated-stat";
 import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
+import { Container } from "@/components/ui/container";
+import { Icon, type IconName } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import { BLOG_CATEGORIES } from "@/content/blog";
 import type { BlogCategoryId } from "@/content/blog";
-import { ROUTES } from "@/constants/navigation";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
+import { NAV_ACTIONS, ROUTES } from "@/constants/navigation";
 import { cn } from "@/lib/cn";
+import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
+import "@/features/homepage/Hero/hero.css";
+import "@/features/services/services.css";
+import { BlogHeroVisual } from "./BlogHeroVisual";
+import "./blog.css";
 
 interface BlogHeroProps {
   breadcrumbs: readonly BreadcrumbItem[];
@@ -32,105 +40,305 @@ function buildListingHref(options: {
   return qs ? `${ROUTES.blog}?${qs}` : ROUTES.blog;
 }
 
-export function BlogHero({
+const HERO_TITLE = "Engineering notes for builders shipping real products";
+const HERO_HIGHLIGHT = "real products";
+
+const HERO_LEAD =
+  "Practical writing on AI development, Next.js, React, performance, and SEO — from the Bitcraftly delivery desk.";
+
+const HERO_STATS: readonly {
+  id: string;
+  value: string;
+  label: string;
+  icon: IconName;
+  tone: "violet" | "sky" | "indigo" | "amber";
+}[] = [
+  {
+    id: "topics",
+    value: String(BLOG_CATEGORIES.length),
+    label: "Topic categories",
+    icon: "layout-grid",
+    tone: "violet",
+  },
+  {
+    id: "ai",
+    value: "AI",
+    label: "Product & LLM notes",
+    icon: "brain",
+    tone: "sky",
+  },
+  {
+    id: "web",
+    value: "Web",
+    label: "Next.js & React",
+    icon: "code",
+    tone: "indigo",
+  },
+  {
+    id: "seo",
+    value: "SEO",
+    label: "Performance & growth",
+    icon: "trending-up",
+    tone: "amber",
+  },
+] as const;
+
+const HERO_FEATURES: readonly {
+  id: string;
+  title: string;
+  description: string;
+  icon: IconName;
+  tone: "violet" | "sky" | "emerald" | "amber";
+}[] = [
+  {
+    id: "practical",
+    title: "Delivery-first",
+    description: "Notes from real client builds — not theory dumps",
+    icon: "check",
+    tone: "violet",
+  },
+  {
+    id: "stack",
+    title: "Modern stack",
+    description: "Next.js, React, TypeScript, and AI tooling",
+    icon: "zap",
+    tone: "sky",
+  },
+  {
+    id: "perf",
+    title: "Performance minded",
+    description: "Core Web Vitals, SEO, and shipping discipline",
+    icon: "rocket",
+    tone: "emerald",
+  },
+  {
+    id: "builders",
+    title: "For builders",
+    description: "Founders, engineers, and product teams",
+    icon: "sparkles",
+    tone: "amber",
+  },
+] as const;
+
+/**
+ * Blog hero — same aurora / services-hero shell as Services landing.
+ */
+export async function BlogHero({
   breadcrumbs,
   activeCategory = "all",
   query = "",
 }: BlogHeroProps) {
+  const isMobile = await isMobileUserAgent();
+  const [titleBefore, titleAfter] = HERO_TITLE.includes(HERO_HIGHLIGHT)
+    ? HERO_TITLE.split(HERO_HIGHLIGHT)
+    : [HERO_TITLE, ""];
+
   return (
     <Section
-      spacing="lg"
-      background="default"
-      className="border-b border-border/70 bg-background"
+      spacing="none"
+      contained={false}
+      aria-labelledby="blog-page-heading"
+      className={cn(
+        "services-hero blog-hero relative overflow-hidden hero-surface",
+        "border-b border-border/60",
+        isMobile && "marketing-hero--compact",
+      )}
     >
-      <div className="flex max-w-3xl flex-col gap-[16px]">
-        <MarketingBreadcrumbs items={breadcrumbs} />
-        <p className="m-0 font-sans text-[12px] font-semibold uppercase tracking-[0.14em] text-primary">
-          Blog
-        </p>
-        <h1
-          id="blog-page-heading"
-          className="m-0 font-sans text-[36px] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground sm:text-[44px]"
-        >
-          Engineering notes for builders shipping real products
-        </h1>
-        <p className="m-0 max-w-2xl font-sans text-[16px] leading-[1.7] text-muted-foreground">
-          Practical writing on AI development, Next.js, React, performance, and
-          SEO — from the Bitcraftly delivery desk.
-        </p>
-      </div>
+      {!isMobile ? (
+        <>
+          <div
+            className="pointer-events-none absolute inset-0 opacity-55 hero-dot-grid"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 opacity-25 hero-line-grid"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -top-[var(--space-16)] -right-[12%] size-[680px] rounded-full blur-3xl hero-aurora-accent"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -bottom-[var(--space-10)] -left-[14%] size-[560px] rounded-full blur-3xl hero-aurora-primary"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute top-1/3 left-1/2 size-[420px] -translate-x-1/2 rounded-full opacity-40 blur-3xl hero-aurora-blend"
+            aria-hidden
+          />
+        </>
+      ) : null}
 
-      <form
-        action={ROUTES.blog}
-        method="get"
-        role="search"
-        className="mt-[28px] flex w-full max-w-xl flex-col gap-[10px] sm:flex-row"
-      >
-        {activeCategory !== "all" ? (
-          <input type="hidden" name="category" value={activeCategory} />
-        ) : null}
-        <label htmlFor="blog-search" className="sr-only">
-          Search articles
-        </label>
-        <input
-          id="blog-search"
-          name="q"
-          type="search"
-          defaultValue={query}
-          placeholder="Search articles…"
-          className={cn(
-            "h-[44px] w-full rounded-[12px] border border-border bg-background px-[14px]",
-            "font-sans text-[14px] text-foreground placeholder:text-muted-foreground",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-          )}
-        />
-        <button
-          type="submit"
-          className={cn(
-            "inline-flex h-[44px] shrink-0 items-center justify-center rounded-[12px] px-[18px]",
-            "bg-primary font-sans text-[14px] font-semibold text-primary-foreground no-underline",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-          )}
-        >
-          Search
-        </button>
-      </form>
+      <Container size="xl" className="services-hero__container">
+        <div className="services-hero__breadcrumb">
+          <MarketingBreadcrumbs items={breadcrumbs} className="mb-0" />
+        </div>
 
-      <nav
-        aria-label="Blog categories"
-        className="mt-[20px] flex flex-wrap gap-[8px]"
-      >
-        <Link
-          href={buildListingHref({ q: query || undefined })}
-          className={cn(
-            "rounded-full border px-[12px] py-[6px] font-sans text-[13px] font-medium no-underline",
-            activeCategory === "all"
-              ? "border-primary/30 bg-primary/10 text-primary"
-              : "border-border text-muted-foreground hover:text-foreground",
-          )}
-          aria-current={activeCategory === "all" ? "page" : undefined}
-        >
-          All
-        </Link>
-        {BLOG_CATEGORIES.map((category) => (
-          <Link
-            key={category.id}
-            href={buildListingHref({
-              category: category.id,
-              q: query || undefined,
-            })}
-            className={cn(
-              "rounded-full border px-[12px] py-[6px] font-sans text-[13px] font-medium no-underline",
-              activeCategory === category.id
-                ? "border-primary/30 bg-primary/10 text-primary"
-                : "border-border text-muted-foreground hover:text-foreground",
-            )}
-            aria-current={activeCategory === category.id ? "page" : undefined}
-          >
-            {category.label}
-          </Link>
-        ))}
-      </nav>
+        <div className="services-hero__grid">
+          <div className="services-hero__content">
+            <p className="services-hero__eyebrow">
+              <Icon
+                name="quote"
+                size="sm"
+                aria-hidden
+                className="services-hero__eyebrow-icon"
+              />
+              <span>Blog</span>
+            </p>
+
+            <h1 id="blog-page-heading" className="services-hero__title">
+              {titleBefore}
+              {HERO_TITLE.includes(HERO_HIGHLIGHT) ? (
+                <span className="services-hero__title-accent">
+                  {HERO_HIGHLIGHT}
+                </span>
+              ) : null}
+              {titleAfter}
+            </h1>
+
+            <p className="services-hero__description">{HERO_LEAD}</p>
+
+            <div className="services-hero__cta-row">
+              <Link
+                href={NAV_ACTIONS.freeConsultation.href}
+                className="services-hero__btn services-hero__btn--primary"
+              >
+                {NAV_ACTIONS.freeConsultation.label}
+                <Icon name="arrow-up-right" size="sm" aria-hidden />
+              </Link>
+              <a
+                href="#blog-articles"
+                className="services-hero__btn services-hero__btn--outline"
+              >
+                Browse articles
+                <Icon name="arrow-up-right" size="sm" aria-hidden />
+              </a>
+            </div>
+
+            <form
+              action={ROUTES.blog}
+              method="get"
+              role="search"
+              className="blog-hero__search"
+            >
+              {activeCategory !== "all" ? (
+                <input type="hidden" name="category" value={activeCategory} />
+              ) : null}
+              <label htmlFor="blog-search" className="sr-only">
+                Search articles
+              </label>
+              <input
+                id="blog-search"
+                name="q"
+                type="search"
+                defaultValue={query}
+                placeholder="Search articles…"
+                className="blog-hero__search-input"
+              />
+              <button type="submit" className="blog-hero__search-btn">
+                <Icon name="search" size="sm" aria-hidden />
+                Search
+              </button>
+            </form>
+
+            <nav aria-label="Blog categories" className="blog-hero__categories">
+              <Link
+                href={buildListingHref({ q: query || undefined })}
+                className={cn(
+                  "blog-hero__chip",
+                  activeCategory === "all" && "blog-hero__chip--active",
+                )}
+                aria-current={activeCategory === "all" ? "page" : undefined}
+              >
+                All
+              </Link>
+              {BLOG_CATEGORIES.map((category) => (
+                <Link
+                  key={category.id}
+                  href={buildListingHref({
+                    category: category.id,
+                    q: query || undefined,
+                  })}
+                  className={cn(
+                    "blog-hero__chip",
+                    activeCategory === category.id && "blog-hero__chip--active",
+                  )}
+                  aria-current={
+                    activeCategory === category.id ? "page" : undefined
+                  }
+                >
+                  {category.label}
+                </Link>
+              ))}
+            </nav>
+
+            {!isMobile ? (
+              <div
+                className="services-hero-stats"
+                role="list"
+                aria-label="Blog highlights"
+              >
+                {HERO_STATS.map((stat) => (
+                  <div
+                    key={stat.id}
+                    role="listitem"
+                    className="services-hero-stats__item"
+                  >
+                    <dl className="services-hero-stats__pair m-0">
+                      <dt className="services-hero-stats__value">
+                        <span className="services-hero-stats__head">
+                          <span
+                            className={`services-hero-stats__icon services-hero-stats__icon--${stat.tone}`}
+                            aria-hidden
+                          >
+                            <Icon name={stat.icon} size="sm" />
+                          </span>
+                          <AnimatedStat value={stat.value} />
+                        </span>
+                      </dt>
+                      <dd className="services-hero-stats__label">
+                        {stat.label}
+                      </dd>
+                    </dl>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </div>
+
+          {!isMobile ? (
+            <div className="services-hero__visual">
+              <BlogHeroVisual />
+            </div>
+          ) : null}
+
+          {!isMobile ? (
+            <ul
+              className="services-hero-features"
+              aria-label="What you will find"
+            >
+              {HERO_FEATURES.map((item) => (
+                <li key={item.id} className="services-hero-features__item">
+                  <span className="services-hero-features__head">
+                    <span
+                      className={`services-hero-features__icon services-hero-features__icon--${item.tone}`}
+                      aria-hidden
+                    >
+                      <Icon name={item.icon} size="sm" />
+                    </span>
+                    <span className="services-hero-features__title">
+                      {item.title}
+                    </span>
+                  </span>
+                  <span className="services-hero-features__desc">
+                    {item.description}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+      </Container>
     </Section>
   );
 }

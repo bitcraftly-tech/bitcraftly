@@ -27,7 +27,11 @@ export function getCareersApplyHref(roleSlug?: string | null): string {
   return `${CAREERS_APPLY_HREF}?role=${encodeURIComponent(roleSlug)}`;
 }
 
-export const CAREER_ROLES: readonly CareerRole[] = [
+/** Active openings on /careers — empty while hiring is paused. */
+export const CAREER_ROLES: readonly CareerRole[] = [];
+
+/** Role archive — restore openings by copying entries into CAREER_ROLES. */
+export const CAREER_ROLES_ARCHIVE: readonly CareerRole[] = [
   {
     slug: "senior-react-developer",
     title: "Senior React.js Developer",

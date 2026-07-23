@@ -37,9 +37,18 @@ export function BlogLandingPage({
         query={q ?? ""}
       />
 
-      <Section spacing="lg" background="default">
+      <Section
+        id="blog-articles"
+        spacing="lg"
+        background="default"
+        aria-labelledby="blog-articles-heading"
+        className="scroll-mt-[100px]"
+      >
         <div className="mb-[16px] flex flex-wrap items-end justify-between gap-[12px]">
-          <p className="m-0 font-sans text-[14px] text-muted-foreground">
+          <p
+            id="blog-articles-heading"
+            className="m-0 font-sans text-[14px] text-muted-foreground"
+          >
             {result.total} article{result.total === 1 ? "" : "s"}
             {tag ? ` tagged “${tag}”` : null}
             {q ? ` matching “${q}”` : null}

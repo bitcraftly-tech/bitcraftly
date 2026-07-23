@@ -581,6 +581,9 @@ export function SolutionsProcessSection() {
             >
               <article className="solutions-process__card">
                 <div className="solutions-process__top">
+                  <span className="solutions-process__number" aria-hidden>
+                    {number}
+                  </span>
                   <span className="solutions-process__icon" aria-hidden>
                     {step.icon ? (
                       <Icon
@@ -590,7 +593,6 @@ export function SolutionsProcessSection() {
                       />
                     ) : null}
                   </span>
-                  <span className="solutions-process__number">{number}</span>
                 </div>
                 <h3 className="solutions-process__title">{step.title}</h3>
                 <p className="solutions-process__desc">{step.description}</p>
