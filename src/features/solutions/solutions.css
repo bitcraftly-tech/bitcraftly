@@ -1,5 +1,5 @@
 /**
- * Solutions hero ù left column matching approved Solutions mock.
+ * Solutions hero ? left column matching approved Solutions mock.
  */
 
 .solutions-hero {
@@ -358,7 +358,7 @@
   }
 }
 
-/* Development process cards ù auto-fit so all solution detail pages
+/* Development process cards ? auto-fit so all solution detail pages
    stay multi-column when the content area is wide enough (incl. zoom). */
 .solutions-process {
   display: grid;
@@ -542,7 +542,7 @@
 }
 
 /* =========================================================
-   Solution detail ù landing-aligned sections
+   Solution detail ? landing-aligned sections
    ========================================================= */
 
 .solution-detail-hero__group {
