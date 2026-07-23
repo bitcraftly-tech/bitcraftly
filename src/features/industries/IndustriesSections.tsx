@@ -35,7 +35,7 @@ function SectionIntro({
   description: string;
 }) {
   return (
-    <div className="mb-[40px] max-w-2xl">
+    <div className="section-intro-row max-w-2xl">
       <p className="industries-intro__eyebrow">{eyebrow}</p>
       <h2 id={headingId} className="industries-intro__heading">
         {heading}
@@ -588,7 +588,9 @@ export function IndustriesFaqSection() {
         heading={INDUSTRIES_LANDING.faqHeading}
         description={INDUSTRIES_LANDING.faqDescription}
       />
-      <FaqAccordion items={[...INDUSTRY_FAQS]} />
+      <div className="section-content-grid">
+        <FaqAccordion items={[...INDUSTRY_FAQS]} />
+      </div>
     </Section>
   );
 }

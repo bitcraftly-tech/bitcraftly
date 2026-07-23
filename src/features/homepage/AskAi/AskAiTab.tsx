@@ -1,9 +1,20 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useId, useRef, useState } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
+import { createPortal } from "react-dom";
 import { Icon } from "@/components/ui/icon";
-/* ask-ai.css loaded post-paint via MarketingDeferredCss */
+import { cn } from "@/lib/cn";
+import "./ask-ai.css";
+
+/** Flip to `true` when the Ask AI launcher should show again. */
+const ASK_AI_ENABLED = false;
 
 const AskAiPanel = dynamic(
   () =>
@@ -19,15 +30,31 @@ const AskAiPanel = dynamic(
 );
 
 /**
- * Fixed right-edge Ask AI launcher that toggles the Bitcraftly AI panel.
- * Panel code loads only when opened to keep first-load JS smaller.
+ * Ask AI launcher entry — currently hidden via ASK_AI_ENABLED.
  */
 export function AskAiTab() {
+  if (!ASK_AI_ENABLED) {
+    return null;
+  }
+
+  return <AskAiTabActive />;
+}
+
+/**
+ * Viewport-fixed Ask AI launcher (ported to document.body).
+ * Inline position styles keep the FAB fixed even if CSS chunks load late.
+ */
+function AskAiTabActive() {
   const [open, setOpen] = useState(false);
+  const [portalReady, setPortalReady] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const tabRef = useRef<HTMLButtonElement>(null);
   const wasOpenRef = useRef(false);
   const panelId = useId();
+
+  useEffect(() => {
+    setPortalReady(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -71,7 +98,27 @@ export function AskAiTab() {
     }
   }, [open]);
 
-  return (
+  const fabStyle: CSSProperties = {
+    position: "fixed",
+    top: "50%",
+    right: 16,
+    bottom: "auto",
+    left: "auto",
+    zIndex: 1300,
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 8,
+    minHeight: 48,
+    padding: "0 16px 0 12px",
+    border: 0,
+    borderRadius: 9999,
+    background: open ? "var(--foreground)" : "var(--primary)",
+    color: "#ffffff",
+    cursor: "pointer",
+    translate: "0 -50%",
+  };
+
+  const ui = (
     <div ref={rootRef} className="ask-ai-root">
       {open ? (
         <AskAiPanel id={panelId} onClose={() => setOpen(false)} />
@@ -80,20 +127,24 @@ export function AskAiTab() {
       <button
         ref={tabRef}
         type="button"
-        className="ask-ai-tab"
+        className={cn("ask-ai-fab", open && "ask-ai-fab--open")}
+        style={fabStyle}
         aria-label={open ? "Close Ask AI" : "Ask AI"}
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((current) => !current)}
       >
-        <Icon
-          name={open ? "close" : "sparkles"}
-          size="sm"
-          className="ask-ai-tab-icon"
-          aria-hidden
-        />
-        <span className="ask-ai-tab-label">{open ? "Close" : "Ask AI"}</span>
+        <span className="ask-ai-fab-icon" aria-hidden>
+          <Icon name={open ? "close" : "sparkles"} size="sm" />
+        </span>
+        <span className="ask-ai-fab-label">{open ? "Close" : "Ask AI"}</span>
       </button>
     </div>
   );
+
+  if (!portalReady) {
+    return null;
+  }
+
+  return createPortal(ui, document.body);
 }

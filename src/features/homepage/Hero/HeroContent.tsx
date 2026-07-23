@@ -18,35 +18,33 @@ export function HeroContent({ compactMobile = false }: HeroContentProps) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-[14px]",
+        "hero-content flex w-full flex-col",
         "items-center text-center",
-        "md:items-start md:text-left",
-        "md:gap-[16px]",
+        "md:items-stretch md:text-left",
       )}
     >
-      {!compactMobile ? (
-        <p
-          role="doc-subtitle"
-          className={cn(
-            "hero-eyebrow m-0 inline-flex items-center gap-[8px]",
-            "rounded-full px-[14px] py-[8px]",
-            "font-sans text-[11px] font-semibold uppercase tracking-[0.14em]",
-          )}
-        >
-          <Icon
-            name="sparkles"
-            size="sm"
-            aria-hidden
-            className="h-[14px] w-[14px] shrink-0"
-          />
-          <span>{HERO_EYEBROW_LABEL}</span>
-        </p>
-      ) : null}
+      <p
+        role="doc-subtitle"
+        className={cn(
+          "hero-eyebrow m-0 inline-flex items-center gap-[6px] sm:gap-[8px]",
+          "rounded-full px-[10px] py-[6px] sm:px-[14px] sm:py-[8px]",
+          "font-sans text-[10px] font-semibold uppercase tracking-[0.12em] sm:text-[11px] sm:tracking-[0.14em]",
+          "md:self-start",
+        )}
+      >
+        <Icon
+          name="sparkles"
+          size="sm"
+          aria-hidden
+          className="h-[12px] w-[12px] shrink-0 sm:h-[14px] sm:w-[14px]"
+        />
+        <span>{HERO_EYEBROW_LABEL}</span>
+      </p>
 
       <h1
         id={HERO_HEADING_ID}
         className={cn(
-          "hero-heading m-0 max-w-3xl font-sans font-semibold text-foreground text-balance",
+          "hero-heading m-0 w-full max-w-[640px] font-sans font-semibold text-foreground text-balance",
           "leading-[1.1] tracking-[-0.04em]",
         )}
       >
@@ -56,7 +54,7 @@ export function HeroContent({ compactMobile = false }: HeroContentProps) {
 
       <p
         className={cn(
-          "hero-description m-0 max-w-xl font-sans text-muted-foreground",
+          "hero-description m-0 w-full max-w-[560px] font-sans text-muted-foreground",
         )}
       >
         {compactMobile ? HERO_DESCRIPTION_MOBILE : HERO_DESCRIPTION}

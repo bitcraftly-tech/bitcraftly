@@ -6,6 +6,18 @@
   color: var(--primary);
 }
 
+/* Filters — always flush left under section title */
+#featured-portfolio .portfolio-filters,
+.portfolio-filters {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start !important;
+  width: 100%;
+  margin: 0;
+  gap: 8px;
+}
+
 .portfolio-filter {
   border: 1px solid #eef2ff;
   background-color: var(--background);
@@ -27,7 +39,11 @@
   color: var(--primary-foreground);
 }
 
+/* Shell inset: 16px on all sides (image + copy) */
+#featured-portfolio .portfolio-card,
 .portfolio-card {
+  box-sizing: border-box;
+  padding: 16px;
   border: 1px solid var(--hp-card-border, #eef2ff);
   background-color: var(--background);
   box-shadow: var(--hp-card-shadow, 0 1px 2px 0 rgb(15 23 42 / 0.04));
@@ -104,6 +120,14 @@
 .portfolio-reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+#featured-portfolio .portfolio-grid-footer,
+.portfolio-grid-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 0 !important;
+  padding-top: 16px !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

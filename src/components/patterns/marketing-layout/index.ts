@@ -21,6 +21,7 @@ export { Section } from "@/components/ui/section";
 export { Container } from "@/components/ui/container";
 
 export {
+  CONTAINER_INSET_CLASS,
   PAGE_SHELL_CLASS,
   PAGE_SECTION_CLASS,
   PAGE_GRID_CLASS,

@@ -106,7 +106,7 @@ export function ServicesCatalogContent({
             data-service-group={group.id}
           >
             <div className="w-full" data-group-body>
-              <div className="mb-[40px] flex w-full flex-wrap items-end justify-between gap-[16px]">
+              <div className="section-intro-row flex w-full flex-wrap items-end justify-between gap-[16px]">
                 <div className="services-section-intro min-w-0 max-w-2xl">
                   <p
                     className={cn(

@@ -151,7 +151,7 @@ export function MarketingOfferDetailPage({
 
           <aside
             className={cn(
-              "w-full shrink-0 rounded-[16px] border border-[var(--hp-card-border,#eef2ff)] bg-surface p-[24px]",
+              "w-full shrink-0 rounded-[16px] border border-[var(--hp-card-border,#eef2ff)] bg-surface card-padding",
               "lg:max-w-[320px]",
             )}
             aria-label={outcomesAriaLabel}
@@ -198,7 +198,7 @@ export function MarketingOfferDetailPage({
               key={item}
               className={cn(
                 "flex items-start gap-[12px] rounded-[16px] border border-[var(--hp-card-border,#eef2ff)]",
-                "bg-background p-[20px]",
+                "bg-background card-padding",
               )}
             >
               <span className="services-page-check" aria-hidden>
@@ -232,7 +232,7 @@ export function MarketingOfferDetailPage({
           {process.map((step, index) => (
             <li
               key={step.title}
-              className="rounded-[16px] border border-[var(--hp-card-border,#eef2ff)] bg-background p-[20px]"
+              className="rounded-[16px] border border-[var(--hp-card-border,#eef2ff)] bg-background card-padding"
             >
               <p className="services-page-label m-0 mb-[10px] font-sans text-[12px] font-semibold tracking-[0.08em]">
                 {String(index + 1).padStart(2, "0")}

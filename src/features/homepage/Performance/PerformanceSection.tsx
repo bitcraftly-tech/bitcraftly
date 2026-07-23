@@ -11,6 +11,8 @@ import {
   PERFORMANCE_LABEL,
   PERFORMANCE_SECTION_ID,
 } from "./performance.constants";
+import "./performance.css";
+
 export function PerformanceSection() {
   return (
     <section
@@ -21,11 +23,11 @@ export function PerformanceSection() {
       <Container size="xl">
         <HomepageReveal
           name="performance"
-          className="mx-auto w-full text-center"
+          className="homepage-section-intro w-full max-w-2xl text-left"
         >
           <p
             className={cn(
-              "performance-label m-0 mb-[var(--space-2)]",
+              "section-intro-eyebrow performance-label",
               "font-sans text-[12px] font-[var(--font-weight-semibold)]",
               "uppercase tracking-[0.16em]",
             )}
@@ -35,7 +37,7 @@ export function PerformanceSection() {
           <h2
             id={PERFORMANCE_HEADING_ID}
             className={cn(
-              "m-0 font-sans font-bold text-foreground",
+              "section-intro-heading font-sans font-bold text-foreground",
               "text-[28px] leading-[1.2] tracking-[-0.02em]",
               "sm:text-[32px] lg:text-[34px]",
             )}
@@ -44,23 +46,18 @@ export function PerformanceSection() {
           </h2>
           <p
             className={cn(
-              "m-0 mx-auto mt-[var(--space-2)] w-full max-w-[1100px]",
+              "section-intro-description w-full max-w-2xl",
               "font-sans text-[15px] font-normal leading-[1.65] text-muted-foreground",
               "sm:text-[16px]",
             )}
           >
-            <span className="sm:block sm:whitespace-nowrap">
-              {PERFORMANCE_DESCRIPTION_LINE_1}
-            </span>{" "}
-            <span className="sm:block sm:whitespace-nowrap">
-              {PERFORMANCE_DESCRIPTION_LINE_2}
-            </span>
+            {PERFORMANCE_DESCRIPTION_LINE_1} {PERFORMANCE_DESCRIPTION_LINE_2}
           </p>
         </HomepageReveal>
 
         <ul
           className={cn(
-            "m-0 mt-[var(--space-6)] grid list-none gap-[24px] p-0",
+            "section-content-grid m-0 grid list-none p-0",
             "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
           )}
         >

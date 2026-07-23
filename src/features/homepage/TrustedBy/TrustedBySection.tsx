@@ -20,8 +20,7 @@ export function TrustedBySection() {
         <TrustedByReveal>
           <div
             className={cn(
-              "flex flex-col gap-[var(--space-3)] py-[var(--space-3)]",
-              "sm:py-[24px]",
+              "trusted-by-section-inner flex flex-col",
               "lg:flex-row lg:items-center lg:gap-0",
             )}
           >

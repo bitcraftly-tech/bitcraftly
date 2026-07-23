@@ -11,13 +11,13 @@ interface FaqAccordionLazyProps {
 
 function FaqStaticFallback({ items }: { items: readonly FaqAccordionItem[] }) {
   return (
-    <div className="w-full" role="presentation">
+    <div className="faq-section-list w-full" role="presentation">
       {items.map((item, index) => {
         const isOpen = index === 0;
         return (
           <div
             key={item.id}
-            className="faq-item mb-[16px] overflow-hidden rounded-[16px]"
+            className="faq-item overflow-hidden rounded-[16px]"
             data-open={isOpen ? "true" : "false"}
           >
             <h3 className="m-0">

@@ -36,7 +36,7 @@ export function SolutionsCategoriesSection() {
       aria-labelledby="solutions-categories-heading"
       className="border-b border-border/40"
     >
-      <div className="services-section-intro mb-[40px] max-w-2xl">
+      <div className="services-section-intro section-intro-row max-w-2xl">
         <p className="services-page-label services-section-intro__eyebrow font-sans text-[12px] font-semibold uppercase tracking-[0.16em]">
           Solution categories
         </p>
@@ -94,7 +94,7 @@ export function SolutionsFeaturedSection() {
       aria-labelledby="solutions-featured-heading"
       className="border-b border-border/40"
     >
-      <div className="services-section-intro mb-[40px] max-w-2xl">
+      <div className="services-section-intro section-intro-row max-w-2xl">
         <p className="services-page-label services-section-intro__eyebrow font-sans text-[12px] font-semibold uppercase tracking-[0.16em]">
           Featured solutions
         </p>
@@ -126,7 +126,7 @@ export function SolutionsFeaturedSection() {
                 className={cn(
                   "services-page-card services-featured-block group flex h-full flex-col rounded-[16px]",
                   "border border-[color:var(--hp-card-border)] bg-background",
-                  item.imageSrc ? "overflow-hidden p-0" : "p-[24px]",
+                  item.imageSrc ? "overflow-hidden p-0" : "card-padding",
                 )}
               >
                 <div
@@ -157,7 +157,7 @@ export function SolutionsFeaturedSection() {
                 <div
                   className={cn(
                     "flex min-h-0 flex-1 flex-col",
-                    item.imageSrc && "p-[24px]",
+                    item.imageSrc && "card-padding",
                   )}
                 >
                   <div className="flex flex-wrap items-center gap-[8px]">
@@ -277,7 +277,7 @@ export function SolutionsGroupsSection({
               groupIndex % 2 === 1 ? "bg-surface" : "bg-background",
             )}
           >
-            <div className="mb-[40px] flex w-full flex-wrap items-end justify-between gap-[16px]">
+            <div className="section-intro-row flex w-full flex-wrap items-end justify-between gap-[16px]">
               <div className="services-section-intro min-w-0 max-w-2xl">
                 <p className="services-page-label services-section-intro__eyebrow font-sans text-[12px] font-semibold uppercase tracking-[0.16em]">
                   {intro?.label ?? "Solution group"}
@@ -347,7 +347,7 @@ export function SolutionsIndustriesSection() {
       aria-labelledby="solutions-industries-heading"
       className="border-b border-border/40 bg-background"
     >
-      <div className="mb-[40px] flex flex-wrap items-end justify-between gap-[16px]">
+      <div className="section-intro-row flex flex-wrap items-end justify-between gap-[16px]">
         <div className="services-section-intro max-w-2xl">
           <p className="services-page-label services-section-intro__eyebrow font-sans text-[12px] font-semibold uppercase tracking-[0.16em]">
             Industries served
@@ -384,7 +384,7 @@ export function SolutionsIndustriesSection() {
               href={getIndustryHref(industry.slug)}
               className={cn(
                 "services-page-card group flex h-full items-center gap-[12px]",
-                "rounded-[16px] p-[24px] no-underline",
+                "rounded-[16px] card-padding no-underline",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-offset-background",
               )}
             >
@@ -416,7 +416,7 @@ export function SolutionsTechSection() {
       aria-labelledby="solutions-tech-heading"
       className="border-b border-border/40"
     >
-      <div className="services-section-intro mb-[40px] max-w-2xl">
+      <div className="services-section-intro section-intro-row max-w-2xl">
         <p className="services-page-label services-section-intro__eyebrow font-sans text-[12px] font-semibold uppercase tracking-[0.16em]">
           Technology stack
         </p>
@@ -454,7 +454,7 @@ export function SolutionsCaseStudiesSection() {
       aria-labelledby="solutions-cases-heading"
       className="border-b border-border/40 bg-background"
     >
-      <div className="mb-[40px] flex flex-wrap items-end justify-between gap-[16px]">
+      <div className="section-intro-row flex flex-wrap items-end justify-between gap-[16px]">
         <div className="services-section-intro max-w-2xl">
           <p className="services-page-label services-section-intro__eyebrow font-sans text-[12px] font-semibold uppercase tracking-[0.16em]">
             Case studies preview
@@ -507,7 +507,7 @@ export function SolutionsWhySection() {
       aria-labelledby="solutions-why-heading"
       className="border-b border-border/40"
     >
-      <div className="services-section-intro mb-[40px] max-w-2xl">
+      <div className="services-section-intro section-intro-row max-w-2xl">
         <p className="services-page-label services-section-intro__eyebrow font-sans text-[12px] font-semibold uppercase tracking-[0.16em]">
           Why choose Bitcraftly
         </p>
@@ -526,12 +526,14 @@ export function SolutionsWhySection() {
       <ul className={cn("m-0 list-none p-0", PAGE_GRID_CLASS)}>
         {SOLUTIONS_LANDING.why.map((item) => (
           <li key={item.title} className="min-w-0 h-full">
-            <div className="services-page-card group h-full rounded-[16px] p-[24px]">
-              <span className="services-page-icon-box inline-flex">
-                <IconBox icon={item.icon} variant="default" size="sm" />
-              </span>
-              <h3 className="services-page-card-title mt-[14px]">{item.title}</h3>
-              <p className="mt-[8px] mb-0 font-sans text-[14px] leading-[1.55] text-muted-foreground">
+            <div className="services-page-card group flex h-full flex-col gap-[12px] rounded-[16px] card-padding">
+              <div className="services-page-card-header flex items-center gap-[12px]">
+                <span className="services-page-icon-box inline-flex shrink-0">
+                  <IconBox icon={item.icon} variant="default" size="sm" />
+                </span>
+                <h3 className="services-page-card-title">{item.title}</h3>
+              </div>
+              <p className="mb-0 font-sans text-[14px] leading-[1.55] text-muted-foreground">
                 {item.description}
               </p>
             </div>
@@ -549,7 +551,7 @@ export function SolutionsProcessSection() {
       aria-labelledby="solutions-process-heading"
       className="border-b border-border/40 bg-background"
     >
-      <div className="services-section-intro mb-[40px] max-w-2xl">
+      <div className="services-section-intro section-intro-row max-w-2xl">
         <p className="services-page-label services-section-intro__eyebrow font-sans text-[12px] font-semibold uppercase tracking-[0.16em]">
           Development process
         </p>
@@ -609,7 +611,7 @@ export function SolutionsFaqSection() {
       aria-labelledby="solutions-faq-heading"
       className="services-faq-section border-b border-border/40"
     >
-      <div className="services-section-intro mb-[40px] max-w-2xl">
+      <div className="services-section-intro section-intro-row max-w-2xl">
         <p className="services-page-label services-section-intro__eyebrow font-sans text-[12px] font-semibold uppercase tracking-[0.16em]">
           FAQ
         </p>
@@ -636,7 +638,7 @@ export function SolutionsHubsSection() {
       aria-labelledby="solutions-hubs-heading"
       className="border-b border-border/40 bg-background"
     >
-      <div className="services-section-intro mb-[40px] max-w-2xl">
+      <div className="services-section-intro section-intro-row max-w-2xl">
         <p className="services-page-label services-section-intro__eyebrow font-sans text-[12px] font-semibold uppercase tracking-[0.16em]">
           Explore more
         </p>
@@ -668,19 +670,21 @@ export function SolutionsHubsSection() {
             <Link
               href={hub.href}
               className={cn(
-                "services-hub-card group flex h-full flex-col",
-                "rounded-[16px] p-[24px] no-underline",
+                "services-hub-card group flex h-full flex-col gap-[12px]",
+                "rounded-[16px] card-padding no-underline",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-offset-background",
               )}
             >
-              <span className="services-page-icon-box inline-flex shrink-0">
-                <IconBox icon={hub.icon} variant="default" size="sm" />
-              </span>
-              <h3 className="services-page-card-title mt-[14px]">{hub.title}</h3>
-              <p className="mt-[8px] mb-0 flex-1 font-sans text-[13px] leading-[1.55] text-muted-foreground sm:text-[14px]">
+              <div className="services-page-card-header flex items-center gap-[12px]">
+                <span className="services-page-icon-box inline-flex shrink-0">
+                  <IconBox icon={hub.icon} variant="default" size="sm" />
+                </span>
+                <h3 className="services-page-card-title">{hub.title}</h3>
+              </div>
+              <p className="mb-0 flex-1 font-sans text-[13px] leading-[1.55] text-muted-foreground sm:text-[14px]">
                 {hub.description}
               </p>
-              <span className="mt-[14px] inline-flex items-center gap-[5px] font-sans text-[13px] font-semibold text-primary sm:text-[14px]">
+              <span className="inline-flex items-center gap-[5px] font-sans text-[13px] font-semibold text-primary sm:text-[14px]">
                 Explore
                 <Icon
                   name="arrow-right"

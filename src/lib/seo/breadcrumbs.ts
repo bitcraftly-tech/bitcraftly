@@ -104,6 +104,17 @@ export function buildAboutBreadcrumbs(
   ]);
 }
 
+/** Home → Resources → … crumbs. */
+export function buildResourcesBreadcrumbs(
+  crumbs: readonly BreadcrumbItem[] = [],
+): BreadcrumbItem[] {
+  return buildBreadcrumbs([
+    { label: "Home", href: "/" },
+    { label: "Resources", href: "/resources" },
+    ...crumbs,
+  ]);
+}
+
 /** Home → Blog → … post crumbs. */
 export function buildBlogBreadcrumbs(
   crumbs: readonly BreadcrumbItem[] = [],

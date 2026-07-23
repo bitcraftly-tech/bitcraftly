@@ -51,7 +51,7 @@ export function CostCalculatorExperience({
 
   return (
     <div className="cost-calculator-experience">
-      <div className="cost-calculator-intro-card cost-calculator-row">
+      <div className="cost-calculator-intro-card cost-calculator-row !p-[16px]">
         <div className="cost-calculator-row-main">
           <div className="cost-calculator-badge-row">
             <span className="cost-calculator-badge">{content.intro.badge}</span>

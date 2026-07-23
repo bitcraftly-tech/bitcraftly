@@ -7,14 +7,6 @@ function ChromeUnavailable() {
   return null;
 }
 
-const AskAiTab = dynamic(
-  () =>
-    import("@/features/homepage/AskAi/AskAiTab")
-      .then((mod) => mod.AskAiTab)
-      .catch(() => ChromeUnavailable),
-  { ssr: false },
-);
-
 const LeadFunnelWidgets = dynamic(
   () =>
     import("@/features/lead-funnel")
@@ -25,12 +17,11 @@ const LeadFunnelWidgets = dynamic(
 
 /**
  * Non-critical marketing chrome — client-only, code-split, idle-deferred.
- * Delays chunk download/parse so first paint is not competing with Ask AI / lead funnel.
+ * Ask AI is off for now (ASK_AI_ENABLED in AskAiTab + not mounted here).
  */
 export function MarketingClientChrome() {
   return (
     <DeferredMount delayMs={5000}>
-      <AskAiTab />
       <LeadFunnelWidgets />
     </DeferredMount>
   );

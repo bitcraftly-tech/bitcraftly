@@ -4,41 +4,13 @@
  * so every marketing route shares the same spacing.
  */
 
-.homepage-sections > * + * {
+.homepage-sections>*+* {
   border-top: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
 }
 
-.homepage-sections > #founder-message + #cost-calculator {
+/* Paired Founder ↔ Calculator: no divider; join spacing in section-rhythm.css */
+.homepage-sections>#founder-message+#cost-calculator {
   border-top: none;
-}
-
-/* Paired Founder ↔ Calculator: tighter join, still premium */
-.homepage-sections > #founder-message.homepage-section {
-  padding-bottom: 24px;
-}
-
-.homepage-sections > #cost-calculator.homepage-section {
-  padding-top: 24px;
-}
-
-@media (min-width: 768px) {
-  .homepage-sections > #founder-message.homepage-section {
-    padding-bottom: 28px;
-  }
-
-  .homepage-sections > #cost-calculator.homepage-section {
-    padding-top: 28px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .homepage-sections > #founder-message.homepage-section {
-    padding-bottom: 32px;
-  }
-
-  .homepage-sections > #cost-calculator.homepage-section {
-  padding-top: 32px;
-  }
 }
 
 /**
@@ -46,7 +18,7 @@
  */
 .homepage-sections {
   --hp-card-radius: 16px;
-  --hp-card-padding: 24px;
+  --hp-card-padding: var(--card-padding);
   --hp-card-border: #eef2ff;
   --hp-card-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.04);
   --hp-card-shadow-hover:
@@ -66,6 +38,7 @@
     opacity: 0;
     transform: translate3d(0, 14px, 0);
   }
+
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);

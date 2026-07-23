@@ -9,6 +9,10 @@ import {
   type KeyboardEvent,
   type MouseEvent,
 } from "react";
+import {
+  SlidingPillIndicator,
+  useSlidingPillIndicator,
+} from "@/components/patterns/sliding-pill";
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/cn";
 import "@/features/services/services.css";
@@ -44,6 +48,7 @@ export function StickyCategoryNav({
   const navId = useId();
   const [activeId, setActiveId] = useState<string>(groups[0]?.id ?? "");
   const ratiosRef = useRef(new Map<string, number>());
+  const pill = useSlidingPillIndicator(activeId || null);
 
   const scrollToGroup = useCallback((id: string) => {
     const el = document.getElementById(id);
@@ -99,7 +104,6 @@ export function StickyCategoryNav({
       const first = sections[0];
       if (!first) return;
 
-      // Above the first tracked section (e.g. hero / page top) → plain route.
       if (first.getBoundingClientRect().top > SPY_TOP) {
         setActiveId((current) => (current === "" ? current : ""));
         clearLocationHash();
@@ -159,20 +163,26 @@ export function StickyCategoryNav({
       <Container size="xl">
         <nav
           id={navId}
+          ref={pill.containerRef}
           aria-label={ariaLabel}
-          className="flex w-full justify-center gap-[12px] overflow-x-auto scroll-smooth px-[2px] py-[14px] [scrollbar-width:none] [-ms-overflow-style:none] [scroll-padding-inline:12px] [&::-webkit-scrollbar]:hidden"
+          className="sliding-pill-track relative flex w-full justify-center gap-[12px] overflow-x-auto scroll-smooth px-[2px] py-[14px] [scrollbar-width:none] [-ms-overflow-style:none] [scroll-padding-inline:12px] [&::-webkit-scrollbar]:hidden"
         >
+          <SlidingPillIndicator
+            style={pill.indicatorStyle}
+            variant="gradient"
+          />
           {groups.map((group) => {
             const isActive = activeId === group.id;
             return (
               <a
                 key={group.id}
+                ref={pill.itemRef(group.id)}
                 href={`#${group.id}`}
                 aria-current={isActive ? "location" : undefined}
                 onClick={(e) => onClick(e, group.id)}
                 onKeyDown={(e) => onKeyDown(e, group.id)}
                 className={cn(
-                  "services-category-tab inline-flex min-h-[42px] shrink-0 items-center rounded-full px-[18px]",
+                  "services-category-tab relative z-[1] inline-flex min-h-[42px] shrink-0 items-center rounded-full px-[18px]",
                   "font-sans text-[13px] font-semibold no-underline whitespace-nowrap",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                   isActive

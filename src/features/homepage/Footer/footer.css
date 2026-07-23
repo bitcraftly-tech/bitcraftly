@@ -13,7 +13,7 @@
  * Not page headings — explicit label typography, not h1–h6 / Heading styles.
  */
 .footer-heading {
-  margin: 0 0 var(--space-1);
+  margin: 0 0 var(--space-md);
   font-family: var(--font-family-sans);
   font-size: var(--font-size-sm); /* 14px */
   font-weight: var(--font-weight-semibold); /* 600 */

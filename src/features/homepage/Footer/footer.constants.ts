@@ -104,8 +104,6 @@ export const FOOTER_NAV_COLUMNS: readonly FooterNavColumn[] = [
       { label: "About Us", href: ROUTES.about },
       { label: "Our Process", href: "/#development-process" },
       { label: "Careers", href: ROUTES.careers },
-      { label: "Privacy Policy", href: ROUTES.privacy },
-      { label: "Terms of Service", href: ROUTES.terms },
     ],
   },
 ];
@@ -141,3 +139,11 @@ export const FOOTER_CONTACT_ITEMS: readonly FooterContactItem[] = [
 ];
 
 export const FOOTER_COPYRIGHT = `© ${new Date().getFullYear()} Bitcraftly Technologies Pvt. Ltd. All rights reserved.`;
+
+/** Trust Center row — matches https://bitcraftly.com/ footer (Cookies opens prefs). */
+export const FOOTER_TRUST_LINKS = [
+  { id: "trust", label: "Trust Center", href: ROUTES.trust, kind: "link" as const },
+  { id: "privacy", label: "Privacy", href: ROUTES.privacy, kind: "link" as const },
+  { id: "terms", label: "Terms", href: ROUTES.terms, kind: "link" as const },
+  { id: "cookies", label: "Cookies", href: "#cookies", kind: "cookies" as const },
+] as const;

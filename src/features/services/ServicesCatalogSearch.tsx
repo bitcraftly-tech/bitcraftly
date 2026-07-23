@@ -2,6 +2,10 @@
 
 import Link from "next/link";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import {
+  SlidingPillIndicator,
+  useSlidingPillIndicator,
+} from "@/components/patterns/sliding-pill";
 import { Icon } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/cn";
@@ -21,6 +25,14 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
   const isFiltering = Boolean(deferredQuery || activeFilter);
+  const popularActiveId =
+    SERVICES_LANDING.popularSearches.find(
+      (term) => query.toLowerCase() === term.toLowerCase(),
+    ) ?? null;
+  const filterActiveId = activeFilter ?? "all";
+  const popularPill = useSlidingPillIndicator(popularActiveId);
+  const filterPill = useSlidingPillIndicator(filterActiveId);
+
   const visibleCount = useMemo(() => {
     if (!isFiltering) {
       return groups.reduce((sum, group) => sum + group.items.length, 0);
@@ -159,17 +171,25 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
           <div className="services-search-guides">
             <div className="services-search-guide">
               <p className="services-search-guide__label">Popular searches</p>
-              <div className="services-search-guide__chips">
+              <div
+                ref={popularPill.containerRef}
+                className="services-search-guide__chips sliding-pill-track"
+              >
+                <SlidingPillIndicator
+                  style={popularPill.indicatorStyle}
+                  variant="gradient"
+                />
                 {SERVICES_LANDING.popularSearches.map((term) => {
                   const pressed = query.toLowerCase() === term.toLowerCase();
                   return (
                     <button
                       key={term}
+                      ref={popularPill.itemRef(term)}
                       type="button"
                       onClick={() => applySearchTerm(term)}
                       aria-pressed={pressed}
                       className={cn(
-                        "services-search-chip",
+                        "services-search-chip relative z-[1]",
                         pressed && "services-search-chip--active",
                       )}
                     >
@@ -205,13 +225,21 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
             aria-label="Filter by capability"
           >
             <p className="services-search-guide__label">Browse by capability</p>
-            <div className="services-search-filters__row">
+            <div
+              ref={filterPill.containerRef}
+              className="services-search-filters__row sliding-pill-track"
+            >
+              <SlidingPillIndicator
+                style={filterPill.indicatorStyle}
+                variant="gradient"
+              />
               <button
+                ref={filterPill.itemRef("all")}
                 type="button"
                 onClick={() => setActiveFilter(null)}
                 aria-pressed={activeFilter === null}
                 className={cn(
-                  "services-search-chip services-search-chip--filter",
+                  "services-search-chip services-search-chip--filter relative z-[1]",
                   activeFilter === null && "services-search-chip--active",
                 )}
               >
@@ -222,6 +250,7 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
                 return (
                   <button
                     key={chip}
+                    ref={filterPill.itemRef(chip)}
                     type="button"
                     onClick={() =>
                       setActiveFilter((current) =>
@@ -230,7 +259,7 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
                     }
                     aria-pressed={pressed}
                     className={cn(
-                      "services-search-chip services-search-chip--filter",
+                      "services-search-chip services-search-chip--filter relative z-[1]",
                       pressed && "services-search-chip--active",
                     )}
                   >

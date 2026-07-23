@@ -21,7 +21,7 @@ export function TechnologyCard({
       tabIndex={tabIndex}
       className={cn(
         "technologies-card group flex h-full flex-col items-center text-center",
-        "rounded-[16px] p-[24px] no-underline",
+        "rounded-[16px] card-padding no-underline",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         className,
       )}
@@ -30,21 +30,11 @@ export function TechnologyCard({
         <TechnologyLogo id={technology.id} />
       </span>
 
-      <span
-        className={cn(
-          "mt-[var(--space-2)] font-sans text-[15px] font-bold",
-          "leading-[1.3] tracking-[-0.01em] text-foreground",
-        )}
-      >
+      <span className="technologies-card__title font-sans text-[15px] font-bold leading-[1.3] tracking-[-0.01em] text-foreground">
         {technology.name}
       </span>
 
-      <span
-        className={cn(
-          "mt-[4px] font-sans text-[12px] font-medium",
-          "leading-[1.4] text-muted-foreground",
-        )}
-      >
+      <span className="technologies-card__meta font-sans text-[12px] font-medium leading-[1.4] text-muted-foreground">
         {technology.category}
       </span>
     </Link>

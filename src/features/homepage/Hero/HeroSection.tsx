@@ -4,6 +4,7 @@ import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
 import { HERO_HEADING_ID, HERO_ID } from "./hero.constants";
 import { HeroContent } from "./HeroContent";
 import { HeroIllustration } from "./HeroIllustration";
+import "./hero.css";
 
 export async function HeroSection() {
   const isMobile = await isMobileUserAgent();
@@ -15,8 +16,7 @@ export async function HeroSection() {
       aria-labelledby={HERO_HEADING_ID}
       className={cn(
         "relative overflow-hidden hero-surface",
-        isMobile ? "pt-[12px] pb-[16px] marketing-hero--compact" : "pt-[20px] pb-[24px]",
-        !isMobile && "md:pt-[28px] md:pb-[32px] lg:pt-[32px] lg:pb-[40px]",
+        isMobile ? "hero-section hero-section--compact" : "hero-section",
       )}
     >
       {!isMobile ? (
@@ -44,17 +44,29 @@ export async function HeroSection() {
         </>
       ) : null}
 
+      {/*
+        Use Tailwind lg:/xl: grid-cols so they override grid-cols-1 in the
+        same utilities layer. Custom CSS alone loses to .grid-cols-1.
+        Left track min must stay >= 560px — never minmax(0, …).
+      */}
       <div
         className={cn(
-          "relative grid grid-cols-1 items-center gap-[var(--space-8)]",
-          !isMobile && "md:gap-[var(--space-10)] lg:grid-cols-[minmax(0,60%)_minmax(0,1fr)] lg:items-stretch lg:gap-[calc(var(--space-3)/2)]",
+          "hero-section-grid relative grid w-full grid-cols-1 items-center",
+          "gap-[var(--space-8)] md:gap-[var(--space-10)]",
+          !isMobile &&
+            [
+              "lg:grid-cols-[minmax(560px,1.15fr)_minmax(0,1fr)]",
+              "lg:items-stretch",
+              "lg:gap-[calc(var(--space-3)/2)]",
+              "xl:grid-cols-[minmax(560px,640px)_minmax(480px,1fr)]",
+            ].join(" "),
         )}
       >
-        <div className="min-w-0">
+        <div className="hero-section-copy w-full min-w-0 lg:min-w-[560px] lg:max-w-[640px]">
           <HeroContent compactMobile={isMobile} />
         </div>
         {!isMobile ? (
-          <div className="min-w-0 h-full min-h-full">
+          <div className="hero-section-media min-w-0 w-full h-full min-h-full">
             <HeroIllustration />
           </div>
         ) : null}

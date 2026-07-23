@@ -95,8 +95,7 @@ export function NewsletterSection() {
       id="newsletter"
       aria-labelledby={headingId}
       className={cn(
-        "footer-surface border-t border-b border-[var(--inverse-border)]",
-        "py-[16px]",
+        "newsletter-section footer-surface border-t border-b border-[var(--inverse-border)]",
       )}
     >
       <Container size="xl">
@@ -152,9 +151,9 @@ export function NewsletterSection() {
                 {NEWSLETTER_COPY.emailLabel}
               </label>
 
-              <div className="relative min-h-[48px] min-w-0 flex-1 sm:min-h-0">
+              <div className="relative flex min-h-[44px] min-w-0 flex-1 items-center sm:min-h-0 sm:block">
                 <span
-                  className="pointer-events-none absolute top-1/2 left-[12px] -translate-y-1/2 text-muted"
+                  className="pointer-events-none absolute top-1/2 left-[8px] -translate-y-1/2 text-muted sm:left-[12px]"
                   aria-hidden
                 >
                   <Icon name="mail" size="sm" className="h-[15px] w-[15px]" />
@@ -181,10 +180,10 @@ export function NewsletterSection() {
                   }}
                   className={cn(
                     "newsletter-input",
-                    "h-full w-full min-w-0",
+                    "h-[44px] w-full min-w-0 sm:h-full",
                     "rounded-none",
-                    "py-0 pr-[10px] pl-[36px]",
-                    "font-sans text-[13px] text-left",
+                    "py-0 pr-[8px] pl-[32px] sm:pr-[10px] sm:pl-[36px]",
+                    "font-sans text-[13px] text-left leading-[44px] sm:leading-normal",
                     "disabled:cursor-not-allowed disabled:opacity-70",
                   )}
                 />
@@ -196,7 +195,7 @@ export function NewsletterSection() {
                 className={cn(
                   "newsletter-subscribe group/newsletter",
                   "inline-flex min-h-[44px] w-full shrink-0 items-center justify-center gap-[6px] sm:h-full sm:w-auto",
-                  "rounded-none rounded-b-[calc(var(--token-radius-xl)-1px)] px-[16px]",
+                  "rounded-none rounded-b-[calc(var(--token-radius-xl)-1px)] px-[5px] sm:px-[16px]",
                   "sm:rounded-b-none sm:rounded-r-[calc(var(--token-radius-xl)-1px)]",
                   "border-0 font-sans text-[13px] font-[var(--font-weight-semibold)]",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",

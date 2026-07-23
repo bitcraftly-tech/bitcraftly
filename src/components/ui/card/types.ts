@@ -3,7 +3,7 @@ import type { Responsive } from "../typography/types";
 
 export type CardVariant = "default" | "outlined" | "elevated" | "glass";
 
-export type CardPadding = "sm" | "md" | "lg";
+export type CardPadding = "none" | "baseline" | "sm" | "md" | "lg";
 
 export type CardElement = "div" | "article" | "section" | "aside" | "li";
 

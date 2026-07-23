@@ -11,6 +11,8 @@ import {
   WHY_LABEL,
   WHY_SECTION_ID,
 } from "./why-bitcraftly.constants";
+import "./why-bitcraftly.css";
+
 export function WhyBitcraftlySection() {
   return (
     <section
@@ -19,10 +21,13 @@ export function WhyBitcraftlySection() {
       className="bg-background text-foreground homepage-section"
     >
       <Container size="xl">
-        <HomepageReveal name="why" className="mx-auto w-full text-center">
+        <HomepageReveal
+          name="why"
+          className="homepage-section-intro w-full max-w-2xl text-left"
+        >
           <p
             className={cn(
-              "why-label m-0 mb-[var(--space-2)]",
+              "section-intro-eyebrow why-label",
               "font-sans text-[12px] font-[var(--font-weight-semibold)]",
               "uppercase tracking-[0.16em]",
             )}
@@ -33,7 +38,7 @@ export function WhyBitcraftlySection() {
           <h2
             id={WHY_HEADING_ID}
             className={cn(
-              "m-0 font-sans font-bold text-foreground",
+              "section-intro-heading font-sans font-bold text-foreground",
               "text-[22px] leading-[1.25] tracking-[-0.02em]",
               "sm:text-[28px] md:text-[30px] lg:text-[32px]",
               "md:whitespace-nowrap",
@@ -44,19 +49,18 @@ export function WhyBitcraftlySection() {
 
           <p
             className={cn(
-              "m-0 mx-auto mt-[var(--space-2)] max-w-[880px]",
+              "section-intro-description max-w-2xl",
               "font-sans text-[15px] font-normal leading-[1.65] text-muted-foreground",
               "sm:text-[16px]",
             )}
           >
-            <span className="sm:block">{WHY_DESCRIPTION_LINE_1}</span>{" "}
-            <span className="sm:block">{WHY_DESCRIPTION_LINE_2}</span>
+            {WHY_DESCRIPTION_LINE_1} {WHY_DESCRIPTION_LINE_2}
           </p>
         </HomepageReveal>
 
         <ul
           className={cn(
-            "m-0 mt-[var(--space-6)] grid list-none gap-[24px] p-0",
+            "section-content-grid m-0 grid list-none p-0",
             "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
           )}
         >

@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/cn";
 import { HomepageReveal } from "../shared/HomepageReveal";
-import { PortfolioGridLazy } from "./PortfolioGridLazy";
+import { PortfolioGrid } from "./PortfolioGrid";
 import {
   PORTFOLIO_DESCRIPTION,
   PORTFOLIO_HEADING,
@@ -9,6 +9,8 @@ import {
   PORTFOLIO_LABEL,
   PORTFOLIO_SECTION_ID,
 } from "./portfolio.constants";
+import "./portfolio.css";
+
 export function PortfolioSection() {
   return (
     <section
@@ -19,11 +21,11 @@ export function PortfolioSection() {
       <Container size="xl">
         <HomepageReveal
           name="portfolio"
-          className="mx-auto max-w-[640px] text-center"
+          className="homepage-section-intro max-w-2xl text-left"
         >
           <p
             className={cn(
-              "portfolio-label m-0 mb-[var(--space-2)]",
+              "section-intro-eyebrow portfolio-label",
               "font-sans text-[12px] font-[var(--font-weight-semibold)]",
               "uppercase tracking-[0.16em]",
             )}
@@ -34,7 +36,7 @@ export function PortfolioSection() {
           <h2
             id={PORTFOLIO_HEADING_ID}
             className={cn(
-              "m-0 font-sans font-bold text-foreground",
+              "section-intro-heading font-sans font-bold text-foreground",
               "text-[28px] leading-[1.2] tracking-[-0.02em]",
               "sm:text-[32px] lg:text-[34px]",
             )}
@@ -44,7 +46,7 @@ export function PortfolioSection() {
 
           <p
             className={cn(
-              "m-0 mx-auto mt-[var(--space-2)] max-w-[520px]",
+              "section-intro-description max-w-2xl",
               "font-sans text-[15px] font-normal leading-[1.65] text-muted-foreground",
               "sm:text-[16px]",
             )}
@@ -53,8 +55,8 @@ export function PortfolioSection() {
           </p>
         </HomepageReveal>
 
-        <div className="mt-[var(--space-6)]">
-          <PortfolioGridLazy />
+        <div className="section-content-grid section-content-grid--portfolio w-full min-w-0">
+          <PortfolioGrid />
         </div>
       </Container>
     </section>

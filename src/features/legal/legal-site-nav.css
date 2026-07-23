@@ -1,0 +1,10 @@
+.legal-site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+}
+
+.legal-site-nav__link--active {
+  color: var(--primary) !important;
+}

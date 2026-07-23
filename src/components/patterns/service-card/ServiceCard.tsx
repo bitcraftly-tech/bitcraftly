@@ -37,7 +37,7 @@ export function ServiceCard({
         href={service.href}
         className={cn(
           "services-card group flex h-full flex-col",
-          "rounded-[16px] p-[24px] no-underline",
+          "rounded-[16px] card-padding no-underline",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           className,
         )}
@@ -54,19 +54,13 @@ export function ServiceCard({
           <h3 className="services-card-title">{service.title}</h3>
         </span>
 
-        <p
-          className={cn(
-            "mt-[10px] mb-0 flex-1 font-sans text-[13px]",
-            "font-normal leading-[1.55] text-muted-foreground",
-            "line-clamp-3 sm:text-[14px]",
-          )}
-        >
+        <p className="services-card-body m-0 mb-0 flex-1 font-sans text-[13px] font-normal leading-[1.55] text-muted-foreground line-clamp-3 sm:text-[14px]">
           {service.description}
         </p>
 
         <span
           className={cn(
-            "mt-[14px] inline-flex items-center gap-[5px]",
+            "services-card-cta inline-flex items-center gap-[5px]",
             "font-sans text-[13px] font-semibold text-primary",
             "sm:text-[14px]",
           )}
@@ -88,7 +82,7 @@ export function ServiceCard({
       href={service.href}
       className={cn(
         "services-page-card group flex h-full flex-col",
-        "rounded-[16px] p-[24px] no-underline",
+        "rounded-[16px] card-padding no-underline",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         className,
       )}
@@ -114,18 +108,12 @@ export function ServiceCard({
         </span>
       </span>
 
-      <p
-        className={cn(
-          "mt-[10px] mb-0 flex-1 font-sans text-[13px]",
-          "font-normal leading-[1.55] text-muted-foreground",
-          "line-clamp-3 sm:text-[14px]",
-        )}
-      >
+      <p className="services-card-body m-0 mb-0 flex-1 font-sans text-[13px] font-normal leading-[1.55] text-muted-foreground line-clamp-3 sm:text-[14px]">
         {service.description}
       </p>
 
       {(service.bestFor || service.timeline) && (
-        <dl className="m-0 mt-[14px] grid gap-[8px] border-t border-[color:var(--services-divider)] pt-[14px]">
+        <dl className="services-card-meta m-0 grid gap-[var(--space-xs)] border-t border-[color:var(--services-divider)] pt-[var(--space-md)]">
           {service.bestFor ? (
             <div className="min-w-0">
               <dt className="m-0 font-sans text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
@@ -151,7 +139,7 @@ export function ServiceCard({
 
       <span
         className={cn(
-          "mt-auto pt-[14px] inline-flex items-center gap-[5px]",
+          "services-card-cta mt-auto inline-flex items-center gap-[5px]",
           "font-sans text-[13px] font-semibold text-primary",
           "sm:text-[14px]",
         )}

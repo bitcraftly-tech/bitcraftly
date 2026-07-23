@@ -20,6 +20,12 @@
   background-color: transparent;
 }
 
+@media (max-width: 1279px) {
+  .header-adaptive > .mx-auto {
+    max-width: 100%;
+  }
+}
+
 html[data-header-mode="solid"] .header-adaptive,
 html[data-header-scrolled="true"] .header-adaptive {
   background-color: color-mix(in srgb, var(--background) 94%, transparent);
@@ -130,35 +136,11 @@ html[data-header-scrolled="true"] .header-adaptive {
 
 /* --- page-shell / homepage-section rhythm (needed for layout, keep critical) --- */
 .page-shell {
-  padding-block: 36px;
-}
-
-@media (min-width: 768px) {
-  .page-shell {
-    padding-block: 48px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .page-shell {
-    padding-block: 60px;
-  }
+  padding-block: var(--section-spacing);
 }
 
 .homepage-section {
-  padding-block: 36px;
-}
-
-@media (min-width: 768px) {
-  .homepage-section {
-    padding-block: 48px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .homepage-section {
-    padding-block: 60px;
-  }
+  padding-block: var(--section-spacing);
 }
 
 .page-shell-sm {

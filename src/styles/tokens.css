@@ -96,6 +96,7 @@
   --space-0-5: 0.25rem; /* 4px — half-step for fine adjustments */
   --space-1: 0.5rem; /* 8px */
   --space-2: 1rem; /* 16px */
+  --space-2-5: 1.25rem; /* 20px */
   --space-3: 1.5rem; /* 24px */
   --space-4: 2rem; /* 32px */
   --space-5: 2.5rem; /* 40px */
@@ -104,6 +105,64 @@
   --space-10: 5rem; /* 80px */
   --space-12: 6rem; /* 96px */
   --space-16: 8rem; /* 128px */
+
+  /**
+   * Enterprise spacing scale — semantic aliases (use in cards & sections).
+   * XS 8 · SM 12 · MD 16 · LG 24 · XL 32 · 2XL 40 · 3XL 48
+   */
+  --space-xs: var(--space-1);
+  --space-sm: 0.75rem; /* 12px */
+  --space-md: var(--space-2);
+  --space-lg: var(--space-3);
+  --space-xl: var(--space-4);
+  --space-2xl: var(--space-5);
+  --space-3xl: var(--space-6);
+
+  /**
+   * Card shell padding — responsive (320–767 / 768–1023 / 1024+).
+   */
+  --card-padding-mobile: var(--space-md); /* 16px */
+  --card-padding-tablet: var(--space-2-5); /* 20px */
+  --card-padding-desktop: var(--space-lg); /* 24px */
+  --card-padding: var(--card-padding-mobile);
+
+  /**
+   * Card internal rhythm — vertical spacing between elements.
+   */
+  --card-gap-image-title: var(--space-lg); /* 24px */
+  --card-gap-title-description: var(--space-md); /* 16px */
+  --card-gap-description-cta: var(--space-lg); /* 24px */
+  --card-gap-icon-title: var(--space-2-5); /* 20px */
+  --card-gap-header-description: var(--space-md); /* 16px — icon+title row → body */
+  --card-gap-tags: var(--space-sm); /* 12px — badge / chip clusters */
+  --card-gap-footer: var(--space-lg); /* 24px — actions / footer row */
+
+  /* Legacy alias — feature CSS migrated incrementally */
+  --hp-card-padding: var(--card-padding);
+
+  /**
+   * Section spacing — global page rhythm (vertical section padding).
+   * Fixed 48px on all breakpoints (top + bottom).
+   */
+  --section-spacing-mobile: var(--space-3xl); /* 48px */
+  --section-spacing-tablet: var(--space-3xl); /* 48px */
+  --section-spacing-desktop: var(--space-3xl); /* 48px */
+  --section-spacing: var(--section-spacing-mobile);
+
+  /**
+   * Section intro rhythm — eyebrow / heading / description / content.
+   */
+  --section-gap-eyebrow-heading: var(--space-sm); /* 12px */
+  --section-gap-heading-description: var(--space-2-5); /* 20px */
+  --section-gap-description-grid: var(--space-xl); /* 32px */
+  --section-gap-portfolio-grid: var(--space-3xl); /* 48px — premium offset above cards */
+  --section-gap-dashboard-grid: var(--space-2xl); /* 40px */
+
+  /**
+   * Section grid spacing — gap between cards / columns in a section grid.
+   */
+  --section-grid-gap: var(--space-lg); /* 24px */
+  --section-grid-gap-wide: var(--space-xl); /* 32px */
 
   /* Radius */
   --token-radius-none: 0;
@@ -126,7 +185,8 @@
   --container-lg: 1024px;
   --container-xl: 1280px;
   --container-2xl: 1536px;
-  --container-padding: var(--space-4);
+  /* Mobile-first gutter — matches Header Container (see responsive overrides below) */
+  --container-padding: var(--space-2);
 
   /* Breakpoints (reference values — Tailwind uses these in @theme) */
   --breakpoint-sm: 640px;
@@ -156,6 +216,29 @@
   --ease-in: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Container horizontal inset — shared by Header + every marketing section */
+@media (min-width: 640px) {
+  :root {
+    --container-padding: var(--space-2-5); /* 20px */
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-padding: var(--space-3); /* 24px */
+    --card-padding: var(--card-padding-tablet);
+    --section-spacing: var(--section-spacing-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --container-padding: var(--space-4); /* 32px — desktop unchanged */
+    --card-padding: var(--card-padding-desktop);
+    --section-spacing: var(--section-spacing-desktop);
+  }
 }
 
 /* -------------------------------------------------------------------------- */

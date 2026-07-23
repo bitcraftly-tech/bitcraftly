@@ -13,20 +13,20 @@ export function CaseStudyCta() {
       aria-labelledby="case-cta-heading"
       className="border-b border-border/50"
     >
-      <div className="rounded-[18px] border border-border bg-surface/60 px-[22px] py-[24px] md:flex md:items-center md:justify-between md:gap-[20px]">
-        <div className="max-w-xl">
+      <div className="case-study-cta-card rounded-[18px] border border-border bg-surface/60 card-padding">
+        <div className="case-study-cta-card__copy max-w-xl">
           <h2
             id="case-cta-heading"
             className="m-0 font-sans text-[24px] font-semibold tracking-[-0.02em] text-foreground"
           >
             Want outcomes like this for your product?
           </h2>
-          <p className="mt-[8px] m-0 font-sans text-[14px] leading-[1.65] text-muted-foreground">
+          <p className="m-0 font-sans text-[14px] leading-[1.65] text-muted-foreground">
             Book a free consultation. We’ll map scope, constraints, and a
             realistic delivery plan.
           </p>
         </div>
-        <div className="mt-[16px] flex flex-wrap gap-[10px] md:mt-0">
+        <div className="case-study-cta-card__actions flex flex-wrap gap-[var(--space-sm)]">
           <Link
             href={NAV_ACTIONS.freeConsultation.href}
             className={cn(

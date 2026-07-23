@@ -42,9 +42,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog",
     "/pricing",
     "/careers",
+    "/careers/apply",
     "/contact",
     "/privacy",
     "/terms",
+    "/trust",
     "/case-studies",
   ];
 

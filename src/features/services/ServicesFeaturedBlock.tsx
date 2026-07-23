@@ -15,7 +15,7 @@ export function ServicesFeaturedBlock({ featured }: ServicesFeaturedBlockProps) 
     <article
       className={cn(
         "services-featured-block services-page-card group relative overflow-hidden",
-        "mb-[24px] rounded-[16px] border border-[color:var(--hp-card-border)] p-[24px] sm:p-[28px]",
+        "mb-[24px] rounded-[16px] border border-[color:var(--hp-card-border)] card-padding",
       )}
     >
       <div
@@ -48,17 +48,17 @@ export function ServicesFeaturedBlock({ featured }: ServicesFeaturedBlockProps) 
             ) : null}
           </div>
 
-          <h3 className="m-0 mt-[14px] font-sans text-[22px] font-bold tracking-[-0.02em] text-foreground sm:text-[24px]">
+          <h3 className="m-0 font-sans text-[22px] font-bold tracking-[-0.02em] text-foreground sm:text-[24px]">
             {featured.title}
           </h3>
-          <p className="m-0 mt-[10px] max-w-xl font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
+          <p className="m-0 max-w-xl font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
             {featured.description}
           </p>
 
           <Link
             href={getServiceHref(featured.slug)}
             className={cn(
-              "services-featured-cta mt-[20px]",
+              "services-featured-cta",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
             )}
           >

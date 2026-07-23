@@ -18,8 +18,6 @@ import { FinalCTASection } from "../FinalCTA";
 /**
  * Below-ATF homepage stack — Server Components (SSR HTML always present).
  * Includes TrustedBy/Services so Hero is the only ATF section in the shell.
- * Off-screen sections use content-visibility (homepage-critical.css) to cut
- * style/layout main-thread work without removing HTML (SEO preserved).
  */
 export function HomepageBelowFold() {
   return (

@@ -14,7 +14,8 @@ interface HomepageRevealProps {
 
 /**
  * Homepage section reveal — Server Component (zero hydration).
- * Motion uses CSS scroll-driven animation when supported.
+ * Always visible by default (`is-visible`): IntersectionObserver was removed.
+ * Homepage critical CSS also fail-opens; this keeps non-homepage routes correct.
  */
 export function HomepageReveal({
   children,
@@ -29,7 +30,12 @@ export function HomepageReveal({
 
   return (
     <div
-      className={cn(`${name}-reveal`, "hp-scroll-reveal", className)}
+      className={cn(
+        `${name}-reveal`,
+        "is-visible",
+        "hp-scroll-reveal",
+        className,
+      )}
       style={style}
     >
       {children}

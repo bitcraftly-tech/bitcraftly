@@ -1,0 +1,274 @@
+/**
+ * Section rhythm — global page spacing (not card internals).
+ *
+ * Section padding: 48px top + bottom (all breakpoints)
+ * Intro rhythm: eyebrow 12 → heading 20 → description → 32 → grid
+ */
+
+.page-shell,
+.homepage-section {
+  padding-block: var(--section-spacing);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Section intro — eyebrow / heading / description                            */
+/* -------------------------------------------------------------------------- */
+
+.section-intro-eyebrow,
+.homepage-section-intro > p:first-of-type,
+.services-section-intro__eyebrow {
+  margin: 0 0 var(--section-gap-eyebrow-heading);
+}
+
+.section-intro-heading,
+.homepage-section-intro > h2,
+.services-section-intro__heading {
+  margin: 0;
+}
+
+.section-intro-description,
+.homepage-section-intro > p:last-of-type,
+.services-section-intro__description {
+  margin: var(--section-gap-heading-description) 0 0;
+}
+
+.section-intro-actions {
+  margin-top: var(--section-gap-heading-description);
+}
+
+/* Content grid after intro block */
+.section-content-grid {
+  margin-top: var(--section-gap-description-grid);
+  gap: var(--section-grid-gap);
+}
+
+.section-content-grid--portfolio {
+  margin-top: var(--section-gap-portfolio-grid);
+}
+
+.section-content-grid--dashboard {
+  margin-top: var(--section-gap-dashboard-grid);
+  gap: var(--section-grid-gap-wide);
+}
+
+/* Intro block followed by content (marketing pages) */
+.services-section-intro + *,
+.homepage-section-intro + * {
+  margin-top: var(--section-gap-description-grid);
+}
+
+.services-section-intro + .section-content-grid--portfolio,
+.homepage-section-intro + .section-content-grid--portfolio {
+  margin-top: var(--section-gap-portfolio-grid);
+}
+
+.services-section-intro + .section-content-grid--dashboard,
+.homepage-section-intro + .section-content-grid--dashboard {
+  margin-top: var(--section-gap-dashboard-grid);
+}
+
+.section-intro-row {
+  margin-bottom: var(--section-gap-description-grid);
+}
+
+.portfolio-grid-list {
+  margin-top: var(--section-gap-heading-description);
+  gap: var(--section-grid-gap);
+}
+
+/* 16px above “View Full Portfolio” — padding avoids margin collapse */
+#featured-portfolio .portfolio-grid-footer,
+.portfolio-grid-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 0 !important;
+  padding-top: 16px !important;
+}
+
+.section-follow-block {
+  margin-top: var(--section-gap-description-grid);
+}
+
+/* Trust bar — same 48px vertical rhythm as other sections */
+.trusted-by-section {
+  padding-block: var(--section-spacing);
+}
+
+.trusted-by-section-inner {
+  gap: var(--section-gap-heading-description);
+}
+
+@media (min-width: 1024px) {
+  .trusted-by-section-inner {
+    gap: var(--section-grid-gap-wide);
+  }
+}
+
+/* Process steps — page-level grid rhythm */
+.process-steps-grid {
+  margin-top: var(--section-gap-description-grid);
+  gap: var(--section-grid-gap-wide);
+}
+
+@media (min-width: 640px) {
+  .process-steps-grid {
+    row-gap: var(--section-grid-gap-wide);
+    column-gap: var(--section-grid-gap);
+  }
+}
+
+@media (min-width: 1024px) {
+  .process-steps-grid {
+    gap: var(--section-grid-gap);
+  }
+}
+
+/* Newsletter band — sits above footer */
+.newsletter-section {
+  padding-block: var(--section-spacing);
+}
+
+.newsletter-section .homepage-section-intro + * {
+  margin-top: var(--section-gap-description-grid);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Hero — 48px top + bottom (illustration size unchanged)                     */
+/* -------------------------------------------------------------------------- */
+
+.hero-section {
+  padding-block: var(--section-spacing);
+}
+
+.hero-section--compact {
+  padding-block: var(--section-spacing);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.hero-content .hero-eyebrow {
+  margin-bottom: var(--section-gap-eyebrow-heading);
+}
+
+.hero-content .hero-heading {
+  margin-bottom: var(--section-gap-heading-description);
+}
+
+.hero-content .hero-description {
+  margin-bottom: var(--section-gap-description-grid);
+}
+
+.hero-section-grid {
+  gap: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .hero-section-grid {
+    gap: var(--space-10);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-section-grid {
+    gap: calc(var(--space-3) / 2);
+  }
+
+  /* Backup if Tailwind utilities are missing — never use minmax(0, …) on copy */
+  #hero .hero-section-grid {
+    grid-template-columns: minmax(560px, 1.15fr) minmax(0, 1fr);
+  }
+
+  #hero .hero-section-copy {
+    width: 100%;
+    min-width: 560px;
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 1280px) {
+  #hero .hero-section-grid {
+    grid-template-columns: minmax(560px, 640px) minmax(480px, 1fr);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Founder ↔ Calculator — 30px gap between the two cards                      */
+/* -------------------------------------------------------------------------- */
+
+#founder-message.homepage-section {
+  padding-block: var(--section-spacing);
+}
+
+.homepage-sections > #founder-message.homepage-section {
+  padding-bottom: 0;
+}
+
+.homepage-sections > #cost-calculator.homepage-section {
+  padding-top: 30px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* FAQ — section vertical rhythm                                              */
+/* -------------------------------------------------------------------------- */
+
+.faq-section-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.faq-section-list .faq-item {
+  margin-bottom: 0;
+}
+
+#faq .faq-trigger {
+  min-height: calc(var(--card-padding) * 2 + var(--space-lg));
+}
+
+/* -------------------------------------------------------------------------- */
+/* Final CTA — same 48px section rhythm                                       */
+/* -------------------------------------------------------------------------- */
+
+#final-cta.homepage-section {
+  padding-block: var(--section-spacing);
+}
+
+#final-cta .final-cta-card {
+  margin-block: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Footer — column rhythm                                                     */
+/* -------------------------------------------------------------------------- */
+
+.footer-surface {
+  padding-block: var(--section-spacing);
+}
+
+.footer-column-grid {
+  gap: var(--space-xl);
+}
+
+.footer-column-grid--desktop {
+  column-gap: var(--space-xl);
+  row-gap: var(--space-xl);
+}
+
+.footer-heading {
+  margin-bottom: var(--section-gap-heading-description);
+}
+
+.footer-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-bottom {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+}

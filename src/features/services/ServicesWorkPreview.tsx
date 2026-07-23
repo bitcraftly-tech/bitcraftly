@@ -20,7 +20,7 @@ export function ServicesWorkPreview() {
       aria-labelledby="services-work-heading"
       className="border-b border-border/40 bg-background"
     >
-      <div className="mb-[40px] flex flex-wrap items-end justify-between gap-[16px]">
+      <div className="section-intro-row flex flex-wrap items-end justify-between gap-[16px]">
         <MarketingSectionIntro
           eyebrow="Featured work"
           headingId="services-work-heading"

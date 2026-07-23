@@ -14,6 +14,7 @@ export {
 } from "./solutions.content";
 export { SolutionsLandingPage } from "./SolutionsLandingPage";
 export { SolutionDetailPage } from "./SolutionDetailPage";
+export { SolutionDetailHero } from "./SolutionDetailHero";
 export {
   buildSolutionDetailJsonLd,
   buildSolutionsListingJsonLd,

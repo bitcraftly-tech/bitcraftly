@@ -11,7 +11,7 @@ interface MarketingSectionIntroProps {
 
 /**
  * Marketing section intro — Homepage-aligned H2 scale via services-page-section-heading.
- * Vertical rhythm: eyebrow 16 → heading 20 → description → (wrapper) 40 → content.
+ * Vertical rhythm: global section tokens (section-rhythm.css).
  */
 export function MarketingSectionIntro({
   eyebrow,

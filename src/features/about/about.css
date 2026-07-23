@@ -8,7 +8,7 @@
   max-width: 44rem;
 }
 
-.about-page dl[aria-label="Bitcraftly highlights"] > div {
+.about-page dl[aria-label="Bitcraftly highlights"]>div {
   padding: 14px 16px;
 }
 
@@ -86,7 +86,7 @@
   }
 }
 
-.about-page .about-prose + .about-prose {
+.about-page .about-prose+.about-prose {
   margin-top: var(--space-4);
 }
 
@@ -132,7 +132,7 @@
   border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
   border-radius: 16px;
   background-color: var(--background);
-  padding: 24px;
+  padding: var(--card-padding);
   transition:
     border-color var(--duration-normal) var(--ease-out),
     box-shadow var(--duration-normal) var(--ease-out);
@@ -257,11 +257,9 @@
   border-radius: 16px;
   padding: 28px;
   background:
-    linear-gradient(
-      160deg,
+    linear-gradient(160deg,
       color-mix(in srgb, var(--primary) 6%, var(--background)),
-      var(--background) 42%
-    );
+      var(--background) 42%);
 }
 
 @media (min-width: 768px) {
@@ -496,7 +494,7 @@
   margin: 0;
   border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
   border-radius: 16px;
-  padding: 24px;
+  padding: var(--card-padding);
   background-color: var(--background);
 }
 

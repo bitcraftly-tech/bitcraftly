@@ -7,6 +7,8 @@
 
 @import "tailwindcss";
 @import "./tokens.css";
+@import "./card-spacing.css";
+@import "./section-rhythm.css";
 @import "./typography.css";
 /* animations.css — loaded post-paint via MarketingDeferredCss (not ATF-critical) */
 
@@ -87,7 +89,11 @@
   --leading-relaxed: var(--line-height-relaxed);
   --leading-loose: var(--line-height-loose);
 
-  /* Spacing — 8px scale */
+  /* Spacing — 8px numeric scale only.
+   * Do NOT register --spacing-xl / 2xl / 3xl here: Tailwind max-w-xl|2xl|3xl
+   * would resolve to spacing tokens (32/40/48px) instead of container widths.
+   * Semantic aliases stay in tokens.css as var(--space-xl), etc.
+   */
   --spacing-0: var(--space-0);
   --spacing-0-5: var(--space-0-5);
   --spacing-1: var(--space-1);
@@ -100,6 +106,11 @@
   --spacing-10: var(--space-10);
   --spacing-12: var(--space-12);
   --spacing-16: var(--space-16);
+
+  /* Max-width scale — pin container sizes so max-w-* never collapses */
+  --max-width-xl: 36rem;
+  --max-width-2xl: 42rem;
+  --max-width-3xl: 48rem;
 
   /* Radius */
   --radius-none: var(--token-radius-none);
@@ -152,6 +163,8 @@
 
 html {
   height: 100%;
+  /* Reserve scrollbar space so mobile menu open/close never shifts the header. */
+  scrollbar-gutter: stable;
 }
 
 body {

@@ -11,6 +11,7 @@ import {
 } from "react";
 import { usePathname } from "next/navigation";
 import { Icon } from "@/components/ui/icon";
+import { Container } from "@/components/ui/container";
 import {
   hasMegaMenu,
   isNavLinkActive,
@@ -232,13 +233,13 @@ export function DesktopNavigation() {
           onMouseEnter={() => openMenu(openLink.href, true)}
           onMouseLeave={() => closeMenu()}
         >
-          <div className="mx-auto w-full max-w-[var(--container-xl)] px-[var(--container-padding)]">
+          <Container size="xl">
             <MegaMenuPanel
               link={openLink}
               menuId={`${baseId}-${openLink.href}-menu`}
               onSelect={() => closeMenu(true)}
             />
-          </div>
+          </Container>
         </div>
       ) : null}
     </nav>

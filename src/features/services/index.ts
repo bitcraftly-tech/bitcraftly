@@ -22,6 +22,7 @@ export { ServiceCard } from "./ServiceCard";
 export { ServiceFaqAccordion } from "./ServiceFaqAccordion";
 export { ServicesLandingPage } from "./ServicesLandingPage";
 export { ServiceDetailPage } from "./ServiceDetailPage";
+export { ServiceDetailHero } from "./ServiceDetailHero";
 export {
   buildServiceDetailJsonLd,
   buildServicesListingJsonLd,

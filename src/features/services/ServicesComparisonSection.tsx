@@ -16,7 +16,7 @@ export function ServicesComparisonSection() {
       aria-labelledby="services-comparison-heading"
       className="border-b border-border/40 bg-background"
     >
-      <div className="mb-[40px] flex w-full flex-wrap items-end justify-between gap-[16px]">
+      <div className="section-intro-row flex w-full flex-wrap items-end justify-between gap-[16px]">
         <MarketingSectionIntro
           eyebrow="Decision guide"
           headingId="services-comparison-heading"
@@ -53,7 +53,7 @@ export function ServicesComparisonSection() {
             <Link
               href={option.href}
               className={cn(
-                "services-page-card group flex h-full flex-col rounded-[16px] p-[24px] no-underline",
+                "services-page-card group flex h-full flex-col rounded-[16px] card-padding no-underline",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-offset-background",
               )}
             >
@@ -64,7 +64,7 @@ export function ServicesComparisonSection() {
                 <h3 className="services-page-card-title">{option.title}</h3>
               </span>
 
-              <dl className="m-0 mt-[14px] flex flex-1 flex-col gap-[10px]">
+              <dl className="m-0 flex flex-1 flex-col gap-[var(--space-xs)]">
                 <div>
                   <dt className="m-0 font-sans text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
                     Best for
@@ -91,7 +91,7 @@ export function ServicesComparisonSection() {
                 </div>
               </dl>
 
-              <span className="mt-[16px] inline-flex items-center gap-[5px] font-sans text-[13px] font-semibold text-primary">
+              <span className="services-card-cta inline-flex items-center gap-[5px] font-sans text-[13px] font-semibold text-primary">
                 Learn more
                 <Icon
                   name="arrow-right"

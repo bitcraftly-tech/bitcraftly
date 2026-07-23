@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AnimatedStat } from "@/components/patterns/animated-stat";
 import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
+import { Container } from "@/components/ui/container";
 import { Icon, type IconName } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/cn";
@@ -160,7 +161,7 @@ export async function ServicesHero({ breadcrumbs }: ServicesHeroProps) {
         </>
       ) : null}
 
-      <div className="services-hero__container">
+      <Container size="xl" className="services-hero__container">
         <div className="services-hero__breadcrumb">
           <MarketingBreadcrumbs items={breadcrumbs} className="mb-0" />
         </div>
@@ -298,7 +299,7 @@ export async function ServicesHero({ breadcrumbs }: ServicesHeroProps) {
         </ul>
         ) : null}
         </div>
-      </div>
+      </Container>
     </Section>
   );
 }

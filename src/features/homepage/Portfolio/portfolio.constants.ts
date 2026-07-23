@@ -1,7 +1,5 @@
-import {
-  BITCRAFTLY_LEGACY_ORIGIN,
-  bitcraftlyProductImage,
-} from "../shared/contact-links";
+import { ROUTES } from "@/constants/navigation";
+import { bitcraftlyProductImage } from "../shared/contact-links";
 import type {
   PortfolioCta,
   PortfolioFilter,
@@ -28,8 +26,13 @@ export const PORTFOLIO_FILTERS: readonly PortfolioFilter[] = [
   { id: "ecommerce", label: "Ecommerce" },
 ] as const;
 
+function workProjectHref(slug: string): string {
+  return `${ROUTES.workProjects}/${slug}`;
+}
+
 /**
- * Featured homepage projects — sourced from https://bitcraftly.com/ portfolio data.
+ * Featured homepage projects — case study links stay on-platform (/work/projects).
+ * Live preview may still open the client’s production site when available.
  */
 export const PORTFOLIO_PROJECTS: readonly PortfolioProject[] = [
   {
@@ -43,7 +46,7 @@ export const PORTFOLIO_PROJECTS: readonly PortfolioProject[] = [
     technologies: ["Next.js", "React", "Mobile UX", "SEO", "WhatsApp"],
     imageSrc: bitcraftlyProductImage("Shrishti Cloud Kitchen.png"),
     imageAlt: "Shrishti Cloud Kitchen website preview",
-    caseStudyHref: `${BITCRAFTLY_LEGACY_ORIGIN}/portfolio`,
+    caseStudyHref: workProjectHref("shrishti-cloud-kitchen"),
     livePreviewHref: "https://www.shrishticloud.kitchen/",
     livePreviewExternal: true,
   },
@@ -58,7 +61,7 @@ export const PORTFOLIO_PROJECTS: readonly PortfolioProject[] = [
     technologies: ["Next.js", "React", "Ecommerce UX", "Mobile-first", "SEO"],
     imageSrc: bitcraftlyProductImage("Swastik Makhana.png"),
     imageAlt: "Swastik Makhana ecommerce storefront preview",
-    caseStudyHref: `${BITCRAFTLY_LEGACY_ORIGIN}/portfolio`,
+    caseStudyHref: workProjectHref("swastik-makhana"),
     livePreviewHref: "https://www.swastikmakhana.co/",
     livePreviewExternal: true,
   },
@@ -79,7 +82,7 @@ export const PORTFOLIO_PROJECTS: readonly PortfolioProject[] = [
     ],
     imageSrc: bitcraftlyProductImage("dairy farm.png"),
     imageAlt: "Kunwar Dairy website preview",
-    caseStudyHref: `${BITCRAFTLY_LEGACY_ORIGIN}/portfolio`,
+    caseStudyHref: workProjectHref("kunwar-dairy"),
     livePreviewHref: "https://kunwardairy.com/",
     livePreviewExternal: true,
   },
@@ -94,9 +97,9 @@ export const PORTFOLIO_PROJECTS: readonly PortfolioProject[] = [
     technologies: ["Next.js", "Forms", "Content structure", "Mobile UX"],
     imageSrc: bitcraftlyProductImage("School Website.png"),
     imageAlt: "School website admissions showcase preview",
-    caseStudyHref: `${BITCRAFTLY_LEGACY_ORIGIN}/portfolio/school-website-showcase`,
-    livePreviewHref: `${BITCRAFTLY_LEGACY_ORIGIN}/portfolio/school-website-showcase`,
-    livePreviewExternal: true,
+    caseStudyHref: workProjectHref("school-website"),
+    livePreviewHref: workProjectHref("school-website"),
+    livePreviewExternal: false,
   },
   {
     id: "clinic-healthcare",
@@ -109,9 +112,9 @@ export const PORTFOLIO_PROJECTS: readonly PortfolioProject[] = [
     technologies: ["React", "Forms", "Trust UX", "SEO"],
     imageSrc: bitcraftlyProductImage("Clinic & Healthcare.png"),
     imageAlt: "Clinic and healthcare website showcase preview",
-    caseStudyHref: `${BITCRAFTLY_LEGACY_ORIGIN}/portfolio/clinic-healthcare-showcase`,
-    livePreviewHref: `${BITCRAFTLY_LEGACY_ORIGIN}/portfolio/clinic-healthcare-showcase`,
-    livePreviewExternal: true,
+    caseStudyHref: workProjectHref("clinic-healthcare"),
+    livePreviewHref: workProjectHref("clinic-healthcare"),
+    livePreviewExternal: false,
   },
   {
     id: "ai-chatbot-restaurant",
@@ -124,13 +127,13 @@ export const PORTFOLIO_PROJECTS: readonly PortfolioProject[] = [
     technologies: ["OpenAI", "Next.js", "React", "WhatsApp API"],
     imageSrc: bitcraftlyProductImage("AI Chatbot for Restaurant.png"),
     imageAlt: "Restaurant AI chatbot showcase preview",
-    caseStudyHref: `${BITCRAFTLY_LEGACY_ORIGIN}/portfolio/restaurant-ai-chatbot-showcase`,
-    livePreviewHref: `${BITCRAFTLY_LEGACY_ORIGIN}/portfolio/restaurant-ai-chatbot-showcase`,
-    livePreviewExternal: true,
+    caseStudyHref: workProjectHref("restaurant-ai-chatbot"),
+    livePreviewHref: workProjectHref("restaurant-ai-chatbot"),
+    livePreviewExternal: false,
   },
 ] as const;
 
 export const PORTFOLIO_PRIMARY_CTA: PortfolioCta = {
   label: "View Full Portfolio",
-  href: `${BITCRAFTLY_LEGACY_ORIGIN}/portfolio`,
+  href: ROUTES.work,
 };

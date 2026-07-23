@@ -25,28 +25,6 @@
   color: var(--primary);
 }
 
-.dashboard-cta {
-  background-image: linear-gradient(to right, var(--primary), var(--accent));
-  color: var(--primary-foreground);
-  box-shadow: 0 8px 20px -12px color-mix(in srgb, var(--primary) 55%, transparent);
-  transition:
-    opacity var(--duration-fast) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-fast) var(--ease-out);
-}
-
-.dashboard-cta:hover:not(:disabled) {
-  opacity: 0.96;
-  transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 12px 24px -12px color-mix(in srgb, var(--primary) 60%, transparent);
-}
-
-.dashboard-cta:disabled {
-  cursor: not-allowed;
-  opacity: 0.55;
-  box-shadow: none;
-}
-
 .dashboard-featured-card {
   display: flex;
   flex-direction: column;
@@ -78,23 +56,21 @@
 }
 
 .dashboard-featured-media--dashboard {
-  padding: 12px;
+  padding: var(--card-padding);
   background:
-    linear-gradient(
-      160deg,
+    linear-gradient(160deg,
       color-mix(in srgb, var(--primary) 5%, #eef2ff),
-      #f8faff
-    );
+      #f8faff);
 }
 
 .dashboard-panel {
   position: absolute;
-  inset: 12px;
+  inset: var(--card-padding);
   width: auto;
   height: auto;
 }
 
-.dashboard-panel > div {
+.dashboard-panel>div {
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -106,8 +82,8 @@
 
 .dashboard-saas-badge {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: var(--card-padding);
+  left: var(--card-padding);
   z-index: 2;
   display: inline-flex;
   align-items: center;
@@ -125,15 +101,14 @@
 }
 
 .dashboard-featured-media--dashboard .dashboard-saas-badge {
-  top: 12px;
-  left: 12px;
+  top: var(--card-padding);
+  left: var(--card-padding);
 }
 
 .dashboard-saas-body {
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 24px;
 }
 
 .dashboard-tech-chip {
@@ -160,8 +135,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dashboard-cta,
-  .dashboard-cta:hover,
+
   .dashboard-featured-card,
   .dashboard-featured-card:hover,
   .dashboard-reveal,

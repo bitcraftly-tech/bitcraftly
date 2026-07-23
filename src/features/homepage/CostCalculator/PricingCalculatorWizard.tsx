@@ -11,6 +11,10 @@ import {
 } from "react";
 import { Icon } from "@/components/ui/icon";
 import type { IconName } from "@/components/ui/icon";
+import {
+  SlidingPillIndicator,
+  useSlidingPillIndicator,
+} from "@/components/patterns/sliding-pill";
 import { cn } from "@/lib/cn";
 import { trackCostCalculatorEvent } from "./analytics";
 import type {
@@ -105,6 +109,8 @@ function PricingCalculatorWizardComponent({
   const [mobilePanelOpen, setMobilePanelOpen] = useState(false);
   const stepRegionRef = useRef<HTMLDivElement>(null);
   const lastEstimateKey = useRef("");
+  const activeStepId = content.steps[stepIndex]?.id ?? null;
+  const stepPill = useSlidingPillIndicator(activeStepId);
 
   useEffect(() => {
     // Drop any previous visit so Calculate Cost always opens on a clean Customer step.
@@ -250,24 +256,30 @@ function PricingCalculatorWizardComponent({
       <div className="pricing-wizard-layout">
         <div className="pricing-wizard-left">
           <div
-            className="pricing-step-pills"
+            ref={stepPill.containerRef}
+            className="pricing-step-pills sliding-pill-track"
             role="tablist"
             aria-label="Calculator steps"
           >
+            <SlidingPillIndicator
+              style={stepPill.indicatorStyle}
+              variant="primary"
+            />
             {content.steps.map((item, index) => {
               const completed = index < stepIndex;
               const active = index === stepIndex;
               return (
                 <button
                   key={item.id}
+                  ref={stepPill.itemRef(item.id)}
                   type="button"
                   role="tab"
                   aria-selected={active}
                   aria-current={active ? "step" : undefined}
                   className={cn(
-                    "pricing-step-pill",
+                    "pricing-step-pill relative z-[1]",
                     active && "is-active",
-                    completed && "is-completed",
+                    completed && !active && "is-completed",
                   )}
                   onClick={() => {
                     if (index <= stepIndex) goToStep(index, "back");

@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
 import { Icon } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/cn";
@@ -19,15 +21,26 @@ export function WorkProcessSection() {
       aria-labelledby="work-process-heading"
       className="work-process border-b border-border/40"
     >
-      <header className="work-process__intro">
-        <p className="work-process__eyebrow">{WORK_PROCESS_COPY.eyebrow}</p>
-        <h2 id="work-process-heading" className="work-process__title">
-          {WORK_PROCESS_COPY.heading}
-        </h2>
-        <p className="work-process__description">
-          {WORK_PROCESS_COPY.description}
-        </p>
-      </header>
+      <div className="section-intro-row flex w-full flex-wrap items-end justify-between gap-[16px]">
+        <MarketingSectionIntro
+          eyebrow={WORK_PROCESS_COPY.eyebrow}
+          headingId="work-process-heading"
+          title={WORK_PROCESS_COPY.heading}
+          description={WORK_PROCESS_COPY.description}
+        />
+        <Link
+          href="/contact?intent=consultation&source=work-process"
+          className="inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          Book Free Consultation
+          <Icon
+            name="arrow-right"
+            size="sm"
+            aria-hidden
+            className="h-[13px] w-[13px]"
+          />
+        </Link>
+      </div>
 
       <ol
         className="work-process__timeline"

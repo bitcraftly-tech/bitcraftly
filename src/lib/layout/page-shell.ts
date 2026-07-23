@@ -15,9 +15,12 @@
  * Do NOT invent per-page max-width / horizontal padding.
  */
 
+/** Horizontal inset — same edges as Header Container (includes safe-area). */
+export const CONTAINER_INSET_CLASS =
+  "pl-[max(var(--container-padding),env(safe-area-inset-left,0px))] pr-[max(var(--container-padding),env(safe-area-inset-right,0px))]";
+
 /** Content column — same edges as Header / Footer / Homepage. */
-export const PAGE_SHELL_CLASS =
-  "mx-auto w-full max-w-[var(--container-xl)] px-[var(--container-padding)]";
+export const PAGE_SHELL_CLASS = `mx-auto w-full max-w-[var(--container-xl)] ${CONTAINER_INSET_CLASS}`;
 
 /**
  * Homepage section rhythm (padding-block):

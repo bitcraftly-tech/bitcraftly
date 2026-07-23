@@ -3,11 +3,9 @@
  */
 
 .newsletter-subscribe {
-  background-image: linear-gradient(
-    to right,
-    var(--primary),
-    var(--accent)
-  );
+  background-image: linear-gradient(to right,
+      var(--primary),
+      var(--accent));
   color: var(--primary-foreground);
   box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--primary) 42%, transparent);
   transition:
@@ -94,7 +92,23 @@
   color: var(--inverse-foreground);
 }
 
+@media (max-width: 639px) {
+  .newsletter-form-shell .newsletter-input {
+    display: block;
+    min-height: 44px;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 44px;
+  }
+
+  .newsletter-form-shell .newsletter-subscribe {
+    min-height: 44px;
+    padding-inline: 5px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+
   .newsletter-subscribe,
   .newsletter-subscribe:hover,
   .newsletter-subscribe:active {

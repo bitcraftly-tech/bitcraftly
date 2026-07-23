@@ -24,8 +24,7 @@ export function WebsiteAuditSection() {
         <HomepageReveal name="website-audit">
           <div
             className={cn(
-              "website-audit-card rounded-[16px] p-[24px]",
-              "sm:p-[28px] lg:p-[32px]",
+              "website-audit-card rounded-[16px] card-padding",
             )}
           >
             <div

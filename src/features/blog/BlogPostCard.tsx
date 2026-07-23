@@ -40,7 +40,7 @@ export function BlogPostCard({ post, priority = false, className }: BlogPostCard
         />
       </Link>
 
-      <div className="flex flex-1 flex-col gap-[10px] p-[18px]">
+      <div className="blog-post-card__body flex flex-1 flex-col">
         <div className="flex flex-wrap items-center gap-[8px]">
           {category ? (
             <Badge variant="primary" size="sm">
@@ -62,7 +62,7 @@ export function BlogPostCard({ post, priority = false, className }: BlogPostCard
           {post.excerpt}
         </p>
 
-        <div className="mt-[4px] flex flex-wrap items-center gap-x-[10px] gap-y-[4px] font-sans text-[12px] text-muted-foreground">
+        <div className="blog-post-card__meta flex flex-wrap items-center gap-x-[10px] gap-y-[4px] font-sans text-[12px] text-muted-foreground">
           <time dateTime={post.publishedAt}>{formatBlogDate(post.publishedAt)}</time>
           {author ? (
             <>

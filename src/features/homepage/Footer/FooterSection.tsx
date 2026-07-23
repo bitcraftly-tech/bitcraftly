@@ -1,5 +1,4 @@
 import { Container } from "@/components/ui/container";
-import { cn } from "@/lib/cn";
 import { FOOTER_ID } from "./footer.constants";
 import { FooterBottom } from "./FooterBottom";
 import { FooterBrand } from "./FooterBrand";
@@ -13,11 +12,11 @@ export function FooterSection() {
   return (
     <footer
       id={FOOTER_ID}
-      className={cn("footer-surface", "pt-[var(--space-2)] pb-[var(--space-2)]")}
+      className="footer-surface"
     >
       <Container size="xl">
         {/* Mobile / tablet */}
-        <div className="flex flex-col gap-[var(--space-3)] xl:hidden">
+        <div className="footer-column-grid flex flex-col xl:hidden">
           <FooterBrand />
           <FooterNavigation stacked />
           <FooterContact />
@@ -28,11 +27,7 @@ export function FooterSection() {
           Brand | Services | Solutions | Resources | Company | Contact Us
         */}
         <div
-          className={cn(
-            "hidden items-start xl:grid",
-            "xl:grid-cols-[minmax(200px,1.2fr)_repeat(4,minmax(0,1fr))_minmax(160px,0.9fr)]",
-            "xl:gap-x-[var(--space-1)] xl:justify-between",
-          )}
+          className="footer-column-grid--desktop hidden items-start xl:grid xl:grid-cols-[minmax(200px,1.2fr)_repeat(4,minmax(0,1fr))_minmax(160px,0.9fr)] xl:justify-between"
         >
           <FooterBrand />
           <FooterNavigation linksOnly />
@@ -40,7 +35,7 @@ export function FooterSection() {
           <FooterContact />
         </div>
 
-        <FooterBottom className="mt-[18px]" />
+        <FooterBottom className="footer-bottom" />
       </Container>
     </footer>
   );

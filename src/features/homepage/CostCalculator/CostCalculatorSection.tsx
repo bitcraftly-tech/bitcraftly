@@ -2,6 +2,8 @@ import { Container } from "@/components/ui/container";
 import { HomepageReveal } from "../shared/HomepageReveal";
 import { COST_CALCULATOR_CONTENT } from "./cost-calculator.content";
 import { CostCalculatorExperienceLazy } from "./CostCalculatorExperienceLazy";
+import "./cost-calculator.css";
+
 function CostCalculatorJsonLd() {
   const schema = {
     "@context": "https://schema.org",

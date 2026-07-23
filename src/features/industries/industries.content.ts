@@ -419,20 +419,21 @@ export const INDUSTRIES_LANDING = {
   cta: {
     heading: "Tell us how your industry runs",
     description:
-      "Share workflows, constraints, and success metrics. We’ll reply with a clear path — not a pitch deck.",
+      "Book a free consultation, message us on WhatsApp, or schedule a discovery call — clear next steps, no pressure.",
     primaryCta: {
-      label: NAV_ACTIONS.freeConsultation.label,
-      href: NAV_ACTIONS.freeConsultation.href,
+      label: "Book Free Consultation",
+      href: "/contact?intent=consultation&source=industries",
     },
     tertiaryCta: {
-      label: "Explore services",
-      href: ROUTES.services,
+      label: "Schedule Discovery Call",
+      href: "/contact?intent=discovery&source=industries",
     },
     trust: [
       "Response within 24 hours",
-      "Milestone delivery model",
-      "Free consultation · written next steps",
-    ],
+      "Free consultation",
+      "No obligation",
+      "Written proposal",
+    ] as const,
   },
 } as const;
 

@@ -504,3 +504,153 @@
     transform: none;
   }
 }
+
+/* =========================================================
+   Solution detail — landing-aligned sections
+   ========================================================= */
+
+.solution-detail-hero__group {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+
+.solution-detail-capabilities {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .solution-detail-capabilities {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.solution-detail-capabilities__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  border: 1px solid var(--hp-card-border, color-mix(in srgb, var(--primary) 12%, var(--border)));
+  border-radius: 16px;
+  background: var(--background);
+  box-shadow: var(--token-shadow-xs);
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--foreground);
+  transition:
+    transform 180ms var(--ease-out),
+    border-color 180ms var(--ease-out),
+    box-shadow 180ms var(--ease-out);
+}
+
+.solution-detail-capabilities__item:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: var(--token-shadow-lg);
+}
+
+.solution-detail-process {
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.solution-detail-faq {
+  margin-top: 24px;
+}
+
+.solution-detail-related__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.solution-detail-related__head .services-section-intro {
+  margin: 0;
+}
+
+.solution-detail-related__all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.solution-detail-related__all:hover {
+  text-decoration: underline;
+}
+
+.solution-detail-related__all:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.solution-detail-related-work {
+  margin-top: 36px;
+}
+
+.solution-detail-related-work__title {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.solution-detail-related-work__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.solution-detail-related-work__chip {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  padding: 0 14px;
+  border: 1px solid var(--hp-card-border, color-mix(in srgb, var(--primary) 12%, var(--border)));
+  border-radius: 10px;
+  background: var(--background);
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--foreground);
+  text-decoration: none;
+  transition:
+    border-color 160ms var(--ease-out),
+    color 160ms var(--ease-out);
+}
+
+.solution-detail-related-work__chip:hover {
+  border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
+  color: var(--primary);
+}
+
+.solution-detail-related-work__chip:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solution-detail-capabilities__item:hover {
+    transform: none;
+  }
+}

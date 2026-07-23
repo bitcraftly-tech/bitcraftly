@@ -138,7 +138,7 @@ function FounderAudioPlayerComponent({
 
   return (
     <aside
-      className="founder-audio-card founder-audio-card--row"
+      className="founder-audio-card founder-audio-card--row !p-[16px]"
       aria-labelledby={content.headingId}
     >
       <div className="founder-audio-main">

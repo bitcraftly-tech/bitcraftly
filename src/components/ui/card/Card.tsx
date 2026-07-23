@@ -13,10 +13,13 @@ const variantStyles: Record<CardVariant, string> = {
     "border border-border/80 bg-background/70 text-foreground shadow-sm backdrop-blur-md",
 };
 
+/** Global card inset baseline — see tokens.css (--card-padding-*). */
 const paddingStyles: Record<CardPadding, string> = {
-  sm: "p-[var(--space-2)]",
-  md: "p-[var(--space-3)]",
-  lg: "p-[var(--space-4)]",
+  none: "p-0",
+  baseline: "card-padding",
+  sm: "card-padding",
+  md: "card-padding",
+  lg: "card-padding",
 };
 
 export function Card({

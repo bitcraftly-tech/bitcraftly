@@ -18,7 +18,7 @@ export function ServicesFaqSection() {
       className="services-faq-section border-b border-border/40 bg-background text-foreground"
     >
       <Container size="xl">
-        <div className="services-section-intro mb-[40px] max-w-2xl">
+        <div className="services-section-intro section-intro-row max-w-2xl">
           <p
             className={cn(
               "faq-label services-section-intro__eyebrow services-page-label",

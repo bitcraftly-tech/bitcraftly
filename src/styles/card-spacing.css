@@ -1,0 +1,421 @@
+/**
+ * Card spacing baseline — shell padding + internal rhythm.
+ *
+ * Shell (responsive):
+ *   --card-padding-mobile   16px
+ *   --card-padding-tablet   20px
+ *   --card-padding-desktop  24px
+ *
+ * Rhythm:
+ *   Image → Title           24px  (--card-gap-image-title)
+ *   Title → Description     16px  (--card-gap-title-description)
+ *   Description → CTA       24px  (--card-gap-description-cta)
+ *   Icon → Title (stacked)  20px  (--card-gap-icon-title)
+ *   Header row → body       16px  (--card-gap-header-description)
+ */
+
+.card-padding {
+  padding: var(--card-padding);
+}
+
+.card-padding-inline {
+  padding-inline: var(--card-padding);
+}
+
+.card-padding-block {
+  padding-block: var(--card-padding);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Image-led cards (Portfolio, Dashboard body, Blog with cover)               */
+/* -------------------------------------------------------------------------- */
+
+/* Portfolio — same card space as Services (image1 → image2) */
+.portfolio-card .portfolio-card-media + .portfolio-card__title {
+  margin-top: var(--card-gap-image-title); /* 24px */
+}
+
+.portfolio-card__title {
+  margin-bottom: 0;
+}
+
+.portfolio-card__description {
+  margin: var(--card-gap-header-description) 0 0; /* 16px — Services header→body */
+}
+
+.portfolio-card__tags {
+  margin: var(--card-gap-header-description) 0 0; /* 16px */
+  gap: var(--space-sm); /* 12px — Services icon↔title gap */
+}
+
+.portfolio-card-actions {
+  margin-top: var(--card-gap-description-cta); /* 24px — Services body→CTA */
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* Dashboard body */
+.dashboard-saas-body > p {
+  margin: var(--card-gap-title-description) 0 0;
+}
+
+.dashboard-saas-body > ul {
+  margin: var(--card-gap-tags) 0 0;
+  gap: var(--space-sm);
+}
+
+/* Dashboard: media flush — rhythm starts at body top padding */
+.dashboard-saas-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: var(--card-gap-image-title) var(--card-padding) var(--card-padding);
+}
+
+.dashboard-saas-body > h3 {
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Icon / header-row cards (Services, Why Bitcraftly, Service page)           */
+/* -------------------------------------------------------------------------- */
+
+.services-card > .services-card-body,
+.services-page-card > .services-card-body {
+  margin-top: var(--card-gap-header-description);
+}
+
+.services-card > .services-card-cta,
+.services-page-card > .services-card-cta {
+  margin-top: var(--card-gap-description-cta);
+}
+
+.why-card > .why-card-body,
+.performance-card > .performance-card-body {
+  margin-top: var(--card-gap-header-description);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Technology cards — logo stack                                              */
+/* -------------------------------------------------------------------------- */
+
+.technologies-card__title {
+  margin: var(--card-gap-icon-title) 0 0;
+}
+
+.technologies-card__meta {
+  margin: var(--space-xs) 0 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Testimonials                                                               */
+/* -------------------------------------------------------------------------- */
+
+.testimonials-card blockquote {
+  margin: 0;
+}
+
+.testimonials-card blockquote + figcaption,
+.testimonials-card .testimonials-card__rating + blockquote {
+  margin-top: 0;
+}
+
+.testimonials-card figcaption {
+  margin-top: auto;
+  padding-top: var(--card-gap-footer);
+}
+
+.testimonials-card .testimonials-card__rating + blockquote {
+  margin-top: var(--card-gap-header-description);
+}
+
+/* -------------------------------------------------------------------------- */
+/* FAQ accordion                                                              */
+/* -------------------------------------------------------------------------- */
+
+.faq-trigger {
+  min-height: calc(var(--card-padding) * 2 + var(--space-md));
+  align-items: center;
+}
+
+.faq-answer {
+  margin-top: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* CTA bands                                                                  */
+/* -------------------------------------------------------------------------- */
+
+.final-cta-card,
+.process-side-cta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+.process-side-cta-description {
+  margin-top: var(--card-gap-title-description);
+}
+
+.process-side-cta-actions {
+  margin-top: var(--card-gap-description-cta);
+}
+
+@media (min-width: 640px) {
+  .process-side-cta-actions {
+    margin-top: 0;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Founder message                                                            */
+/* -------------------------------------------------------------------------- */
+
+.founder-audio-card {
+  box-sizing: border-box;
+  gap: var(--space-lg);
+  padding: 16px;
+}
+
+.founder-heading {
+  margin-top: var(--space-sm);
+}
+
+.founder-description {
+  margin-top: var(--card-gap-title-description);
+}
+
+.founder-identity {
+  margin-top: var(--space-lg);
+}
+
+.founder-player--panel {
+  gap: var(--space-md);
+  padding: var(--card-padding);
+}
+
+.founder-player-row {
+  gap: var(--space-sm);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Blog post cards                                                            */
+/* -------------------------------------------------------------------------- */
+
+.blog-post-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Industries cards — icon header row                                         */
+/* -------------------------------------------------------------------------- */
+
+.industries-card__head {
+  margin-bottom: var(--card-gap-header-description);
+}
+
+.industries-card__highlights {
+  gap: var(--space-sm);
+  margin: var(--card-gap-footer) 0 0;
+  padding: var(--card-gap-tags) 0 0;
+}
+
+.industries-card__actions {
+  gap: var(--space-sm) var(--space-md);
+  padding-top: var(--card-gap-footer);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Work / portfolio cards — image-led                                         */
+/* -------------------------------------------------------------------------- */
+
+.work-card__body {
+  gap: 0;
+  padding: var(--card-gap-image-title) var(--card-padding) var(--card-padding);
+}
+
+.work-card__summary {
+  margin-top: var(--card-gap-title-description);
+}
+
+.work-card__services,
+.work-card__tech,
+.work-card__metrics {
+  margin-top: var(--card-gap-tags);
+  gap: var(--space-sm);
+}
+
+.work-card__facts {
+  margin-top: var(--card-gap-tags);
+  gap: var(--space-sm);
+}
+
+.work-card__cta {
+  margin-top: auto;
+  padding-top: var(--card-gap-footer);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Services hub / comparison cards                                            */
+/* -------------------------------------------------------------------------- */
+
+.services-hub-card > .services-page-card-title,
+.services-page-card > .services-page-card-header + .services-page-card-title {
+  margin-top: var(--card-gap-icon-title);
+}
+
+.services-hub-card > .services-page-card-title + p,
+.services-page-card > .services-card-body {
+  margin-top: var(--card-gap-title-description);
+}
+
+.services-hub-card > p + span,
+.services-page-card > .services-card-cta,
+.services-page-card > .services-card-meta + .services-card-cta,
+.services-page-card > .services-card-body + .services-card-cta {
+  margin-top: var(--card-gap-description-cta);
+}
+
+.services-page-card > .services-page-card-header + .services-card-body,
+.services-page-card > .services-page-card-header + dl {
+  margin-top: var(--card-gap-header-description);
+}
+
+.services-page-card > dl + span,
+.services-page-card > .services-card-meta + span {
+  margin-top: var(--card-gap-description-cta);
+}
+
+.services-card-meta {
+  margin-top: var(--card-gap-description-cta);
+  padding-top: var(--card-gap-title-description);
+}
+
+/* Featured services block */
+.services-featured-block .services-page-icon-box + p {
+  margin-left: 0;
+}
+
+.services-featured-block h3 {
+  margin-top: var(--card-gap-icon-title);
+}
+
+.services-featured-block h3 + p {
+  margin-top: var(--card-gap-title-description);
+}
+
+.services-featured-block .services-featured-cta {
+  margin-top: var(--card-gap-description-cta);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Case study / marketing CTA cards                                           */
+/* -------------------------------------------------------------------------- */
+
+.case-study-cta-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap-description-cta);
+}
+
+.case-study-cta-card__copy p {
+  margin: var(--card-gap-title-description) 0 0;
+}
+
+@media (min-width: 768px) {
+  .case-study-cta-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+  }
+
+  .case-study-cta-card__actions {
+    margin-top: 0;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Pricing estimate card                                                      */
+/* -------------------------------------------------------------------------- */
+
+.pricing-calc__estimate-card {
+  gap: var(--card-gap-title-description);
+}
+
+.pricing-calc__package {
+  margin-top: var(--card-gap-tags);
+  padding: var(--space-sm);
+}
+
+.pricing-calc__package-name {
+  margin: var(--space-xs) 0 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Testimonials controls                                                      */
+/* -------------------------------------------------------------------------- */
+
+.testimonials-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: var(--space-lg);
+  gap: var(--space-sm);
+}
+
+.testimonials-controls__nav-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Final CTA — consistent action rhythm                                       */
+/* -------------------------------------------------------------------------- */
+
+@media (min-width: 640px) {
+  .final-cta-actions {
+    margin-top: var(--card-gap-description-cta);
+    gap: var(--space-sm);
+  }
+}
+
+@media (min-width: 1024px) {
+  .final-cta-actions {
+    margin-top: var(--card-gap-description-cta);
+    gap: var(--space-sm);
+  }
+}
+
+.final-cta-trust {
+  margin: var(--card-gap-footer) 0 0;
+  gap: var(--space-xs);
+}
+
+@media (min-width: 640px) {
+  .final-cta-trust {
+    gap: var(--space-sm);
+    margin-top: var(--card-gap-footer);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Blog post cards — image-led body                                           */
+/* -------------------------------------------------------------------------- */
+
+.blog-post-card__body {
+  padding: var(--card-gap-image-title) var(--card-padding) var(--card-padding);
+  gap: var(--card-gap-title-description);
+}
+
+.blog-post-card__meta {
+  margin-top: auto;
+  padding-top: var(--card-gap-footer);
+}

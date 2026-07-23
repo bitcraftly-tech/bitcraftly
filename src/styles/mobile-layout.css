@@ -12,10 +12,3 @@
     padding-bottom: var(--space-4);
   }
 }
-
-@supports (padding: max(0px)) {
-  .header-adaptive {
-    padding-left: max(var(--container-padding), env(safe-area-inset-left, 0px));
-    padding-right: max(var(--container-padding), env(safe-area-inset-right, 0px));
-  }
-}

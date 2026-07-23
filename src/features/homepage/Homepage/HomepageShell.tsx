@@ -29,7 +29,7 @@ function HomepageFaqJsonLd() {
 /**
  * Homepage ATF architecture:
  * - Critical path: Hero + critical CSS + FAQ JSON-LD (SEO)
- * - Below-ATF: SSR HTML with content-visibility; interactive islands hydrate lazily
+ * - Below-ATF: SSR HTML; interactive islands hydrate lazily
  */
 export function HomepageShell() {
   return (

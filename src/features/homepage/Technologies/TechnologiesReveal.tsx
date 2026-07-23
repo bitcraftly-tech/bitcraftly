@@ -20,7 +20,12 @@ export function TechnologiesReveal({
 
   return (
     <div
-      className={cn("technologies-reveal", "hp-scroll-reveal", className)}
+      className={cn(
+        "technologies-reveal",
+        "is-visible",
+        "hp-scroll-reveal",
+        className,
+      )}
       style={style}
     >
       {children}

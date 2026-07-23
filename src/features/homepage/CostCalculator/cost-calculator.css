@@ -29,35 +29,37 @@
 }
 
 .cost-calculator-row,
+#cost-calculator .cost-calculator-intro-card,
 .cost-calculator-intro-card {
   display: grid;
+  box-sizing: border-box;
   gap: 20px;
   align-items: center;
-  padding: 24px;
+  padding: 16px;
   border: 1px solid var(--border);
   border-radius: 20px;
   background:
-    radial-gradient(
-      120% 140% at 0% 0%,
+    radial-gradient(120% 140% at 0% 0%,
       color-mix(in srgb, var(--primary) 8%, transparent),
-      transparent 55%
-    ),
+      transparent 55%),
     var(--background);
   color: var(--foreground);
   box-shadow: 0 10px 30px -22px rgb(15 23 42 / 0.28);
 }
 
 @media (min-width: 640px) {
+  #cost-calculator .cost-calculator-intro-card,
   .cost-calculator-intro-card {
-    padding: 28px 32px;
+    padding: 16px;
   }
 }
 
 @media (min-width: 900px) {
+  #cost-calculator .cost-calculator-intro-card,
   .cost-calculator-intro-card {
     grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.7fr);
     gap: 28px;
-    padding: 32px 36px;
+    padding: 16px;
   }
 }
 
@@ -355,16 +357,17 @@
   border: 1px solid var(--border);
   border-radius: 16px;
   background: var(--background);
-  padding: 20px;
+  padding: var(--card-padding);
 }
 
 @media (min-width: 640px) {
   .pricing-wizard-left {
-    padding: 24px;
+    padding: var(--card-padding);
   }
 }
 
 .pricing-step-pills {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -394,8 +397,8 @@
 }
 
 .pricing-step-pill.is-active {
-  border-color: var(--primary);
-  background: var(--primary);
+  border-color: transparent;
+  background: transparent;
   color: #ffffff;
 }
 
@@ -453,6 +456,7 @@
     opacity: 0;
     transform: translateX(18px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -464,6 +468,7 @@
     opacity: 0;
     transform: translateX(-18px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -524,7 +529,7 @@
 
 @media (min-width: 640px) {
   .pricing-option-card {
-    padding: 20px;
+    padding: var(--card-padding);
   }
 }
 
@@ -645,7 +650,7 @@
   margin: 14px 0 0;
 }
 
-.pricing-summary-list > div {
+.pricing-summary-list>div {
   display: flex;
   justify-content: space-between;
   gap: 16px;
@@ -726,19 +731,17 @@
   border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
   border-radius: 16px;
   background:
-    linear-gradient(
-      145deg,
+    linear-gradient(145deg,
       color-mix(in srgb, #eef2ff 90%, transparent),
       var(--background) 42%,
-      var(--background)
-    );
-  padding: 20px;
+      var(--background));
+  padding: var(--card-padding);
   box-shadow: 0 16px 40px rgb(79 70 229 / 0.12);
 }
 
 @media (min-width: 640px) {
   .pricing-live-panel {
-    padding: 24px;
+    padding: var(--card-padding);
   }
 }
 
@@ -921,6 +924,7 @@
 }
 
 @media (max-width: 640px) {
+
   .pricing-cta-primary,
   .pricing-cta-secondary,
   .pricing-cta-ghost {
@@ -981,7 +985,7 @@
   margin-top: 22px;
   border: 1px dashed var(--border);
   border-radius: 12px;
-  padding: 24px;
+  padding: var(--card-padding);
   text-align: center;
 }
 
@@ -1042,28 +1046,23 @@
 }
 
 /* Founder audio (homepage companion card) — light theme */
+/* Shell inset: 16px on all sides */
+#founder-message .founder-audio-card,
 .founder-audio-card {
   display: grid;
-  gap: 20px;
+  box-sizing: border-box;
+  gap: var(--space-lg);
   min-height: 0;
-  padding: 24px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
+  padding: 16px;
+  border: 1px solid var(--hp-card-border, #eef2ff);
+  border-radius: var(--hp-card-radius, 16px);
   background:
-    radial-gradient(
-      120% 140% at 100% 0%,
+    radial-gradient(120% 140% at 100% 0%,
       color-mix(in srgb, var(--primary) 8%, transparent),
-      transparent 55%
-    ),
+      transparent 55%),
     var(--background);
   color: var(--foreground);
-  box-shadow: 0 10px 30px -22px rgb(15 23 42 / 0.28);
-}
-
-@media (min-width: 640px) {
-  .founder-audio-card {
-    padding: 28px 32px;
-  }
+  box-shadow: var(--hp-card-shadow, 0 1px 2px 0 rgb(15 23 42 / 0.04));
 }
 
 @media (min-width: 900px) {
@@ -1071,7 +1070,6 @@
     grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.95fr);
     gap: 28px;
     align-items: stretch;
-    padding: 32px 36px;
   }
 }
 
@@ -1090,7 +1088,7 @@
 }
 
 .founder-heading {
-  margin: 8px 0 0;
+  margin: var(--space-sm) 0 0;
   font-family: var(--font-family-sans);
   font-size: 22px;
   font-weight: 700;
@@ -1105,7 +1103,7 @@
 }
 
 .founder-description {
-  margin: 8px 0 0;
+  margin: var(--card-gap-title-description) 0 0;
   max-width: 48ch;
   font-family: var(--font-family-sans);
   font-size: 14px;
@@ -1116,8 +1114,8 @@
 .founder-identity {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-top: 20px;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
 }
 
 .founder-photo {
@@ -1218,16 +1216,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  border: 1px solid var(--hp-card-border, #eef2ff);
+  border-radius: 12px;
   background: var(--surface);
-  padding: 16px;
-}
-
-@media (min-width: 640px) {
-  .founder-player--panel {
-    padding: 18px;
-  }
+  padding: var(--card-padding);
 }
 
 .founder-player-row {
@@ -1299,11 +1291,13 @@
 }
 
 @keyframes founder-wave-pulse {
+
   0%,
   100% {
     transform: scaleY(0.7);
     opacity: 0.55;
   }
+
   50% {
     transform: scaleY(1);
     opacity: 1;
@@ -1419,6 +1413,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .cost-calculator-reveal,
   .cost-calculator-reveal.is-visible,
   .founder-wave.is-active span,

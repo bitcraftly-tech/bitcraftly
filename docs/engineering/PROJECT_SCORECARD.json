@@ -1,0 +1,58 @@
+{
+  "documentVersion": "2026-07-23",
+  "auditType": "project-completion-release-readiness",
+  "methodology": "Repository-only evidence; no operational assumptions",
+  "companionAudit": "docs/engineering/MARKETING_SURFACE_AUDIT_2026-07-23.md",
+  "project": {
+    "name": "Bitcraftly Platform",
+    "packageVersion": "0.1.0",
+    "currentBranch": "release/v1.0-launch",
+    "latestCommitNote": "Pending commit: marketing surface design alignment + legal/trust/careers/portal",
+    "primaryRemote": "https://github.com/bitcraftly-tech/bitcraftly.git",
+    "tagsDocumented": ["v1.0.0-rc5", "v1.0-launch-candidate"]
+  },
+  "overallCompletionPercent": 90,
+  "productionReady": false,
+  "stagingReady": true,
+  "releaseRecommendation": "READY_FOR_STAGING",
+  "completionByArea": {
+    "marketingWebsite": 96,
+    "marketingHubInternalParity": 95,
+    "legalTrustCareers": 90,
+    "portalLoginUi": 70,
+    "leadCrm": 96,
+    "ownerCrm": 90,
+    "authentication": 85,
+    "testing": 91,
+    "deployment": 88,
+    "documentation": 92,
+    "performance": 78,
+    "security": 86,
+    "infrastructure": 85
+  },
+  "qualityGates": {
+    "typecheck": { "status": "pass", "verifiedLocally": "2026-07-23" },
+    "lint": { "status": "not-reverified-this-commit", "lastKnown": "2026-07-22" },
+    "build": { "status": "not-reverified-this-commit", "lastKnownStaticRoutes": 122 }
+  },
+  "marketingSurface": {
+    "servicesDetail": "done",
+    "solutionsDetail": "done",
+    "industriesDetail": "done",
+    "workHubsProjectsTestimonials": "done",
+    "caseStudyHeroAligned": "done",
+    "resourcesGuidesDocsFaq": "done",
+    "privacyTerms": "done",
+    "trust": "done",
+    "portalLogin": "ui-only",
+    "careers": "done"
+  },
+  "openGaps": [
+    "portal-login-real-auth",
+    "trust-document-library",
+    "long-form-guides-docs",
+    "dashboard-routes-404",
+    "sprint-004.3-C-performance",
+    "approved-work-testimonials-content"
+  ]
+}

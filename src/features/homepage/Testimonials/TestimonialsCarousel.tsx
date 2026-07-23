@@ -47,15 +47,14 @@ export function TestimonialsCarousel() {
         }
       }}
     >
-      <div className="testimonials-stage">
+      <div className="testimonials-stage" aria-roledescription="carousel">
         {TESTIMONIALS.map((item, slideIndex) => {
           const active = slideIndex === index;
           return (
             <figure
               key={item.id}
               className={cn(
-                "testimonials-card testimonials-slide m-0 rounded-[16px] p-[24px]",
-                "sm:p-[32px]",
+                "testimonials-card testimonials-slide m-0 flex h-full min-h-full flex-col !p-[16px]",
                 active && "is-active",
               )}
               aria-hidden={!active}
@@ -64,7 +63,7 @@ export function TestimonialsCarousel() {
             >
               {item.rating > 0 ? (
                 <div
-                  className="flex items-center gap-[4px]"
+                  className="testimonials-card__rating flex items-center gap-[4px]"
                   aria-label={`${item.rating} out of 5 stars`}
                 >
                   {Array.from({ length: item.rating }).map((_, starIndex) => (
@@ -79,9 +78,7 @@ export function TestimonialsCarousel() {
                 </div>
               ) : null}
 
-              <blockquote
-                className={cn("m-0", item.rating > 0 ? "mt-[16px]" : "mt-0")}
-              >
+              <blockquote className="m-0">
                 <p
                   className={cn(
                     "m-0 font-sans text-[16px] font-medium leading-[1.65]",
@@ -93,7 +90,7 @@ export function TestimonialsCarousel() {
                 </p>
               </blockquote>
 
-              <figcaption className="mt-[20px] flex items-center gap-[12px]">
+              <figcaption className="mt-auto flex items-center gap-[var(--space-sm)]">
                 {item.photoSrc ? (
                   <span className="relative size-[44px] shrink-0 overflow-hidden rounded-full">
                     <Image
@@ -129,14 +126,12 @@ export function TestimonialsCarousel() {
         })}
       </div>
 
-      <div className="mt-[20px] flex w-full items-center justify-between gap-[12px]">
-        <div className="flex items-center gap-[8px]">
+      {/* Controls always below the card: arrows left, progress dots right */}
+      <div className="testimonials-controls">
+        <div className="testimonials-controls__nav-group">
           <button
             type="button"
-            className={cn(
-              "testimonials-nav inline-flex size-[40px] items-center justify-center rounded-[12px]",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-            )}
+            className="testimonials-nav"
             aria-label="Previous slide"
             onClick={() => goTo(index - 1)}
           >
@@ -149,10 +144,7 @@ export function TestimonialsCarousel() {
           </button>
           <button
             type="button"
-            className={cn(
-              "testimonials-nav inline-flex size-[40px] items-center justify-center rounded-[12px]",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-            )}
+            className="testimonials-nav"
             aria-label="Next slide"
             onClick={() => goTo(index + 1)}
           >
@@ -166,7 +158,7 @@ export function TestimonialsCarousel() {
         </div>
 
         <div
-          className="flex items-center gap-[6px]"
+          className="testimonials-controls__dots"
           role="tablist"
           aria-label="Proof slides"
         >

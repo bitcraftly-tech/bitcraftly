@@ -1,21 +1,25 @@
 import type { Metadata } from "next";
-import { MarketingPageShell } from "@/components/patterns/marketing-page-shell";
+import {
+  getResourceTopicBySlug,
+  ResourcesTopicPage,
+} from "@/features/resources";
 import { createPageMetadata } from "@/lib/seo/createPageMetadata";
 
 const PATH = "/resources/guides";
+const content = getResourceTopicBySlug("guides");
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Guides",
-  description: "Practical playbooks for product and engineering teams.",
+  title: content?.seoTitle ?? "Guides",
+  description:
+    content?.seoDescription ??
+    "Practical playbooks for product and engineering teams.",
   path: PATH,
 });
 
 export default function GuidesPage() {
-  return (
-    <MarketingPageShell
-      title="Guides"
-      description="Practical playbooks for product and engineering teams."
-      headingId="guides-page-heading"
-    />
-  );
+  if (!content) {
+    return null;
+  }
+
+  return <ResourcesTopicPage content={content} />;
 }

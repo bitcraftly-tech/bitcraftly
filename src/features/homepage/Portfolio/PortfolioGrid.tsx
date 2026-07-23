@@ -12,6 +12,7 @@ import {
   PORTFOLIO_PROJECTS,
 } from "./portfolio.constants";
 import type { PortfolioFilterId } from "./portfolio.types";
+import "./portfolio.css";
 
 export function PortfolioGrid() {
   const [activeFilter, setActiveFilter] = useState<PortfolioFilterId>("all");
@@ -24,11 +25,20 @@ export function PortfolioGrid() {
   }, [activeFilter]);
 
   return (
-    <div>
+    <div className="w-full min-w-0">
       <div
-        className="flex flex-wrap items-center justify-center gap-[8px]"
+        className="portfolio-filters"
         role="group"
         aria-label="Portfolio filters"
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          width: "100%",
+          gap: 8,
+          margin: 0,
+        }}
       >
         {PORTFOLIO_FILTERS.map((filter) => {
           const isActive = filter.id === activeFilter;
@@ -53,7 +63,7 @@ export function PortfolioGrid() {
 
       <ul
         className={cn(
-          "m-0 mt-[var(--space-5)] grid list-none gap-[24px] p-0",
+          "portfolio-grid-list m-0 grid list-none p-0",
           "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
         )}
       >
@@ -71,12 +81,20 @@ export function PortfolioGrid() {
       </ul>
 
       {projects.length === 0 ? (
-        <p className="mt-[var(--space-5)] text-center text-[15px] text-muted-foreground">
+        <p className="mt-[var(--space-5)] text-left text-[15px] text-muted-foreground">
           No projects in this category yet.
         </p>
       ) : null}
 
-      <div className="mt-[var(--space-6)] flex justify-center">
+      <div
+        className="portfolio-grid-footer"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: 0,
+          paddingTop: 16,
+        }}
+      >
         <Link
           href={PORTFOLIO_PRIMARY_CTA.href}
           target="_blank"

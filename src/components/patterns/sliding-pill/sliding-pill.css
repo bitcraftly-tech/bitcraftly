@@ -1,0 +1,52 @@
+/**
+ * Shared sliding pill — spring-like active indicator for tabs / filter chips.
+ */
+
+.sliding-pill-track {
+  position: relative;
+}
+
+.sliding-pill-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 999px;
+  pointer-events: none;
+  will-change: transform, width, height;
+  transition:
+    transform 0.38s cubic-bezier(0.22, 1.2, 0.36, 1),
+    width 0.38s cubic-bezier(0.22, 1.2, 0.36, 1),
+    height 0.38s cubic-bezier(0.22, 1.2, 0.36, 1),
+    opacity 0.2s ease;
+}
+
+.sliding-pill-indicator--gradient {
+  background-image: linear-gradient(to right, var(--primary), var(--accent));
+  box-shadow:
+    0 10px 24px -10px color-mix(in srgb, var(--primary) 55%, transparent),
+    0 6px 16px -12px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.sliding-pill-indicator--accent {
+  background: var(--accent);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.sliding-pill-indicator--primary {
+  background: var(--primary);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+.sliding-pill-indicator--segment {
+  background: var(--background);
+  box-shadow:
+    0 1px 2px rgb(15 23 42 / 0.06),
+    0 0 0 1px color-mix(in srgb, var(--border) 88%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sliding-pill-indicator {
+    transition: none;
+  }
+}

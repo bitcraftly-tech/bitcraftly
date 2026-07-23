@@ -1,5 +1,8 @@
+import Link from "next/link";
+import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
 import { Icon } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
+import { ROUTES } from "@/constants/navigation";
 import { cn } from "@/lib/cn";
 import {
   getApprovedTestimonials,
@@ -24,13 +27,26 @@ export function WorkTrustSection() {
       aria-labelledby="work-trust-heading"
       className="work-trust border-b border-border/40"
     >
-      <header className="work-trust__intro">
-        <p className="work-trust__eyebrow">{WORK_TRUST_COPY.eyebrow}</p>
-        <h2 id="work-trust-heading" className="work-trust__title">
-          {WORK_TRUST_COPY.heading}
-        </h2>
-        <p className="work-trust__description">{WORK_TRUST_COPY.description}</p>
-      </header>
+      <div className="section-intro-row flex w-full flex-wrap items-end justify-between gap-[16px]">
+        <MarketingSectionIntro
+          eyebrow={WORK_TRUST_COPY.eyebrow}
+          headingId="work-trust-heading"
+          title={WORK_TRUST_COPY.heading}
+          description={WORK_TRUST_COPY.description}
+        />
+        <Link
+          href={ROUTES.about}
+          className="inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          Meet the Founder
+          <Icon
+            name="arrow-right"
+            size="sm"
+            aria-hidden
+            className="h-[13px] w-[13px]"
+          />
+        </Link>
+      </div>
 
       <ul className="work-trust__pillars" aria-label={WORK_TRUST_COPY.pillarsLabel}>
         {WORK_TRUST_PILLARS.map((pillar) => (

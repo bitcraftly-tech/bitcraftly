@@ -16,7 +16,7 @@ export function PortfolioCard({ project, className }: PortfolioCardProps) {
   return (
     <article
       className={cn(
-        "portfolio-card flex h-full flex-col rounded-[16px] p-[24px]",
+        "portfolio-card flex h-full flex-col rounded-[16px] !p-[16px]",
         className,
       )}
     >
@@ -53,27 +53,16 @@ export function PortfolioCard({ project, className }: PortfolioCardProps) {
         </div>
       </div>
 
-      <h3
-        className={cn(
-          "mt-[14px] mb-0 font-sans text-[16px] font-bold",
-          "leading-[1.25] tracking-[-0.015em] text-foreground",
-        )}
-      >
+      <h3 className="portfolio-card__title mb-0 font-sans text-[16px] font-bold leading-[1.25] tracking-[-0.015em] text-foreground">
         {project.title}
       </h3>
 
-      <p
-        className={cn(
-          "mt-[8px] mb-0 flex-1 font-sans text-[13px]",
-          "font-normal leading-[1.55] text-muted-foreground",
-          "line-clamp-3 sm:text-[14px]",
-        )}
-      >
+      <p className="portfolio-card__description mb-0 flex-1 font-sans text-[13px] font-normal leading-[1.55] text-muted-foreground line-clamp-3 sm:text-[14px]">
         {project.description}
       </p>
 
       <ul
-        className="m-0 mt-[12px] flex list-none flex-wrap gap-[6px] p-0"
+        className="portfolio-card__tags m-0 flex list-none flex-wrap p-0"
         aria-label="Technologies used"
       >
         {project.technologies.map((tech) => (
@@ -89,7 +78,7 @@ export function PortfolioCard({ project, className }: PortfolioCardProps) {
         ))}
       </ul>
 
-      <div className="portfolio-card-actions mt-[14px] flex flex-wrap items-center gap-[12px]">
+      <div className="portfolio-card-actions mt-auto flex flex-wrap items-center">
         <Link
           href={project.caseStudyHref}
           target={caseExternal ? "_blank" : undefined}

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageShell } from "@/components/patterns/marketing-layout";
 import { ROUTES } from "@/constants/navigation";
 import {
   getWorkProjectBySlug,
@@ -47,12 +46,5 @@ export default async function WorkProjectPage({ params }: WorkProjectPageProps) 
     notFound();
   }
 
-  return (
-    <PageShell className="work-page">
-      <WorkProjectDetailPage
-        title={project.title}
-        description={project.summary}
-      />
-    </PageShell>
-  );
+  return <WorkProjectDetailPage project={project} />;
 }

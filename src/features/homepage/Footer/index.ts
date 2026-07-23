@@ -15,6 +15,7 @@ export {
   FOOTER_COMPANY_COLUMN,
   FOOTER_CONTACT_ITEMS,
   FOOTER_COPYRIGHT,
+  FOOTER_TRUST_LINKS,
 } from "./footer.constants";
 export type {
   FooterNavLink,

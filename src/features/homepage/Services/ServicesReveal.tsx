@@ -19,7 +19,10 @@ export function ServicesReveal({
       : undefined;
 
   return (
-    <div className={cn("services-reveal", "hp-scroll-reveal", className)} style={style}>
+    <div
+      className={cn("services-reveal", "is-visible", "hp-scroll-reveal", className)}
+      style={style}
+    >
       {children}
     </div>
   );

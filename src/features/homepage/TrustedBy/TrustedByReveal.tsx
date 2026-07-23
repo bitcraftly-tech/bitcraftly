@@ -20,7 +20,12 @@ export function TrustedByReveal({
 
   return (
     <div
-      className={cn("trusted-by-reveal", "hp-scroll-reveal", className)}
+      className={cn(
+        "trusted-by-reveal",
+        "is-visible",
+        "hp-scroll-reveal",
+        className,
+      )}
       style={style}
     >
       {children}

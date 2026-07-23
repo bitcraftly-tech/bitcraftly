@@ -8,36 +8,12 @@
 
 /* Non-homepage section vertical rhythm — equal padding-block */
 .page-shell {
-  padding-block: 36px;
+  padding-block: var(--section-spacing);
 }
 
-@media (min-width: 768px) {
-  .page-shell {
-    padding-block: 48px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .page-shell {
-    padding-block: 60px;
-  }
-}
-
-/* Homepage section vertical rhythm — unchanged from established homepage design */
+/* Homepage section vertical rhythm */
 .homepage-section {
-  padding-block: 36px;
-}
-
-@media (min-width: 768px) {
-  .homepage-section {
-    padding-block: 48px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .homepage-section {
-    padding-block: 60px;
-  }
+  padding-block: var(--section-spacing);
 }
 
 /* Compact section (sticky toolbars only — not content sections) */

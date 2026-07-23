@@ -113,11 +113,13 @@ export const ROUTES = {
   press: "/press",
   privacy: "/privacy",
   terms: "/terms",
+  trust: "/trust",
   pricing: "/pricing",
   packages: "/packages",
   about: "/about",
   contact: "/contact",
   assistant: "/assistant",
+  login: "/login",
   admin: "/admin",
 } as const;
 

@@ -70,7 +70,7 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
   if (items.length === 0) return null;
 
   return (
-    <div className="w-full" role="presentation">
+    <div className="faq-section-list w-full" role="presentation">
       {items.map((item, index) => {
         const isOpen = openId === item.id;
         const panelId = `${baseId}-${item.id}-panel`;
@@ -79,7 +79,7 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
         return (
           <div
             key={item.id}
-            className={cn("faq-item mb-[16px] overflow-hidden rounded-[16px]")}
+            className={cn("faq-item overflow-hidden rounded-[16px]")}
             data-open={isOpen ? "true" : "false"}
           >
             <h3 className="m-0">

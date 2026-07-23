@@ -27,7 +27,7 @@ export function FooterNavigation({
     return (
       <div
         className={cn(
-          "grid grid-cols-2 gap-x-[var(--space-2)] gap-y-[var(--space-3)] md:grid-cols-4",
+          "footer-column-grid grid grid-cols-2 gap-x-[var(--space-lg)] gap-y-[var(--space-lg)] md:grid-cols-4",
           className,
         )}
       >
@@ -65,7 +65,7 @@ export function FooterNavGroup({
   return (
     <nav aria-labelledby={headingId} className={cn("min-w-0", className)}>
       <FooterHeading id={headingId}>{column.title}</FooterHeading>
-      <ul className="flex flex-col gap-[var(--space-0-5)]">
+      <ul className="footer-nav-list m-0 p-0 list-none">
         {column.links.map((link) => (
           <li key={`${column.id}-${link.href}`}>
             <FooterLink href={link.href} external={link.external}>

@@ -7,7 +7,6 @@ export { MegaMenuPanel } from "./MegaMenuPanel";
 export { MegaMenuItem } from "./MegaMenuItem";
 export { MobileNavAccordion } from "./MobileNavAccordion";
 export {
-  HEADER_BOOK_CALL,
   HEADER_CTA,
   HEADER_HEIGHT_PX,
   HEADER_ID,

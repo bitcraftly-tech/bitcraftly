@@ -1,5 +1,8 @@
+import Link from "next/link";
+import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
 import { Icon } from "@/components/ui/icon";
 import { Section } from "@/components/ui/section";
+import { ROUTES } from "@/constants/navigation";
 import { WORK_LANDING_SECTIONS } from "./work.content";
 import "./work.css";
 
@@ -39,7 +42,7 @@ const OPTIMIZE_ITEMS = [
 ] as const;
 
 /**
- * Portfolio catalog intro — aligned with bitcraftly.com/portfolio.
+ * Portfolio catalog intro — Services-style left intro + right CTA.
  */
 export function WorkFeaturedSection() {
   return (
@@ -50,44 +53,63 @@ export function WorkFeaturedSection() {
       aria-labelledby="work-featured-heading"
       className="work-featured border-b border-border/40"
     >
-      <header className="work-pf-intro">
-        <p className="work-featured__eyebrow">Featured Work</p>
-        <h2 id="work-featured-heading" className="work-featured__title">
-          {FEATURED_META?.title ?? "Our Portfolio"}
-        </h2>
-        <p className="work-featured__description">
-          {FEATURED_META?.description ??
-            "A showcase of modern, fast, and AI-powered digital solutions built with React.js, Next.js & cutting-edge technologies."}
-        </p>
-      </header>
+      <div className="section-intro-row flex w-full flex-wrap items-end justify-between gap-[16px]">
+        <MarketingSectionIntro
+          eyebrow="Featured Work"
+          headingId="work-featured-heading"
+          title={FEATURED_META?.title ?? "Our Portfolio"}
+          description={
+            FEATURED_META?.description ??
+            "A showcase of modern, fast, and AI-powered digital solutions built with React.js, Next.js & cutting-edge technologies."
+          }
+        />
+        <Link
+          href={ROUTES.services}
+          className="inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          Explore services
+          <Icon
+            name="arrow-right"
+            size="sm"
+            aria-hidden
+            className="h-[13px] w-[13px]"
+          />
+        </Link>
+      </div>
 
       <div className="work-pf-proof">
-        <article className="work-pf-proof__experience">
-          <span className="work-pf-proof__icon" aria-hidden>
-            <Icon name="star" size="sm" className="h-[20px] w-[20px]" />
-          </span>
-          <div>
-            <h3 className="work-pf-proof__title">20+ Years of Experience</h3>
-            <p className="work-pf-proof__text">
-              Delivering high-quality solutions that drive real business results.
-            </p>
-          </div>
-        </article>
+        <div className="work-pf-proof__panel">
+          <aside className="work-pf-proof__stat" aria-label="Delivery experience">
+            <p className="work-pf-proof__stat-value">20+</p>
+            <div className="work-pf-proof__stat-copy">
+              <h3 className="work-pf-proof__title">Years of Experience</h3>
+              <p className="work-pf-proof__text">
+                High-quality solutions that drive real business results.
+              </p>
+            </div>
+          </aside>
 
-        <div className="work-pf-proof__optimize">
-          <p className="work-pf-proof__optimize-label">What we optimize</p>
-          <ul className="work-pf-proof__grid" aria-label="Delivery principles">
-            {OPTIMIZE_ITEMS.map((item) => (
-              <li key={item.id} className="work-pf-proof__item">
-                <span className="work-pf-proof__item-icon" aria-hidden>
-                  <Icon name={item.icon} size="sm" className="h-[18px] w-[18px]" />
-                </span>
-                <p className="work-pf-proof__item-kicker">{item.label}</p>
-                <h3 className="work-pf-proof__item-title">{item.title}</h3>
-                <p className="work-pf-proof__item-text">{item.description}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="work-pf-proof__optimize">
+            <p className="work-pf-proof__optimize-label">What we optimize</p>
+            <ul className="work-pf-proof__grid" aria-label="Delivery principles">
+              {OPTIMIZE_ITEMS.map((item) => (
+                <li key={item.id} className="work-pf-proof__item">
+                  <div className="work-pf-proof__item-head">
+                    <span className="work-pf-proof__item-icon" aria-hidden>
+                      <Icon
+                        name={item.icon}
+                        size="sm"
+                        className="h-[16px] w-[16px]"
+                      />
+                    </span>
+                    <h3 className="work-pf-proof__item-title">{item.title}</h3>
+                  </div>
+                  <p className="work-pf-proof__item-kicker">{item.label}</p>
+                  <p className="work-pf-proof__item-text">{item.description}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </Section>

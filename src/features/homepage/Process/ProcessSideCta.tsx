@@ -22,7 +22,7 @@ export function ProcessSideCta({ content, className }: ProcessSideCtaProps) {
         <p className="process-side-cta-description">{content.description}</p>
       </div>
 
-      <div className="flex shrink-0 items-center gap-[8px]">
+      <div className="process-side-cta-actions flex shrink-0 items-center gap-[var(--space-xs)]">
         <Link
           href={content.href}
           className={cn(

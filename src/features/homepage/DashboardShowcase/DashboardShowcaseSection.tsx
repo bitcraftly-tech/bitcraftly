@@ -35,7 +35,8 @@ const SAAS_TECH = [
 ] as const;
 
 /**
- * Enterprise dashboard / product UI showcase — Featured Project cards.
+ * Enterprise dashboard — split intro like Tech Stack / Process:
+ * left copy + chips, right text-link CTA.
  */
 export function DashboardShowcaseSection() {
   return (
@@ -45,85 +46,90 @@ export function DashboardShowcaseSection() {
       className="dashboard-section bg-surface text-foreground homepage-section"
     >
       <Container size="xl">
-        <HomepageReveal
-          name="dashboard"
-          className="mx-auto max-w-[720px] text-center"
-        >
-          <p
+        <div className="section-intro-row flex w-full flex-wrap items-end justify-between gap-[16px]">
+          <HomepageReveal name="dashboard" className="min-w-0 max-w-2xl">
+            <div className="homepage-section-intro text-left">
+              <p
+                className={cn(
+                  "section-intro-eyebrow dashboard-label",
+                  "font-sans text-[12px] font-[var(--font-weight-semibold)]",
+                  "uppercase tracking-[0.16em]",
+                )}
+              >
+                Product UI
+              </p>
+
+              <h2
+                id={DASHBOARD_HEADING_ID}
+                className={cn(
+                  "section-intro-heading font-sans font-bold text-foreground",
+                  "text-[28px] leading-[1.2] tracking-[-0.02em]",
+                  "sm:text-[32px] lg:text-[34px]",
+                )}
+              >
+                Enterprise Dashboard Showcase
+              </h2>
+
+              <p
+                className={cn(
+                  "section-intro-description max-w-2xl",
+                  "font-sans text-[15px] font-normal leading-[1.65] text-muted-foreground",
+                  "sm:text-[16px]",
+                )}
+              >
+                Startup UI patterns — React product screens, analytics
+                dashboards, and interaction flows founders use for
+                investor-ready walkthroughs.
+              </p>
+
+              <ul
+                className={cn(
+                  "section-intro-actions m-0 flex list-none flex-wrap items-center justify-start gap-[8px] p-0",
+                )}
+                aria-label="Dashboard capabilities"
+              >
+                {DASHBOARD_FEATURES.map((item) => (
+                  <li key={item} className="dashboard-feature-chip">
+                    <Icon
+                      name="check"
+                      size="sm"
+                      aria-hidden
+                      className="h-[12px] w-[12px]"
+                    />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </HomepageReveal>
+
+          <Link
+            href={ROUTES.workPortfolio}
             className={cn(
-              "dashboard-label m-0 mb-[var(--space-2)]",
-              "font-sans text-[12px] font-[var(--font-weight-semibold)]",
-              "uppercase tracking-[0.16em]",
+              "group inline-flex shrink-0 items-center gap-[4px] self-end no-underline",
+              "font-sans text-[13px] font-semibold text-primary",
+              "rounded-sm transition-opacity duration-200 hover:opacity-80",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+              "focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
             )}
           >
-            Product UI
-          </p>
-
-          <h2
-            id={DASHBOARD_HEADING_ID}
-            className={cn(
-              "m-0 font-sans font-bold text-foreground",
-              "text-[28px] leading-[1.2] tracking-[-0.02em]",
-              "sm:text-[32px] lg:text-[34px]",
-            )}
-          >
-            Enterprise Dashboard Showcase
-          </h2>
-
-          <p
-            className={cn(
-              "m-0 mx-auto mt-[var(--space-2)] max-w-[560px]",
-              "font-sans text-[15px] font-normal leading-[1.65] text-muted-foreground",
-              "sm:text-[16px]",
-            )}
-          >
-            Startup UI patterns — React product screens, analytics dashboards, and
-            interaction flows founders use for investor-ready walkthroughs.
-          </p>
-
-          <ul
-            className={cn(
-              "m-0 mt-[20px] flex list-none flex-wrap items-center justify-center gap-[8px] p-0",
-            )}
-            aria-label="Dashboard capabilities"
-          >
-            {DASHBOARD_FEATURES.map((item) => (
-              <li key={item} className="dashboard-feature-chip">
-                <Icon
-                  name="check"
-                  size="sm"
-                  aria-hidden
-                  className="h-[12px] w-[12px]"
-                />
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-[20px] flex justify-center">
-            <Link
-              href={ROUTES.workPortfolio}
+            View product portfolio
+            <Icon
+              name="arrow-right"
+              size="sm"
+              aria-hidden
               className={cn(
-                "dashboard-cta inline-flex min-h-[44px] items-center justify-center gap-[8px]",
-                "rounded-[12px] border-0 px-[18px] no-underline",
-                "font-sans text-[14px] font-semibold",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+                "h-[13px] w-[13px]",
+                "transition-transform duration-[var(--duration-normal)]",
+                "group-hover:translate-x-[3px]",
               )}
-            >
-              View product portfolio
-              <Icon
-                name="arrow-up-right"
-                size="sm"
-                aria-hidden
-                className="h-[14px] w-[14px]"
-              />
-            </Link>
-          </div>
-        </HomepageReveal>
+            />
+          </Link>
+        </div>
 
         <ul
           className={cn(
-            "m-0 mt-[var(--space-6)] grid list-none gap-[24px] p-0",
+            "section-content-grid section-content-grid--dashboard m-0 grid list-none p-0",
             "grid-cols-1 lg:grid-cols-2",
           )}
         >
@@ -140,13 +146,13 @@ export function DashboardShowcaseSection() {
                   <h3 className="m-0 font-sans text-[18px] font-bold tracking-[-0.015em] text-foreground">
                     Revenue Analytics Dashboard
                   </h3>
-                  <p className="mt-[8px] mb-0 font-sans text-[13px] leading-[1.55] text-muted-foreground sm:text-[14px]">
+                  <p className="mb-0 font-sans text-[13px] leading-[1.55] text-muted-foreground sm:text-[14px]">
                     Live revenue overview with growth trends, project pipeline,
                     lead volume, and success metrics — built for founder demos
                     and product walkthroughs.
                   </p>
                   <ul
-                    className="m-0 mt-[14px] flex list-none flex-wrap gap-[6px] p-0"
+                    className="m-0 flex list-none flex-wrap p-0"
                     aria-label="Tech stack"
                   >
                     {ANALYTICS_TECH.map((tech) => (
@@ -177,13 +183,13 @@ export function DashboardShowcaseSection() {
                   <h3 className="m-0 font-sans text-[18px] font-bold tracking-[-0.015em] text-foreground">
                     Multi-tenant SaaS Shell
                   </h3>
-                  <p className="mt-[8px] mb-0 font-sans text-[13px] leading-[1.55] text-muted-foreground sm:text-[14px]">
+                  <p className="mb-0 font-sans text-[13px] leading-[1.55] text-muted-foreground sm:text-[14px]">
                     Full-stack startup frontend with authentication flows,
                     billing-ready UI, analytics dashboards, and scalable
                     component architecture.
                   </p>
                   <ul
-                    className="m-0 mt-[14px] flex list-none flex-wrap gap-[6px] p-0"
+                    className="m-0 flex list-none flex-wrap p-0"
                     aria-label="Tech stack"
                   >
                     {SAAS_TECH.map((tech) => (

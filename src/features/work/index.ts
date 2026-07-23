@@ -28,10 +28,15 @@ export {
 } from "./work-explorer-context";
 export {
   WorkCategoriesSection,
-  WorkHubPage,
   WorkPortfolioSection,
-  WorkProjectDetailPage,
 } from "./WorkSections";
+export { WorkHubPage, WorkHubFallbackPage } from "./WorkHubPage";
+export { WorkProjectDetailPage } from "./WorkProjectDetailPage";
+export {
+  WorkTestimonialDetailPage,
+  type WorkTestimonialDetail,
+} from "./WorkTestimonialDetailPage";
+export { WorkInternalHero } from "./WorkInternalHero";
 export {
   getApprovedTestimonials,
   getFeaturedWorkProjects,

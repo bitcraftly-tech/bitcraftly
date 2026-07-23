@@ -64,21 +64,17 @@ export function BlogLandingPage({
       </Section>
 
       <Section spacing="md" background="surface" className="border-t border-border/70">
-        <div
-          className={cn(
-            "flex flex-col items-start justify-between gap-[16px] rounded-[18px] border border-border bg-background p-[24px]",
-            "md:flex-row md:items-center",
-          )}
-        >
-          <div className="max-w-xl">
+        <div className="case-study-cta-card rounded-[18px] border border-border bg-background card-padding">
+          <div className="case-study-cta-card__copy max-w-xl">
             <h2 className="m-0 font-sans text-[22px] font-semibold tracking-[-0.02em] text-foreground">
               Building something ambitious?
             </h2>
-            <p className="mt-[8px] m-0 font-sans text-[14px] leading-[1.65] text-muted-foreground">
+            <p className="m-0 font-sans text-[14px] leading-[1.65] text-muted-foreground">
               Talk to Bitcraftly about AI products, Next.js platforms, and
               performance-minded marketing systems.
             </p>
           </div>
+          <div className="case-study-cta-card__actions">
           <Link
             href={NAV_ACTIONS.freeConsultation.href}
             className={cn(
@@ -89,6 +85,7 @@ export function BlogLandingPage({
           >
             {NAV_ACTIONS.freeConsultation.label}
           </Link>
+          </div>
         </div>
       </Section>
     </PageShell>

@@ -18,7 +18,7 @@ export function ServicesRelatedHubs() {
     >
       <div className="w-full">
         <MarketingSectionIntro
-          className="mb-[40px]"
+          className="section-intro-row"
           eyebrow="Explore more"
           headingId="services-internal-links-heading"
           title="Related hubs"
@@ -41,23 +41,23 @@ export function ServicesRelatedHubs() {
               <Link
                 href={hub.href}
                 className={cn(
-                  "services-hub-card group flex h-full flex-col",
-                  "rounded-[16px] p-[24px] no-underline",
+                  "services-hub-card group flex h-full flex-col gap-[12px]",
+                  "rounded-[16px] card-padding no-underline",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 )}
               >
-                <span className="services-page-icon-box inline-flex shrink-0">
-                  <IconBox icon={hub.icon} variant="default" size="sm" />
-                </span>
-                <h3 className="services-page-card-title mt-[14px]">
-                  {hub.title}
-                </h3>
-                <p className="mt-[8px] mb-0 flex-1 font-sans text-[13px] leading-[1.55] text-muted-foreground sm:text-[14px]">
+                <div className="services-page-card-header flex items-center gap-[12px]">
+                  <span className="services-page-icon-box inline-flex shrink-0">
+                    <IconBox icon={hub.icon} variant="default" size="sm" />
+                  </span>
+                  <h3 className="services-page-card-title">{hub.title}</h3>
+                </div>
+                <p className="mb-0 flex-1 font-sans text-[13px] leading-[1.55] text-muted-foreground sm:text-[14px]">
                   {hub.description}
                 </p>
                 <span
                   className={cn(
-                    "mt-[14px] inline-flex items-center gap-[5px]",
+                    "inline-flex items-center gap-[5px]",
                     "font-sans text-[13px] font-semibold text-primary",
                     "sm:text-[14px]",
                   )}

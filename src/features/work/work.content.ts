@@ -1111,9 +1111,9 @@ export const WORK_CTA_COPY = {
     "Whether you're starting from scratch or scaling an existing platform, we're ready to help.",
   primaryCta: {
     label: "Book Free Consultation",
-    href: NAV_ACTIONS.freeConsultation.href,
+    href: "/contact?intent=consultation&source=work",
   },
-  secondaryCta: {
+  tertiaryCta: {
     label: "View Services",
     href: ROUTES.services,
   },

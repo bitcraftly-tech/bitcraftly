@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageShell } from "@/components/patterns/marketing-layout";
 import {
   getAllCaseStudySlugs,
   getCaseStudyBySlug,
@@ -11,7 +10,11 @@ import {
   WORK_STATIC_SLUGS,
 } from "@/constants/navigation";
 import { CaseStudyDetailPage } from "@/features/case-studies";
-import { getWorkHubBySlug, WorkHubPage } from "@/features/work";
+import {
+  getWorkHubBySlug,
+  WorkHubFallbackPage,
+  WorkHubPage,
+} from "@/features/work";
 import { createPageMetadata } from "@/lib/seo/createPageMetadata";
 import { createNoIndexMetadata } from "@/lib/seo/noindex-metadata";
 import "@/features/work/work.css";
@@ -91,11 +94,7 @@ export default async function WorkSlugPage({ params }: WorkSlugPageProps) {
 
   const hub = getWorkHubBySlug(slug);
   if (hub) {
-    return (
-      <PageShell className="work-page">
-        <WorkHubPage title={hub.title} description={hub.description} />
-      </PageShell>
-    );
+    return <WorkHubPage hub={hub} />;
   }
 
   const item = getWorkPageBySlug(slug);
@@ -104,8 +103,6 @@ export default async function WorkSlugPage({ params }: WorkSlugPageProps) {
   }
 
   return (
-    <PageShell className="work-page">
-      <WorkHubPage title={item.label} description={item.description} />
-    </PageShell>
+    <WorkHubFallbackPage title={item.label} description={item.description} />
   );
 }

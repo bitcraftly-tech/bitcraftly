@@ -7,7 +7,7 @@ interface ProcessRevealProps {
   delayMs?: number;
 }
 
-/** Server Component — CSS scroll reveal, no client hydration. */
+/** Server Component — CSS scroll reveal, no client hydration. Always visible. */
 export function ProcessReveal({
   children,
   className,
@@ -19,7 +19,10 @@ export function ProcessReveal({
       : undefined;
 
   return (
-    <div className={cn("process-reveal", "hp-scroll-reveal", className)} style={style}>
+    <div
+      className={cn("process-reveal", "is-visible", "hp-scroll-reveal", className)}
+      style={style}
+    >
       {children}
     </div>
   );

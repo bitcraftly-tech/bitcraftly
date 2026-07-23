@@ -1,21 +1,22 @@
 "use client";
 
-import { MountWhenVisible } from "@/components/patterns/mount-when-visible";
+import dynamic from "next/dynamic";
 
-const loadCarousel = () =>
-  import("./TestimonialsCarousel").then((mod) => mod.TestimonialsCarousel);
+const TestimonialsCarousel = dynamic(
+  () =>
+    import("./TestimonialsCarousel").then((mod) => mod.TestimonialsCarousel),
+  {
+    ssr: true,
+    loading: () => (
+      <div
+        className="min-h-[12rem] w-full rounded-[var(--token-radius-lg)] bg-background/60"
+        aria-hidden="true"
+      />
+    ),
+  },
+);
 
-/** Defers testimonials carousel hydration until near viewport. */
+/** Client carousel — SSR shell keeps section height stable (no blank IO gate). */
 export function TestimonialsCarouselLazy() {
-  return (
-    <MountWhenVisible
-      load={loadCarousel}
-      fallback={
-        <div
-          className="min-h-[22rem] w-full rounded-[var(--token-radius-lg)] bg-background/60"
-          aria-hidden="true"
-        />
-      }
-    />
-  );
+  return <TestimonialsCarousel />;
 }

@@ -17,13 +17,13 @@ export function FAQSection() {
     <section
       id={FAQ_SECTION_ID}
       aria-labelledby={FAQ_HEADING_ID}
-      className="bg-background text-foreground homepage-section"
+      className="faq-section bg-background text-foreground homepage-section"
     >
       <Container size="xl">
-        <HomepageReveal name="faq" className="mx-auto max-w-[640px] text-center">
+        <HomepageReveal name="faq" className="homepage-section-intro max-w-2xl text-left">
           <p
             className={cn(
-              "faq-label m-0 mb-[var(--space-2)]",
+              "section-intro-eyebrow faq-label",
               "font-sans text-[12px] font-[var(--font-weight-semibold)]",
               "uppercase tracking-[0.16em]",
             )}
@@ -34,7 +34,7 @@ export function FAQSection() {
           <h2
             id={FAQ_HEADING_ID}
             className={cn(
-              "m-0 font-sans font-bold text-foreground",
+              "section-intro-heading font-sans font-bold text-foreground",
               "text-[28px] leading-[1.2] tracking-[-0.02em]",
               "sm:text-[32px] lg:text-[34px]",
             )}
@@ -44,7 +44,7 @@ export function FAQSection() {
 
           <p
             className={cn(
-              "m-0 mx-auto mt-[var(--space-2)] max-w-[520px]",
+              "section-intro-description max-w-2xl",
               "font-sans text-[15px] font-normal leading-[1.65] text-muted-foreground",
               "sm:text-[16px]",
             )}
@@ -53,7 +53,7 @@ export function FAQSection() {
           </p>
         </HomepageReveal>
 
-        <div className="mt-[var(--space-6)]">
+        <div className="section-content-grid">
           <HomepageReveal name="faq" delayMs={80}>
             <FaqAccordionLazy items={FAQ_ITEMS} />
           </HomepageReveal>

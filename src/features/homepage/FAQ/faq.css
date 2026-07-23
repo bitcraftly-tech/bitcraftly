@@ -25,11 +25,9 @@
 
 .faq-item[data-open="true"] {
   border-color: color-mix(in srgb, var(--primary) 42%, #eef2ff);
-  background-image: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--primary) 5%, white),
-    color-mix(in srgb, var(--accent) 4%, white)
-  );
+  background-image: linear-gradient(135deg,
+      color-mix(in srgb, var(--primary) 5%, white),
+      color-mix(in srgb, var(--accent) 4%, white));
   box-shadow:
     var(--token-shadow-md),
     0 12px 28px -20px color-mix(in srgb, var(--primary) 35%, transparent);
@@ -39,8 +37,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 18px 20px;
+  gap: var(--space-sm);
+  padding: var(--card-padding);
   border: 0;
   background: transparent;
   color: var(--foreground);
@@ -138,8 +136,8 @@
 }
 
 .faq-answer {
-  margin: 0 20px 18px;
-  padding: 14px 16px;
+  margin: 0 var(--card-padding) var(--card-padding);
+  padding: var(--card-padding);
   border-radius: 12px;
   border: 1px solid color-mix(in srgb, var(--primary) 12%, #eef2ff);
   background-color: color-mix(in srgb, var(--background) 88%, white);
@@ -164,6 +162,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .faq-item,
   .faq-item:hover,
   .faq-panel,
