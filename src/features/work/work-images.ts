@@ -1,10 +1,8 @@
-/** Live Bitcraftly portfolio screenshots hosted on bitcraftly.com. */
+/** Portfolio screenshots served from `public/products`. */
 
-export const BITCRAFTLY_PRODUCT_ORIGIN = "https://bitcraftly.com";
-
-/** Product screenshot URL — same source as the live portfolio. */
+/** Product screenshot path — same-origin static asset. */
 export function workProductImage(fileName: string): string {
-  return `${BITCRAFTLY_PRODUCT_ORIGIN}/products/${encodeURIComponent(fileName)}`;
+  return `/products/${encodeURIComponent(fileName)}`;
 }
 
 export const WORK_WHATSAPP_HREF =
