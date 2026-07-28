@@ -166,6 +166,24 @@ DATABASE_URL="..." DIRECT_URL="..." npm run db:deploy
 
 ## CI/CD
 
+### Branch → environment flow
+
+| Stage | Branch | Vercel target | URL |
+|-------|--------|---------------|-----|
+| Feature work | `feature/*` | Preview (PR) | Vercel preview URL |
+| Staging / UT | `develop` | Preview + branch domain | https://staging.bitcraftly.com |
+| Production | `main` | Production | https://bitcraftly.com |
+
+Promoted path:
+
+1. Open PR: `feature/*` → `develop`
+2. Merge to `develop` → auto-deploys staging for UT
+3. After UT pass, open PR: `develop` → `main`
+4. Merge to `main` → auto-deploys production
+
+Connected Git repo (Vercel project `bitcraftly-tech-v2`): `bitcraftly-tech/bitcraftly`.  
+Production branch: `main`. Staging domain `staging.bitcraftly.com` is assigned to Git branch `develop`.
+
 ### Continuous Integration (`ci.yml`)
 
 Runs on:
@@ -174,7 +192,7 @@ Runs on:
 - `develop`
 - `release/**`
 
-Jobs: lint → typecheck → unit tests → Prisma generate → build → E2E → Lighthouse.
+Jobs: lint → typecheck · unit tests · Prisma generate · build · E2E · Lighthouse.
 
 ### Database deploy (`db-deploy.yml`)
 
@@ -190,6 +208,7 @@ Jobs: lint → typecheck → unit tests → Prisma generate → build → E2E �
 ### Pre-deploy
 
 - [ ] CI green on target branch
+- [ ] Staging UT passed on https://staging.bitcraftly.com (`develop`)
 - [ ] `.env.example` reviewed; all production vars set in hosting provider
 - [ ] Resend domain verified (SPF, DKIM)
 - [ ] `db:deploy` run against production (no pending migrations)
@@ -197,7 +216,7 @@ Jobs: lint → typecheck → unit tests → Prisma generate → build → E2E �
 
 ### Deploy
 
-1. [ ] Merge to `main` or deploy from `release/v1.0-launch`
+1. [ ] Merge `develop` → `main` (after staging UT)
 2. [ ] Confirm build succeeds (`prebuild` → `db:generate` → `next build`)
 3. [ ] Confirm production server starts (env validation passes)
 
