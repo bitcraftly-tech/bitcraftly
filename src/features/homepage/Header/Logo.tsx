@@ -23,17 +23,17 @@ export function Logo({
       <Image
         src="/brand/icon.webp"
         alt=""
-        width={40}
-        height={40}
+        width={42}
+        height={42}
         priority={priority}
         quality={75}
-        className="h-[32px] w-[32px] shrink-0 sm:h-[36px] sm:w-[36px] xl:h-[40px] xl:w-[40px]"
+        className="h-[38px] w-[38px] shrink-0 sm:h-[40px] sm:w-[40px] xl:h-[42px] xl:w-[42px]"
       />
       <span className="flex min-w-0 flex-col justify-center gap-[2px]">
-        <span className="whitespace-nowrap font-sans text-[16px] font-bold leading-none tracking-[-0.02em] text-foreground sm:text-[17px] xl:text-[18px]">
+        <span className="whitespace-nowrap font-sans text-[18px] font-bold leading-none tracking-[-0.02em] text-foreground sm:text-[18px] xl:text-[19px]">
           Bitcraftly
         </span>
-        <span className="truncate font-sans text-[11px] font-normal leading-tight text-muted-foreground sm:text-[12px] xl:text-[13px]">
+        <span className="truncate font-sans text-[12px] font-normal leading-tight text-muted-foreground sm:text-[12px] xl:text-[13px]">
           AI & Digital Engineering Partner
         </span>
       </span>

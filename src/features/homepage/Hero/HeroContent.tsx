@@ -20,6 +20,7 @@ export function HeroContent({ compactMobile = false }: HeroContentProps) {
       className={cn(
         "hero-content flex w-full flex-col",
         "items-center text-center",
+        "gap-[var(--space-2)] sm:gap-[var(--space-2-5)]",
         "md:items-stretch md:text-left",
       )}
     >

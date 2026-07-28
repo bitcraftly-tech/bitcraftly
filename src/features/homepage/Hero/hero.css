@@ -58,14 +58,14 @@
 
 .hero-description {
   margin-top: 0;
-  font-size: 11px;
+  font-size: var(--font-size-sm);
   font-weight: 400;
-  line-height: 1.7;
+  line-height: var(--line-height-relaxed, 1.7);
 }
 
 @media (min-width: 640px) {
   .hero-description {
-    font-size: 13px;
+    font-size: 0.9375rem; /* 15px — between sm and base */
   }
 }
 
@@ -151,7 +151,13 @@
 
 .hero-cta-primary {
   border-color: transparent;
-  background-image: linear-gradient(to right, var(--primary), var(--accent));
+  background-color: var(--primary);
+  background-image: linear-gradient(
+    to right in oklab,
+    var(--primary) 0%,
+    color-mix(in oklab, var(--primary) 55%, var(--accent)) 52%,
+    var(--accent) 100%
+  );
   color: var(--primary-foreground);
 }
 
@@ -161,8 +167,8 @@
 }
 
 .hero-cta-primary:hover {
-  opacity: 0.95;
-  transform: translateY(-1px) scale(1.02);
+  opacity: 0.96;
+  transform: translateY(-1px);
   box-shadow: 0 10px 22px -12px color-mix(in srgb, var(--primary) 55%, transparent);
 }
 
@@ -173,7 +179,7 @@
 }
 
 .hero-cta-outline:hover {
-  transform: translateY(-1px) scale(1.02);
+  transform: translateY(-1px);
   border-color: color-mix(in srgb, var(--primary) 50%, var(--border));
   color: var(--primary);
   box-shadow: 0 8px 18px -14px color-mix(in srgb, var(--primary) 35%, transparent);
