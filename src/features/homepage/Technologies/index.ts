@@ -1,1 +1,1 @@
-export { TechnologiesSection } from "./TechnologiesSection";
+export { TechnologiesSection } from './TechnologiesSection';

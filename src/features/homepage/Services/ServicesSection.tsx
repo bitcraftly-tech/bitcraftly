@@ -1,8 +1,8 @@
-import { Container } from "@/components/ui/container";
-import { cn } from "@/lib/cn";
-import { ServiceCard } from "./ServiceCard";
-import { ServicesIntroCta } from "./ServicesIntroCta";
-import { ServicesReveal } from "./ServicesReveal";
+import { Container } from '@/components/ui/container';
+import { cn } from '@/lib/cn';
+import { ServiceCard } from './ServiceCard';
+import { ServicesIntroCta } from './ServicesIntroCta';
+import { ServicesReveal } from './ServicesReveal';
 import {
   HOMEPAGE_SERVICES,
   SERVICES_DESCRIPTION,
@@ -10,7 +10,7 @@ import {
   SERVICES_HEADING_ID,
   SERVICES_LABEL,
   SERVICES_SECTION_ID,
-} from "./services.constants";
+} from './services.constants';
 
 /**
  * Services — split intro like Process / Tech Stack:
@@ -29,9 +29,9 @@ export function ServicesSection() {
             <div className="homepage-section-intro text-left">
               <p
                 className={cn(
-                  "section-intro-eyebrow services-label",
-                  "font-sans text-[12px] font-[var(--font-weight-semibold)]",
-                  "uppercase tracking-[0.16em]",
+                  'section-intro-eyebrow services-label',
+                  'font-sans text-[12px] font-[var(--font-weight-semibold)]',
+                  'uppercase tracking-[0.16em]',
                 )}
               >
                 {SERVICES_LABEL}
@@ -40,9 +40,9 @@ export function ServicesSection() {
               <h2
                 id={SERVICES_HEADING_ID}
                 className={cn(
-                  "section-intro-heading font-sans font-bold text-foreground",
-                  "text-[28px] leading-[1.2] tracking-[-0.02em]",
-                  "sm:text-[32px] lg:text-[34px]",
+                  'section-intro-heading font-sans font-bold text-foreground',
+                  'text-[28px] leading-[1.2] tracking-[-0.02em]',
+                  'sm:text-[32px] lg:text-[34px]',
                 )}
               >
                 {SERVICES_HEADING}
@@ -50,9 +50,9 @@ export function ServicesSection() {
 
               <p
                 className={cn(
-                  "section-intro-description max-w-2xl",
-                  "font-sans text-[15px] font-normal leading-[1.65] text-muted-foreground",
-                  "sm:text-[16px]",
+                  'section-intro-description max-w-2xl',
+                  'font-sans text-[15px] font-normal leading-[1.65] text-muted-foreground',
+                  'sm:text-[16px]',
                 )}
               >
                 {SERVICES_DESCRIPTION}
@@ -65,8 +65,8 @@ export function ServicesSection() {
 
         <ul
           className={cn(
-            "section-content-grid m-0 grid list-none p-0",
-            "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+            'section-content-grid m-0 grid list-none p-0',
+            'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
           )}
         >
           {HOMEPAGE_SERVICES.map((service, index) => (

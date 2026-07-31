@@ -1,5 +1,5 @@
-import type { MetadataRoute } from "next";
-import { getSiteUrl } from "@/lib/seo/site";
+import type { MetadataRoute } from 'next';
+import { getSiteUrl } from '@/lib/seo/site';
 
 /**
  * Production robots.txt — standard directives only.
@@ -11,16 +11,9 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: "*",
-        allow: "/",
-        disallow: [
-          "/api/",
-          "/admin/",
-          "/owner/",
-          "/assistant/",
-          "/dashboard/",
-          "/private/",
-        ],
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/owner/', '/assistant/', '/dashboard/', '/private/'],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

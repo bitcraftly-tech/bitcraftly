@@ -1,7 +1,7 @@
-import Image from "next/image";
-import { cn } from "@/lib/cn";
+import Image from 'next/image';
+import { cn } from '@/lib/cn';
 
-const HERO_IMAGE_SRC = "/hero-opt.webp";
+const HERO_IMAGE_SRC = '/hero-opt.webp';
 
 /**
  * Keeps its own aspect box so the graphic stays large and fully visible.
@@ -11,8 +11,8 @@ export function HeroIllustration() {
   return (
     <div
       className={cn(
-        "relative mx-auto h-full w-full min-h-[360px] min-w-0 max-w-xl aspect-[5/4]",
-        "lg:mx-0 lg:h-full lg:min-h-full lg:max-w-none lg:aspect-auto",
+        'relative mx-auto h-full w-full min-h-[360px] min-w-0 max-w-xl aspect-[5/4]',
+        'lg:mx-0 lg:h-full lg:min-h-full lg:max-w-none lg:aspect-auto',
       )}
     >
       <div

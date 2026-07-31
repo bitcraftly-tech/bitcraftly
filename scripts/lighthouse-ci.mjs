@@ -3,32 +3,32 @@
  * Bitcraftly Lighthouse CI runner (filesystem reports + score gates).
  * Requires a production build; always starts `next start` (never reuses `next dev`).
  */
-import { spawn } from "node:child_process";
-import { access, mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
-import lighthouse from "lighthouse";
-import * as chromeLauncher from "chrome-launcher";
+import { spawn } from 'node:child_process';
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import lighthouse from 'lighthouse';
+import * as chromeLauncher from 'chrome-launcher';
 
 /** Dedicated port avoids colliding with `next dev` on 3000. */
 const PORT = Number(process.env.LHCI_PORT ?? 3099);
-const HOST = "127.0.0.1";
+const HOST = '127.0.0.1';
 const BASE = `http://${HOST}:${PORT}`;
-const OUT_DIR = path.resolve(".lighthouseci");
-const BUILD_ID_PATH = path.resolve(".next/BUILD_ID");
+const OUT_DIR = path.resolve('.lighthouseci');
+const BUILD_ID_PATH = path.resolve('.next/BUILD_ID');
 
 const URLS = [
-  { id: "home", url: `${BASE}/` },
-  { id: "services", url: `${BASE}/services` },
-  { id: "pricing", url: `${BASE}/pricing` },
-  { id: "contact", url: `${BASE}/contact` },
+  { id: 'home', url: `${BASE}/` },
+  { id: 'services', url: `${BASE}/services` },
+  { id: 'pricing', url: `${BASE}/pricing` },
+  { id: 'contact', url: `${BASE}/contact` },
 ];
 
 /** Hard gates — warn-level categories are reported but do not fail. */
 const GATES = {
-  accessibility: { min: 0.85, level: "error" },
-  seo: { min: 0.85, level: "error" },
-  performance: { min: 0.5, level: "warn" },
-  "best-practices": { min: 0.7, level: "warn" },
+  accessibility: { min: 0.85, level: 'error' },
+  seo: { min: 0.85, level: 'error' },
+  performance: { min: 0.5, level: 'warn' },
+  'best-practices': { min: 0.7, level: 'warn' },
 };
 
 function sleep(ms) {
@@ -40,7 +40,7 @@ async function ensureProductionBuild() {
     await access(BUILD_ID_PATH);
   } catch {
     throw new Error(
-      "Production build not found. Run `npm run build` before `npm run lighthouse:ci`.",
+      'Production build not found. Run `npm run build` before `npm run lighthouse:ci`.',
     );
   }
 }
@@ -49,21 +49,21 @@ async function waitForServer(url, timeoutMs = 180_000) {
   const started = Date.now();
   while (Date.now() - started < timeoutMs) {
     try {
-      const response = await fetch(url, { redirect: "manual" });
+      const response = await fetch(url, { redirect: 'manual' });
       if (response.status >= 200 && response.status < 400) {
         return;
       }
       if (response.status >= 500) {
         const body = await response.text();
-        if (body.includes("environment validation failed")) {
+        if (body.includes('environment validation failed')) {
           throw new Error(
-            "Production server failed env validation. Set SKIP_ENV_VALIDATION=true for Lighthouse CI " +
-              "(CI workflow already does this) or provide required .env values.",
+            'Production server failed env validation. Set SKIP_ENV_VALIDATION=true for Lighthouse CI ' +
+              '(CI workflow already does this) or provide required .env values.',
           );
         }
       }
     } catch (error) {
-      if (error instanceof Error && error.message.includes("env validation")) {
+      if (error instanceof Error && error.message.includes('env validation')) {
         throw error;
       }
       // retry transient errors
@@ -78,27 +78,25 @@ async function waitForServer(url, timeoutMs = 180_000) {
  * @param {string} base
  */
 async function assertProductionServer(base) {
-  const response = await fetch(`${base}/`, { redirect: "manual" });
+  const response = await fetch(`${base}/`, { redirect: 'manual' });
   const html = await response.text();
 
   if (!response.ok && response.status !== 304) {
-    throw new Error(
-      `Production server check failed: ${base}/ returned HTTP ${response.status}.`,
-    );
+    throw new Error(`Production server check failed: ${base}/ returned HTTP ${response.status}.`);
   }
 
   const devMarkers = [
-    "/_next/webpack-hmr",
-    "__NEXT_DEV",
-    "next/dist/client/dev",
-    "webpack-internal://",
+    '/_next/webpack-hmr',
+    '__NEXT_DEV',
+    'next/dist/client/dev',
+    'webpack-internal://',
   ];
 
   for (const marker of devMarkers) {
     if (html.includes(marker)) {
       throw new Error(
         `Refusing to audit ${base}: detected dev server marker "${marker}". ` +
-          "Stop `next dev` and run `npm run build` before Lighthouse CI.",
+          'Stop `next dev` and run `npm run build` before Lighthouse CI.',
       );
     }
   }
@@ -106,7 +104,7 @@ async function assertProductionServer(base) {
   if (/\/_next\/static\/chunks\/[^"'\\s]+\?v=\d+/.test(html)) {
     throw new Error(
       `Refusing to audit ${base}: HTML references dev-style versioned chunks (?v=). ` +
-        "Ensure `next start` is serving a production build.",
+        'Ensure `next start` is serving a production build.',
     );
   }
 
@@ -116,7 +114,7 @@ async function assertProductionServer(base) {
 async function isPortInUse(port) {
   try {
     const response = await fetch(`http://${HOST}:${port}/`, {
-      redirect: "manual",
+      redirect: 'manual',
       signal: AbortSignal.timeout(1500),
     });
     return response.status > 0;
@@ -126,28 +124,23 @@ async function isPortInUse(port) {
 }
 
 function startNextServer() {
-  const nextBin = path.resolve("node_modules/next/dist/bin/next");
-  const child = spawn(
-    process.execPath,
-    [nextBin, "start", "-H", HOST, "-p", String(PORT)],
-    {
-      shell: false,
-      stdio: ["ignore", "pipe", "pipe"],
-      env: {
-        ...process.env,
-        NODE_ENV: "production",
-        PORT: String(PORT),
-        /** Lighthouse audits public marketing routes — no owner secrets required. */
-        SKIP_ENV_VALIDATION:
-          process.env.SKIP_ENV_VALIDATION ?? "true",
-      },
+  const nextBin = path.resolve('node_modules/next/dist/bin/next');
+  const child = spawn(process.execPath, [nextBin, 'start', '-H', HOST, '-p', String(PORT)], {
+    shell: false,
+    stdio: ['ignore', 'pipe', 'pipe'],
+    env: {
+      ...process.env,
+      NODE_ENV: 'production',
+      PORT: String(PORT),
+      /** Lighthouse audits public marketing routes — no owner secrets required. */
+      SKIP_ENV_VALIDATION: process.env.SKIP_ENV_VALIDATION ?? 'true',
     },
-  );
+  });
 
-  child.stdout?.on("data", (chunk) => {
+  child.stdout?.on('data', (chunk) => {
     process.stdout.write(`[next] ${chunk}`);
   });
-  child.stderr?.on("data", (chunk) => {
+  child.stderr?.on('data', (chunk) => {
     process.stderr.write(`[next] ${chunk}`);
   });
 
@@ -157,11 +150,11 @@ function startNextServer() {
 async function auditUrl(chrome, url) {
   const result = await lighthouse(url, {
     port: chrome.port,
-    output: "json",
-    logLevel: "error",
-    formFactor: "desktop",
+    output: 'json',
+    logLevel: 'error',
+    formFactor: 'desktop',
     screenEmulation: { disabled: true },
-    onlyCategories: ["performance", "accessibility", "best-practices", "seo"],
+    onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'],
   });
 
   if (!result?.lhr) {
@@ -177,13 +170,13 @@ function evaluateGates(lhr) {
 
   for (const [category, rule] of Object.entries(GATES)) {
     const score = lhr.categories[category]?.score;
-    if (typeof score !== "number") {
+    if (typeof score !== 'number') {
       failures.push(`${category}: missing score`);
       continue;
     }
     if (score + 1e-9 < rule.min) {
       const message = `${category}: ${(score * 100).toFixed(0)} < ${(rule.min * 100).toFixed(0)}`;
-      if (rule.level === "error") {
+      if (rule.level === 'error') {
         failures.push(message);
       } else {
         warnings.push(message);
@@ -195,14 +188,14 @@ function evaluateGates(lhr) {
 }
 
 function fmt(score) {
-  return typeof score === "number" ? `${Math.round(score * 100)}` : "n/a";
+  return typeof score === 'number' ? `${Math.round(score * 100)}` : 'n/a';
 }
 
 async function main() {
   await mkdir(OUT_DIR, { recursive: true });
   await ensureProductionBuild();
 
-  const buildId = (await readFile(BUILD_ID_PATH, "utf8")).trim();
+  const buildId = (await readFile(BUILD_ID_PATH, 'utf8')).trim();
   process.stdout.write(`Using production build ${buildId} on port ${PORT}\n`);
 
   if (await isPortInUse(PORT)) {
@@ -223,11 +216,11 @@ async function main() {
 
     chrome = await chromeLauncher.launch({
       chromeFlags: [
-        "--headless=new",
-        "--no-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-extensions",
-        "--disable-component-extensions-with-background-pages",
+        '--headless=new',
+        '--no-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-extensions',
+        '--disable-component-extensions-with-background-pages',
       ],
     });
 
@@ -238,12 +231,12 @@ async function main() {
       process.stdout.write(`Auditing ${target.url}\n`);
       const lhr = await auditUrl(chrome, target.url);
       const reportPath = path.join(OUT_DIR, `${target.id}.report.json`);
-      await writeFile(reportPath, JSON.stringify(lhr, null, 2), "utf8");
+      await writeFile(reportPath, JSON.stringify(lhr, null, 2), 'utf8');
 
       const scores = {
         performance: lhr.categories.performance?.score ?? null,
         accessibility: lhr.categories.accessibility?.score ?? null,
-        "best-practices": lhr.categories["best-practices"]?.score ?? null,
+        'best-practices': lhr.categories['best-practices']?.score ?? null,
         seo: lhr.categories.seo?.score ?? null,
       };
 
@@ -260,7 +253,7 @@ async function main() {
       });
 
       process.stdout.write(
-        `  perf=${fmt(scores.performance)} a11y=${fmt(scores.accessibility)} bp=${fmt(scores["best-practices"])} seo=${fmt(scores.seo)}\n`,
+        `  perf=${fmt(scores.performance)} a11y=${fmt(scores.accessibility)} bp=${fmt(scores['best-practices'])} seo=${fmt(scores.seo)}\n`,
       );
       for (const warning of warnings) {
         process.stdout.write(`  WARN ${warning}\n`);
@@ -270,17 +263,15 @@ async function main() {
       }
     }
 
-    const summaryPath = path.join(OUT_DIR, "summary.json");
-    await writeFile(summaryPath, JSON.stringify(summary, null, 2), "utf8");
+    const summaryPath = path.join(OUT_DIR, 'summary.json');
+    await writeFile(summaryPath, JSON.stringify(summary, null, 2), 'utf8');
     process.stdout.write(`Wrote ${summaryPath}\n`);
 
     if (hardFailures > 0) {
       process.exitCode = 1;
-      process.stderr.write(
-        `Lighthouse CI failed with ${hardFailures} assertion error(s).\n`,
-      );
+      process.stderr.write(`Lighthouse CI failed with ${hardFailures} assertion error(s).\n`);
     } else {
-      process.stdout.write("Lighthouse CI passed.\n");
+      process.stdout.write('Lighthouse CI passed.\n');
     }
   } finally {
     if (chrome) {
@@ -293,14 +284,12 @@ async function main() {
       }
     }
     if (server && !server.killed) {
-      server.kill("SIGTERM");
+      server.kill('SIGTERM');
     }
   }
 }
 
 main().catch((error) => {
-  process.stderr.write(
-    `${error instanceof Error ? error.stack : String(error)}\n`,
-  );
+  process.stderr.write(`${error instanceof Error ? error.stack : String(error)}\n`);
   process.exitCode = 1;
 });

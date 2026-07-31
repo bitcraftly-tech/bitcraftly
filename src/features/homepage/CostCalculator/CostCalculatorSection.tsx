@@ -1,21 +1,21 @@
-import { Container } from "@/components/ui/container";
-import { HomepageReveal } from "../shared/HomepageReveal";
-import { COST_CALCULATOR_CONTENT } from "./cost-calculator.content";
-import { CostCalculatorExperienceLazy } from "./CostCalculatorExperienceLazy";
-import "./cost-calculator.css";
+import { Container } from '@/components/ui/container';
+import { HomepageReveal } from '../shared/HomepageReveal';
+import { COST_CALCULATOR_CONTENT } from './cost-calculator.content';
+import { CostCalculatorExperienceLazy } from './CostCalculatorExperienceLazy';
+import './cost-calculator.css';
 
 function CostCalculatorJsonLd() {
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    name: "Bitcraftly Project Cost Calculator",
-    applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Bitcraftly Project Cost Calculator',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
     description: COST_CALCULATOR_CONTENT.calculator.description,
     offers: {
-      "@type": "Offer",
-      priceCurrency: "INR",
-      price: "8999",
+      '@type': 'Offer',
+      priceCurrency: 'INR',
+      price: '8999',
       description: COST_CALCULATOR_CONTENT.intro.pricingBadge,
     },
   };

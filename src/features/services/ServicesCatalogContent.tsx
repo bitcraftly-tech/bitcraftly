@@ -1,20 +1,20 @@
-import Link from "next/link";
-import type { CSSProperties } from "react";
-import { MarketingStagger } from "@/components/patterns/marketing-stagger";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { NAV_ACTIONS } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { ServiceCard } from "./ServiceCard";
-import { ServicesFeaturedBlock } from "./ServicesFeaturedBlock";
-import { buildServiceSearchIndex } from "./services-catalog.utils";
+import Link from 'next/link';
+import type { CSSProperties } from 'react';
+import { MarketingStagger } from '@/components/patterns/marketing-stagger';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { NAV_ACTIONS } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { ServiceCard } from './ServiceCard';
+import { ServicesFeaturedBlock } from './ServicesFeaturedBlock';
+import { buildServiceSearchIndex } from './services-catalog.utils';
 import type {
   FeaturedServiceBlock,
   RelatedLink,
   ServiceCardModel,
   ServiceGroupIntro,
   ServiceGroupRelatedLinks,
-} from "./services.types";
+} from './services.types';
 
 interface CatalogGroup {
   id: string;
@@ -30,20 +30,20 @@ interface ServicesCatalogContentProps {
 }
 
 const RELATED_COLUMN_KEYS = [
-  "caseStudies",
-  "technologies",
-  "industries",
-  "blog",
+  'caseStudies',
+  'technologies',
+  'industries',
+  'blog',
 ] as const satisfies readonly (keyof ServiceGroupRelatedLinks)[];
 
 const RELATED_COLUMN_META: Record<
   keyof ServiceGroupRelatedLinks,
   { title: string; fallbackIcon: IconName }
 > = {
-  caseStudies: { title: "Case studies", fallbackIcon: "quote" },
-  technologies: { title: "Technologies", fallbackIcon: "code" },
-  industries: { title: "Industries", fallbackIcon: "globe" },
-  blog: { title: "Guides & FAQ", fallbackIcon: "message" },
+  caseStudies: { title: 'Case studies', fallbackIcon: 'quote' },
+  technologies: { title: 'Technologies', fallbackIcon: 'code' },
+  industries: { title: 'Industries', fallbackIcon: 'globe' },
+  blog: { title: 'Guides & FAQ', fallbackIcon: 'message' },
 };
 
 const RELATED_LINKS_PER_COLUMN = 3;
@@ -82,9 +82,7 @@ export function ServicesCatalogContent({
   featuredByGroup,
 }: ServicesCatalogContentProps) {
   const introById = new Map(intros.map((intro) => [intro.id, intro]));
-  const featuredById = new Map(
-    featuredByGroup.map((item) => [item.groupId, item]),
-  );
+  const featuredById = new Map(featuredByGroup.map((item) => [item.groupId, item]));
   const mergedRelated = mergeRelatedLinks(relatedByGroup);
 
   return (
@@ -100,8 +98,8 @@ export function ServicesCatalogContent({
             spacing="lg"
             aria-labelledby={`${group.id}-heading`}
             className={cn(
-              "scroll-mt-[130px] border-b border-border/40",
-              groupIndex % 2 === 1 ? "bg-surface" : "bg-background",
+              'scroll-mt-[130px] border-b border-border/40',
+              groupIndex % 2 === 1 ? 'bg-surface' : 'bg-background',
             )}
             data-service-group={group.id}
           >
@@ -110,11 +108,11 @@ export function ServicesCatalogContent({
                 <div className="services-section-intro min-w-0 max-w-2xl">
                   <p
                     className={cn(
-                      "services-page-label services-section-intro__eyebrow",
-                      "font-sans text-[12px] font-semibold uppercase tracking-[0.16em]",
+                      'services-page-label services-section-intro__eyebrow',
+                      'font-sans text-[12px] font-semibold uppercase tracking-[0.16em]',
                     )}
                   >
-                    {intro?.label ?? "Service group"}
+                    {intro?.label ?? 'Service group'}
                   </p>
                   <h2
                     id={`${group.id}-heading`}
@@ -125,8 +123,8 @@ export function ServicesCatalogContent({
                   {intro?.description ? (
                     <p
                       className={cn(
-                        "services-section-intro__description max-w-2xl",
-                        "font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]",
+                        'services-section-intro__description max-w-2xl',
+                        'font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]',
                       )}
                     >
                       {intro.description}
@@ -138,12 +136,7 @@ export function ServicesCatalogContent({
                   className="inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   Book a call
-                  <Icon
-                    name="arrow-right"
-                    size="sm"
-                    aria-hidden
-                    className="h-[13px] w-[13px]"
-                  />
+                  <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
                 </Link>
               </div>
 
@@ -156,8 +149,8 @@ export function ServicesCatalogContent({
               <MarketingStagger
                 as="ul"
                 className={cn(
-                  "m-0 grid w-full list-none gap-[24px] p-0",
-                  "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+                  'm-0 grid w-full list-none gap-[24px] p-0',
+                  'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
                 )}
               >
                 {group.items.map((card, index) => (
@@ -166,7 +159,7 @@ export function ServicesCatalogContent({
                     className="mkt-stagger__item min-w-0 h-full"
                     style={
                       {
-                        "--stagger": Math.min(index, 5),
+                        '--stagger': Math.min(index, 5),
                       } as CSSProperties
                     }
                     data-service-card
@@ -181,9 +174,7 @@ export function ServicesCatalogContent({
             </div>
 
             <div data-group-filter-empty hidden>
-              <h2 className="services-page-section-heading">
-                {intro?.title ?? group.title}
-              </h2>
+              <h2 className="services-page-section-heading">{intro?.title ?? group.title}</h2>
               <p className="services-section-intro__description font-sans text-[14px] text-muted-foreground">
                 No services in this category match your current search.
               </p>
@@ -208,8 +199,8 @@ export function ServicesCatalogContent({
               Explore nearby pages
             </h2>
             <p className="services-section-intro__description font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
-              Jump into work, industries, case studies, and guides that pair
-              with these service lines.
+              Jump into work, industries, case studies, and guides that pair with these service
+              lines.
             </p>
           </header>
           <div className="services-related__grid">
@@ -258,9 +249,7 @@ function RelatedResourceColumn({
                   />
                 </span>
                 {link.description ? (
-                  <span className="services-related__desc">
-                    {link.description}
-                  </span>
+                  <span className="services-related__desc">{link.description}</span>
                 ) : null}
               </span>
             </Link>

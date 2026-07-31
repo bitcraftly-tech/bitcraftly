@@ -1,24 +1,21 @@
-import Image from "next/image";
-import Link from "next/link";
-import { cn } from "@/lib/cn";
-import { FOOTER_BRAND } from "./footer.constants";
-import { FooterSocial } from "./FooterSocial";
+import Image from 'next/image';
+import Link from 'next/link';
+import { cn } from '@/lib/cn';
+import { FOOTER_BRAND } from './footer.constants';
+import { FooterSocial } from './FooterSocial';
 
 export function FooterBrand({ className }: { className?: string }) {
   return (
     <div
-      className={cn(
-        "flex w-full max-w-[240px] min-w-0 flex-col gap-[var(--space-2)]",
-        className,
-      )}
+      className={cn('flex w-full max-w-[240px] min-w-0 flex-col gap-[var(--space-2)]', className)}
     >
       <Link
         href="/"
         aria-label="Bitcraftly home"
         className={cn(
-          "footer-focus-ring inline-flex w-fit items-center gap-[var(--space-1)] no-underline",
-          "rounded-[var(--token-radius-md)]",
-          "transition-opacity duration-[var(--duration-fast)] hover:opacity-90",
+          'footer-focus-ring inline-flex w-fit items-center gap-[var(--space-1)] no-underline',
+          'rounded-[var(--token-radius-md)]',
+          'transition-opacity duration-[var(--duration-fast)] hover:opacity-90',
         )}
       >
         <Image
@@ -32,8 +29,8 @@ export function FooterBrand({ className }: { className?: string }) {
         />
         <span
           className={cn(
-            "font-sans text-[22px] font-[var(--font-weight-bold)]",
-            "leading-none tracking-[-0.02em] text-inverse-foreground",
+            'font-sans text-[22px] font-[var(--font-weight-bold)]',
+            'leading-none tracking-[-0.02em] text-inverse-foreground',
           )}
         >
           Bitcraftly
@@ -42,9 +39,9 @@ export function FooterBrand({ className }: { className?: string }) {
 
       <p
         className={cn(
-          "footer-muted",
-          "font-sans text-[13px] font-[var(--font-weight-normal)]",
-          "leading-[var(--line-height-snug)]",
+          'footer-muted',
+          'font-sans text-[13px] font-[var(--font-weight-normal)]',
+          'leading-[var(--line-height-snug)]',
         )}
       >
         {FOOTER_BRAND.description}

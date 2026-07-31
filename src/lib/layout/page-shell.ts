@@ -17,7 +17,7 @@
 
 /** Horizontal inset — same edges as Header Container (includes safe-area). */
 export const CONTAINER_INSET_CLASS =
-  "pl-[max(var(--container-padding),env(safe-area-inset-left,0px))] pr-[max(var(--container-padding),env(safe-area-inset-right,0px))]";
+  'pl-[max(var(--container-padding),env(safe-area-inset-left,0px))] pr-[max(var(--container-padding),env(safe-area-inset-right,0px))]';
 
 /** Content column — same edges as Header / Footer / Homepage. */
 export const PAGE_SHELL_CLASS = `mx-auto w-full max-w-[var(--container-xl)] ${CONTAINER_INSET_CLASS}`;
@@ -27,14 +27,11 @@ export const PAGE_SHELL_CLASS = `mx-auto w-full max-w-[var(--container-xl)] ${CO
  * mobile 36 · tablet 48 · desktop 60
  * Applied via `.page-shell` in page-shell.css
  */
-export const PAGE_SECTION_CLASS = "page-shell";
+export const PAGE_SECTION_CLASS = 'page-shell';
 
 /** Shared marketing grid for cards / lists. */
-export const PAGE_GRID_CLASS =
-  "grid w-full grid-cols-1 gap-[24px] sm:grid-cols-2 lg:grid-cols-3";
+export const PAGE_GRID_CLASS = 'grid w-full grid-cols-1 gap-[24px] sm:grid-cols-2 lg:grid-cols-3';
 
-export const PAGE_GRID_2_CLASS =
-  "grid w-full grid-cols-1 gap-[24px] sm:grid-cols-2";
+export const PAGE_GRID_2_CLASS = 'grid w-full grid-cols-1 gap-[24px] sm:grid-cols-2';
 
-export const PAGE_GRID_4_CLASS =
-  "grid w-full grid-cols-1 gap-[24px] sm:grid-cols-2 lg:grid-cols-4";
+export const PAGE_GRID_4_CLASS = 'grid w-full grid-cols-1 gap-[24px] sm:grid-cols-2 lg:grid-cols-4';

@@ -1,1 +1,1 @@
-export { PerformanceSection } from "./PerformanceSection";
+export { PerformanceSection } from './PerformanceSection';

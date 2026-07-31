@@ -1,4 +1,4 @@
-import type { IconName } from "@/components/ui/icon";
+import type { IconName } from '@/components/ui/icon';
 
 export interface SolutionFaqItem {
   id: string;
@@ -66,7 +66,7 @@ export interface SolutionCardModel {
   href: string;
   icon: IconName;
   ctaLabel: string;
-  badge?: "Popular" | "Enterprise" | "Recommended" | "New";
+  badge?: 'Popular' | 'Enterprise' | 'Recommended' | 'New';
 }
 
 export interface RelatedLink {

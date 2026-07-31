@@ -70,8 +70,8 @@
     column-gap: var(--trust-hero-gap);
     row-gap: 0;
     grid-template-areas:
-      "content visual"
-      "features features";
+      'content visual'
+      'features features';
   }
 
   .trust-hero__content {
@@ -232,7 +232,7 @@
 }
 
 .trust-page__btn:disabled,
-.trust-page__btn[aria-disabled="true"] {
+.trust-page__btn[aria-disabled='true'] {
   cursor: not-allowed;
   opacity: 0.5;
   pointer-events: none;

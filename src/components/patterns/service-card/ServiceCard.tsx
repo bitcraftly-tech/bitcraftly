@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { IconBox } from "@/components/ui/icon-box";
-import { cn } from "@/lib/cn";
+import Link from 'next/link';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { IconBox } from '@/components/ui/icon-box';
+import { cn } from '@/lib/cn';
 
 export interface ServiceCardData {
   href: string;
@@ -14,7 +14,7 @@ export interface ServiceCardData {
   timeline?: string;
 }
 
-export type ServiceCardVariant = "homepage" | "page";
+export type ServiceCardVariant = 'homepage' | 'page';
 
 interface ServiceCardProps {
   service: ServiceCardData;
@@ -26,19 +26,15 @@ interface ServiceCardProps {
 /**
  * Shared service/solution card — variants preserve existing CSS (zero visual change).
  */
-export function ServiceCard({
-  service,
-  variant = "page",
-  className,
-}: ServiceCardProps) {
-  if (variant === "homepage") {
+export function ServiceCard({ service, variant = 'page', className }: ServiceCardProps) {
+  if (variant === 'homepage') {
     return (
       <Link
         href={service.href}
         className={cn(
-          "services-card group flex h-full flex-col",
-          "rounded-[16px] card-padding no-underline",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          'services-card group flex h-full flex-col',
+          'rounded-[16px] card-padding no-underline',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
           className,
         )}
       >
@@ -60,9 +56,9 @@ export function ServiceCard({
 
         <span
           className={cn(
-            "services-card-cta inline-flex items-center gap-[5px]",
-            "font-sans text-[13px] font-semibold text-primary",
-            "sm:text-[14px]",
+            'services-card-cta inline-flex items-center gap-[5px]',
+            'font-sans text-[13px] font-semibold text-primary',
+            'sm:text-[14px]',
           )}
         >
           {service.ctaLabel}
@@ -81,9 +77,9 @@ export function ServiceCard({
     <Link
       href={service.href}
       className={cn(
-        "services-page-card group flex h-full flex-col",
-        "rounded-[16px] card-padding no-underline",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        'services-page-card group flex h-full flex-col',
+        'rounded-[16px] card-padding no-underline',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
         className,
       )}
     >
@@ -97,7 +93,7 @@ export function ServiceCard({
             {service.badge ? (
               <span
                 className={cn(
-                  "services-page-badge",
+                  'services-page-badge',
                   `services-page-badge--${service.badge.toLowerCase()}`,
                 )}
               >
@@ -139,9 +135,9 @@ export function ServiceCard({
 
       <span
         className={cn(
-          "services-card-cta mt-auto inline-flex items-center gap-[5px]",
-          "font-sans text-[13px] font-semibold text-primary",
-          "sm:text-[14px]",
+          'services-card-cta mt-auto inline-flex items-center gap-[5px]',
+          'font-sans text-[13px] font-semibold text-primary',
+          'sm:text-[14px]',
         )}
       >
         {service.ctaLabel}

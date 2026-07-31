@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { Icon } from "@/components/ui/icon";
-import { trackLeadEvent } from "../analytics";
-import { LEAD_FUNNEL_CONFIG } from "../lead-funnel.config";
-import { cn } from "@/lib/cn";
+import Link from 'next/link';
+import { Icon } from '@/components/ui/icon';
+import { trackLeadEvent } from '../analytics';
+import { LEAD_FUNNEL_CONFIG } from '../lead-funnel.config';
+import { cn } from '@/lib/cn';
 
 interface FreeAuditCtaProps {
   href?: string;
@@ -17,34 +17,26 @@ interface FreeAuditCtaProps {
 
 export function FreeAuditCta({
   href,
-  label = "Get a free website audit",
-  source = "free-audit-cta",
+  label = 'Get a free website audit',
+  source = 'free-audit-cta',
   className,
   preferWhatsApp = false,
   onNavigate,
 }: FreeAuditCtaProps) {
   const destination =
-    href ??
-    (preferWhatsApp
-      ? LEAD_FUNNEL_CONFIG.whatsappAuditHref
-      : LEAD_FUNNEL_CONFIG.auditHref);
+    href ?? (preferWhatsApp ? LEAD_FUNNEL_CONFIG.whatsappAuditHref : LEAD_FUNNEL_CONFIG.auditHref);
 
-  const external = destination.startsWith("http");
+  const external = destination.startsWith('http');
 
   return (
     <Link
       href={destination}
-      {...(external
-        ? { target: "_blank", rel: "noopener noreferrer" }
-        : {})}
-      className={cn(
-        "lead-funnel__channel-btn lead-funnel__channel-btn--primary",
-        className,
-      )}
+      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      className={cn('lead-funnel__channel-btn lead-funnel__channel-btn--primary', className)}
       onClick={() => {
-        trackLeadEvent("audit_cta_click", {
+        trackLeadEvent('audit_cta_click', {
           source,
-          channel: preferWhatsApp ? "whatsapp" : "contact",
+          channel: preferWhatsApp ? 'whatsapp' : 'contact',
         });
         onNavigate?.();
       }}

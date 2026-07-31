@@ -1,1 +1,1 @@
-export { MarketingSectionIntro } from "./MarketingSectionIntro";
+export { MarketingSectionIntro } from './MarketingSectionIntro';

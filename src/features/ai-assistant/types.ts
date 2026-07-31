@@ -1,9 +1,9 @@
 /** Supported model providers — adapters live under `./providers`. */
-export type AiProviderId = "openai" | "gemini" | "claude" | "mock";
+export type AiProviderId = 'openai' | 'gemini' | 'claude' | 'mock';
 
-export type ChatRole = "user" | "assistant" | "system";
+export type ChatRole = 'user' | 'assistant' | 'system';
 
-export type ChatMessageStatus = "complete" | "streaming" | "error";
+export type ChatMessageStatus = 'complete' | 'streaming' | 'error';
 
 export interface ChatMessage {
   readonly id: string;
@@ -15,9 +15,9 @@ export interface ChatMessage {
 }
 
 export type StreamChunk =
-  | { readonly type: "token"; readonly content: string }
-  | { readonly type: "done" }
-  | { readonly type: "error"; readonly message: string };
+  | { readonly type: 'token'; readonly content: string }
+  | { readonly type: 'done' }
+  | { readonly type: 'error'; readonly message: string };
 
 export interface AiChatRequest {
   readonly messages: readonly ChatMessage[];

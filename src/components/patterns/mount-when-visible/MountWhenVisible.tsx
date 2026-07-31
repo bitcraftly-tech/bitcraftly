@@ -1,12 +1,6 @@
-"use client";
+'use client';
 
-import {
-  useEffect,
-  useRef,
-  useState,
-  type ComponentType,
-  type ReactNode,
-} from "react";
+import { useEffect, useRef, useState, type ComponentType, type ReactNode } from 'react';
 
 interface MountWhenVisibleProps {
   /** Dynamic import that resolves to a component. */
@@ -25,7 +19,7 @@ interface MountWhenVisibleProps {
 export function MountWhenVisible({
   load,
   fallback = null,
-  rootMargin = "280px 0px",
+  rootMargin = '280px 0px',
   className,
 }: MountWhenVisibleProps) {
   const ref = useRef<HTMLDivElement>(null);

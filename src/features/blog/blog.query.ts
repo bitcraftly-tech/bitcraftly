@@ -6,8 +6,8 @@ import {
   type BlogListResult,
   type BlogPost,
   type BlogPostSummary,
-} from "@/content/blog";
-import { estimateReadingTimeMinutes } from "./blog.utils";
+} from '@/content/blog';
+import { estimateReadingTimeMinutes } from './blog.utils';
 
 const DEFAULT_PAGE_SIZE = 9;
 
@@ -32,10 +32,10 @@ function matchesQuery(post: BlogPost, q: string): boolean {
     post.title,
     post.excerpt,
     post.description,
-    post.tags.join(" "),
-    getBlogCategoryById(post.categoryId)?.label ?? "",
+    post.tags.join(' '),
+    getBlogCategoryById(post.categoryId)?.label ?? '',
   ]
-    .join(" ")
+    .join(' ')
     .toLowerCase();
 
   return haystack.includes(q.toLowerCase());
@@ -48,13 +48,13 @@ function matchesQuery(post: BlogPost, q: string): boolean {
 export function queryBlogPosts(query: BlogListQuery = {}): BlogListResult {
   const pageSize = Math.max(1, query.pageSize ?? DEFAULT_PAGE_SIZE);
   const page = Math.max(1, query.page ?? 1);
-  const category = query.category ?? "all";
+  const category = query.category ?? 'all';
   const tag = query.tag?.trim();
   const q = query.q?.trim();
 
   let filtered: BlogPost[] = [...BLOG_POSTS];
 
-  if (category !== "all") {
+  if (category !== 'all') {
     filtered = filtered.filter((post) => post.categoryId === category);
   }
 
@@ -84,10 +84,7 @@ export function queryBlogPosts(query: BlogListQuery = {}): BlogListResult {
   };
 }
 
-export function getRelatedPosts(
-  post: BlogPost,
-  limit = 3,
-): readonly BlogPostSummary[] {
+export function getRelatedPosts(post: BlogPost, limit = 3): readonly BlogPostSummary[] {
   const scored = BLOG_POSTS.filter((candidate) => candidate.slug !== post.slug)
     .map((candidate) => {
       let score = 0;
@@ -109,8 +106,7 @@ export function getRelatedPosts(
 
   const fallback = BLOG_POSTS.filter(
     (candidate) =>
-      candidate.slug !== post.slug &&
-      !related.some((item) => item.slug === candidate.slug),
+      candidate.slug !== post.slug && !related.some((item) => item.slug === candidate.slug),
   )
     .slice(0, limit - related.length)
     .map(toSummary);
@@ -126,11 +122,11 @@ export function getFeaturedPosts(limit = 2): readonly BlogPostSummary[] {
 
 export function isBlogCategoryId(value: string): value is BlogCategoryId {
   return (
-    value === "ai-development" ||
-    value === "nextjs" ||
-    value === "react" ||
-    value === "web-performance" ||
-    value === "seo"
+    value === 'ai-development' ||
+    value === 'nextjs' ||
+    value === 'react' ||
+    value === 'web-performance' ||
+    value === 'seo'
   );
 }
 

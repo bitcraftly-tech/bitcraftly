@@ -1,5 +1,5 @@
-import { OwnerLoginForm } from "./components/OwnerLoginForm";
-import { resolveOwnerNextPath } from "./owner-auth.utils";
+import { OwnerLoginForm } from './components/OwnerLoginForm';
+import { resolveOwnerNextPath } from './owner-auth.utils';
 
 interface OwnerLoginPageProps {
   readonly nextPath?: string;

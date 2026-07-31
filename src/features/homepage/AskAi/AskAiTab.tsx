@@ -1,24 +1,18 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
-import {
-  useEffect,
-  useId,
-  useRef,
-  useState,
-  type CSSProperties,
-} from "react";
-import { createPortal } from "react-dom";
-import { Icon } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
-import "./ask-ai.css";
+import dynamic from 'next/dynamic';
+import { useEffect, useId, useRef, useState, type CSSProperties } from 'react';
+import { createPortal } from 'react-dom';
+import { Icon } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
+import './ask-ai.css';
 
 /** Flip to `true` when the Ask AI launcher should show again. */
 const ASK_AI_ENABLED = false;
 
 const AskAiPanel = dynamic(
   () =>
-    import("./AskAiPanel")
+    import('./AskAiPanel')
       .then((mod) => mod.AskAiPanel)
       .catch(() => {
         function AskAiPanelUnavailable() {
@@ -60,7 +54,7 @@ function AskAiTabActive() {
     if (!open) return;
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         setOpen(false);
       }
     }
@@ -73,11 +67,11 @@ function AskAiTabActive() {
       }
     }
 
-    document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('pointerdown', onPointerDown);
     return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('pointerdown', onPointerDown);
     };
   }, [open]);
 
@@ -85,9 +79,7 @@ function AskAiTabActive() {
     if (open) {
       wasOpenRef.current = true;
       const frame = requestAnimationFrame(() => {
-        rootRef.current
-          ?.querySelector<HTMLButtonElement>(".ask-ai-panel-close")
-          ?.focus();
+        rootRef.current?.querySelector<HTMLButtonElement>('.ask-ai-panel-close')?.focus();
       });
       return () => cancelAnimationFrame(frame);
     }
@@ -99,45 +91,43 @@ function AskAiTabActive() {
   }, [open]);
 
   const fabStyle: CSSProperties = {
-    position: "fixed",
-    top: "50%",
+    position: 'fixed',
+    top: '50%',
     right: 16,
-    bottom: "auto",
-    left: "auto",
+    bottom: 'auto',
+    left: 'auto',
     zIndex: 1300,
-    display: "inline-flex",
-    alignItems: "center",
+    display: 'inline-flex',
+    alignItems: 'center',
     gap: 8,
     minHeight: 48,
-    padding: "0 16px 0 12px",
+    padding: '0 16px 0 12px',
     border: 0,
     borderRadius: 9999,
-    background: open ? "var(--foreground)" : "var(--primary)",
-    color: "#ffffff",
-    cursor: "pointer",
-    translate: "0 -50%",
+    background: open ? 'var(--foreground)' : 'var(--primary)',
+    color: '#ffffff',
+    cursor: 'pointer',
+    translate: '0 -50%',
   };
 
   const ui = (
     <div ref={rootRef} className="ask-ai-root">
-      {open ? (
-        <AskAiPanel id={panelId} onClose={() => setOpen(false)} />
-      ) : null}
+      {open ? <AskAiPanel id={panelId} onClose={() => setOpen(false)} /> : null}
 
       <button
         ref={tabRef}
         type="button"
-        className={cn("ask-ai-fab", open && "ask-ai-fab--open")}
+        className={cn('ask-ai-fab', open && 'ask-ai-fab--open')}
         style={fabStyle}
-        aria-label={open ? "Close Ask AI" : "Ask AI"}
+        aria-label={open ? 'Close Ask AI' : 'Ask AI'}
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((current) => !current)}
       >
         <span className="ask-ai-fab-icon" aria-hidden>
-          <Icon name={open ? "close" : "sparkles"} size="sm" />
+          <Icon name={open ? 'close' : 'sparkles'} size="sm" />
         </span>
-        <span className="ask-ai-fab-label">{open ? "Close" : "Ask AI"}</span>
+        <span className="ask-ai-fab-label">{open ? 'Close' : 'Ask AI'}</span>
       </button>
     </div>
   );

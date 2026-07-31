@@ -8,27 +8,27 @@ Standards for writing code in the Bitcraftly Platform. All contributors — huma
 
 ### Files and directories
 
-| Type | Convention | Example |
-|------|------------|---------|
-| React components | PascalCase | `UserProfile.tsx` |
-| Hooks | camelCase with `use` prefix | `useAuth.ts` |
-| Utilities | camelCase | `formatDate.ts` |
-| Services | camelCase with descriptive suffix | `authService.ts` |
-| Types | PascalCase | `User.ts`, `AuthResponse.ts` |
-| Constants | SCREAMING_SNAKE_CASE | `API_BASE_URL` |
-| Feature folders | kebab-case or lowercase | `auth/`, `dashboard/` |
-| Route segments | kebab-case | `src/app/(platform)/user-settings/` |
+| Type             | Convention                        | Example                             |
+| ---------------- | --------------------------------- | ----------------------------------- |
+| React components | PascalCase                        | `UserProfile.tsx`                   |
+| Hooks            | camelCase with `use` prefix       | `useAuth.ts`                        |
+| Utilities        | camelCase                         | `formatDate.ts`                     |
+| Services         | camelCase with descriptive suffix | `authService.ts`                    |
+| Types            | PascalCase                        | `User.ts`, `AuthResponse.ts`        |
+| Constants        | SCREAMING_SNAKE_CASE              | `API_BASE_URL`                      |
+| Feature folders  | kebab-case or lowercase           | `auth/`, `dashboard/`               |
+| Route segments   | kebab-case                        | `src/app/(platform)/user-settings/` |
 
 ### Variables and functions
 
-| Type | Convention | Example |
-|------|------------|---------|
-| Variables | camelCase | `isLoading`, `userName` |
-| Functions | camelCase, verb-first | `fetchUser`, `handleSubmit` |
-| Boolean variables | `is`, `has`, `should` prefix | `isAuthenticated`, `hasError` |
-| Event handlers | `handle` prefix | `handleClick`, `handleChange` |
-| Types / Interfaces | PascalCase, no `I` prefix | `UserProfile`, not `IUserProfile` |
-| Enums | PascalCase name, PascalCase members | `UserRole.Admin` |
+| Type               | Convention                          | Example                           |
+| ------------------ | ----------------------------------- | --------------------------------- |
+| Variables          | camelCase                           | `isLoading`, `userName`           |
+| Functions          | camelCase, verb-first               | `fetchUser`, `handleSubmit`       |
+| Boolean variables  | `is`, `has`, `should` prefix        | `isAuthenticated`, `hasError`     |
+| Event handlers     | `handle` prefix                     | `handleClick`, `handleChange`     |
+| Types / Interfaces | PascalCase, no `I` prefix           | `UserProfile`, not `IUserProfile` |
+| Enums              | PascalCase name, PascalCase members | `UserRole.Admin`                  |
 
 ---
 
@@ -65,14 +65,14 @@ features/auth/
 
 ### Boundary rules
 
-| Directory | Contains | Does not contain |
-|-----------|----------|------------------|
-| `src/app/` | Routes, layouts, metadata | Business logic, API calls |
-| `src/features/` | Domain logic and UI | Generic reusable primitives |
-| `src/components/ui/` | Design system primitives | Feature-specific components |
-| `src/services/` | Shared API integrations | UI components |
-| `src/lib/` | Framework setup, clients | Feature business rules |
-| `src/utils/` | Pure helper functions | React hooks or API calls |
+| Directory            | Contains                  | Does not contain            |
+| -------------------- | ------------------------- | --------------------------- |
+| `src/app/`           | Routes, layouts, metadata | Business logic, API calls   |
+| `src/features/`      | Domain logic and UI       | Generic reusable primitives |
+| `src/components/ui/` | Design system primitives  | Feature-specific components |
+| `src/services/`      | Shared API integrations   | UI components               |
+| `src/lib/`           | Framework setup, clients  | Feature business rules      |
+| `src/utils/`         | Pure helper functions     | React hooks or API calls    |
 
 ---
 
@@ -115,42 +115,42 @@ features/auth/
 
 ## TypeScript Rules
 
-| Rule | Detail |
-|------|--------|
-| Strict mode | Always enabled — do not disable strict checks |
-| No `any` | Use `unknown` and narrow, or define explicit types |
-| Explicit return types | Required for exported functions and public APIs |
-| Prefer `interface` | For object shapes; use `type` for unions and intersections |
-| Path aliases | Use `@/` imports for `src/` paths — avoid deep relative imports |
-| Enums vs unions | Prefer string literal unions over enums unless values are shared at runtime |
-| Null handling | Handle `null` and `undefined` explicitly — no non-null assertions unless justified |
+| Rule                  | Detail                                                                             |
+| --------------------- | ---------------------------------------------------------------------------------- |
+| Strict mode           | Always enabled — do not disable strict checks                                      |
+| No `any`              | Use `unknown` and narrow, or define explicit types                                 |
+| Explicit return types | Required for exported functions and public APIs                                    |
+| Prefer `interface`    | For object shapes; use `type` for unions and intersections                         |
+| Path aliases          | Use `@/` imports for `src/` paths — avoid deep relative imports                    |
+| Enums vs unions       | Prefer string literal unions over enums unless values are shared at runtime        |
+| Null handling         | Handle `null` and `undefined` explicitly — no non-null assertions unless justified |
 
 ---
 
 ## React Rules
 
-| Rule | Detail |
-|------|--------|
-| Server Components first | Default to Server Components for all new components |
-| Minimal client JS | Only mark components `"use client"` when necessary |
-| Single responsibility | One component, one purpose |
-| No business logic in JSX | Extract logic to hooks, services, or utility functions |
-| Keys in lists | Always provide stable, unique `key` props |
-| Accessibility | Use semantic HTML; add ARIA only when native semantics are insufficient |
-| Images | Use `next/image` with explicit `width`, `height`, and meaningful `alt` text |
-| Metadata | Define page metadata via `export const metadata` or `generateMetadata` |
+| Rule                     | Detail                                                                      |
+| ------------------------ | --------------------------------------------------------------------------- |
+| Server Components first  | Default to Server Components for all new components                         |
+| Minimal client JS        | Only mark components `"use client"` when necessary                          |
+| Single responsibility    | One component, one purpose                                                  |
+| No business logic in JSX | Extract logic to hooks, services, or utility functions                      |
+| Keys in lists            | Always provide stable, unique `key` props                                   |
+| Accessibility            | Use semantic HTML; add ARIA only when native semantics are insufficient     |
+| Images                   | Use `next/image` with explicit `width`, `height`, and meaningful `alt` text |
+| Metadata                 | Define page metadata via `export const metadata` or `generateMetadata`      |
 
 ---
 
 ## Styling Rules
 
-| Rule | Detail |
-|------|--------|
-| Tailwind utilities | Primary styling method — use utility classes |
-| Design tokens | Use `@theme` tokens from `globals.css` — no hardcoded colors or spacing |
-| Custom CSS | Only when Tailwind utilities are insufficient |
-| Dark mode | Follow the project dark mode strategy defined in design docs |
-| Responsive | Mobile-first with Tailwind breakpoint prefixes |
+| Rule               | Detail                                                                  |
+| ------------------ | ----------------------------------------------------------------------- |
+| Tailwind utilities | Primary styling method — use utility classes                            |
+| Design tokens      | Use `@theme` tokens from `globals.css` — no hardcoded colors or spacing |
+| Custom CSS         | Only when Tailwind utilities are insufficient                           |
+| Dark mode          | Follow the project dark mode strategy defined in design docs            |
+| Responsive         | Mobile-first with Tailwind breakpoint prefixes                          |
 
 ---
 
@@ -164,16 +164,16 @@ All commits follow the [Conventional Commits](https://www.conventionalcommits.or
 <type>(<optional scope>): <description>
 ```
 
-| Type | Usage |
-|------|-------|
-| `feat` | New feature |
-| `fix` | Bug fix |
+| Type       | Usage                              |
+| ---------- | ---------------------------------- |
+| `feat`     | New feature                        |
+| `fix`      | Bug fix                            |
 | `refactor` | Code change without feature or fix |
-| `docs` | Documentation only |
-| `test` | Tests only |
-| `chore` | Tooling, maintenance |
-| `style` | Formatting, no logic change |
-| `perf` | Performance improvement |
+| `docs`     | Documentation only                 |
+| `test`     | Tests only                         |
+| `chore`    | Tooling, maintenance               |
+| `style`    | Formatting, no logic change        |
+| `perf`     | Performance improvement            |
 
 ### Branch naming
 

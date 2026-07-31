@@ -1,7 +1,7 @@
-export { Caption } from "./Caption";
-export { Heading } from "./Heading";
-export { Label } from "./Label";
-export { Text } from "./Text";
+export { Caption } from './Caption';
+export { Heading } from './Heading';
+export { Label } from './Label';
+export { Text } from './Text';
 export type {
   Breakpoint,
   CaptionProps,
@@ -13,4 +13,4 @@ export type {
   TextElement,
   TextProps,
   TextSize,
-} from "./types";
+} from './types';

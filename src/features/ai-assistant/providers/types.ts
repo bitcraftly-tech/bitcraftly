@@ -1,4 +1,4 @@
-import type { AiChatRequest, AiProviderId, StreamChunk } from "../types";
+import type { AiChatRequest, AiProviderId, StreamChunk } from '../types';
 
 /**
  * Provider contract for Bitcraftly AI Assistant.
@@ -20,18 +20,15 @@ export class ProviderNotConfiguredError extends Error {
     super(
       `${displayName} adapter is registered but not configured. Wire the API client before enabling this provider.`,
     );
-    this.name = "ProviderNotConfiguredError";
+    this.name = 'ProviderNotConfiguredError';
     this.providerId = providerId;
   }
 }
 
 /** Yields a structured error stream when a provider is not yet wired. */
 export async function* streamNotConfigured(
-  provider: Pick<AiProvider, "id" | "displayName">,
+  provider: Pick<AiProvider, 'id' | 'displayName'>,
 ): AsyncIterable<StreamChunk> {
-  const message = new ProviderNotConfiguredError(
-    provider.id,
-    provider.displayName,
-  ).message;
-  yield { type: "error", message };
+  const message = new ProviderNotConfiguredError(provider.id, provider.displayName).message;
+  yield { type: 'error', message };
 }

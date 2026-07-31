@@ -1,5 +1,5 @@
-import { MarketingFinalCtaBand } from "@/components/patterns/marketing-final-cta-band";
-import { RESOURCES_CTA_COPY } from "./resources.content";
+import { MarketingFinalCtaBand } from '@/components/patterns/marketing-final-cta-band';
+import { RESOURCES_CTA_COPY } from './resources.content';
 
 /**
  * Final CTA — same MarketingFinalCtaBand shell as Resources landing.

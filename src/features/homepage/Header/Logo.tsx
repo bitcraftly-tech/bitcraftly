@@ -1,22 +1,16 @@
-import Image from "next/image";
-import Link from "next/link";
-import { cn } from "@/lib/cn";
+import Image from 'next/image';
+import Link from 'next/link';
+import { cn } from '@/lib/cn';
 
-export function Logo({
-  className,
-  priority = false,
-}: {
-  className?: string;
-  priority?: boolean;
-}) {
+export function Logo({ className, priority = false }: { className?: string; priority?: boolean }) {
   return (
     <Link
       href="/"
       className={cn(
-        "inline-flex max-w-full min-w-0 items-center gap-[8px] sm:gap-[10px]",
-        "text-foreground no-underline hover:no-underline hover:text-foreground",
-        "rounded-md transition-opacity duration-200 hover:opacity-90",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        'inline-flex max-w-full min-w-0 items-center gap-[8px] sm:gap-[10px]',
+        'text-foreground no-underline hover:no-underline hover:text-foreground',
+        'rounded-md transition-opacity duration-200 hover:opacity-90',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
         className,
       )}
     >

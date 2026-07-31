@@ -1,9 +1,9 @@
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { Section } from "@/components/ui/section";
-import { ROUTES } from "@/constants/navigation";
-import { AssistantChat } from "./components/AssistantChat";
-import { ASSISTANT_META } from "./assistant.config";
-import "./ai-assistant.css";
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { Section } from '@/components/ui/section';
+import { ROUTES } from '@/constants/navigation';
+import { AssistantChat } from './components/AssistantChat';
+import { ASSISTANT_META } from './assistant.config';
+import './ai-assistant.css';
 
 export function AiAssistantPage() {
   return (

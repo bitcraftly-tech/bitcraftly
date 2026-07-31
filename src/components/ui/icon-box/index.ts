@@ -1,6 +1,2 @@
-export { IconBox } from "./IconBox";
-export type {
-  IconBoxProps,
-  IconBoxSize,
-  IconBoxVariant,
-} from "./types";
+export { IconBox } from './IconBox';
+export type { IconBoxProps, IconBoxSize, IconBoxVariant } from './types';

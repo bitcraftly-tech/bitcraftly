@@ -1,5 +1,5 @@
-import { Section } from "@/components/ui/section";
-import { WORK_LANDING_SECTIONS } from "./work.content";
+import { Section } from '@/components/ui/section';
+import { WORK_LANDING_SECTIONS } from './work.content';
 
 function scaffoldCopy(sectionId: string): {
   title: string;
@@ -8,24 +8,24 @@ function scaffoldCopy(sectionId: string): {
   const meta = WORK_LANDING_SECTIONS.find((item) => item.id === sectionId);
   return {
     title: meta?.title ?? sectionId,
-    description: meta?.description ?? "",
+    description: meta?.description ?? '',
   };
 }
 
 function WorkSectionScaffold({
   id,
   headingId,
-  background = "default",
+  background = 'default',
 }: {
   id: string;
   headingId: string;
-  background?: "default" | "surface";
+  background?: 'default' | 'surface';
 }) {
   const { title, description } = scaffoldCopy(id);
 
   return (
     <Section
-      id={id === "portfolio-grid" ? "work-portfolio" : id}
+      id={id === 'portfolio-grid' ? 'work-portfolio' : id}
       spacing="lg"
       background={background}
       aria-labelledby={headingId}
@@ -46,12 +46,7 @@ function WorkSectionScaffold({
 }
 
 export function WorkCategoriesSection() {
-  return (
-    <WorkSectionScaffold
-      id="portfolio-categories"
-      headingId="work-categories-heading"
-    />
-  );
+  return <WorkSectionScaffold id="portfolio-categories" headingId="work-categories-heading" />;
 }
 
 export function WorkPortfolioSection() {
@@ -64,14 +59,14 @@ export function WorkPortfolioSection() {
   );
 }
 
-export { WorkResultsSection } from "./WorkResultsSection";
+export { WorkResultsSection } from './WorkResultsSection';
 
-export { WorkTechSection } from "./WorkTechSection";
+export { WorkTechSection } from './WorkTechSection';
 
-export { WorkProcessSection } from "./WorkProcessSection";
+export { WorkProcessSection } from './WorkProcessSection';
 
-export { WorkTestimonialsSection } from "./WorkTrustSection";
+export { WorkTestimonialsSection } from './WorkTrustSection';
 
-export { WorkFaqSection } from "./WorkFaqSection";
+export { WorkFaqSection } from './WorkFaqSection';
 
-export { WorkRelatedServicesSection } from "./WorkRelatedServicesSection";
+export { WorkRelatedServicesSection } from './WorkRelatedServicesSection';

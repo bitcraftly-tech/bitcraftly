@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useId, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
-import { Icon } from "@/components/ui/icon";
-import { Button } from "@/components/ui/button";
-import { trackLeadEvent } from "../analytics";
-import { LEAD_FUNNEL_CONFIG } from "../lead-funnel.config";
-import { FreeAuditCta } from "./FreeAuditCta";
-import { WhatsAppCta } from "./WhatsAppCta";
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { Icon } from '@/components/ui/icon';
+import { Button } from '@/components/ui/button';
+import { trackLeadEvent } from '../analytics';
+import { LEAD_FUNNEL_CONFIG } from '../lead-funnel.config';
+import { FreeAuditCta } from './FreeAuditCta';
+import { WhatsAppCta } from './WhatsAppCta';
 
 function wasDismissed(): boolean {
   try {
-    return sessionStorage.getItem(LEAD_FUNNEL_CONFIG.exitIntentStorageKey) === "1";
+    return sessionStorage.getItem(LEAD_FUNNEL_CONFIG.exitIntentStorageKey) === '1';
   } catch {
     return false;
   }
@@ -19,7 +19,7 @@ function wasDismissed(): boolean {
 
 function markDismissed(): void {
   try {
-    sessionStorage.setItem(LEAD_FUNNEL_CONFIG.exitIntentStorageKey, "1");
+    sessionStorage.setItem(LEAD_FUNNEL_CONFIG.exitIntentStorageKey, '1');
   } catch {
     // ignore quota / private mode
   }
@@ -38,13 +38,12 @@ export function ExitIntentPopup() {
   const [open, setOpen] = useState(false);
   const armedRef = useRef(false);
 
-  const close = useCallback((reason: "dismiss" | "cta") => {
+  const close = useCallback((reason: 'dismiss' | 'cta') => {
     setOpen(false);
     markDismissed();
-    trackLeadEvent(
-      reason === "cta" ? "exit_intent_cta_click" : "exit_intent_dismiss",
-      { source: "exit-intent" },
-    );
+    trackLeadEvent(reason === 'cta' ? 'exit_intent_cta_click' : 'exit_intent_dismiss', {
+      source: 'exit-intent',
+    });
     previouslyFocused.current?.focus();
   }, []);
 
@@ -61,22 +60,18 @@ export function ExitIntentPopup() {
       if (!armedRef.current || open || wasDismissed()) {
         return;
       }
-      if (
-        event.clientY <= 0 &&
-        event.relatedTarget === null &&
-        !event.buttons
-      ) {
+      if (event.clientY <= 0 && event.relatedTarget === null && !event.buttons) {
         previouslyFocused.current = document.activeElement as HTMLElement | null;
         setOpen(true);
-        trackLeadEvent("exit_intent_shown", { source: "exit-intent" });
+        trackLeadEvent('exit_intent_shown', { source: 'exit-intent' });
         armedRef.current = false;
       }
     };
 
-    document.addEventListener("mouseout", onMouseOut);
+    document.addEventListener('mouseout', onMouseOut);
     return () => {
       window.clearTimeout(armTimer);
-      document.removeEventListener("mouseout", onMouseOut);
+      document.removeEventListener('mouseout', onMouseOut);
     };
   }, [open, pathname]);
 
@@ -92,12 +87,12 @@ export function ExitIntentPopup() {
     focusable?.[0]?.focus();
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         event.preventDefault();
-        close("dismiss");
+        close('dismiss');
         return;
       }
-      if (event.key !== "Tab" || !focusable || focusable.length === 0) {
+      if (event.key !== 'Tab' || !focusable || focusable.length === 0) {
         return;
       }
       const first = focusable[0];
@@ -114,12 +109,12 @@ export function ExitIntentPopup() {
       }
     };
 
-    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener('keydown', onKeyDown);
     const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
 
     return () => {
-      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener('keydown', onKeyDown);
       document.body.style.overflow = previousOverflow;
     };
   }, [close, open]);
@@ -134,7 +129,7 @@ export function ExitIntentPopup() {
         type="button"
         className="lead-funnel__exit-backdrop"
         aria-label="Dismiss offer"
-        onClick={() => close("dismiss")}
+        onClick={() => close('dismiss')}
       />
       <div
         ref={dialogRef}
@@ -148,7 +143,7 @@ export function ExitIntentPopup() {
           type="button"
           className="lead-funnel__exit-close"
           aria-label="Close"
-          onClick={() => close("dismiss")}
+          onClick={() => close('dismiss')}
         >
           <Icon name="close" size="sm" aria-hidden />
         </button>
@@ -157,27 +152,19 @@ export function ExitIntentPopup() {
           Get a free website audit
         </h2>
         <p id={descId} className="lead-funnel__exit-text">
-          Speed, mobile UX, and lead-capture checklist — no obligation. Founder
-          reply within one business day.
+          Speed, mobile UX, and lead-capture checklist — no obligation. Founder reply within one
+          business day.
         </p>
         <div className="lead-funnel__exit-actions">
-          <FreeAuditCta
-            source="exit-intent"
-            onNavigate={() => close("cta")}
-          />
+          <FreeAuditCta source="exit-intent" onNavigate={() => close('cta')} />
           <WhatsAppCta
             href={LEAD_FUNNEL_CONFIG.whatsappAuditHref}
             label="WhatsApp the audit request"
             source="exit-intent"
-            onNavigate={() => close("cta")}
+            onNavigate={() => close('cta')}
           />
         </div>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => close("dismiss")}
-        >
+        <Button type="button" variant="ghost" size="sm" onClick={() => close('dismiss')}>
           No thanks
         </Button>
       </div>

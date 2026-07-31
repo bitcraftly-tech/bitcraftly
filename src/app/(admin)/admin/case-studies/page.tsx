@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { AdminCaseStudiesPage } from "@/features/admin";
+import type { Metadata } from 'next';
+import { AdminCaseStudiesPage } from '@/features/admin';
 
 export const metadata: Metadata = {
-  title: "Case Studies",
+  title: 'Case Studies',
 };
 
 export default function AdminCaseStudiesRoutePage() {

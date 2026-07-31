@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 /**
  * Loads footer + deferred chrome widget CSS after first paint
@@ -14,7 +14,7 @@ export function MarketingDeferredCss() {
     const raf1 = window.requestAnimationFrame(() => {
       raf2 = window.requestAnimationFrame(() => {
         if (!cancelled) {
-          void import("./marketing-deferred-styles").catch(() => {
+          void import('./marketing-deferred-styles').catch(() => {
             /* non-critical */
           });
         }

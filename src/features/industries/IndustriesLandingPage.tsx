@@ -1,9 +1,9 @@
-import { JsonLdScript } from "@/components/patterns/json-ld";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { ROUTES } from "@/constants/navigation";
-import { buildIndustriesBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { IndustriesHero } from "./IndustriesHero";
-import { IndustriesPageCta } from "./IndustriesPageCta";
+import { JsonLdScript } from '@/components/patterns/json-ld';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { ROUTES } from '@/constants/navigation';
+import { buildIndustriesBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { IndustriesHero } from './IndustriesHero';
+import { IndustriesPageCta } from './IndustriesPageCta';
 import {
   IndustriesCaseStudiesSection,
   IndustriesChallengesSection,
@@ -18,9 +18,9 @@ import {
   IndustriesSolutionsSection,
   IndustriesTechSection,
   IndustriesWhySection,
-} from "./IndustriesSections";
-import { buildIndustriesListingJsonLd } from "./industries-schema";
-import "./industries.css";
+} from './IndustriesSections';
+import { buildIndustriesListingJsonLd } from './industries-schema';
+import './industries.css';
 
 /**
  * Industries landing — vertical engineering credibility, conversion-focused.
@@ -52,8 +52,8 @@ export function IndustriesLandingPage() {
 }
 
 export const INDUSTRIES_LANDING_META = {
-  title: "Industries",
+  title: 'Industries',
   description:
-    "Bitcraftly engineers industry platforms for healthcare, education, retail, finance, logistics, SaaS, and more — domain networks, measurable delivery.",
+    'Bitcraftly engineers industry platforms for healthcare, education, retail, finance, logistics, SaaS, and more — domain networks, measurable delivery.',
   path: ROUTES.industries,
 } as const;

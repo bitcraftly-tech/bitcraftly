@@ -1,17 +1,17 @@
-import Link from "next/link";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Container } from "@/components/ui/container";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { ROUTES } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import type { LegalDocument } from "./legal.content";
-import { LegalHeroVisual } from "./LegalHeroVisual";
-import { LegalSiteNav, type LegalSiteNavActive } from "./LegalSiteNav";
-import "./legal.css";
+import Link from 'next/link';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Container } from '@/components/ui/container';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { ROUTES } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import type { LegalDocument } from './legal.content';
+import { LegalHeroVisual } from './LegalHeroVisual';
+import { LegalSiteNav, type LegalSiteNavActive } from './LegalSiteNav';
+import './legal.css';
 
 interface LegalDocumentHeroProps {
   document: LegalDocument;
@@ -25,35 +25,35 @@ const PRIVACY_FEATURES: readonly {
   title: string;
   description: string;
   icon: IconName;
-  tone: "violet" | "sky" | "emerald" | "amber";
+  tone: 'violet' | 'sky' | 'emerald' | 'amber';
 }[] = [
   {
-    id: "transparent",
-    title: "Transparent use",
-    description: "Clear purposes for every data touchpoint",
-    icon: "sparkles",
-    tone: "violet",
+    id: 'transparent',
+    title: 'Transparent use',
+    description: 'Clear purposes for every data touchpoint',
+    icon: 'sparkles',
+    tone: 'violet',
   },
   {
-    id: "secure",
-    title: "Secure storage",
-    description: "Reasonable controls on modern infrastructure",
-    icon: "shield",
-    tone: "sky",
+    id: 'secure',
+    title: 'Secure storage',
+    description: 'Reasonable controls on modern infrastructure',
+    icon: 'shield',
+    tone: 'sky',
   },
   {
-    id: "rights",
-    title: "Your rights",
-    description: "Access, correction, export, or deletion",
-    icon: "check",
-    tone: "emerald",
+    id: 'rights',
+    title: 'Your rights',
+    description: 'Access, correction, export, or deletion',
+    icon: 'check',
+    tone: 'emerald',
   },
   {
-    id: "response",
-    title: "Verified handling",
-    description: "We act on confirmed requests promptly",
-    icon: "zap",
-    tone: "amber",
+    id: 'response',
+    title: 'Verified handling',
+    description: 'We act on confirmed requests promptly',
+    icon: 'zap',
+    tone: 'amber',
   },
 ] as const;
 
@@ -62,35 +62,35 @@ const TERMS_FEATURES: readonly {
   title: string;
   description: string;
   icon: IconName;
-  tone: "violet" | "sky" | "emerald" | "amber";
+  tone: 'violet' | 'sky' | 'emerald' | 'amber';
 }[] = [
   {
-    id: "clear",
-    title: "Clear acceptance",
-    description: "Using the site means these terms apply",
-    icon: "check",
-    tone: "violet",
+    id: 'clear',
+    title: 'Clear acceptance',
+    description: 'Using the site means these terms apply',
+    icon: 'check',
+    tone: 'violet',
   },
   {
-    id: "scope",
-    title: "Defined scope",
-    description: "Web, apps, and custom work as agreed",
-    icon: "layout-grid",
-    tone: "sky",
+    id: 'scope',
+    title: 'Defined scope',
+    description: 'Web, apps, and custom work as agreed',
+    icon: 'layout-grid',
+    tone: 'sky',
   },
   {
-    id: "payments",
-    title: "Milestone payments",
-    description: "Written quotes before work begins",
-    icon: "zap",
-    tone: "emerald",
+    id: 'payments',
+    title: 'Milestone payments',
+    description: 'Written quotes before work begins',
+    icon: 'zap',
+    tone: 'emerald',
   },
   {
-    id: "fair",
-    title: "Fair engagement",
-    description: "India law · clear liability limits",
-    icon: "shield",
-    tone: "amber",
+    id: 'fair',
+    title: 'Fair engagement',
+    description: 'India law · clear liability limits',
+    icon: 'shield',
+    tone: 'amber',
   },
 ] as const;
 
@@ -105,15 +105,13 @@ export async function LegalDocumentHero({
 }: LegalDocumentHeroProps) {
   const isMobile = await isMobileUserAgent();
   const highlight = document.titleHighlight;
-  const titleParts = highlight
-    ? document.title.split(highlight)
-    : [document.title, ""];
+  const titleParts = highlight ? document.title.split(highlight) : [document.title, ''];
 
-  const primaryHref = `#${document.sections[0]?.id ?? ""}`;
-  const isTerms = activeNav === "terms";
-  const primaryLabel = isTerms ? "Read terms" : "Read policy";
+  const primaryHref = `#${document.sections[0]?.id ?? ''}`;
+  const isTerms = activeNav === 'terms';
+  const primaryLabel = isTerms ? 'Read terms' : 'Read policy';
   const features = isTerms ? TERMS_FEATURES : PRIVACY_FEATURES;
-  const featuresLabel = isTerms ? "Engagement principles" : "Privacy principles";
+  const featuresLabel = isTerms ? 'Engagement principles' : 'Privacy principles';
 
   return (
     <Section
@@ -121,9 +119,9 @@ export async function LegalDocumentHero({
       contained={false}
       aria-labelledby={headingId}
       className={cn(
-        "legal-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'legal-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -159,21 +157,14 @@ export async function LegalDocumentHero({
         <div className="legal-hero__grid">
           <div className="legal-hero__content">
             <p className="legal-hero__eyebrow">
-              <Icon
-                name="shield"
-                size="sm"
-                aria-hidden
-                className="legal-hero__eyebrow-icon"
-              />
+              <Icon name="shield" size="sm" aria-hidden className="legal-hero__eyebrow-icon" />
               <span>{document.eyebrow}</span>
             </p>
 
             <h1 id={headingId} className="legal-hero__title">
               {titleParts[0]}
-              {highlight ? (
-                <span className="legal-hero__title-accent">{highlight}</span>
-              ) : null}
-              {titleParts[1] ?? ""}
+              {highlight ? <span className="legal-hero__title-accent">{highlight}</span> : null}
+              {titleParts[1] ?? ''}
             </h1>
 
             <p className="legal-hero__description">{document.description}</p>
@@ -182,17 +173,11 @@ export async function LegalDocumentHero({
             <LegalSiteNav active={activeNav} className="legal-hero__site-nav" />
 
             <div className="legal-hero__cta-row">
-              <a
-                href={primaryHref}
-                className="legal-hero__btn legal-hero__btn--primary"
-              >
+              <a href={primaryHref} className="legal-hero__btn legal-hero__btn--primary">
                 {primaryLabel}
                 <Icon name="arrow-up-right" size="sm" aria-hidden />
               </a>
-              <Link
-                href={ROUTES.trust}
-                className="legal-hero__btn legal-hero__btn--outline"
-              >
+              <Link href={ROUTES.trust} className="legal-hero__btn legal-hero__btn--outline">
                 Trust Center
                 <Icon name="arrow-up-right" size="sm" aria-hidden />
               </Link>
@@ -201,9 +186,7 @@ export async function LegalDocumentHero({
 
           {!isMobile ? (
             <div className="legal-hero__visual">
-              <LegalHeroVisual
-                variant={isTerms ? "terms" : "privacy"}
-              />
+              <LegalHeroVisual variant={isTerms ? 'terms' : 'privacy'} />
             </div>
           ) : null}
 
@@ -218,13 +201,9 @@ export async function LegalDocumentHero({
                     >
                       <Icon name={item.icon} size="sm" />
                     </span>
-                    <span className="legal-hero-features__title">
-                      {item.title}
-                    </span>
+                    <span className="legal-hero-features__title">{item.title}</span>
                   </span>
-                  <span className="legal-hero-features__desc">
-                    {item.description}
-                  </span>
+                  <span className="legal-hero-features__desc">{item.description}</span>
                 </li>
               ))}
             </ul>

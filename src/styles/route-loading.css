@@ -1,2 +1,2 @@
 /** Route-transition loading only — not imported in globals (avoids ATF CSS regression). */
-@import "../components/ui/skeleton/skeleton.css";
+@import '../components/ui/skeleton/skeleton.css';

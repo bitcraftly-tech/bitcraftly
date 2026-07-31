@@ -1,11 +1,11 @@
-import Link from "next/link";
-import { MarketingIllustratedHero } from "@/components/patterns/hero-compositions";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { Section } from "@/components/ui/section";
-import { CASE_STUDIES, getCaseStudyHref } from "@/content/case-studies";
-import { NAV_ACTIONS, ROUTES } from "@/constants/navigation";
-import { buildCaseStudiesBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { CaseStudiesHeroVisual } from "./CaseStudiesHeroVisual";
+import Link from 'next/link';
+import { MarketingIllustratedHero } from '@/components/patterns/hero-compositions';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { Section } from '@/components/ui/section';
+import { CASE_STUDIES, getCaseStudyHref } from '@/content/case-studies';
+import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { buildCaseStudiesBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { CaseStudiesHeroVisual } from './CaseStudiesHeroVisual';
 
 export function CaseStudiesLandingPage() {
   const breadcrumbs = buildCaseStudiesBreadcrumbs();
@@ -21,26 +21,18 @@ export function CaseStudiesLandingPage() {
         description="Before-and-after stories from Bitcraftly engagements — timelines, scope, and business metrics that matter to founders and operators."
         supporting="See how we turn discovery into shipped systems with clear payback."
         primaryCta={{
-          label: "View portfolio",
+          label: 'View portfolio',
           href: ROUTES.work,
         }}
         secondaryCta={{
           label: NAV_ACTIONS.bookCall.label,
           href: NAV_ACTIONS.bookCall.href,
         }}
-        trustItems={[
-          "Before / after metrics",
-          "Written delivery notes",
-          "Measurable ROI",
-        ]}
+        trustItems={['Before / after metrics', 'Written delivery notes', 'Measurable ROI']}
         renderVisual={() => <CaseStudiesHeroVisual />}
       />
 
-      <Section
-        spacing="lg"
-        background="default"
-        aria-labelledby="case-studies-list-heading"
-      >
+      <Section spacing="lg" background="default" aria-labelledby="case-studies-list-heading">
         <h2
           id="case-studies-list-heading"
           className="m-0 font-sans text-[28px] font-semibold tracking-[-0.02em] text-foreground"

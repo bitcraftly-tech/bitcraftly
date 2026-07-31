@@ -1,5 +1,5 @@
-import type { ReactElement, SVGProps } from "react";
-import { cn } from "@/lib/cn";
+import type { ReactElement, SVGProps } from 'react';
+import { cn } from '@/lib/cn';
 
 type TechLogoProps = SVGProps<SVGSVGElement> & {
   title: string;
@@ -13,7 +13,7 @@ function TechLogoSvg({ title, className, children, ...props }: TechLogoProps) {
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("h-8 w-8", className)}
+      className={cn('h-8 w-8', className)}
       {...props}
     >
       <title>{title}</title>
@@ -26,14 +26,7 @@ const logos: Record<string, (className?: string) => ReactElement> = {
   react: (className) => (
     <TechLogoSvg title="React" className={className}>
       <circle cx="16" cy="16" r="2.2" fill="#61DAFB" />
-      <ellipse
-        cx="16"
-        cy="16"
-        rx="11"
-        ry="4.5"
-        stroke="#61DAFB"
-        strokeWidth="1.6"
-      />
+      <ellipse cx="16" cy="16" rx="11" ry="4.5" stroke="#61DAFB" strokeWidth="1.6" />
       <ellipse
         cx="16"
         cy="16"
@@ -57,10 +50,7 @@ const logos: Record<string, (className?: string) => ReactElement> = {
   nextjs: (className) => (
     <TechLogoSvg title="Next.js" className={className}>
       <circle cx="16" cy="16" r="12" fill="#0F172A" />
-      <path
-        d="M13 10.5h2.1l5.4 8.2V10.5H22.5V21.5h-2.1L15 13.3v8.2H13V10.5z"
-        fill="#fff"
-      />
+      <path d="M13 10.5h2.1l5.4 8.2V10.5H22.5V21.5h-2.1L15 13.3v8.2H13V10.5z" fill="#fff" />
     </TechLogoSvg>
   ),
   typescript: (className) => (
@@ -72,7 +62,7 @@ const logos: Record<string, (className?: string) => ReactElement> = {
       />
     </TechLogoSvg>
   ),
-  "tailwind-css": (className) => (
+  'tailwind-css': (className) => (
     <TechLogoSvg title="Tailwind CSS" className={className}>
       <path
         fill="#38BDF8"
@@ -134,10 +124,7 @@ const logos: Record<string, (className?: string) => ReactElement> = {
   fastapi: (className) => (
     <TechLogoSvg title="FastAPI" className={className}>
       <circle cx="16" cy="16" r="12" fill="#009688" />
-      <path
-        fill="#fff"
-        d="M15.2 8.5h1.6v6.2l4.4 4.4-1.1 1.1-4.9-4.9V8.5z"
-      />
+      <path fill="#fff" d="M15.2 8.5h1.6v6.2l4.4 4.4-1.1 1.1-4.9-4.9V8.5z" />
     </TechLogoSvg>
   ),
   mongodb: (className) => (
@@ -176,18 +163,9 @@ const logos: Record<string, (className?: string) => ReactElement> = {
   ),
   redis: (className) => (
     <TechLogoSvg title="Redis" className={className}>
-      <path
-        fill="#DC382D"
-        d="M6.5 12.2 16 8.5l9.5 3.7-9.5 3.7-9.5-3.7z"
-      />
-      <path
-        fill="#A41E11"
-        d="M6.5 12.2v4.2L16 20.1l9.5-3.7v-4.2L16 15.9 6.5 12.2z"
-      />
-      <path
-        fill="#DC382D"
-        d="M6.5 16.4v4.2L16 24.3l9.5-3.7v-4.2L16 20.1 6.5 16.4z"
-      />
+      <path fill="#DC382D" d="M6.5 12.2 16 8.5l9.5 3.7-9.5 3.7-9.5-3.7z" />
+      <path fill="#A41E11" d="M6.5 12.2v4.2L16 20.1l9.5-3.7v-4.2L16 15.9 6.5 12.2z" />
+      <path fill="#DC382D" d="M6.5 16.4v4.2L16 24.3l9.5-3.7v-4.2L16 20.1 6.5 16.4z" />
     </TechLogoSvg>
   ),
   firebase: (className) => (
@@ -217,7 +195,7 @@ const logos: Record<string, (className?: string) => ReactElement> = {
       />
     </TechLogoSvg>
   ),
-  "google-cloud": (className) => (
+  'google-cloud': (className) => (
     <TechLogoSvg title="Google Cloud" className={className}>
       <path
         fill="#4285F4"
@@ -227,14 +205,8 @@ const logos: Record<string, (className?: string) => ReactElement> = {
         fill="#EA4335"
         d="M12.2 13.2a4.8 4.8 0 0 1 7.2-1.4l2.1-2.1A7.7 7.7 0 0 0 9.4 12l2.8 1.2z"
       />
-      <path
-        fill="#FBBC05"
-        d="M9.4 12a7.7 7.7 0 0 0-.1 2.2l3.1.1A4.8 4.8 0 0 1 12.2 13l-2.8-1z"
-      />
-      <path
-        fill="#34A853"
-        d="M16.8 22.5a7.7 7.7 0 0 0 6.7-4H16.8v3.2c0 .3 0 .5 0 .8z"
-      />
+      <path fill="#FBBC05" d="M9.4 12a7.7 7.7 0 0 0-.1 2.2l3.1.1A4.8 4.8 0 0 1 12.2 13l-2.8-1z" />
+      <path fill="#34A853" d="M16.8 22.5a7.7 7.7 0 0 0 6.7-4H16.8v3.2c0 .3 0 .5 0 .8z" />
     </TechLogoSvg>
   ),
   docker: (className) => (
@@ -302,23 +274,13 @@ const logos: Record<string, (className?: string) => ReactElement> = {
         fill="#000"
         d="M16 5.5c-2.4 3.2-4.8 5.1-4.8 9.2 0 2.9 2.1 5.3 4.8 5.3s4.8-2.4 4.8-5.3c0-4.1-2.4-6-4.8-9.2z"
       />
-      <path
-        fill="#00DC82"
-        d="M16 21.5c-1.4 0-2.5-1-2.5-2.3h5c0 1.3-1.1 2.3-2.5 2.3z"
-      />
+      <path fill="#00DC82" d="M16 21.5c-1.4 0-2.5-1-2.5-2.3h5c0 1.3-1.1 2.3-2.5 2.3z" />
     </TechLogoSvg>
   ),
-  "react-native": (className) => (
+  'react-native': (className) => (
     <TechLogoSvg title="React Native" className={className}>
       <circle cx="16" cy="16" r="2.2" fill="#61DAFB" />
-      <ellipse
-        cx="16"
-        cy="16"
-        rx="11"
-        ry="4.5"
-        stroke="#61DAFB"
-        strokeWidth="1.6"
-      />
+      <ellipse cx="16" cy="16" rx="11" ry="4.5" stroke="#61DAFB" strokeWidth="1.6" />
       <ellipse
         cx="16"
         cy="16"
@@ -349,13 +311,7 @@ const logos: Record<string, (className?: string) => ReactElement> = {
   ),
 };
 
-export function TechnologyLogo({
-  id,
-  className,
-}: {
-  id: string;
-  className?: string;
-}) {
+export function TechnologyLogo({ id, className }: { id: string; className?: string }) {
   const render = logos[id];
   if (!render) {
     return (

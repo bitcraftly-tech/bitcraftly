@@ -1,9 +1,9 @@
-import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
-import { ServiceFaqAccordion } from "./ServiceFaqAccordion";
-import { SERVICES_LANDING } from "./services.content";
-import "@/features/homepage/FAQ/faq.css";
+import { Container } from '@/components/ui/container';
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
+import { ServiceFaqAccordion } from './ServiceFaqAccordion';
+import { SERVICES_LANDING } from './services.content';
+import '@/features/homepage/FAQ/faq.css';
 
 /**
  * Services listing FAQ — aligned with Solutions FAQ intro rhythm.
@@ -21,8 +21,8 @@ export function ServicesFaqSection() {
         <div className="services-section-intro section-intro-row max-w-2xl">
           <p
             className={cn(
-              "faq-label services-section-intro__eyebrow services-page-label",
-              "font-sans text-[12px] font-semibold uppercase tracking-[0.16em]",
+              'faq-label services-section-intro__eyebrow services-page-label',
+              'font-sans text-[12px] font-semibold uppercase tracking-[0.16em]',
             )}
           >
             FAQ
@@ -37,12 +37,12 @@ export function ServicesFaqSection() {
 
           <p
             className={cn(
-              "services-section-intro__description",
-              "font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]",
+              'services-section-intro__description',
+              'font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]',
             )}
           >
-            Choosing a service line, timelines, stack, ownership, and how
-            engagements work at Bitcraftly.
+            Choosing a service line, timelines, stack, ownership, and how engagements work at
+            Bitcraftly.
           </p>
         </div>
 

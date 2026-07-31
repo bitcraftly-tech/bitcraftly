@@ -1,14 +1,14 @@
-import Link from "next/link";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Container } from "@/components/ui/container";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import { ResourcesHeroVisual } from "./ResourcesHeroVisual";
-import "./resources.css";
+import Link from 'next/link';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Container } from '@/components/ui/container';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import { ResourcesHeroVisual } from './ResourcesHeroVisual';
+import './resources.css';
 
 export interface ResourcesHeroCta {
   label: string;
@@ -35,7 +35,7 @@ export async function ResourcesHero({
   breadcrumbs,
   headingId,
   eyebrow,
-  eyebrowIcon = "sparkles",
+  eyebrowIcon = 'sparkles',
   title,
   titleHighlight,
   description,
@@ -45,9 +45,7 @@ export async function ResourcesHero({
 }: ResourcesHeroProps) {
   const isMobile = await isMobileUserAgent();
   const [titleBefore, titleAfter] =
-    titleHighlight && title.includes(titleHighlight)
-      ? title.split(titleHighlight)
-      : [title, ""];
+    titleHighlight && title.includes(titleHighlight) ? title.split(titleHighlight) : [title, ''];
 
   return (
     <Section
@@ -55,9 +53,9 @@ export async function ResourcesHero({
       contained={false}
       aria-labelledby={headingId}
       className={cn(
-        "resources-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'resources-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -105,10 +103,8 @@ export async function ResourcesHero({
             <h1 id={headingId} className="resources-hero__title">
               {titleHighlight && title.includes(titleHighlight) ? (
                 <>
-                  {titleBefore.trimEnd()}{" "}
-                  <span className="resources-hero__title-mark">
-                    {titleHighlight}
-                  </span>
+                  {titleBefore.trimEnd()}{' '}
+                  <span className="resources-hero__title-mark">{titleHighlight}</span>
                   {titleAfter}
                 </>
               ) : (

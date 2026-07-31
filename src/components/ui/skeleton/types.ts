@@ -1,6 +1,6 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties } from 'react';
 
-export type SkeletonVariant = "default" | "circular" | "text";
+export type SkeletonVariant = 'default' | 'circular' | 'text';
 
 export interface SkeletonProps {
   className?: string;

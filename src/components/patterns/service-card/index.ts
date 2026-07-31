@@ -1,2 +1,2 @@
-export { ServiceCard } from "./ServiceCard";
-export type { ServiceCardData, ServiceCardVariant } from "./ServiceCard";
+export { ServiceCard } from './ServiceCard';
+export type { ServiceCardData, ServiceCardVariant } from './ServiceCard';

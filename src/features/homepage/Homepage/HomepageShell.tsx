@@ -1,18 +1,18 @@
-import { HeroSection } from "../Hero";
-import { FAQ_ITEMS } from "../FAQ/faq.constants";
-import { HomepageBelowFold } from "./HomepageBelowFold";
-import { HomepageDeferredCss } from "./HomepageDeferredCss";
-import "./homepage-critical.css";
+import { HeroSection } from '../Hero';
+import { FAQ_ITEMS } from '../FAQ/faq.constants';
+import { HomepageBelowFold } from './HomepageBelowFold';
+import { HomepageDeferredCss } from './HomepageDeferredCss';
+import './homepage-critical.css';
 
 function HomepageFaqJsonLd() {
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
     mainEntity: FAQ_ITEMS.map((item) => ({
-      "@type": "Question",
+      '@type': 'Question',
       name: item.question,
       acceptedAnswer: {
-        "@type": "Answer",
+        '@type': 'Answer',
         text: item.answer,
       },
     })),

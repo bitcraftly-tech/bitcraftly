@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
-import { MountWhenVisible } from "@/components/patterns/mount-when-visible";
+import { MountWhenVisible } from '@/components/patterns/mount-when-visible';
 
-const loadMarquee = () =>
-  import("./TechnologiesMarquee").then((mod) => mod.TechnologiesMarquee);
+const loadMarquee = () => import('./TechnologiesMarquee').then((mod) => mod.TechnologiesMarquee);
 
 /** Defers marquee client JS until near viewport. */
 export function TechnologiesMarqueeLazy() {

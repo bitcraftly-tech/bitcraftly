@@ -1,16 +1,16 @@
-import Link from "next/link";
-import { JsonLdScript } from "@/components/patterns/json-ld";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { Section } from "@/components/ui/section";
-import type { BlogPost } from "@/content/blog";
-import { ROUTES } from "@/constants/navigation";
-import { buildBlogBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { buildBlogPostJsonLd } from "./blog-schema";
-import { getRelatedPosts } from "./blog.query";
-import { BlogPostBody } from "./BlogPostBody";
-import { BlogPostHeader } from "./BlogPostHeader";
-import { BlogRelatedPosts } from "./BlogRelatedPosts";
-import { BlogTableOfContents } from "./BlogTableOfContents";
+import Link from 'next/link';
+import { JsonLdScript } from '@/components/patterns/json-ld';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { Section } from '@/components/ui/section';
+import type { BlogPost } from '@/content/blog';
+import { ROUTES } from '@/constants/navigation';
+import { buildBlogBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { buildBlogPostJsonLd } from './blog-schema';
+import { getRelatedPosts } from './blog.query';
+import { BlogPostBody } from './BlogPostBody';
+import { BlogPostHeader } from './BlogPostHeader';
+import { BlogRelatedPosts } from './BlogRelatedPosts';
+import { BlogTableOfContents } from './BlogTableOfContents';
 
 interface BlogPostDetailPageProps {
   post: BlogPost;

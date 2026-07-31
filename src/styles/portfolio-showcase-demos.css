@@ -1,0 +1,111 @@
+/**
+ * Interactive portfolio showcase styles — mirrored from bitcraftly-tech-v2
+ * (plain CSS only; no @apply so this file can load outside globals.css).
+ */
+
+/**
+ * Platform maps Tailwind --spacing-* to an 8px design scale (2× default).
+ * Tech-v2 demos were authored against the default 4px scale (p-2=8px, px-12=48px).
+ * Reset only under /portfolio so marketing pages keep the platform scale.
+ */
+.portfolio-demo-shell {
+  /* Default Tailwind spacing (tech-v2) — platform marketing uses 2× scale */
+  --space-0: 0px;
+  --space-0-5: 0.125rem; /* 2px */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
+
+  --spacing-0: 0px;
+  --spacing-0-5: 0.125rem;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+
+  /* Default Tailwind radii (tech-v2: rounded-md = 6px, not platform 8px) */
+  --token-radius-sm: 0.125rem;
+  --token-radius-md: 0.375rem;
+  --token-radius-lg: 0.5rem;
+  --token-radius-xl: 0.75rem;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  /* Match tech-v2 body rhythm (16px / 28px) so header row height aligns */
+  --line-height-normal: 1.75;
+  --leading-normal: 1.75;
+  line-height: 1.75;
+  font-family:
+    var(--font-geist-sans),
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scrollbar-gutter: auto;
+}
+
+/* Portfolio showcase light shell token remap */
+html:not(.dark) .portfolio-showcase-light {
+  color-scheme: light;
+  --color-dark-bg-primary: #f7f8fc;
+  --color-dark-bg-secondary: #eef1f8;
+  --color-dark-bg-card: #ffffff;
+  --color-dark-text-primary: #0f172a;
+  --color-dark-text-secondary: #475569;
+  --color-dark-text-tertiary: #64748b;
+  --color-dark-border-primary: #e2e8f0;
+  --color-dark-border-secondary: #cbd5e1;
+}
+
+html:not(.dark) .portfolio-showcase-light .showcase-card-panel {
+  border-color: rgb(226 232 240 / 0.9);
+  background-color: rgb(255 255 255 / 0.95);
+  color: #0f172a;
+  box-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+  backdrop-filter: blur(4px);
+}
+
+html:not(.dark) .portfolio-showcase-light .showcase-gradient-panel {
+  border-color: #e2e8f0;
+  background-image: linear-gradient(to bottom right, #ffffff, #f8fafc, #f1f5f9);
+  color: #0f172a;
+}
+
+.dark .portfolio-showcase-light {
+  color-scheme: dark;
+}
+
+.dark .portfolio-showcase-light .showcase-card-panel {
+  border-color: rgb(51 65 85 / 0.9);
+  background-color: rgb(15 23 42 / 0.95);
+  color: #f1f5f9;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+}
+
+.dark .portfolio-showcase-light .showcase-gradient-panel {
+  border-color: #334155;
+  background-image: linear-gradient(to bottom right, #0f172a, #020617, #000000);
+  color: #f1f5f9;
+}

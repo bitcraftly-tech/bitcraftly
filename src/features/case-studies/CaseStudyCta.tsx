@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { NAV_ACTIONS, ROUTES } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
+import Link from 'next/link';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
 
 export function CaseStudyCta() {
   return (
@@ -22,16 +22,15 @@ export function CaseStudyCta() {
             Want outcomes like this for your product?
           </h2>
           <p className="m-0 font-sans text-[14px] leading-[1.65] text-muted-foreground">
-            Book a free consultation. We’ll map scope, constraints, and a
-            realistic delivery plan.
+            Book a free consultation. We’ll map scope, constraints, and a realistic delivery plan.
           </p>
         </div>
         <div className="case-study-cta-card__actions flex flex-wrap gap-[var(--space-sm)]">
           <Link
             href={NAV_ACTIONS.freeConsultation.href}
             className={cn(
-              "inline-flex h-[44px] items-center gap-[8px] rounded-[12px] px-[18px]",
-              "bg-primary font-sans text-[14px] font-semibold text-primary-foreground no-underline",
+              'inline-flex h-[44px] items-center gap-[8px] rounded-[12px] px-[18px]',
+              'bg-primary font-sans text-[14px] font-semibold text-primary-foreground no-underline',
             )}
           >
             {NAV_ACTIONS.freeConsultation.label}

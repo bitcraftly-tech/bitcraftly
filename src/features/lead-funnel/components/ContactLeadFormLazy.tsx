@@ -1,13 +1,8 @@
-"use client";
+'use client';
 
-import {
-  useEffect,
-  useRef,
-  useState,
-  type ComponentType,
-} from "react";
-import { submitLeadAction } from "../actions/submit-lead.action";
-import type { LeadFunnelDefaults } from "../types";
+import { useEffect, useRef, useState, type ComponentType } from 'react';
+import { submitLeadAction } from '../actions/submit-lead.action';
+import type { LeadFunnelDefaults } from '../types';
 
 /** Keeps the contact server action in the route's static module graph. */
 const registerContactLeadAction = submitLeadAction;
@@ -28,10 +23,7 @@ type ContactLeadFormComponent = ComponentType<{
  * Defers the lead form bundle until the section is near the viewport,
  * while still forwarding live defaults/intent tokens after mount.
  */
-export function ContactLeadFormLazy({
-  defaults,
-  intentFocusToken = 0,
-}: ContactLeadFormLazyProps) {
+export function ContactLeadFormLazy({ defaults, intentFocusToken = 0 }: ContactLeadFormLazyProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [Form, setForm] = useState<ContactLeadFormComponent | null>(null);
 
@@ -44,13 +36,13 @@ export function ContactLeadFormLazy({
       ([entry]) => {
         if (!entry?.isIntersecting) return;
         observer.disconnect();
-        void import("./ContactLeadForm").then((mod) => {
+        void import('./ContactLeadForm').then((mod) => {
           if (!cancelled) {
             setForm(() => mod.ContactLeadForm);
           }
         });
       },
-      { rootMargin: "280px 0px", threshold: 0.01 },
+      { rootMargin: '280px 0px', threshold: 0.01 },
     );
 
     observer.observe(node);

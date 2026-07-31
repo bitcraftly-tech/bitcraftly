@@ -1,22 +1,11 @@
-"use client";
+'use client';
 
-import {
-  memo,
-  useCallback,
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { Icon } from "@/components/ui/icon";
-import type { IconName } from "@/components/ui/icon";
-import {
-  SlidingPillIndicator,
-  useSlidingPillIndicator,
-} from "@/components/patterns/sliding-pill";
-import { cn } from "@/lib/cn";
-import { trackCostCalculatorEvent } from "./analytics";
+import { memo, useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { Icon } from '@/components/ui/icon';
+import type { IconName } from '@/components/ui/icon';
+import { SlidingPillIndicator, useSlidingPillIndicator } from '@/components/patterns/sliding-pill';
+import { cn } from '@/lib/cn';
+import { trackCostCalculatorEvent } from './analytics';
 import type {
   CalculatorCustomerId,
   CalculatorFeatureId,
@@ -26,13 +15,9 @@ import type {
   CalculatorSelections,
   CalculatorTimelineId,
   CostCalculatorCmsContent,
-} from "./cost-calculator.types";
-import {
-  buildQuoteHref,
-  calculatePricingEstimate,
-  formatInr,
-} from "./estimate-engine";
-import { LivePricePanel } from "./LivePricePanel";
+} from './cost-calculator.types';
+import { buildQuoteHref, calculatePricingEstimate, formatInr } from './estimate-engine';
+import { LivePricePanel } from './LivePricePanel';
 
 interface PricingCalculatorWizardProps {
   content: CostCalculatorCmsContent;
@@ -54,7 +39,7 @@ function OptionCard({
   return (
     <button
       type="button"
-      className={cn("pricing-option-card", active && "is-active")}
+      className={cn('pricing-option-card', active && 'is-active')}
       aria-pressed={active}
       onClick={onClick}
     >
@@ -85,7 +70,7 @@ function FeatureChip({
   return (
     <button
       type="button"
-      className={cn("pricing-feature-chip", active && "is-active")}
+      className={cn('pricing-feature-chip', active && 'is-active')}
       aria-pressed={active}
       onClick={onClick}
     >
@@ -96,19 +81,15 @@ function FeatureChip({
   );
 }
 
-function PricingCalculatorWizardComponent({
-  content,
-}: PricingCalculatorWizardProps) {
+function PricingCalculatorWizardComponent({ content }: PricingCalculatorWizardProps) {
   const reactId = useId();
   const panelAnchorId = `${reactId}-estimate`;
   const [stepIndex, setStepIndex] = useState(0);
-  const [direction, setDirection] = useState<"forward" | "back">("forward");
-  const [selections, setSelections] = useState<CalculatorSelections>(
-    content.defaultSelections,
-  );
+  const [direction, setDirection] = useState<'forward' | 'back'>('forward');
+  const [selections, setSelections] = useState<CalculatorSelections>(content.defaultSelections);
   const [mobilePanelOpen, setMobilePanelOpen] = useState(false);
   const stepRegionRef = useRef<HTMLDivElement>(null);
-  const lastEstimateKey = useRef("");
+  const lastEstimateKey = useRef('');
   const activeStepId = content.steps[stepIndex]?.id ?? null;
   const stepPill = useSlidingPillIndicator(activeStepId);
 
@@ -139,10 +120,10 @@ function PricingCalculatorWizardComponent({
 
   useEffect(() => {
     if (!estimate.lines.length) return;
-    const key = `${estimate.estimatedTotal}-${selections.projectTypeId}-${selections.featureIds.join(",")}-${selections.hostingId}-${selections.timelineId}`;
+    const key = `${estimate.estimatedTotal}-${selections.projectTypeId}-${selections.featureIds.join(',')}-${selections.hostingId}-${selections.timelineId}`;
     if (key === lastEstimateKey.current) return;
     lastEstimateKey.current = key;
-    trackCostCalculatorEvent("estimate_generated", {
+    trackCostCalculatorEvent('estimate_generated', {
       total: estimate.estimatedTotal,
       complete: estimate.isComplete,
       projectTypeId: selections.projectTypeId ?? undefined,
@@ -152,34 +133,27 @@ function PricingCalculatorWizardComponent({
   const projectsForCustomer = useMemo(() => {
     const customerId = selections.customerTypeId;
     if (!customerId) return [];
-    return content.projectTypes.filter((project) =>
-      project.customerIds.includes(customerId),
-    );
+    return content.projectTypes.filter((project) => project.customerIds.includes(customerId));
   }, [content.projectTypes, selections.customerTypeId]);
 
   const quoteHref = useMemo(
-    () =>
-      buildQuoteHref(
-        content.actions.requestQuoteHref,
-        estimate,
-        selections,
-      ),
+    () => buildQuoteHref(content.actions.requestQuoteHref, estimate, selections),
     [content.actions.requestQuoteHref, estimate, selections],
   );
 
   const canProceed = useMemo(() => {
     switch (content.steps[stepIndex]?.id) {
-      case "customer":
+      case 'customer':
         return Boolean(selections.customerTypeId);
-      case "project":
+      case 'project':
         return Boolean(selections.projectTypeId);
-      case "features":
+      case 'features':
         return true;
-      case "hosting":
+      case 'hosting':
         return Boolean(selections.hostingId);
-      case "timeline":
+      case 'timeline':
         return Boolean(selections.timelineId);
-      case "summary":
+      case 'summary':
         return true;
       default:
         return false;
@@ -187,7 +161,7 @@ function PricingCalculatorWizardComponent({
   }, [content.steps, selections, stepIndex]);
 
   const goToStep = useCallback(
-    (nextIndex: number, dir: "forward" | "back") => {
+    (nextIndex: number, dir: 'forward' | 'back') => {
       if (nextIndex < 0 || nextIndex >= content.steps.length) return;
       if (nextIndex > stepIndex + 1) return;
       setDirection(dir);
@@ -206,13 +180,13 @@ function PricingCalculatorWizardComponent({
       customerTypeId: id,
       projectTypeId: null,
     }));
-    setDirection("forward");
+    setDirection('forward');
     setStepIndex(1);
   }
 
   function selectProject(id: CalculatorProjectTypeId) {
     setSelections((current) => ({ ...current, projectTypeId: id }));
-    setDirection("forward");
+    setDirection('forward');
     setStepIndex(2);
   }
 
@@ -239,11 +213,9 @@ function PricingCalculatorWizardComponent({
 
   const step = content.steps[stepIndex];
   const customerLabel =
-    content.customers.find((item) => item.id === selections.customerTypeId)
-      ?.label ?? "—";
+    content.customers.find((item) => item.id === selections.customerTypeId)?.label ?? '—';
   const projectLabel =
-    content.projectTypes.find((item) => item.id === selections.projectTypeId)
-      ?.label ?? "—";
+    content.projectTypes.find((item) => item.id === selections.projectTypeId)?.label ?? '—';
 
   return (
     <div className="pricing-wizard">
@@ -261,10 +233,7 @@ function PricingCalculatorWizardComponent({
             role="tablist"
             aria-label="Calculator steps"
           >
-            <SlidingPillIndicator
-              style={stepPill.indicatorStyle}
-              variant="primary"
-            />
+            <SlidingPillIndicator style={stepPill.indicatorStyle} variant="primary" />
             {content.steps.map((item, index) => {
               const completed = index < stepIndex;
               const active = index === stepIndex;
@@ -275,14 +244,14 @@ function PricingCalculatorWizardComponent({
                   type="button"
                   role="tab"
                   aria-selected={active}
-                  aria-current={active ? "step" : undefined}
+                  aria-current={active ? 'step' : undefined}
                   className={cn(
-                    "pricing-step-pill relative z-[1]",
-                    active && "is-active",
-                    completed && !active && "is-completed",
+                    'pricing-step-pill relative z-[1]',
+                    active && 'is-active',
+                    completed && !active && 'is-completed',
                   )}
                   onClick={() => {
-                    if (index <= stepIndex) goToStep(index, "back");
+                    if (index <= stepIndex) goToStep(index, 'back');
                   }}
                 >
                   {index + 1}. {item.label}
@@ -291,11 +260,7 @@ function PricingCalculatorWizardComponent({
             })}
           </div>
 
-          <div
-            className="pricing-step-tip"
-            role="note"
-            aria-live="polite"
-          >
+          <div className="pricing-step-tip" role="note" aria-live="polite">
             <span className="pricing-step-tip-label" aria-hidden>
               Tip
             </span>
@@ -305,17 +270,15 @@ function PricingCalculatorWizardComponent({
           <div
             ref={stepRegionRef}
             className={cn(
-              "pricing-step-region",
-              direction === "forward"
-                ? "is-enter-forward"
-                : "is-enter-back",
+              'pricing-step-region',
+              direction === 'forward' ? 'is-enter-forward' : 'is-enter-back',
             )}
             role="tabpanel"
             tabIndex={-1}
             aria-label={step?.label}
             key={step?.id}
           >
-            {step?.id === "customer" ? (
+            {step?.id === 'customer' ? (
               <div className="pricing-step-body">
                 <h4 className="pricing-step-title">Select customer type</h4>
                 <div className="pricing-option-grid pricing-option-grid-2">
@@ -333,12 +296,10 @@ function PricingCalculatorWizardComponent({
               </div>
             ) : null}
 
-            {step?.id === "project" && selections.customerTypeId ? (
+            {step?.id === 'project' && selections.customerTypeId ? (
               <div className="pricing-step-body">
                 <h4 className="pricing-step-title">Select project type</h4>
-                <p className="pricing-step-subtitle">
-                  {customerLabel} projects
-                </p>
+                <p className="pricing-step-subtitle">{customerLabel} projects</p>
                 <div className="pricing-option-grid pricing-option-grid-2">
                   {projectsForCustomer.map((project) => (
                     <OptionCard
@@ -354,12 +315,10 @@ function PricingCalculatorWizardComponent({
               </div>
             ) : null}
 
-            {step?.id === "features" ? (
+            {step?.id === 'features' ? (
               <div className="pricing-step-body">
                 <h4 className="pricing-step-title">Additional features</h4>
-                <p className="pricing-step-subtitle">
-                  Optional — jitna chahiye select karo
-                </p>
+                <p className="pricing-step-subtitle">Optional — jitna chahiye select karo</p>
                 <div className="pricing-feature-row">
                   {content.features.map((feature) => (
                     <FeatureChip
@@ -375,7 +334,7 @@ function PricingCalculatorWizardComponent({
               </div>
             ) : null}
 
-            {step?.id === "hosting" ? (
+            {step?.id === 'hosting' ? (
               <div className="pricing-step-body">
                 <h4 className="pricing-step-title">Domain & hosting</h4>
                 <div className="pricing-option-grid pricing-option-grid-2">
@@ -390,9 +349,7 @@ function PricingCalculatorWizardComponent({
                     />
                   ))}
                 </div>
-                <h4 className="pricing-step-title pricing-step-title-spaced">
-                  Maintenance
-                </h4>
+                <h4 className="pricing-step-title pricing-step-title-spaced">Maintenance</h4>
                 <div className="pricing-option-grid pricing-option-grid-2">
                   {content.maintenanceOptions.map((option) => (
                     <OptionCard
@@ -412,7 +369,7 @@ function PricingCalculatorWizardComponent({
               </div>
             ) : null}
 
-            {step?.id === "timeline" ? (
+            {step?.id === 'timeline' ? (
               <div className="pricing-step-body">
                 <h4 className="pricing-step-title">Choose timeline</h4>
                 <div className="pricing-option-grid pricing-option-grid-3">
@@ -430,7 +387,7 @@ function PricingCalculatorWizardComponent({
               </div>
             ) : null}
 
-            {step?.id === "summary" ? (
+            {step?.id === 'summary' ? (
               <div className="pricing-step-body">
                 <h4 className="pricing-step-title">Summary</h4>
                 <dl className="pricing-summary-list">
@@ -447,22 +404,17 @@ function PricingCalculatorWizardComponent({
                     <dd>
                       {selections.featureIds.length
                         ? selections.featureIds
-                            .map(
-                              (id) =>
-                                content.features.find((item) => item.id === id)
-                                  ?.label,
-                            )
+                            .map((id) => content.features.find((item) => item.id === id)?.label)
                             .filter(Boolean)
-                            .join(", ")
-                        : "None"}
+                            .join(', ')
+                        : 'None'}
                     </dd>
                   </div>
                   <div>
                     <dt>Hosting</dt>
                     <dd>
-                      {content.hostingOptions.find(
-                        (item) => item.id === selections.hostingId,
-                      )?.label ?? "—"}
+                      {content.hostingOptions.find((item) => item.id === selections.hostingId)
+                        ?.label ?? '—'}
                     </dd>
                   </div>
                   <div>
@@ -470,15 +422,14 @@ function PricingCalculatorWizardComponent({
                     <dd>
                       {content.maintenanceOptions.find(
                         (item) => item.id === selections.maintenanceId,
-                      )?.label ?? "—"}
+                      )?.label ?? '—'}
                     </dd>
                   </div>
                   <div>
                     <dt>Timeline</dt>
                     <dd>
-                      {content.timelines.find(
-                        (item) => item.id === selections.timelineId,
-                      )?.label ?? "—"}
+                      {content.timelines.find((item) => item.id === selections.timelineId)?.label ??
+                        '—'}
                     </dd>
                   </div>
                 </dl>
@@ -491,7 +442,7 @@ function PricingCalculatorWizardComponent({
               type="button"
               className="pricing-nav-back"
               disabled={stepIndex === 0}
-              onClick={() => goToStep(stepIndex - 1, "back")}
+              onClick={() => goToStep(stepIndex - 1, 'back')}
             >
               {content.calculator.backLabel}
             </button>
@@ -500,7 +451,7 @@ function PricingCalculatorWizardComponent({
                 type="button"
                 className="pricing-nav-next"
                 disabled={!canProceed}
-                onClick={() => goToStep(stepIndex + 1, "forward")}
+                onClick={() => goToStep(stepIndex + 1, 'forward')}
               >
                 {content.calculator.nextLabel}
               </button>
@@ -510,10 +461,7 @@ function PricingCalculatorWizardComponent({
 
         <div
           id={panelAnchorId}
-          className={cn(
-            "pricing-wizard-right",
-            mobilePanelOpen && "is-mobile-open",
-          )}
+          className={cn('pricing-wizard-right', mobilePanelOpen && 'is-mobile-open')}
         >
           <LivePricePanel
             content={content}
@@ -532,20 +480,16 @@ function PricingCalculatorWizardComponent({
           onClick={() => {
             setMobilePanelOpen(true);
             const prefersReducedMotion = window.matchMedia(
-              "(prefers-reduced-motion: reduce)",
+              '(prefers-reduced-motion: reduce)',
             ).matches;
             document.getElementById(panelAnchorId)?.scrollIntoView({
-              behavior: prefersReducedMotion ? "auto" : "smooth",
-              block: "start",
+              behavior: prefersReducedMotion ? 'auto' : 'smooth',
+              block: 'start',
             });
           }}
         >
           <span>{content.calculator.stickyEstimateLabel}</span>
-          <strong>
-            {estimate.lines.length
-              ? formatInr(estimate.estimatedTotal)
-              : "—"}
-          </strong>
+          <strong>{estimate.lines.length ? formatInr(estimate.estimatedTotal) : '—'}</strong>
         </button>
       </div>
     </div>

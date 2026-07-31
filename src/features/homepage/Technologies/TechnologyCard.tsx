@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { cn } from "@/lib/cn";
-import { TechnologyLogo } from "./tech-logos";
-import type { HomepageTechnology } from "./technologies.types";
+import Link from 'next/link';
+import { cn } from '@/lib/cn';
+import { TechnologyLogo } from './tech-logos';
+import type { HomepageTechnology } from './technologies.types';
 
 interface TechnologyCardProps {
   technology: HomepageTechnology;
@@ -10,19 +10,15 @@ interface TechnologyCardProps {
   tabIndex?: number;
 }
 
-export function TechnologyCard({
-  technology,
-  className,
-  tabIndex,
-}: TechnologyCardProps) {
+export function TechnologyCard({ technology, className, tabIndex }: TechnologyCardProps) {
   return (
     <Link
       href={technology.href}
       tabIndex={tabIndex}
       className={cn(
-        "technologies-card group flex h-full flex-col items-center text-center",
-        "rounded-[16px] card-padding no-underline",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        'technologies-card group flex h-full flex-col items-center text-center',
+        'rounded-[16px] card-padding no-underline',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
         className,
       )}
     >

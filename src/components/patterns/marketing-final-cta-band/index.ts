@@ -1,1 +1,1 @@
-export { MarketingFinalCtaBand } from "./MarketingFinalCtaBand";
+export { MarketingFinalCtaBand } from './MarketingFinalCtaBand';

@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { MountWhenVisible } from "@/components/patterns/mount-when-visible";
+import { MountWhenVisible } from '@/components/patterns/mount-when-visible';
 
 interface PricingCalculatorLazyProps {
   headingId: string;
 }
 
 const loadPricingCalculator = (headingId: string) =>
-  import("./PricingCalculator").then((mod) => {
+  import('./PricingCalculator').then((mod) => {
     const Calculator = mod.PricingCalculator;
     function BoundPricingCalculator() {
       return <Calculator headingId={headingId} />;

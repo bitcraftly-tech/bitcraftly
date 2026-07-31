@@ -1,10 +1,10 @@
-import { CS_EDUNEXT } from "./projects/edunext-learning-platform";
-import { CS_LOCALLEAD } from "./projects/locallead-services-engine";
-import { CS_MEDANTA } from "./projects/medanta-care-ops-portal";
-import { CS_RETAILOPS } from "./projects/retailops-commerce-suite";
-import { CS_SAASPRO } from "./projects/saaspro-analytics-platform";
-import { CS_SHRISHTI } from "./projects/shrishti-cloud-kitchen";
-import type { CaseStudy } from "./types";
+import { CS_EDUNEXT } from './projects/edunext-learning-platform';
+import { CS_LOCALLEAD } from './projects/locallead-services-engine';
+import { CS_MEDANTA } from './projects/medanta-care-ops-portal';
+import { CS_RETAILOPS } from './projects/retailops-commerce-suite';
+import { CS_SAASPRO } from './projects/saaspro-analytics-platform';
+import { CS_SHRISHTI } from './projects/shrishti-cloud-kitchen';
+import type { CaseStudy } from './types';
 
 export type {
   CaseStudy,
@@ -12,7 +12,7 @@ export type {
   CaseStudyMetric,
   CaseStudyScreenshot,
   CaseStudyTestimonial,
-} from "./types";
+} from './types';
 
 /** Canonical catalog — featured / newest first. */
 export const CASE_STUDIES: readonly CaseStudy[] = [
@@ -36,10 +36,7 @@ export function getCaseStudyHref(slug: string): string {
   return `/work/${slug}`;
 }
 
-export function getRelatedCaseStudies(
-  study: CaseStudy,
-  limit = 3,
-): readonly CaseStudy[] {
+export function getRelatedCaseStudies(study: CaseStudy, limit = 3): readonly CaseStudy[] {
   const related = study.relatedSlugs
     .map((slug) => getCaseStudyBySlug(slug))
     .filter((item): item is CaseStudy => Boolean(item));
@@ -49,9 +46,7 @@ export function getRelatedCaseStudies(
   }
 
   const fallback = CASE_STUDIES.filter(
-    (item) =>
-      item.slug !== study.slug &&
-      !related.some((entry) => entry.slug === item.slug),
+    (item) => item.slug !== study.slug && !related.some((entry) => entry.slug === item.slug),
   ).slice(0, limit - related.length);
 
   return [...related, ...fallback];

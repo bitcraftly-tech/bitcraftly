@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { memo } from "react";
-import Link from "next/link";
-import { cn } from "@/lib/cn";
-import { AnimatedNumber } from "./AnimatedNumber";
-import { trackCostCalculatorEvent } from "./analytics";
+import { memo } from 'react';
+import Link from 'next/link';
+import { cn } from '@/lib/cn';
+import { AnimatedNumber } from './AnimatedNumber';
+import { trackCostCalculatorEvent } from './analytics';
 import type {
   CalculatorEstimateResult,
   CalculatorSelections,
   CostCalculatorCmsContent,
-} from "./cost-calculator.types";
-import { downloadEstimatePdf } from "./download-estimate-pdf";
-import { formatInr } from "./estimate-engine";
+} from './cost-calculator.types';
+import { downloadEstimatePdf } from './download-estimate-pdf';
+import { formatInr } from './estimate-engine';
 
 interface LivePricePanelProps {
   content: CostCalculatorCmsContent;
@@ -34,7 +34,7 @@ function LivePricePanelComponent({
   function handleDownload() {
     if (!estimate.isComplete) return;
     downloadEstimatePdf(content, estimate, selections);
-    trackCostCalculatorEvent("download_estimate_clicked", {
+    trackCostCalculatorEvent('download_estimate_clicked', {
       enabled: true,
       total: estimate.estimatedTotal,
     });
@@ -50,12 +50,7 @@ function LivePricePanelComponent({
             {estimate.lines.map((line) => (
               <li key={line.id} className="pricing-live-line">
                 <span>{line.label}</span>
-                <span
-                  className={cn(
-                    "pricing-live-line-amount",
-                    line.amount < 0 && "is-discount",
-                  )}
-                >
+                <span className={cn('pricing-live-line-amount', line.amount < 0 && 'is-discount')}>
                   {formatInr(line.amount)}
                 </span>
               </li>
@@ -64,15 +59,10 @@ function LivePricePanelComponent({
 
           <div className="pricing-live-total-card">
             <p className="pricing-live-meta-label">
-              {estimate.isComplete
-                ? copy.estimatedCostLabel
-                : copy.runningTotalLabel}
+              {estimate.isComplete ? copy.estimatedCostLabel : copy.runningTotalLabel}
             </p>
             <p className="pricing-live-total">
-              <AnimatedNumber
-                value={estimate.estimatedTotal}
-                format={formatInr}
-              />
+              <AnimatedNumber value={estimate.estimatedTotal} format={formatInr} />
             </p>
           </div>
 
@@ -119,7 +109,7 @@ function LivePricePanelComponent({
               href={consultationHref}
               className="pricing-cta-primary"
               onClick={() =>
-                trackCostCalculatorEvent("book_consultation_clicked", {
+                trackCostCalculatorEvent('book_consultation_clicked', {
                   total: estimate.estimatedTotal,
                 })
               }
@@ -128,10 +118,7 @@ function LivePricePanelComponent({
             </Link>
             <Link
               href={quoteHref}
-              className={cn(
-                "pricing-cta-secondary",
-                !estimate.isComplete && "is-disabled",
-              )}
+              className={cn('pricing-cta-secondary', !estimate.isComplete && 'is-disabled')}
               aria-disabled={!estimate.isComplete}
               tabIndex={estimate.isComplete ? 0 : -1}
               onClick={(event) => {
@@ -139,14 +126,14 @@ function LivePricePanelComponent({
                   event.preventDefault();
                   return;
                 }
-                trackCostCalculatorEvent("quote_requested", {
+                trackCostCalculatorEvent('quote_requested', {
                   total: estimate.estimatedTotal,
                 });
               }}
             >
               {estimate.isComplete
                 ? content.actions.requestQuoteLabel
-                : "Complete all steps for quote"}
+                : 'Complete all steps for quote'}
             </Link>
             <button
               type="button"
@@ -156,7 +143,7 @@ function LivePricePanelComponent({
               title={
                 estimate.isComplete
                   ? content.actions.downloadEstimateLabel
-                  : "Complete all steps to download the estimate PDF"
+                  : 'Complete all steps to download the estimate PDF'
               }
               onClick={handleDownload}
             >

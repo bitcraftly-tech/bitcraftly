@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
-import { getSiteUrl } from "./site";
+import { getSiteUrl } from './site';
 
 interface CreatePageMetadataInput {
   title: string;
@@ -11,8 +11,8 @@ interface CreatePageMetadataInput {
   image?: string;
 }
 
-const SITE_NAME = "Bitcraftly";
-const DEFAULT_OG_IMAGE_PATH = "/opengraph-image.webp";
+const SITE_NAME = 'Bitcraftly';
+const DEFAULT_OG_IMAGE_PATH = '/opengraph-image.webp';
 
 export function createPageMetadata({
   title,
@@ -25,11 +25,9 @@ export function createPageMetadata({
   const url = `${siteUrl}${path}`;
   const alreadyBranded = title.includes(SITE_NAME);
   /** Absolute title when input already includes the brand (avoids `| Bitcraftly | Bitcraftly`). */
-  const metadataTitle = alreadyBranded
-    ? ({ absolute: title } as const)
-    : title;
+  const metadataTitle = alreadyBranded ? ({ absolute: title } as const) : title;
   const socialTitle = alreadyBranded ? title : `${title} | ${SITE_NAME}`;
-  const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
+  const imageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
 
   return {
     title: metadataTitle,
@@ -43,8 +41,8 @@ export function createPageMetadata({
       description,
       url,
       siteName: SITE_NAME,
-      locale: "en_IN",
-      type: "website",
+      locale: 'en_IN',
+      type: 'website',
       images: [
         {
           url: imageUrl,
@@ -55,7 +53,7 @@ export function createPageMetadata({
       ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: socialTitle,
       description,
       images: [imageUrl],

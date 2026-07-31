@@ -1,42 +1,31 @@
-import type { IconName } from "@/components/ui/icon";
+import type { IconName } from '@/components/ui/icon';
 
-export type CalculatorCustomerId = "personal" | "business";
+export type CalculatorCustomerId = 'personal' | 'business';
 
 export type CalculatorProjectTypeId =
-  | "website"
-  | "web-app"
-  | "ai-solution"
-  | "erp"
-  | "crm"
-  | "saas"
-  | "dashboard"
-  | "mobile-app"
-  | "custom-software";
+  | 'website'
+  | 'web-app'
+  | 'ai-solution'
+  | 'erp'
+  | 'crm'
+  | 'saas'
+  | 'dashboard'
+  | 'mobile-app'
+  | 'custom-software';
 
 export type CalculatorFeatureId =
-  | "authentication"
-  | "cms"
-  | "admin"
-  | "dashboard"
-  | "payment"
-  | "api"
-  | "ai-integration";
+  'authentication' | 'cms' | 'admin' | 'dashboard' | 'payment' | 'api' | 'ai-integration';
 
-export type CalculatorHostingId = "already-have" | "setup-for-me";
+export type CalculatorHostingId = 'already-have' | 'setup-for-me';
 
-export type CalculatorMaintenanceId = "none" | "monthly";
+export type CalculatorMaintenanceId = 'none' | 'monthly';
 
-export type CalculatorTimelineId = "standard" | "fast" | "rush";
+export type CalculatorTimelineId = 'standard' | 'fast' | 'rush';
 
-export type FounderLanguageId = "en" | "hi";
+export type FounderLanguageId = 'en' | 'hi';
 
 export type CalculatorWizardStepId =
-  | "customer"
-  | "project"
-  | "features"
-  | "hosting"
-  | "timeline"
-  | "summary";
+  'customer' | 'project' | 'features' | 'hosting' | 'timeline' | 'summary';
 
 export interface CalculatorCustomerOption {
   id: CalculatorCustomerId;
@@ -104,13 +93,7 @@ export interface CalculatorEstimateLine {
   id: string;
   label: string;
   amount: number;
-  category:
-    | "project"
-    | "feature"
-    | "hosting"
-    | "maintenance"
-    | "discount"
-    | "tax";
+  category: 'project' | 'feature' | 'hosting' | 'maintenance' | 'discount' | 'tax';
   recurring?: boolean;
 }
 

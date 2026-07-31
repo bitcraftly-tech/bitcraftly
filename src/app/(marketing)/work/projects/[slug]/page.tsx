@@ -1,14 +1,10 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { ROUTES } from "@/constants/navigation";
-import {
-  getWorkProjectBySlug,
-  WORK_PROJECTS,
-  WorkProjectDetailPage,
-} from "@/features/work";
-import { createPageMetadata } from "@/lib/seo/createPageMetadata";
-import { createNoIndexMetadata } from "@/lib/seo/noindex-metadata";
-import "@/features/work/work.css";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { ROUTES } from '@/constants/navigation';
+import { getWorkProjectBySlug, WORK_PROJECTS, WorkProjectDetailPage } from '@/features/work';
+import { createPageMetadata } from '@/lib/seo/createPageMetadata';
+import { createNoIndexMetadata } from '@/lib/seo/noindex-metadata';
+import '@/features/work/work.css';
 
 interface WorkProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -18,9 +14,7 @@ export function generateStaticParams() {
   return WORK_PROJECTS.map((project) => ({ slug: project.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: WorkProjectPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: WorkProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = getWorkProjectBySlug(slug);
 
@@ -31,9 +25,7 @@ export async function generateMetadata({
   return createPageMetadata({
     title: project.seoTitle ?? `${project.title} | Work`,
     description:
-      project.seoDescription ??
-      project.summary ??
-      "Bitcraftly project case detail page.",
+      project.seoDescription ?? project.summary ?? 'Bitcraftly project case detail page.',
     path: `${ROUTES.workProjects}/${slug}`,
   });
 }

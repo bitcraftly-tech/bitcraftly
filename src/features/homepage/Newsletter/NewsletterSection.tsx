@@ -1,47 +1,44 @@
-"use client";
+'use client';
 
-import { useEffect, useId, useRef, useState } from "react";
-import type { FormEvent } from "react";
-import { usePathname } from "next/navigation";
-import { Container } from "@/components/ui/container";
-import { Icon } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
-import { LeadHoneypotField } from "@/features/lead-funnel/components/LeadHoneypotField";
+import { useEffect, useId, useRef, useState } from 'react';
+import type { FormEvent } from 'react';
+import { usePathname } from 'next/navigation';
+import { Container } from '@/components/ui/container';
+import { Icon } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
+import { LeadHoneypotField } from '@/features/lead-funnel/components/LeadHoneypotField';
 import {
   mapSubmitLeadFailureToUserMessage,
   submitLeadFromClient,
-} from "@/features/lead-funnel/submit-lead.client";
-import { trackLeadEvent } from "@/features/lead-funnel/analytics";
-import {
-  NEWSLETTER_COPY,
-  NEWSLETTER_TRUST_ITEMS,
-} from "./newsletter.constants";
+} from '@/features/lead-funnel/submit-lead.client';
+import { trackLeadEvent } from '@/features/lead-funnel/analytics';
+import { NEWSLETTER_COPY, NEWSLETTER_TRUST_ITEMS } from './newsletter.constants';
 /* newsletter.css loaded post-paint via MarketingDeferredCss */
 
-type FormStatus = "idle" | "loading" | "success" | "error";
+type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function NewsletterSection() {
   const formId = useId();
   const pathname = usePathname();
-  const headingId = "newsletter-section-heading";
+  const headingId = 'newsletter-section-heading';
   const errorRef = useRef<HTMLParagraphElement>(null);
   const successRef = useRef<HTMLParagraphElement>(null);
-  const [email, setEmail] = useState("");
-  const [honeypot, setHoneypot] = useState("");
-  const [status, setStatus] = useState<FormStatus>("idle");
+  const [email, setEmail] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const [status, setStatus] = useState<FormStatus>('idle');
   const [confirmationSent, setConfirmationSent] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    if (status === "error" && errorMessage) {
+    if (status === 'error' && errorMessage) {
       errorRef.current?.focus();
     }
   }, [errorMessage, status]);
 
   useEffect(() => {
-    if (status === "success") {
+    if (status === 'success') {
       successRef.current?.focus();
     }
   }, [status]);
@@ -51,41 +48,41 @@ export function NewsletterSection() {
     const trimmed = email.trim();
 
     if (!EMAIL_PATTERN.test(trimmed)) {
-      setStatus("error");
-      setErrorMessage("Enter a valid work email address.");
+      setStatus('error');
+      setErrorMessage('Enter a valid work email address.');
       return;
     }
 
-    setStatus("loading");
+    setStatus('loading');
     setErrorMessage(null);
 
     const result = await submitLeadFromClient({
-      leadType: "newsletter",
+      leadType: 'newsletter',
       email: trimmed,
       _honeypot: honeypot,
-      source: "newsletter",
-      pagePath: pathname || "/",
+      source: 'newsletter',
+      pagePath: pathname || '/',
     });
 
     if (!result.ok) {
-      setStatus("error");
+      setStatus('error');
       setErrorMessage(mapSubmitLeadFailureToUserMessage(result));
       return;
     }
 
-    trackLeadEvent("form_submit_success", {
-      source: "newsletter",
-      page_path: pathname || "/",
+    trackLeadEvent('form_submit_success', {
+      source: 'newsletter',
+      page_path: pathname || '/',
     });
 
     setConfirmationSent(result.confirmationSent);
-    setStatus("success");
-    setEmail("");
-    setHoneypot("");
+    setStatus('success');
+    setEmail('');
+    setHoneypot('');
   }
 
-  const isLoading = status === "loading";
-  const isSuccess = status === "success";
+  const isLoading = status === 'loading';
+  const isSuccess = status === 'success';
   const successMessage = confirmationSent
     ? NEWSLETTER_COPY.successMessageWithConfirmation
     : NEWSLETTER_COPY.successMessage;
@@ -95,7 +92,7 @@ export function NewsletterSection() {
       id="newsletter"
       aria-labelledby={headingId}
       className={cn(
-        "newsletter-section footer-surface border-t border-b border-[var(--inverse-border)]",
+        'newsletter-section footer-surface border-t border-b border-[var(--inverse-border)]',
       )}
     >
       <Container size="xl">
@@ -103,9 +100,9 @@ export function NewsletterSection() {
           <p
             id={headingId}
             className={cn(
-              "m-0 mb-[6px]",
-              "font-sans text-[length:var(--font-size-lg)] font-[var(--font-weight-semibold)]",
-              "leading-[var(--line-height-snug)] text-inverse-foreground",
+              'm-0 mb-[6px]',
+              'font-sans text-[length:var(--font-size-lg)] font-[var(--font-weight-semibold)]',
+              'leading-[var(--line-height-snug)] text-inverse-foreground',
             )}
           >
             {NEWSLETTER_COPY.title}
@@ -113,9 +110,9 @@ export function NewsletterSection() {
 
           <p
             className={cn(
-              "footer-muted m-0 mb-[var(--space-2)]",
-              "font-sans text-[length:var(--font-size-sm)] font-[var(--font-weight-normal)]",
-              "leading-[var(--line-height-snug)] md:whitespace-nowrap",
+              'footer-muted m-0 mb-[var(--space-2)]',
+              'font-sans text-[length:var(--font-size-sm)] font-[var(--font-weight-normal)]',
+              'leading-[var(--line-height-snug)] md:whitespace-nowrap',
             )}
           >
             {NEWSLETTER_COPY.description}
@@ -137,8 +134,8 @@ export function NewsletterSection() {
               noValidate
               aria-busy={isLoading}
               className={cn(
-                "newsletter-form-shell flex w-full flex-col overflow-hidden rounded-[var(--token-radius-xl)] p-0",
-                "sm:h-[48px] sm:flex-row sm:items-stretch",
+                'newsletter-form-shell flex w-full flex-col overflow-hidden rounded-[var(--token-radius-xl)] p-0',
+                'sm:h-[48px] sm:flex-row sm:items-stretch',
               )}
             >
               <LeadHoneypotField
@@ -166,25 +163,23 @@ export function NewsletterSection() {
                   autoComplete="email"
                   value={email}
                   disabled={isLoading}
-                  aria-invalid={status === "error"}
-                  aria-describedby={
-                    errorMessage ? "newsletter-section-error" : undefined
-                  }
+                  aria-invalid={status === 'error'}
+                  aria-describedby={errorMessage ? 'newsletter-section-error' : undefined}
                   placeholder={NEWSLETTER_COPY.emailPlaceholder}
                   onChange={(event) => {
                     setEmail(event.target.value);
-                    if (status === "error") {
-                      setStatus("idle");
+                    if (status === 'error') {
+                      setStatus('idle');
                       setErrorMessage(null);
                     }
                   }}
                   className={cn(
-                    "newsletter-input",
-                    "h-[44px] w-full min-w-0 sm:h-full",
-                    "rounded-none",
-                    "py-0 pr-[8px] pl-[32px] sm:pr-[10px] sm:pl-[36px]",
-                    "font-sans text-[13px] text-left leading-[44px] sm:leading-normal",
-                    "disabled:cursor-not-allowed disabled:opacity-70",
+                    'newsletter-input',
+                    'h-[44px] w-full min-w-0 sm:h-full',
+                    'rounded-none',
+                    'py-0 pr-[8px] pl-[32px] sm:pr-[10px] sm:pl-[36px]',
+                    'font-sans text-[13px] text-left leading-[44px] sm:leading-normal',
+                    'disabled:cursor-not-allowed disabled:opacity-70',
                   )}
                 />
               </div>
@@ -193,18 +188,16 @@ export function NewsletterSection() {
                 type="submit"
                 disabled={isLoading}
                 className={cn(
-                  "newsletter-subscribe group/newsletter",
-                  "inline-flex min-h-[44px] w-full shrink-0 items-center justify-center gap-[6px] sm:h-full sm:w-auto",
-                  "rounded-none rounded-b-[calc(var(--token-radius-xl)-1px)] px-[5px] sm:px-[16px]",
-                  "sm:rounded-b-none sm:rounded-r-[calc(var(--token-radius-xl)-1px)]",
-                  "border-0 font-sans text-[13px] font-[var(--font-weight-semibold)]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
-                  "disabled:cursor-not-allowed disabled:opacity-80",
+                  'newsletter-subscribe group/newsletter',
+                  'inline-flex min-h-[44px] w-full shrink-0 items-center justify-center gap-[6px] sm:h-full sm:w-auto',
+                  'rounded-none rounded-b-[calc(var(--token-radius-xl)-1px)] px-[5px] sm:px-[16px]',
+                  'sm:rounded-b-none sm:rounded-r-[calc(var(--token-radius-xl)-1px)]',
+                  'border-0 font-sans text-[13px] font-[var(--font-weight-semibold)]',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2',
+                  'disabled:cursor-not-allowed disabled:opacity-80',
                 )}
               >
-                {isLoading
-                  ? NEWSLETTER_COPY.loadingLabel
-                  : NEWSLETTER_COPY.submitLabel}
+                {isLoading ? NEWSLETTER_COPY.loadingLabel : NEWSLETTER_COPY.submitLabel}
                 {!isLoading ? (
                   <Icon
                     name="arrow-up-right"
@@ -231,17 +224,17 @@ export function NewsletterSection() {
 
           <ul
             className={cn(
-              "mt-[var(--space-2)] flex flex-wrap items-center justify-center",
-              "gap-x-[var(--space-2)] gap-y-[var(--space-1)]",
+              'mt-[var(--space-2)] flex flex-wrap items-center justify-center',
+              'gap-x-[var(--space-2)] gap-y-[var(--space-1)]',
             )}
           >
             {NEWSLETTER_TRUST_ITEMS.map((item) => (
               <li
                 key={item}
                 className={cn(
-                  "inline-flex items-center gap-[5px]",
-                  "font-sans text-[length:var(--font-size-xs)] font-[var(--font-weight-normal)]",
-                  "leading-none text-inverse-muted",
+                  'inline-flex items-center gap-[5px]',
+                  'font-sans text-[length:var(--font-size-xs)] font-[var(--font-weight-normal)]',
+                  'leading-none text-inverse-muted',
                 )}
               >
                 <Icon

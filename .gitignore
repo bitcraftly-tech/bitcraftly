@@ -49,6 +49,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Accidental nested clone (must not be typechecked or committed)
+/bitcraftly/
+
 # -----------------------------------------------------------------------------
 # Design Assets (Lovable)
 # -----------------------------------------------------------------------------
@@ -63,3 +66,7 @@ docs/design/temp/
 *.fig.bak
 *.sketch.bak
 /src/generated/prisma
+
+# Local oversized source footage (keep web-optimized hero.mp4 / hero-mobile.mp4 only)
+public/dayal-builders/hero-source.mp4
+

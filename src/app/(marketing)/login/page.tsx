@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { PortalLoginPage, PORTAL_LOGIN_META } from "@/features/portal-login";
-import { createPageMetadata } from "@/lib/seo/createPageMetadata";
+import type { Metadata } from 'next';
+import { PortalLoginPage, PORTAL_LOGIN_META } from '@/features/portal-login';
+import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 
 export const metadata: Metadata = createPageMetadata({
   title: PORTAL_LOGIN_META.title,

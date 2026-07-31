@@ -1,21 +1,11 @@
-"use client";
+'use client';
 
-import {
-  memo,
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from "react";
-import Image from "next/image";
-import { Icon } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
-import { trackCostCalculatorEvent } from "./analytics";
-import type {
-  FounderLanguageId,
-  FounderMessageContent,
-} from "./cost-calculator.types";
+import { memo, useCallback, useEffect, useId, useRef, useState } from 'react';
+import Image from 'next/image';
+import { Icon } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
+import { trackCostCalculatorEvent } from './analytics';
+import type { FounderLanguageId, FounderMessageContent } from './cost-calculator.types';
 
 interface FounderAudioPlayerProps {
   content: FounderMessageContent;
@@ -25,21 +15,16 @@ interface FounderAudioPlayerProps {
 const PLAYBACK_SPEED_OPTIONS = [0.75, 1, 1.25, 1.5] as const;
 
 function formatTime(seconds: number): string {
-  if (!Number.isFinite(seconds) || seconds <= 0) return "0:00";
+  if (!Number.isFinite(seconds) || seconds <= 0) return '0:00';
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, "0")}`;
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
-function FounderAudioPlayerComponent({
-  content,
-  active = true,
-}: FounderAudioPlayerProps) {
+function FounderAudioPlayerComponent({ content, active = true }: FounderAudioPlayerProps) {
   const reactId = useId();
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [langId, setLangId] = useState<FounderLanguageId>(
-    content.languages[0]?.id ?? "hi",
-  );
+  const [langId, setLangId] = useState<FounderLanguageId>(content.languages[0]?.id ?? 'hi');
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -47,8 +32,7 @@ function FounderAudioPlayerComponent({
   const [audioAvailable, setAudioAvailable] = useState(true);
   const [playbackRate, setPlaybackRate] = useState(1);
 
-  const language =
-    content.languages.find((item) => item.id === langId) ?? content.languages[0];
+  const language = content.languages.find((item) => item.id === langId) ?? content.languages[0];
 
   const stopAndReset = useCallback(() => {
     const audio = audioRef.current;
@@ -104,7 +88,7 @@ function FounderAudioPlayerComponent({
       audio.playbackRate = playbackRate;
       await audio.play();
       setPlaying(true);
-      trackCostCalculatorEvent("founder_audio_played", { language: langId });
+      trackCostCalculatorEvent('founder_audio_played', { language: langId });
     } catch {
       setAudioAvailable(false);
       setPlaying(false);
@@ -122,7 +106,7 @@ function FounderAudioPlayerComponent({
     if (nextLang === langId) return;
     stopAndReset();
     setLangId(nextLang);
-    trackCostCalculatorEvent("language_switched", { language: nextLang });
+    trackCostCalculatorEvent('language_switched', { language: nextLang });
   }
 
   function onSeek(value: number) {
@@ -170,9 +154,7 @@ function FounderAudioPlayerComponent({
           ))}
         </ul>
 
-        <p className="founder-transcript founder-transcript--desktop">
-          “{language?.transcript}”
-        </p>
+        <p className="founder-transcript founder-transcript--desktop">“{language?.transcript}”</p>
       </div>
 
       <div
@@ -180,19 +162,12 @@ function FounderAudioPlayerComponent({
         role="group"
         aria-label="Founder audio message player"
       >
-        <div
-          className="founder-lang-row"
-          role="group"
-          aria-label="Listen in your language"
-        >
+        <div className="founder-lang-row" role="group" aria-label="Listen in your language">
           {content.languages.map((item) => (
             <button
               key={item.id}
               type="button"
-              className={cn(
-                "founder-lang-btn",
-                langId === item.id && "is-active",
-              )}
+              className={cn('founder-lang-btn', langId === item.id && 'is-active')}
               aria-pressed={langId === item.id}
               onClick={() => switchLanguage(item.id)}
             >
@@ -229,9 +204,7 @@ function FounderAudioPlayerComponent({
           <button
             type="button"
             className="founder-play-btn"
-            aria-label={
-              playing ? "Pause founder message" : "Play founder message"
-            }
+            aria-label={playing ? 'Pause founder message' : 'Play founder message'}
             disabled={!audioAvailable}
             onClick={() => {
               void togglePlayback();
@@ -240,24 +213,13 @@ function FounderAudioPlayerComponent({
             {playing ? (
               <span className="founder-pause-icon" aria-hidden />
             ) : (
-              <Icon
-                name="play"
-                size="sm"
-                aria-hidden
-                className="h-[14px] w-[14px]"
-              />
+              <Icon name="play" size="sm" aria-hidden className="h-[14px] w-[14px]" />
             )}
           </button>
 
-          <div
-            className={cn("founder-wave", playing && "is-active")}
-            aria-hidden
-          >
+          <div className={cn('founder-wave', playing && 'is-active')} aria-hidden>
             {waveBars.map((height, index) => (
-              <span
-                key={`${reactId}-wave-${index}`}
-                style={{ height: `${height}%` }}
-              />
+              <span key={`${reactId}-wave-${index}`} style={{ height: `${height}%` }} />
             ))}
           </div>
 
@@ -282,10 +244,10 @@ function FounderAudioPlayerComponent({
           <button
             type="button"
             className="founder-mute-btn"
-            aria-label={muted ? "Unmute audio" : "Mute audio"}
+            aria-label={muted ? 'Unmute audio' : 'Mute audio'}
             onClick={() => setMuted((current) => !current)}
           >
-            {muted ? "Unmute" : "Mute"}
+            {muted ? 'Unmute' : 'Mute'}
           </button>
         </div>
 
@@ -307,23 +269,15 @@ function FounderAudioPlayerComponent({
 
         <div className="founder-time-row">
           <span>{formatTime(currentTime)}</span>
-          <span>
-            {duration > 0
-              ? formatTime(duration)
-              : (language?.durationHint ?? "0:00")}
-          </span>
+          <span>{duration > 0 ? formatTime(duration) : (language?.durationHint ?? '0:00')}</span>
         </div>
 
         {!audioAvailable ? (
-          <p className="founder-fallback">
-            Audio unavailable right now — transcript below.
-          </p>
+          <p className="founder-fallback">Audio unavailable right now — transcript below.</p>
         ) : null}
       </div>
 
-      <p className="founder-transcript founder-transcript--mobile">
-        “{language?.transcript}”
-      </p>
+      <p className="founder-transcript founder-transcript--mobile">“{language?.transcript}”</p>
     </aside>
   );
 }

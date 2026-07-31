@@ -11,15 +11,15 @@
 
 The repository is an early-stage Next.js 16 scaffold with **good architectural intent** but **critical structural inconsistency** in its current working tree. A migration from root `app/` to `src/app/` was started locally but is incomplete and **currently breaks routing**.
 
-| Area | Status | Severity |
-|------|--------|----------|
-| App Router resolution | Broken (home route missing) | **Critical** |
-| `src/` feature scaffold | Planned, not integrated | High |
-| TypeScript strict mode | Enabled | Good |
-| Tailwind CSS v4 | Correct baseline setup | Good |
-| Documentation | Placeholder / boilerplate | High |
-| CI, testing, env tooling | Missing | High |
-| Git hygiene | Uncommitted structural work | Medium |
+| Area                     | Status                      | Severity     |
+| ------------------------ | --------------------------- | ------------ |
+| App Router resolution    | Broken (home route missing) | **Critical** |
+| `src/` feature scaffold  | Planned, not integrated     | High         |
+| TypeScript strict mode   | Enabled                     | Good         |
+| Tailwind CSS v4          | Correct baseline setup      | Good         |
+| Documentation            | Placeholder / boilerplate   | High         |
+| CI, testing, env tooling | Missing                     | High         |
+| Git hygiene              | Uncommitted structural work | Medium       |
 
 **Bottom line:** Before feature development, resolve the dual `app/` vs `src/app/` conflict, commit the intended foundation, and replace boilerplate documentation with Bitcraftly-specific guidance.
 
@@ -35,11 +35,11 @@ This project uses:
 AI workflow:
 
 PROJECT_CONTEXT.md
-        ↓
+↓
 Relevant Rules
-        ↓
+↓
 Feature Development
-        ↓
+↓
 Code Review
 
 ## Current Architecture Status
@@ -209,12 +209,12 @@ No `/` route is registered. The application home page in `src/app/page.tsx` is n
 
 **Local git state confirms the mismatch:**
 
-| Path | Git status |
-|------|------------|
-| `app/layout.tsx`, `app/page.tsx`, `app/globals.css` | Deleted (unstaged) |
-| `src/` | Untracked |
-| `tsconfig.json` | Modified (`@/*` → `./src/*`) |
-| `docs/`, `.cursor/` | Untracked |
+| Path                                                | Git status                   |
+| --------------------------------------------------- | ---------------------------- |
+| `app/layout.tsx`, `app/page.tsx`, `app/globals.css` | Deleted (unstaged)           |
+| `src/`                                              | Untracked                    |
+| `tsconfig.json`                                     | Modified (`@/*` → `./src/*`) |
+| `docs/`, `.cursor/`                                 | Untracked                    |
 
 This is the single highest-priority fix before any other foundation work.
 
@@ -222,44 +222,44 @@ This is the single highest-priority fix before any other foundation work.
 
 The `src/` scaffold aligns with the stated **feature-based architecture** in `.cursor/rules/Bitcraftly-Engineering-Standards.mdc`:
 
-| Directory | Intended role | Current state |
-|-----------|---------------|---------------|
-| `src/features/*` | Domain modules (auth, crm, cms, ai, dashboard, homepage) | Empty (`.gitkeep` only) |
-| `src/components/ui` | Shared design-system primitives | Empty |
-| `src/components/layout` | Shell, nav, sidebar | Empty |
-| `src/components/providers` | Context / client providers | Empty |
-| `src/services/` | API / external integrations | Empty |
-| `src/lib/` | Framework adapters, shared clients | Empty |
-| `src/utils/` | Pure helpers | Empty |
-| `src/data/` | Static / seed data | Empty |
-| `src/hooks/` | Shared React hooks | Empty |
-| `src/types/` | Shared TypeScript types | Empty |
-| `src/config/` | App configuration | Empty |
+| Directory                  | Intended role                                            | Current state           |
+| -------------------------- | -------------------------------------------------------- | ----------------------- |
+| `src/features/*`           | Domain modules (auth, crm, cms, ai, dashboard, homepage) | Empty (`.gitkeep` only) |
+| `src/components/ui`        | Shared design-system primitives                          | Empty                   |
+| `src/components/layout`    | Shell, nav, sidebar                                      | Empty                   |
+| `src/components/providers` | Context / client providers                               | Empty                   |
+| `src/services/`            | API / external integrations                              | Empty                   |
+| `src/lib/`                 | Framework adapters, shared clients                       | Empty                   |
+| `src/utils/`               | Pure helpers                                             | Empty                   |
+| `src/data/`                | Static / seed data                                       | Empty                   |
+| `src/hooks/`               | Shared React hooks                                       | Empty                   |
+| `src/types/`               | Shared TypeScript types                                  | Empty                   |
+| `src/config/`              | App configuration                                        | Empty                   |
 
 The scaffold is reasonable for an enterprise platform, but **boundaries between `lib/`, `services/`, `utils/`, and `data/` are undefined**, which will cause drift as the team grows.
 
 ### Missing folders (recommended)
 
-| Folder / file | Why it matters |
-|---------------|----------------|
-| `src/middleware.ts` | JWT auth, route protection, redirects (referenced in engineering standards) |
-| `src/app/(marketing)/`, `src/app/(dashboard)/` | Route groups for layout separation at scale |
-| `src/app/api/` or external API client layer | FastAPI integration boundary |
-| `tests/` or `__tests__/` | Unit / integration tests |
-| `e2e/` | End-to-end tests (Playwright) |
-| `.github/workflows/` | CI (lint, typecheck, build, test) |
-| `.env.example` | Documented environment contract |
-| `docs/decisions/0001-*.md` | First ADR (e.g. adopt `src/` directory) |
+| Folder / file                                  | Why it matters                                                              |
+| ---------------------------------------------- | --------------------------------------------------------------------------- |
+| `src/middleware.ts`                            | JWT auth, route protection, redirects (referenced in engineering standards) |
+| `src/app/(marketing)/`, `src/app/(dashboard)/` | Route groups for layout separation at scale                                 |
+| `src/app/api/` or external API client layer    | FastAPI integration boundary                                                |
+| `tests/` or `__tests__/`                       | Unit / integration tests                                                    |
+| `e2e/`                                         | End-to-end tests (Playwright)                                               |
+| `.github/workflows/`                           | CI (lint, typecheck, build, test)                                           |
+| `.env.example`                                 | Documented environment contract                                             |
+| `docs/decisions/0001-*.md`                     | First ADR (e.g. adopt `src/` directory)                                     |
 
 ### Unnecessary or problematic files
 
-| Item | Recommendation |
-|------|----------------|
-| Root `app/` (after migration) | Remove entirely once `src/app/` is canonical; move `favicon.ico` to `src/app/` |
-| `public/next.svg`, `public/vercel.svg` | Remove when replacing boilerplate homepage |
-| 18+ `.gitkeep` files | Acceptable short-term; replace with README stubs per folder or first real file |
-| Duplicate YAML frontmatter in `AGENTS.md` | Consolidate to a single frontmatter block |
-| `.next/` build output (untracked) | Already in `.gitignore` — ensure it stays ignored |
+| Item                                      | Recommendation                                                                 |
+| ----------------------------------------- | ------------------------------------------------------------------------------ |
+| Root `app/` (after migration)             | Remove entirely once `src/app/` is canonical; move `favicon.ico` to `src/app/` |
+| `public/next.svg`, `public/vercel.svg`    | Remove when replacing boilerplate homepage                                     |
+| 18+ `.gitkeep` files                      | Acceptable short-term; replace with README stubs per folder or first real file |
+| Duplicate YAML frontmatter in `AGENTS.md` | Consolidate to a single frontmatter block                                      |
+| `.next/` build output (untracked)         | Already in `.gitignore` — ensure it stays ignored                              |
 
 ---
 
@@ -268,9 +268,7 @@ The scaffold is reasonable for an enterprise platform, but **boundaries between 
 **File:** `next.config.ts`
 
 ```typescript
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+const nextConfig: NextConfig = {/* config options here */};
 ```
 
 ### Current state
@@ -282,6 +280,7 @@ const nextConfig: NextConfig = {
 ### Issues observed
 
 1. **Turbopack root warning** during build:
+
    > Detected multiple lockfiles… selected `C:\main\real_projects\package-lock.json`
 
    A parent-directory lockfile causes Next.js to infer the wrong workspace root. This can affect module resolution and caching in monorepo-adjacent setups.
@@ -309,24 +308,24 @@ const nextConfig: NextConfig = {
 
 ### Strengths
 
-| Option | Value | Assessment |
-|--------|-------|------------|
-| `strict` | `true` | Correct for enterprise codebase |
-| `noEmit` | `true` | Standard for Next.js |
-| `moduleResolution` | `bundler` | Correct for Next 16 |
-| `jsx` | `react-jsx` | Correct for React 19 |
-| `paths` | `@/*` → `./src/*` (local) | Correct **after** migration completes |
+| Option             | Value                     | Assessment                            |
+| ------------------ | ------------------------- | ------------------------------------- |
+| `strict`           | `true`                    | Correct for enterprise codebase       |
+| `noEmit`           | `true`                    | Standard for Next.js                  |
+| `moduleResolution` | `bundler`                 | Correct for Next 16                   |
+| `jsx`              | `react-jsx`               | Correct for React 19                  |
+| `paths`            | `@/*` → `./src/*` (local) | Correct **after** migration completes |
 
 ### Gaps and risks
 
-| Issue | Detail |
-|-------|--------|
-| Path alias / filesystem mismatch | Alias points to `src/*` but App Router still reads root `app/` |
-| `allowJs: true` | Unnecessary if the project is TypeScript-only |
-| `target: ES2017` | Conservative; consider `ES2022` for modern syntax support |
-| No `baseUrl` | Works with `paths`, but explicit `baseUrl: "."` improves clarity |
-| No `noUncheckedIndexedAccess` | Optional stricter flag for safer object access |
-| No dedicated `typecheck` script | Build runs TS check, but CI should run it explicitly |
+| Issue                            | Detail                                                           |
+| -------------------------------- | ---------------------------------------------------------------- |
+| Path alias / filesystem mismatch | Alias points to `src/*` but App Router still reads root `app/`   |
+| `allowJs: true`                  | Unnecessary if the project is TypeScript-only                    |
+| `target: ES2017`                 | Conservative; consider `ES2022` for modern syntax support        |
+| No `baseUrl`                     | Works with `paths`, but explicit `baseUrl: "."` improves clarity |
+| No `noUncheckedIndexedAccess`    | Optional stricter flag for safer object access                   |
+| No dedicated `typecheck` script  | Build runs TS check, but CI should run it explicitly             |
 
 ### Missing TypeScript tooling
 
@@ -340,11 +339,11 @@ const nextConfig: NextConfig = {
 
 ### Configuration files
 
-| File | Role | Status |
-|------|------|--------|
-| `postcss.config.mjs` | `@tailwindcss/postcss` plugin | Correct (Tailwind v4) |
-| `src/styles/globals.css` | `@import "tailwindcss"` + `@theme inline` | Correct pattern |
-| `tailwind.config.js` | N/A | Not needed in v4 CSS-first mode |
+| File                     | Role                                      | Status                          |
+| ------------------------ | ----------------------------------------- | ------------------------------- |
+| `postcss.config.mjs`     | `@tailwindcss/postcss` plugin             | Correct (Tailwind v4)           |
+| `src/styles/globals.css` | `@import "tailwindcss"` + `@theme inline` | Correct pattern                 |
+| `tailwind.config.js`     | N/A                                       | Not needed in v4 CSS-first mode |
 
 ### Theme tokens (current)
 
@@ -388,19 +387,19 @@ const nextConfig: NextConfig = {
 
 ### Application code
 
-| File | Status |
-|------|--------|
-| `src/app/layout.tsx` | Branded metadata ("Bitcraftly Platform"), imports `@/styles/globals.css` — **good intent, not active** |
-| `src/app/page.tsx` | create-next-app boilerplate — needs replacement |
-| `src/styles/globals.css` | Minimal Tailwind v4 theme — needs design system expansion |
+| File                     | Status                                                                                                 |
+| ------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `src/app/layout.tsx`     | Branded metadata ("Bitcraftly Platform"), imports `@/styles/globals.css` — **good intent, not active** |
+| `src/app/page.tsx`       | create-next-app boilerplate — needs replacement                                                        |
+| `src/styles/globals.css` | Minimal Tailwind v4 theme — needs design system expansion                                              |
 
 ### Configuration
 
-| File | Status |
-|------|--------|
-| `package.json` | Minimal scripts; no test, format, or typecheck commands |
+| File                | Status                                                                                 |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| `package.json`      | Minimal scripts; no test, format, or typecheck commands                                |
 | `eslint.config.mjs` | Flat config with `eslint-config-next` core-web-vitals + typescript — adequate baseline |
-| `.gitignore` | Standard; ignores `.env*`, `.next/`, and `next-env.d.ts` |
+| `.gitignore`        | Standard; ignores `.env*`, `.next/`, and `next-env.d.ts`                               |
 
 ### Public assets
 
@@ -484,7 +483,7 @@ Merge into a single frontmatter block and add pointers to:
 
 ```markdown
 ---
-description: 
+description:
 alwaysApply: true
 ---
 
@@ -522,13 +521,13 @@ Comprehensive and appropriate for an enterprise frontend:
 
 ### Gaps vs. actual codebase
 
-| Rule | Reality |
-|------|---------|
-| Feature-based architecture | Scaffold exists; zero feature code |
-| Follow Bitcraftly Design System | No design system documented or implemented |
-| Never hardcode colors | Boilerplate page violates this |
-| JWT Authentication | No auth infrastructure |
-| Prefer Server Components | Boilerplate page is a Server Component (good) but uses client-heavy patterns soon needed for interactivity |
+| Rule                            | Reality                                                                                                    |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Feature-based architecture      | Scaffold exists; zero feature code                                                                         |
+| Follow Bitcraftly Design System | No design system documented or implemented                                                                 |
+| Never hardcode colors           | Boilerplate page violates this                                                                             |
+| JWT Authentication              | No auth infrastructure                                                                                     |
+| Prefer Server Components        | Boilerplate page is a Server Component (good) but uses client-heavy patterns soon needed for interactivity |
 
 ### Rule file status
 
@@ -540,14 +539,14 @@ Comprehensive and appropriate for an enterprise frontend:
 
 All subdirectories contain single-line placeholder READMEs:
 
-| Path | Content quality |
-|------|-----------------|
-| `docs/architecture/` | One sentence |
-| `docs/api/` | One sentence |
-| `docs/design/` | One sentence |
-| `docs/database/` | One sentence |
-| `docs/decisions/` | ADR format described, no ADRs written |
-| `docs/prompts/` | One sentence |
+| Path                 | Content quality                       |
+| -------------------- | ------------------------------------- |
+| `docs/architecture/` | One sentence                          |
+| `docs/api/`          | One sentence                          |
+| `docs/design/`       | One sentence                          |
+| `docs/database/`     | One sentence                          |
+| `docs/decisions/`    | ADR format described, no ADRs written |
+| `docs/prompts/`      | One sentence                          |
 
 The `docs/decisions/` README correctly suggests `0001-adopt-src-directory.md` — this ADR should be the **first document written** to record the migration decision.
 
@@ -588,16 +587,16 @@ flowchart TD
     E --> I
 ```
 
-| Risk | Description | Mitigation |
-|------|-------------|------------|
-| **Split-brain architecture** | Root vs `src/` ambiguity | Complete migration; one App Router root |
-| **Feature boundary erosion** | No colocation convention | Document: each feature owns `components/`, `hooks/`, `services/`, `types/` |
-| **Shared vs feature code drift** | Three helper directories | Define: `lib` = infra, `services` = API calls, `utils` = pure functions |
-| **Auth not foundational** | JWT mentioned but not scaffolded | Add middleware, session/token utilities, protected route groups early |
-| **No API contract layer** | FastAPI backend with no client typing | OpenAPI → generated types, or shared Zod schemas |
-| **No testing pyramid** | Zero tests | Add Vitest + RTL for units, Playwright for critical flows |
-| **Boilerplate homepage** | Default Next.js marketing page | Replace with Bitcraftly homepage feature module |
-| **Env config sprawl** | `.env*` gitignored, no example | Add `.env.example` with `NEXT_PUBLIC_API_URL`, etc. |
+| Risk                             | Description                           | Mitigation                                                                 |
+| -------------------------------- | ------------------------------------- | -------------------------------------------------------------------------- |
+| **Split-brain architecture**     | Root vs `src/` ambiguity              | Complete migration; one App Router root                                    |
+| **Feature boundary erosion**     | No colocation convention              | Document: each feature owns `components/`, `hooks/`, `services/`, `types/` |
+| **Shared vs feature code drift** | Three helper directories              | Define: `lib` = infra, `services` = API calls, `utils` = pure functions    |
+| **Auth not foundational**        | JWT mentioned but not scaffolded      | Add middleware, session/token utilities, protected route groups early      |
+| **No API contract layer**        | FastAPI backend with no client typing | OpenAPI → generated types, or shared Zod schemas                           |
+| **No testing pyramid**           | Zero tests                            | Add Vitest + RTL for units, Playwright for critical flows                  |
+| **Boilerplate homepage**         | Default Next.js marketing page        | Replace with Bitcraftly homepage feature module                            |
+| **Env config sprawl**            | `.env*` gitignored, no example        | Add `.env.example` with `NEXT_PUBLIC_API_URL`, etc.                        |
 
 ### Recommended target architecture
 
@@ -630,24 +629,24 @@ src/
 
 ## 12. Missing Configurations Checklist
 
-| Config / tooling | Present | Priority |
-|------------------|---------|----------|
-| `next.config.ts` (production settings) | Empty | High |
-| `tsconfig.json` strict mode | Yes | — |
-| Tailwind v4 PostCSS | Yes | — |
-| ESLint | Yes | — |
-| Prettier | No | Medium |
-| `.env.example` | No | High |
-| `middleware.ts` | No | High |
-| Unit tests (Vitest/Jest) | No | High |
-| E2E tests (Playwright) | No | Medium |
-| CI workflow | No | High |
-| Husky / lint-staged | No | Medium |
-| Dependabot / Renovate | No | Low |
-| `components.json` (if shadcn) | No | Medium |
-| OpenAPI / API types | No | High |
-| ADRs | No | Medium |
-| Design tokens doc | No | High |
+| Config / tooling                       | Present | Priority |
+| -------------------------------------- | ------- | -------- |
+| `next.config.ts` (production settings) | Empty   | High     |
+| `tsconfig.json` strict mode            | Yes     | —        |
+| Tailwind v4 PostCSS                    | Yes     | —        |
+| ESLint                                 | Yes     | —        |
+| Prettier                               | No      | Medium   |
+| `.env.example`                         | No      | High     |
+| `middleware.ts`                        | No      | High     |
+| Unit tests (Vitest/Jest)               | No      | High     |
+| E2E tests (Playwright)                 | No      | Medium   |
+| CI workflow                            | No      | High     |
+| Husky / lint-staged                    | No      | Medium   |
+| Dependabot / Renovate                  | No      | Low      |
+| `components.json` (if shadcn)          | No      | Medium   |
+| OpenAPI / API types                    | No      | High     |
+| ADRs                                   | No      | Medium   |
+| Design tokens doc                      | No      | High     |
 
 ---
 
@@ -666,14 +665,14 @@ src/
 
 **Recommended additions:**
 
-| Script | Purpose |
-|--------|---------|
-| `typecheck` | `tsc --noEmit` |
-| `lint:fix` | `eslint --fix` |
-| `format` | Prettier |
-| `test` | Unit tests |
-| `test:e2e` | Playwright |
-| `validate` | `typecheck && lint && test && build` |
+| Script      | Purpose                              |
+| ----------- | ------------------------------------ |
+| `typecheck` | `tsc --noEmit`                       |
+| `lint:fix`  | `eslint --fix`                       |
+| `format`    | Prettier                             |
+| `test`      | Unit tests                           |
+| `test:e2e`  | Playwright                           |
+| `validate`  | `typecheck && lint && test && build` |
 
 ---
 
@@ -717,12 +716,12 @@ Ordered by dependency and impact. **No code is included — this is guidance onl
 
 The following commands were run during this audit:
 
-| Command | Result |
-|---------|--------|
+| Command         | Result                                                              |
+| --------------- | ------------------------------------------------------------------- |
 | `npm run build` | Succeeds, but **only `/_not-found` route** — confirms routing break |
-| `npm run lint` | Passes (no lintable application issues in active routes) |
-| `git status` | Shows deleted root app files, untracked `src/` and docs |
-| `git ls-files` | Confirms committed state still references root `app/` |
+| `npm run lint`  | Passes (no lintable application issues in active routes)            |
+| `git status`    | Shows deleted root app files, untracked `src/` and docs             |
+| `git ls-files`  | Confirms committed state still references root `app/`               |
 
 ---
 
@@ -734,4 +733,4 @@ Until that conflict is resolved and the scaffold is committed with proper docume
 
 ---
 
-*This document was generated as part of a read-only foundation audit. No project source files were modified.*
+_This document was generated as part of a read-only foundation audit. No project source files were modified._

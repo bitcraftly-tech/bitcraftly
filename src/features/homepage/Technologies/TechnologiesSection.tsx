@@ -1,8 +1,8 @@
-import { Container } from "@/components/ui/container";
-import { cn } from "@/lib/cn";
-import { TechnologiesCtaLink } from "./TechnologiesCtaLink";
-import { TechnologiesMarqueeLazy } from "./TechnologiesMarqueeLazy";
-import { TechnologiesReveal } from "./TechnologiesReveal";
+import { Container } from '@/components/ui/container';
+import { cn } from '@/lib/cn';
+import { TechnologiesCtaLink } from './TechnologiesCtaLink';
+import { TechnologiesMarqueeLazy } from './TechnologiesMarqueeLazy';
+import { TechnologiesReveal } from './TechnologiesReveal';
 import {
   TECHNOLOGIES_DESCRIPTION,
   TECHNOLOGIES_HEADING_ID,
@@ -11,8 +11,8 @@ import {
   TECHNOLOGIES_INTRO_CTA,
   TECHNOLOGIES_LABEL,
   TECHNOLOGIES_SECTION_ID,
-} from "./technologies.constants";
-import "./technologies.css";
+} from './technologies.constants';
+import './technologies.css';
 
 /**
  * Tech Stack — split intro like Process / Decision Guide:
@@ -31,9 +31,9 @@ export function TechnologiesSection() {
             <div className="homepage-section-intro text-left">
               <p
                 className={cn(
-                  "section-intro-eyebrow technologies-label",
-                  "font-sans text-[12px] font-[var(--font-weight-semibold)]",
-                  "uppercase tracking-[0.16em]",
+                  'section-intro-eyebrow technologies-label',
+                  'font-sans text-[12px] font-[var(--font-weight-semibold)]',
+                  'uppercase tracking-[0.16em]',
                 )}
               >
                 {TECHNOLOGIES_LABEL}
@@ -42,9 +42,9 @@ export function TechnologiesSection() {
               <h2
                 id={TECHNOLOGIES_HEADING_ID}
                 className={cn(
-                  "section-intro-heading font-sans font-bold text-foreground",
-                  "text-[28px] leading-[1.2] tracking-[-0.02em]",
-                  "sm:text-[32px] lg:text-[34px]",
+                  'section-intro-heading font-sans font-bold text-foreground',
+                  'text-[28px] leading-[1.2] tracking-[-0.02em]',
+                  'sm:text-[32px] lg:text-[34px]',
                 )}
               >
                 {TECHNOLOGIES_HEADING_LINE_1} {TECHNOLOGIES_HEADING_LINE_2}
@@ -52,9 +52,9 @@ export function TechnologiesSection() {
 
               <p
                 className={cn(
-                  "section-intro-description max-w-2xl",
-                  "font-sans text-[15px] font-normal leading-[1.65] text-muted-foreground",
-                  "sm:text-[16px]",
+                  'section-intro-description max-w-2xl',
+                  'font-sans text-[15px] font-normal leading-[1.65] text-muted-foreground',
+                  'sm:text-[16px]',
                 )}
               >
                 {TECHNOLOGIES_DESCRIPTION}

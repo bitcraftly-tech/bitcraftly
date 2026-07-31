@@ -1,6 +1,6 @@
-import type { ReactElement, SVGProps } from "react";
-import { cn } from "@/lib/cn";
-import type { TrustedByIconId } from "./trusted-by.types";
+import type { ReactElement, SVGProps } from 'react';
+import { cn } from '@/lib/cn';
+import type { TrustedByIconId } from './trusted-by.types';
 
 type IconSvgProps = SVGProps<SVGSVGElement>;
 
@@ -16,7 +16,7 @@ function IconBase({ className, children, ...props }: IconSvgProps) {
       strokeLinejoin="round"
       aria-hidden
       focusable="false"
-      className={cn("h-[26px] w-[26px] shrink-0", className)}
+      className={cn('h-[26px] w-[26px] shrink-0', className)}
       {...props}
     >
       {children}
@@ -87,18 +87,12 @@ const ICONS: Record<TrustedByIconId, (props: IconSvgProps) => ReactElement> = {
   sparkles: SparklesIcon,
   layers: LayersIcon,
   gauge: GaugeIcon,
-  "shield-check": ShieldCheckIcon,
-  "trend-up": TrendUpIcon,
+  'shield-check': ShieldCheckIcon,
+  'trend-up': TrendUpIcon,
   handshake: HandshakeIcon,
 };
 
-export function TrustedByIcon({
-  id,
-  className,
-}: {
-  id: TrustedByIconId;
-  className?: string;
-}) {
+export function TrustedByIcon({ id, className }: { id: TrustedByIconId; className?: string }) {
   const Comp = ICONS[id];
   return <Comp className={className} />;
 }

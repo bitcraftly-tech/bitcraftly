@@ -14,12 +14,12 @@ Primary companion documents:
 
 ## Project identity
 
-| Item | Value |
-|------|--------|
-| Active repo | `https://github.com/bitcraftly-tech/bitcraftly.git` (`origin`) |
-| Release branch | `release/v1.0-launch` |
-| Latest tag | `v1.0.0-rc5`, `v1.0-launch-candidate` |
-| Stack | Next.js 16.2.10, React 19.2.4, TS strict, Tailwind v4, Prisma 7, PostgreSQL (Neon), Resend |
+| Item           | Value                                                                                      |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| Active repo    | `https://github.com/bitcraftly-tech/bitcraftly.git` (`origin`)                             |
+| Release branch | `release/v1.0-launch`                                                                      |
+| Latest tag     | `v1.0.0-rc5`, `v1.0-launch-candidate`                                                      |
+| Stack          | Next.js 16.2.10, React 19.2.4, TS strict, Tailwind v4, Prisma 7, PostgreSQL (Neon), Resend |
 
 ---
 

@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { logoutOwnerAction } from "../actions/owner-auth.actions";
-import { OWNER_AUTH_ROUTES } from "../owner-auth.constants";
+import Link from 'next/link';
+import { logoutOwnerAction } from '../actions/owner-auth.actions';
+import { OWNER_AUTH_ROUTES } from '../owner-auth.constants';
 
 interface OwnerDashboardShellProps {
   readonly children: React.ReactNode;

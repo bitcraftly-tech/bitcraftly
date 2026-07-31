@@ -1,9 +1,6 @@
-import { loadOwnerLeadsDashboard } from "./owner-leads.loader";
-import { parseOwnerLeadsSearchParams } from "./owner-leads.utils";
-import {
-  OwnerLeadsDashboard,
-  OwnerLeadsErrorState,
-} from "./OwnerLeadsPage";
+import { loadOwnerLeadsDashboard } from './owner-leads.loader';
+import { parseOwnerLeadsSearchParams } from './owner-leads.utils';
+import { OwnerLeadsDashboard, OwnerLeadsErrorState } from './OwnerLeadsPage';
 
 interface OwnerLeadsPageProps {
   readonly searchParams: Record<string, string | string[] | undefined>;

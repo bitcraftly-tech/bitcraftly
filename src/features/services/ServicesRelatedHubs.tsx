@@ -1,12 +1,12 @@
-import Link from "next/link";
-import type { CSSProperties } from "react";
-import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
-import { MarketingStagger } from "@/components/patterns/marketing-stagger";
-import { Icon } from "@/components/ui/icon";
-import { IconBox } from "@/components/ui/icon-box";
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
-import { SERVICES_LANDING } from "./services.content";
+import Link from 'next/link';
+import type { CSSProperties } from 'react';
+import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
+import { MarketingStagger } from '@/components/patterns/marketing-stagger';
+import { Icon } from '@/components/ui/icon';
+import { IconBox } from '@/components/ui/icon-box';
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
+import { SERVICES_LANDING } from './services.content';
 
 export function ServicesRelatedHubs() {
   return (
@@ -28,22 +28,22 @@ export function ServicesRelatedHubs() {
         <MarketingStagger
           as="ul"
           className={cn(
-            "m-0 grid w-full list-none gap-[24px] p-0",
-            "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+            'm-0 grid w-full list-none gap-[24px] p-0',
+            'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
           )}
         >
           {SERVICES_LANDING.hubs.map((hub, index) => (
             <li
               key={hub.href}
               className="mkt-stagger__item min-w-0"
-              style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
+              style={{ '--stagger': Math.min(index, 5) } as CSSProperties}
             >
               <Link
                 href={hub.href}
                 className={cn(
-                  "services-hub-card group flex h-full flex-col gap-[12px]",
-                  "rounded-[16px] card-padding no-underline",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                  'services-hub-card group flex h-full flex-col gap-[12px]',
+                  'rounded-[16px] card-padding no-underline',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
                 )}
               >
                 <div className="services-page-card-header flex items-center gap-[12px]">
@@ -57,9 +57,9 @@ export function ServicesRelatedHubs() {
                 </p>
                 <span
                   className={cn(
-                    "inline-flex items-center gap-[5px]",
-                    "font-sans text-[13px] font-semibold text-primary",
-                    "sm:text-[14px]",
+                    'inline-flex items-center gap-[5px]',
+                    'font-sans text-[13px] font-semibold text-primary',
+                    'sm:text-[14px]',
                   )}
                 >
                   Explore

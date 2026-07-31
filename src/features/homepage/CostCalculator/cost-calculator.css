@@ -39,9 +39,11 @@
   border: 1px solid var(--border);
   border-radius: 20px;
   background:
-    radial-gradient(120% 140% at 0% 0%,
+    radial-gradient(
+      120% 140% at 0% 0%,
       color-mix(in srgb, var(--primary) 8%, transparent),
-      transparent 55%),
+      transparent 55%
+    ),
     var(--background);
   color: var(--foreground);
   box-shadow: 0 10px 30px -22px rgb(15 23 42 / 0.28);
@@ -650,7 +652,7 @@
   margin: 14px 0 0;
 }
 
-.pricing-summary-list>div {
+.pricing-summary-list > div {
   display: flex;
   justify-content: space-between;
   gap: 16px;
@@ -730,11 +732,12 @@
   flex-direction: column;
   border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
   border-radius: 16px;
-  background:
-    linear-gradient(145deg,
-      color-mix(in srgb, #eef2ff 90%, transparent),
-      var(--background) 42%,
-      var(--background));
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, #eef2ff 90%, transparent),
+    var(--background) 42%,
+    var(--background)
+  );
   padding: var(--card-padding);
   box-shadow: 0 16px 40px rgb(79 70 229 / 0.12);
 }
@@ -924,7 +927,6 @@
 }
 
 @media (max-width: 640px) {
-
   .pricing-cta-primary,
   .pricing-cta-secondary,
   .pricing-cta-ghost {
@@ -1057,9 +1059,11 @@
   border: 1px solid var(--hp-card-border, #eef2ff);
   border-radius: var(--hp-card-radius, 16px);
   background:
-    radial-gradient(120% 140% at 100% 0%,
+    radial-gradient(
+      120% 140% at 100% 0%,
       color-mix(in srgb, var(--primary) 8%, transparent),
-      transparent 55%),
+      transparent 55%
+    ),
     var(--background);
   color: var(--foreground);
   box-shadow: var(--hp-card-shadow, 0 1px 2px 0 rgb(15 23 42 / 0.04));
@@ -1291,7 +1295,6 @@
 }
 
 @keyframes founder-wave-pulse {
-
   0%,
   100% {
     transform: scaleY(0.7);
@@ -1413,7 +1416,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .cost-calculator-reveal,
   .cost-calculator-reveal.is-visible,
   .founder-wave.is-active span,

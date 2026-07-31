@@ -1,6 +1,6 @@
-import Link from "next/link";
-import type { AdminContentRow } from "../admin.types";
-import { AdminStatusBadge } from "./AdminStatusBadge";
+import Link from 'next/link';
+import type { AdminContentRow } from '../admin.types';
+import { AdminStatusBadge } from './AdminStatusBadge';
 
 interface AdminDataTableProps {
   caption: string;
@@ -11,7 +11,7 @@ interface AdminDataTableProps {
 export function AdminDataTable({
   caption,
   rows,
-  emptyLabel = "No records yet.",
+  emptyLabel = 'No records yet.',
 }: AdminDataTableProps) {
   if (rows.length === 0) {
     return (

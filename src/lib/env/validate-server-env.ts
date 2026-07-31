@@ -1,17 +1,14 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import {
-  productionServerEnvSchema,
-  type ProductionServerEnv,
-} from "./server-env.schema";
+import { productionServerEnvSchema, type ProductionServerEnv } from './server-env.schema';
 
 function formatValidationError(error: z.ZodError): string {
   return error.issues
     .map((issue) => {
-      const path = issue.path.length > 0 ? issue.path.join(".") : "env";
+      const path = issue.path.length > 0 ? issue.path.join('.') : 'env';
       return `${path}: ${issue.message}`;
     })
-    .join("\n");
+    .join('\n');
 }
 
 /**

@@ -1,4 +1,4 @@
-import type { IconName } from "@/components/ui/icon";
+import type { IconName } from '@/components/ui/icon';
 
 export interface ProcessStep {
   id: string;

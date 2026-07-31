@@ -1,8 +1,8 @@
-import { headers } from "next/headers";
+import { headers } from 'next/headers';
 
-import { resolveClientIp } from "@/lib/security/client-ip";
+import { resolveClientIp } from '@/lib/security/client-ip';
 
-import type { LeadServerMetadata } from "./lead.types";
+import type { LeadServerMetadata } from './lead.types';
 
 export interface LeadRequestHeaders {
   readonly referer?: string;
@@ -23,8 +23,8 @@ export async function readLeadRequestHeaders(): Promise<LeadRequestHeaders> {
   const headerStore = await headers();
 
   return {
-    referer: firstHeaderValue(headerStore.get("referer")),
-    userAgent: firstHeaderValue(headerStore.get("user-agent")),
+    referer: firstHeaderValue(headerStore.get('referer')),
+    userAgent: firstHeaderValue(headerStore.get('user-agent')),
     clientIp: resolveClientIp(headerStore),
   };
 }

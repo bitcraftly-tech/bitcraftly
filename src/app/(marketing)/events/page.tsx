@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
-import { MarketingPageShell } from "@/components/patterns/marketing-page-shell";
-import { ROUTES } from "@/constants/navigation";
-import { createPageMetadata } from "@/lib/seo/createPageMetadata";
+import type { Metadata } from 'next';
+import { MarketingPageShell } from '@/components/patterns/marketing-page-shell';
+import { ROUTES } from '@/constants/navigation';
+import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Events",
-  description: "Talks, webinars, and community events from Bitcraftly.",
+  title: 'Events',
+  description: 'Talks, webinars, and community events from Bitcraftly.',
   path: ROUTES.events,
 });
 

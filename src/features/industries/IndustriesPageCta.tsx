@@ -1,5 +1,5 @@
-import { MarketingFinalCtaBand } from "@/components/patterns/marketing-final-cta-band";
-import { INDUSTRIES_LANDING } from "./industries.content";
+import { MarketingFinalCtaBand } from '@/components/patterns/marketing-final-cta-band';
+import { INDUSTRIES_LANDING } from './industries.content';
 
 /**
  * Final CTA — same MarketingFinalCtaBand shell as /services (left-aligned band).

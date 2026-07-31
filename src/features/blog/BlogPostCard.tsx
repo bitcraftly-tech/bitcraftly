@@ -1,10 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { getBlogAuthorById, getBlogCategoryById } from "@/content/blog";
-import type { BlogPostSummary } from "@/content/blog";
-import { cn } from "@/lib/cn";
-import { formatBlogDate, getBlogPostHref } from "./blog.utils";
+import Image from 'next/image';
+import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
+import { getBlogAuthorById, getBlogCategoryById } from '@/content/blog';
+import type { BlogPostSummary } from '@/content/blog';
+import { cn } from '@/lib/cn';
+import { formatBlogDate, getBlogPostHref } from './blog.utils';
 
 interface BlogPostCardProps {
   post: BlogPostSummary;
@@ -20,8 +20,8 @@ export function BlogPostCard({ post, priority = false, className }: BlogPostCard
   return (
     <article
       className={cn(
-        "group flex h-full flex-col overflow-hidden rounded-[16px] border border-border bg-background",
-        "transition-colors hover:border-primary/30",
+        'group flex h-full flex-col overflow-hidden rounded-[16px] border border-border bg-background',
+        'transition-colors hover:border-primary/30',
         className,
       )}
     >

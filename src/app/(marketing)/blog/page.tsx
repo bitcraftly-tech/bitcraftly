@@ -1,10 +1,6 @@
-import type { Metadata } from "next";
-import {
-  BlogLandingPage,
-  BLOG_LANDING_META,
-  isBlogCategoryId,
-} from "@/features/blog";
-import { createPageMetadata } from "@/lib/seo/createPageMetadata";
+import type { Metadata } from 'next';
+import { BlogLandingPage, BLOG_LANDING_META, isBlogCategoryId } from '@/features/blog';
+import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 
 export const metadata: Metadata = createPageMetadata(BLOG_LANDING_META);
 
@@ -20,9 +16,8 @@ interface BlogPageProps {
 export default async function BlogPage({ searchParams }: BlogPageProps) {
   const params = await searchParams;
   const categoryParam = params.category;
-  const category =
-    categoryParam && isBlogCategoryId(categoryParam) ? categoryParam : "all";
-  const page = Number.parseInt(params.page ?? "1", 10);
+  const category = categoryParam && isBlogCategoryId(categoryParam) ? categoryParam : 'all';
+  const page = Number.parseInt(params.page ?? '1', 10);
 
   return (
     <BlogLandingPage

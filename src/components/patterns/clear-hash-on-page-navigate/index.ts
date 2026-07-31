@@ -1,1 +1,1 @@
-export { ClearHashOnPageNavigate } from "./ClearHashOnPageNavigate";
+export { ClearHashOnPageNavigate } from './ClearHashOnPageNavigate';

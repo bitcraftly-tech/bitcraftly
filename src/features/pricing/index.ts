@@ -1,13 +1,13 @@
-export { PricingLandingPage, PRICING_LANDING_META } from "./PricingLandingPage";
-export { PricingHeroVisual } from "./PricingHeroVisual";
+export { PricingLandingPage, PRICING_LANDING_META } from './PricingLandingPage';
+export { PricingHeroVisual } from './PricingHeroVisual';
 export {
   PricingCalculator,
   calculatePricingEstimate,
   formatInr,
   pricingCalculatorSchema,
-} from "./calculator";
+} from './calculator';
 export type {
   PricingCalculatorFormValues,
   PricingCalculatorProps,
   PricingEstimateResult,
-} from "./calculator";
+} from './calculator';

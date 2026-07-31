@@ -10,13 +10,13 @@ This guide covers the production deployment workflow for Bitcraftly Platform V2:
 
 ## Architecture overview
 
-| Layer | Technology |
-|-------|------------|
-| Frontend | Next.js 16 (App Router), React 19, TypeScript |
-| Database | PostgreSQL (Neon) via Prisma 7 |
-| Lead email | Resend API |
-| Owner CRM | Session auth (`/owner/leads`) |
-| Hosting | Vercel or compatible Node.js host |
+| Layer      | Technology                                    |
+| ---------- | --------------------------------------------- |
+| Frontend   | Next.js 16 (App Router), React 19, TypeScript |
+| Database   | PostgreSQL (Neon) via Prisma 7                |
+| Lead email | Resend API                                    |
+| Owner CRM  | Session auth (`/owner/leads`)                 |
+| Hosting    | Vercel or compatible Node.js host             |
 
 Application routes live under `src/app/`. There is no root `app/` directory.
 
@@ -39,31 +39,31 @@ Copy `.env.example` to `.env.local` for local development. In production, set va
 
 ### Required (production runtime)
 
-| Variable | Scope | Description |
-|----------|-------|-------------|
-| `DATABASE_URL` | Server | Pooled PostgreSQL connection string (Neon pooler recommended) |
-| `DIRECT_URL` | Server / CLI | Direct connection for Prisma CLI migrations |
-| `RESEND_API_KEY` | Server | Resend API key (`re_…`) |
-| `LEAD_NOTIFICATION_TO` | Server | Inbox for lead alert emails |
-| `LEAD_FROM_EMAIL` | Server | Verified sender, e.g. `Bitcraftly <notifications@domain.com>` |
-| `NEXT_PUBLIC_SITE_URL` | Public | Canonical URL, no trailing slash |
-| `OWNER_AUTH_EMAIL` | Server | Owner CRM login email |
-| `OWNER_AUTH_PASSWORD` | Server | Owner CRM password (min 12 characters) |
-| `OWNER_SESSION_SECRET` | Server | HMAC signing secret (min 32 characters) |
+| Variable               | Scope        | Description                                                   |
+| ---------------------- | ------------ | ------------------------------------------------------------- |
+| `DATABASE_URL`         | Server       | Pooled PostgreSQL connection string (Neon pooler recommended) |
+| `DIRECT_URL`           | Server / CLI | Direct connection for Prisma CLI migrations                   |
+| `RESEND_API_KEY`       | Server       | Resend API key (`re_…`)                                       |
+| `LEAD_NOTIFICATION_TO` | Server       | Inbox for lead alert emails                                   |
+| `LEAD_FROM_EMAIL`      | Server       | Verified sender, e.g. `Bitcraftly <notifications@domain.com>` |
+| `NEXT_PUBLIC_SITE_URL` | Public       | Canonical URL, no trailing slash                              |
+| `OWNER_AUTH_EMAIL`     | Server       | Owner CRM login email                                         |
+| `OWNER_AUTH_PASSWORD`  | Server       | Owner CRM password (min 12 characters)                        |
+| `OWNER_SESSION_SECRET` | Server       | HMAC signing secret (min 32 characters)                       |
 
 ### Optional
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `LEAD_RATE_LIMIT_MAX` | `5` | Max submissions per IP+email per window |
-| `LEAD_RATE_LIMIT_IP_MAX` | `30` | Max submissions per IP across all emails |
-| `LEAD_RATE_LIMIT_WINDOW_MS` | `900000` | Rate limit window (15 min) |
-| `OWNER_LOGIN_RATE_LIMIT_MAX` | `10` | Max login attempts per IP per window |
-| `OWNER_LOGIN_ACCOUNT_RATE_LIMIT_MAX` | `5` | Max login attempts per account per window |
-| `OWNER_LOGIN_RATE_LIMIT_WINDOW_MS` | `900000` | Owner login rate limit window |
-| `NEXT_PUBLIC_CALENDLY_URL` | — | Calendly link; CTAs fall back to contact |
-| `SHADOW_DATABASE_URL` | — | Shadow DB for `db:migrate` (local dev only) |
-| `SKIP_ENV_VALIDATION` | — | Emergency bypass — **never use in production** |
+| Variable                             | Default  | Description                                    |
+| ------------------------------------ | -------- | ---------------------------------------------- |
+| `LEAD_RATE_LIMIT_MAX`                | `5`      | Max submissions per IP+email per window        |
+| `LEAD_RATE_LIMIT_IP_MAX`             | `30`     | Max submissions per IP across all emails       |
+| `LEAD_RATE_LIMIT_WINDOW_MS`          | `900000` | Rate limit window (15 min)                     |
+| `OWNER_LOGIN_RATE_LIMIT_MAX`         | `10`     | Max login attempts per IP per window           |
+| `OWNER_LOGIN_ACCOUNT_RATE_LIMIT_MAX` | `5`      | Max login attempts per account per window      |
+| `OWNER_LOGIN_RATE_LIMIT_WINDOW_MS`   | `900000` | Owner login rate limit window                  |
+| `NEXT_PUBLIC_CALENDLY_URL`           | —        | Calendly link; CTAs fall back to contact       |
+| `SHADOW_DATABASE_URL`                | —        | Shadow DB for `db:migrate` (local dev only)    |
+| `SKIP_ENV_VALIDATION`                | —        | Emergency bypass — **never use in production** |
 
 ### Startup validation
 
@@ -79,26 +79,26 @@ Validation is skipped during:
 
 ## Production security (Sprint 004.2)
 
-| Control | Implementation |
-|---------|----------------|
-| Owner route protection | Middleware + `requireOwnerSession()` in dashboard layout and CRM loaders |
-| Owner login rate limiting | IP + account sliding windows (`owner-login-rate-limit.ts`) |
-| Lead bot protection | Honeypot field + server-side Zod validation |
-| Lead rate limiting | Per IP+email and per-IP limits (`lead-guard.service.ts`) |
-| Security headers | CSP, HSTS, COOP, CORP, X-Frame-Options, Permissions-Policy |
-| Error boundaries | `error.tsx`, `global-error.tsx`, `not-found.tsx` |
-| Secret exposure | Server secrets are server-only; `NEXT_PUBLIC_*` vars are site URL and Calendly only |
+| Control                   | Implementation                                                                      |
+| ------------------------- | ----------------------------------------------------------------------------------- |
+| Owner route protection    | Middleware + `requireOwnerSession()` in dashboard layout and CRM loaders            |
+| Owner login rate limiting | IP + account sliding windows (`owner-login-rate-limit.ts`)                          |
+| Lead bot protection       | Honeypot field + server-side Zod validation                                         |
+| Lead rate limiting        | Per IP+email and per-IP limits (`lead-guard.service.ts`)                            |
+| Security headers          | CSP, HSTS, COOP, CORP, X-Frame-Options, Permissions-Policy                          |
+| Error boundaries          | `error.tsx`, `global-error.tsx`, `not-found.tsx`                                    |
+| Secret exposure           | Server secrets are server-only; `NEXT_PUBLIC_*` vars are site URL and Calendly only |
 
 Owner session cookie flags: `httpOnly`, `secure` (production), `sameSite: strict`, `path: /owner`.
 
 ### Observability & health (Sprint 004.3)
 
-| Endpoint / Hook | Purpose |
-|-----------------|---------|
-| `GET /api/health` | Liveness probe + build metadata |
-| `instrumentation.ts` → `onRequestError` | Structured SSR/server-action error logging |
-| `src/lib/observability/report-error.ts` | Server error reporter (Sentry-ready) |
-| Error boundaries | Client errors reported via `reportClientError()` |
+| Endpoint / Hook                         | Purpose                                          |
+| --------------------------------------- | ------------------------------------------------ |
+| `GET /api/health`                       | Liveness probe + build metadata                  |
+| `instrumentation.ts` → `onRequestError` | Structured SSR/server-action error logging       |
+| `src/lib/observability/report-error.ts` | Server error reporter (Sentry-ready)             |
+| Error boundaries                        | Client errors reported via `reportClientError()` |
 
 Set `SENTRY_DSN` when connecting `@sentry/nextjs` in a future sprint. CSP allows Sentry ingest when DSN is configured.
 
@@ -203,14 +203,14 @@ Jobs: lint → typecheck → unit tests → Prisma generate → build → E2E �
 
 ### Post-deploy smoke
 
-| Check | Pass |
-|-------|------|
-| Homepage loads | ☐ |
-| `/contact` form submits → success UI | ☐ |
-| Lead row in database | ☐ |
-| Notification email at `LEAD_NOTIFICATION_TO` | ☐ |
-| `/owner/login` → authenticate → `/owner/leads` | ☐ |
-| Invalid env would fail at startup (spot-check staging) | ☐ |
+| Check                                                  | Pass |
+| ------------------------------------------------------ | ---- |
+| Homepage loads                                         | ☐    |
+| `/contact` form submits → success UI                   | ☐    |
+| Lead row in database                                   | ☐    |
+| Notification email at `LEAD_NOTIFICATION_TO`           | ☐    |
+| `/owner/login` → authenticate → `/owner/leads`         | ☐    |
+| Invalid env would fail at startup (spot-check staging) | ☐    |
 
 See also:
 
@@ -229,12 +229,12 @@ See also:
 
 ## Known limitations
 
-| Item | Status |
-|------|--------|
-| Rate limiter | In-memory per instance — not distributed |
-| Admin panel auth | UI preview only — `/admin/*` not authenticated |
-| E2E lead capture tests | Manual smoke required |
-| Error monitoring | Not yet integrated (Sentry planned) |
+| Item                   | Status                                         |
+| ---------------------- | ---------------------------------------------- |
+| Rate limiter           | In-memory per instance — not distributed       |
+| Admin panel auth       | UI preview only — `/admin/*` not authenticated |
+| E2E lead capture tests | Manual smoke required                          |
+| Error monitoring       | Not yet integrated (Sentry planned)            |
 
 ---
 

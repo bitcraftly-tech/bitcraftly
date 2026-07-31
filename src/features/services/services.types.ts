@@ -1,4 +1,4 @@
-import type { IconName } from "@/components/ui/icon";
+import type { IconName } from '@/components/ui/icon';
 
 export interface ServiceFaqItem {
   id: string;
@@ -38,11 +38,7 @@ export interface ServicePageContent {
   ctaSecondaryLabel: string;
 }
 
-export type ServiceCardBadge =
-  | "Popular"
-  | "Enterprise"
-  | "Recommended"
-  | "New";
+export type ServiceCardBadge = 'Popular' | 'Enterprise' | 'Recommended' | 'New';
 
 export interface ServiceCardModel {
   slug: string;

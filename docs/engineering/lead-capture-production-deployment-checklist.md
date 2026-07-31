@@ -39,20 +39,20 @@ Set in the hosting provider (e.g. Vercel → Project → Settings → Environmen
 
 Startup validation (`src/instrumentation.ts`) enforces these at production server boot.
 
-| Variable | Required | Scope | Notes |
-|----------|----------|-------|-------|
-| `DATABASE_URL` | **Yes** | Server only | Neon pooled PostgreSQL connection |
-| `DIRECT_URL` | **Yes** | Server / CLI | Direct Neon connection for Prisma CLI |
-| `RESEND_API_KEY` | **Yes** | Server only | Resend API key (`re_…`) |
-| `LEAD_NOTIFICATION_TO` | **Yes** | Server only | Team inbox for lead alerts |
-| `LEAD_FROM_EMAIL` | **Yes** | Server only | Verified sender, e.g. `Bitcraftly <notifications@domain.com>` |
-| `NEXT_PUBLIC_SITE_URL` | **Yes** | Public | Canonical production URL, no trailing slash |
-| `OWNER_AUTH_EMAIL` | **Yes** | Server only | Owner CRM login email |
-| `OWNER_AUTH_PASSWORD` | **Yes** | Server only | Min 12 characters |
-| `OWNER_SESSION_SECRET` | **Yes** | Server only | Min 32 characters — session signing |
-| `LEAD_RATE_LIMIT_MAX` | No | Server only | Default: `5` |
-| `LEAD_RATE_LIMIT_WINDOW_MS` | No | Server only | Default: `900000` (15 min) |
-| `NEXT_PUBLIC_CALENDLY_URL` | No | Public | Optional; CTAs fall back to contact if unset |
+| Variable                    | Required | Scope        | Notes                                                         |
+| --------------------------- | -------- | ------------ | ------------------------------------------------------------- |
+| `DATABASE_URL`              | **Yes**  | Server only  | Neon pooled PostgreSQL connection                             |
+| `DIRECT_URL`                | **Yes**  | Server / CLI | Direct Neon connection for Prisma CLI                         |
+| `RESEND_API_KEY`            | **Yes**  | Server only  | Resend API key (`re_…`)                                       |
+| `LEAD_NOTIFICATION_TO`      | **Yes**  | Server only  | Team inbox for lead alerts                                    |
+| `LEAD_FROM_EMAIL`           | **Yes**  | Server only  | Verified sender, e.g. `Bitcraftly <notifications@domain.com>` |
+| `NEXT_PUBLIC_SITE_URL`      | **Yes**  | Public       | Canonical production URL, no trailing slash                   |
+| `OWNER_AUTH_EMAIL`          | **Yes**  | Server only  | Owner CRM login email                                         |
+| `OWNER_AUTH_PASSWORD`       | **Yes**  | Server only  | Min 12 characters                                             |
+| `OWNER_SESSION_SECRET`      | **Yes**  | Server only  | Min 32 characters — session signing                           |
+| `LEAD_RATE_LIMIT_MAX`       | No       | Server only  | Default: `5`                                                  |
+| `LEAD_RATE_LIMIT_WINDOW_MS` | No       | Server only  | Default: `900000` (15 min)                                    |
+| `NEXT_PUBLIC_CALENDLY_URL`  | No       | Public       | Optional; CTAs fall back to contact if unset                  |
 
 - [ ] All required variables set for **Production** environment
 - [ ] `NEXT_PUBLIC_SITE_URL` matches live domain (e.g. `https://bitcraftly.com`)
@@ -76,17 +76,17 @@ Startup validation (`src/instrumentation.ts`) enforces these at production serve
 
 ## Post-deploy smoke (minimum)
 
-| Check | Pass |
-|-------|------|
-| `/contact` loads; form visible | ☐ |
-| Contact submit → success UI (with valid data + Resend configured) | ☐ |
-| Lead row persisted in database | ☐ |
-| Notification email received at `LEAD_NOTIFICATION_TO` | ☐ |
-| Homepage newsletter submit → success UI | ☐ |
-| Newsletter notification email received | ☐ |
-| Invalid email → client validation (no success UI) | ☐ |
-| Missing Resend vars → user-friendly DELIVERY message (no internal error text) | ☐ |
-| `form_submit_success` in dataLayer **only** after server success (see staging checklist) | ☐ |
+| Check                                                                                    | Pass |
+| ---------------------------------------------------------------------------------------- | ---- |
+| `/contact` loads; form visible                                                           | ☐    |
+| Contact submit → success UI (with valid data + Resend configured)                        | ☐    |
+| Lead row persisted in database                                                           | ☐    |
+| Notification email received at `LEAD_NOTIFICATION_TO`                                    | ☐    |
+| Homepage newsletter submit → success UI                                                  | ☐    |
+| Newsletter notification email received                                                   | ☐    |
+| Invalid email → client validation (no success UI)                                        | ☐    |
+| Missing Resend vars → user-friendly DELIVERY message (no internal error text)            | ☐    |
+| `form_submit_success` in dataLayer **only** after server success (see staging checklist) | ☐    |
 
 ---
 
@@ -94,13 +94,13 @@ Startup validation (`src/instrumentation.ts`) enforces these at production serve
 
 User-facing messages must **never** expose internal config or Resend errors.
 
-| Code | Expected user message (approx.) |
-|------|----------------------------------|
+| Code         | Expected user message (approx.)        |
+| ------------ | -------------------------------------- |
 | `VALIDATION` | Field-level or Zod message from server |
-| `HONEYPOT` | “Unable to submit your request…” |
-| `RATE_LIMIT` | “Too many submissions…” |
-| `DELIVERY` | “We could not deliver your message…” |
-| `UNKNOWN` | “Something went wrong…” |
+| `HONEYPOT`   | “Unable to submit your request…”       |
+| `RATE_LIMIT` | “Too many submissions…”                |
+| `DELIVERY`   | “We could not deliver your message…”   |
+| `UNKNOWN`    | “Something went wrong…”                |
 
 - [ ] Spot-check DELIVERY path (temporarily unset one Resend var in staging first — **never** in prod for extended periods)
 
@@ -136,21 +136,21 @@ User-facing messages must **never** expose internal config or Resend errors.
 
 ## Known limitations (document for ops)
 
-| Item | Status |
-|------|--------|
-| Lead persistence (CRM/DB) | **Implemented** — Prisma + Neon; verify with owner CRM at `/owner/leads` |
-| Build pipeline | `prebuild` runs `prisma generate` before every build |
-| DB migrations | Use GitHub **Database Migrate Deploy** workflow or `npm run db:deploy` — never `db:migrate` in prod |
-| Rate limiter | In-memory per instance — not suitable for multi-instance scale |
-| E2E automated lead tests | Not yet in Playwright suite — manual smoke required |
-| `form_submit_error` analytics | Intentionally removed — failures not tracked |
+| Item                          | Status                                                                                              |
+| ----------------------------- | --------------------------------------------------------------------------------------------------- |
+| Lead persistence (CRM/DB)     | **Implemented** — Prisma + Neon; verify with owner CRM at `/owner/leads`                            |
+| Build pipeline                | `prebuild` runs `prisma generate` before every build                                                |
+| DB migrations                 | Use GitHub **Database Migrate Deploy** workflow or `npm run db:deploy` — never `db:migrate` in prod |
+| Rate limiter                  | In-memory per instance — not suitable for multi-instance scale                                      |
+| E2E automated lead tests      | Not yet in Playwright suite — manual smoke required                                                 |
+| `form_submit_error` analytics | Intentionally removed — failures not tracked                                                        |
 
 ---
 
 ## Sign-off
 
-| Role | Name | Date | Approved |
-|------|------|------|----------|
-| Engineering | | | ☐ |
-| Product | | | ☐ |
-| QA / Manual smoke | | | ☐ |
+| Role              | Name | Date | Approved |
+| ----------------- | ---- | ---- | -------- |
+| Engineering       |      |      | ☐        |
+| Product           |      |      | ☐        |
+| QA / Manual smoke |      |      | ☐        |

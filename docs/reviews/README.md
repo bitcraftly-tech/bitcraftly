@@ -8,8 +8,8 @@ This directory archives formal reviews that evaluate the health, structure, and 
 
 ## Contents
 
-| Document | Description |
-|----------|-------------|
+| Document                                                           | Description                                             |
+| ------------------------------------------------------------------ | ------------------------------------------------------- |
 | [PROJECT_FOUNDATION_REVIEW.md](../../PROJECT_FOUNDATION_REVIEW.md) | Initial Principal Frontend Architect audit (2026-07-11) |
 
 ## When to add a review

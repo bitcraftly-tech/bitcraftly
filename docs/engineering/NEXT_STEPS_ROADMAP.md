@@ -8,13 +8,13 @@
 
 ## 1. Immediate actions (this week — outside sprint ceremony)
 
-| # | Action | Owner | Outcome |
-|---|--------|-------|---------|
-| 1 | Verify Cloudflare DNS + Resend domain **Verified** | Founder / Ops | Production email works |
-| 2 | Confirm Vercel Production + Preview env vars | Ops | No silent lead failures |
-| 3 | Staging smoke: `/`, `/contact`, `/owner/login`, `/owner/leads`, `/careers`, `/blog` | Eng | Confidence on HEAD |
-| 4 | Decide: Perf ≥90 is **hard launch gate** vs **post-staging Phase C** | Founder + Arch | Sprint 005 scope lock |
-| 5 | Decide: `/admin` blocked/noindex vs auth before public launch | Founder + Arch | Security posture |
+| #   | Action                                                                              | Owner          | Outcome                 |
+| --- | ----------------------------------------------------------------------------------- | -------------- | ----------------------- |
+| 1   | Verify Cloudflare DNS + Resend domain **Verified**                                  | Founder / Ops  | Production email works  |
+| 2   | Confirm Vercel Production + Preview env vars                                        | Ops            | No silent lead failures |
+| 3   | Staging smoke: `/`, `/contact`, `/owner/login`, `/owner/leads`, `/careers`, `/blog` | Eng            | Confidence on HEAD      |
+| 4   | Decide: Perf ≥90 is **hard launch gate** vs **post-staging Phase C**                | Founder + Arch | Sprint 005 scope lock   |
+| 5   | Decide: `/admin` blocked/noindex vs auth before public launch                       | Founder + Arch | Security posture        |
 
 ---
 
@@ -33,17 +33,17 @@
 
 ### Deliverables
 
-| Deliverable | Acceptance |
-|-------------|------------|
+| Deliverable                 | Acceptance                                                                        |
+| --------------------------- | --------------------------------------------------------------------------------- |
 | Phase C performance changes | Desktop LH Perf ≥90 on 4 core routes (or documented waiver with Founder sign-off) |
-| Sitemap update | Resources (+ decided secondary hubs) present |
-| JSON-LD URL fix | No hardcoded production host in feature schemas |
-| Admin posture | Middleware/robots/auth decision implemented |
-| Smoke report | Staging + prod lead submit evidence |
+| Sitemap update              | Resources (+ decided secondary hubs) present                                      |
+| JSON-LD URL fix             | No hardcoded production host in feature schemas                                   |
+| Admin posture               | Middleware/robots/auth decision implemented                                       |
+| Smoke report                | Staging + prod lead submit evidence                                               |
 
 ### Dependencies
 
-- Ability to run Lighthouse locally/CI against preview  
+- Ability to run Lighthouse locally/CI against preview
 - Content freeze on homepage/services/solutions during Perf work (protected pages)
 
 ### Expected outcome
@@ -61,26 +61,26 @@ Project completion moves ~91% → **~94%**; production readiness ~78 → **~88**
 
 ### Objectives
 
-1. Integrate **Sentry** (`@sentry/nextjs`) using existing instrumentation hooks  
-2. Introduce **distributed rate limiting** (Upstash Redis or equivalent) for lead + owner login  
-3. Expand Playwright coverage: contact happy-path, careers apply smoke, owner leads auth gate  
-4. Soft analytics: privacy-safe event plumbing or GTM container decision  
+1. Integrate **Sentry** (`@sentry/nextjs`) using existing instrumentation hooks
+2. Introduce **distributed rate limiting** (Upstash Redis or equivalent) for lead + owner login
+3. Expand Playwright coverage: contact happy-path, careers apply smoke, owner leads auth gate
+4. Soft analytics: privacy-safe event plumbing or GTM container decision
 5. Content ops: approved testimonials; resources long-form pilot (1–2 articles)
 
 ### Deliverables
 
-| Deliverable | Acceptance |
-|-------------|------------|
-| Sentry errors on staging/prod | Alert on 5xx / action failures |
-| Redis rate limits | Documented multi-instance behavior |
-| E2E suite expansion | ≥3 new critical flows green in CI |
-| Testimonials content | Non-placeholder on testimonials surface |
-| Resources pilot | ≥1 long-form guide indexed |
+| Deliverable                   | Acceptance                              |
+| ----------------------------- | --------------------------------------- |
+| Sentry errors on staging/prod | Alert on 5xx / action failures          |
+| Redis rate limits             | Documented multi-instance behavior      |
+| E2E suite expansion           | ≥3 new critical flows green in CI       |
+| Testimonials content          | Non-placeholder on testimonials surface |
+| Resources pilot               | ≥1 long-form guide indexed              |
 
 ### Dependencies
 
-- Sentry project + DSN secrets  
-- Upstash (or Redis) provisioning  
+- Sentry project + DSN secrets
+- Upstash (or Redis) provisioning
 - Founder-approved testimonial copy
 
 ### Expected outcome
@@ -98,25 +98,25 @@ Completion ~94% → **~96%**; readiness ~88 → **~92**.
 
 ### Objectives
 
-1. **Portal auth MVP** for `/login` (session or OAuth) **or** remove/disable route from primary nav permanently  
-2. Admin authentication for `/admin/*` **or** remove from deploy surface  
-3. Spec `/dashboard/*` IA (or remove dead links from marketing)  
-4. Optional FastAPI spike **only if** product needs non-Next workloads (otherwise defer indefinitely and update standards docs)  
+1. **Portal auth MVP** for `/login` (session or OAuth) **or** remove/disable route from primary nav permanently
+2. Admin authentication for `/admin/*` **or** remove from deploy surface
+3. Spec `/dashboard/*` IA (or remove dead links from marketing)
+4. Optional FastAPI spike **only if** product needs non-Next workloads (otherwise defer indefinitely and update standards docs)
 5. Captcha evaluation for lead forms if abuse appears
 
 ### Deliverables
 
-| Deliverable | Acceptance |
-|-------------|------------|
-| Auth decision doc + implementation | No unauthenticated privileged UI on public host |
-| Dashboard IA or link purge | Zero marketing 404s to `/dashboard` |
-| Standards sync | README/AGENTS no longer imply FastAPI exists if deferred |
-| Abuse controls | Captcha or equivalent if metrics warrant |
+| Deliverable                        | Acceptance                                               |
+| ---------------------------------- | -------------------------------------------------------- |
+| Auth decision doc + implementation | No unauthenticated privileged UI on public host          |
+| Dashboard IA or link purge         | Zero marketing 404s to `/dashboard`                      |
+| Standards sync                     | README/AGENTS no longer imply FastAPI exists if deferred |
+| Abuse controls                     | Captcha or equivalent if metrics warrant                 |
 
 ### Dependencies
 
-- Identity provider choice (Credentials / Google / magic link)  
-- Legal/privacy review for portal data  
+- Identity provider choice (Credentials / Google / magic link)
+- Legal/privacy review for portal data
 
 ### Expected outcome
 
@@ -127,44 +127,44 @@ Completion **~97–98%** for “marketing + lead platform”; product portal bec
 
 ## 5. Post-007 backlog (parking lot)
 
-- Trust document library  
-- Full CMS (replace admin scaffolds)  
-- AI assistant deepening (`/assistant`)  
-- Packages/pricing SKUs as first-class route  
-- Internationalization  
-- Dark-mode marketing theme  
+- Trust document library
+- Full CMS (replace admin scaffolds)
+- AI assistant deepening (`/assistant`)
+- Packages/pricing SKUs as first-class route
+- Internationalization
+- Dark-mode marketing theme
 - Containerized deploy (Docker) if leaving Vercel
 
 ---
 
 ## 6. Suggested calendar
 
-| Window | Focus |
-|--------|-------|
-| Days 0–3 | Ops P0 + Sprint 005 kickoff |
-| Days 4–10 | Sprint 005 delivery + production GO review |
-| Days 11–24 | Sprint 006 |
-| Days 25–45 | Sprint 007 (auth/product) |
+| Window     | Focus                                      |
+| ---------- | ------------------------------------------ |
+| Days 0–3   | Ops P0 + Sprint 005 kickoff                |
+| Days 4–10  | Sprint 005 delivery + production GO review |
+| Days 11–24 | Sprint 006                                 |
+| Days 25–45 | Sprint 007 (auth/product)                  |
 
 ---
 
 ## 7. RACI (lightweight)
 
-| Decision | Responsible | Accountable | Consulted |
-|----------|-------------|-------------|-----------|
-| Perf gate vs waiver | Eng Lead | Founder | Arch |
-| Admin/portal auth | Eng | Founder | Security |
-| DNS/Resend | Ops/Founder | Founder | Eng |
-| Content depth | Content | Founder | Marketing Eng |
+| Decision            | Responsible | Accountable | Consulted     |
+| ------------------- | ----------- | ----------- | ------------- |
+| Perf gate vs waiver | Eng Lead    | Founder     | Arch          |
+| Admin/portal auth   | Eng         | Founder     | Security      |
+| DNS/Resend          | Ops/Founder | Founder     | Eng           |
+| Content depth       | Content     | Founder     | Marketing Eng |
 
 ---
 
 ## 8. Success metrics
 
-| Metric | Target by end of Sprint 005 | Target by end of Sprint 006 |
-|--------|-----------------------------|-----------------------------|
-| LH Perf (core 4) | ≥90 or signed waiver | Maintain ≥90 |
-| Lead email success | ≥99% on verified domain | Same + alerting |
-| Owner CRM uptime | Smoke pass | Error budget via Sentry |
-| Marketing 404s to product stubs | 0 critical | 0 |
-| CI green on `release/**` | Required | Required |
+| Metric                          | Target by end of Sprint 005 | Target by end of Sprint 006 |
+| ------------------------------- | --------------------------- | --------------------------- |
+| LH Perf (core 4)                | ≥90 or signed waiver        | Maintain ≥90                |
+| Lead email success              | ≥99% on verified domain     | Same + alerting             |
+| Owner CRM uptime                | Smoke pass                  | Error budget via Sentry     |
+| Marketing 404s to product stubs | 0 critical                  | 0                           |
+| CI green on `release/**`        | Required                    | Required                    |

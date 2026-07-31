@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { AdminServicesPage } from "@/features/admin";
+import type { Metadata } from 'next';
+import { AdminServicesPage } from '@/features/admin';
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: 'Services',
 };
 
 export default function AdminServicesRoutePage() {

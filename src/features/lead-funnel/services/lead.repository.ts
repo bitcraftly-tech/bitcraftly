@@ -1,15 +1,11 @@
-import { Prisma } from "@/generated/prisma/client";
-import type { Lead as PrismaLead, LeadStatus as PrismaLeadStatus } from "@/generated/prisma/client";
-import { prisma } from "@/lib/db/prisma";
-import type { LeadIntent } from "../types";
-import type { LeadRecord } from "./lead.types";
+import { Prisma } from '@/generated/prisma/client';
+import type { Lead as PrismaLead, LeadStatus as PrismaLeadStatus } from '@/generated/prisma/client';
+import { prisma } from '@/lib/db/prisma';
+import type { LeadIntent } from '../types';
+import type { LeadRecord } from './lead.types';
 
 export type LeadRepositoryErrorCode =
-  | "UNIQUE_VIOLATION"
-  | "NOT_FOUND"
-  | "DATABASE_UNAVAILABLE"
-  | "PRISMA_ERROR"
-  | "UNKNOWN";
+  'UNIQUE_VIOLATION' | 'NOT_FOUND' | 'DATABASE_UNAVAILABLE' | 'PRISMA_ERROR' | 'UNKNOWN';
 
 export interface LeadRepositorySuccess<T> {
   readonly ok: true;
@@ -22,13 +18,11 @@ export interface LeadRepositoryFailure {
   readonly message: string;
 }
 
-export type LeadRepositoryResult<T> =
-  | LeadRepositorySuccess<T>
-  | LeadRepositoryFailure;
+export type LeadRepositoryResult<T> = LeadRepositorySuccess<T> | LeadRepositoryFailure;
 
 export type PersistedLeadStatus = PrismaLeadStatus;
 
-export interface PersistedLeadRecord extends Omit<LeadRecord, "status"> {
+export interface PersistedLeadRecord extends Omit<LeadRecord, 'status'> {
   readonly status: PersistedLeadStatus;
   readonly notificationSentAt?: string;
   readonly notificationError?: string;
@@ -65,24 +59,18 @@ export type ListLeadsResult = LeadRepositoryResult<{
 export type GetLeadStatusCountsResult = LeadRepositoryResult<LeadStatusCounts>;
 
 export const PERSISTED_LEAD_STATUSES = [
-  "new",
-  "contacted",
-  "qualified",
-  "closed",
-  "spam",
+  'new',
+  'contacted',
+  'qualified',
+  'closed',
+  'spam',
 ] as const satisfies readonly PersistedLeadStatus[];
 
-const DATABASE_UNAVAILABLE_CODES = new Set([
-  "P1000",
-  "P1001",
-  "P1002",
-  "P1008",
-  "P1017",
-]);
+const DATABASE_UNAVAILABLE_CODES = new Set(['P1000', 'P1001', 'P1002', 'P1008', 'P1017']);
 
 type LeadModelDelegate = Pick<
   typeof prisma.lead,
-  "create" | "findUnique" | "findMany" | "update" | "count" | "groupBy"
+  'create' | 'findUnique' | 'findMany' | 'update' | 'count' | 'groupBy'
 >;
 
 export type { LeadModelDelegate };
@@ -91,14 +79,8 @@ export interface LeadRepository {
   saveLead(record: LeadRecord): Promise<SaveLeadResult>;
   findLeadById(id: string): Promise<FindLeadByIdResult>;
   findLeadByEmail(email: string): Promise<FindLeadByEmailResult>;
-  updateLeadStatus(
-    id: string,
-    status: PersistedLeadStatus,
-  ): Promise<UpdateLeadStatusResult>;
-  markNotificationSent(
-    id: string,
-    notificationSentAt: Date,
-  ): Promise<MarkNotificationSentResult>;
+  updateLeadStatus(id: string, status: PersistedLeadStatus): Promise<UpdateLeadStatusResult>;
+  markNotificationSent(id: string, notificationSentAt: Date): Promise<MarkNotificationSentResult>;
   markNotificationFailed(
     id: string,
     notificationError: string,
@@ -133,9 +115,7 @@ function mapLeadRowToRecord(row: PrismaLead): PersistedLeadRecord {
     submittedAt: toIsoString(row.submittedAt),
     referer: optionalString(row.referer),
     userAgent: optionalString(row.userAgent),
-    notificationSentAt: row.notificationSentAt
-      ? toIsoString(row.notificationSentAt)
-      : undefined,
+    notificationSentAt: row.notificationSentAt ? toIsoString(row.notificationSentAt) : undefined,
     notificationError: optionalString(row.notificationError),
     createdAt: toIsoString(row.createdAt),
     updatedAt: toIsoString(row.updatedAt),
@@ -174,10 +154,10 @@ function buildListLeadsWhere(filters?: ListLeadsFilters): Prisma.LeadWhereInput 
   if (search) {
     conditions.push({
       OR: [
-        { name: { contains: search, mode: "insensitive" } },
-        { company: { contains: search, mode: "insensitive" } },
-        { email: { contains: search, mode: "insensitive" } },
-        { intent: { contains: search, mode: "insensitive" } },
+        { name: { contains: search, mode: 'insensitive' } },
+        { company: { contains: search, mode: 'insensitive' } },
+        { email: { contains: search, mode: 'insensitive' } },
+        { intent: { contains: search, mode: 'insensitive' } },
       ],
     });
   }
@@ -214,33 +194,33 @@ function applyGroupedLeadStatusCounts(
 
 export function mapLeadRepositoryError(error: unknown): LeadRepositoryFailure {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    if (error.code === "P2002") {
+    if (error.code === 'P2002') {
       return {
         ok: false,
-        code: "UNIQUE_VIOLATION",
-        message: "A lead with this identifier already exists.",
+        code: 'UNIQUE_VIOLATION',
+        message: 'A lead with this identifier already exists.',
       };
     }
 
-    if (error.code === "P2025") {
+    if (error.code === 'P2025') {
       return {
         ok: false,
-        code: "NOT_FOUND",
-        message: "Lead not found.",
+        code: 'NOT_FOUND',
+        message: 'Lead not found.',
       };
     }
 
     if (DATABASE_UNAVAILABLE_CODES.has(error.code)) {
       return {
         ok: false,
-        code: "DATABASE_UNAVAILABLE",
-        message: "Database is unavailable.",
+        code: 'DATABASE_UNAVAILABLE',
+        message: 'Database is unavailable.',
       };
     }
 
     return {
       ok: false,
-      code: "PRISMA_ERROR",
+      code: 'PRISMA_ERROR',
       message: error.message,
     };
   }
@@ -251,29 +231,27 @@ export function mapLeadRepositoryError(error: unknown): LeadRepositoryFailure {
   ) {
     return {
       ok: false,
-      code: "DATABASE_UNAVAILABLE",
-      message: "Database is unavailable.",
+      code: 'DATABASE_UNAVAILABLE',
+      message: 'Database is unavailable.',
     };
   }
 
   if (error instanceof Prisma.PrismaClientUnknownRequestError) {
     return {
       ok: false,
-      code: "PRISMA_ERROR",
+      code: 'PRISMA_ERROR',
       message: error.message,
     };
   }
 
   return {
     ok: false,
-    code: "UNKNOWN",
-    message: "An unexpected database error occurred.",
+    code: 'UNKNOWN',
+    message: 'An unexpected database error occurred.',
   };
 }
 
-export function createLeadRepository(deps: {
-  lead: LeadModelDelegate;
-}): LeadRepository {
+export function createLeadRepository(deps: { lead: LeadModelDelegate }): LeadRepository {
   const { lead } = deps;
 
   return {
@@ -301,8 +279,8 @@ export function createLeadRepository(deps: {
         if (!row) {
           return {
             ok: false,
-            code: "NOT_FOUND",
-            message: "Lead not found.",
+            code: 'NOT_FOUND',
+            message: 'Lead not found.',
           };
         }
 
@@ -319,7 +297,7 @@ export function createLeadRepository(deps: {
       try {
         const rows = await lead.findMany({
           where: { email: email.trim() },
-          orderBy: { submittedAt: "desc" },
+          orderBy: { submittedAt: 'desc' },
         });
 
         return {
@@ -385,7 +363,7 @@ export function createLeadRepository(deps: {
       try {
         const rows = await lead.findMany({
           where: buildListLeadsWhere(filters),
-          orderBy: { submittedAt: "desc" },
+          orderBy: { submittedAt: 'desc' },
         });
 
         return {
@@ -404,15 +382,12 @@ export function createLeadRepository(deps: {
         const [total, grouped] = await Promise.all([
           lead.count(),
           lead.groupBy({
-            by: ["status"],
+            by: ['status'],
             _count: { status: true },
           }),
         ]);
 
-        const counts = applyGroupedLeadStatusCounts(
-          createEmptyLeadStatusCounts(total),
-          grouped,
-        );
+        const counts = applyGroupedLeadStatusCounts(createEmptyLeadStatusCounts(total), grouped);
 
         return {
           ok: true,
@@ -428,18 +403,11 @@ export function createLeadRepository(deps: {
 const defaultLeadRepository = createLeadRepository({ lead: prisma.lead });
 
 export const saveLead = defaultLeadRepository.saveLead.bind(defaultLeadRepository);
-export const findLeadById = defaultLeadRepository.findLeadById.bind(
-  defaultLeadRepository,
-);
-export const findLeadByEmail = defaultLeadRepository.findLeadByEmail.bind(
-  defaultLeadRepository,
-);
-export const updateLeadStatus = defaultLeadRepository.updateLeadStatus.bind(
-  defaultLeadRepository,
-);
-export const markNotificationSent = defaultLeadRepository.markNotificationSent.bind(
-  defaultLeadRepository,
-);
+export const findLeadById = defaultLeadRepository.findLeadById.bind(defaultLeadRepository);
+export const findLeadByEmail = defaultLeadRepository.findLeadByEmail.bind(defaultLeadRepository);
+export const updateLeadStatus = defaultLeadRepository.updateLeadStatus.bind(defaultLeadRepository);
+export const markNotificationSent =
+  defaultLeadRepository.markNotificationSent.bind(defaultLeadRepository);
 export const markNotificationFailed =
   defaultLeadRepository.markNotificationFailed.bind(defaultLeadRepository);
 export const listLeads = defaultLeadRepository.listLeads.bind(defaultLeadRepository);

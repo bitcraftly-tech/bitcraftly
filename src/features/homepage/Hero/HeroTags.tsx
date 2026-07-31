@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { Icon } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
-import { HERO_CAPABILITY_TAGS } from "./hero.constants";
+import Link from 'next/link';
+import { Icon } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
+import { HERO_CAPABILITY_TAGS } from './hero.constants';
 
 interface HeroTagsProps {
   className?: string;
@@ -11,8 +11,8 @@ export function HeroTags({ className }: HeroTagsProps) {
   return (
     <ul
       className={cn(
-        "m-0 flex list-none flex-wrap items-center gap-[10px] p-0",
-        "justify-center md:justify-start",
+        'm-0 flex list-none flex-wrap items-center gap-[10px] p-0',
+        'justify-center md:justify-start',
         className,
       )}
       aria-label="Capabilities"

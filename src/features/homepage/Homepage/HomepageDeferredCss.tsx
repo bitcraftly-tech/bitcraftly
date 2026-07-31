@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 /**
  * Loads below-hero decorative CSS after first paint.
@@ -15,7 +15,7 @@ export function HomepageDeferredCss() {
     const raf1 = window.requestAnimationFrame(() => {
       raf2 = window.requestAnimationFrame(() => {
         if (!cancelled) {
-          void import("./homepage-deferred-styles").catch(() => {
+          void import('./homepage-deferred-styles').catch(() => {
             /* non-critical */
           });
         }

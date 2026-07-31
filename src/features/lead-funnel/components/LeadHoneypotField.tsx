@@ -5,11 +5,7 @@ interface LeadHoneypotFieldProps {
 }
 
 /** Hidden bot field — must remain empty on legitimate submissions. */
-export function LeadHoneypotField({
-  id,
-  value,
-  onChange,
-}: LeadHoneypotFieldProps) {
+export function LeadHoneypotField({ id, value, onChange }: LeadHoneypotFieldProps) {
   return (
     <div className="sr-only" aria-hidden="true">
       <label htmlFor={id}>Leave this field empty</label>

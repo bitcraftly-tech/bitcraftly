@@ -1,10 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Section } from "@/components/ui/section";
-import {
-  getCaseStudyHref,
-  type CaseStudy,
-} from "@/content/case-studies";
+import Image from 'next/image';
+import Link from 'next/link';
+import { Section } from '@/components/ui/section';
+import { getCaseStudyHref, type CaseStudy } from '@/content/case-studies';
 
 interface CaseStudyRelatedProps {
   studies: readonly CaseStudy[];
@@ -16,12 +13,7 @@ export function CaseStudyRelated({ studies }: CaseStudyRelatedProps) {
   }
 
   return (
-    <Section
-      id="related"
-      spacing="lg"
-      background="surface"
-      aria-labelledby="case-related-heading"
-    >
+    <Section id="related" spacing="lg" background="surface" aria-labelledby="case-related-heading">
       <h2
         id="case-related-heading"
         className="m-0 font-sans text-[28px] font-semibold tracking-[-0.02em] text-foreground"

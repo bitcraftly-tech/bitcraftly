@@ -1,12 +1,12 @@
-import Image from "next/image";
-import { cn } from "@/lib/cn";
+import Image from 'next/image';
+import { cn } from '@/lib/cn';
 
 interface WorkBrowserCoverProps {
   src: string;
   alt: string;
   hostname: string;
   /** Prefix class family: `work-featured-card` or `work-card`. */
-  namespace?: "work-featured-card" | "work-card";
+  namespace?: 'work-featured-card' | 'work-card';
   priority?: boolean;
   sizes?: string;
   className?: string;
@@ -19,13 +19,13 @@ export function WorkBrowserCover({
   src,
   alt,
   hostname,
-  namespace = "work-card",
+  namespace = 'work-card',
   priority = false,
-  sizes = "(max-width: 768px) 100vw, 50vw",
+  sizes = '(max-width: 768px) 100vw, 50vw',
   className,
 }: WorkBrowserCoverProps) {
   const hasScreenshot =
-    src.startsWith("http") || src.startsWith("/work/") || src.startsWith("/images/");
+    src.startsWith('http') || src.startsWith('/work/') || src.startsWith('/images/');
 
   return (
     <div className={cn(`${namespace}__browser`, className)} aria-hidden={!hasScreenshot}>
@@ -55,9 +55,7 @@ export function WorkBrowserCover({
             <div className={`${namespace}__pane ${namespace}__pane--nav`} />
             <div className={`${namespace}__pane-main`}>
               <div className={`${namespace}__pane-block`} />
-              <div
-                className={`${namespace}__pane-block ${namespace}__pane-block--wide`}
-              />
+              <div className={`${namespace}__pane-block ${namespace}__pane-block--wide`} />
               <div className={`${namespace}__bars`} aria-hidden>
                 <span />
                 <span />

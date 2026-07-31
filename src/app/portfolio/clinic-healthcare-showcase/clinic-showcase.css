@@ -1,0 +1,1104 @@
+/**
+ * Clinic & Healthcare showcase — page-scoped design system.
+ *
+ * Everything lives under `.clinic-showcase` so the demo can carry its own
+ * medical palette without leaking into the marketing site or other showcases.
+ */
+
+.clinic-showcase {
+  /* Brand */
+  --cl-primary: #0f766e;
+  --cl-primary-strong: #0b5f58;
+  --cl-primary-soft: #ccfbf1;
+  --cl-accent: #14b8a6;
+  --cl-secondary: #2563eb;
+  --cl-danger: #e11d48;
+
+  /* Surfaces */
+  --cl-page: #f8fafc;
+  --cl-surface: #ffffff;
+  --cl-surface-soft: #f1f5f9;
+  --cl-surface-tint: #f0fdfa;
+
+  /* Ink */
+  --cl-text: #0f172a;
+  --cl-muted: #475569;
+  --cl-faint: #64748b;
+  --cl-on-primary: #ffffff;
+
+  /* Hero wash — sampled from the left edge of the ward photo. */
+  --cl-hero-wash: 243 251 253;
+
+  /* Lines & light */
+  --cl-border: #e2e8f0;
+  --cl-border-strong: #cbd5e1;
+  --cl-ring: rgb(20 184 166 / 0.38);
+  --cl-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 12px rgb(15 23 42 / 0.04);
+  --cl-shadow-md: 0 8px 28px rgb(15 23 42 / 0.08);
+  --cl-shadow-lg: 0 24px 60px rgb(15 23 42 / 0.12);
+
+  /* Geometry */
+  --cl-radius-sm: 0.75rem;
+  --cl-radius: 1rem;
+  --cl-radius-lg: 1.5rem;
+  --cl-radius-xl: 2rem;
+
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  background-color: var(--cl-page);
+  color: var(--cl-text);
+  -webkit-font-smoothing: antialiased;
+  /* Keep horizontal carousels from expanding the document width on small phones. */
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+.clinic-showcase.dark {
+  --cl-primary: #2dd4bf;
+  --cl-primary-strong: #14b8a6;
+  --cl-primary-soft: #134e4a;
+  --cl-accent: #5eead4;
+  --cl-secondary: #60a5fa;
+  --cl-danger: #fb7185;
+
+  --cl-page: #060d16;
+  --cl-surface: #0f1b2a;
+  --cl-surface-soft: #12202f;
+  --cl-surface-tint: #0c1d22;
+
+  --cl-text: #e6eef7;
+  --cl-muted: #9fb2c6;
+  --cl-faint: #7f93a8;
+  --cl-on-primary: #04120f;
+
+  --cl-border: #1e3145;
+  --cl-border-strong: #2a4159;
+  --cl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --cl-shadow-md: 0 8px 28px rgb(0 0 0 / 0.45);
+  --cl-shadow-lg: 0 24px 60px rgb(0 0 0 / 0.55);
+}
+
+/* ———————————————————————————— Layout rhythm ———————————————————————————— */
+
+.cl-container {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4.2vw, 2rem);
+}
+
+.cl-section {
+  padding-block: clamp(3rem, 5.4vw, 4.75rem);
+}
+
+.cl-section--tight {
+  padding-block: clamp(2rem, 3.6vw, 3rem);
+}
+
+/* —————————————————————————————— Typography ————————————————————————————— */
+
+/**
+ * The global stylesheet sizes bare headings; inside this showcase every
+ * heading opts into a scale class instead, so reset them back to inherit.
+ * `:where()` keeps this at class specificity so `.cl-h2` & friends still win.
+ */
+.clinic-showcase :where(h1, h2, h3, h4, h5, h6) {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+.cl-display {
+  font-size: clamp(2.25rem, 1.15rem + 4.4vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -0.028em;
+  font-weight: 700;
+}
+
+.cl-h2 {
+  font-size: clamp(1.75rem, 1.1rem + 2.4vw, 2.5rem);
+  line-height: 1.16;
+  letter-spacing: -0.022em;
+  font-weight: 700;
+}
+
+.cl-h3 {
+  font-size: clamp(1.125rem, 1.02rem + 0.42vw, 1.375rem);
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+  font-weight: 600;
+}
+
+.cl-h4 {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.cl-body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--cl-muted);
+}
+
+.cl-small {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--cl-muted);
+}
+
+.cl-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--cl-accent) 32%, transparent);
+  background: var(--cl-surface-tint);
+  padding: 0.4rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cl-primary);
+}
+
+/* Short teal rule used under centred section headings. */
+.cl-rule {
+  display: block;
+  width: 4.5rem;
+  height: 3px;
+  margin-inline: auto;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--cl-primary), var(--cl-accent));
+}
+
+/* ———————————————————————————————— Buttons ————————————————————————————— */
+
+.cl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.cl-btn--primary {
+  background: linear-gradient(135deg, var(--cl-primary), var(--cl-accent));
+  color: var(--cl-on-primary);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--cl-primary) 28%, transparent);
+}
+
+.cl-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px color-mix(in srgb, var(--cl-primary) 34%, transparent);
+}
+
+.cl-btn--outline {
+  background: var(--cl-surface);
+  border-color: var(--cl-border-strong);
+  color: var(--cl-text);
+}
+
+.cl-btn--outline:hover {
+  transform: translateY(-2px);
+  border-color: var(--cl-primary);
+  color: var(--cl-primary);
+  box-shadow: var(--cl-shadow-sm);
+}
+
+.cl-btn--ghost {
+  background: transparent;
+  border-color: color-mix(in srgb, currentcolor 34%, transparent);
+  color: inherit;
+}
+
+.cl-btn--ghost:hover {
+  background: color-mix(in srgb, currentcolor 10%, transparent);
+}
+
+.cl-btn--light {
+  background: #ffffff;
+  color: var(--cl-primary);
+}
+
+.cl-btn--light:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgb(15 23 42 / 0.18);
+}
+
+.cl-btn--sm {
+  padding: 0.5rem 1.05rem;
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 379px) {
+  .cl-btn--sm {
+    padding: 0.5rem 0.75rem;
+    gap: 0.35rem;
+  }
+}
+
+.cl-btn--block {
+  width: 100%;
+}
+
+/* ————————————————————————————————— Cards —————————————————————————————— */
+
+.cl-card {
+  background: var(--cl-surface);
+  border: 1px solid var(--cl-border);
+  border-radius: var(--cl-radius-lg);
+  box-shadow: var(--cl-shadow-sm);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.cl-card--lift:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--cl-accent) 45%, var(--cl-border));
+  box-shadow: var(--cl-shadow-md);
+}
+
+.cl-icon-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--cl-radius);
+  background: var(--cl-surface-tint);
+  color: var(--cl-primary);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.cl-card--lift:hover .cl-icon-tile {
+  background: linear-gradient(135deg, var(--cl-primary), var(--cl-accent));
+  color: var(--cl-on-primary);
+  transform: scale(1.06);
+}
+
+/* Image wrapper: rounded, clipped, subtle zoom on hover. */
+.cl-media {
+  position: relative;
+  overflow: hidden;
+  background: var(--cl-surface-soft);
+}
+
+.cl-media img {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cl-zoom:hover .cl-media img,
+.cl-zoom:focus-within .cl-media img {
+  transform: scale(1.06);
+}
+
+/* ———————————————————————————————— Forms ——————————————————————————————— */
+
+.cl-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--cl-text);
+  margin-bottom: 0.4rem;
+}
+
+.cl-field {
+  width: 100%;
+  border-radius: var(--cl-radius-sm);
+  border: 1px solid var(--cl-border);
+  background: var(--cl-surface);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.9375rem;
+  color: var(--cl-text);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cl-field::placeholder {
+  color: var(--cl-faint);
+}
+
+.cl-field:focus {
+  outline: none;
+  border-color: var(--cl-primary);
+  box-shadow: 0 0 0 3px var(--cl-ring);
+}
+
+.cl-field[aria-invalid='true'] {
+  border-color: var(--cl-danger);
+}
+
+/* ————————————————————————————— Focus states ——————————————————————————— */
+
+.clinic-showcase :focus-visible {
+  outline: 2px solid var(--cl-primary);
+  outline-offset: 2px;
+  border-radius: 0.35rem;
+}
+
+/* —————————————————————————— Section backgrounds ——————————————————————— */
+
+.cl-bg-tint {
+  background:
+    radial-gradient(
+      120% 80% at 100% 0%,
+      color-mix(in srgb, var(--cl-accent) 14%, transparent) 0%,
+      transparent 60%
+    ),
+    var(--cl-surface-tint);
+}
+
+.cl-bg-surface {
+  background: var(--cl-surface);
+}
+
+/* —————————————————————————————— Hero band ————————————————————————————— */
+
+.cl-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: rgb(var(--cl-hero-wash));
+}
+
+.cl-hero__bg,
+.cl-hero__veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cl-hero__bg {
+  z-index: -2;
+}
+
+.cl-hero__bg img {
+  object-fit: cover;
+  object-position: 72% 45%;
+}
+
+/* Left-weighted wash so the headline stays legible over the ward photo. */
+.cl-hero__veil {
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    rgb(var(--cl-hero-wash) / 1) 0%,
+    rgb(var(--cl-hero-wash) / 0.96) 28%,
+    rgb(var(--cl-hero-wash) / 0.66) 50%,
+    rgb(var(--cl-hero-wash) / 0.14) 74%,
+    rgb(var(--cl-hero-wash) / 0) 100%
+  );
+}
+
+/* Stacked layout — wash top-to-bottom instead, so the copy stays readable. */
+@media (max-width: 1023px) {
+  .cl-hero__veil {
+    background: linear-gradient(
+      180deg,
+      rgb(var(--cl-hero-wash) / 0.28) 0%,
+      rgb(var(--cl-hero-wash) / 0.86) 34%,
+      rgb(var(--cl-hero-wash) / 0.98) 62%
+    );
+  }
+}
+
+.clinic-showcase.dark .cl-hero {
+  background: linear-gradient(180deg, #0b1729 0%, var(--cl-page) 100%);
+}
+
+.clinic-showcase.dark .cl-hero__bg img {
+  opacity: 0.4;
+}
+
+.clinic-showcase.dark .cl-hero__veil {
+  background: linear-gradient(
+    100deg,
+    rgb(2 6 23 / 0.95) 0%,
+    rgb(2 6 23 / 0.86) 34%,
+    rgb(2 6 23 / 0.55) 58%,
+    rgb(2 6 23 / 0.12) 82%,
+    rgb(2 6 23 / 0) 100%
+  );
+}
+
+/* ———————————————————— Quick services rail (below hero) ———————————————— */
+
+/* Carries the hero wash a little further down before the page tone takes over. */
+.cl-quick {
+  background: rgb(var(--cl-hero-wash));
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.clinic-showcase.dark .cl-quick {
+  background: linear-gradient(180deg, #0b1729 0%, var(--cl-page) 78%);
+}
+
+.cl-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+/* The filled CTA closes the row; on narrow grids it takes a line of its own. */
+.cl-quick-grid > :last-child {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 640px) {
+  .cl-quick-grid {
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cl-quick-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 0.62fr);
+    gap: 1.25rem;
+  }
+
+  .cl-quick-grid > :last-child {
+    grid-column: auto;
+  }
+}
+
+.cl-quick-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+.cl-quick-card__title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--cl-text);
+}
+
+.cl-quick-card__copy {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--cl-faint);
+}
+
+.cl-quick-cta {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.5rem 1.1rem;
+  border-radius: var(--cl-radius-lg);
+  background: linear-gradient(135deg, var(--cl-primary), var(--cl-accent));
+  color: var(--cl-on-primary);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.25;
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--cl-primary) 26%, transparent);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.cl-quick-cta:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px color-mix(in srgb, var(--cl-primary) 32%, transparent);
+}
+
+/* ———————————————————————————— Stats band —————————————————————————————— */
+
+.cl-stats {
+  background: rgb(var(--cl-hero-wash));
+  padding-block: clamp(2.25rem, 4.5vw, 3.5rem);
+}
+
+.clinic-showcase.dark .cl-stats {
+  background: color-mix(in srgb, var(--cl-surface) 70%, #0b1729);
+}
+
+.cl-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .cl-stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+}
+
+.cl-stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  padding-inline: 0.75rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .cl-stats-item {
+    padding-inline: 1.25rem;
+  }
+
+  /* Soft vertical rules between the four columns. */
+  .cl-stats-item + .cl-stats-item {
+    border-left: 1px solid color-mix(in srgb, var(--cl-primary) 18%, var(--cl-border));
+  }
+}
+
+.cl-stats-item__icon {
+  display: inline-flex;
+  color: var(--cl-primary);
+}
+
+.cl-stats-item__value {
+  font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--cl-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.cl-stats-item__label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--cl-text);
+}
+
+/* Cut-out consultant sits on the baseline of the band. */
+.cl-hero__figure {
+  position: relative;
+  align-self: end;
+  width: 100%;
+  height: clamp(17rem, 40vw, 29rem);
+}
+
+@media (min-width: 1024px) {
+  /* Stretch to the full band height so the cut-out stands on the baseline. */
+  .cl-hero__figure {
+    align-self: stretch;
+    height: auto;
+    min-height: 29rem;
+  }
+}
+
+.cl-hero__figure img {
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+.cl-hero__glow {
+  position: absolute;
+  inset: 12% -6% -4% -6%;
+  z-index: -1;
+  border-radius: 999px;
+  background: radial-gradient(
+    58% 58% at 50% 60%,
+    color-mix(in srgb, var(--cl-accent) 26%, transparent) 0%,
+    transparent 72%
+  );
+  filter: blur(28px);
+}
+
+/* Play affordance inside the secondary hero CTA. */
+.cl-btn__play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--cl-primary), var(--cl-accent));
+  color: var(--cl-on-primary);
+}
+
+/* Trust strip pinned to the bottom of the band. */
+.cl-hero-trust {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.cl-hero-trust__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.85rem 0.75rem;
+  text-align: center;
+  border-radius: var(--cl-radius);
+  border: 1px solid rgb(255 255 255 / 0.72);
+  background: rgb(255 255 255 / 0.74);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--cl-shadow-sm);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.cl-hero-trust__item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--cl-shadow-md);
+}
+
+.clinic-showcase.dark .cl-hero-trust__item {
+  border-color: rgb(148 163 184 / 0.24);
+  background: rgb(15 23 42 / 0.68);
+}
+
+@media (min-width: 640px) {
+  .cl-hero-trust {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  /* Decorative plus marks between the four pillars, as in the design. */
+  .cl-hero-trust__item + .cl-hero-trust__item::before {
+    content: '+';
+    position: absolute;
+    left: -0.5rem;
+    top: 50%;
+    translate: -50% -50%;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1;
+    color: color-mix(in srgb, var(--cl-primary) 55%, transparent);
+  }
+}
+
+/* —————————————————————————— Carousel scrollers ———————————————————————— */
+
+.cl-rail {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding-block: 0.5rem;
+  max-width: 100%;
+}
+
+.cl-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.cl-rail > * {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
+.cl-rail-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--cl-border);
+  background: var(--cl-surface);
+  color: var(--cl-text);
+  box-shadow: var(--cl-shadow-sm);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.cl-rail-btn:hover:not(:disabled) {
+  background: var(--cl-primary);
+  border-color: var(--cl-primary);
+  color: var(--cl-on-primary);
+}
+
+.cl-rail-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ————————————————————— Appointment success dialog ————————————————————— */
+
+.cl-success {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+
+.cl-success__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  cursor: pointer;
+  background: rgb(15 23 42 / 0.48);
+  backdrop-filter: blur(2px);
+}
+
+.cl-success__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 24rem);
+  border-radius: var(--cl-radius-xl);
+  border: 1px solid var(--cl-border);
+  background: var(--cl-surface);
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--cl-shadow-lg);
+}
+
+.cl-success__close {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid var(--cl-border);
+  background: var(--cl-surface);
+  color: var(--cl-muted);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.cl-success__close:hover {
+  border-color: var(--cl-primary);
+  color: var(--cl-primary);
+  background: var(--cl-surface-tint);
+}
+
+.cl-success__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 999px;
+  background: var(--cl-primary-soft);
+  color: var(--cl-primary);
+}
+
+/* ———————————————————— Back-to-top thumbler (right edge) ———————————————— */
+
+.cl-back-thumbler {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: 55;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  border: 0;
+  border-radius: 0.75rem 0 0 0.75rem;
+  background: linear-gradient(180deg, var(--cl-primary) 0%, var(--cl-primary-strong) 100%);
+  color: var(--cl-on-primary);
+  box-shadow: -4px 8px 24px color-mix(in srgb, var(--cl-primary) 28%, transparent);
+  padding: 0.85rem 0.45rem 0.95rem;
+  cursor: pointer;
+  transform: translate(110%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.22s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.cl-back-thumbler--visible {
+  transform: translate(0, -50%);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cl-back-thumbler:hover {
+  background: linear-gradient(180deg, var(--cl-accent) 0%, var(--cl-primary) 100%);
+}
+
+.cl-back-thumbler:focus-visible {
+  outline: 2px solid var(--cl-accent);
+  outline-offset: 2px;
+}
+
+.cl-back-thumbler__icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+}
+
+.cl-back-thumbler__label {
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cl-back-thumbler {
+    transition: none;
+  }
+}
+
+/* ———————————————————— Ask AI FAB ————————————————————————————————————— */
+
+.cl-ask-ai-fab-wrap {
+  position: fixed;
+  right: 1rem;
+  bottom: 1.25rem;
+  z-index: 56;
+}
+
+.cl-ask-ai-fab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 999px;
+  padding: 0.85rem 1.1rem 0.85rem 0.9rem;
+  text-decoration: none;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--cl-primary-strong), var(--cl-primary) 45%, var(--cl-accent));
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--cl-primary) 38%, transparent);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cl-ask-ai-fab:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--cl-primary) 48%, transparent);
+}
+
+.cl-ask-ai-fab:focus-visible {
+  outline: 2px solid var(--cl-accent);
+  outline-offset: 3px;
+}
+
+.cl-ask-ai-fab__glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--cl-accent), transparent 55%);
+  opacity: 0.45;
+  filter: blur(8px);
+  z-index: -1;
+  pointer-events: none;
+  animation: cl-ai-pulse 2.8s ease-in-out infinite;
+}
+
+.cl-ask-ai-fab__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.18);
+  flex-shrink: 0;
+}
+
+.cl-ask-ai-fab__label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+@keyframes cl-ai-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes cl-ai-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cl-ai-spinner {
+  display: inline-block;
+  animation: cl-ai-spin 0.75s linear infinite;
+}
+
+.cl-ai-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.cl-ai-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cl-accent) 0%, transparent);
+  transition: box-shadow 0.25s ease;
+}
+
+.cl-ai-card:hover::after {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cl-accent) 55%, transparent);
+}
+
+@media (max-width: 639px) {
+  .cl-ask-ai-fab-wrap {
+    right: 0.85rem;
+    bottom: 1rem;
+  }
+
+  .cl-ask-ai-fab {
+    padding: 0.85rem;
+  }
+
+  .cl-ask-ai-fab__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+/* Lift WhatsApp when Ask AI FAB is present */
+.clinic-showcase:has(.cl-ask-ai-fab) .cl-wa-fab {
+  bottom: 5.75rem;
+}
+
+@media (max-width: 639px) {
+  .clinic-showcase:has(.cl-ask-ai-fab) .cl-wa-fab {
+    bottom: 5.25rem;
+  }
+}
+
+/* ———————————————————— Emergency WhatsApp FAB —————————————————————————— */
+
+.cl-wa-fab {
+  position: fixed;
+  right: 1rem;
+  bottom: 1.25rem;
+  z-index: 55;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 999px;
+  background: #25d366;
+  color: #ffffff;
+  padding: 0.85rem 1.05rem 0.85rem 0.9rem;
+  box-shadow: 0 12px 28px rgb(37 211 102 / 0.38);
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.cl-wa-fab:hover {
+  transform: translateY(-3px);
+  background: #1ebe57;
+  box-shadow: 0 16px 32px rgb(37 211 102 / 0.46);
+}
+
+.cl-wa-fab:focus-visible {
+  outline: 2px solid #128c7e;
+  outline-offset: 3px;
+}
+
+.cl-wa-fab__icon {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex-shrink: 0;
+}
+
+.cl-wa-fab__label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+@media (max-width: 639px) {
+  .cl-wa-fab {
+    right: 0.85rem;
+    bottom: 1rem;
+    padding: 0.85rem;
+  }
+
+  .cl-wa-fab__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+/* ————————————————————————————— Reduced motion ————————————————————————— */
+
+@media (prefers-reduced-motion: reduce) {
+  .clinic-showcase *,
+  .clinic-showcase *::before,
+  .clinic-showcase *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

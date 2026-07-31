@@ -1,9 +1,9 @@
-import { AdminPageHeader } from "@/features/admin/components/AdminPageHeader";
-import { hasActiveOwnerLeadsFilters } from "./owner-leads.utils";
-import type { OwnerLeadsDashboardSuccess } from "./owner-leads.loader";
-import { OwnerLeadsFiltersForm } from "./components/OwnerLeadsFiltersForm";
-import { OwnerLeadsStatCards } from "./components/OwnerLeadsStatCards";
-import { OwnerLeadsTable } from "./components/OwnerLeadsTable";
+import { AdminPageHeader } from '@/features/admin/components/AdminPageHeader';
+import { hasActiveOwnerLeadsFilters } from './owner-leads.utils';
+import type { OwnerLeadsDashboardSuccess } from './owner-leads.loader';
+import { OwnerLeadsFiltersForm } from './components/OwnerLeadsFiltersForm';
+import { OwnerLeadsStatCards } from './components/OwnerLeadsStatCards';
+import { OwnerLeadsTable } from './components/OwnerLeadsTable';
 
 interface OwnerLeadsDashboardProps {
   readonly data: OwnerLeadsDashboardSuccess;
@@ -13,10 +13,10 @@ export function OwnerLeadsDashboard({ data }: OwnerLeadsDashboardProps) {
   const filtersActive = hasActiveOwnerLeadsFilters(data.filters);
   const emptyLabel =
     data.counts.total === 0
-      ? "No leads captured yet."
+      ? 'No leads captured yet.'
       : filtersActive
-        ? "No leads match your search or filter."
-        : "No leads captured yet.";
+        ? 'No leads match your search or filter.'
+        : 'No leads captured yet.';
 
   return (
     <div className="admin-page owner-leads-page">

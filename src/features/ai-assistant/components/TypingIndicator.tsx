@@ -1,19 +1,12 @@
-"use client";
+'use client';
 
 interface TypingIndicatorProps {
   label?: string;
 }
 
-export function TypingIndicator({
-  label = "Bitcraftly AI is typing",
-}: TypingIndicatorProps) {
+export function TypingIndicator({ label = 'Bitcraftly AI is typing' }: TypingIndicatorProps) {
   return (
-    <div
-      className="ai-assistant__typing"
-      role="status"
-      aria-live="polite"
-      aria-label={label}
-    >
+    <div className="ai-assistant__typing" role="status" aria-live="polite" aria-label={label}>
       <span className="ai-assistant__typing-dots" aria-hidden="true">
         <span />
         <span />

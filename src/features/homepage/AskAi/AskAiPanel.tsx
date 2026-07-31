@@ -1,10 +1,10 @@
-import Link from "next/link";
-import type { CSSProperties } from "react";
-import { Icon } from "@/components/ui/icon";
+import Link from 'next/link';
+import type { CSSProperties } from 'react';
+import { Icon } from '@/components/ui/icon';
 import {
   HERO_ASSISTANT,
   HERO_ASSISTANT_SUGGESTIONS,
-} from "@/features/homepage/Hero/hero.constants";
+} from '@/features/homepage/Hero/hero.constants';
 
 interface AskAiPanelProps {
   id: string;
@@ -12,22 +12,22 @@ interface AskAiPanelProps {
 }
 
 const panelStyle: CSSProperties = {
-  position: "fixed",
-  top: "50%",
+  position: 'fixed',
+  top: '50%',
   right: 16,
-  bottom: "auto",
-  left: "auto",
+  bottom: 'auto',
+  left: 'auto',
   zIndex: 1300,
-  display: "flex",
-  width: "min(340px, calc(100vw - 32px))",
-  maxHeight: "min(70vh, 480px)",
-  flexDirection: "column",
+  display: 'flex',
+  width: 'min(340px, calc(100vw - 32px))',
+  maxHeight: 'min(70vh, 480px)',
+  flexDirection: 'column',
   gap: 12,
   padding: 14,
-  overflow: "auto",
+  overflow: 'auto',
   borderRadius: 16,
-  background: "var(--background)",
-  translate: "0 -50%",
+  background: 'var(--background)',
+  translate: '0 -50%',
 };
 
 /**

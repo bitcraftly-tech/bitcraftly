@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
-import { DeferredMount } from "@/components/patterns/deferred-mount";
+import dynamic from 'next/dynamic';
+import { DeferredMount } from '@/components/patterns/deferred-mount';
 
 function ChromeUnavailable() {
   return null;
@@ -9,7 +9,7 @@ function ChromeUnavailable() {
 
 const LeadFunnelWidgets = dynamic(
   () =>
-    import("@/features/lead-funnel")
+    import('@/features/lead-funnel')
       .then((mod) => mod.LeadFunnelWidgets)
       .catch(() => ChromeUnavailable),
   { ssr: false },

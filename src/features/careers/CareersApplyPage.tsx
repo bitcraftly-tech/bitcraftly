@@ -1,21 +1,21 @@
-import { Suspense } from "react";
-import Link from "next/link";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { Section } from "@/components/ui/section";
-import { ROUTES } from "@/constants/navigation";
-import { buildBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { CareersApplyWizard } from "./CareersApplyWizard";
-import "./careers.css";
+import { Suspense } from 'react';
+import Link from 'next/link';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { Section } from '@/components/ui/section';
+import { ROUTES } from '@/constants/navigation';
+import { buildBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { CareersApplyWizard } from './CareersApplyWizard';
+import './careers.css';
 
 /**
  * Careers apply route — parity with bitcraftly.com/careers/apply chrome.
  */
 export function CareersApplyPage() {
   const breadcrumbs = buildBreadcrumbs([
-    { label: "Home", href: ROUTES.home },
-    { label: "Careers", href: ROUTES.careers },
-    { label: "Apply" },
+    { label: 'Home', href: ROUTES.home },
+    { label: 'Careers', href: ROUTES.careers },
+    { label: 'Apply' },
   ]);
 
   return (
@@ -33,13 +33,11 @@ export function CareersApplyPage() {
               Send your profile
             </h1>
             <p className="careers-apply-page__lede">
-              Takes about 4–5 minutes. Founder reviews every application — no
-              keyword bots.
+              Takes about 4–5 minutes. Founder reviews every application — no keyword bots.
             </p>
             <p className="careers-apply-page__note">
-              Prefer email?{" "}
-              <a href="mailto:hello@bitcraftly.com">hello@bitcraftly.com</a>
-              {" · "}
+              Prefer email? <a href="mailto:hello@bitcraftly.com">hello@bitcraftly.com</a>
+              {' · '}
               <Link href={ROUTES.careers}>Back to open roles</Link>
             </p>
           </div>

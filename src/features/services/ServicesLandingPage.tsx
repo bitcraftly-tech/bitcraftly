@@ -1,43 +1,33 @@
-import dynamic from "next/dynamic";
-import { JsonLdScript } from "@/components/patterns/json-ld";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { SERVICE_GROUPS } from "@/constants/services";
-import { buildServicesBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { ServicesCatalog } from "./ServicesCatalog";
-import { ServicesCategoryNav } from "./ServicesCategoryNav";
-import { ServicesComparisonSection } from "./ServicesComparisonSection";
-import { ServicesFaqSection } from "./ServicesFaqSection";
-import { ServicesHero } from "./ServicesHero";
-import { ServicesPageCta } from "./ServicesPageCta";
-import { ServicesRelatedHubs } from "./ServicesRelatedHubs";
-import { ServicesWorkPreview } from "./ServicesWorkPreview";
-import {
-  SERVICES_LANDING,
-  getServiceCardModels,
-} from "./services.content";
-import { buildServicesListingJsonLd } from "./services-schema";
-import type { ServiceCardModel } from "./services.types";
-import "./services.css";
+import dynamic from 'next/dynamic';
+import { JsonLdScript } from '@/components/patterns/json-ld';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { SERVICE_GROUPS } from '@/constants/services';
+import { buildServicesBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { ServicesCatalog } from './ServicesCatalog';
+import { ServicesCategoryNav } from './ServicesCategoryNav';
+import { ServicesComparisonSection } from './ServicesComparisonSection';
+import { ServicesFaqSection } from './ServicesFaqSection';
+import { ServicesHero } from './ServicesHero';
+import { ServicesPageCta } from './ServicesPageCta';
+import { ServicesRelatedHubs } from './ServicesRelatedHubs';
+import { ServicesWorkPreview } from './ServicesWorkPreview';
+import { SERVICES_LANDING, getServiceCardModels } from './services.content';
+import { buildServicesListingJsonLd } from './services-schema';
+import type { ServiceCardModel } from './services.types';
+import './services.css';
 
 const ProcessSection = dynamic(
-  () =>
-    import("@/features/homepage/Process").then((mod) => mod.ProcessSection),
+  () => import('@/features/homepage/Process').then((mod) => mod.ProcessSection),
   { ssr: true },
 );
 
 const WhyBitcraftlySection = dynamic(
-  () =>
-    import("@/features/homepage/WhyBitcraftly").then(
-      (mod) => mod.WhyBitcraftlySection,
-    ),
+  () => import('@/features/homepage/WhyBitcraftly').then((mod) => mod.WhyBitcraftlySection),
   { ssr: true },
 );
 
 const TestimonialsSection = dynamic(
-  () =>
-    import("@/features/homepage/Testimonials").then(
-      (mod) => mod.TestimonialsSection,
-    ),
+  () => import('@/features/homepage/Testimonials').then((mod) => mod.TestimonialsSection),
   { ssr: true },
 );
 
@@ -58,8 +48,8 @@ export function ServicesLandingPage() {
         description: item.description,
         href: `/services/${item.slug}`,
         icon: item.icon,
-        ctaLabel: "Learn More",
-        badge: "Recommended",
+        ctaLabel: 'Learn More',
+        badge: 'Recommended',
         tags: [],
       } satisfies ServiceCardModel;
     }),

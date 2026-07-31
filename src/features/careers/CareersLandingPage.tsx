@@ -1,62 +1,50 @@
-import Link from "next/link";
-import type { CSSProperties } from "react";
-import { MarketingFinalCtaBand } from "@/components/patterns/marketing-final-cta-band";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
-import { MarketingStagger } from "@/components/patterns/marketing-stagger";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { ROUTES } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { buildBreadcrumbs } from "@/lib/seo/breadcrumbs";
+import Link from 'next/link';
+import type { CSSProperties } from 'react';
+import { MarketingFinalCtaBand } from '@/components/patterns/marketing-final-cta-band';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
+import { MarketingStagger } from '@/components/patterns/marketing-stagger';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { ROUTES } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { buildBreadcrumbs } from '@/lib/seo/breadcrumbs';
 import {
   CAREER_BENEFITS,
   CAREER_CULTURE,
   CAREER_PROCESS_STEPS,
   CAREER_ROLES,
   getCareersApplyHref,
-} from "./careers.content";
-import { CareersHero } from "./CareersHero";
-import { CareersRolesBoard } from "./CareersRolesBoard";
-import "./careers.css";
+} from './careers.content';
+import { CareersHero } from './CareersHero';
+import { CareersRolesBoard } from './CareersRolesBoard';
+import './careers.css';
 
 const focusRing = cn(
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-  "focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+  'focus-visible:ring-offset-2 focus-visible:ring-offset-background',
 );
 
-const CULTURE_ICONS: readonly IconName[] = [
-  "shield",
-  "rocket",
-  "globe",
-  "code",
-];
+const CULTURE_ICONS: readonly IconName[] = ['shield', 'rocket', 'globe', 'code'];
 
 const BENEFIT_ICONS: readonly IconName[] = [
-  "calendar",
-  "sparkles",
-  "layout-grid",
-  "star",
-  "check",
-  "trending-up",
+  'calendar',
+  'sparkles',
+  'layout-grid',
+  'star',
+  'check',
+  'trending-up',
 ];
 
-const PROCESS_ICONS: readonly IconName[] = [
-  "mail",
-  "search",
-  "message",
-  "code",
-  "zap",
-  "check",
-];
+const PROCESS_ICONS: readonly IconName[] = ['mail', 'search', 'message', 'code', 'zap', 'check'];
 
 /**
  * Careers landing — Services-style layout + bitcraftly.com/careers content.
  */
 export function CareersLandingPage() {
   const breadcrumbs = buildBreadcrumbs([
-    { label: "Home", href: ROUTES.home },
-    { label: "Careers" },
+    { label: 'Home', href: ROUTES.home },
+    { label: 'Careers' },
   ]);
   const hasOpenings = CAREER_ROLES.length > 0;
 
@@ -75,30 +63,23 @@ export function CareersLandingPage() {
           <MarketingSectionIntro
             eyebrow="Open positions"
             headingId="open-roles-heading"
-            title={
-              hasOpenings ? "Roles we are hiring for" : "Current openings"
-            }
+            title={hasOpenings ? 'Roles we are hiring for' : 'Current openings'}
             description={
               hasOpenings
-                ? "Engineering, design, and product — filter by team, search skills, and apply in minutes."
-                : "There are no open roles at the moment. Leave a general application and we will reach out when hiring resumes."
+                ? 'Engineering, design, and product — filter by team, search skills, and apply in minutes.'
+                : 'There are no open roles at the moment. Leave a general application and we will reach out when hiring resumes.'
             }
           />
           <Link
-            href={getCareersApplyHref("general")}
+            href={getCareersApplyHref('general')}
             className={cn(
-              "inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline",
-              "transition-opacity duration-200 hover:opacity-80",
+              'inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline',
+              'transition-opacity duration-200 hover:opacity-80',
               focusRing,
             )}
           >
             General application
-            <Icon
-              name="arrow-right"
-              size="sm"
-              aria-hidden
-              className="h-[13px] w-[13px]"
-            />
+            <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
           </Link>
         </div>
         <CareersRolesBoard />
@@ -123,30 +104,24 @@ export function CareersLandingPage() {
             </span>
             <p className="careers-remote-banner__title">Remote-first</p>
           </div>
-          <p>
-            Work from anywhere · Ghaziabad / NCR overlap for sync when clients
-            need it
-          </p>
+          <p>Work from anywhere · Ghaziabad / NCR overlap for sync when clients need it</p>
         </div>
 
         <MarketingStagger
           as="ul"
-          className={cn(
-            "m-0 grid w-full list-none gap-[16px] p-0",
-            "grid-cols-1 sm:grid-cols-2",
-          )}
+          className={cn('m-0 grid w-full list-none gap-[16px] p-0', 'grid-cols-1 sm:grid-cols-2')}
         >
           {CAREER_CULTURE.map((item, index) => (
             <li
               key={item.title}
               className="mkt-stagger__item min-w-0"
-              style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
+              style={{ '--stagger': Math.min(index, 5) } as CSSProperties}
             >
               <article className="careers-page-card">
                 <div className="careers-page-card__head">
                   <span className="careers-page-card__icon" aria-hidden>
                     <Icon
-                      name={CULTURE_ICONS[index] ?? "sparkles"}
+                      name={CULTURE_ICONS[index] ?? 'sparkles'}
                       size="sm"
                       className="h-[16px] w-[16px]"
                     />
@@ -176,21 +151,21 @@ export function CareersLandingPage() {
         <MarketingStagger
           as="ul"
           className={cn(
-            "m-0 grid w-full list-none gap-[16px] p-0",
-            "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+            'm-0 grid w-full list-none gap-[16px] p-0',
+            'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
           )}
         >
           {CAREER_BENEFITS.map((item, index) => (
             <li
               key={item.title}
               className="mkt-stagger__item min-w-0"
-              style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
+              style={{ '--stagger': Math.min(index, 5) } as CSSProperties}
             >
               <article className="careers-page-card">
                 <div className="careers-page-card__head">
                   <span className="careers-page-card__icon" aria-hidden>
                     <Icon
-                      name={BENEFIT_ICONS[index] ?? "check"}
+                      name={BENEFIT_ICONS[index] ?? 'check'}
                       size="sm"
                       className="h-[16px] w-[16px]"
                     />
@@ -219,47 +194,40 @@ export function CareersLandingPage() {
           <a
             href="mailto:hello@bitcraftly.com"
             className={cn(
-              "inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline",
-              "transition-opacity duration-200 hover:opacity-80",
+              'inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline',
+              'transition-opacity duration-200 hover:opacity-80',
               focusRing,
             )}
           >
             hello@bitcraftly.com
-            <Icon
-              name="arrow-up-right"
-              size="sm"
-              aria-hidden
-              className="h-[13px] w-[13px]"
-            />
+            <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
           </a>
         </div>
 
         <MarketingStagger
           as="ol"
           className={cn(
-            "m-0 grid w-full list-none gap-[16px] p-0",
-            "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+            'm-0 grid w-full list-none gap-[16px] p-0',
+            'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
           )}
         >
           {CAREER_PROCESS_STEPS.map((step, index) => (
             <li
               key={step.title}
               className="mkt-stagger__item min-w-0"
-              style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
+              style={{ '--stagger': Math.min(index, 5) } as CSSProperties}
             >
               <article className="careers-page-card careers-page-card--step">
                 <div className="careers-page-card__step-meta">
-                  <span className="careers-page-card__step-index">
-                    Step {index + 1}
-                  </span>
-                  {"optional" in step && step.optional ? (
+                  <span className="careers-page-card__step-index">Step {index + 1}</span>
+                  {'optional' in step && step.optional ? (
                     <span className="careers-page-card__optional">Optional</span>
                   ) : null}
                 </div>
                 <div className="careers-page-card__head">
                   <span className="careers-page-card__icon" aria-hidden>
                     <Icon
-                      name={PROCESS_ICONS[index] ?? "check"}
+                      name={PROCESS_ICONS[index] ?? 'check'}
                       size="sm"
                       className="h-[16px] w-[16px]"
                     />
@@ -279,18 +247,14 @@ export function CareersLandingPage() {
         description="Apply in under five minutes — resume, links, and role fit. Founder reviews every profile personally."
         reassurance="Prefer email? hello@bitcraftly.com"
         primaryCta={{
-          label: hasOpenings ? "Apply now" : "Send general application",
-          href: getCareersApplyHref("general"),
+          label: hasOpenings ? 'Apply now' : 'Send general application',
+          href: getCareersApplyHref('general'),
         }}
         tertiaryCta={{
-          label: hasOpenings ? "View open roles" : "See hiring process",
-          href: hasOpenings ? "#open-roles" : "#careers-process-heading",
+          label: hasOpenings ? 'View open roles' : 'See hiring process',
+          href: hasOpenings ? '#open-roles' : '#careers-process-heading',
         }}
-        trust={[
-          "Founder-led review",
-          "Clear salary bands",
-          "Remote-first · India",
-        ]}
+        trust={['Founder-led review', 'Clear salary bands', 'Remote-first · India']}
       />
     </PageShell>
   );

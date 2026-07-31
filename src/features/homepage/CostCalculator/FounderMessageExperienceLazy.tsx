@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { MountWhenVisible } from "@/components/patterns/mount-when-visible";
-import { COST_CALCULATOR_CONTENT } from "./cost-calculator.content";
+import { MountWhenVisible } from '@/components/patterns/mount-when-visible';
+import { COST_CALCULATOR_CONTENT } from './cost-calculator.content';
 
 const loadExperience = () =>
-  import("./FounderMessageExperience").then((mod) => {
+  import('./FounderMessageExperience').then((mod) => {
     const Experience = mod.FounderMessageExperience;
     function BoundFounderMessageExperience() {
       return <Experience content={COST_CALCULATOR_CONTENT.founder} />;

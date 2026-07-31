@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect } from "react";
+import Link from 'next/link';
+import { useEffect } from 'react';
 
-import { reportClientError } from "@/lib/observability/report-client-error";
+import { reportClientError } from '@/lib/observability/report-client-error';
 
 interface GlobalErrorProps {
   readonly error: Error & { digest?: string };
@@ -12,7 +12,7 @@ interface GlobalErrorProps {
 
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
   useEffect(() => {
-    reportClientError(error, { boundary: "global" });
+    reportClientError(error, { boundary: 'global' });
   }, [error]);
 
   return (

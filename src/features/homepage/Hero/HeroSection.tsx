@@ -1,10 +1,10 @@
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import { HERO_HEADING_ID, HERO_ID } from "./hero.constants";
-import { HeroContent } from "./HeroContent";
-import { HeroIllustration } from "./HeroIllustration";
-import "./hero.css";
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import { HERO_HEADING_ID, HERO_ID } from './hero.constants';
+import { HeroContent } from './HeroContent';
+import { HeroIllustration } from './HeroIllustration';
+import './hero.css';
 
 export async function HeroSection() {
   const isMobile = await isMobileUserAgent();
@@ -15,8 +15,8 @@ export async function HeroSection() {
       spacing="none"
       aria-labelledby={HERO_HEADING_ID}
       className={cn(
-        "relative overflow-hidden hero-surface",
-        isMobile ? "hero-section hero-section--compact" : "hero-section",
+        'relative overflow-hidden hero-surface',
+        isMobile ? 'hero-section hero-section--compact' : 'hero-section',
       )}
     >
       {!isMobile ? (
@@ -51,15 +51,15 @@ export async function HeroSection() {
       */}
       <div
         className={cn(
-          "hero-section-grid relative grid w-full grid-cols-1 items-center",
-          "gap-[var(--space-8)] md:gap-[var(--space-10)]",
+          'hero-section-grid relative grid w-full grid-cols-1 items-center',
+          'gap-[var(--space-8)] md:gap-[var(--space-10)]',
           !isMobile &&
             [
-              "lg:grid-cols-[minmax(560px,1.15fr)_minmax(0,1fr)]",
-              "lg:items-stretch",
-              "lg:gap-[calc(var(--space-3)/2)]",
-              "xl:grid-cols-[minmax(560px,640px)_minmax(480px,1fr)]",
-            ].join(" "),
+              'lg:grid-cols-[minmax(560px,1.15fr)_minmax(0,1fr)]',
+              'lg:items-stretch',
+              'lg:gap-[calc(var(--space-3)/2)]',
+              'xl:grid-cols-[minmax(560px,640px)_minmax(480px,1fr)]',
+            ].join(' '),
         )}
       >
         <div className="hero-section-copy w-full min-w-0 lg:min-w-[560px] lg:max-w-[640px]">

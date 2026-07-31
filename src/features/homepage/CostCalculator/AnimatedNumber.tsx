@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 interface AnimatedNumberProps {
   value: number;
@@ -9,13 +9,13 @@ interface AnimatedNumberProps {
 }
 
 function subscribeReducedMotion(onStoreChange: () => void): () => void {
-  const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-  media.addEventListener("change", onStoreChange);
-  return () => media.removeEventListener("change", onStoreChange);
+  const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+  media.addEventListener('change', onStoreChange);
+  return () => media.removeEventListener('change', onStoreChange);
 }
 
 function getReducedMotionSnapshot(): boolean {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 function getReducedMotionServerSnapshot(): boolean {
@@ -23,11 +23,7 @@ function getReducedMotionServerSnapshot(): boolean {
 }
 
 /** Lightweight price counter — no framer dependency. */
-export function AnimatedNumber({
-  value,
-  format,
-  className,
-}: AnimatedNumberProps) {
+export function AnimatedNumber({ value, format, className }: AnimatedNumberProps) {
   const reduceMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotionSnapshot,

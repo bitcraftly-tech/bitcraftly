@@ -1,5 +1,5 @@
-import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/cn";
+import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from '@/lib/cn';
 
 interface CardGridSkeletonProps {
   count?: number;
@@ -7,21 +7,17 @@ interface CardGridSkeletonProps {
   className?: string;
 }
 
-export function CardGridSkeleton({
-  count = 6,
-  columns = 3,
-  className,
-}: CardGridSkeletonProps) {
+export function CardGridSkeleton({ count = 6, columns = 3, className }: CardGridSkeletonProps) {
   const gridClass =
     columns === 2
-      ? "sm:grid-cols-2"
+      ? 'sm:grid-cols-2'
       : columns === 4
-        ? "sm:grid-cols-2 lg:grid-cols-4"
-        : "sm:grid-cols-2 lg:grid-cols-3";
+        ? 'sm:grid-cols-2 lg:grid-cols-4'
+        : 'sm:grid-cols-2 lg:grid-cols-3';
 
   return (
     <div
-      className={cn("grid grid-cols-1 gap-[var(--space-3)]", gridClass, className)}
+      className={cn('grid grid-cols-1 gap-[var(--space-3)]', gridClass, className)}
       role="status"
       aria-live="polite"
       aria-busy="true"
@@ -38,7 +34,7 @@ export function CardSkeleton({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-[var(--space-2)] rounded-[var(--token-radius-lg)] border border-border/60 p-[var(--space-3)]",
+        'flex flex-col gap-[var(--space-2)] rounded-[var(--token-radius-lg)] border border-border/60 p-[var(--space-3)]',
         className,
       )}
       aria-hidden="true"
@@ -56,7 +52,7 @@ export function ServiceCardSkeleton({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-[var(--space-2)] rounded-[var(--token-radius-lg)] border border-border/60 p-[var(--space-3)]",
+        'flex flex-col gap-[var(--space-2)] rounded-[var(--token-radius-lg)] border border-border/60 p-[var(--space-3)]',
         className,
       )}
       aria-hidden="true"
@@ -76,7 +72,7 @@ export function PricingCardSkeleton({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-[var(--space-2)] rounded-[var(--token-radius-xl)] border border-border/60 p-[var(--space-4)]",
+        'flex flex-col gap-[var(--space-2)] rounded-[var(--token-radius-xl)] border border-border/60 p-[var(--space-4)]',
         className,
       )}
       aria-hidden="true"
@@ -97,7 +93,7 @@ export function PricingCardSkeleton({ className }: { className?: string }) {
 
 export function BlogCardSkeleton({ className }: { className?: string }) {
   return (
-    <div className={cn("flex flex-col gap-[var(--space-2)]", className)} aria-hidden="true">
+    <div className={cn('flex flex-col gap-[var(--space-2)]', className)} aria-hidden="true">
       <Skeleton className="aspect-[16/9] w-full rounded-[var(--token-radius-lg)]" />
       <Skeleton className="h-[12px] w-[28%]" />
       <Skeleton className="h-[20px] w-[92%]" />
@@ -110,7 +106,7 @@ export function CaseStudyCardSkeleton({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "grid gap-[var(--space-3)] rounded-[var(--token-radius-lg)] border border-border/60 p-[var(--space-3)] md:grid-cols-[140px_1fr]",
+        'grid gap-[var(--space-3)] rounded-[var(--token-radius-lg)] border border-border/60 p-[var(--space-3)] md:grid-cols-[140px_1fr]',
         className,
       )}
       aria-hidden="true"

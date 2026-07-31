@@ -1,18 +1,15 @@
-import {
-  FloatMetricCard,
-  HeroStage,
-} from "@/components/patterns/hero-compositions";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
+import { FloatMetricCard, HeroStage } from '@/components/patterns/hero-compositions';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
 
 const CONTACT_CARDS: readonly {
   title: string;
   value: string;
   icon: IconName;
 }[] = [
-  { title: "Consultation", value: "Book a call", icon: "calendar" },
-  { title: "WhatsApp", value: "Chat now", icon: "message" },
-  { title: "Email", value: "hello@bitcraftly", icon: "mail" },
+  { title: 'Consultation', value: 'Book a call', icon: 'calendar' },
+  { title: 'WhatsApp', value: 'Chat now', icon: 'message' },
+  { title: 'Email', value: 'hello@bitcraftly', icon: 'mail' },
 ];
 
 /**
@@ -21,12 +18,7 @@ const CONTACT_CARDS: readonly {
 export function ContactHeroVisual() {
   return (
     <HeroStage>
-      <div
-        className={cn(
-          "mh-panel absolute left-[4%] top-[6%] z-[1] w-[52%] p-[14px]",
-          "mh-bob",
-        )}
-      >
+      <div className={cn('mh-panel absolute left-[4%] top-[6%] z-[1] w-[52%] p-[14px]', 'mh-bob')}>
         <div className="flex items-center gap-[10px]">
           <span className="grid size-[44px] place-items-center rounded-[14px] bg-gradient-to-br from-primary to-accent font-sans text-[16px] font-extrabold text-primary-foreground">
             B
@@ -41,7 +33,7 @@ export function ContactHeroVisual() {
           </div>
         </div>
         <div className="mt-[12px] flex -space-x-[8px]">
-          {["BC", "AI", "UX", "BE"].map((initials) => (
+          {['BC', 'AI', 'UX', 'BE'].map((initials) => (
             <span
               key={initials}
               className="mh-avatar-initial grid size-[32px] place-items-center rounded-full border-2 border-background bg-[color-mix(in_srgb,var(--primary)_10%,var(--background))] font-sans text-[10px] font-bold"
@@ -54,8 +46,8 @@ export function ContactHeroVisual() {
 
       <div
         className={cn(
-          "mh-panel absolute right-[4%] top-[8%] z-[2] w-[40%] p-[12px] mh-hide-sm",
-          "mh-bob mh-bob-delay-1",
+          'mh-panel absolute right-[4%] top-[8%] z-[2] w-[40%] p-[12px] mh-hide-sm',
+          'mh-bob mh-bob-delay-1',
         )}
         aria-hidden
       >
@@ -77,8 +69,8 @@ export function ContactHeroVisual() {
 
       <div
         className={cn(
-          "absolute inset-x-[4%] bottom-[8%] z-[3] grid grid-cols-3 gap-[8px]",
-          "mh-bob mh-bob-delay-2",
+          'absolute inset-x-[4%] bottom-[8%] z-[3] grid grid-cols-3 gap-[8px]',
+          'mh-bob mh-bob-delay-2',
         )}
       >
         {CONTACT_CARDS.map((card) => (

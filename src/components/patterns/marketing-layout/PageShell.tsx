@@ -1,5 +1,5 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import type { HTMLAttributes, ReactNode } from 'react';
+import { cn } from '@/lib/cn';
 
 export interface PageShellProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -12,10 +12,7 @@ export interface PageShellProps extends HTMLAttributes<HTMLDivElement> {
  */
 export function PageShell({ children, className, ...props }: PageShellProps) {
   return (
-    <div
-      className={cn("flex w-full flex-1 flex-col", className)}
-      {...props}
-    >
+    <div className={cn('flex w-full flex-1 flex-col', className)} {...props}>
       {children}
     </div>
   );

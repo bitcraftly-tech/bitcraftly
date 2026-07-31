@@ -1,1 +1,1 @@
-export { AskAiTab } from "./AskAiTab";
+export { AskAiTab } from './AskAiTab';

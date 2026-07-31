@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { OwnerLeadsPage } from "@/features/owner-crm";
+import type { Metadata } from 'next';
+import { OwnerLeadsPage } from '@/features/owner-crm';
 
 export const metadata: Metadata = {
-  title: "Leads",
+  title: 'Leads',
 };
 
 interface OwnerLeadsRouteProps {

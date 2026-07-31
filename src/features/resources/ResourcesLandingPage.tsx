@@ -1,24 +1,21 @@
-import Link from "next/link";
-import type { CSSProperties } from "react";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
-import { MarketingStagger } from "@/components/patterns/marketing-stagger";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import {
-  RESOURCE_GROUPS,
-  RESOURCES_FEATURED,
-} from "@/constants/resources";
-import { buildResourcesBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { cn } from "@/lib/cn";
-import { ResourcesHero } from "./ResourcesHero";
-import { ResourcesPageCta } from "./ResourcesPageCta";
-import { RESOURCES_LANDING } from "./resources.content";
-import "./resources.css";
+import Link from 'next/link';
+import type { CSSProperties } from 'react';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
+import { MarketingStagger } from '@/components/patterns/marketing-stagger';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { RESOURCE_GROUPS, RESOURCES_FEATURED } from '@/constants/resources';
+import { buildResourcesBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { cn } from '@/lib/cn';
+import { ResourcesHero } from './ResourcesHero';
+import { ResourcesPageCta } from './ResourcesPageCta';
+import { RESOURCES_LANDING } from './resources.content';
+import './resources.css';
 
 const focusRing = cn(
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-  "focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+  'focus-visible:ring-offset-2 focus-visible:ring-offset-background',
 );
 
 /**
@@ -38,7 +35,7 @@ export function ResourcesLandingPage() {
         description={RESOURCES_LANDING.description}
         primaryCta={RESOURCES_LANDING.primaryCta}
         secondaryCta={RESOURCES_LANDING.secondaryCta}
-        chips={["Guides", "Documentation", "FAQ", "Blog", "Case studies"]}
+        chips={['Guides', 'Documentation', 'FAQ', 'Blog', 'Case studies']}
       />
 
       <Section
@@ -58,25 +55,19 @@ export function ResourcesLandingPage() {
               Start with the latest insights
             </h2>
             <p className="m-0 mt-[12px] font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
-              Fresh ideas on AI, product, and digital engineering from the
-              Bitcraftly team.
+              Fresh ideas on AI, product, and digital engineering from the Bitcraftly team.
             </p>
           </div>
           <Link
             href={RESOURCES_FEATURED.href}
             className={cn(
-              "inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline",
-              "transition-opacity duration-200 hover:opacity-80",
+              'inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline',
+              'transition-opacity duration-200 hover:opacity-80',
               focusRing,
             )}
           >
             {RESOURCES_FEATURED.ctaLabel}
-            <Icon
-              name="arrow-right"
-              size="sm"
-              aria-hidden
-              className="h-[13px] w-[13px]"
-            />
+            <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
           </Link>
         </div>
 
@@ -105,19 +96,14 @@ export function ResourcesLandingPage() {
             <Link
               href={RESOURCES_FEATURED.href}
               className={cn(
-                "inline-flex min-h-[44px] items-center justify-center gap-[8px] rounded-[12px] px-[18px]",
-                "bg-primary font-sans text-[14px] font-semibold text-primary-foreground no-underline",
-                "transition-opacity duration-200 hover:opacity-90",
+                'inline-flex min-h-[44px] items-center justify-center gap-[8px] rounded-[12px] px-[18px]',
+                'bg-primary font-sans text-[14px] font-semibold text-primary-foreground no-underline',
+                'transition-opacity duration-200 hover:opacity-90',
                 focusRing,
               )}
             >
               {RESOURCES_FEATURED.ctaLabel}
-              <Icon
-                name="arrow-up-right"
-                size="sm"
-                aria-hidden
-                className="h-[14px] w-[14px]"
-              />
+              <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[14px] w-[14px]" />
             </Link>
           </div>
         </article>
@@ -127,7 +113,7 @@ export function ResourcesLandingPage() {
         <Section
           key={group.id}
           spacing="lg"
-          background={group.id === "learning" ? "default" : "surface"}
+          background={group.id === 'learning' ? 'default' : 'surface'}
           aria-labelledby={`resources-${group.id}-heading`}
           className="border-b border-border/40"
         >
@@ -136,41 +122,34 @@ export function ResourcesLandingPage() {
             eyebrow={group.title}
             headingId={`resources-${group.id}-heading`}
             title={
-              group.id === "learning"
-                ? "Learn from delivery, not just theory"
-                : "Company resources and policies"
+              group.id === 'learning'
+                ? 'Learn from delivery, not just theory'
+                : 'Company resources and policies'
             }
             description={
-              group.id === "learning"
-                ? "Blog posts, case studies, guides, and FAQs for founders and product teams."
-                : "Careers, contact, events, press, and the legal pages that keep engagement clear."
+              group.id === 'learning'
+                ? 'Blog posts, case studies, guides, and FAQs for founders and product teams.'
+                : 'Careers, contact, events, press, and the legal pages that keep engagement clear.'
             }
           />
 
           <MarketingStagger
             as="ul"
             className={cn(
-              "m-0 mt-[24px] grid w-full list-none gap-[16px] p-0",
-              "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+              'm-0 mt-[24px] grid w-full list-none gap-[16px] p-0',
+              'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
             )}
           >
             {group.items.map((item, index) => (
               <li
                 key={item.slug}
                 className="mkt-stagger__item min-w-0"
-                style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
+                style={{ '--stagger': Math.min(index, 5) } as CSSProperties}
               >
-                <Link
-                  href={item.href}
-                  className={cn("group resources-link-card", focusRing)}
-                >
+                <Link href={item.href} className={cn('group resources-link-card', focusRing)}>
                   <div className="resources-link-card__head">
                     <span className="resources-link-card__icon" aria-hidden>
-                      <Icon
-                        name={item.icon as IconName}
-                        size="sm"
-                        className="h-[16px] w-[16px]"
-                      />
+                      <Icon name={item.icon as IconName} size="sm" className="h-[16px] w-[16px]" />
                     </span>
                     <h3 className="resources-link-card__title">{item.label}</h3>
                   </div>

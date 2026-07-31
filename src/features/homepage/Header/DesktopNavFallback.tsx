@@ -1,6 +1,6 @@
-import { hasMegaMenu } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { HEADER_NAV_ID, HEADER_NAV_LINKS } from "./header.constants";
+import { hasMegaMenu } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { HEADER_NAV_ID, HEADER_NAV_LINKS } from './header.constants';
 
 /**
  * SSR/loading shell matching desktop nav chrome (no mega-menu JS).
@@ -21,9 +21,9 @@ export function DesktopNavFallback() {
             key={`${link.label}-${link.href}`}
             href={link.href}
             className={cn(
-              "header-nav-item relative inline-flex items-center gap-[4px] py-[8px] no-underline",
-              "font-sans text-[14px] font-medium leading-none tracking-[-0.01em] whitespace-nowrap",
-              "text-foreground",
+              'header-nav-item relative inline-flex items-center gap-[4px] py-[8px] no-underline',
+              'font-sans text-[14px] font-medium leading-none tracking-[-0.01em] whitespace-nowrap',
+              'text-foreground',
             )}
           >
             <span>{link.label}</span>

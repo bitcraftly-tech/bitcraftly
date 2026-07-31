@@ -1,6 +1,6 @@
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import type { CaseStudy } from "@/content/case-studies";
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import type { CaseStudy } from '@/content/case-studies';
 
 interface CaseStudyFeaturesProps {
   study: CaseStudy;
@@ -33,9 +33,7 @@ export function CaseStudyFeatures({ study }: CaseStudyFeaturesProps) {
             <span className="mt-[2px] inline-flex text-primary" aria-hidden>
               <Icon name="check" size="sm" className="h-[16px] w-[16px]" />
             </span>
-            <span className="font-sans text-[15px] leading-[1.55] text-foreground">
-              {feature}
-            </span>
+            <span className="font-sans text-[15px] leading-[1.55] text-foreground">{feature}</span>
           </li>
         ))}
       </ul>

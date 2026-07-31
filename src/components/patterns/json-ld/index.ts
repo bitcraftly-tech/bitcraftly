@@ -1,1 +1,1 @@
-export { JsonLdScript } from "./JsonLdScript";
+export { JsonLdScript } from './JsonLdScript';

@@ -34,12 +34,12 @@ npm run test:unit -- src/features/lead-funnel
 npm run build
 ```
 
-| Command | Expected | Pass |
-|---------|----------|------|
-| `lint` | Exit 0 | ☐ |
-| `typecheck` | Exit 0 | ☐ |
-| `test:unit -- src/features/lead-funnel` | 6 files, 23 tests pass | ☐ |
-| `build` | Exit 0, `/contact` route present | ☐ |
+| Command                                 | Expected                         | Pass |
+| --------------------------------------- | -------------------------------- | ---- |
+| `lint`                                  | Exit 0                           | ☐    |
+| `typecheck`                             | Exit 0                           | ☐    |
+| `test:unit -- src/features/lead-funnel` | 6 files, 23 tests pass           | ☐    |
+| `build`                                 | Exit 0, `/contact` route present | ☐    |
 
 ---
 
@@ -80,7 +80,7 @@ Open console — in development, `[lead-funnel]` logs appear.
 
 ```js
 // Optional: inspect dataLayer in console
-window.dataLayer?.filter(e => e.event?.startsWith('lead_funnel_'))
+window.dataLayer?.filter((e) => e.event?.startsWith('lead_funnel_'));
 ```
 
 ---
@@ -105,25 +105,25 @@ window.dataLayer?.filter(e => e.event?.startsWith('lead_funnel_'))
 
 ## Resend configuration verification
 
-| Check | Pass |
-|-------|------|
-| API key valid (200 from Resend on successful submit) | ☐ |
-| From address uses verified domain | ☐ |
-| HTML + plain text parts present in received email | ☐ |
-| User HTML in message escaped (try `<script>` in test message on staging) | ☐ |
-| Notification subject includes lead type and name | ☐ |
+| Check                                                                    | Pass |
+| ------------------------------------------------------------------------ | ---- |
+| API key valid (200 from Resend on successful submit)                     | ☐    |
+| From address uses verified domain                                        | ☐    |
+| HTML + plain text parts present in received email                        | ☐    |
+| User HTML in message escaped (try `<script>` in test message on staging) | ☐    |
+| Notification subject includes lead type and name                         | ☐    |
 
 ---
 
 ## Error code matrix (staging)
 
-| Scenario | How to trigger | Expected UI | Analytics |
-|----------|----------------|-------------|-----------|
-| `VALIDATION` | Bypass client validation* or invalid server payload | Server validation message | None |
-| `HONEYPOT` | Fill hidden honeypot via DevTools | “Unable to submit…” | None |
-| `RATE_LIMIT` | 6+ rapid submits | “Too many submissions…” | None |
-| `DELIVERY` | Missing/invalid Resend config | “We could not deliver…” | None |
-| `UNKNOWN` | Simulate network failure** | “Something went wrong…” | None |
+| Scenario     | How to trigger                                      | Expected UI               | Analytics |
+| ------------ | --------------------------------------------------- | ------------------------- | --------- |
+| `VALIDATION` | Bypass client validation* or invalid server payload | Server validation message | None      |
+| `HONEYPOT`   | Fill hidden honeypot via DevTools                   | “Unable to submit…”       | None      |
+| `RATE_LIMIT` | 6+ rapid submits                                    | “Too many submissions…”   | None      |
+| `DELIVERY`   | Missing/invalid Resend config                       | “We could not deliver…”   | None      |
+| `UNKNOWN`    | Simulate network failure**                          | “Something went wrong…”   | None      |
 
 \*Use DevTools to remove `minLength` or send malformed request only in staging.  
 \*\*Optional: offline mode in DevTools during submit.
@@ -176,14 +176,14 @@ window.dataLayer?.filter(e => e.event?.startsWith('lead_funnel_'))
 
 ## Staging sign-off
 
-| Area | Verified by | Date | Pass |
-|------|-------------|------|------|
-| Contact form happy path | | | ☐ |
-| Newsletter happy path | | | ☐ |
-| Resend emails received | | | ☐ |
-| Error handling | | | ☐ |
-| Analytics integrity | | | ☐ |
-| Accessibility | | | ☐ |
-| Automated tests + build | | | ☐ |
+| Area                    | Verified by | Date | Pass |
+| ----------------------- | ----------- | ---- | ---- |
+| Contact form happy path |             |      | ☐    |
+| Newsletter happy path   |             |      | ☐    |
+| Resend emails received  |             |      | ☐    |
+| Error handling          |             |      | ☐    |
+| Analytics integrity     |             |      | ☐    |
+| Accessibility           |             |      | ☐    |
+| Automated tests + build |             |      | ☐    |
 
 **Ready for production deployment:** ☐ Yes ☐ No — blockers: _______________

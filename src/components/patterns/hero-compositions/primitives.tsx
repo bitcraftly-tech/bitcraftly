@@ -1,12 +1,12 @@
-import type { ReactNode } from "react";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
-import "./hero-compositions.css";
+import type { ReactNode } from 'react';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
+import './hero-compositions.css';
 
 export function HeroStage({
   children,
   className,
-  minHeightClass = "lg:min-h-[380px]",
+  minHeightClass = 'lg:min-h-[380px]',
   /** Decorative compositions should not enter the accessibility tree. */
   decorative = true,
 }: {
@@ -17,7 +17,7 @@ export function HeroStage({
 }) {
   return (
     <div
-      className={cn("mh-stage", minHeightClass, className)}
+      className={cn('mh-stage', minHeightClass, className)}
       aria-hidden={decorative || undefined}
     >
       <div className="mh-glow" aria-hidden />
@@ -41,7 +41,7 @@ export function FloatMetricCard({
   className?: string;
 }) {
   return (
-    <div className={cn("mh-float", className)} aria-hidden>
+    <div className={cn('mh-float', className)} aria-hidden>
       <span className="mh-float-icon">
         <Icon name={icon} size="sm" className="h-[14px] w-[14px]" />
       </span>
@@ -53,9 +53,7 @@ export function FloatMetricCard({
           {value}
         </p>
         {hint ? (
-          <p className="m-0 mt-[4px] font-sans text-[11px] text-muted-foreground">
-            {hint}
-          </p>
+          <p className="m-0 mt-[4px] font-sans text-[11px] text-muted-foreground">{hint}</p>
         ) : null}
       </div>
     </div>
@@ -72,7 +70,7 @@ export function BrowserWindow({
   className?: string;
 }) {
   return (
-    <div className={cn("mh-panel", className)}>
+    <div className={cn('mh-panel', className)}>
       <div className="mh-browser-chrome">
         <div className="mh-browser-dots" aria-hidden>
           <span />
@@ -86,15 +84,9 @@ export function BrowserWindow({
   );
 }
 
-export function PhoneFrame({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
+export function PhoneFrame({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("mh-phone", className)}>
+    <div className={cn('mh-phone', className)}>
       <div className="mh-phone-notch" aria-hidden />
       <div className="p-[10px] pt-[8px]">{children}</div>
     </div>

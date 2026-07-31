@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { ClearHashOnPageNavigate } from "@/components/patterns/clear-hash-on-page-navigate";
-import { DeferredNewsletter } from "@/components/patterns/deferred-newsletter";
-import { MarketingClientChrome } from "@/components/patterns/marketing-client-chrome";
-import { MarketingDeferredCss } from "@/lib/layout/MarketingDeferredCss";
+import { ClearHashOnPageNavigate } from '@/components/patterns/clear-hash-on-page-navigate';
+import { DeferredNewsletter } from '@/components/patterns/deferred-newsletter';
+import { MarketingClientChrome } from '@/components/patterns/marketing-client-chrome';
+import { MarketingDeferredCss } from '@/lib/layout/MarketingDeferredCss';
 
 /**
  * Code-split marketing client chrome — loaded asynchronously from the server

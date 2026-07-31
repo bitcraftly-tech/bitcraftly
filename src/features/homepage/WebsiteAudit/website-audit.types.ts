@@ -12,5 +12,5 @@ export interface WebsiteAuditAction {
   id: string;
   label: string;
   href: string;
-  variant: "primary" | "outline";
+  variant: 'primary' | 'outline';
 }

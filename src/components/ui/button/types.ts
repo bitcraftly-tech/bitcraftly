@@ -1,15 +1,10 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-export type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "ghost"
-  | "destructive";
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
 
-export type ButtonSize = "sm" | "md" | "lg";
+export type ButtonSize = 'sm' | 'md' | 'lg';
 
-export type ButtonType = "button" | "submit" | "reset";
+export type ButtonType = 'button' | 'submit' | 'reset';
 
 /**
  * Button props for the Bitcraftly design system.

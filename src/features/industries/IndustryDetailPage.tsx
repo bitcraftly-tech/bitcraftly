@@ -1,19 +1,16 @@
-import Link from "next/link";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { ROUTES } from "@/constants/navigation";
-import { buildIndustriesBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { IndustryDetailHero } from "./IndustryDetailHero";
-import { IndustriesPageCta } from "./IndustriesPageCta";
-import { IndustryCard } from "./IndustryCard";
-import {
-  getIndustryModelBySlug,
-  INDUSTRIES_CATALOG,
-} from "./industries.content";
-import type { IndustryModel } from "./industries.types";
-import "./industries.css";
+import Link from 'next/link';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { ROUTES } from '@/constants/navigation';
+import { buildIndustriesBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { IndustryDetailHero } from './IndustryDetailHero';
+import { IndustriesPageCta } from './IndustriesPageCta';
+import { IndustryCard } from './IndustryCard';
+import { getIndustryModelBySlug, INDUSTRIES_CATALOG } from './industries.content';
+import type { IndustryModel } from './industries.types';
+import './industries.css';
 
 interface IndustryDetailPageProps {
   industry: IndustryModel;
@@ -74,7 +71,10 @@ export function IndustryDetailPage({ industry }: IndustryDetailPageProps) {
         <ul className="industry-detail-list">
           {industry.solutions.map((item) => (
             <li key={item} className="industry-detail-list__item">
-              <span className="industry-detail-list__icon industry-detail-list__icon--check" aria-hidden>
+              <span
+                className="industry-detail-list__icon industry-detail-list__icon--check"
+                aria-hidden
+              >
                 <Icon name="check" size="sm" />
               </span>
               <span>{item}</span>
@@ -116,10 +116,7 @@ export function IndustryDetailPage({ industry }: IndustryDetailPageProps) {
               title="Related industries"
               description="Explore adjacent verticals where the same delivery model applies."
             />
-            <Link
-              href={ROUTES.industries}
-              className="industry-detail-related__all"
-            >
+            <Link href={ROUTES.industries} className="industry-detail-related__all">
               View all industries
               <Icon name="arrow-right" size="sm" aria-hidden />
             </Link>

@@ -1,32 +1,32 @@
-import Link from "next/link";
-import { AnimatedStat } from "@/components/patterns/animated-stat";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Container } from "@/components/ui/container";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import { SERVICES_LANDING } from "./services.content";
-import { ServicesHeroVisual } from "./ServicesHeroVisual";
-import "./services.css";
+import Link from 'next/link';
+import { AnimatedStat } from '@/components/patterns/animated-stat';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Container } from '@/components/ui/container';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import { SERVICES_LANDING } from './services.content';
+import { ServicesHeroVisual } from './ServicesHeroVisual';
+import './services.css';
 
 interface ServicesHeroProps {
   breadcrumbs: readonly BreadcrumbItem[];
 }
 
 const HERO_LEAD =
-  "From idea to impact — we design, build, and scale high-performance digital products that drive growth and transform businesses.";
+  'From idea to impact — we design, build, and scale high-performance digital products that drive growth and transform businesses.';
 
 const HERO_PRIMARY_CTA = {
-  label: "Book Free Consultation",
+  label: 'Book Free Consultation',
   href: SERVICES_LANDING.primaryCta.href,
 } as const;
 
 const HERO_SECONDARY_CTA = {
-  label: "Explore Services",
-  href: "#services-catalog",
+  label: 'Explore Services',
+  href: '#services-catalog',
 } as const;
 
 const HERO_TECH_STACK: readonly {
@@ -34,12 +34,12 @@ const HERO_TECH_STACK: readonly {
   label: string;
   icon?: IconName;
 }[] = [
-  { id: "react", label: "React", icon: "code" },
-  { id: "next", label: "Next.js", icon: "globe" },
-  { id: "ts", label: "TypeScript", icon: "zap" },
-  { id: "node", label: "Node.js", icon: "database" },
-  { id: "aws", label: "AWS", icon: "cloud" },
-  { id: "more", label: "+ More" },
+  { id: 'react', label: 'React', icon: 'code' },
+  { id: 'next', label: 'Next.js', icon: 'globe' },
+  { id: 'ts', label: 'TypeScript', icon: 'zap' },
+  { id: 'node', label: 'Node.js', icon: 'database' },
+  { id: 'aws', label: 'AWS', icon: 'cloud' },
+  { id: 'more', label: '+ More' },
 ] as const;
 
 const HERO_STATS: readonly {
@@ -47,35 +47,35 @@ const HERO_STATS: readonly {
   value: string;
   label: string;
   icon: IconName;
-  tone: "violet" | "sky" | "indigo" | "amber";
+  tone: 'violet' | 'sky' | 'indigo' | 'amber';
 }[] = [
   {
-    id: "experience",
-    value: "20+",
-    label: "Years of Experience",
-    icon: "rocket",
-    tone: "violet",
+    id: 'experience',
+    value: '20+',
+    label: 'Years of Experience',
+    icon: 'rocket',
+    tone: 'violet',
   },
   {
-    id: "projects",
-    value: "300+",
-    label: "Projects Delivered",
-    icon: "layout-grid",
-    tone: "sky",
+    id: 'projects',
+    value: '300+',
+    label: 'Projects Delivered',
+    icon: 'layout-grid',
+    tone: 'sky',
   },
   {
-    id: "industries",
-    value: "24+",
-    label: "Industries Served",
-    icon: "globe",
-    tone: "indigo",
+    id: 'industries',
+    value: '24+',
+    label: 'Industries Served',
+    icon: 'globe',
+    tone: 'indigo',
   },
   {
-    id: "satisfaction",
-    value: "100%",
-    label: "Client Satisfaction",
-    icon: "star",
-    tone: "amber",
+    id: 'satisfaction',
+    value: '100%',
+    label: 'Client Satisfaction',
+    icon: 'star',
+    tone: 'amber',
   },
 ] as const;
 
@@ -84,35 +84,35 @@ const HERO_FEATURES: readonly {
   title: string;
   description: string;
   icon: IconName;
-  tone: "violet" | "sky" | "emerald" | "amber";
+  tone: 'violet' | 'sky' | 'emerald' | 'amber';
 }[] = [
   {
-    id: "agile",
-    title: "Agile & Transparent",
-    description: "Collaborative process with full transparency",
-    icon: "shield",
-    tone: "violet",
+    id: 'agile',
+    title: 'Agile & Transparent',
+    description: 'Collaborative process with full transparency',
+    icon: 'shield',
+    tone: 'violet',
   },
   {
-    id: "scalable",
-    title: "Scalable Solutions",
-    description: "Built to scale with your business growth",
-    icon: "layout-grid",
-    tone: "sky",
+    id: 'scalable',
+    title: 'Scalable Solutions',
+    description: 'Built to scale with your business growth',
+    icon: 'layout-grid',
+    tone: 'sky',
   },
   {
-    id: "secure",
-    title: "Secure & Reliable",
-    description: "Enterprise-grade security and reliability",
-    icon: "check",
-    tone: "emerald",
+    id: 'secure',
+    title: 'Secure & Reliable',
+    description: 'Enterprise-grade security and reliability',
+    icon: 'check',
+    tone: 'emerald',
   },
   {
-    id: "results",
-    title: "Results-Driven",
-    description: "Focused on delivering measurable results",
-    icon: "trending-up",
-    tone: "amber",
+    id: 'results',
+    title: 'Results-Driven',
+    description: 'Focused on delivering measurable results',
+    icon: 'trending-up',
+    tone: 'amber',
   },
 ] as const;
 
@@ -121,9 +121,7 @@ const HERO_FEATURES: readonly {
  */
 export async function ServicesHero({ breadcrumbs }: ServicesHeroProps) {
   const isMobile = await isMobileUserAgent();
-  const titleParts = SERVICES_LANDING.title.split(
-    SERVICES_LANDING.titleHighlight,
-  );
+  const titleParts = SERVICES_LANDING.title.split(SERVICES_LANDING.titleHighlight);
 
   return (
     <Section
@@ -131,9 +129,9 @@ export async function ServicesHero({ breadcrumbs }: ServicesHeroProps) {
       contained={false}
       aria-labelledby="services-page-heading"
       className={cn(
-        "services-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'services-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -169,21 +167,14 @@ export async function ServicesHero({ breadcrumbs }: ServicesHeroProps) {
         <div className="services-hero__grid">
           <div className="services-hero__content">
             <p className="services-hero__eyebrow">
-              <Icon
-                name="code"
-                size="sm"
-                aria-hidden
-                className="services-hero__eyebrow-icon"
-              />
+              <Icon name="code" size="sm" aria-hidden className="services-hero__eyebrow-icon" />
               <span>{SERVICES_LANDING.eyebrow}</span>
             </p>
 
             <h1 id="services-page-heading" className="services-hero__title">
               {titleParts[0]}
-              <span className="services-hero__title-accent">
-                {SERVICES_LANDING.titleHighlight}
-              </span>
-              {titleParts[1] ?? ""}
+              <span className="services-hero__title-accent">{SERVICES_LANDING.titleHighlight}</span>
+              {titleParts[1] ?? ''}
             </h1>
 
             <p className="services-hero__description">{HERO_LEAD}</p>
@@ -209,17 +200,15 @@ export async function ServicesHero({ breadcrumbs }: ServicesHeroProps) {
 
             {!isMobile ? (
               <div className="services-hero-stack">
-                <p className="services-hero-stack__label">
-                  Technology stack we work with
-                </p>
+                <p className="services-hero-stack__label">Technology stack we work with</p>
                 <ul className="services-hero-stack__list">
                   {HERO_TECH_STACK.map((item) => (
                     <li key={item.id}>
                       <span
                         className={
                           item.icon
-                            ? "services-hero-stack__pill"
-                            : "services-hero-stack__pill services-hero-stack__pill--more"
+                            ? 'services-hero-stack__pill'
+                            : 'services-hero-stack__pill services-hero-stack__pill--more'
                         }
                       >
                         {item.icon ? (
@@ -239,17 +228,9 @@ export async function ServicesHero({ breadcrumbs }: ServicesHeroProps) {
             ) : null}
 
             {!isMobile ? (
-              <div
-                className="services-hero-stats"
-                role="list"
-                aria-label="Company highlights"
-              >
+              <div className="services-hero-stats" role="list" aria-label="Company highlights">
                 {HERO_STATS.map((stat) => (
-                  <div
-                    key={stat.id}
-                    role="listitem"
-                    className="services-hero-stats__item"
-                  >
+                  <div key={stat.id} role="listitem" className="services-hero-stats__item">
                     <dl className="services-hero-stats__pair m-0">
                       <dt className="services-hero-stats__value">
                         <span className="services-hero-stats__head">
@@ -276,28 +257,24 @@ export async function ServicesHero({ breadcrumbs }: ServicesHeroProps) {
             </div>
           ) : null}
 
-        {!isMobile ? (
-        <ul className="services-hero-features" aria-label="Delivery principles">
-          {HERO_FEATURES.map((item) => (
-            <li key={item.id} className="services-hero-features__item">
-              <span className="services-hero-features__head">
-                <span
-                  className={`services-hero-features__icon services-hero-features__icon--${item.tone}`}
-                  aria-hidden
-                >
-                  <Icon name={item.icon} size="sm" />
-                </span>
-                <span className="services-hero-features__title">
-                  {item.title}
-                </span>
-              </span>
-              <span className="services-hero-features__desc">
-                {item.description}
-              </span>
-            </li>
-          ))}
-        </ul>
-        ) : null}
+          {!isMobile ? (
+            <ul className="services-hero-features" aria-label="Delivery principles">
+              {HERO_FEATURES.map((item) => (
+                <li key={item.id} className="services-hero-features__item">
+                  <span className="services-hero-features__head">
+                    <span
+                      className={`services-hero-features__icon services-hero-features__icon--${item.tone}`}
+                      aria-hidden
+                    >
+                      <Icon name={item.icon} size="sm" />
+                    </span>
+                    <span className="services-hero-features__title">{item.title}</span>
+                  </span>
+                  <span className="services-hero-features__desc">{item.description}</span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
       </Container>
     </Section>

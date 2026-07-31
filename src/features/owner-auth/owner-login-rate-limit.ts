@@ -2,9 +2,9 @@ import {
   checkInMemoryRateLimit,
   resetInMemoryRateLimitStore,
   type RateLimitResult,
-} from "@/lib/security/in-memory-rate-limit";
+} from '@/lib/security/in-memory-rate-limit';
 
-const NAMESPACE = "owner-login";
+const NAMESPACE = 'owner-login';
 
 const DEFAULT_IP_CONFIG = {
   maxAttempts: Number(process.env.OWNER_LOGIN_RATE_LIMIT_MAX ?? 10),
@@ -13,17 +13,15 @@ const DEFAULT_IP_CONFIG = {
 
 const DEFAULT_ACCOUNT_CONFIG = {
   maxAttempts: Number(process.env.OWNER_LOGIN_ACCOUNT_RATE_LIMIT_MAX ?? 5),
-  windowMs: Number(
-    process.env.OWNER_LOGIN_ACCOUNT_RATE_LIMIT_WINDOW_MS ?? 15 * 60 * 1000,
-  ),
+  windowMs: Number(process.env.OWNER_LOGIN_ACCOUNT_RATE_LIMIT_WINDOW_MS ?? 15 * 60 * 1000),
 };
 
 function buildIpKey(clientIp?: string): string {
-  return `ip:${clientIp?.trim() || "unknown-ip"}`;
+  return `ip:${clientIp?.trim() || 'unknown-ip'}`;
 }
 
 function buildAccountKey(email: string): string {
-  return `account:${email.trim().toLowerCase() || "unknown-account"}`;
+  return `account:${email.trim().toLowerCase() || 'unknown-account'}`;
 }
 
 export function checkOwnerLoginRateLimit(params: {
@@ -40,11 +38,7 @@ export function checkOwnerLoginRateLimit(params: {
     return ipResult;
   }
 
-  return checkInMemoryRateLimit(
-    NAMESPACE,
-    buildAccountKey(params.email),
-    DEFAULT_ACCOUNT_CONFIG,
-  );
+  return checkInMemoryRateLimit(NAMESPACE, buildAccountKey(params.email), DEFAULT_ACCOUNT_CONFIG);
 }
 
 /** Test-only reset — do not call from production code paths. */

@@ -1,18 +1,13 @@
-export type LeadIntent =
-  | "consultation"
-  | "audit"
-  | "discovery"
-  | "quote"
-  | "general";
+export type LeadIntent = 'consultation' | 'audit' | 'discovery' | 'quote' | 'general';
 
 export type LeadSource =
-  | "contact-form"
-  | "whatsapp-cta"
-  | "calendly-cta"
-  | "free-audit-cta"
-  | "exit-intent"
-  | "sticky-cta"
-  | "contact-page"
+  | 'contact-form'
+  | 'whatsapp-cta'
+  | 'calendly-cta'
+  | 'free-audit-cta'
+  | 'exit-intent'
+  | 'sticky-cta'
+  | 'contact-page'
   | string;
 
 export interface LeadFunnelDefaults {

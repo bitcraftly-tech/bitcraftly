@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { ExitIntentPopup } from "./components/ExitIntentPopup";
-import { StickyLeadCta } from "./components/StickyLeadCta";
+import { ExitIntentPopup } from './components/ExitIntentPopup';
+import { StickyLeadCta } from './components/StickyLeadCta';
 /* lead-funnel.css loaded post-paint via MarketingDeferredCss */
 
 /**

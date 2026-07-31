@@ -1,5 +1,5 @@
-import { Section } from "@/components/ui/section";
-import type { CaseStudy } from "@/content/case-studies";
+import { Section } from '@/components/ui/section';
+import type { CaseStudy } from '@/content/case-studies';
 
 interface CaseStudyTestimonialProps {
   study: CaseStudy;
@@ -27,10 +27,8 @@ export function CaseStudyTestimonial({ study }: CaseStudyTestimonialProps) {
           “{testimonial.quote}”
         </p>
         <footer className="mt-[16px] font-sans text-[14px] text-muted-foreground">
-          <cite className="not-italic font-semibold text-foreground">
-            {testimonial.name}
-          </cite>
-          {" — "}
+          <cite className="not-italic font-semibold text-foreground">{testimonial.name}</cite>
+          {' — '}
           {testimonial.role}, {testimonial.company}
         </footer>
       </blockquote>

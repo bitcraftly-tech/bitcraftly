@@ -1,6 +1,6 @@
 interface ErrorContext {
   readonly digest?: string;
-  readonly source?: "server" | "client" | "request";
+  readonly source?: 'server' | 'client' | 'request';
   readonly routePath?: string;
   readonly routerKind?: string;
   readonly method?: string;
@@ -21,13 +21,13 @@ function normalizeError(error: unknown): {
   }
 
   return {
-    message: typeof error === "string" ? error : "Unknown error",
+    message: typeof error === 'string' ? error : 'Unknown error',
   };
 }
 
 function serializeError(error: unknown, context: ErrorContext = {}): string {
   return JSON.stringify({
-    level: "error",
+    level: 'error',
     timestamp: new Date().toISOString(),
     sentryReady: Boolean(process.env.SENTRY_DSN),
     ...normalizeError(error),
@@ -39,16 +39,10 @@ function serializeError(error: unknown, context: ErrorContext = {}): string {
  * Server-side error reporter. Structured for log drains and future Sentry wiring.
  * Set SENTRY_DSN and connect @sentry/nextjs in a follow-up to forward events.
  */
-export function reportError(
-  error: unknown,
-  context: ErrorContext = {},
-): void {
-  console.error(serializeError(error, { ...context, source: context.source ?? "server" }));
+export function reportError(error: unknown, context: ErrorContext = {}): void {
+  console.error(serializeError(error, { ...context, source: context.source ?? 'server' }));
 }
 
-export function reportRequestError(
-  error: unknown,
-  context: ErrorContext = {},
-): void {
-  reportError(error, { ...context, source: "request" });
+export function reportRequestError(error: unknown, context: ErrorContext = {}): void {
+  reportError(error, { ...context, source: 'request' });
 }

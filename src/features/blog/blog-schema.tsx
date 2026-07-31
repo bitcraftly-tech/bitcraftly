@@ -3,52 +3,50 @@ import {
   getBlogCategoryById,
   type BlogPost,
   type BlogPostSummary,
-} from "@/content/blog";
-import { ROUTES } from "@/constants/navigation";
-import { getBlogPostHref } from "./blog.utils";
+} from '@/content/blog';
+import { ROUTES } from '@/constants/navigation';
+import { getBlogPostHref } from './blog.utils';
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-  "https://bitcraftly.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ?? 'https://bitcraftly.com';
 
 function absolute(path: string): string {
-  if (path.startsWith("http")) return path;
-  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+  if (path.startsWith('http')) return path;
+  return `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
 export function buildBlogListingJsonLd(posts: readonly BlogPostSummary[]) {
   return {
-    "@context": "https://schema.org",
-    "@graph": [
+    '@context': 'https://schema.org',
+    '@graph': [
       {
-        "@type": "BreadcrumbList",
+        '@type': 'BreadcrumbList',
         itemListElement: [
           {
-            "@type": "ListItem",
+            '@type': 'ListItem',
             position: 1,
-            name: "Home",
+            name: 'Home',
             item: `${SITE_URL}/`,
           },
           {
-            "@type": "ListItem",
+            '@type': 'ListItem',
             position: 2,
-            name: "Blog",
+            name: 'Blog',
             item: absolute(ROUTES.blog),
           },
         ],
       },
       {
-        "@type": "CollectionPage",
-        "@id": `${absolute(ROUTES.blog)}#webpage`,
+        '@type': 'CollectionPage',
+        '@id': `${absolute(ROUTES.blog)}#webpage`,
         url: absolute(ROUTES.blog),
-        name: "Bitcraftly Blog",
+        name: 'Bitcraftly Blog',
         description:
-          "Engineering and product insights on AI, Next.js, React, performance, and SEO from the Bitcraftly team.",
-        isPartOf: { "@id": `${SITE_URL}/#website` },
+          'Engineering and product insights on AI, Next.js, React, performance, and SEO from the Bitcraftly team.',
+        isPartOf: { '@id': `${SITE_URL}/#website` },
         mainEntity: {
-          "@type": "ItemList",
+          '@type': 'ItemList',
           itemListElement: posts.map((post, index) => ({
-            "@type": "ListItem",
+            '@type': 'ListItem',
             position: index + 1,
             url: absolute(getBlogPostHref(post.slug)),
             name: post.title,
@@ -65,25 +63,25 @@ export function buildBlogPostJsonLd(post: BlogPost) {
   const url = absolute(getBlogPostHref(post.slug));
 
   return {
-    "@context": "https://schema.org",
-    "@graph": [
+    '@context': 'https://schema.org',
+    '@graph': [
       {
-        "@type": "BreadcrumbList",
+        '@type': 'BreadcrumbList',
         itemListElement: [
           {
-            "@type": "ListItem",
+            '@type': 'ListItem',
             position: 1,
-            name: "Home",
+            name: 'Home',
             item: `${SITE_URL}/`,
           },
           {
-            "@type": "ListItem",
+            '@type': 'ListItem',
             position: 2,
-            name: "Blog",
+            name: 'Blog',
             item: absolute(ROUTES.blog),
           },
           {
-            "@type": "ListItem",
+            '@type': 'ListItem',
             position: 3,
             name: post.title,
             item: url,
@@ -91,32 +89,32 @@ export function buildBlogPostJsonLd(post: BlogPost) {
         ],
       },
       {
-        "@type": "BlogPosting",
-        "@id": `${url}#article`,
+        '@type': 'BlogPosting',
+        '@id': `${url}#article`,
         headline: post.title,
         description: post.seoDescription ?? post.description,
         image: [absolute(post.coverImage)],
         datePublished: post.publishedAt,
         dateModified: post.updatedAt ?? post.publishedAt,
         author: {
-          "@type": "Person",
-          name: author?.name ?? "Bitcraftly",
+          '@type': 'Person',
+          name: author?.name ?? 'Bitcraftly',
           jobTitle: author?.role,
         },
         publisher: {
-          "@type": "Organization",
-          name: "Bitcraftly",
+          '@type': 'Organization',
+          name: 'Bitcraftly',
           logo: {
-            "@type": "ImageObject",
-            url: absolute("/brand/icon.png"),
+            '@type': 'ImageObject',
+            url: absolute('/brand/icon.png'),
           },
         },
         mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": url,
+          '@type': 'WebPage',
+          '@id': url,
         },
         articleSection: category?.label,
-        keywords: post.tags.join(", "),
+        keywords: post.tags.join(', '),
         url,
       },
     ],

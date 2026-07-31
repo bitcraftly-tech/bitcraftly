@@ -2,23 +2,18 @@
  * Blog domain types — content + feature shared contract.
  */
 
-export type BlogCategoryId =
-  | "ai-development"
-  | "nextjs"
-  | "react"
-  | "web-performance"
-  | "seo";
+export type BlogCategoryId = 'ai-development' | 'nextjs' | 'react' | 'web-performance' | 'seo';
 
 export type BlogBlock =
-  | { readonly type: "paragraph"; readonly text: string }
+  | { readonly type: 'paragraph'; readonly text: string }
   | {
-      readonly type: "heading";
+      readonly type: 'heading';
       readonly level: 2 | 3;
       readonly id: string;
       readonly text: string;
     }
-  | { readonly type: "list"; readonly items: readonly string[] }
-  | { readonly type: "callout"; readonly text: string };
+  | { readonly type: 'list'; readonly items: readonly string[] }
+  | { readonly type: 'callout'; readonly text: string };
 
 export interface BlogAuthor {
   readonly id: string;
@@ -68,7 +63,7 @@ export interface BlogPostSummary {
 export interface BlogListQuery {
   readonly page?: number;
   readonly pageSize?: number;
-  readonly category?: BlogCategoryId | "all";
+  readonly category?: BlogCategoryId | 'all';
   readonly tag?: string;
   readonly q?: string;
 }

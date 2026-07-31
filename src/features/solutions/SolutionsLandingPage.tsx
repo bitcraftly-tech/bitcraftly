@@ -1,9 +1,9 @@
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { JsonLdScript } from "@/components/patterns/json-ld";
-import { buildSolutionsBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { SolutionsCategoryNav } from "./SolutionsCategoryNav";
-import { SolutionsHero } from "./SolutionsHero";
-import { SolutionsPageCta } from "./SolutionsPageCta";
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { JsonLdScript } from '@/components/patterns/json-ld';
+import { buildSolutionsBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { SolutionsCategoryNav } from './SolutionsCategoryNav';
+import { SolutionsHero } from './SolutionsHero';
+import { SolutionsPageCta } from './SolutionsPageCta';
 import {
   SolutionsCaseStudiesSection,
   SolutionsCategoriesSection,
@@ -15,10 +15,10 @@ import {
   SolutionsProcessSection,
   SolutionsTechSection,
   SolutionsWhySection,
-} from "./SolutionsSections";
-import { getSolutionCardModels } from "./solutions.content";
-import { buildSolutionsListingJsonLd } from "./solutions-schema";
-import "@/features/services/services.css";
+} from './SolutionsSections';
+import { getSolutionCardModels } from './solutions.content';
+import { buildSolutionsListingJsonLd } from './solutions-schema';
+import '@/features/services/services.css';
 
 export function SolutionsLandingPage() {
   const breadcrumbs = buildSolutionsBreadcrumbs();

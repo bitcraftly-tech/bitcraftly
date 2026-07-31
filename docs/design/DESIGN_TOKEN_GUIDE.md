@@ -29,10 +29,10 @@ Fonts (Geist Sans, Geist Mono) are loaded via `next/font` in `src/app/layout.tsx
 
 ### Two-layer token model
 
-| Layer | Location | Naming | Example |
-|-------|----------|--------|---------|
-| **Raw tokens** | `tokens.css` `:root` | Semantic, unprefixed | `--primary`, `--space-4`, `--token-radius-md` |
-| **Tailwind theme** | `globals.css` `@theme` | Framework-prefixed | `--color-primary`, `--spacing-4`, `--radius-md` |
+| Layer              | Location               | Naming               | Example                                         |
+| ------------------ | ---------------------- | -------------------- | ----------------------------------------------- |
+| **Raw tokens**     | `tokens.css` `:root`   | Semantic, unprefixed | `--primary`, `--space-4`, `--token-radius-md`   |
+| **Tailwind theme** | `globals.css` `@theme` | Framework-prefixed   | `--color-primary`, `--spacing-4`, `--radius-md` |
 
 Raw tokens describe **what** the value means. Tailwind mappings describe **how** utilities reference them.
 
@@ -40,12 +40,12 @@ Raw tokens describe **what** the value means. Tailwind mappings describe **how**
 
 Colors use semantic roles, not palette names:
 
-| Pattern | Meaning | Example |
-|---------|---------|---------|
-| `--{role}` | Base color | `--primary`, `--surface` |
-| `--{role}-hover` | Interactive hover state | `--primary-hover` |
-| `--{role}-foreground` | Text/icon on `{role}` background | `--primary-foreground` |
-| `--{role}-subtle` | Low-emphasis background (feedback colors) | `--success-subtle` |
+| Pattern               | Meaning                                   | Example                  |
+| --------------------- | ----------------------------------------- | ------------------------ |
+| `--{role}`            | Base color                                | `--primary`, `--surface` |
+| `--{role}-hover`      | Interactive hover state                   | `--primary-hover`        |
+| `--{role}-foreground` | Text/icon on `{role}` background          | `--primary-foreground`   |
+| `--{role}-subtle`     | Low-emphasis background (feedback colors) | `--success-subtle`       |
 
 **Do not** use palette names like `--blue-500` or hardcoded hex in components.
 
@@ -53,16 +53,16 @@ Colors use semantic roles, not palette names:
 
 Based on an **8px scale**:
 
-| Token | Value | Use |
-|-------|-------|-----|
-| `--space-0` | 0 | Reset |
-| `--space-0-5` | 4px | Fine adjustments |
-| `--space-1` | 8px | Tight spacing |
-| `--space-2` | 16px | Default inner padding |
-| `--space-3` | 24px | Section gaps |
-| `--space-4` | 32px | Container padding |
-| `--space-6` | 48px | Large gaps |
-| `--space-8` | 64px | Section margins |
+| Token         | Value | Use                   |
+| ------------- | ----- | --------------------- |
+| `--space-0`   | 0     | Reset                 |
+| `--space-0-5` | 4px   | Fine adjustments      |
+| `--space-1`   | 8px   | Tight spacing         |
+| `--space-2`   | 16px  | Default inner padding |
+| `--space-3`   | 24px  | Section gaps          |
+| `--space-4`   | 32px  | Container padding     |
+| `--space-6`   | 48px  | Large gaps            |
+| `--space-8`   | 64px  | Section margins       |
 
 Tailwind equivalent: `p-2` → 16px, `gap-4` → 32px.
 
@@ -70,10 +70,10 @@ Tailwind equivalent: `p-2` → 16px, `gap-4` → 32px.
 
 Raw values use `--token-` prefix to avoid circular references in `@theme`:
 
-| Raw token | Tailwind utility |
-|-----------|------------------|
-| `--token-radius-md` | `rounded-md` |
-| `--token-shadow-lg` | `shadow-lg` |
+| Raw token           | Tailwind utility |
+| ------------------- | ---------------- |
+| `--token-radius-md` | `rounded-md`     |
+| `--token-shadow-lg` | `shadow-lg`      |
 
 ---
 
@@ -81,25 +81,25 @@ Raw values use `--token-` prefix to avoid circular references in `@theme`:
 
 ### Brand and neutral
 
-| Token | Tailwind class | Purpose |
-|-------|----------------|---------|
-| `--primary` | `bg-primary`, `text-primary` | Primary actions, links |
-| `--secondary` | `bg-secondary` | Secondary actions |
-| `--accent` | `bg-accent` | Highlights, badges |
-| `--background` | `bg-background` | Page background |
-| `--foreground` | `text-foreground` | Primary text |
-| `--surface` | `bg-surface` | Cards, panels, elevated areas |
-| `--border` | `border-border` | Default borders |
+| Token          | Tailwind class               | Purpose                       |
+| -------------- | ---------------------------- | ----------------------------- |
+| `--primary`    | `bg-primary`, `text-primary` | Primary actions, links        |
+| `--secondary`  | `bg-secondary`               | Secondary actions             |
+| `--accent`     | `bg-accent`                  | Highlights, badges            |
+| `--background` | `bg-background`              | Page background               |
+| `--foreground` | `text-foreground`            | Primary text                  |
+| `--surface`    | `bg-surface`                 | Cards, panels, elevated areas |
+| `--border`     | `border-border`              | Default borders               |
 
 ### Feedback
 
-| Token | Tailwind class | Purpose |
-|-------|----------------|---------|
-| `--success` | `bg-success`, `text-success` | Success states |
-| `--warning` | `bg-warning` | Warning states |
-| `--error` | `bg-error` | Error states |
-| `--info` | `bg-info` | Informational states |
-| `--{role}-subtle` | `bg-success-subtle` | Low-emphasis feedback backgrounds |
+| Token             | Tailwind class               | Purpose                           |
+| ----------------- | ---------------------------- | --------------------------------- |
+| `--success`       | `bg-success`, `text-success` | Success states                    |
+| `--warning`       | `bg-warning`                 | Warning states                    |
+| `--error`         | `bg-error`                   | Error states                      |
+| `--info`          | `bg-info`                    | Informational states              |
+| `--{role}-subtle` | `bg-success-subtle`          | Low-emphasis feedback backgrounds |
 
 ---
 
@@ -107,41 +107,41 @@ Raw values use `--token-` prefix to avoid circular references in `@theme`:
 
 ### Font families
 
-| Token | Tailwind | Usage |
-|-------|----------|-------|
+| Token                | Tailwind    | Usage                   |
+| -------------------- | ----------- | ----------------------- |
 | `--font-family-sans` | `font-sans` | Body text, headings, UI |
-| `--font-family-mono` | `font-mono` | Code, technical data |
+| `--font-family-mono` | `font-mono` | Code, technical data    |
 
 Loaded via `next/font/google` as Geist Sans and Geist Mono.
 
 ### Font sizes
 
-| Token | Size | Tailwind | Typical use |
-|-------|------|----------|-------------|
-| `--font-size-xs` | 12px | `text-xs` | Captions, metadata |
-| `--font-size-sm` | 14px | `text-sm` | Labels, secondary text |
-| `--font-size-base` | 16px | `text-base` | Body text |
-| `--font-size-lg` | 18px | `text-lg` | Lead paragraphs |
-| `--font-size-xl` | 20px | `text-xl` | Small headings |
-| `--font-size-2xl` | 24px | `text-2xl` | Section headings |
-| `--font-size-3xl` | 30px | `text-3xl` | Page headings |
-| `--font-size-4xl` | 36px | `text-4xl` | Display text |
+| Token              | Size | Tailwind    | Typical use            |
+| ------------------ | ---- | ----------- | ---------------------- |
+| `--font-size-xs`   | 12px | `text-xs`   | Captions, metadata     |
+| `--font-size-sm`   | 14px | `text-sm`   | Labels, secondary text |
+| `--font-size-base` | 16px | `text-base` | Body text              |
+| `--font-size-lg`   | 18px | `text-lg`   | Lead paragraphs        |
+| `--font-size-xl`   | 20px | `text-xl`   | Small headings         |
+| `--font-size-2xl`  | 24px | `text-2xl`  | Section headings       |
+| `--font-size-3xl`  | 30px | `text-3xl`  | Page headings          |
+| `--font-size-4xl`  | 36px | `text-4xl`  | Display text           |
 
 ### Font weights
 
-| Token | Value | Tailwind |
-|-------|-------|----------|
-| `--font-weight-normal` | 400 | `font-normal` |
-| `--font-weight-medium` | 500 | `font-medium` |
-| `--font-weight-semibold` | 600 | `font-semibold` |
-| `--font-weight-bold` | 700 | `font-bold` |
+| Token                    | Value | Tailwind        |
+| ------------------------ | ----- | --------------- |
+| `--font-weight-normal`   | 400   | `font-normal`   |
+| `--font-weight-medium`   | 500   | `font-medium`   |
+| `--font-weight-semibold` | 600   | `font-semibold` |
+| `--font-weight-bold`     | 700   | `font-bold`     |
 
 ### Line heights
 
-| Token | Value | Tailwind |
-|-------|-------|----------|
-| `--line-height-tight` | 1.25 | `leading-tight` |
-| `--line-height-normal` | 1.5 | `leading-normal` |
+| Token                   | Value | Tailwind          |
+| ----------------------- | ----- | ----------------- |
+| `--line-height-tight`   | 1.25  | `leading-tight`   |
+| `--line-height-normal`  | 1.5   | `leading-normal`  |
 | `--line-height-relaxed` | 1.625 | `leading-relaxed` |
 
 ### Typography CSS classes
@@ -186,21 +186,21 @@ Defined in `typography.css` for non-Tailwind contexts:
 
 ### Breakpoints
 
-| Token | Value | Tailwind prefix |
-|-------|-------|-----------------|
-| `--breakpoint-sm` | 640px | `sm:` |
-| `--breakpoint-md` | 768px | `md:` |
-| `--breakpoint-lg` | 1024px | `lg:` |
-| `--breakpoint-xl` | 1280px | `xl:` |
-| `--breakpoint-2xl` | 1536px | `2xl:` |
+| Token              | Value  | Tailwind prefix |
+| ------------------ | ------ | --------------- |
+| `--breakpoint-sm`  | 640px  | `sm:`           |
+| `--breakpoint-md`  | 768px  | `md:`           |
+| `--breakpoint-lg`  | 1024px | `lg:`           |
+| `--breakpoint-xl`  | 1280px | `xl:`           |
+| `--breakpoint-2xl` | 1536px | `2xl:`          |
 
 ### Container widths
 
-| Token | Value |
-|-------|-------|
-| `--container-sm` | 640px |
-| `--container-lg` | 1024px |
-| `--container-xl` | 1280px |
+| Token             | Value  |
+| ----------------- | ------ |
+| `--container-sm`  | 640px  |
+| `--container-lg`  | 1024px |
+| `--container-xl`  | 1280px |
 | `--container-2xl` | 1536px |
 
 ### Example
@@ -217,15 +217,15 @@ Defined in `typography.css` for non-Tailwind contexts:
 
 Use semantic z-index tokens for stacking contexts:
 
-| Token | Value | Use |
-|-------|-------|-----|
-| `--z-dropdown` | 1000 | Dropdown menus |
-| `--z-sticky` | 1100 | Sticky headers |
-| `--z-fixed` | 1200 | Fixed elements |
-| `--z-modal-backdrop` | 1300 | Modal overlays |
-| `--z-modal` | 1400 | Modal content |
-| `--z-popover` | 1500 | Popovers |
-| `--z-tooltip` | 1600 | Tooltips |
+| Token                | Value | Use            |
+| -------------------- | ----- | -------------- |
+| `--z-dropdown`       | 1000  | Dropdown menus |
+| `--z-sticky`         | 1100  | Sticky headers |
+| `--z-fixed`          | 1200  | Fixed elements |
+| `--z-modal-backdrop` | 1300  | Modal overlays |
+| `--z-modal`          | 1400  | Modal content  |
+| `--z-popover`        | 1500  | Popovers       |
+| `--z-tooltip`        | 1600  | Tooltips       |
 
 **Do not** use arbitrary z-index values like `z-[9999]`.
 
@@ -235,11 +235,11 @@ Use semantic z-index tokens for stacking contexts:
 
 ### Durations
 
-| Token | Value | Use |
-|-------|-------|-----|
-| `--duration-fast` | 150ms | Hover, color transitions |
-| `--duration-normal` | 250ms | Fade, slide animations |
-| `--duration-slow` | 350ms | Complex transitions |
+| Token               | Value | Use                      |
+| ------------------- | ----- | ------------------------ |
+| `--duration-fast`   | 150ms | Hover, color transitions |
+| `--duration-normal` | 250ms | Fade, slide animations   |
+| `--duration-slow`   | 350ms | Complex transitions      |
 
 ### Animation classes
 
@@ -268,9 +268,9 @@ All color tokens swap values in dark mode. No component changes required when to
 
 ```tsx
 // Example — not implemented yet
-document.documentElement.classList.toggle("dark");
+document.documentElement.classList.toggle('dark');
 // or
-document.documentElement.setAttribute("data-theme", "dark");
+document.documentElement.setAttribute('data-theme', 'dark');
 ```
 
 ---

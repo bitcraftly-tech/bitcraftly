@@ -1,25 +1,22 @@
-import {
-  FloatMetricCard,
-  HeroStage,
-} from "@/components/patterns/hero-compositions";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
+import { FloatMetricCard, HeroStage } from '@/components/patterns/hero-compositions';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
 
 const PIPELINE: readonly {
   label: string;
-  status: "done" | "active" | "next";
+  status: 'done' | 'active' | 'next';
   icon: IconName;
 }[] = [
-  { label: "Apply", status: "done", icon: "mail" },
-  { label: "Founder review", status: "active", icon: "search" },
-  { label: "Chat", status: "next", icon: "message" },
-  { label: "Offer", status: "next", icon: "check" },
+  { label: 'Apply', status: 'done', icon: 'mail' },
+  { label: 'Founder review', status: 'active', icon: 'search' },
+  { label: 'Chat', status: 'next', icon: 'message' },
+  { label: 'Offer', status: 'next', icon: 'check' },
 ];
 
 const STACK: readonly { label: string; icon: IconName }[] = [
-  { label: "Next.js", icon: "code" },
-  { label: "FastAPI", icon: "zap" },
-  { label: "TypeScript", icon: "layout-grid" },
+  { label: 'Next.js', icon: 'code' },
+  { label: 'FastAPI', icon: 'zap' },
+  { label: 'TypeScript', icon: 'layout-grid' },
 ];
 
 /**
@@ -28,12 +25,7 @@ const STACK: readonly { label: string; icon: IconName }[] = [
 export function CareersHeroVisual() {
   return (
     <HeroStage>
-      <div
-        className={cn(
-          "mh-panel absolute inset-x-[5%] top-[5%] z-[1] p-[14px]",
-          "mh-bob",
-        )}
-      >
+      <div className={cn('mh-panel absolute inset-x-[5%] top-[5%] z-[1] p-[14px]', 'mh-bob')}>
         <div className="mb-[12px] flex items-center justify-between gap-[8px]">
           <div>
             <p className="m-0 font-sans text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
@@ -51,20 +43,20 @@ export function CareersHeroVisual() {
             <li
               key={step.label}
               className={cn(
-                "flex items-center gap-[10px] rounded-[12px] border px-[10px] py-[9px]",
-                step.status === "active"
-                  ? "border-primary/30 bg-gradient-to-br from-[color-mix(in_srgb,var(--primary)_12%,var(--background))] to-[color-mix(in_srgb,var(--accent)_8%,var(--background))]"
-                  : "border-[color:var(--hp-card-border,var(--border))] bg-background",
+                'flex items-center gap-[10px] rounded-[12px] border px-[10px] py-[9px]',
+                step.status === 'active'
+                  ? 'border-primary/30 bg-gradient-to-br from-[color-mix(in_srgb,var(--primary)_12%,var(--background))] to-[color-mix(in_srgb,var(--accent)_8%,var(--background))]'
+                  : 'border-[color:var(--hp-card-border,var(--border))] bg-background',
               )}
             >
               <span
                 className={cn(
-                  "grid size-[28px] place-items-center rounded-[8px]",
-                  step.status === "active"
-                    ? "bg-primary text-primary-foreground"
-                    : step.status === "done"
-                      ? "bg-[color-mix(in_srgb,var(--primary)_14%,var(--background))] text-primary"
-                      : "bg-surface text-muted-foreground",
+                  'grid size-[28px] place-items-center rounded-[8px]',
+                  step.status === 'active'
+                    ? 'bg-primary text-primary-foreground'
+                    : step.status === 'done'
+                      ? 'bg-[color-mix(in_srgb,var(--primary)_14%,var(--background))] text-primary'
+                      : 'bg-surface text-muted-foreground',
                 )}
               >
                 <Icon name={step.icon} size="sm" className="h-[14px] w-[14px]" />
@@ -74,11 +66,11 @@ export function CareersHeroVisual() {
                   {step.label}
                 </span>
                 <span className="block font-sans text-[10px] text-muted-foreground">
-                  {step.status === "done"
-                    ? "Submitted"
-                    : step.status === "active"
-                      ? "In progress"
-                      : "Next"}
+                  {step.status === 'done'
+                    ? 'Submitted'
+                    : step.status === 'active'
+                      ? 'In progress'
+                      : 'Next'}
                 </span>
               </span>
             </li>
@@ -88,8 +80,8 @@ export function CareersHeroVisual() {
 
       <div
         className={cn(
-          "mh-panel absolute bottom-[8%] left-[5%] z-[2] w-[54%] p-[12px]",
-          "mh-bob mh-bob-delay-1",
+          'mh-panel absolute bottom-[8%] left-[5%] z-[2] w-[54%] p-[12px]',
+          'mh-bob mh-bob-delay-1',
         )}
       >
         <div className="mb-[8px] flex items-center gap-[8px]">
@@ -111,11 +103,7 @@ export function CareersHeroVisual() {
               key={item.label}
               className="inline-flex items-center gap-[5px] rounded-full border border-[color:var(--hp-card-border,var(--border))] bg-surface px-[8px] py-[4px] font-sans text-[10px] font-semibold text-foreground"
             >
-              <Icon
-                name={item.icon}
-                size="sm"
-                className="h-[11px] w-[11px] text-primary"
-              />
+              <Icon name={item.icon} size="sm" className="h-[11px] w-[11px] text-primary" />
               {item.label}
             </span>
           ))}
@@ -124,16 +112,12 @@ export function CareersHeroVisual() {
 
       <div
         className={cn(
-          "mh-panel absolute bottom-[8%] right-[5%] z-[2] w-[36%] p-[12px] mh-hide-sm",
-          "mh-bob mh-bob-delay-2",
+          'mh-panel absolute bottom-[8%] right-[5%] z-[2] w-[36%] p-[12px] mh-hide-sm',
+          'mh-bob mh-bob-delay-2',
         )}
       >
         <div className="flex items-center gap-[6px]">
-          <Icon
-            name="globe"
-            size="sm"
-            className="h-[14px] w-[14px] text-primary"
-          />
+          <Icon name="globe" size="sm" className="h-[14px] w-[14px] text-primary" />
           <p className="m-0 font-sans text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
             Work model
           </p>

@@ -1,23 +1,12 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import {
-  getAllCaseStudySlugs,
-  getCaseStudyBySlug,
-  getCaseStudyHref,
-} from "@/content/case-studies";
-import {
-  getWorkPageBySlug,
-  WORK_STATIC_SLUGS,
-} from "@/constants/navigation";
-import { CaseStudyDetailPage } from "@/features/case-studies";
-import {
-  getWorkHubBySlug,
-  WorkHubFallbackPage,
-  WorkHubPage,
-} from "@/features/work";
-import { createPageMetadata } from "@/lib/seo/createPageMetadata";
-import { createNoIndexMetadata } from "@/lib/seo/noindex-metadata";
-import "@/features/work/work.css";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { getAllCaseStudySlugs, getCaseStudyBySlug, getCaseStudyHref } from '@/content/case-studies';
+import { getWorkPageBySlug, WORK_STATIC_SLUGS } from '@/constants/navigation';
+import { CaseStudyDetailPage } from '@/features/case-studies';
+import { getWorkHubBySlug, WorkHubFallbackPage, WorkHubPage } from '@/features/work';
+import { createPageMetadata } from '@/lib/seo/createPageMetadata';
+import { createNoIndexMetadata } from '@/lib/seo/noindex-metadata';
+import '@/features/work/work.css';
 
 interface WorkSlugPageProps {
   params: Promise<{ slug: string }>;
@@ -39,9 +28,7 @@ export function generateStaticParams() {
   return params;
 }
 
-export async function generateMetadata({
-  params,
-}: WorkSlugPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: WorkSlugPageProps): Promise<Metadata> {
   const { slug } = await params;
   const study = getCaseStudyBySlug(slug);
 
@@ -58,7 +45,7 @@ export async function generateMetadata({
       ...base,
       openGraph: {
         ...base.openGraph,
-        type: "article",
+        type: 'article',
       },
     };
   }
@@ -102,7 +89,5 @@ export default async function WorkSlugPage({ params }: WorkSlugPageProps) {
     notFound();
   }
 
-  return (
-    <WorkHubFallbackPage title={item.label} description={item.description} />
-  );
+  return <WorkHubFallbackPage title={item.label} description={item.description} />;
 }

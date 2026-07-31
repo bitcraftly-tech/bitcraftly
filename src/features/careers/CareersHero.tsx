@@ -1,63 +1,63 @@
-import Link from "next/link";
-import { AnimatedStat } from "@/components/patterns/animated-stat";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Container } from "@/components/ui/container";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { ROUTES } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import "@/features/services/services.css";
-import { CAREER_ROLES, getCareersApplyHref } from "./careers.content";
-import { CareersHeroVisual } from "./CareersHeroVisual";
-import "./careers.css";
+import Link from 'next/link';
+import { AnimatedStat } from '@/components/patterns/animated-stat';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Container } from '@/components/ui/container';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { ROUTES } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import '@/features/services/services.css';
+import { CAREER_ROLES, getCareersApplyHref } from './careers.content';
+import { CareersHeroVisual } from './CareersHeroVisual';
+import './careers.css';
 
 interface CareersHeroProps {
   breadcrumbs: readonly BreadcrumbItem[];
 }
 
-const HERO_TITLE = "Build products that SMBs actually use";
-const HERO_HIGHLIGHT = "SMBs actually use";
+const HERO_TITLE = 'Build products that SMBs actually use';
+const HERO_HIGHLIGHT = 'SMBs actually use';
 
 const HERO_LEAD =
-  "Premium studio hiring — remote-first, founder-led reviews, and a modern stack. Join a small team shipping websites, apps, and AI-powered web solutions.";
+  'Premium studio hiring — remote-first, founder-led reviews, and a modern stack. Join a small team shipping websites, apps, and AI-powered web solutions.';
 
 const HERO_STATS: readonly {
   id: string;
   value: string;
   label: string;
   icon: IconName;
-  tone: "violet" | "sky" | "indigo" | "amber";
+  tone: 'violet' | 'sky' | 'indigo' | 'amber';
 }[] = [
   {
-    id: "remote",
-    value: "100%",
-    label: "Remote-first roles",
-    icon: "globe",
-    tone: "violet",
+    id: 'remote',
+    value: '100%',
+    label: 'Remote-first roles',
+    icon: 'globe',
+    tone: 'violet',
   },
   {
-    id: "founder",
-    value: "1:1",
-    label: "Founder-led reviews",
-    icon: "shield",
-    tone: "sky",
+    id: 'founder',
+    value: '1:1',
+    label: 'Founder-led reviews',
+    icon: 'shield',
+    tone: 'sky',
   },
   {
-    id: "stack",
-    value: "Modern",
-    label: "Next.js · FastAPI",
-    icon: "code",
-    tone: "indigo",
+    id: 'stack',
+    value: 'Modern',
+    label: 'Next.js · FastAPI',
+    icon: 'code',
+    tone: 'indigo',
   },
   {
-    id: "team",
-    value: "Small",
-    label: "High-ownership team",
-    icon: "rocket",
-    tone: "amber",
+    id: 'team',
+    value: 'Small',
+    label: 'High-ownership team',
+    icon: 'rocket',
+    tone: 'amber',
   },
 ] as const;
 
@@ -66,35 +66,35 @@ const HERO_FEATURES: readonly {
   title: string;
   description: string;
   icon: IconName;
-  tone: "violet" | "sky" | "emerald" | "amber";
+  tone: 'violet' | 'sky' | 'emerald' | 'amber';
 }[] = [
   {
-    id: "craft",
-    title: "Craft over chaos",
-    description: "Ship real client products — not slide decks",
-    icon: "sparkles",
-    tone: "violet",
+    id: 'craft',
+    title: 'Craft over chaos',
+    description: 'Ship real client products — not slide decks',
+    icon: 'sparkles',
+    tone: 'violet',
   },
   {
-    id: "async",
-    title: "Async-first rhythm",
-    description: "Flexible hours with clear delivery ownership",
-    icon: "calendar",
-    tone: "sky",
+    id: 'async',
+    title: 'Async-first rhythm',
+    description: 'Flexible hours with clear delivery ownership',
+    icon: 'calendar',
+    tone: 'sky',
   },
   {
-    id: "growth",
-    title: "Learning budget",
-    description: "Courses, tools, and space to level up",
-    icon: "trending-up",
-    tone: "emerald",
+    id: 'growth',
+    title: 'Learning budget',
+    description: 'Courses, tools, and space to level up',
+    icon: 'trending-up',
+    tone: 'emerald',
   },
   {
-    id: "comp",
-    title: "Transparent bands",
-    description: "Clear compensation discussed early",
-    icon: "check",
-    tone: "amber",
+    id: 'comp',
+    title: 'Transparent bands',
+    description: 'Clear compensation discussed early',
+    icon: 'check',
+    tone: 'amber',
   },
 ] as const;
 
@@ -106,7 +106,7 @@ export async function CareersHero({ breadcrumbs }: CareersHeroProps) {
   const hasOpenings = CAREER_ROLES.length > 0;
   const [titleBefore, titleAfter] = HERO_TITLE.includes(HERO_HIGHLIGHT)
     ? HERO_TITLE.split(HERO_HIGHLIGHT)
-    : [HERO_TITLE, ""];
+    : [HERO_TITLE, ''];
 
   return (
     <Section
@@ -114,9 +114,9 @@ export async function CareersHero({ breadcrumbs }: CareersHeroProps) {
       contained={false}
       aria-labelledby="careers-page-heading"
       className={cn(
-        "services-hero careers-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'services-hero careers-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -152,21 +152,14 @@ export async function CareersHero({ breadcrumbs }: CareersHeroProps) {
         <div className="services-hero__grid">
           <div className="services-hero__content">
             <p className="services-hero__eyebrow">
-              <Icon
-                name="rocket"
-                size="sm"
-                aria-hidden
-                className="services-hero__eyebrow-icon"
-              />
+              <Icon name="rocket" size="sm" aria-hidden className="services-hero__eyebrow-icon" />
               <span>Careers at Bitcraftly</span>
             </p>
 
             <h1 id="careers-page-heading" className="services-hero__title">
               {titleBefore}
               {HERO_TITLE.includes(HERO_HIGHLIGHT) ? (
-                <span className="services-hero__title-accent">
-                  {HERO_HIGHLIGHT}
-                </span>
+                <span className="services-hero__title-accent">{HERO_HIGHLIGHT}</span>
               ) : null}
               {titleAfter}
             </h1>
@@ -174,46 +167,34 @@ export async function CareersHero({ breadcrumbs }: CareersHeroProps) {
             <p className="services-hero__description">{HERO_LEAD}</p>
 
             <p className="careers-hero__note">
-              Every application is read by Sanjay — no keyword bots, no
-              outsourced recruiters.
+              Every application is read by Sanjay — no keyword bots, no outsourced recruiters.
             </p>
 
             <div className="services-hero__cta-row">
               <Link
-                href={getCareersApplyHref("general")}
+                href={getCareersApplyHref('general')}
                 className="services-hero__btn services-hero__btn--primary"
               >
-                {hasOpenings ? "Apply now" : "Send general application"}
+                {hasOpenings ? 'Apply now' : 'Send general application'}
                 <Icon name="arrow-up-right" size="sm" aria-hidden />
               </Link>
               <Link
-                href={hasOpenings ? "#open-roles" : "#careers-process-heading"}
+                href={hasOpenings ? '#open-roles' : '#careers-process-heading'}
                 className="services-hero__btn services-hero__btn--outline"
               >
-                {hasOpenings ? "View open roles" : "See hiring process"}
+                {hasOpenings ? 'View open roles' : 'See hiring process'}
                 <Icon name="arrow-up-right" size="sm" aria-hidden />
               </Link>
-              <Link
-                href={ROUTES.about}
-                className="services-hero__btn services-hero__btn--outline"
-              >
+              <Link href={ROUTES.about} className="services-hero__btn services-hero__btn--outline">
                 Meet the team
                 <Icon name="arrow-up-right" size="sm" aria-hidden />
               </Link>
             </div>
 
             {!isMobile ? (
-              <div
-                className="services-hero-stats"
-                role="list"
-                aria-label="Careers highlights"
-              >
+              <div className="services-hero-stats" role="list" aria-label="Careers highlights">
                 {HERO_STATS.map((stat) => (
-                  <div
-                    key={stat.id}
-                    role="listitem"
-                    className="services-hero-stats__item"
-                  >
+                  <div key={stat.id} role="listitem" className="services-hero-stats__item">
                     <dl className="services-hero-stats__pair m-0">
                       <dt className="services-hero-stats__value">
                         <span className="services-hero-stats__head">
@@ -226,9 +207,7 @@ export async function CareersHero({ breadcrumbs }: CareersHeroProps) {
                           <AnimatedStat value={stat.value} />
                         </span>
                       </dt>
-                      <dd className="services-hero-stats__label">
-                        {stat.label}
-                      </dd>
+                      <dd className="services-hero-stats__label">{stat.label}</dd>
                     </dl>
                   </div>
                 ))}
@@ -243,10 +222,7 @@ export async function CareersHero({ breadcrumbs }: CareersHeroProps) {
           ) : null}
 
           {!isMobile ? (
-            <ul
-              className="services-hero-features"
-              aria-label="Why join Bitcraftly"
-            >
+            <ul className="services-hero-features" aria-label="Why join Bitcraftly">
               {HERO_FEATURES.map((item) => (
                 <li key={item.id} className="services-hero-features__item">
                   <span className="services-hero-features__head">
@@ -256,13 +232,9 @@ export async function CareersHero({ breadcrumbs }: CareersHeroProps) {
                     >
                       <Icon name={item.icon} size="sm" />
                     </span>
-                    <span className="services-hero-features__title">
-                      {item.title}
-                    </span>
+                    <span className="services-hero-features__title">{item.title}</span>
                   </span>
-                  <span className="services-hero-features__desc">
-                    {item.description}
-                  </span>
+                  <span className="services-hero-features__desc">{item.description}</span>
                 </li>
               ))}
             </ul>

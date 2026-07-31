@@ -1,12 +1,9 @@
-import Link from "next/link";
-import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import {
-  WORK_RELATED_COPY,
-  WORK_RELATED_SERVICES,
-} from "./work.content";
-import "./work.css";
+import Link from 'next/link';
+import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { WORK_RELATED_COPY, WORK_RELATED_SERVICES } from './work.content';
+import './work.css';
 
 /**
  * Related Services — Services-style intro + capability cards.
@@ -34,17 +31,11 @@ export function WorkRelatedServicesSection() {
             <article className="work-related__card work-convert__glass">
               <div className="work-related__card-header">
                 <span className="work-related__icon" aria-hidden>
-                  <Icon
-                    name={service.icon}
-                    size="sm"
-                    className="h-[20px] w-[20px]"
-                  />
+                  <Icon name={service.icon} size="sm" className="h-[20px] w-[20px]" />
                 </span>
                 <h3 className="work-related__card-title">{service.title}</h3>
               </div>
-              <p className="work-related__card-description">
-                {service.description}
-              </p>
+              <p className="work-related__card-description">{service.description}</p>
               <Link href={service.href} className="work-related__cta">
                 {service.ctaLabel}
                 <Icon

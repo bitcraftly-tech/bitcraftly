@@ -2,11 +2,7 @@
  * Lightweight SVG architecture diagram for the About story section.
  * Decorative to sighted users; hidden from assistive tech (paired with prose).
  */
-export function AboutStoryArchitectureVisual({
-  className,
-}: {
-  className?: string;
-}) {
+export function AboutStoryArchitectureVisual({ className }: { className?: string }) {
   return (
     <svg
       className={className}

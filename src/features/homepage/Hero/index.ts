@@ -1,9 +1,9 @@
-export { HeroActions } from "./HeroActions";
-export { HeroContent } from "./HeroContent";
-export { HeroDashboard } from "./HeroDashboard";
-export { HeroIllustration } from "./HeroIllustration";
-export { HeroSection } from "./HeroSection";
-export { HeroTags } from "./HeroTags";
+export { HeroActions } from './HeroActions';
+export { HeroContent } from './HeroContent';
+export { HeroDashboard } from './HeroDashboard';
+export { HeroIllustration } from './HeroIllustration';
+export { HeroSection } from './HeroSection';
+export { HeroTags } from './HeroTags';
 export {
   HERO_ASSISTANT,
   HERO_ASSISTANT_SUGGESTIONS,
@@ -19,7 +19,7 @@ export {
   HERO_HEADING_ID,
   HERO_ID,
   HERO_METRICS,
-} from "./hero.constants";
+} from './hero.constants';
 export type {
   HeroAssistantSuggestion,
   HeroAutomationStep,
@@ -28,4 +28,4 @@ export type {
   HeroDashboardStat,
   HeroEyebrowSegment,
   HeroMetric,
-} from "./hero.types";
+} from './hero.types';

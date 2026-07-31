@@ -1,5 +1,5 @@
-import { Section } from "@/components/ui/section";
-import type { CaseStudy } from "@/content/case-studies";
+import { Section } from '@/components/ui/section';
+import type { CaseStudy } from '@/content/case-studies';
 
 interface CaseStudyArchitectureProps {
   study: CaseStudy;
@@ -25,10 +25,7 @@ export function CaseStudyArchitecture({ study }: CaseStudyArchitectureProps) {
       </h2>
       <ul className="mt-[18px] m-0 grid list-none grid-cols-1 gap-[12px] p-0 md:grid-cols-3">
         {study.architecture.map((layer) => (
-          <li
-            key={layer.id}
-            className="rounded-[16px] border border-border bg-background p-[16px]"
-          >
+          <li key={layer.id} className="rounded-[16px] border border-border bg-background p-[16px]">
             <h3 className="m-0 font-sans text-[17px] font-semibold text-foreground">
               {layer.title}
             </h3>

@@ -1,14 +1,14 @@
-import { Container } from "@/components/ui/container";
-import { cn } from "@/lib/cn";
+import { Container } from '@/components/ui/container';
+import { cn } from '@/lib/cn';
 import {
   TRUSTED_BY_HEADING_ID,
   TRUSTED_BY_HEADING_LINE_1,
   TRUSTED_BY_HEADING_LINE_2,
   TRUSTED_BY_ID,
   TRUSTED_BY_VALUES,
-} from "./trusted-by.constants";
-import { TrustedByReveal } from "./TrustedByReveal";
-import { TrustedByValueItem } from "./TrustedByValueItem";
+} from './trusted-by.constants';
+import { TrustedByReveal } from './TrustedByReveal';
+import { TrustedByValueItem } from './TrustedByValueItem';
 export function TrustedBySection() {
   return (
     <section
@@ -20,17 +20,17 @@ export function TrustedBySection() {
         <TrustedByReveal>
           <div
             className={cn(
-              "trusted-by-section-inner flex flex-col",
-              "lg:flex-row lg:items-center lg:gap-0",
+              'trusted-by-section-inner flex flex-col',
+              'lg:flex-row lg:items-center lg:gap-0',
             )}
           >
             <h2
               id={TRUSTED_BY_HEADING_ID}
               className={cn(
-                "trusted-by-heading m-0 shrink-0 font-sans font-bold",
-                "text-[18px] leading-[1.25] tracking-[-0.02em] text-foreground",
-                "sm:text-[20px]",
-                "lg:pr-[var(--space-4)]",
+                'trusted-by-heading m-0 shrink-0 font-sans font-bold',
+                'text-[18px] leading-[1.25] tracking-[-0.02em] text-foreground',
+                'sm:text-[20px]',
+                'lg:pr-[var(--space-4)]',
               )}
             >
               <span className="block">{TRUSTED_BY_HEADING_LINE_1}</span>
@@ -39,18 +39,18 @@ export function TrustedBySection() {
 
             <ul
               className={cn(
-                "trusted-by-list m-0 flex min-w-0 flex-1 list-none flex-col p-0",
-                "sm:flex-row sm:flex-wrap",
-                "lg:flex-nowrap lg:items-stretch",
+                'trusted-by-list m-0 flex min-w-0 flex-1 list-none flex-col p-0',
+                'sm:flex-row sm:flex-wrap',
+                'lg:flex-nowrap lg:items-stretch',
               )}
             >
               {TRUSTED_BY_VALUES.map((value) => (
                 <li
                   key={value.id}
                   className={cn(
-                    "trusted-by-list-item min-w-0",
-                    "sm:w-1/2 sm:py-[var(--space-1)]",
-                    "lg:w-auto lg:flex-1 lg:py-0",
+                    'trusted-by-list-item min-w-0',
+                    'sm:w-1/2 sm:py-[var(--space-1)]',
+                    'lg:w-auto lg:flex-1 lg:py-0',
                   )}
                 >
                   <TrustedByValueItem

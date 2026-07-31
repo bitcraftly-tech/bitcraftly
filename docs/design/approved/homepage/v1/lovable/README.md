@@ -3,6 +3,7 @@
 This folder contains the original Lovable export.
 
 Purpose:
+
 - Reference only
 - Compare layouts
 - Inspect spacing

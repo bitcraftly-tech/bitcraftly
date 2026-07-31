@@ -60,17 +60,17 @@ Harden production security for Bitcraftly Platform V2 without changing UI, brand
 
 ## Security Improvements
 
-| Area | Before | After |
-|------|--------|-------|
-| Owner CRM access | Middleware only | Middleware + `requireOwnerSession()` |
-| Owner login | Unlimited attempts | IP + account rate limits |
-| Owner cookie | `sameSite: lax` | `sameSite: strict` |
-| Login path matching | Exact `/owner/login` | Prefix match includes subpaths |
-| Lead rate limiting | IP+email only | IP+email + IP-only limits |
-| Security headers | Partial (no CSP/COOP/CORP) | Full set including CSP |
-| Error handling | Next.js defaults | Branded error/not-found boundaries |
-| Debug logging | Dev `console.info` in analytics | Removed |
-| Honeypot | Lead forms only | Unchanged (already implemented) |
+| Area                | Before                          | After                                |
+| ------------------- | ------------------------------- | ------------------------------------ |
+| Owner CRM access    | Middleware only                 | Middleware + `requireOwnerSession()` |
+| Owner login         | Unlimited attempts              | IP + account rate limits             |
+| Owner cookie        | `sameSite: lax`                 | `sameSite: strict`                   |
+| Login path matching | Exact `/owner/login`            | Prefix match includes subpaths       |
+| Lead rate limiting  | IP+email only                   | IP+email + IP-only limits            |
+| Security headers    | Partial (no CSP/COOP/CORP)      | Full set including CSP               |
+| Error handling      | Next.js defaults                | Branded error/not-found boundaries   |
+| Debug logging       | Dev `console.info` in analytics | Removed                              |
+| Honeypot            | Lead forms only                 | Unchanged (already implemented)      |
 
 ---
 
@@ -78,23 +78,23 @@ Harden production security for Bitcraftly Platform V2 without changing UI, brand
 
 ### Server-only (not in client bundles)
 
-| Variable | Used in |
-|----------|---------|
-| `DATABASE_URL` | `src/lib/db/prisma.ts` |
-| `RESEND_API_KEY` | `lead-notification.service.ts` |
-| `LEAD_NOTIFICATION_TO` | `lead-notification.service.ts` |
-| `LEAD_FROM_EMAIL` | `lead-notification.service.ts` |
-| `OWNER_AUTH_EMAIL` | `owner-auth.config.ts` |
-| `OWNER_AUTH_PASSWORD` | `owner-auth.config.ts` |
+| Variable               | Used in                                  |
+| ---------------------- | ---------------------------------------- |
+| `DATABASE_URL`         | `src/lib/db/prisma.ts`                   |
+| `RESEND_API_KEY`       | `lead-notification.service.ts`           |
+| `LEAD_NOTIFICATION_TO` | `lead-notification.service.ts`           |
+| `LEAD_FROM_EMAIL`      | `lead-notification.service.ts`           |
+| `OWNER_AUTH_EMAIL`     | `owner-auth.config.ts`                   |
+| `OWNER_AUTH_PASSWORD`  | `owner-auth.config.ts`                   |
 | `OWNER_SESSION_SECRET` | `owner-auth.env.ts`, middleware, session |
 
 ### `NEXT_PUBLIC_*` (client-safe)
 
-| Variable | Purpose |
-|----------|---------|
-| `NEXT_PUBLIC_SITE_URL` | Canonical URLs in JSON-LD and SEO |
-| `NEXT_PUBLIC_APP_URL` | Fallback site URL in `getSiteUrl()` |
-| `NEXT_PUBLIC_CALENDLY_URL` | Optional Calendly booking link |
+| Variable                   | Purpose                             |
+| -------------------------- | ----------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`     | Canonical URLs in JSON-LD and SEO   |
+| `NEXT_PUBLIC_APP_URL`      | Fallback site URL in `getSiteUrl()` |
+| `NEXT_PUBLIC_CALENDLY_URL` | Optional Calendly booking link      |
 
 No server secrets found in client components or `NEXT_PUBLIC_*` variables.
 
@@ -102,32 +102,32 @@ No server secrets found in client components or `NEXT_PUBLIC_*` variables.
 
 ## Files Changed
 
-| File | Action |
-|------|--------|
-| `src/lib/security/in-memory-rate-limit.ts` | Created |
-| `src/lib/security/client-ip.ts` | Created |
-| `src/lib/security/security-headers.ts` | Created |
-| `src/features/owner-auth/require-owner-session.ts` | Created |
-| `src/features/owner-auth/owner-login-rate-limit.ts` | Created |
-| `src/features/owner-auth/owner-login-rate-limit.test.ts` | Created |
-| `src/features/owner-auth/actions/owner-auth.actions.ts` | Modified — login rate limit, strict cookie |
-| `src/features/owner-auth/owner-auth.utils.ts` | Modified — login path prefix |
-| `src/features/owner-auth/owner-auth.utils.test.ts` | Modified |
-| `src/features/owner-crm/owner-leads.loader.ts` | Modified — requireOwnerSession |
-| `src/app/owner/(dashboard)/layout.tsx` | Modified — requireOwnerSession |
-| `src/features/lead-funnel/services/lead-rate-limit.ts` | Modified — shared limiter + IP limit |
-| `src/features/lead-funnel/services/lead-guard.service.ts` | Modified — IP rate limit |
-| `src/features/lead-funnel/services/lead-guard.service.test.ts` | Modified |
-| `src/features/lead-funnel/services/lead-server-context.ts` | Modified — shared client IP |
-| `src/features/lead-funnel/analytics.ts` | Modified — removed debug logging |
-| `src/features/homepage/CostCalculator/analytics.ts` | Modified — removed debug logging |
-| `src/app/error.tsx` | Created |
-| `src/app/global-error.tsx` | Created |
-| `src/app/not-found.tsx` | Created |
-| `next.config.ts` | Modified — centralized security headers |
-| `.env.example` | Modified — rate limit env vars |
-| `SECURITY.md` | Modified — roadmap updated |
-| `docs/engineering/production-deployment.md` | Modified — security section |
+| File                                                           | Action                                     |
+| -------------------------------------------------------------- | ------------------------------------------ |
+| `src/lib/security/in-memory-rate-limit.ts`                     | Created                                    |
+| `src/lib/security/client-ip.ts`                                | Created                                    |
+| `src/lib/security/security-headers.ts`                         | Created                                    |
+| `src/features/owner-auth/require-owner-session.ts`             | Created                                    |
+| `src/features/owner-auth/owner-login-rate-limit.ts`            | Created                                    |
+| `src/features/owner-auth/owner-login-rate-limit.test.ts`       | Created                                    |
+| `src/features/owner-auth/actions/owner-auth.actions.ts`        | Modified — login rate limit, strict cookie |
+| `src/features/owner-auth/owner-auth.utils.ts`                  | Modified — login path prefix               |
+| `src/features/owner-auth/owner-auth.utils.test.ts`             | Modified                                   |
+| `src/features/owner-crm/owner-leads.loader.ts`                 | Modified — requireOwnerSession             |
+| `src/app/owner/(dashboard)/layout.tsx`                         | Modified — requireOwnerSession             |
+| `src/features/lead-funnel/services/lead-rate-limit.ts`         | Modified — shared limiter + IP limit       |
+| `src/features/lead-funnel/services/lead-guard.service.ts`      | Modified — IP rate limit                   |
+| `src/features/lead-funnel/services/lead-guard.service.test.ts` | Modified                                   |
+| `src/features/lead-funnel/services/lead-server-context.ts`     | Modified — shared client IP                |
+| `src/features/lead-funnel/analytics.ts`                        | Modified — removed debug logging           |
+| `src/features/homepage/CostCalculator/analytics.ts`            | Modified — removed debug logging           |
+| `src/app/error.tsx`                                            | Created                                    |
+| `src/app/global-error.tsx`                                     | Created                                    |
+| `src/app/not-found.tsx`                                        | Created                                    |
+| `next.config.ts`                                               | Modified — centralized security headers    |
+| `.env.example`                                                 | Modified — rate limit env vars             |
+| `SECURITY.md`                                                  | Modified — roadmap updated                 |
+| `docs/engineering/production-deployment.md`                    | Modified — security section                |
 
 ---
 
@@ -142,17 +142,17 @@ npm run test:unit -- src/features/owner-auth/owner-login-rate-limit.test.ts src/
 
 ### Acceptance criteria
 
-| Criterion | Status |
-|-----------|--------|
-| Build passes | ✅ |
-| Lint passes | ✅ |
-| Typecheck passes | ✅ |
-| No public owner access | ✅ Middleware + requireOwnerSession |
-| No secret exposure | ✅ Audit complete |
-| No debug code | ✅ console.info removed |
-| Security headers verified | ✅ CSP, COOP, CORP added |
-| Rate limiting implemented | ✅ Lead + owner login |
-| Honeypot implemented | ✅ Existing lead honeypot verified |
+| Criterion                 | Status                              |
+| ------------------------- | ----------------------------------- |
+| Build passes              | ✅                                  |
+| Lint passes               | ✅                                  |
+| Typecheck passes          | ✅                                  |
+| No public owner access    | ✅ Middleware + requireOwnerSession |
+| No secret exposure        | ✅ Audit complete                   |
+| No debug code             | ✅ console.info removed             |
+| Security headers verified | ✅ CSP, COOP, CORP added            |
+| Rate limiting implemented | ✅ Lead + owner login               |
+| Honeypot implemented      | ✅ Existing lead honeypot verified  |
 
 ---
 

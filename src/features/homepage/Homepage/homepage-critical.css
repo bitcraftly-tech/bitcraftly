@@ -37,9 +37,11 @@
 }
 
 .hero-surface {
-  background-image: linear-gradient(to bottom,
-      color-mix(in srgb, var(--primary) 6%, var(--background)),
-      var(--background) 45%);
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--primary) 6%, var(--background)),
+    var(--background) 45%
+  );
 }
 
 .hero-eyebrow {
@@ -73,49 +75,57 @@
 }
 
 .hero-dot-grid {
-  background-image: radial-gradient(circle at 1px 1px,
-      color-mix(in srgb, var(--muted) 35%, transparent) 1px,
-      transparent 0);
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in srgb, var(--muted) 35%, transparent) 1px,
+    transparent 0
+  );
   background-size: 22px 22px;
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 20%,
-      black 40%,
-      transparent 85%);
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, black 40%, transparent 85%);
 }
 
 .hero-line-grid {
   background-image:
-    linear-gradient(to right,
+    linear-gradient(
+      to right,
       color-mix(in srgb, var(--border) 60%, transparent) 1px,
-      transparent 1px),
-    linear-gradient(to bottom,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
       color-mix(in srgb, var(--border) 60%, transparent) 1px,
-      transparent 1px);
+      transparent 1px
+    );
   background-size: 80px 80px;
   mask-image: radial-gradient(ellipse at top, black 20%, transparent 75%);
 }
 
 .hero-aurora-accent {
-  background: radial-gradient(closest-side,
-      color-mix(in srgb, var(--accent) 55%, transparent),
-      transparent 70%);
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--accent) 55%, transparent),
+    transparent 70%
+  );
 }
 
 .hero-aurora-primary {
-  background: radial-gradient(closest-side,
-      color-mix(in srgb, var(--primary) 55%, transparent),
-      transparent 70%);
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--primary) 55%, transparent),
+    transparent 70%
+  );
 }
 
 .hero-aurora-blend {
-  background: radial-gradient(closest-side,
-      color-mix(in srgb, var(--primary) 35%, transparent),
-      transparent 70%);
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--primary) 35%, transparent),
+    transparent 70%
+  );
 }
 
 .hero-brand-gradient {
-  background-image: linear-gradient(to right,
-      var(--primary),
-      var(--accent));
+  background-image: linear-gradient(to right, var(--primary), var(--accent));
 }
 
 .hero-cta {
@@ -183,23 +193,25 @@
 }
 
 .hero-brand-gradient-soft {
-  background-image: linear-gradient(to bottom right,
-      color-mix(in srgb, var(--primary) 12%, var(--surface)),
-      var(--background));
+  background-image: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--primary) 12%, var(--surface)),
+    var(--background)
+  );
 }
 
 .hero-gradient-text {
-  background-image: linear-gradient(to right,
-      var(--primary),
-      var(--accent));
+  background-image: linear-gradient(to right, var(--primary), var(--accent));
   background-clip: text;
   color: transparent;
 }
 
 .hero-metric-value {
-  background-image: linear-gradient(to bottom right,
-      var(--foreground),
-      color-mix(in srgb, var(--foreground) 70%, transparent));
+  background-image: linear-gradient(
+    to bottom right,
+    var(--foreground),
+    color-mix(in srgb, var(--foreground) 70%, transparent)
+  );
   background-clip: text;
   color: transparent;
 }
@@ -217,18 +229,22 @@
 }
 
 .hero-revenue-value {
-  background-image: linear-gradient(to bottom right,
-      var(--foreground),
-      color-mix(in srgb, var(--foreground) 75%, transparent));
+  background-image: linear-gradient(
+    to bottom right,
+    var(--foreground),
+    color-mix(in srgb, var(--foreground) 75%, transparent)
+  );
   background-clip: text;
   color: transparent;
 }
 
 .hero-automation-connector {
-  background-image: linear-gradient(to right,
-      color-mix(in srgb, var(--primary) 60%, transparent),
-      color-mix(in srgb, var(--accent) 60%, transparent),
-      color-mix(in srgb, var(--primary) 60%, transparent));
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--primary) 60%, transparent),
+    color-mix(in srgb, var(--accent) 60%, transparent),
+    color-mix(in srgb, var(--primary) 60%, transparent)
+  );
 }
 
 .hero-tag {
@@ -285,7 +301,6 @@
 }
 
 @keyframes hero-illustration-float {
-
   0%,
   100% {
     transform: translateY(0);
@@ -297,7 +312,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .hero-illustration-image,
   .hero-cta-primary:hover,
   .hero-cta-outline:hover,
@@ -315,11 +329,11 @@
  * so every marketing route shares the same spacing.
  */
 
-.homepage-sections>*+* {
+.homepage-sections > * + * {
   border-top: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
 }
 
-.homepage-sections>#founder-message+#cost-calculator {
+.homepage-sections > #founder-message + #cost-calculator {
   border-top: none;
 }
 
@@ -332,8 +346,7 @@
   --hp-card-border: #eef2ff;
   --hp-card-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.04);
   --hp-card-shadow-hover:
-    var(--token-shadow-md),
-    0 16px 36px -20px color-mix(in srgb, var(--primary) 28%, transparent);
+    var(--token-shadow-md), 0 16px 36px -20px color-mix(in srgb, var(--primary) 28%, transparent);
   --hp-card-lift: -6px;
   --hp-card-transition: 220ms var(--ease-out);
 }
@@ -366,8 +379,8 @@
  * Fail-open for legacy `.*-reveal { opacity: 0 }` (expected JS `.is-visible`).
  * Must live in critical CSS so mid-page stays visible before deferred CSS loads.
  */
-[class*="-reveal"],
-[class*="-reveal"].hp-scroll-reveal {
+[class*='-reveal'],
+[class*='-reveal'].hp-scroll-reveal {
   opacity: 1 !important;
   transform: none !important;
 }

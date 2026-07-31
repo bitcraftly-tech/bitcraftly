@@ -1,19 +1,16 @@
-import { TrustedBySection } from "../TrustedBy";
-import { ServicesSection } from "../Services";
-import { TechnologiesSection } from "../Technologies";
-import { PortfolioSection } from "../Portfolio";
-import { DashboardShowcaseSection } from "../DashboardShowcase";
-import {
-  CostCalculatorSection,
-  FounderMessageSection,
-} from "../CostCalculator";
-import { ProcessSection } from "../Process";
-import { PerformanceSection } from "../Performance";
-import { WebsiteAuditSection } from "../WebsiteAudit";
-import { WhyBitcraftlySection } from "../WhyBitcraftly";
-import { TestimonialsSection } from "../Testimonials";
-import { FAQSection } from "../FAQ";
-import { FinalCTASection } from "../FinalCTA";
+import { TrustedBySection } from '../TrustedBy';
+import { ServicesSection } from '../Services';
+import { TechnologiesSection } from '../Technologies';
+import { PortfolioSection } from '../Portfolio';
+import { DashboardShowcaseSection } from '../DashboardShowcase';
+import { CostCalculatorSection, FounderMessageSection } from '../CostCalculator';
+import { ProcessSection } from '../Process';
+import { PerformanceSection } from '../Performance';
+import { WebsiteAuditSection } from '../WebsiteAudit';
+import { WhyBitcraftlySection } from '../WhyBitcraftly';
+import { TestimonialsSection } from '../Testimonials';
+import { FAQSection } from '../FAQ';
+import { FinalCTASection } from '../FinalCTA';
 
 /**
  * Below-ATF homepage stack — Server Components (SSR HTML always present).

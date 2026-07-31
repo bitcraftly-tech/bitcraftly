@@ -14,15 +14,15 @@ Harden production infrastructure for Bitcraftly Platform V2 launch without chang
 
 ## Deliverables
 
-| # | Deliverable | Status |
-|---|-------------|--------|
-| 1 | Prisma generate in build pipeline | ✅ |
-| 2 | Production-safe `db:deploy` workflow | ✅ |
-| 3 | GitHub Actions for `main`, `develop`, `release/**` | ✅ |
-| 4 | Production-ready `.env.example` | ✅ |
-| 5 | Required env var validation at startup | ✅ |
-| 6 | Updated deployment documentation | ✅ |
-| 7 | lint · typecheck · build verification | ✅ |
+| #   | Deliverable                                        | Status |
+| --- | -------------------------------------------------- | ------ |
+| 1   | Prisma generate in build pipeline                  | ✅     |
+| 2   | Production-safe `db:deploy` workflow               | ✅     |
+| 3   | GitHub Actions for `main`, `develop`, `release/**` | ✅     |
+| 4   | Production-ready `.env.example`                    | ✅     |
+| 5   | Required env var validation at startup             | ✅     |
+| 6   | Updated deployment documentation                   | ✅     |
+| 7   | lint · typecheck · build verification              | ✅     |
 
 ---
 
@@ -95,11 +95,11 @@ Required variables validated:
 
 ### 6. Documentation
 
-| File | Change |
-|------|--------|
-| `docs/engineering/production-deployment.md` | **New** — master production deploy guide |
+| File                                                               | Change                                           |
+| ------------------------------------------------------------------ | ------------------------------------------------ |
+| `docs/engineering/production-deployment.md`                        | **New** — master production deploy guide         |
 | `docs/engineering/lead-capture-production-deployment-checklist.md` | Updated env vars, DB persistence, build pipeline |
-| `docs/engineering/README.md` | Added link to production deployment guide |
+| `docs/engineering/README.md`                                       | Added link to production deployment guide        |
 
 ---
 
@@ -137,21 +137,21 @@ Before first production deploy:
 
 ## Files changed
 
-| File | Action |
-|------|--------|
-| `package.json` | Modified — added `prebuild` |
-| `.env.example` | Created |
-| `.github/workflows/ci.yml` | Modified — branches, db:generate, SKIP_ENV_VALIDATION |
-| `.github/workflows/db-deploy.yml` | Created |
-| `src/lib/env/server-env.schema.ts` | Created |
-| `src/lib/env/validate-server-env.ts` | Created |
-| `src/lib/env/validate-server-env.test.ts` | Created |
-| `src/lib/env/index.ts` | Created |
-| `src/instrumentation.ts` | Created |
-| `docs/engineering/production-deployment.md` | Created |
-| `docs/engineering/lead-capture-production-deployment-checklist.md` | Modified |
-| `docs/engineering/README.md` | Modified |
-| `docs/release/Sprint-004.1.md` | Created |
+| File                                                               | Action                                                |
+| ------------------------------------------------------------------ | ----------------------------------------------------- |
+| `package.json`                                                     | Modified — added `prebuild`                           |
+| `.env.example`                                                     | Created                                               |
+| `.github/workflows/ci.yml`                                         | Modified — branches, db:generate, SKIP_ENV_VALIDATION |
+| `.github/workflows/db-deploy.yml`                                  | Created                                               |
+| `src/lib/env/server-env.schema.ts`                                 | Created                                               |
+| `src/lib/env/validate-server-env.ts`                               | Created                                               |
+| `src/lib/env/validate-server-env.test.ts`                          | Created                                               |
+| `src/lib/env/index.ts`                                             | Created                                               |
+| `src/instrumentation.ts`                                           | Created                                               |
+| `docs/engineering/production-deployment.md`                        | Created                                               |
+| `docs/engineering/lead-capture-production-deployment-checklist.md` | Modified                                              |
+| `docs/engineering/README.md`                                       | Modified                                              |
+| `docs/release/Sprint-004.1.md`                                     | Created                                               |
 
 ---
 

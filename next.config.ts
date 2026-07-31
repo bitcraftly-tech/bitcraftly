@@ -1,11 +1,11 @@
-import type { NextConfig } from "next";
-import bundleAnalyzer from "@next/bundle-analyzer";
-import { buildSecurityHeaders } from "./src/lib/security/security-headers";
+import type { NextConfig } from 'next';
+import bundleAnalyzer from '@next/bundle-analyzer';
+import { buildSecurityHeaders } from './src/lib/security/security-headers';
 
 const projectRoot = process.cwd();
 
 const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
+  enabled: process.env.ANALYZE === 'true',
 });
 
 const nextConfig: NextConfig = {
@@ -37,17 +37,14 @@ const nextConfig: NextConfig = {
    * Prefer modern JS output — drop legacy polyfills for evergreen browsers.
    */
   compiler: {
-    removeConsole:
-      process.env.NODE_ENV === "production"
-        ? { exclude: ["error", "warn"] }
-        : false,
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
   },
 
   /**
    * Image Optimization
    */
   images: {
-    formats: ["image/avif", "image/webp"],
+    formats: ['image/avif', 'image/webp'],
 
     /** Explicit list — Logo (80) and Hero (55) use non-default qualities. */
     qualities: [55, 75, 80],
@@ -59,19 +56,29 @@ const nextConfig: NextConfig = {
 
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "bitcraftly.com",
-        pathname: "/products/**",
+        protocol: 'https',
+        hostname: 'bitcraftly.com',
+        pathname: '/products/**',
       },
       {
-        protocol: "https",
-        hostname: "bitcraftly.com",
-        pathname: "/images/**",
+        protocol: 'https',
+        hostname: 'bitcraftly.com',
+        pathname: '/images/**',
       },
       {
-        protocol: "https",
-        hostname: "bitcraftly.com",
-        pathname: "/brand/**",
+        protocol: 'https',
+        hostname: 'bitcraftly.com',
+        pathname: '/brand/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        pathname: '/**',
       },
     ],
   },
@@ -84,23 +91,23 @@ const nextConfig: NextConfig = {
   /**
    * Production Security + Cache Headers
    */
- async headers() {
-  return [
-    {
-      source: "/_next/static/:path*",
-      headers: [
-        {
-          key: "Cache-Control",
-          value: "public, max-age=31536000, immutable",
-        },
-      ],
-    },
-    {
-      source: "/(.*)",
-      headers: [...buildSecurityHeaders()],
-    },
-  ];
-},
+  async headers() {
+    return [
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/(.*)',
+        headers: [...buildSecurityHeaders()],
+      },
+    ];
+  },
 };
 
 export default withBundleAnalyzer(nextConfig);

@@ -1,13 +1,7 @@
-"use client";
+'use client';
 
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  useSyncExternalStore,
-} from "react";
-import { cn } from "@/lib/cn";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import { cn } from '@/lib/cn';
 
 interface AnimatedStatProps {
   value: string;
@@ -15,13 +9,13 @@ interface AnimatedStatProps {
 }
 
 function subscribeReducedMotion(onStoreChange: () => void): () => void {
-  const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-  media.addEventListener("change", onStoreChange);
-  return () => media.removeEventListener("change", onStoreChange);
+  const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+  media.addEventListener('change', onStoreChange);
+  return () => media.removeEventListener('change', onStoreChange);
 }
 
 function getReducedMotionSnapshot(): boolean {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 function getReducedMotionServerSnapshot(): boolean {
@@ -29,13 +23,11 @@ function getReducedMotionServerSnapshot(): boolean {
 }
 
 /** Parses countable display strings like `200+`, `98%`, `24h`. Skips `24/7`. */
-function parseCountable(
-  value: string,
-): { target: number; suffix: string } | null {
-  if (value.includes("/")) return null;
+function parseCountable(value: string): { target: number; suffix: string } | null {
+  if (value.includes('/')) return null;
   const match = /^(\d+)(.*)$/.exec(value);
   if (!match) return null;
-  return { target: Number(match[1]), suffix: match[2] ?? "" };
+  return { target: Number(match[1]), suffix: match[2] ?? '' };
 }
 
 /**
@@ -49,7 +41,7 @@ export function AnimatedStat({ value, className }: AnimatedStatProps) {
   );
   const parsed = useMemo(() => parseCountable(value), [value]);
   const target = parsed?.target ?? 0;
-  const suffix = parsed?.suffix ?? "";
+  const suffix = parsed?.suffix ?? '';
   const ref = useRef<HTMLSpanElement>(null);
   const [display, setDisplay] = useState(target);
   const [started, setStarted] = useState(false);
@@ -102,7 +94,7 @@ export function AnimatedStat({ value, className }: AnimatedStatProps) {
     return (
       <span
         ref={parsed && !reduceMotion ? ref : undefined}
-        className={cn("tabular-nums inline-block text-left", className)}
+        className={cn('tabular-nums inline-block text-left', className)}
         style={reserveStyle}
       >
         {value}
@@ -112,7 +104,7 @@ export function AnimatedStat({ value, className }: AnimatedStatProps) {
 
   return (
     <span
-      className={cn("tabular-nums inline-block text-left", className)}
+      className={cn('tabular-nums inline-block text-left', className)}
       style={reserveStyle}
       aria-label={value}
     >

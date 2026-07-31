@@ -1,17 +1,14 @@
-import Link from "next/link";
-import type { OwnerLeadsFilters } from "../owner-crm.types";
-import {
-  OWNER_CRM_ROUTES,
-  OWNER_LEAD_STATUS_FILTER_OPTIONS,
-} from "../owner-crm.types";
+import Link from 'next/link';
+import type { OwnerLeadsFilters } from '../owner-crm.types';
+import { OWNER_CRM_ROUTES, OWNER_LEAD_STATUS_FILTER_OPTIONS } from '../owner-crm.types';
 
 interface OwnerLeadsFiltersFormProps {
   readonly filters: OwnerLeadsFilters;
 }
 
 export function OwnerLeadsFiltersForm({ filters }: OwnerLeadsFiltersFormProps) {
-  const searchId = "owner-leads-search";
-  const statusId = "owner-leads-status";
+  const searchId = 'owner-leads-search';
+  const statusId = 'owner-leads-status';
 
   return (
     <section aria-labelledby="owner-leads-filters-heading" className="owner-leads-filters">
@@ -26,7 +23,7 @@ export function OwnerLeadsFiltersForm({ filters }: OwnerLeadsFiltersFormProps) {
             id={searchId}
             name="q"
             type="search"
-            defaultValue={filters.search ?? ""}
+            defaultValue={filters.search ?? ''}
             placeholder="Name, company, email, or intent"
             autoComplete="off"
           />
@@ -34,7 +31,7 @@ export function OwnerLeadsFiltersForm({ filters }: OwnerLeadsFiltersFormProps) {
 
         <div className="owner-leads-filters__field">
           <label htmlFor={statusId}>Status</label>
-          <select id={statusId} name="status" defaultValue={filters.status ?? ""}>
+          <select id={statusId} name="status" defaultValue={filters.status ?? ''}>
             <option value="">All statuses</option>
             {OWNER_LEAD_STATUS_FILTER_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>

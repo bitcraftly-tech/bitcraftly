@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
-import type { IconName } from "@/components/ui/icon";
-import { Icon } from "@/components/ui/icon";
-import { IconBox } from "@/components/ui/icon-box";
-import { Text } from "@/components/ui/typography";
-import type { SiteNavLink } from "@/constants/navigation";
+import { useState } from 'react';
+import Link from 'next/link';
+import type { IconName } from '@/components/ui/icon';
+import { Icon } from '@/components/ui/icon';
+import { IconBox } from '@/components/ui/icon-box';
+import { Text } from '@/components/ui/typography';
+import type { SiteNavLink } from '@/constants/navigation';
 import {
   getSiteNavChildren,
   hasMegaMenu,
   isNavLinkActive,
   toNavChildLink,
-} from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { NavigationLink } from "./NavigationLink";
+} from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { NavigationLink } from './NavigationLink';
 
 interface MobileNavAccordionProps {
   links: readonly SiteNavLink[];
@@ -22,11 +22,7 @@ interface MobileNavAccordionProps {
   onNavigate: () => void;
 }
 
-export function MobileNavAccordion({
-  links,
-  pathname,
-  onNavigate,
-}: MobileNavAccordionProps) {
+export function MobileNavAccordion({ links, pathname, onNavigate }: MobileNavAccordionProps) {
   const [openHref, setOpenHref] = useState<string | null>(null);
 
   return (
@@ -55,18 +51,14 @@ export function MobileNavAccordion({
             <button
               type="button"
               className={cn(
-                "flex w-full items-center justify-between rounded-lg px-[var(--space-2)] py-[var(--space-2)]",
-                "text-left text-base font-medium transition-colors duration-200",
-                "hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                isActive || isOpen ? "text-primary" : "text-foreground",
+                'flex w-full items-center justify-between rounded-lg px-[var(--space-2)] py-[var(--space-2)]',
+                'text-left text-base font-medium transition-colors duration-200',
+                'hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+                isActive || isOpen ? 'text-primary' : 'text-foreground',
               )}
               aria-expanded={isOpen}
               aria-controls={`mobile-accordion-${link.href}`}
-              onClick={() =>
-                setOpenHref((current) =>
-                  current === link.href ? null : link.href,
-                )
-              }
+              onClick={() => setOpenHref((current) => (current === link.href ? null : link.href))}
             >
               <span>{link.label}</span>
               <Icon
@@ -74,8 +66,8 @@ export function MobileNavAccordion({
                 size="sm"
                 aria-hidden
                 className={cn(
-                  "h-[16px] w-[16px] transition-transform duration-200",
-                  isOpen && "rotate-180",
+                  'h-[16px] w-[16px] transition-transform duration-200',
+                  isOpen && 'rotate-180',
                 )}
               />
             </button>
@@ -153,9 +145,9 @@ function MobileChildLink({
       href={href}
       onClick={onNavigate}
       className={cn(
-        "flex items-start gap-[10px] rounded-[10px] p-[10px] no-underline",
-        "transition-colors duration-200 hover:bg-surface",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+        'flex items-start gap-[10px] rounded-[10px] p-[10px] no-underline',
+        'transition-colors duration-200 hover:bg-surface',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
       )}
     >
       <IconBox icon={icon} size="sm" variant="default" />
@@ -163,12 +155,7 @@ function MobileChildLink({
         <span className="block font-sans text-[length:var(--font-size-sm)] font-[var(--font-weight-semibold)] text-foreground">
           {label}
         </span>
-        <Text
-          as="span"
-          size="sm"
-          muted
-          className="mt-[2px] block leading-snug"
-        >
+        <Text as="span" size="sm" muted className="mt-[2px] block leading-snug">
           {description}
         </Text>
       </span>

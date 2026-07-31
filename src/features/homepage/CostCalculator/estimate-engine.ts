@@ -2,7 +2,7 @@ import type {
   CalculatorEstimateResult,
   CalculatorSelections,
   CostCalculatorCmsContent,
-} from "./cost-calculator.types";
+} from './cost-calculator.types';
 
 /**
  * Pure estimate engine — CMS-data driven, UI-agnostic.
@@ -11,22 +11,15 @@ export function calculatePricingEstimate(
   content: CostCalculatorCmsContent,
   selections: CalculatorSelections,
 ): CalculatorEstimateResult {
-  const project = content.projectTypes.find(
-    (item) => item.id === selections.projectTypeId,
-  );
-  const timeline = content.timelines.find(
-    (item) => item.id === selections.timelineId,
-  );
-  const hosting = content.hostingOptions.find(
-    (item) => item.id === selections.hostingId,
-  );
+  const project = content.projectTypes.find((item) => item.id === selections.projectTypeId);
+  const timeline = content.timelines.find((item) => item.id === selections.timelineId);
+  const hosting = content.hostingOptions.find((item) => item.id === selections.hostingId);
   const maintenance =
-    content.maintenanceOptions.find(
-      (item) => item.id === selections.maintenanceId,
-    ) ?? content.maintenanceOptions[0];
+    content.maintenanceOptions.find((item) => item.id === selections.maintenanceId) ??
+    content.maintenanceOptions[0];
 
   const multiplier = timeline?.multiplier ?? 1;
-  const lines: CalculatorEstimateResult["lines"] = [];
+  const lines: CalculatorEstimateResult['lines'] = [];
 
   let projectTotal = 0;
   if (project) {
@@ -35,7 +28,7 @@ export function calculatePricingEstimate(
       id: `project-${project.id}`,
       label: project.label,
       amount: projectTotal,
-      category: "project",
+      category: 'project',
     });
   }
 
@@ -49,25 +42,25 @@ export function calculatePricingEstimate(
       id: `feature-${feature.id}`,
       label: feature.label,
       amount,
-      category: "feature",
+      category: 'feature',
     });
   }
 
   let hostingTotal = 0;
   if (hosting && hosting.price > 0) {
-    if (hosting.id === "setup-for-me") {
+    if (hosting.id === 'setup-for-me') {
       lines.push({
-        id: "domain",
-        label: "Domain",
+        id: 'domain',
+        label: 'Domain',
         amount: 1200,
-        category: "hosting",
+        category: 'hosting',
         recurring: true,
       });
       lines.push({
-        id: "hosting",
-        label: "Hosting",
+        id: 'hosting',
+        label: 'Hosting',
         amount: 3000,
-        category: "hosting",
+        category: 'hosting',
         recurring: true,
       });
       hostingTotal = 4200;
@@ -77,7 +70,7 @@ export function calculatePricingEstimate(
         id: `hosting-${hosting.id}`,
         label: hosting.label,
         amount: hostingTotal,
-        category: "hosting",
+        category: 'hosting',
       });
     }
   }
@@ -85,10 +78,10 @@ export function calculatePricingEstimate(
   const maintenanceMonthly = maintenance?.monthlyPrice ?? 0;
   if (maintenanceMonthly > 0) {
     lines.push({
-      id: "maintenance",
-      label: "Maintenance (monthly)",
+      id: 'maintenance',
+      label: 'Maintenance (monthly)',
       amount: maintenanceMonthly,
-      category: "maintenance",
+      category: 'maintenance',
       recurring: true,
     });
   }
@@ -97,51 +90,48 @@ export function calculatePricingEstimate(
   if (content.discount.enabled && content.discount.amount > 0) {
     discountTotal = content.discount.amount;
     lines.push({
-      id: "discount",
+      id: 'discount',
       label: content.discount.label,
       amount: -discountTotal,
-      category: "discount",
+      category: 'discount',
     });
   }
 
-  const subtotal = Math.max(
-    0,
-    projectTotal + featuresTotal + hostingTotal - discountTotal,
-  );
+  const subtotal = Math.max(0, projectTotal + featuresTotal + hostingTotal - discountTotal);
 
   let taxTotal = 0;
   if (content.tax.enabled && content.tax.ratePercent > 0) {
     taxTotal = Math.round(subtotal * (content.tax.ratePercent / 100));
     lines.push({
-      id: "tax",
+      id: 'tax',
       label: content.tax.label,
       amount: taxTotal,
-      category: "tax",
+      category: 'tax',
     });
   }
 
   const estimatedTotal = subtotal + taxTotal;
   const isComplete = Boolean(
     selections.customerTypeId &&
-      selections.projectTypeId &&
-      selections.hostingId &&
-      selections.timelineId,
+    selections.projectTypeId &&
+    selections.hostingId &&
+    selections.timelineId,
   );
 
   let weeksMin = project?.timelineWeeksMin ?? 0;
   let weeksMax = project?.timelineWeeksMax ?? 0;
-  if (timeline?.id === "rush" && project) {
+  if (timeline?.id === 'rush' && project) {
     weeksMin = Math.max(1, Math.round(weeksMin / 1.35));
     weeksMax = Math.max(weeksMin, Math.round(weeksMax / 1.35));
-  } else if (timeline?.id === "fast" && project) {
+  } else if (timeline?.id === 'fast' && project) {
     weeksMax = Math.max(weeksMin, Math.round(weeksMax / 1.15));
   }
 
   const timelineLabel = project
     ? weeksMin === weeksMax
-      ? `${weeksMin} week${weeksMin > 1 ? "s" : ""}`
+      ? `${weeksMin} week${weeksMin > 1 ? 's' : ''}`
       : `${weeksMin}–${weeksMax} weeks`
-    : "Select a project";
+    : 'Select a project';
 
   return {
     lines,
@@ -154,21 +144,21 @@ export function calculatePricingEstimate(
     estimatedTotal,
     annualRenewal: hosting?.annualRenewal ?? 0,
     timelineLabel,
-    suggestedPackage: project?.suggestedPackage ?? "Custom quote",
+    suggestedPackage: project?.suggestedPackage ?? 'Custom quote',
     recommendedStack: project?.recommendedStack ?? [],
     hostingLabel: hosting
-      ? hosting.id === "setup-for-me"
-        ? "Domain + hosting included"
-        : "Domain & hosting on your side"
-      : "Select domain & hosting option",
+      ? hosting.id === 'setup-for-me'
+        ? 'Domain + hosting included'
+        : 'Domain & hosting on your side'
+      : 'Select domain & hosting option',
     isComplete,
   };
 }
 
 export function formatInr(value: number): string {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
     maximumFractionDigits: 0,
   }).format(value);
 }
@@ -182,23 +172,23 @@ export function buildQuoteHref(
     return baseHref;
   }
 
-  const url = new URL(baseHref, "https://bitcraftly.local");
-  url.searchParams.set("service", estimate.suggestedPackage);
-  url.searchParams.set("intent", "quote");
-  url.searchParams.set("source", "project-cost-calculator");
+  const url = new URL(baseHref, 'https://bitcraftly.local');
+  url.searchParams.set('service', estimate.suggestedPackage);
+  url.searchParams.set('intent', 'quote');
+  url.searchParams.set('source', 'project-cost-calculator');
   url.searchParams.set(
-    "budget",
+    'budget',
     estimate.estimatedTotal <= 15000
-      ? "Under ₹15,000"
+      ? 'Under ₹15,000'
       : estimate.estimatedTotal <= 30000
-        ? "₹15,000–₹30,000"
+        ? '₹15,000–₹30,000'
         : estimate.estimatedTotal <= 60000
-          ? "₹30,000–₹60,000"
-          : "₹60,000+",
+          ? '₹30,000–₹60,000'
+          : '₹60,000+',
   );
   url.searchParams.set(
-    "message",
-    `Cost calculator estimate: ${formatInr(estimate.estimatedTotal)} | Customer: ${selections.customerTypeId} | Project: ${estimate.suggestedPackage} | Features: ${selections.featureIds.join(", ") || "none"} | Hosting: ${selections.hostingId} | Timeline: ${selections.timelineId}`,
+    'message',
+    `Cost calculator estimate: ${formatInr(estimate.estimatedTotal)} | Customer: ${selections.customerTypeId} | Project: ${estimate.suggestedPackage} | Features: ${selections.featureIds.join(', ') || 'none'} | Hosting: ${selections.hostingId} | Timeline: ${selections.timelineId}`,
   );
 
   return `${url.pathname}?${url.searchParams.toString()}`;

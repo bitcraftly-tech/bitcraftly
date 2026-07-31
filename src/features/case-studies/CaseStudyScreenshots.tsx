@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { Section } from "@/components/ui/section";
-import type { CaseStudy } from "@/content/case-studies";
+import Image from 'next/image';
+import { Section } from '@/components/ui/section';
+import type { CaseStudy } from '@/content/case-studies';
 
 interface CaseStudyScreenshotsProps {
   study: CaseStudy;

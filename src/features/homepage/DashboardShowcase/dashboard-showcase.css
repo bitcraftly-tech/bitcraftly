@@ -57,10 +57,7 @@
 
 .dashboard-featured-media--dashboard {
   padding: var(--card-padding);
-  background:
-    linear-gradient(160deg,
-      color-mix(in srgb, var(--primary) 5%, #eef2ff),
-      #f8faff);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--primary) 5%, #eef2ff), #f8faff);
 }
 
 .dashboard-panel {
@@ -70,7 +67,7 @@
   height: auto;
 }
 
-.dashboard-panel>div {
+.dashboard-panel > div {
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -135,7 +132,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .dashboard-featured-card,
   .dashboard-featured-card:hover,
   .dashboard-reveal,

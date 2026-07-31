@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useCallback } from "react";
-import { MountWhenVisible } from "@/components/patterns/mount-when-visible";
-import type { FaqAccordionItem } from "@/components/patterns/faq-accordion";
-import type { ComponentType } from "react";
+import { useCallback } from 'react';
+import { MountWhenVisible } from '@/components/patterns/mount-when-visible';
+import type { FaqAccordionItem } from '@/components/patterns/faq-accordion';
+import type { ComponentType } from 'react';
 
 interface FaqAccordionLazyProps {
   items: readonly FaqAccordionItem[];
@@ -18,12 +18,12 @@ function FaqStaticFallback({ items }: { items: readonly FaqAccordionItem[] }) {
           <div
             key={item.id}
             className="faq-item overflow-hidden rounded-[16px]"
-            data-open={isOpen ? "true" : "false"}
+            data-open={isOpen ? 'true' : 'false'}
           >
             <h3 className="m-0">
               <span className="faq-trigger">
                 <span className="faq-index" aria-hidden>
-                  {String(index + 1).padStart(2, "0")}
+                  {String(index + 1).padStart(2, '0')}
                 </span>
                 <span className="faq-question">{item.question}</span>
               </span>
@@ -48,7 +48,7 @@ function FaqStaticFallback({ items }: { items: readonly FaqAccordionItem[] }) {
  */
 export function FaqAccordionLazy({ items }: FaqAccordionLazyProps) {
   const load = useCallback((): Promise<ComponentType> => {
-    return import("@/components/patterns/faq-accordion").then((mod) => {
+    return import('@/components/patterns/faq-accordion').then((mod) => {
       function BoundFaqAccordion() {
         return <mod.FaqAccordion items={items} />;
       }
@@ -56,10 +56,5 @@ export function FaqAccordionLazy({ items }: FaqAccordionLazyProps) {
     });
   }, [items]);
 
-  return (
-    <MountWhenVisible
-      load={load}
-      fallback={<FaqStaticFallback items={items} />}
-    />
-  );
+  return <MountWhenVisible load={load} fallback={<FaqStaticFallback items={items} />} />;
 }

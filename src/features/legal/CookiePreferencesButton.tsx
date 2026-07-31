@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
-import { Icon } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
-import "./cookie-prefs.css";
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { Icon } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
+import './cookie-prefs.css';
 
-const STORAGE_KEY = "bitcraftly_cookie_preferences";
+const STORAGE_KEY = 'bitcraftly_cookie_preferences';
 
 interface CookiePreferences {
   necessary: true;
@@ -18,7 +18,7 @@ const DEFAULT_PREFS: CookiePreferences = {
 };
 
 function readPreferences(): CookiePreferences {
-  if (typeof window === "undefined") return DEFAULT_PREFS;
+  if (typeof window === 'undefined') return DEFAULT_PREFS;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return DEFAULT_PREFS;
@@ -37,7 +37,7 @@ function readPreferences(): CookiePreferences {
  */
 export function CookiePreferencesButton({
   className,
-  children = "Cookies",
+  children = 'Cookies',
 }: {
   className?: string;
   children?: ReactNode;
@@ -58,13 +58,13 @@ export function CookiePreferencesButton({
     if (!open) return;
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         setOpen(false);
       }
     }
 
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
   }, [open]);
 
   useEffect(() => {
@@ -80,12 +80,7 @@ export function CookiePreferencesButton({
 
   return (
     <>
-      <button
-        ref={buttonRef}
-        type="button"
-        className={className}
-        onClick={() => setOpen(true)}
-      >
+      <button ref={buttonRef} type="button" className={className} onClick={() => setOpen(true)}>
         {children}
       </button>
 
@@ -115,8 +110,8 @@ export function CookiePreferencesButton({
               </button>
             </div>
             <p className="cookie-prefs__lede">
-              We use necessary cookies to run the site. Optional analytics
-              cookies help us improve Bitcraftly — only if you allow them.
+              We use necessary cookies to run the site. Optional analytics cookies help us improve
+              Bitcraftly — only if you allow them.
             </p>
 
             <ul className="cookie-prefs__list">
@@ -155,14 +150,14 @@ export function CookiePreferencesButton({
             <div className="cookie-prefs__actions">
               <button
                 type="button"
-                className={cn("cookie-prefs__btn cookie-prefs__btn--primary")}
+                className={cn('cookie-prefs__btn cookie-prefs__btn--primary')}
                 onClick={save}
               >
                 Save preferences
               </button>
               <button
                 type="button"
-                className={cn("cookie-prefs__btn cookie-prefs__btn--ghost")}
+                className={cn('cookie-prefs__btn cookie-prefs__btn--ghost')}
                 onClick={() => {
                   setPrefs({ necessary: true, analytics: false });
                   window.localStorage.setItem(

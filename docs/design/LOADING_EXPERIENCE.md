@@ -37,15 +37,15 @@ No route waits on a fullscreen spinner.
 
 During client navigations, Next.js App Router shows route-specific skeletons **inside** the persistent layout. Header/footer remain mounted.
 
-| Route group | Skeleton |
-|-------------|----------|
-| `(marketing)/loading.tsx` | Default hero + card grid |
-| `/services`, `/solutions`, `/industries` | Hub hero + service cards |
-| `/pricing` | Hero + pricing cards |
-| `/contact` | Hero + form skeleton |
-| `/work` | Hero + case study rows |
-| `/blog` | Hero + blog cards |
-| `/owner/leads` | CRM stats + table skeleton |
+| Route group                              | Skeleton                   |
+| ---------------------------------------- | -------------------------- |
+| `(marketing)/loading.tsx`                | Default hero + card grid   |
+| `/services`, `/solutions`, `/industries` | Hub hero + service cards   |
+| `/pricing`                               | Hero + pricing cards       |
+| `/contact`                               | Hero + form skeleton       |
+| `/work`                                  | Hero + case study rows     |
+| `/blog`                                  | Hero + blog cards          |
+| `/owner/leads`                           | CRM stats + table skeleton |
 
 Mobile routes use `isMobileUserAgent()` to omit hero illustration placeholders (Sprint 004.4 alignment).
 
@@ -109,11 +109,11 @@ src/components/patterns/skeletons/
 
 ### Design tokens (skeleton.css)
 
-| Token | Purpose |
-|-------|---------|
-| `--skeleton-base` | Placeholder fill |
-| `--skeleton-highlight` | Shimmer sweep |
-| `--skeleton-duration` | 1.4s animation cycle |
+| Token                  | Purpose              |
+| ---------------------- | -------------------- |
+| `--skeleton-base`      | Placeholder fill     |
+| `--skeleton-highlight` | Shimmer sweep        |
+| `--skeleton-duration`  | 1.4s animation cycle |
 
 Uses existing `--border`, `--surface`, `--background` — no new brand colors.
 
@@ -121,40 +121,40 @@ Uses existing `--border`, `--surface`, `--background` — no new brand colors.
 
 ## Component map
 
-| Skeleton | File | Used by |
-|----------|------|---------|
-| `Skeleton` | `ui/skeleton` | All compositions |
-| `HeroLoadingSkeleton` | patterns/skeletons | Route loading, marketing shells |
-| `CardSkeleton` / `CardGridSkeleton` | patterns/skeletons | Default routes, portfolio fallback |
-| `ServiceCardSkeleton` | patterns/skeletons | Services, Solutions, Industries loading |
-| `PricingCardSkeleton` | patterns/skeletons | Pricing loading |
-| `BlogCardSkeleton` | patterns/skeletons | Blog loading |
-| `CaseStudyCardSkeleton` | patterns/skeletons | Work loading |
-| `FormSkeleton` | patterns/skeletons | Contact, pricing calculator, lead funnel |
-| `TableSkeleton` | patterns/skeletons | Owner CRM leads |
-| `ChartSkeleton` | patterns/skeletons | Available for dashboard charts |
-| `DashboardCardSkeleton` | patterns/skeletons | Owner CRM stats |
-| `LeadListSkeleton` | patterns/skeletons | Owner leads loading |
-| `AvatarSkeleton` | patterns/skeletons | Reusable avatar placeholder |
-| `ImageSkeleton` | patterns/skeletons | Reusable image placeholder |
-| `TestimonialsSectionSkeleton` | MarketingRouteLoading | Homepage Suspense |
-| `FaqSectionSkeleton` | MarketingRouteLoading | Homepage Suspense |
-| `CalculatorSectionSkeleton` | MarketingRouteLoading | Homepage Suspense |
-| `PortfolioSectionSkeleton` | MarketingRouteLoading | Homepage Suspense |
-| `TechnologiesSectionSkeleton` | MarketingRouteLoading | Homepage Suspense |
-| `FounderMessageSectionSkeleton` | MarketingRouteLoading | Homepage Suspense |
-| `MarketingRouteLoading` | patterns/skeletons | App Router `loading.tsx` |
+| Skeleton                            | File                  | Used by                                  |
+| ----------------------------------- | --------------------- | ---------------------------------------- |
+| `Skeleton`                          | `ui/skeleton`         | All compositions                         |
+| `HeroLoadingSkeleton`               | patterns/skeletons    | Route loading, marketing shells          |
+| `CardSkeleton` / `CardGridSkeleton` | patterns/skeletons    | Default routes, portfolio fallback       |
+| `ServiceCardSkeleton`               | patterns/skeletons    | Services, Solutions, Industries loading  |
+| `PricingCardSkeleton`               | patterns/skeletons    | Pricing loading                          |
+| `BlogCardSkeleton`                  | patterns/skeletons    | Blog loading                             |
+| `CaseStudyCardSkeleton`             | patterns/skeletons    | Work loading                             |
+| `FormSkeleton`                      | patterns/skeletons    | Contact, pricing calculator, lead funnel |
+| `TableSkeleton`                     | patterns/skeletons    | Owner CRM leads                          |
+| `ChartSkeleton`                     | patterns/skeletons    | Available for dashboard charts           |
+| `DashboardCardSkeleton`             | patterns/skeletons    | Owner CRM stats                          |
+| `LeadListSkeleton`                  | patterns/skeletons    | Owner leads loading                      |
+| `AvatarSkeleton`                    | patterns/skeletons    | Reusable avatar placeholder              |
+| `ImageSkeleton`                     | patterns/skeletons    | Reusable image placeholder               |
+| `TestimonialsSectionSkeleton`       | MarketingRouteLoading | Homepage Suspense                        |
+| `FaqSectionSkeleton`                | MarketingRouteLoading | Homepage Suspense                        |
+| `CalculatorSectionSkeleton`         | MarketingRouteLoading | Homepage Suspense                        |
+| `PortfolioSectionSkeleton`          | MarketingRouteLoading | Homepage Suspense                        |
+| `TechnologiesSectionSkeleton`       | MarketingRouteLoading | Homepage Suspense                        |
+| `FounderMessageSectionSkeleton`     | MarketingRouteLoading | Homepage Suspense                        |
+| `MarketingRouteLoading`             | patterns/skeletons    | App Router `loading.tsx`                 |
 
 ---
 
 ## Animation guidelines
 
-| Interaction | Animation | Max duration |
-|-------------|-----------|--------------|
-| Skeleton shimmer | Horizontal gradient sweep | 1.4s loop |
-| Hero illustration (desktop) | Fade + scale enter | 250ms (`hero-illustration-reveal`) |
-| Button loading | Opacity pulse | 250ms |
-| Reduced motion | Opacity pulse only | 1.4s |
+| Interaction                 | Animation                 | Max duration                       |
+| --------------------------- | ------------------------- | ---------------------------------- |
+| Skeleton shimmer            | Horizontal gradient sweep | 1.4s loop                          |
+| Hero illustration (desktop) | Fade + scale enter        | 250ms (`hero-illustration-reveal`) |
+| Button loading              | Opacity pulse             | 250ms                              |
+| Reduced motion              | Opacity pulse only        | 1.4s                               |
 
 **Avoided:** fullscreen spinners, bounce, generic rotating loaders.
 
@@ -162,15 +162,15 @@ Uses existing `--border`, `--surface`, `--background` — no new brand colors.
 
 ## Accessibility
 
-| Requirement | Implementation |
-|-------------|----------------|
-| Skeletons decorative | `aria-hidden="true"` on skeleton nodes |
-| Loading regions | `aria-busy="true"` + `aria-label` on section shells |
-| Live updates | `aria-live="polite"` on route loading containers |
-| Buttons | `aria-busy`, disabled during submit |
-| Reduced motion | Shimmer disabled; opacity pulse fallback |
-| Skip link | Unchanged in marketing layout |
-| WCAG AA | No token/color changes |
+| Requirement          | Implementation                                      |
+| -------------------- | --------------------------------------------------- |
+| Skeletons decorative | `aria-hidden="true"` on skeleton nodes              |
+| Loading regions      | `aria-busy="true"` + `aria-label` on section shells |
+| Live updates         | `aria-live="polite"` on route loading containers    |
+| Buttons              | `aria-busy`, disabled during submit                 |
+| Reduced motion       | Shimmer disabled; opacity pulse fallback            |
+| Skip link            | Unchanged in marketing layout                       |
+| WCAG AA              | No token/color changes                              |
 
 FAQ lazy accordion keeps **SSR static fallback** with real question text for SEO and screen readers (not replaced by skeleton).
 
@@ -188,26 +188,26 @@ FAQ lazy accordion keeps **SSR static fallback** with real question text for SEO
 
 ### Expected improvements
 
-| Metric | Mechanism |
-|--------|-----------|
-| **LCP** | ATF hero copy streams first; illustration deferred on mobile |
-| **CLS** | Skeleton dimensions match final layout; reserved min-heights |
-| **INP** | Fewer blocking spinners; deferred hydration unchanged |
-| **TBT** | Homepage Suspense allows earlier paint of hero + header |
-| **Perceived speed** | Shimmer skeletons vs blank/gray boxes |
+| Metric              | Mechanism                                                    |
+| ------------------- | ------------------------------------------------------------ |
+| **LCP**             | ATF hero copy streams first; illustration deferred on mobile |
+| **CLS**             | Skeleton dimensions match final layout; reserved min-heights |
+| **INP**             | Fewer blocking spinners; deferred hydration unchanged        |
+| **TBT**             | Homepage Suspense allows earlier paint of hero + header      |
+| **Perceived speed** | Shimmer skeletons vs blank/gray boxes                        |
 
 ### Before vs after
 
-| Area | Before (004.4) | After (004.5) |
-|------|----------------|---------------|
-| Route navigation | Blank main or layout-only wait | Hero + section skeletons |
-| Homepage BTF | Full synchronous SSR block | Suspense streaming + skeleton fallbacks |
-| Contact/pricing forms | Gray `min-h` boxes | Structured `FormSkeleton` |
-| Testimonials carousel | Gray box | Carousel-shaped skeleton |
-| Owner CRM | Custom pulse divs | Shared `LeadListSkeleton` + `TableSkeleton` |
-| Button loading | SVG spinner | Opacity pulse + loading label |
-| Shared skeleton system | None | `ui/skeleton` + compositions |
-| React Suspense | None | Homepage below-fold boundaries |
+| Area                   | Before (004.4)                 | After (004.5)                               |
+| ---------------------- | ------------------------------ | ------------------------------------------- |
+| Route navigation       | Blank main or layout-only wait | Hero + section skeletons                    |
+| Homepage BTF           | Full synchronous SSR block     | Suspense streaming + skeleton fallbacks     |
+| Contact/pricing forms  | Gray `min-h` boxes             | Structured `FormSkeleton`                   |
+| Testimonials carousel  | Gray box                       | Carousel-shaped skeleton                    |
+| Owner CRM              | Custom pulse divs              | Shared `LeadListSkeleton` + `TableSkeleton` |
+| Button loading         | SVG spinner                    | Opacity pulse + loading label               |
+| Shared skeleton system | None                           | `ui/skeleton` + compositions                |
+| React Suspense         | None                           | Homepage below-fold boundaries              |
 
 ### Lighthouse (desktop CI — unchanged script)
 
@@ -282,18 +282,18 @@ Build ID (004.5): from latest `npm run build` output.
 
 ## Acceptance checklist
 
-| Criterion | Status |
-|-----------|--------|
-| No fullscreen spinner | ✅ |
-| Skeleton-based loading | ✅ |
-| Route `loading.tsx` on major marketing routes | ✅ |
-| Suspense below-the-fold (homepage) | ✅ |
-| Mobile hero illustration skipped (server) | ✅ (004.4) |
-| `prefers-reduced-motion` | ✅ |
-| `aria-busy` / `aria-hidden` | ✅ |
-| No branding/color/typography changes | ✅ |
-| lint / typecheck / build / tests | ✅ |
-| Lighthouse Performance ≥95 | ⏳ Phase C |
+| Criterion                                     | Status     |
+| --------------------------------------------- | ---------- |
+| No fullscreen spinner                         | ✅         |
+| Skeleton-based loading                        | ✅         |
+| Route `loading.tsx` on major marketing routes | ✅         |
+| Suspense below-the-fold (homepage)            | ✅         |
+| Mobile hero illustration skipped (server)     | ✅ (004.4) |
+| `prefers-reduced-motion`                      | ✅         |
+| `aria-busy` / `aria-hidden`                   | ✅         |
+| No branding/color/typography changes          | ✅         |
+| lint / typecheck / build / tests              | ✅         |
+| Lighthouse Performance ≥95                    | ⏳ Phase C |
 
 Suggested commit:
 

@@ -1,9 +1,9 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Icon } from "@/components/ui/icon";
-import { NAV_ACTIONS, ROUTES } from "@/constants/navigation";
-import { WORK_WHATSAPP_HREF } from "./work-images";
-import type { WorkProject } from "./work.types";
+import Image from 'next/image';
+import Link from 'next/link';
+import { Icon } from '@/components/ui/icon';
+import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { WORK_WHATSAPP_HREF } from './work-images';
+import type { WorkProject } from './work.types';
 
 interface WorkFeaturedShowcaseProps {
   project: WorkProject;
@@ -13,20 +13,22 @@ interface WorkFeaturedShowcaseProps {
  * Future / featured project band — media + dense product panel.
  */
 export function WorkFeaturedShowcase({ project }: WorkFeaturedShowcaseProps) {
-  const isFuture = project.status === "future";
+  const isFuture = project.status === 'future';
   const caseHref = isFuture
     ? NAV_ACTIONS.freeConsultation.href
     : `${ROUTES.workProjects}/${project.slug}`;
-  const coverAlt =
-    project.coverImageAlt ?? `${project.title} product screenshot`;
+  const coverAlt = project.coverImageAlt ?? `${project.title} product screenshot`;
   const liveHref = project.liveUrl ?? WORK_WHATSAPP_HREF;
-  const liveExternal = Boolean(project.liveExternal) || isFuture;
+  const isInteractiveDemo = project.badge === 'Interactive demo';
+  const liveExternal = Boolean(project.liveExternal) || isFuture || isInteractiveDemo;
+  const demoLabel = isFuture
+    ? 'WhatsApp us'
+    : isInteractiveDemo
+      ? 'Interactive demo'
+      : 'Live Client';
 
   return (
-    <section
-      className="work-pf-showcase"
-      aria-labelledby="work-featured-showcase-heading"
-    >
+    <section className="work-pf-showcase" aria-labelledby="work-featured-showcase-heading">
       <div className="work-pf-showcase__panel">
         <div className="work-pf-showcase__media">
           <Image
@@ -38,19 +40,16 @@ export function WorkFeaturedShowcase({ project }: WorkFeaturedShowcaseProps) {
           />
           <div className="work-pf-showcase__media-fade" aria-hidden />
           <span className="work-pf-showcase__media-badge">
-            {isFuture ? "Future project" : "Featured project"}
+            {isFuture ? 'Future project' : 'Featured project'}
           </span>
         </div>
 
         <div className="work-pf-showcase__body">
           <p className="work-pf-showcase__eyebrow">
-            {isFuture ? "Coming soon" : project.industry}
+            {isFuture ? 'Coming soon' : project.industry}
             {project.duration ? ` · ${project.duration}` : null}
           </p>
-          <h3
-            id="work-featured-showcase-heading"
-            className="work-pf-showcase__title"
-          >
+          <h3 id="work-featured-showcase-heading" className="work-pf-showcase__title">
             {project.title}
           </h3>
           <p className="work-pf-showcase__text">{project.summary}</p>
@@ -62,32 +61,17 @@ export function WorkFeaturedShowcase({ project }: WorkFeaturedShowcaseProps) {
           </ul>
 
           <div className="work-pf-showcase__actions">
-            <Link
-              href={caseHref}
-              className="work-pf-card__btn work-pf-card__btn--primary"
-            >
-              {isFuture ? "Discuss this build" : "View Case Study"}
-              <Icon
-                name="arrow-up-right"
-                size="sm"
-                aria-hidden
-                className="h-[13px] w-[13px]"
-              />
+            <Link href={caseHref} className="work-pf-card__btn work-pf-card__btn--primary">
+              {isFuture ? 'Discuss this build' : 'View Case Study'}
+              <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
             </Link>
             <Link
               href={liveHref}
-              {...(liveExternal
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
+              {...(liveExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               className="work-pf-card__btn work-pf-card__btn--outline"
             >
-              {isFuture ? "WhatsApp us" : "Live Demo"}
-              <Icon
-                name="arrow-up-right"
-                size="sm"
-                aria-hidden
-                className="h-[13px] w-[13px]"
-              />
+              {demoLabel}
+              <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
             </Link>
           </div>
         </div>

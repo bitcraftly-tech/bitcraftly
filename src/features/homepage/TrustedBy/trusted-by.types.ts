@@ -1,10 +1,5 @@
 export type TrustedByIconId =
-  | "sparkles"
-  | "layers"
-  | "gauge"
-  | "shield-check"
-  | "trend-up"
-  | "handshake";
+  'sparkles' | 'layers' | 'gauge' | 'shield-check' | 'trend-up' | 'handshake';
 
 export interface TrustedByValue {
   id: string;

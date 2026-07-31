@@ -5,11 +5,11 @@
  * Tailwind CSS v4 utilities via @theme inline.
  */
 
-@import "tailwindcss";
-@import "./tokens.css";
-@import "./card-spacing.css";
-@import "./section-rhythm.css";
-@import "./typography.css";
+@import 'tailwindcss';
+@import './tokens.css';
+@import './card-spacing.css';
+@import './section-rhythm.css';
+@import './typography.css';
 /* animations.css — loaded post-paint via MarketingDeferredCss (not ATF-critical) */
 
 /* -------------------------------------------------------------------------- */

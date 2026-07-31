@@ -1,12 +1,11 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
-import type { FounderMessageContent } from "./cost-calculator.types";
+import dynamic from 'next/dynamic';
+import { useEffect, useRef, useState } from 'react';
+import type { FounderMessageContent } from './cost-calculator.types';
 
 const FounderAudioPlayer = dynamic(
-  () =>
-    import("./FounderAudioPlayer").then((module) => module.FounderAudioPlayer),
+  () => import('./FounderAudioPlayer').then((module) => module.FounderAudioPlayer),
   {
     ssr: false,
     loading: () => (
@@ -21,9 +20,7 @@ interface FounderMessageExperienceProps {
   content: FounderMessageContent;
 }
 
-export function FounderMessageExperience({
-  content,
-}: FounderMessageExperienceProps) {
+export function FounderMessageExperience({ content }: FounderMessageExperienceProps) {
   const [visible, setVisible] = useState(false);
   const slotRef = useRef<HTMLDivElement>(null);
 
@@ -38,7 +35,7 @@ export function FounderMessageExperience({
           observer.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -6% 0px" },
+      { threshold: 0.15, rootMargin: '0px 0px -6% 0px' },
     );
 
     observer.observe(node);

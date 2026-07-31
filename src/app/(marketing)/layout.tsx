@@ -9,11 +9,11 @@ import {
   MarketingLayoutClientHeadLoader,
   MarketingLayoutClientMidLoader,
   MarketingLayoutClientTailLoader,
-} from "@/lib/layout/MarketingLayoutClientLoaders";
-import { FooterSection } from "@/features/homepage/Footer";
-import { HeaderSection } from "@/features/homepage/Header";
-import "@/lib/layout/marketing-chrome.css";
-import "@/styles/mobile-layout.css";
+} from '@/lib/layout/MarketingLayoutClientLoaders';
+import { FooterSection } from '@/features/homepage/Footer';
+import { HeaderSection } from '@/features/homepage/Header';
+import '@/lib/layout/marketing-chrome.css';
+import '@/styles/mobile-layout.css';
 
 export default function MarketingLayout({
   children,

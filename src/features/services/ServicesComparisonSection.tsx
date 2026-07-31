@@ -1,13 +1,13 @@
-import Link from "next/link";
-import type { CSSProperties } from "react";
-import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
-import { MarketingStagger } from "@/components/patterns/marketing-stagger";
-import { Icon } from "@/components/ui/icon";
-import { IconBox } from "@/components/ui/icon-box";
-import { Section } from "@/components/ui/section";
-import { NAV_ACTIONS } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { SERVICES_LANDING } from "./services.content";
+import Link from 'next/link';
+import type { CSSProperties } from 'react';
+import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
+import { MarketingStagger } from '@/components/patterns/marketing-stagger';
+import { Icon } from '@/components/ui/icon';
+import { IconBox } from '@/components/ui/icon-box';
+import { Section } from '@/components/ui/section';
+import { NAV_ACTIONS } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { SERVICES_LANDING } from './services.content';
 
 export function ServicesComparisonSection() {
   return (
@@ -28,33 +28,28 @@ export function ServicesComparisonSection() {
           className="inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           Get a recommendation
-          <Icon
-            name="arrow-right"
-            size="sm"
-            aria-hidden
-            className="h-[13px] w-[13px]"
-          />
+          <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
         </Link>
       </div>
 
       <MarketingStagger
         as="ul"
         className={cn(
-          "m-0 grid list-none gap-[24px] p-0",
-          "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+          'm-0 grid list-none gap-[24px] p-0',
+          'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
         )}
       >
         {SERVICES_LANDING.comparison.map((option, index) => (
           <li
             key={option.id}
             className="mkt-stagger__item min-w-0"
-            style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
+            style={{ '--stagger': Math.min(index, 5) } as CSSProperties}
           >
             <Link
               href={option.href}
               className={cn(
-                "services-page-card group flex h-full flex-col rounded-[16px] card-padding no-underline",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-offset-background",
+                'services-page-card group flex h-full flex-col rounded-[16px] card-padding no-underline',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-offset-background',
               )}
             >
               <span className="services-page-card-header">

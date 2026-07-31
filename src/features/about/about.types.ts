@@ -1,4 +1,4 @@
-import type { IconName } from "@/components/ui/icon";
+import type { IconName } from '@/components/ui/icon';
 
 export interface AboutValue {
   readonly id: string;
@@ -25,7 +25,7 @@ export interface AboutCultureItem {
   readonly icon: IconName;
 }
 
-export type AboutTechGroupId = "frontend" | "backend" | "ai-delivery";
+export type AboutTechGroupId = 'frontend' | 'backend' | 'ai-delivery';
 
 export interface AboutTechItem {
   readonly id: string;

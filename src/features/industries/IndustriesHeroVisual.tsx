@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { cn } from "@/lib/cn";
-import "@/features/homepage/Hero/hero.css";
-import "./industries.css";
+import Image from 'next/image';
+import { cn } from '@/lib/cn';
+import '@/features/homepage/Hero/hero.css';
+import './industries.css';
 
-const INDUSTRIES_HERO_IMAGE_SRC = "/industries-hero.webp";
+const INDUSTRIES_HERO_IMAGE_SRC = '/industries-hero.webp';
 
 /**
  * Industries-only hero visual — illustration only (no orbital background rings).
@@ -12,9 +12,9 @@ export function IndustriesHeroVisual() {
   return (
     <div
       className={cn(
-        "industries-hero__visual relative mx-auto h-full w-full min-h-[420px] min-w-0 max-w-xl",
-        "md:mx-0 md:max-w-none md:min-h-[560px]",
-        "lg:mx-0 lg:h-full lg:min-h-full lg:max-w-none lg:self-stretch",
+        'industries-hero__visual relative mx-auto h-full w-full min-h-[420px] min-w-0 max-w-xl',
+        'md:mx-0 md:max-w-none md:min-h-[560px]',
+        'lg:mx-0 lg:h-full lg:min-h-full lg:max-w-none lg:self-stretch',
       )}
       aria-hidden="true"
     >

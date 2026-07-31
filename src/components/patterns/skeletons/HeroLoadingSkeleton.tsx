@@ -1,7 +1,7 @@
-import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
-import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/cn";
+import { Container } from '@/components/ui/container';
+import { Section } from '@/components/ui/section';
+import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from '@/lib/cn';
 
 interface HeroLoadingSkeletonProps {
   compact?: boolean;
@@ -9,16 +9,13 @@ interface HeroLoadingSkeletonProps {
 }
 
 /** Matches marketing hero ATF layout — prevents CLS during route transitions. */
-export function HeroLoadingSkeleton({
-  compact = false,
-  className,
-}: HeroLoadingSkeletonProps) {
+export function HeroLoadingSkeleton({ compact = false, className }: HeroLoadingSkeletonProps) {
   return (
     <Section
       spacing="none"
       className={cn(
-        "relative overflow-hidden border-b border-border/60 hero-surface",
-        compact ? "marketing-hero--compact py-[var(--space-4)]" : "py-[var(--space-6)]",
+        'relative overflow-hidden border-b border-border/60 hero-surface',
+        compact ? 'marketing-hero--compact py-[var(--space-4)]' : 'py-[var(--space-6)]',
         className,
       )}
       aria-busy="true"
@@ -27,14 +24,12 @@ export function HeroLoadingSkeleton({
       <Container size="xl">
         <div
           className={cn(
-            "grid grid-cols-1 gap-[var(--space-4)]",
-            !compact && "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-center",
+            'grid grid-cols-1 gap-[var(--space-4)]',
+            !compact && 'lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-center',
           )}
         >
           <div className="flex min-w-0 flex-col gap-[14px]">
-            {!compact ? (
-              <Skeleton className="h-[32px] w-[min(280px,70%)] rounded-full" />
-            ) : null}
+            {!compact ? <Skeleton className="h-[32px] w-[min(280px,70%)] rounded-full" /> : null}
             <Skeleton className="h-[44px] w-full max-w-[520px]" />
             <Skeleton className="h-[44px] w-full max-w-[420px]" />
             <Skeleton className="h-[14px] w-full max-w-[480px]" />
