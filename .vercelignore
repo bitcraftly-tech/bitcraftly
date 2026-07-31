@@ -1,0 +1,8 @@
+# Oversized local source footage — web uses hero.mp4 / hero-mobile.mp4
+public/dayal-builders/hero-source.mp4
+
+# Local junk
+localhost_*.report.html
+scripts/tmp-*
+tmp-top.png
+.vercel-*-deploy.log
