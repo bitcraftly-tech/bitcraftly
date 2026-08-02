@@ -100,13 +100,6 @@ html.bc-booting #bc-demo-boot-splash {
   border-color: color-mix(in srgb, var(--demo-boot-accent, #0f766e) 12%, transparent);
   border-bottom-color: color-mix(in srgb, var(--demo-boot-accent, #0f766e) 60%, transparent);
 }
-.bc-boot-splash__logo-glow {
-  position: absolute;
-  inset: 7px;
-  border-radius: 11px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.32), transparent 72%);
-  animation: bc-boot-glow 1.6s ease-in-out infinite;
-}
 .bc-demo-boot__glow {
   position: absolute;
   inset: 6px;
@@ -121,8 +114,10 @@ html.bc-booting #bc-demo-boot-splash {
   height: 28px;
   object-fit: contain;
   border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  filter: none;
   animation: bc-boot-float 1.6s ease-in-out infinite;
-  filter: drop-shadow(0 4px 8px rgba(37, 99, 235, 0.2));
 }
 .bc-demo-boot__mark {
   position: relative;
@@ -172,7 +167,6 @@ html.bc-booting #bc-demo-boot-splash {
 }
 @media (prefers-reduced-motion: reduce) {
   .bc-boot-splash__logo,
-  .bc-boot-splash__logo-glow,
   .bc-boot-splash__ring,
   .bc-demo-boot__mark,
   .bc-demo-boot__glow,
@@ -203,13 +197,6 @@ export const APP_BOOT_INIT_SCRIPT = `
     var root = document.documentElement;
     if (root.classList.contains('bc-app-ready')) return;
     var path = location.pathname || '';
-    /* Homepage: never gate first paint behind the boot splash. */
-    if (path === '/' || path === '') {
-      root.classList.remove('bc-booting', 'bc-demo-booting');
-      root.classList.add('bc-app-ready');
-      root.setAttribute('aria-busy', 'false');
-      return;
-    }
     var isDemo =
       path.indexOf('/interactive-demos/') === 0 ||
       (path.indexOf('/portfolio/') === 0 && path.length > '/portfolio/'.length);

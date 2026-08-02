@@ -2,7 +2,12 @@
 
 import { useEffect, useState } from 'react';
 
-import { BOOT_FADE_OUT_MS, revealBootedDocument, waitUntilBootReady } from './boot-ready';
+import {
+  BOOT_DOM_FAILSAFE_MS,
+  BOOT_FADE_OUT_MS,
+  revealBootedDocument,
+  waitUntilBootReady,
+} from './boot-ready';
 import { isInteractiveDemoPath } from './boot-path';
 
 /**
@@ -26,21 +31,37 @@ export function AppBootSplash() {
 
     let cancelled = false;
     let leaveTimer = 0;
+    let finished = false;
 
-    void (async () => {
-      await waitUntilBootReady();
-      if (cancelled) return;
-
+    const finish = () => {
+      if (cancelled || finished) return;
+      finished = true;
       revealBootedDocument();
       setPhase('leaving');
       leaveTimer = window.setTimeout(() => {
         if (!cancelled) setPhase('gone');
       }, BOOT_FADE_OUT_MS);
+    };
+
+    void (async () => {
+      try {
+        const currentPath = location.pathname || '';
+        const fastHome = currentPath === '/' || currentPath === '';
+        await waitUntilBootReady({ fast: fastHome });
+      } catch {
+        /* fail-open — never trap the page behind the splash */
+      } finally {
+        finish();
+      }
     })();
+
+    // Absolute failsafe if async work stalls (timers throttled, etc.)
+    const hardTimer = window.setTimeout(finish, BOOT_DOM_FAILSAFE_MS);
 
     return () => {
       cancelled = true;
       window.clearTimeout(leaveTimer);
+      window.clearTimeout(hardTimer);
     };
   }, []);
 
@@ -61,8 +82,6 @@ export function AppBootSplash() {
         <div className="bc-boot-splash__logo-wrap" aria-hidden>
           <span className="bc-boot-splash__ring bc-boot-splash__ring--delayed" />
           <span className="bc-boot-splash__ring" />
-          <span className="bc-boot-splash__logo-glow" />
-          {/* Native img — available before Next/Image hydrates; matches header brand mark. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="bc-boot-splash__logo"
