@@ -5,6 +5,7 @@ import { getIndustryHref } from '@/constants/industries';
 import { ROUTES } from '@/constants/navigation';
 import './home-story.css';
 import '../Homepage/homepage-polish.css';
+import '../Homepage/homepage-visual-rhythm.css';
 
 const MODULES = [
   'Marketing Website',
