@@ -86,8 +86,8 @@ export function AppBootSplash() {
             className="bc-boot-splash__logo"
             src="/logo.png"
             alt=""
-            width={34}
-            height={34}
+            width={40}
+            height={28}
             decoding="async"
             fetchPriority="high"
           />

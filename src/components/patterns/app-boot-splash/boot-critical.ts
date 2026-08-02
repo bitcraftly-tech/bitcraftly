@@ -99,11 +99,11 @@ html.bc-booting #bc-demo-boot-splash {
 .bc-boot-splash__logo {
   position: relative;
   z-index: 1;
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 28px;
   object-fit: contain;
-  border-radius: 8px;
-  background: #000726;
+  border-radius: 0;
+  background: transparent;
   box-shadow: none;
   filter: none;
   animation: bc-boot-float 1.6s ease-in-out infinite;
