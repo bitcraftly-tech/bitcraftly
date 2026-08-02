@@ -1,0 +1,346 @@
+/**
+ * Phase 4 — Premium Motion & Micro-interactions
+ * CSS-first interaction language. No redesign / no layout / no color changes.
+ * Fail-open for CLS: content stays visible without scroll-timeline support.
+ */
+
+.homepage-sections,
+.home-story {
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-soft: cubic-bezier(0.33, 0.1, 0.25, 1);
+  --motion-fast: 140ms;
+  --motion-base: 180ms;
+  --motion-lift: -3px;
+  --motion-lift-sm: -2px;
+  --motion-arrow: 3px;
+}
+
+/* —— Buttons (HomeStory invite + system CTAs + shared bc-btn in story) —— */
+.home-story .hs-invite-btn.bc-btn,
+.home-story .hs-system__cta,
+.home-story .hs-wave-all,
+.home-story .hs-auto-link {
+  transition:
+    transform var(--motion-fast) var(--motion-ease),
+    box-shadow var(--motion-base) var(--motion-ease),
+    border-color var(--motion-fast) var(--motion-ease),
+    background-color var(--motion-fast) var(--motion-ease),
+    filter var(--motion-fast) var(--motion-ease),
+    gap var(--motion-fast) var(--motion-ease),
+    color var(--motion-fast) var(--motion-ease);
+}
+
+.home-story .hs-invite-btn.bc-btn:hover {
+  transform: translateY(var(--motion-lift-sm));
+}
+
+.home-story .hs-invite-btn.bc-btn:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
+  transition-duration: 90ms;
+}
+
+.home-story .hs-invite-btn.bc-btn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--background, #fff),
+    0 0 0 4px color-mix(in srgb, var(--primary) 70%, transparent);
+}
+
+.home-story .hs-invite-btn .bc-btn__arrow,
+.home-story .hs-system__cta-arrow {
+  transition: transform var(--motion-fast) var(--motion-ease);
+}
+
+.home-story .hs-invite-btn:hover .bc-btn__arrow {
+  transform: translate(var(--motion-arrow), calc(var(--motion-arrow) * -1));
+}
+
+.home-story .hs-system__cta:hover .hs-system__cta-arrow,
+.home-story .hs-system:hover .hs-system__cta .hs-system__cta-arrow {
+  transform: translateX(var(--motion-arrow));
+}
+
+.home-story .hs-wave-all:hover svg,
+.home-story .hs-auto-link:hover svg {
+  transform: translateX(var(--motion-arrow));
+}
+
+/* —— Cards: soft lift, shadow, border glow, no bounce —— */
+.home-story .hs-system,
+.home-story .hs-flow,
+.home-story .hs-duel__row,
+.home-story .hs-sync__channel,
+.home-story .hs-eco__node,
+.home-story .hs-path-step {
+  transition:
+    transform var(--motion-base) var(--motion-ease),
+    box-shadow var(--motion-base) var(--motion-ease),
+    border-color var(--motion-fast) var(--motion-ease),
+    background-color var(--motion-fast) var(--motion-ease),
+    filter var(--motion-fast) var(--motion-ease);
+}
+
+.home-story .hs-system:hover,
+.home-story .hs-flow:hover,
+.home-story .hs-duel__row:hover,
+.home-story .hs-sync__channel:hover,
+.home-story .hs-path-step:hover {
+  transform: translateY(var(--motion-lift));
+  border-color: color-mix(in srgb, var(--primary) 28%, transparent);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 88%, transparent) inset,
+    0 0 0 0.5px color-mix(in srgb, white 40%, transparent) inset,
+    0 0 0 1px color-mix(in srgb, var(--primary) 10%, transparent),
+    0 16px 32px -16px color-mix(in srgb, var(--primary) 26%, transparent),
+    0 28px 52px -24px color-mix(in srgb, var(--primary-end) 18%, transparent);
+}
+
+.home-story .hs-outcome,
+.home-story .hs-module {
+  transition:
+    background-color var(--motion-fast) var(--motion-ease),
+    box-shadow var(--motion-base) var(--motion-ease);
+}
+
+.home-story .hs-outcome:hover,
+.home-story .hs-module:hover {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.home-story .hs-launch__copy {
+  transition:
+    border-color var(--motion-fast) var(--motion-ease),
+    box-shadow var(--motion-base) var(--motion-ease),
+    transform var(--motion-base) var(--motion-ease);
+}
+
+.home-story .hs-launch__step:hover .hs-launch__copy {
+  transform: translateY(var(--motion-lift-sm));
+}
+
+/* —— Section reveals (CSS scroll-driven, fail-open) —— */
+@keyframes hs-motion-reveal {
+  from {
+    opacity: 0.01;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/*
+ * Progressive enhancement only. Without scroll-timeline support,
+ * sections remain fully visible (no CLS, no hidden content).
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .home-story > .hs-section {
+      animation: hs-motion-reveal 720ms var(--motion-ease) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+/* —— Workflow: subtle connector pulse —— */
+@keyframes hs-connector-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateX(1px);
+  }
+}
+
+.home-story .hs-flow__connector {
+  position: relative;
+}
+
+.home-story .hs-flow__arrow {
+  animation: hs-connector-pulse 2.8s var(--motion-ease-soft) infinite;
+}
+
+.home-story .hs-flow__connector::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 55%, transparent);
+  opacity: 0.35;
+  animation: hs-connector-dot 2.8s var(--motion-ease-soft) infinite;
+  pointer-events: none;
+}
+
+@keyframes hs-connector-dot {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.15);
+  }
+}
+
+@media (max-width: 640px) {
+  .home-story .hs-flow__connector::after {
+    display: none;
+  }
+}
+
+/* —— Dashboard: keep motion, smoother timing only —— */
+.home-story .hs-eco__glow {
+  animation-duration: 6.5s;
+  animation-timing-function: var(--motion-ease-soft);
+}
+
+.home-story .hs-eco__node--1 {
+  animation-duration: 8s;
+  animation-timing-function: var(--motion-ease-soft);
+}
+
+.home-story .hs-eco__node--2 {
+  animation-duration: 8.8s;
+  animation-timing-function: var(--motion-ease-soft);
+}
+
+.home-story .hs-eco__node--3 {
+  animation-duration: 9.2s;
+  animation-timing-function: var(--motion-ease-soft);
+}
+
+.home-story .hs-eco__node--4 {
+  animation-duration: 8.4s;
+  animation-timing-function: var(--motion-ease-soft);
+}
+
+.home-story .hs-eco__lines path,
+.home-story .hs-eco__lines line {
+  animation-duration: 3.6s;
+  animation-timing-function: linear;
+}
+
+/* Soften float amplitude via existing keyframes — do not replace them */
+@keyframes hs-eco-float-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+@keyframes hs-eco-float-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+}
+
+@keyframes hs-eco-float-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -3px, 0);
+  }
+}
+
+@keyframes hs-eco-float-d {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+/* —— Sync packets: softer cadence —— */
+.home-story .hs-sync__bridge-packet {
+  animation-duration: 3.4s;
+  animation-timing-function: var(--motion-ease-soft);
+}
+
+.home-story .hs-sync__bridge-packet--late {
+  animation-duration: 3.4s;
+}
+
+/* —— Launch timeline: softer node easing (keep existing keyframe names) —— */
+.home-story .hs-launch__num,
+.home-story .hs-launch__rail,
+.home-story .hs-launch__rail-flow {
+  animation-timing-function: var(--motion-ease-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-story > .hs-section {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .home-story .hs-invite-btn.bc-btn,
+  .home-story .hs-system__cta,
+  .home-story .hs-wave-all,
+  .home-story .hs-auto-link,
+  .home-story .hs-system,
+  .home-story .hs-flow,
+  .home-story .hs-duel__row,
+  .home-story .hs-sync__channel,
+  .home-story .hs-path-step,
+  .home-story .hs-outcome,
+  .home-story .hs-module,
+  .home-story .hs-launch__copy,
+  .home-story .hs-invite-btn .bc-btn__arrow,
+  .home-story .hs-system__cta-arrow {
+    transition: none !important;
+  }
+
+  .home-story .hs-invite-btn.bc-btn:hover,
+  .home-story .hs-invite-btn.bc-btn:active,
+  .home-story .hs-system:hover,
+  .home-story .hs-flow:hover,
+  .home-story .hs-duel__row:hover,
+  .home-story .hs-sync__channel:hover,
+  .home-story .hs-path-step:hover,
+  .home-story .hs-launch__step:hover .hs-launch__copy {
+    transform: none !important;
+  }
+
+  .home-story .hs-flow__arrow,
+  .home-story .hs-flow__connector::after,
+  .home-story .hs-eco__glow,
+  .home-story .hs-eco__node--1,
+  .home-story .hs-eco__node--2,
+  .home-story .hs-eco__node--3,
+  .home-story .hs-eco__node--4,
+  .home-story .hs-eco__lines path,
+  .home-story .hs-eco__lines line,
+  .home-story .hs-sync__bridge-packet {
+    animation: none !important;
+  }
+
+  .home-story .hs-invite-btn:hover .bc-btn__arrow,
+  .home-story .hs-system__cta:hover .hs-system__cta-arrow,
+  .home-story .hs-wave-all:hover svg,
+  .home-story .hs-auto-link:hover svg {
+    transform: none !important;
+  }
+}

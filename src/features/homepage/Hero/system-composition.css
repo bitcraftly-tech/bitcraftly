@@ -10,7 +10,7 @@
   --sys-ease: cubic-bezier(0.33, 0.1, 0.25, 1);
   --sys-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --sys-ease-float: cubic-bezier(0.45, 0.05, 0.55, 0.95);
-  --sys-duration: 280ms;
+  --sys-duration: 300ms;
   position: relative;
   width: min(100%, 620px);
   height: 520px;
@@ -254,7 +254,7 @@
   right: 8%;
   bottom: 4%;
   width: 72%;
-  animation: sys-float-a 7s var(--sys-ease-float) infinite;
+  animation: sys-float-a 7.5s var(--sys-ease-float) infinite;
 }
 
 .sys__panel--analytics {
@@ -300,7 +300,7 @@
   left: 0;
   top: 28%;
   width: 48%;
-  animation: sys-float-b 7.6s var(--sys-ease-float) infinite;
+  animation: sys-float-b 8.2s var(--sys-ease-float) infinite;
 }
 
 .sys__panel--dash {
@@ -337,7 +337,7 @@
   right: 0;
   top: 18%;
   width: 42%;
-  animation: sys-float-c 7.2s var(--sys-ease-float) infinite;
+  animation: sys-float-c 7.8s var(--sys-ease-float) infinite;
 }
 
 .sys__panel--ai {
@@ -392,7 +392,7 @@
   top: 8%;
   width: 58%;
   height: auto;
-  animation: sys-float-d 8s var(--sys-ease-float) infinite;
+  animation: sys-float-d 8.6s var(--sys-ease-float) infinite;
 }
 
 .sys__panel--site {
@@ -550,7 +550,7 @@
   width: 100%;
   height: 100%;
   will-change: transform;
-  transition: transform 720ms var(--sys-ease-out);
+  transition: transform 780ms var(--sys-ease-out);
 }
 
 .sys__browser-page {
