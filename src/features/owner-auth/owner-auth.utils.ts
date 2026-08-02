@@ -1,4 +1,4 @@
-import { OWNER_AUTH_ROUTES, OWNER_PROTECTED_PREFIX } from "./owner-auth.constants";
+import { OWNER_AUTH_ROUTES, OWNER_PROTECTED_PREFIX } from './owner-auth.constants';
 
 export function resolveOwnerNextPath(next: string | null | undefined): string {
   if (!next) {
@@ -17,15 +17,9 @@ export function resolveOwnerNextPath(next: string | null | undefined): string {
 }
 
 export function isOwnerLoginPath(pathname: string): boolean {
-  return (
-    pathname === OWNER_AUTH_ROUTES.login ||
-    pathname.startsWith(`${OWNER_AUTH_ROUTES.login}/`)
-  );
+  return pathname === OWNER_AUTH_ROUTES.login || pathname.startsWith(`${OWNER_AUTH_ROUTES.login}/`);
 }
 
 export function isOwnerProtectedPath(pathname: string): boolean {
-  return (
-    pathname.startsWith(OWNER_PROTECTED_PREFIX) &&
-    !isOwnerLoginPath(pathname)
-  );
+  return pathname.startsWith(OWNER_PROTECTED_PREFIX) && !isOwnerLoginPath(pathname);
 }

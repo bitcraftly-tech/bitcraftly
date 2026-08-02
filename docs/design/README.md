@@ -14,12 +14,12 @@ This directory defines **how the platform looks and feels**. It is the source of
 
 ## Intended contents
 
-| Document | Description |
-|----------|-------------|
-| Component specs | [UI_COMPONENT_SPECIFICATION.md](./UI_COMPONENT_SPECIFICATION.md) — primitives API, accessibility, patterns |
-| Design tokens | [DESIGN_TOKEN_GUIDE.md](./DESIGN_TOKEN_GUIDE.md) — naming, usage, examples |
-| Layout guidelines | Grid, spacing, and breakpoint conventions |
-| Brand assets | Logos, icons, and imagery standards |
+| Document          | Description                                                                                                |
+| ----------------- | ---------------------------------------------------------------------------------------------------------- |
+| Component specs   | [UI_COMPONENT_SPECIFICATION.md](./UI_COMPONENT_SPECIFICATION.md) — primitives API, accessibility, patterns |
+| Design tokens     | [DESIGN_TOKEN_GUIDE.md](./DESIGN_TOKEN_GUIDE.md) — naming, usage, examples                                 |
+| Layout guidelines | Grid, spacing, and breakpoint conventions                                                                  |
+| Brand assets      | Logos, icons, and imagery standards                                                                        |
 
 ## Relationship to code
 

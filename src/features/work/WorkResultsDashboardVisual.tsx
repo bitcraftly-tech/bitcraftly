@@ -1,32 +1,29 @@
-"use client";
+'use client';
 
-import { useId, useState } from "react";
-import {
-  SlidingPillIndicator,
-  useSlidingPillIndicator,
-} from "@/components/patterns/sliding-pill";
-import { cn } from "@/lib/cn";
+import { useId, useState } from 'react';
+import { SlidingPillIndicator, useSlidingPillIndicator } from '@/components/patterns/sliding-pill';
+import { cn } from '@/lib/cn';
 
 const DASHBOARD_TABS = [
   {
-    id: "performance",
-    label: "Performance",
-    value: "+40%",
-    caption: "Faster delivery cycles",
+    id: 'performance',
+    label: 'Performance',
+    value: '+40%',
+    caption: 'Faster delivery cycles',
     bars: [42, 58, 51, 67, 74, 82, 88],
   },
   {
-    id: "automation",
-    label: "Automation",
-    value: "65%",
-    caption: "Manual process coverage",
+    id: 'automation',
+    label: 'Automation',
+    value: '65%',
+    caption: 'Manual process coverage',
     bars: [28, 36, 44, 49, 55, 61, 65],
   },
   {
-    id: "scale",
-    label: "Scale",
-    value: "2M+",
-    caption: "Users on delivered surfaces",
+    id: 'scale',
+    label: 'Scale',
+    value: '2M+',
+    caption: 'Users on delivered surfaces',
     bars: [30, 38, 47, 56, 68, 79, 91],
   },
 ] as const;
@@ -36,18 +33,12 @@ const DASHBOARD_TABS = [
  */
 export function WorkResultsDashboardVisual() {
   const baseId = useId();
-  const [activeId, setActiveId] = useState<(typeof DASHBOARD_TABS)[number]["id"]>(
-    "performance",
-  );
-  const active =
-    DASHBOARD_TABS.find((tab) => tab.id === activeId) ?? DASHBOARD_TABS[0];
+  const [activeId, setActiveId] = useState<(typeof DASHBOARD_TABS)[number]['id']>('performance');
+  const active = DASHBOARD_TABS.find((tab) => tab.id === activeId) ?? DASHBOARD_TABS[0];
   const pill = useSlidingPillIndicator(activeId);
 
   return (
-    <div
-      className="work-results__dash"
-      aria-label="Interactive analytics dashboard illustration"
-    >
+    <div className="work-results__dash" aria-label="Interactive analytics dashboard illustration">
       <div className="work-results__dash-head">
         <div>
           <p className="work-results__dash-eyebrow">Live impact view</p>
@@ -74,32 +65,26 @@ export function WorkResultsDashboardVisual() {
                 aria-controls={`${baseId}-panel`}
                 tabIndex={selected ? 0 : -1}
                 className={cn(
-                  "work-results__dash-tab",
-                  selected && "work-results__dash-tab--active",
+                  'work-results__dash-tab',
+                  selected && 'work-results__dash-tab--active',
                 )}
                 onClick={() => setActiveId(tab.id)}
                 onKeyDown={(event) => {
-                  const index = DASHBOARD_TABS.findIndex(
-                    (item) => item.id === tab.id,
-                  );
+                  const index = DASHBOARD_TABS.findIndex((item) => item.id === tab.id);
                   let nextIndex: number | null = null;
-                  if (event.key === "ArrowRight") {
+                  if (event.key === 'ArrowRight') {
                     event.preventDefault();
                     nextIndex = (index + 1) % DASHBOARD_TABS.length;
                   }
-                  if (event.key === "ArrowLeft") {
+                  if (event.key === 'ArrowLeft') {
                     event.preventDefault();
-                    nextIndex =
-                      (index - 1 + DASHBOARD_TABS.length) %
-                      DASHBOARD_TABS.length;
+                    nextIndex = (index - 1 + DASHBOARD_TABS.length) % DASHBOARD_TABS.length;
                   }
                   if (nextIndex === null) return;
                   const next = DASHBOARD_TABS[nextIndex];
                   setActiveId(next.id);
                   requestAnimationFrame(() => {
-                    document
-                      .getElementById(`${baseId}-tab-${next.id}`)
-                      ?.focus();
+                    document.getElementById(`${baseId}-tab-${next.id}`)?.focus();
                   });
                 }}
               >
@@ -130,7 +115,7 @@ export function WorkResultsDashboardVisual() {
             <span
               key={`${active.id}-${index}`}
               className="work-results__dash-bar"
-              style={{ ["--bar-h" as string]: `${height}%` }}
+              style={{ ['--bar-h' as string]: `${height}%` }}
             />
           ))}
         </div>

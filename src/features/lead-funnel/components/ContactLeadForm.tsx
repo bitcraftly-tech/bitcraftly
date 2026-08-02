@@ -1,24 +1,18 @@
-"use client";
+'use client';
 
-import { useEffect, useId, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import { Icon } from "@/components/ui/icon";
-import { Label } from "@/components/ui/typography";
-import { trackLeadEvent } from "../analytics";
-import { LEAD_INTENT_OPTIONS } from "../lead-funnel.config";
-import {
-  contactLeadFormSchema,
-  type ContactLeadFormValues,
-} from "../contact-form.schema";
-import type { LeadFunnelDefaults } from "../types";
-import { LeadHoneypotField } from "./LeadHoneypotField";
-import {
-  mapSubmitLeadFailureToUserMessage,
-  submitLeadFromClient,
-} from "../submit-lead.client";
+import { useEffect, useId, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '@/components/ui/button';
+import { Icon } from '@/components/ui/icon';
+import { Label } from '@/components/ui/typography';
+import { trackLeadEvent } from '../analytics';
+import { LEAD_INTENT_OPTIONS } from '../lead-funnel.config';
+import { contactLeadFormSchema, type ContactLeadFormValues } from '../contact-form.schema';
+import type { LeadFunnelDefaults } from '../types';
+import { LeadHoneypotField } from './LeadHoneypotField';
+import { mapSubmitLeadFailureToUserMessage, submitLeadFromClient } from '../submit-lead.client';
 
 interface ContactLeadFormProps {
   defaults?: LeadFunnelDefaults;
@@ -33,16 +27,14 @@ const DISCOVERY_MESSAGE_PRESET =
 const AUDIT_MESSAGE_PRESET =
   "I'd like a free website audit (speed, mobile UX, and conversion checklist).\n\nWebsite URL:\nMain problem:";
 
-function resolveIntent(
-  value: string | undefined,
-): ContactLeadFormValues["intent"] {
+function resolveIntent(value: string | undefined): ContactLeadFormValues['intent'] {
   const match = LEAD_INTENT_OPTIONS.find((option) => option.value === value);
-  return match?.value ?? "consultation";
+  return match?.value ?? 'consultation';
 }
 
 export function ContactLeadForm({
   defaults,
-  headingId = "contact-lead-form-heading",
+  headingId = 'contact-lead-form-heading',
   intentFocusToken = 0,
 }: ContactLeadFormProps) {
   const formId = useId();
@@ -52,7 +44,7 @@ export function ContactLeadForm({
   const [submitted, setSubmitted] = useState(false);
   const [confirmationSent, setConfirmationSent] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [honeypot, setHoneypot] = useState("");
+  const [honeypot, setHoneypot] = useState('');
 
   const {
     register,
@@ -63,22 +55,22 @@ export function ContactLeadForm({
   } = useForm<ContactLeadFormValues>({
     resolver: zodResolver(contactLeadFormSchema),
     defaultValues: {
-      name: "",
-      email: defaults?.email ?? "",
-      phone: "",
-      company: "",
+      name: '',
+      email: defaults?.email ?? '',
+      phone: '',
+      company: '',
       intent: resolveIntent(defaults?.intent),
       message: defaults?.service
-        ? `Interested in: ${defaults.service}${defaults.budget ? `\nBudget: ${defaults.budget}` : ""}`
-        : "",
-      website: "",
+        ? `Interested in: ${defaults.service}${defaults.budget ? `\nBudget: ${defaults.budget}` : ''}`
+        : '',
+      website: '',
     },
   });
 
   useEffect(() => {
-    trackLeadEvent("form_view", {
-      source: defaults?.source ?? "contact-form",
-      intent: defaults?.intent ?? "consultation",
+    trackLeadEvent('form_view', {
+      source: defaults?.source ?? 'contact-form',
+      intent: defaults?.intent ?? 'consultation',
     });
   }, [defaults?.intent, defaults?.source]);
 
@@ -86,12 +78,12 @@ export function ContactLeadForm({
     if (!intentFocusToken || !defaults?.intent) return;
 
     const intent = resolveIntent(defaults.intent);
-    setValue("intent", intent, { shouldDirty: true, shouldValidate: true });
+    setValue('intent', intent, { shouldDirty: true, shouldValidate: true });
 
-    if (intent === "discovery") {
-      setValue("message", DISCOVERY_MESSAGE_PRESET, { shouldDirty: true });
-    } else if (intent === "audit") {
-      setValue("message", AUDIT_MESSAGE_PRESET, { shouldDirty: true });
+    if (intent === 'discovery') {
+      setValue('message', DISCOVERY_MESSAGE_PRESET, { shouldDirty: true });
+    } else if (intent === 'audit') {
+      setValue('message', AUDIT_MESSAGE_PRESET, { shouldDirty: true });
     }
 
     setSubmitted(false);
@@ -120,7 +112,7 @@ export function ContactLeadForm({
     setSubmitError(null);
 
     const result = await submitLeadFromClient({
-      leadType: "contact",
+      leadType: 'contact',
       name: values.name,
       email: values.email,
       phone: values.phone,
@@ -129,8 +121,8 @@ export function ContactLeadForm({
       message: values.message,
       website: values.website,
       _honeypot: honeypot,
-      source: defaults?.source ?? "contact-form",
-      pagePath: pathname || "/contact",
+      source: defaults?.source ?? 'contact-form',
+      pagePath: pathname || '/contact',
     });
 
     if (!result.ok) {
@@ -138,8 +130,8 @@ export function ContactLeadForm({
       return;
     }
 
-    trackLeadEvent("form_submit_success", {
-      source: defaults?.source ?? "contact-form",
+    trackLeadEvent('form_submit_success', {
+      source: defaults?.source ?? 'contact-form',
       intent: values.intent,
       has_phone: Boolean(values.phone),
       has_company: Boolean(values.company),
@@ -148,15 +140,15 @@ export function ContactLeadForm({
 
     setConfirmationSent(result.confirmationSent);
     setSubmitted(true);
-    setHoneypot("");
+    setHoneypot('');
     reset({
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-      intent: "consultation",
-      message: "",
-      website: "",
+      name: '',
+      email: '',
+      phone: '',
+      company: '',
+      intent: 'consultation',
+      message: '',
+      website: '',
     });
   }
 
@@ -182,7 +174,7 @@ export function ContactLeadForm({
         <p className="lead-funnel__success-text">
           {confirmationSent
             ? "Thanks — we've sent a confirmation to your email. A Bitcraftly founder will reply within one business day. You can also continue on WhatsApp if you prefer a faster chat."
-            : "Thanks — a Bitcraftly founder will reply within one business day. You can also continue on WhatsApp if you prefer a faster chat."}
+            : 'Thanks — a Bitcraftly founder will reply within one business day. You can also continue on WhatsApp if you prefer a faster chat.'}
         </p>
 
         <div className="lead-funnel__success-actions">
@@ -210,11 +202,7 @@ export function ContactLeadForm({
       onSubmit={handleSubmit(onSubmit)}
       aria-labelledby={headingId}
     >
-      <LeadHoneypotField
-        id={`${formId}-honeypot`}
-        value={honeypot}
-        onChange={setHoneypot}
-      />
+      <LeadHoneypotField id={`${formId}-honeypot`} value={honeypot} onChange={setHoneypot} />
 
       {submitError ? (
         <div
@@ -241,17 +229,11 @@ export function ContactLeadForm({
               placeholder="Jane Cooper"
               className="lead-funnel__input"
               aria-invalid={Boolean(errors.name) || undefined}
-              aria-describedby={
-                errors.name ? `${formId}-name-error` : undefined
-              }
-              {...register("name")}
+              aria-describedby={errors.name ? `${formId}-name-error` : undefined}
+              {...register('name')}
             />
             {errors.name ? (
-              <p
-                id={`${formId}-name-error`}
-                className="lead-funnel__error"
-                role="alert"
-              >
+              <p id={`${formId}-name-error`} className="lead-funnel__error" role="alert">
                 {errors.name.message}
               </p>
             ) : null}
@@ -268,17 +250,11 @@ export function ContactLeadForm({
               placeholder="jane@company.com"
               className="lead-funnel__input"
               aria-invalid={Boolean(errors.email) || undefined}
-              aria-describedby={
-                errors.email ? `${formId}-email-error` : undefined
-              }
-              {...register("email")}
+              aria-describedby={errors.email ? `${formId}-email-error` : undefined}
+              {...register('email')}
             />
             {errors.email ? (
-              <p
-                id={`${formId}-email-error`}
-                className="lead-funnel__error"
-                role="alert"
-              >
+              <p id={`${formId}-email-error`} className="lead-funnel__error" role="alert">
                 {errors.email.message}
               </p>
             ) : null}
@@ -293,17 +269,11 @@ export function ContactLeadForm({
               placeholder="+91…"
               className="lead-funnel__input"
               aria-invalid={Boolean(errors.phone) || undefined}
-              aria-describedby={
-                errors.phone ? `${formId}-phone-error` : undefined
-              }
-              {...register("phone")}
+              aria-describedby={errors.phone ? `${formId}-phone-error` : undefined}
+              {...register('phone')}
             />
             {errors.phone ? (
-              <p
-                id={`${formId}-phone-error`}
-                className="lead-funnel__error"
-                role="alert"
-              >
+              <p id={`${formId}-phone-error`} className="lead-funnel__error" role="alert">
                 {errors.phone.message}
               </p>
             ) : null}
@@ -317,7 +287,7 @@ export function ContactLeadForm({
               autoComplete="organization"
               placeholder="Acme Inc."
               className="lead-funnel__input"
-              {...register("company")}
+              {...register('company')}
             />
           </div>
         </div>
@@ -335,10 +305,8 @@ export function ContactLeadForm({
                 id={`${formId}-intent`}
                 className="lead-funnel__input lead-funnel__select"
                 aria-invalid={Boolean(errors.intent) || undefined}
-                aria-describedby={
-                  errors.intent ? `${formId}-intent-error` : undefined
-                }
-                {...register("intent")}
+                aria-describedby={errors.intent ? `${formId}-intent-error` : undefined}
+                {...register('intent')}
               >
                 {LEAD_INTENT_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -354,11 +322,7 @@ export function ContactLeadForm({
               />
             </div>
             {errors.intent ? (
-              <p
-                id={`${formId}-intent-error`}
-                className="lead-funnel__error"
-                role="alert"
-              >
+              <p id={`${formId}-intent-error`} className="lead-funnel__error" role="alert">
                 {errors.intent.message}
               </p>
             ) : null}
@@ -372,7 +336,7 @@ export function ContactLeadForm({
               inputMode="url"
               placeholder="https://"
               className="lead-funnel__input"
-              {...register("website")}
+              {...register('website')}
             />
           </div>
 
@@ -386,17 +350,11 @@ export function ContactLeadForm({
               placeholder="Goals, timeline, constraints, or links that help us prepare…"
               className="lead-funnel__input lead-funnel__textarea"
               aria-invalid={Boolean(errors.message) || undefined}
-              aria-describedby={
-                errors.message ? `${formId}-message-error` : undefined
-              }
-              {...register("message")}
+              aria-describedby={errors.message ? `${formId}-message-error` : undefined}
+              {...register('message')}
             />
             {errors.message ? (
-              <p
-                id={`${formId}-message-error`}
-                className="lead-funnel__error"
-                role="alert"
-              >
+              <p id={`${formId}-message-error`} className="lead-funnel__error" role="alert">
                 {errors.message.message}
               </p>
             ) : null}
@@ -413,9 +371,7 @@ export function ContactLeadForm({
           disabled={isSubmitting}
           fullWidth
           className="lead-funnel__submit"
-          iconRight={
-            <Icon name="arrow-right" size="sm" className="h-[14px] w-[14px]" />
-          }
+          iconRight={<Icon name="arrow-right" size="sm" className="h-[14px] w-[14px]" />}
         >
           Send message
         </Button>

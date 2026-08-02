@@ -1,5 +1,5 @@
-import { Section } from "@/components/ui/section";
-import type { CaseStudy } from "@/content/case-studies";
+import { Section } from '@/components/ui/section';
+import type { CaseStudy } from '@/content/case-studies';
 
 interface CaseStudySolutionProps {
   study: CaseStudy;

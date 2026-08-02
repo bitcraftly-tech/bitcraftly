@@ -25,7 +25,8 @@
   justify-content: space-between;
   gap: var(--space-3, 0.75rem);
   padding: var(--space-4, 1rem) var(--space-4, 1rem) var(--space-3, 0.75rem);
-  border-bottom: 1px solid color-mix(in oklab, var(--color-border, hsl(var(--border))) 80%, transparent);
+  border-bottom: 1px solid
+    color-mix(in oklab, var(--color-border, hsl(var(--border))) 80%, transparent);
 }
 
 .ai-assistant__identity {
@@ -239,7 +240,8 @@
   display: grid;
   gap: var(--space-2, 0.5rem);
   padding: var(--space-3, 0.75rem) var(--space-4, 1rem) var(--space-4, 1rem);
-  border-top: 1px solid color-mix(in oklab, var(--color-border, hsl(var(--border))) 80%, transparent);
+  border-top: 1px solid
+    color-mix(in oklab, var(--color-border, hsl(var(--border))) 80%, transparent);
   background: color-mix(in oklab, var(--color-background, hsl(var(--background))) 70%, transparent);
 }
 

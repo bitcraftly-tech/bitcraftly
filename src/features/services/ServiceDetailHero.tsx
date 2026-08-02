@@ -1,16 +1,16 @@
-import Link from "next/link";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Container } from "@/components/ui/container";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { ROUTES } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import { ServicesHeroVisual } from "./ServicesHeroVisual";
-import type { ServicePageContent } from "./services.types";
-import "./services.css";
+import Link from 'next/link';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Container } from '@/components/ui/container';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { ROUTES } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import { ServicesHeroVisual } from './ServicesHeroVisual';
+import type { ServicePageContent } from './services.types';
+import './services.css';
 
 interface ServiceDetailHeroProps {
   content: ServicePageContent;
@@ -18,13 +18,8 @@ interface ServiceDetailHeroProps {
   contactHref: string;
 }
 
-const FEATURE_TONES = ["violet", "sky", "emerald", "amber"] as const;
-const FEATURE_ICONS: readonly IconName[] = [
-  "check",
-  "zap",
-  "shield",
-  "layout-grid",
-];
+const FEATURE_TONES = ['violet', 'sky', 'emerald', 'amber'] as const;
+const FEATURE_ICONS: readonly IconName[] = ['check', 'zap', 'shield', 'layout-grid'];
 
 /**
  * Service detail hero — same shell language as Services landing hero.
@@ -39,8 +34,8 @@ export async function ServiceDetailHero({
   const featureItems = content.highlights.slice(0, 4).map((title, index) => ({
     id: `feature-${index}`,
     title,
-    icon: FEATURE_ICONS[index] ?? "check",
-    tone: FEATURE_TONES[index] ?? "violet",
+    icon: FEATURE_ICONS[index] ?? 'check',
+    tone: FEATURE_TONES[index] ?? 'violet',
   }));
 
   return (
@@ -49,9 +44,9 @@ export async function ServiceDetailHero({
       contained={false}
       aria-labelledby={headingId}
       className={cn(
-        "services-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'services-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -105,10 +100,7 @@ export async function ServiceDetailHero({
             <p className="services-hero__description">{content.intro}</p>
 
             <div className="services-hero__cta-row">
-              <Link
-                href={contactHref}
-                className="services-hero__btn services-hero__btn--primary"
-              >
+              <Link href={contactHref} className="services-hero__btn services-hero__btn--primary">
                 {content.ctaPrimaryLabel}
                 <Icon name="arrow-up-right" size="sm" aria-hidden />
               </Link>
@@ -123,18 +115,12 @@ export async function ServiceDetailHero({
 
             {!isMobile ? (
               <div className="service-detail-hero__outcomes">
-                <p className="service-detail-hero__outcomes-label">
-                  What you get
-                </p>
+                <p className="service-detail-hero__outcomes-label">What you get</p>
                 <ul className="service-detail-hero__outcomes-list">
                   {content.outcomes.map((outcome) => (
                     <li key={outcome} className="service-detail-hero__outcome">
                       <span className="services-page-check" aria-hidden>
-                        <Icon
-                          name="check"
-                          size="sm"
-                          className="h-[14px] w-[14px]"
-                        />
+                        <Icon name="check" size="sm" className="h-[14px] w-[14px]" />
                       </span>
                       <span>{outcome}</span>
                     </li>
@@ -151,10 +137,7 @@ export async function ServiceDetailHero({
           ) : null}
 
           {!isMobile && featureItems.length > 0 ? (
-            <ul
-              className="services-hero-features"
-              aria-label="Service capabilities preview"
-            >
+            <ul className="services-hero-features" aria-label="Service capabilities preview">
               {featureItems.map((item) => (
                 <li key={item.id} className="services-hero-features__item">
                   <span className="services-hero-features__head">
@@ -164,9 +147,7 @@ export async function ServiceDetailHero({
                     >
                       <Icon name={item.icon} size="sm" />
                     </span>
-                    <span className="services-hero-features__title">
-                      {item.title}
-                    </span>
+                    <span className="services-hero-features__title">{item.title}</span>
                   </span>
                 </li>
               ))}

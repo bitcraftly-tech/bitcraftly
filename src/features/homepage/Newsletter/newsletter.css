@@ -2,31 +2,27 @@
  * Newsletter band — token-based decorative styles only.
  */
 
-.newsletter-subscribe {
-  /* Solid fallback + oklab stops — avoids sRGB banding stripes on the CTA. */
-  background-color: var(--primary);
-  background-image: linear-gradient(
-    to right in oklab,
-    var(--primary) 0%,
-    color-mix(in oklab, var(--primary) 55%, var(--accent)) 52%,
-    var(--accent) 100%
-  );
+.newsletter-section {
+  display: block;
+  width: 100%;
+  border-color: color-mix(in srgb, #ffffff 14%, transparent);
+  /* Solid logo inverse — avoid invisible white text on light page bg */
+  color: var(--inverse-foreground);
+  background-color: var(--inverse);
+  background-image: none;
+}
+
+/* Subscribe = shared primary pattern only (layout sizing stays here) */
+.newsletter-subscribe.bc-btn--primary {
+  background-color: var(--primary) !important;
+  background-image: var(--btn-grad) !important;
   color: var(--primary-foreground);
-  box-shadow: none;
-  transition:
-    opacity var(--duration-fast) var(--ease-out),
-    filter var(--duration-fast) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out);
+  border: 0;
+  box-shadow: var(--btn-shadow);
 }
 
-.newsletter-subscribe:hover {
-  opacity: 0.96;
-  transform: translateY(-1px);
-  filter: brightness(1.04);
-}
-
-.newsletter-subscribe:active {
-  transform: translateY(1px);
+.newsletter-subscribe.bc-btn--primary:hover {
+  background-image: var(--btn-grad-hover) !important;
 }
 
 .newsletter-input {
@@ -113,7 +109,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .newsletter-subscribe,
   .newsletter-subscribe:hover,
   .newsletter-subscribe:active {

@@ -9,11 +9,13 @@ import {
   MarketingLayoutClientHeadLoader,
   MarketingLayoutClientMidLoader,
   MarketingLayoutClientTailLoader,
-} from "@/lib/layout/MarketingLayoutClientLoaders";
-import { FooterSection } from "@/features/homepage/Footer";
-import { HeaderSection } from "@/features/homepage/Header";
-import "@/lib/layout/marketing-chrome.css";
-import "@/styles/mobile-layout.css";
+} from '@/lib/layout/MarketingLayoutClientLoaders';
+import { FooterSection } from '@/features/homepage/Footer';
+import { HeaderSection } from '@/features/homepage/Header';
+import '@/lib/layout/marketing-chrome.css';
+import '@/features/homepage/Footer/footer.css';
+import '@/features/homepage/Newsletter/newsletter.css';
+import '@/features/homepage/Homepage/homepage-polish.css';
 
 export default function MarketingLayout({
   children,
@@ -33,6 +35,7 @@ export default function MarketingLayout({
       <main id="main-content" className="flex flex-1 flex-col" tabIndex={-1}>
         {children}
       </main>
+      {/* Stay Ahead with AI — between page content and footer */}
       <MarketingLayoutClientMidLoader />
       <FooterSection />
       <MarketingLayoutClientTailLoader />

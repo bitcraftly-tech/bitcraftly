@@ -1,10 +1,8 @@
-import { cn } from "@/lib/cn";
-import type { Breakpoint, Responsive } from "./types";
+import { cn } from '@/lib/cn';
+import type { Breakpoint, Responsive } from './types';
 
-function isResponsiveObject<T>(
-  value: Responsive<T>,
-): value is Partial<Record<Breakpoint, T>> {
-  return typeof value === "object" && value !== null;
+function isResponsiveObject<T>(value: Responsive<T>): value is Partial<Record<Breakpoint, T>> {
+  return typeof value === 'object' && value !== null;
 }
 
 export function buildResponsiveClasses<T extends string | number>(
@@ -23,18 +21,16 @@ export function buildResponsiveClasses<T extends string | number>(
   const baseToken = value.base ?? defaultValue;
   const baseClasses = classMap[baseToken];
 
-  const breakpointClasses = (
-    Object.entries(value) as [Breakpoint, T][]
-  )
-    .filter(([breakpoint]) => breakpoint !== "base")
+  const breakpointClasses = (Object.entries(value) as [Breakpoint, T][])
+    .filter(([breakpoint]) => breakpoint !== 'base')
     .map(([breakpoint, token]) =>
       classMap[token]
-        .split(" ")
+        .split(' ')
         .filter(Boolean)
         .map((cls) => `${breakpoint}:${cls}`)
-        .join(" "),
+        .join(' '),
     )
-    .join(" ");
+    .join(' ');
 
   return cn(baseClasses, breakpointClasses);
 }
@@ -43,7 +39,7 @@ export function resolveHeadingLevel(
   as?: `h${1 | 2 | 3 | 4 | 5 | 6}`,
   level?: Responsive<1 | 2 | 3 | 4 | 5 | 6>,
 ): 1 | 2 | 3 | 4 | 5 | 6 {
-  if (typeof level === "number") {
+  if (typeof level === 'number') {
     return level;
   }
 

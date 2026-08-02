@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 interface ClientErrorContext {
   readonly digest?: string;
-  readonly boundary?: "route" | "global";
+  readonly boundary?: 'route' | 'global';
 }
 
 function normalizeError(error: Error & { digest?: string }) {
@@ -24,9 +24,9 @@ export function reportClientError(
 ): void {
   console.error(
     JSON.stringify({
-      level: "error",
+      level: 'error',
       timestamp: new Date().toISOString(),
-      source: "client",
+      source: 'client',
       sentryReady: Boolean(process.env.NEXT_PUBLIC_SENTRY_DSN ?? process.env.SENTRY_DSN),
       ...normalizeError(error),
       context,

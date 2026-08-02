@@ -1,11 +1,11 @@
-import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/cn";
+import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from '@/lib/cn';
 
 export function FormSkeleton({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex min-h-[24rem] w-full flex-col gap-[var(--space-3)] rounded-[var(--token-radius-lg)] border border-border/60 p-[var(--space-4)]",
+        'flex min-h-[24rem] w-full flex-col gap-[var(--space-3)] rounded-[var(--token-radius-lg)] border border-border/60 p-[var(--space-4)]',
         className,
       )}
       role="status"
@@ -33,9 +33,17 @@ export function TableSkeleton({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-col gap-[var(--space-2)]", className)} role="status" aria-live="polite" aria-busy="true">
+    <div
+      className={cn('flex flex-col gap-[var(--space-2)]', className)}
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+    >
       <span className="sr-only">Loading table</span>
-      <div className="grid gap-[var(--space-2)]" style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}>
+      <div
+        className="grid gap-[var(--space-2)]"
+        style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+      >
         {Array.from({ length: columns }, (_, index) => (
           <Skeleton key={`table-head-${index}`} className="h-[14px] w-[80%]" />
         ))}
@@ -60,7 +68,7 @@ export function ChartSkeleton({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex min-h-[220px] flex-col gap-[var(--space-3)] rounded-[var(--token-radius-lg)] border border-border/60 p-[var(--space-4)]",
+        'flex min-h-[220px] flex-col gap-[var(--space-3)] rounded-[var(--token-radius-lg)] border border-border/60 p-[var(--space-4)]',
         className,
       )}
       role="status"
@@ -83,7 +91,7 @@ export function DashboardCardSkeleton({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-[var(--space-2)] rounded-[var(--token-radius-lg)] border border-border/60 p-[var(--space-3)]",
+        'flex flex-col gap-[var(--space-2)] rounded-[var(--token-radius-lg)] border border-border/60 p-[var(--space-3)]',
         className,
       )}
       aria-hidden="true"
@@ -105,7 +113,12 @@ export function LeadListSkeleton({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-col gap-[var(--space-4)]", className)} role="status" aria-live="polite" aria-busy="true">
+    <div
+      className={cn('flex flex-col gap-[var(--space-4)]', className)}
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+    >
       <span className="sr-only">Loading leads</span>
       {statCount > 0 ? (
         <div className="grid gap-[var(--space-2)] sm:grid-cols-2 lg:grid-cols-3">
@@ -119,24 +132,14 @@ export function LeadListSkeleton({
   );
 }
 
-export function AvatarSkeleton({
-  size = 40,
-  className,
-}: {
-  size?: number;
-  className?: string;
-}) {
+export function AvatarSkeleton({ size = 40, className }: { size?: number; className?: string }) {
   return (
-    <Skeleton
-      variant="circular"
-      className={cn(className)}
-      style={{ width: size, height: size }}
-    />
+    <Skeleton variant="circular" className={cn(className)} style={{ width: size, height: size }} />
   );
 }
 
 export function ImageSkeleton({
-  aspectRatio = "16/10",
+  aspectRatio = '16/10',
   className,
 }: {
   aspectRatio?: string;
@@ -144,7 +147,7 @@ export function ImageSkeleton({
 }) {
   return (
     <Skeleton
-      className={cn("w-full rounded-[var(--token-radius-md)]", className)}
+      className={cn('w-full rounded-[var(--token-radius-md)]', className)}
       style={{ aspectRatio }}
     />
   );

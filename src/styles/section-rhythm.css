@@ -18,12 +18,14 @@
 .homepage-section-intro > p:first-of-type,
 .services-section-intro__eyebrow {
   margin: 0 0 var(--section-gap-eyebrow-heading);
+  color: var(--primary);
 }
 
 .section-intro-heading,
 .homepage-section-intro > h2,
 .services-section-intro__heading {
   margin: 0;
+  color: var(--heading);
 }
 
 .section-intro-description,
@@ -87,21 +89,6 @@
 
 .section-follow-block {
   margin-top: var(--section-gap-description-grid);
-}
-
-/* Trust bar — same 48px vertical rhythm as other sections */
-.trusted-by-section {
-  padding-block: var(--section-spacing);
-}
-
-.trusted-by-section-inner {
-  gap: var(--section-gap-heading-description);
-}
-
-@media (min-width: 1024px) {
-  .trusted-by-section-inner {
-    gap: var(--section-grid-gap-wide);
-  }
 }
 
 /* Process steps — page-level grid rhythm */
@@ -245,8 +232,13 @@
 /* Footer — column rhythm                                                     */
 /* -------------------------------------------------------------------------- */
 
-.footer-surface {
+.footer-surface,
+#footer.footer-surface,
+#newsletter.footer-surface {
   padding-block: var(--section-spacing);
+  /* Background gradient lives in footer.css / footer-surface-lock (logo navy). */
+  color: var(--inverse-foreground);
+  background-color: var(--inverse);
 }
 
 .footer-column-grid {

@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { MarketingFinalCtaBand } from "@/components/patterns/marketing-final-cta-band";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { PAGE_GRID_2_CLASS, PAGE_GRID_CLASS } from "@/lib/layout/page-shell";
-import { cn } from "@/lib/cn";
+import Image from 'next/image';
+import { MarketingFinalCtaBand } from '@/components/patterns/marketing-final-cta-band';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { PAGE_GRID_2_CLASS, PAGE_GRID_CLASS } from '@/lib/layout/page-shell';
+import { cn } from '@/lib/cn';
 import {
   ABOUT_CTA,
   ABOUT_CULTURE,
@@ -22,11 +22,11 @@ import {
   ABOUT_TRUSTED_LOGOS,
   ABOUT_VALUES,
   ABOUT_VISION,
-} from "./about.content";
-import { AboutFeaturedCaseStudyCard } from "./AboutFeaturedCaseStudyCard";
-import { AboutStoryArchitectureVisual } from "./AboutStoryArchitectureVisual";
-import { AboutTestimonialCard } from "./AboutTestimonialCard";
-import { AboutTrustedBy } from "./AboutTrustedBy";
+} from './about.content';
+import { AboutFeaturedCaseStudyCard } from './AboutFeaturedCaseStudyCard';
+import { AboutStoryArchitectureVisual } from './AboutStoryArchitectureVisual';
+import { AboutTestimonialCard } from './AboutTestimonialCard';
+import { AboutTrustedBy } from './AboutTrustedBy';
 
 function SectionIntro({
   eyebrow,
@@ -42,7 +42,7 @@ function SectionIntro({
   className?: string;
 }) {
   return (
-    <header className={cn("mb-[32px] max-w-2xl", className)}>
+    <header className={cn('mb-[32px] max-w-2xl', className)}>
       <p className="about-eyebrow">{eyebrow}</p>
       <h2 id={headingId} className="about-heading">
         {heading}
@@ -131,7 +131,7 @@ export function AboutValuesSection() {
         heading="Why teams trust how we work"
         lede="Each principle answers a practical hiring question — clarity, ownership, quality, and longevity."
       />
-      <ul className={cn(PAGE_GRID_CLASS, "about-card-grid m-0 list-none p-0")}>
+      <ul className={cn(PAGE_GRID_CLASS, 'about-card-grid m-0 list-none p-0')}>
         {ABOUT_VALUES.map((value) => (
           <li key={value.id} className="about-card-grid__item">
             <article className="about-card">
@@ -234,7 +234,7 @@ export function AboutCultureSection() {
         heading="How we keep quality high under real deadlines"
         lede="Process exists to protect outcomes — not to create theater."
       />
-      <ul className={cn(PAGE_GRID_2_CLASS, "about-card-grid m-0 list-none p-0")}>
+      <ul className={cn(PAGE_GRID_2_CLASS, 'about-card-grid m-0 list-none p-0')}>
         {ABOUT_CULTURE.map((item) => (
           <li key={item.id} className="about-card-grid__item">
             <article className="about-card">
@@ -273,22 +273,18 @@ export function AboutTechnologySection() {
           return (
             <div key={group.id} className="about-tech-group">
               <h3 className="about-tech-group__label">{group.label}</h3>
-              <ul className={cn(PAGE_GRID_CLASS, "about-card-grid m-0 list-none p-0")}>
+              <ul className={cn(PAGE_GRID_CLASS, 'about-card-grid m-0 list-none p-0')}>
                 {items.map((item) => (
                   <li
                     key={item.id}
                     className={cn(
-                      "about-tech-chip about-card-grid__item",
-                      item.featured && "about-tech-chip--featured",
+                      'about-tech-chip about-card-grid__item',
+                      item.featured && 'about-tech-chip--featured',
                     )}
                   >
                     <div className="about-card__head">
                       <span className="about-icon" aria-hidden>
-                        <Icon
-                          name={item.icon}
-                          size="sm"
-                          className="h-[18px] w-[18px]"
-                        />
+                        <Icon name={item.icon} size="sm" className="h-[18px] w-[18px]" />
                       </span>
                       <h4 className="about-card__title">{item.label}</h4>
                     </div>
@@ -377,7 +373,7 @@ export function AboutTestimonialsSection() {
         heading={ABOUT_TESTIMONIALS_COPY.heading}
         lede={ABOUT_TESTIMONIALS_COPY.lede}
       />
-      <ul className={cn(PAGE_GRID_2_CLASS, "m-0 list-none p-0")}>
+      <ul className={cn(PAGE_GRID_2_CLASS, 'm-0 list-none p-0')}>
         {ABOUT_TESTIMONIALS.map((item) => (
           <li key={item.id}>
             <AboutTestimonialCard testimonial={item} />
@@ -402,9 +398,7 @@ export function AboutTrustSection() {
         heading="Proof points teams check before they hire"
         lede="Experience, ownership, and delivery discipline — backed by process, not slogans."
       />
-      <ul
-        className={cn(PAGE_GRID_CLASS, "m-0 mb-[32px] list-none p-0 lg:grid-cols-4")}
-      >
+      <ul className={cn(PAGE_GRID_CLASS, 'm-0 mb-[32px] list-none p-0 lg:grid-cols-4')}>
         {ABOUT_TRUST_STATS.map((stat) => (
           <li key={stat.id} className="about-stat">
             <p className="about-stat__value">{stat.value}</p>

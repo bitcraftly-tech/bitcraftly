@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { AboutLandingPage, ABOUT_LANDING_META } from "@/features/about";
-import { createPageMetadata } from "@/lib/seo/createPageMetadata";
+import type { Metadata } from 'next';
+import { AboutLandingPage, ABOUT_LANDING_META } from '@/features/about';
+import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 
 export const metadata: Metadata = createPageMetadata({
   title: ABOUT_LANDING_META.title,

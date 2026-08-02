@@ -1,4 +1,4 @@
-import { defineConfig, devices } from "@playwright/test";
+import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Bitcraftly Platform — Playwright E2E configuration
@@ -10,11 +10,10 @@ import { defineConfig, devices } from "@playwright/test";
  * - In CI, prefer a production `next start` after build
  */
 const PORT = Number(process.env.PLAYWRIGHT_PORT ?? 3000);
-const BASE_URL =
-  process.env.PLAYWRIGHT_BASE_URL ?? `http://127.0.0.1:${PORT}`;
+const BASE_URL = process.env.PLAYWRIGHT_BASE_URL ?? `http://127.0.0.1:${PORT}`;
 
 export default defineConfig({
-  testDir: "./tests",
+  testDir: './tests',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -24,29 +23,29 @@ export default defineConfig({
     timeout: 10_000,
   },
   reporter: process.env.CI
-    ? [["github"], ["html", { open: "never" }], ["list"]]
-    : [["list"], ["html", { open: "never" }]],
-  outputDir: "test-results",
+    ? [['github'], ['html', { open: 'never' }], ['list']]
+    : [['list'], ['html', { open: 'never' }]],
+  outputDir: 'test-results',
   use: {
     baseURL: BASE_URL,
-    trace: "on-first-retry",
-    screenshot: "only-on-failure",
-    video: "retain-on-failure",
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
     actionTimeout: 15_000,
     navigationTimeout: 30_000,
   },
   projects: [
     {
-      name: "desktop-chromium",
+      name: 'desktop-chromium',
       use: {
-        ...devices["Desktop Chrome"],
+        ...devices['Desktop Chrome'],
         viewport: { width: 1440, height: 900 },
       },
     },
     {
-      name: "mobile-chromium",
+      name: 'mobile-chromium',
       use: {
-        ...devices["Pixel 7"],
+        ...devices['Pixel 7'],
       },
     },
   ],
@@ -56,13 +55,11 @@ export default defineConfig({
      * CI: expect the app to be built; start production server.
      * Fallback command builds then starts for a self-contained run.
      */
-    command: process.env.CI
-      ? `npx next start -p ${PORT}`
-      : `npx next dev --webpack -p ${PORT}`,
+    command: process.env.CI ? `npx next start -p ${PORT}` : `npx next dev --webpack -p ${PORT}`,
     url: BASE_URL,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
-    stdout: "pipe",
-    stderr: "pipe",
+    stdout: 'pipe',
+    stderr: 'pipe',
   },
 });

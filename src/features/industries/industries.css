@@ -12,7 +12,7 @@
   --ind-shadow-lg: 0 22px 48px -20px color-mix(in srgb, var(--primary) 38%, transparent);
 }
 
-.industries-page>section {
+.industries-page > section {
   scroll-margin-top: 88px;
 }
 
@@ -155,10 +155,11 @@
   padding: 17px 17px 19px;
   border-radius: var(--token-radius-xl);
   border: 1px solid color-mix(in srgb, var(--hl-tone) 18%, var(--border));
-  background:
-    linear-gradient(165deg,
-      color-mix(in srgb, var(--hl-tone) 10%, var(--background)) 0%,
-      var(--background) 62%);
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--hl-tone) 10%, var(--background)) 0%,
+    var(--background) 62%
+  );
   box-shadow:
     0 1px 2px color-mix(in srgb, var(--hl-tone) 8%, transparent),
     0 14px 28px -18px color-mix(in srgb, var(--hl-tone) 34%, transparent);
@@ -388,11 +389,7 @@
   flex: 1;
   min-width: 0;
   overflow: hidden;
-  mask-image: linear-gradient(to right,
-      transparent,
-      #000 8%,
-      #000 92%,
-      transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
 
 .industries-hero__trusted-track {
@@ -479,7 +476,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .industries-hero__btn--primary:hover,
   .industries-hero__btn--outline:hover {
     transform: none !important;
@@ -551,17 +547,19 @@
 
 .industries-card--priority {
   border-color: color-mix(in srgb, var(--ind-accent, var(--primary)) 32%, var(--border));
-  background:
-    linear-gradient(165deg,
-      color-mix(in srgb, var(--ind-accent, var(--primary)) 10%, var(--background)) 0%,
-      var(--background) 52%);
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--ind-accent, var(--primary)) 10%, var(--background)) 0%,
+    var(--background) 52%
+  );
   box-shadow:
     0 1px 2px color-mix(in srgb, var(--ind-accent, var(--primary)) 8%, transparent),
     0 14px 28px -18px color-mix(in srgb, var(--ind-accent, var(--primary)) 36%, transparent);
 }
 
 .industries-card--priority .industries-card__illust {
-  box-shadow: 0 8px 18px -12px color-mix(in srgb, var(--ind-accent, var(--primary)) 45%, transparent);
+  box-shadow: 0 8px 18px -12px
+    color-mix(in srgb, var(--ind-accent, var(--primary)) 45%, transparent);
 }
 
 .industries-card:hover {
@@ -578,7 +576,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .industries-card,
   .industries-card:hover {
     transition: none;
@@ -718,7 +715,9 @@
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
-  transition: color 160ms ease, gap 160ms ease;
+  transition:
+    color 160ms ease,
+    gap 160ms ease;
 }
 
 .industries-card__cta--primary {
@@ -741,7 +740,9 @@
 .industries-card__cta:focus-visible {
   outline: none;
   border-radius: 4px;
-  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 4px var(--primary);
 }
 
 /* Featured rail */
@@ -789,10 +790,11 @@
   border: 1px solid color-mix(in srgb, var(--challenge-tone) 18%, var(--border));
   border-left-width: 4px;
   border-left-color: var(--challenge-tone);
-  background:
-    linear-gradient(160deg,
-      color-mix(in srgb, var(--challenge-tone) 10%, var(--background)) 0%,
-      var(--background) 55%);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--challenge-tone) 10%, var(--background)) 0%,
+    var(--background) 55%
+  );
   box-shadow:
     0 1px 2px color-mix(in srgb, var(--challenge-tone) 6%, transparent),
     0 14px 28px -20px color-mix(in srgb, var(--challenge-tone) 40%, transparent);
@@ -839,7 +841,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .industries-challenge,
   .industries-challenge:hover {
     transition: none;
@@ -896,7 +897,7 @@
   padding: 0;
 }
 
-.industries-challenge__grid>div {
+.industries-challenge__grid > div {
   margin: 0;
   padding: 10px 12px;
   border-radius: var(--token-radius-lg);
@@ -947,10 +948,11 @@
   border-radius: var(--token-radius-xl);
   border: 1px solid color-mix(in srgb, var(--solution-tone) 20%, var(--border));
   border-top: 3px solid var(--solution-tone);
-  background:
-    linear-gradient(160deg,
-      color-mix(in srgb, var(--solution-tone) 11%, var(--background)) 0%,
-      var(--background) 55%);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--solution-tone) 11%, var(--background)) 0%,
+    var(--background) 55%
+  );
   text-decoration: none;
   color: inherit;
   box-shadow:
@@ -984,11 +986,12 @@
 
 .industries-solution:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 4px var(--primary);
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .industries-solution,
   .industries-solution:hover {
     transition: none;
@@ -1045,7 +1048,7 @@
   border-top: 1px solid color-mix(in srgb, var(--solution-tone) 14%, var(--border));
 }
 
-.industries-solution__meta>div {
+.industries-solution__meta > div {
   margin: 0;
 }
 
@@ -1087,7 +1090,9 @@
 .industries-solution__cta:focus-visible {
   outline: none;
   border-radius: 4px;
-  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 4px var(--primary);
 }
 
 /* Related services cards (shared offer shell) */
@@ -1099,10 +1104,11 @@
   padding: var(--card-padding);
   border-radius: var(--token-radius-xl);
   border: 1px solid color-mix(in srgb, var(--offer-tone) 16%, var(--border));
-  background:
-    linear-gradient(160deg,
-      color-mix(in srgb, var(--offer-tone) 8%, var(--background)) 0%,
-      var(--background) 55%);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--offer-tone) 8%, var(--background)) 0%,
+    var(--background) 55%
+  );
   text-decoration: none;
   color: inherit;
   box-shadow:
@@ -1124,11 +1130,12 @@
 
 .industries-offer:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 4px var(--primary);
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .industries-offer,
   .industries-offer:hover {
     transform: none;
@@ -1232,10 +1239,11 @@
   padding: 18px;
   border-radius: var(--token-radius-xl);
   border: 1px solid color-mix(in srgb, var(--tech-tone) 20%, var(--border));
-  background:
-    linear-gradient(155deg,
-      color-mix(in srgb, var(--tech-tone) 10%, var(--background)) 0%,
-      var(--background) 58%);
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--tech-tone) 10%, var(--background)) 0%,
+    var(--background) 58%
+  );
   box-shadow:
     0 1px 2px color-mix(in srgb, var(--tech-tone) 8%, transparent),
     0 12px 28px -20px color-mix(in srgb, var(--tech-tone) 40%, transparent);
@@ -1394,11 +1402,12 @@
 
 .industries-case:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 4px var(--primary);
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .industries-case,
   .industries-case:hover {
     transition: none;
@@ -1413,10 +1422,11 @@
   gap: 6px;
   min-height: 120px;
   padding: 22px;
-  background:
-    linear-gradient(145deg,
-      color-mix(in srgb, var(--case-tone) 18%, var(--background)) 0%,
-      color-mix(in srgb, var(--case-tone) 6%, var(--background)) 100%);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--case-tone) 18%, var(--background)) 0%,
+    color-mix(in srgb, var(--case-tone) 6%, var(--background)) 100%
+  );
   border-bottom: 1px solid color-mix(in srgb, var(--case-tone) 14%, var(--border));
 }
 
@@ -1505,7 +1515,7 @@
   flex: 1;
 }
 
-.industries-case__facts>div {
+.industries-case__facts > div {
   margin: 0;
 }
 
@@ -1566,7 +1576,9 @@
 .industries-case__cta:focus-visible {
   outline: none;
   border-radius: 4px;
-  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 4px var(--primary);
 }
 
 /* Metrics cards */
@@ -1593,10 +1605,11 @@
   min-width: 0;
   border-radius: var(--token-radius-xl);
   border: 1px solid color-mix(in srgb, var(--metric-tone) 18%, var(--border));
-  background:
-    linear-gradient(160deg,
-      color-mix(in srgb, var(--metric-tone) 10%, var(--background)) 0%,
-      var(--background) 55%);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--metric-tone) 10%, var(--background)) 0%,
+    var(--background) 55%
+  );
   box-shadow:
     0 1px 2px color-mix(in srgb, var(--metric-tone) 6%, transparent),
     0 14px 28px -20px color-mix(in srgb, var(--metric-tone) 40%, transparent);
@@ -1627,7 +1640,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .industries-metrics__card,
   .industries-metrics__card:hover {
     transition: none;
@@ -1714,16 +1726,18 @@
   }
 
   .industries-process__step:not(:last-child)::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 44px;
     right: -11px;
     z-index: 1;
     width: 20px;
     height: 2px;
-    background: linear-gradient(to right,
-        color-mix(in srgb, var(--process-tone) 55%, transparent),
-        color-mix(in srgb, var(--primary) 22%, transparent));
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--process-tone) 55%, transparent),
+      color-mix(in srgb, var(--primary) 22%, transparent)
+    );
     box-shadow: 0 0 8px color-mix(in srgb, var(--process-tone) 30%, transparent);
     pointer-events: none;
   }
@@ -1740,10 +1754,11 @@
   padding: var(--card-padding);
   border-radius: var(--token-radius-xl);
   border: 1px solid color-mix(in srgb, var(--process-tone) 18%, var(--border));
-  background:
-    linear-gradient(160deg,
-      color-mix(in srgb, var(--process-tone) 10%, var(--background)) 0%,
-      var(--background) 52%);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--process-tone) 10%, var(--background)) 0%,
+    var(--background) 52%
+  );
   box-shadow:
     0 1px 2px color-mix(in srgb, var(--process-tone) 6%, transparent),
     0 14px 28px -20px color-mix(in srgb, var(--process-tone) 40%, transparent);
@@ -1774,7 +1789,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .industries-process__step,
   .industries-process__step:hover {
     transition: none;
@@ -1869,10 +1883,11 @@
   padding: 26px;
   border-radius: var(--token-radius-xl);
   border: 1px solid color-mix(in srgb, var(--why-tone) 18%, var(--border));
-  background:
-    linear-gradient(160deg,
-      color-mix(in srgb, var(--why-tone) 12%, var(--background)) 0%,
-      var(--background) 58%);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--why-tone) 12%, var(--background)) 0%,
+    var(--background) 58%
+  );
   box-shadow:
     0 1px 2px color-mix(in srgb, var(--why-tone) 6%, transparent),
     0 14px 28px -20px color-mix(in srgb, var(--why-tone) 40%, transparent);
@@ -1903,7 +1918,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .industries-why__card,
   .industries-why__card:hover {
     transition: none;
@@ -1991,10 +2005,11 @@
   padding: 22px;
   border-radius: var(--token-radius-xl);
   border: 1px solid color-mix(in srgb, var(--proof-tone) 18%, var(--border));
-  background:
-    linear-gradient(160deg,
-      color-mix(in srgb, var(--proof-tone) 10%, var(--background)) 0%,
-      var(--background) 58%);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--proof-tone) 10%, var(--background)) 0%,
+    var(--background) 58%
+  );
   box-shadow:
     0 1px 2px color-mix(in srgb, var(--proof-tone) 6%, transparent),
     0 14px 28px -20px color-mix(in srgb, var(--proof-tone) 36%, transparent);
@@ -2029,7 +2044,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .industries-proof__card,
   .industries-proof__card:hover {
     transition: none;
@@ -2096,10 +2110,11 @@
   padding: 20px;
   border-radius: var(--token-radius-xl);
   border: 1px solid color-mix(in srgb, var(--roi-tone) 18%, var(--border));
-  background:
-    linear-gradient(165deg,
-      color-mix(in srgb, var(--roi-tone) 12%, var(--background)) 0%,
-      var(--background) 55%);
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--roi-tone) 12%, var(--background)) 0%,
+    var(--background) 55%
+  );
   box-shadow:
     0 1px 2px color-mix(in srgb, var(--roi-tone) 6%, transparent),
     0 14px 28px -20px color-mix(in srgb, var(--roi-tone) 40%, transparent);
@@ -2134,7 +2149,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .industries-roi__card,
   .industries-roi__card:hover {
     transition: none;
@@ -2326,7 +2340,7 @@
   gap: 18px;
 }
 
-.industries-featured-rail>li,
+.industries-featured-rail > li,
 .industries-page #industries-grid li {
   display: flex;
   align-items: stretch;
@@ -2436,7 +2450,7 @@
   align-items: stretch;
 }
 
-.industries-challenges>li {
+.industries-challenges > li {
   display: flex;
   min-height: 100%;
 }
@@ -2482,7 +2496,7 @@
   align-items: stretch;
 }
 
-.industries-solutions>li {
+.industries-solutions > li {
   display: flex;
   min-height: 100%;
 }
@@ -2567,7 +2581,7 @@
   gap: 16px;
 }
 
-.industries-cases>li {
+.industries-cases > li {
   display: flex;
   min-height: 100%;
 }
@@ -2617,7 +2631,7 @@
   gap: 16px;
 }
 
-.industries-roi>li {
+.industries-roi > li {
   display: flex;
   min-height: 100%;
 }
@@ -2664,7 +2678,7 @@
   gap: 16px;
 }
 
-.industries-process>li {
+.industries-process > li {
   display: flex;
   min-height: 100%;
 }
@@ -2770,7 +2784,7 @@
   gap: 16px;
 }
 
-.industries-why>li {
+.industries-why > li {
   display: flex;
   min-height: 100%;
 }

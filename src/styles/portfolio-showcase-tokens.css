@@ -1,0 +1,39 @@
+/**
+ * Legacy Bitcraftly-tech-v2 design tokens required by interactive portfolio demos.
+ * Scoped for Tailwind utilities used in showcase TSX (bg-bg-*, text-text-*, dark:bg-dark-*).
+ * Does not replace the platform design system — extends it for /portfolio routes.
+ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-bg-primary: #f7f8fc;
+  --color-bg-secondary: #eef1f8;
+  --color-bg-card: #ffffff;
+  --color-bg-section: #f3f5fa;
+  --color-bg-hover: #e8ecf4;
+
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #334155;
+  --color-text-tertiary: #64748b;
+  --color-text-disabled: #94a3b8;
+
+  --color-border-primary: #dfe4ee;
+  --color-border-secondary: #e2e8f0;
+  --color-border-divider: #eaedf4;
+
+  --color-dark-bg-primary: #0a0a0f;
+  --color-dark-bg-secondary: #13131a;
+  --color-dark-bg-card: #1c1c27;
+  --color-dark-text-primary: #f0eff8;
+  --color-dark-text-secondary: #b8b7c8;
+  --color-dark-text-tertiary: #8888aa;
+  --color-dark-border-primary: #2a2a3d;
+  --color-dark-border-secondary: #3a3a4d;
+}
+
+:root {
+  /* Demos reference Playfair via font-[var(--font-playfair)] — map to brand sans. */
+  --font-playfair: var(--font-geist-sans), ui-sans-serif, system-ui, serif;
+  --font-inter: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}

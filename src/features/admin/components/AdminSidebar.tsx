@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Icon } from "@/components/ui/icon";
-import { ADMIN_NAV } from "../admin.nav";
-import { ADMIN_ROUTES } from "../admin.routes";
-import { cn } from "@/lib/cn";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Icon } from '@/components/ui/icon';
+import { ADMIN_NAV } from '../admin.nav';
+import { ADMIN_ROUTES } from '../admin.routes';
+import { cn } from '@/lib/cn';
 
 interface AdminSidebarProps {
   open: boolean;
@@ -25,15 +25,11 @@ export function AdminSidebar({ open, onNavigate }: AdminSidebarProps) {
   return (
     <aside
       id="admin-sidebar"
-      className={cn("admin-sidebar", open && "admin-sidebar--open")}
+      className={cn('admin-sidebar', open && 'admin-sidebar--open')}
       aria-label="Admin navigation"
     >
       <div className="admin-sidebar__brand">
-        <Link
-          href={ADMIN_ROUTES.root}
-          className="admin-sidebar__brand-link"
-          onClick={onNavigate}
-        >
+        <Link href={ADMIN_ROUTES.root} className="admin-sidebar__brand-link" onClick={onNavigate}>
           <Icon name="layout-grid" size="sm" aria-hidden />
           <span>Bitcraftly Admin</span>
         </Link>
@@ -48,19 +44,14 @@ export function AdminSidebar({ open, onNavigate }: AdminSidebarProps) {
               <li key={item.id}>
                 <Link
                   href={item.href}
-                  className={cn(
-                    "admin-sidebar__link",
-                    active && "admin-sidebar__link--active",
-                  )}
-                  aria-current={active ? "page" : undefined}
+                  className={cn('admin-sidebar__link', active && 'admin-sidebar__link--active')}
+                  aria-current={active ? 'page' : undefined}
                   onClick={onNavigate}
                 >
                   <Icon name={item.icon} size="sm" aria-hidden />
                   <span className="admin-sidebar__link-text">
                     <span className="admin-sidebar__link-label">{item.label}</span>
-                    <span className="admin-sidebar__link-desc">
-                      {item.description}
-                    </span>
+                    <span className="admin-sidebar__link-desc">{item.description}</span>
                   </span>
                 </Link>
               </li>

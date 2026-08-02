@@ -1,21 +1,12 @@
-import type { Metadata } from "next";
-import {
-  AiAssistantPage,
-  AI_ASSISTANT_PAGE_META,
-} from "@/features/ai-assistant";
-import { createPageMetadata } from "@/lib/seo/createPageMetadata";
+import type { Metadata } from 'next';
+import { AiAssistantPage, AI_ASSISTANT_PAGE_META } from '@/features/ai-assistant';
+import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 
 export const metadata: Metadata = createPageMetadata({
   title: AI_ASSISTANT_PAGE_META.title,
   description: AI_ASSISTANT_PAGE_META.description,
   path: AI_ASSISTANT_PAGE_META.path,
-  keywords: [
-    "Bitcraftly AI",
-    "AI assistant",
-    "chat",
-    "pricing questions",
-    "services",
-  ],
+  keywords: ['Bitcraftly AI', 'AI assistant', 'chat', 'pricing questions', 'services'],
 });
 
 export default function AssistantRoutePage() {

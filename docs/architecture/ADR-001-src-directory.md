@@ -1,9 +1,9 @@
 # ADR-001: Adopt `src/` Directory Layout
 
-| Field | Value |
-|-------|-------|
-| **Status** | Accepted |
-| **Date** | 2026-07-11 |
+| Field       | Value                  |
+| ----------- | ---------------------- |
+| **Status**  | Accepted               |
+| **Date**    | 2026-07-11             |
 | **Authors** | Bitcraftly Engineering |
 
 ---
@@ -49,13 +49,13 @@ src/
 
 ## Benefits
 
-| Benefit | Description |
-|---------|-------------|
-| **Clear boundary** | Separates source code from config, docs, and tooling at the project root |
-| **Scalability** | Feature folders, shared components, and services have defined homes |
-| **Convention** | Matches Next.js `src` directory documentation and community practice |
-| **Tooling** | TypeScript path aliases, linters, and test runners scope cleanly to `src/` |
-| **Onboarding** | New engineers locate application code in one predictable location |
+| Benefit            | Description                                                                |
+| ------------------ | -------------------------------------------------------------------------- |
+| **Clear boundary** | Separates source code from config, docs, and tooling at the project root   |
+| **Scalability**    | Feature folders, shared components, and services have defined homes        |
+| **Convention**     | Matches Next.js `src` directory documentation and community practice       |
+| **Tooling**        | TypeScript path aliases, linters, and test runners scope cleanly to `src/` |
+| **Onboarding**     | New engineers locate application code in one predictable location          |
 
 ---
 

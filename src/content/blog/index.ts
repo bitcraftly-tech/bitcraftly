@@ -1,10 +1,10 @@
-import { BLOG_AUTHORS, BLOG_CATEGORIES } from "./meta";
-import { POST_WEB_PERFORMANCE } from "./posts/core-web-vitals-for-marketing-teams";
-import { POST_NEXTJS_APP_ROUTER } from "./posts/nextjs-app-router-architecture-for-marketing-sites";
-import { POST_REACT_COMPOSITION } from "./posts/react-composition-patterns-that-age-well";
-import { POST_AI_PRODUCT_FEATURES } from "./posts/shipping-ai-product-features-without-chaos";
-import { POST_TECHNICAL_SEO } from "./posts/technical-seo-checklist-for-nextjs-sites";
-import type { BlogPost } from "./types";
+import { BLOG_AUTHORS, BLOG_CATEGORIES } from './meta';
+import { POST_WEB_PERFORMANCE } from './posts/core-web-vitals-for-marketing-teams';
+import { POST_NEXTJS_APP_ROUTER } from './posts/nextjs-app-router-architecture-for-marketing-sites';
+import { POST_REACT_COMPOSITION } from './posts/react-composition-patterns-that-age-well';
+import { POST_AI_PRODUCT_FEATURES } from './posts/shipping-ai-product-features-without-chaos';
+import { POST_TECHNICAL_SEO } from './posts/technical-seo-checklist-for-nextjs-sites';
+import type { BlogPost } from './types';
 
 export type {
   BlogAuthor,
@@ -15,9 +15,9 @@ export type {
   BlogListResult,
   BlogPost,
   BlogPostSummary,
-} from "./types";
+} from './types';
 
-export { BLOG_AUTHORS, BLOG_CATEGORIES } from "./meta";
+export { BLOG_AUTHORS, BLOG_CATEGORIES } from './meta';
 
 /** Canonical ordered catalog — newest first. */
 export const BLOG_POSTS: readonly BlogPost[] = [

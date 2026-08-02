@@ -1,34 +1,29 @@
-import Image from "next/image";
-import Link from "next/link";
-import type { CSSProperties } from "react";
-import { MarketingStagger } from "@/components/patterns/marketing-stagger";
-import { Icon } from "@/components/ui/icon";
-import { IconBox } from "@/components/ui/icon-box";
-import { Section } from "@/components/ui/section";
-import { getIndustryHref } from "@/constants/industries";
-import { getSolutionHref, NAV_ACTIONS, ROUTES } from "@/constants/navigation";
-import { SOLUTION_GROUPS } from "@/constants/solutions";
-import { PortfolioCard } from "@/features/homepage/Portfolio/PortfolioCard";
-import { PORTFOLIO_PROJECTS } from "@/features/homepage/Portfolio/portfolio.constants";
-import "@/features/homepage/Portfolio/portfolio.css";
-import { ServiceCard } from "@/features/services/ServiceCard";
-import { ServiceFaqAccordion } from "@/features/services/ServiceFaqAccordion";
-import { PAGE_GRID_CLASS, PAGE_GRID_4_CLASS } from "@/lib/layout/page-shell";
-import { cn } from "@/lib/cn";
-import {
-  SOLUTIONS_LANDING,
-  getSolutionCardModels,
-} from "./solutions.content";
-import type { SolutionCardModel } from "./solutions.types";
-import "@/features/homepage/FAQ/faq.css";
-import "@/features/homepage/Hero/hero.css";
-import "@/features/services/services.css";
-import "./solutions.css";
+import Image from 'next/image';
+import Link from 'next/link';
+import type { CSSProperties } from 'react';
+import { MarketingStagger } from '@/components/patterns/marketing-stagger';
+import { Icon } from '@/components/ui/icon';
+import { IconBox } from '@/components/ui/icon-box';
+import { Section } from '@/components/ui/section';
+import { getIndustryHref } from '@/constants/industries';
+import { getSolutionHref, NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { SOLUTION_GROUPS } from '@/constants/solutions';
+import { PortfolioCard } from '@/features/homepage/Portfolio/PortfolioCard';
+import { PORTFOLIO_PROJECTS } from '@/features/homepage/Portfolio/portfolio.constants';
+import '@/features/homepage/Portfolio/portfolio.css';
+import { ServiceCard } from '@/features/services/ServiceCard';
+import { ServiceFaqAccordion } from '@/features/services/ServiceFaqAccordion';
+import { PAGE_GRID_CLASS, PAGE_GRID_4_CLASS } from '@/lib/layout/page-shell';
+import { cn } from '@/lib/cn';
+import { SOLUTIONS_LANDING, getSolutionCardModels } from './solutions.content';
+import type { SolutionCardModel } from './solutions.types';
+import '@/features/homepage/FAQ/faq.css';
+import '@/features/homepage/Hero/hero.css';
+import '@/features/services/services.css';
+import './solutions.css';
 
 export function SolutionsCategoriesSection() {
-  const cardsBySlug = new Map(
-    getSolutionCardModels().map((card) => [card.slug, card]),
-  );
+  const cardsBySlug = new Map(getSolutionCardModels().map((card) => [card.slug, card]));
 
   return (
     <Section
@@ -47,14 +42,14 @@ export function SolutionsCategoriesSection() {
           What we build for growing teams
         </h2>
         <p className="services-section-intro__description font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
-          Premium solution lines spanning operations, customer systems, and AI
-          — each delivered as a custom build with clear outcomes.
+          Premium solution lines spanning operations, customer systems, and AI — each delivered as a
+          custom build with clear outcomes.
         </p>
       </div>
 
       <MarketingStagger
         as="ul"
-        className={cn("m-0 list-none p-0", PAGE_GRID_CLASS, "lg:grid-cols-4")}
+        className={cn('m-0 list-none p-0', PAGE_GRID_CLASS, 'lg:grid-cols-4')}
       >
         {SOLUTIONS_LANDING.categories.map((category, index) => {
           const card = cardsBySlug.get(category.slug);
@@ -62,7 +57,7 @@ export function SolutionsCategoriesSection() {
             <li
               key={category.slug}
               className="mkt-stagger__item min-w-0 h-full"
-              style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
+              style={{ '--stagger': Math.min(index, 5) } as CSSProperties}
             >
               <ServiceCard
                 service={{
@@ -83,9 +78,7 @@ export function SolutionsCategoriesSection() {
 }
 
 export function SolutionsFeaturedSection() {
-  const badgeBySlug = new Map(
-    getSolutionCardModels().map((card) => [card.slug, card.badge]),
-  );
+  const badgeBySlug = new Map(getSolutionCardModels().map((card) => [card.slug, card.badge]));
 
   return (
     <Section
@@ -105,8 +98,8 @@ export function SolutionsFeaturedSection() {
           Showcase builds teams ask for most
         </h2>
         <p className="services-section-intro__description font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
-          High-demand CRM, SaaS, and AI automation patterns — features,
-          benefits, and a clear next step on each card.
+          High-demand CRM, SaaS, and AI automation patterns — features, benefits, and a clear next
+          step on each card.
         </p>
       </div>
 
@@ -120,25 +113,25 @@ export function SolutionsFeaturedSection() {
             <li
               key={item.slug}
               className="mkt-stagger__item min-w-0 h-full"
-              style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
+              style={{ '--stagger': Math.min(index, 5) } as CSSProperties}
             >
               <article
                 className={cn(
-                  "services-page-card services-featured-block group flex h-full flex-col rounded-[16px]",
-                  "border border-[color:var(--hp-card-border)] bg-background",
-                  item.imageSrc ? "overflow-hidden p-0" : "card-padding",
+                  'services-page-card services-featured-block group flex h-full flex-col rounded-[16px]',
+                  'border border-[color:var(--hp-card-border)] bg-background',
+                  item.imageSrc ? 'overflow-hidden p-0' : 'card-padding',
                 )}
               >
                 <div
                   className={cn(
-                    "solutions-featured-media relative flex items-center justify-center overflow-hidden",
+                    'solutions-featured-media relative flex items-center justify-center overflow-hidden',
                     item.imageSrc
-                      ? "solutions-featured-media--bleed w-full shrink-0 rounded-none"
-                      : "mb-[18px] min-h-[140px] rounded-[12px]",
+                      ? 'solutions-featured-media--bleed w-full shrink-0 rounded-none'
+                      : 'mb-[18px] min-h-[140px] rounded-[12px]',
                   )}
                   aria-hidden
                 >
-                  {"imageSrc" in item && item.imageSrc ? (
+                  {'imageSrc' in item && item.imageSrc ? (
                     <Image
                       src={item.imageSrc}
                       alt=""
@@ -155,17 +148,14 @@ export function SolutionsFeaturedSection() {
                 </div>
 
                 <div
-                  className={cn(
-                    "flex min-h-0 flex-1 flex-col",
-                    item.imageSrc && "card-padding",
-                  )}
+                  className={cn('flex min-h-0 flex-1 flex-col', item.imageSrc && 'card-padding')}
                 >
                   <div className="flex flex-wrap items-center gap-[8px]">
                     <h3 className="services-page-card-title">{item.title}</h3>
                     {badge ? (
                       <span
                         className={cn(
-                          "services-page-badge",
+                          'services-page-badge',
                           `services-page-badge--${badge.toLowerCase()}`,
                         )}
                       >
@@ -229,8 +219,8 @@ export function SolutionsFeaturedSection() {
                   <Link
                     href={getSolutionHref(item.slug)}
                     className={cn(
-                      "services-featured-cta mt-[20px]",
-                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                      'services-featured-cta mt-[20px]',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
                     )}
                   >
                     {item.ctaLabel}
@@ -251,15 +241,9 @@ export function SolutionsFeaturedSection() {
   );
 }
 
-export function SolutionsGroupsSection({
-  cards,
-}: {
-  cards: readonly SolutionCardModel[];
-}) {
+export function SolutionsGroupsSection({ cards }: { cards: readonly SolutionCardModel[] }) {
   const cardBySlug = new Map(cards.map((card) => [card.slug, card]));
-  const introById = new Map(
-    SOLUTIONS_LANDING.groupIntros.map((intro) => [intro.id, intro]),
-  );
+  const introById = new Map(SOLUTIONS_LANDING.groupIntros.map((intro) => [intro.id, intro]));
 
   return (
     <>
@@ -273,14 +257,14 @@ export function SolutionsGroupsSection({
             spacing="lg"
             aria-labelledby={`${group.id}-heading`}
             className={cn(
-              "scroll-mt-[130px] border-b border-border/40",
-              groupIndex % 2 === 1 ? "bg-surface" : "bg-background",
+              'scroll-mt-[130px] border-b border-border/40',
+              groupIndex % 2 === 1 ? 'bg-surface' : 'bg-background',
             )}
           >
             <div className="section-intro-row flex w-full flex-wrap items-end justify-between gap-[16px]">
               <div className="services-section-intro min-w-0 max-w-2xl">
                 <p className="services-page-label services-section-intro__eyebrow font-sans text-[12px] font-semibold uppercase tracking-[0.16em]">
-                  {intro?.label ?? "Solution group"}
+                  {intro?.label ?? 'Solution group'}
                 </p>
                 <h2
                   id={`${group.id}-heading`}
@@ -299,19 +283,11 @@ export function SolutionsGroupsSection({
                 className="inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-offset-background"
               >
                 Book a call
-                <Icon
-                  name="arrow-right"
-                  size="sm"
-                  aria-hidden
-                  className="h-[13px] w-[13px]"
-                />
+                <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
               </Link>
             </div>
 
-            <MarketingStagger
-              as="ul"
-              className={cn("m-0 list-none p-0", PAGE_GRID_CLASS)}
-            >
+            <MarketingStagger as="ul" className={cn('m-0 list-none p-0', PAGE_GRID_CLASS)}>
               {group.items.map((item, index) => {
                 const card = cardBySlug.get(item.slug) ?? {
                   slug: item.slug,
@@ -326,7 +302,7 @@ export function SolutionsGroupsSection({
                   <li
                     key={item.slug}
                     className="mkt-stagger__item min-w-0 h-full"
-                    style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
+                    style={{ '--stagger': Math.min(index, 5) } as CSSProperties}
                   >
                     <ServiceCard service={card} />
                   </li>
@@ -359,8 +335,8 @@ export function SolutionsIndustriesSection() {
             Built for real operating contexts
           </h2>
           <p className="services-section-intro__description font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
-            Healthcare, retail, finance, and more — solutions shaped around how
-            each industry actually runs.
+            Healthcare, retail, finance, and more — solutions shaped around how each industry
+            actually runs.
           </p>
         </div>
         <Link
@@ -368,32 +344,25 @@ export function SolutionsIndustriesSection() {
           className="inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           View all industries
-          <Icon
-            name="arrow-right"
-            size="sm"
-            aria-hidden
-            className="h-[13px] w-[13px]"
-          />
+          <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
         </Link>
       </div>
 
-      <ul className={cn("m-0 list-none p-0", PAGE_GRID_4_CLASS)}>
+      <ul className={cn('m-0 list-none p-0', PAGE_GRID_4_CLASS)}>
         {SOLUTIONS_LANDING.industries.map((industry) => (
           <li key={industry.slug} className="min-w-0 h-full">
             <Link
               href={getIndustryHref(industry.slug)}
               className={cn(
-                "services-page-card group flex h-full items-center gap-[12px]",
-                "rounded-[16px] card-padding no-underline",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-offset-background",
+                'services-page-card group flex h-full items-center gap-[12px]',
+                'rounded-[16px] card-padding no-underline',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-offset-background',
               )}
             >
               <span className="services-page-icon-box inline-flex shrink-0">
                 <IconBox icon={industry.icon} variant="default" size="sm" />
               </span>
-              <h3 className="services-page-card-title min-w-0 flex-1">
-                {industry.label}
-              </h3>
+              <h3 className="services-page-card-title min-w-0 flex-1">{industry.label}</h3>
               <Icon
                 name="arrow-right"
                 size="sm"
@@ -427,8 +396,8 @@ export function SolutionsTechSection() {
           Modern stack for durable systems
         </h2>
         <p className="services-section-intro__description font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
-          Proven frameworks and cloud tooling chosen for maintainability,
-          performance, and long-term ownership.
+          Proven frameworks and cloud tooling chosen for maintainability, performance, and long-term
+          ownership.
         </p>
       </div>
 
@@ -466,8 +435,8 @@ export function SolutionsCaseStudiesSection() {
             Featured work that shows the craft
           </h2>
           <p className="services-section-intro__description font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
-            Selected builds that demonstrate how we ship CRM, SaaS, and AI
-            systems with measurable outcomes.
+            Selected builds that demonstrate how we ship CRM, SaaS, and AI systems with measurable
+            outcomes.
           </p>
         </div>
         <Link
@@ -475,21 +444,16 @@ export function SolutionsCaseStudiesSection() {
           className="inline-flex items-center gap-[4px] font-sans text-[13px] font-semibold text-primary no-underline transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           View portfolio
-          <Icon
-            name="arrow-right"
-            size="sm"
-            aria-hidden
-            className="h-[13px] w-[13px]"
-          />
+          <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
         </Link>
       </div>
 
-      <MarketingStagger as="ul" className={cn("m-0 list-none p-0", PAGE_GRID_CLASS)}>
+      <MarketingStagger as="ul" className={cn('m-0 list-none p-0', PAGE_GRID_CLASS)}>
         {projects.map((project, index) => (
           <li
             key={project.id}
             className="mkt-stagger__item min-w-0"
-            style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
+            style={{ '--stagger': Math.min(index, 5) } as CSSProperties}
           >
             <PortfolioCard project={project} />
           </li>
@@ -518,12 +482,12 @@ export function SolutionsWhySection() {
           Built for outcomes, not jargon
         </h2>
         <p className="services-section-intro__description font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
-          Performance, security, and maintainability are baked into delivery —
-          so your team can run and extend what we ship.
+          Performance, security, and maintainability are baked into delivery — so your team can run
+          and extend what we ship.
         </p>
       </div>
 
-      <ul className={cn("m-0 list-none p-0", PAGE_GRID_CLASS)}>
+      <ul className={cn('m-0 list-none p-0', PAGE_GRID_CLASS)}>
         {SOLUTIONS_LANDING.why.map((item) => (
           <li key={item.title} className="min-w-0 h-full">
             <div className="services-page-card group flex h-full flex-col gap-[12px] rounded-[16px] card-padding">
@@ -562,22 +526,19 @@ export function SolutionsProcessSection() {
           A clear path from idea to support
         </h2>
         <p className="services-section-intro__description font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
-          Discovery through launch and ongoing support — visible progress, written
-          scope, and no black-box sprints.
+          Discovery through launch and ongoing support — visible progress, written scope, and no
+          black-box sprints.
         </p>
       </div>
 
-      <MarketingStagger
-        as="ol"
-        className="solutions-process m-0 grid list-none p-0"
-      >
+      <MarketingStagger as="ol" className="solutions-process m-0 grid list-none p-0">
         {SOLUTIONS_LANDING.process.map((step, index) => {
-          const number = String(index + 1).padStart(2, "0");
+          const number = String(index + 1).padStart(2, '0');
           return (
             <li
               key={step.title}
               className="mkt-stagger__item solutions-process__item"
-              style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
+              style={{ '--stagger': Math.min(index, 5) } as CSSProperties}
             >
               <article className="solutions-process__card">
                 <div className="solutions-process__top">
@@ -586,11 +547,7 @@ export function SolutionsProcessSection() {
                   </span>
                   <span className="solutions-process__icon" aria-hidden>
                     {step.icon ? (
-                      <Icon
-                        name={step.icon}
-                        size="sm"
-                        className="h-[18px] w-[18px]"
-                      />
+                      <Icon name={step.icon} size="sm" className="h-[18px] w-[18px]" />
                     ) : null}
                   </span>
                 </div>
@@ -624,8 +581,8 @@ export function SolutionsFaqSection() {
           Frequently asked questions
         </h2>
         <p className="services-section-intro__description font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
-          Timelines, ownership, engagement model, and what to expect when we
-          scope a solution together.
+          Timelines, ownership, engagement model, and what to expect when we scope a solution
+          together.
         </p>
       </div>
       <ServiceFaqAccordion items={[...SOLUTIONS_LANDING.faqs]} />
@@ -651,30 +608,30 @@ export function SolutionsHubsSection() {
           Related hubs
         </h2>
         <p className="services-section-intro__description font-sans text-[14px] leading-[1.65] text-muted-foreground sm:text-[15px]">
-          Jump into services, industries, case studies, and resources that
-          connect to these solutions.
+          Jump into services, industries, case studies, and resources that connect to these
+          solutions.
         </p>
       </div>
 
       <MarketingStagger
         as="ul"
         className={cn(
-          "m-0 grid w-full list-none gap-[24px] p-0",
-          "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+          'm-0 grid w-full list-none gap-[24px] p-0',
+          'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
         )}
       >
         {SOLUTIONS_LANDING.hubs.map((hub, index) => (
           <li
             key={hub.href}
             className="mkt-stagger__item min-w-0 h-full"
-            style={{ "--stagger": Math.min(index, 5) } as CSSProperties}
+            style={{ '--stagger': Math.min(index, 5) } as CSSProperties}
           >
             <Link
               href={hub.href}
               className={cn(
-                "services-hub-card group flex h-full flex-col gap-[12px]",
-                "rounded-[16px] card-padding no-underline",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-offset-background",
+                'services-hub-card group flex h-full flex-col gap-[12px]',
+                'rounded-[16px] card-padding no-underline',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-offset-background',
               )}
             >
               <div className="services-page-card-header flex items-center gap-[12px]">

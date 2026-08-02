@@ -1,4 +1,4 @@
-import type { IconName } from "@/components/ui/icon";
+import type { IconName } from '@/components/ui/icon';
 
 /** Leaf link used across mega menus, mobile nav, footer, and sidebars. */
 export interface NavLinkItem {
@@ -56,7 +56,7 @@ export interface SiteNavLink {
    * - default: full-width mega menu
    * - compact: constrained dropdown (e.g. Work)
    */
-  menuVariant?: "default" | "compact";
+  menuVariant?: 'default' | 'compact';
 }
 
 export interface SiteNavAction {
@@ -72,13 +72,10 @@ export interface CreateDropdownNavInput {
   featured?: NavFeaturedCard;
   exploreAllLabel?: string;
   viewAllLabel?: string;
-  menuVariant?: "default" | "compact";
+  menuVariant?: 'default' | 'compact';
 }
 
-export function toNavChildLink(
-  item: NavLinkItem,
-  parentPath: string,
-): NavChildLink {
+export function toNavChildLink(item: NavLinkItem, parentPath: string): NavChildLink {
   return {
     slug: item.slug,
     label: item.label,
@@ -88,13 +85,8 @@ export function toNavChildLink(
   };
 }
 
-export function flattenNavGroups(
-  groups: readonly NavGroup[],
-  parentPath: string,
-): NavChildLink[] {
-  return groups.flatMap((group) =>
-    group.items.map((item) => toNavChildLink(item, parentPath)),
-  );
+export function flattenNavGroups(groups: readonly NavGroup[], parentPath: string): NavChildLink[] {
+  return groups.flatMap((group) => group.items.map((item) => toNavChildLink(item, parentPath)));
 }
 
 export function getSiteNavChildren(link: SiteNavLink): readonly NavChildLink[] {
@@ -108,8 +100,7 @@ export function getSiteNavChildren(link: SiteNavLink): readonly NavChildLink[] {
 export function hasMegaMenu(link: SiteNavLink): boolean {
   return Boolean(
     link.hasDropdown &&
-      ((link.groups && link.groups.length > 0) ||
-        (link.children && link.children.length > 0)),
+    ((link.groups && link.groups.length > 0) || (link.children && link.children.length > 0)),
   );
 }
 
@@ -122,7 +113,7 @@ export function createDropdownNav({
   featured,
   exploreAllLabel,
   viewAllLabel,
-  menuVariant = "default",
+  menuVariant = 'default',
 }: CreateDropdownNavInput): SiteNavLink {
   const lower = label.toLowerCase();
 

@@ -1,15 +1,15 @@
-import { Icon } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
-import { FOOTER_CONTACT_ITEMS } from "./footer.constants";
-import { FooterHeading } from "./FooterHeading";
-import { FooterLink } from "./FooterLink";
-import type { FooterContactItem } from "./footer.types";
+import { Icon } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
+import { FOOTER_CONTACT_ITEMS } from './footer.constants';
+import { FooterHeading } from './FooterHeading';
+import { FooterLink } from './FooterLink';
+import type { FooterContactItem } from './footer.types';
 
 export function FooterContact({ className }: { className?: string }) {
-  const headingId = "footer-contact-heading";
+  const headingId = 'footer-contact-heading';
 
   return (
-    <section aria-labelledby={headingId} className={cn("min-w-0", className)}>
+    <section aria-labelledby={headingId} className={cn('min-w-0', className)}>
       <FooterHeading id={headingId}>Contact Us</FooterHeading>
       <ul className="flex flex-col gap-[var(--space-0-5)]">
         {FOOTER_CONTACT_ITEMS.map((item) => (
@@ -24,11 +24,7 @@ export function FooterContact({ className }: { className?: string }) {
 
 function ContactItem({ item }: { item: FooterContactItem }) {
   return (
-    <FooterLink
-      href={item.href}
-      external={item.external}
-      className="gap-[var(--space-0-5)]"
-    >
+    <FooterLink href={item.href} external={item.external} className="gap-[var(--space-0-5)]">
       <Icon
         name={item.icon}
         size="sm"

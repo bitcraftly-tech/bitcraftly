@@ -1,6 +1,6 @@
-import { cn } from "@/lib/cn";
-import { getPostHeadingIds } from "./blog.utils";
-import type { BlogPost } from "@/content/blog";
+import { cn } from '@/lib/cn';
+import { getPostHeadingIds } from './blog.utils';
+import type { BlogPost } from '@/content/blog';
 
 interface BlogTableOfContentsProps {
   post: BlogPost;
@@ -17,10 +17,7 @@ export function BlogTableOfContents({ post, className }: BlogTableOfContentsProp
   return (
     <nav
       aria-label="Table of contents"
-      className={cn(
-        "rounded-[16px] border border-border bg-surface/40 p-[16px]",
-        className,
-      )}
+      className={cn('rounded-[16px] border border-border bg-surface/40 p-[16px]', className)}
     >
       <p className="m-0 font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
         On this page
@@ -31,8 +28,8 @@ export function BlogTableOfContents({ post, className }: BlogTableOfContentsProp
             <a
               href={`#${heading.id}`}
               className={cn(
-                "block font-sans text-[13px] leading-[1.45] text-muted-foreground no-underline hover:text-primary",
-                heading.level === 3 && "pl-[12px]",
+                'block font-sans text-[13px] leading-[1.45] text-muted-foreground no-underline hover:text-primary',
+                heading.level === 3 && 'pl-[12px]',
               )}
             >
               {heading.text}

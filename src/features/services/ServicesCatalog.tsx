@@ -1,11 +1,11 @@
-import { ServicesCatalogContent } from "./ServicesCatalogContent";
-import { ServicesCatalogSearchLoader } from "./ServicesCatalogSearchLoader";
+import { ServicesCatalogContent } from './ServicesCatalogContent';
+import { ServicesCatalogSearchLoader } from './ServicesCatalogSearchLoader';
 import type {
   FeaturedServiceBlock,
   ServiceCardModel,
   ServiceGroupIntro,
   ServiceGroupRelatedLinks,
-} from "./services.types";
+} from './services.types';
 
 interface CatalogGroup {
   id: string;

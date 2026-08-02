@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
-import type { ServiceCardModel } from "./services.types";
+import dynamic from 'next/dynamic';
+import type { ServiceCardModel } from './services.types';
 
 interface ServicesCatalogSearchLoaderProps {
   readonly groups: ReadonlyArray<{
@@ -11,8 +11,7 @@ interface ServicesCatalogSearchLoaderProps {
 }
 
 const ServicesCatalogSearch = dynamic(
-  () =>
-    import("./ServicesCatalogSearch").then((mod) => mod.ServicesCatalogSearch),
+  () => import('./ServicesCatalogSearch').then((mod) => mod.ServicesCatalogSearch),
   {
     ssr: false,
     loading: () => (
@@ -25,8 +24,6 @@ const ServicesCatalogSearch = dynamic(
 );
 
 /** Defers catalog filter JS until after first paint. */
-export function ServicesCatalogSearchLoader({
-  groups,
-}: ServicesCatalogSearchLoaderProps) {
+export function ServicesCatalogSearchLoader({ groups }: ServicesCatalogSearchLoaderProps) {
   return <ServicesCatalogSearch groups={groups} />;
 }

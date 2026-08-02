@@ -1,12 +1,5 @@
 export type PortfolioFilterId =
-  | "all"
-  | "ai"
-  | "saas"
-  | "healthcare"
-  | "education"
-  | "retail"
-  | "websites"
-  | "ecommerce";
+  'all' | 'ai' | 'saas' | 'healthcare' | 'education' | 'retail' | 'websites' | 'ecommerce';
 
 export interface PortfolioProject {
   id: string;

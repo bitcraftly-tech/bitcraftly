@@ -1,16 +1,16 @@
-import Link from "next/link";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { ROUTES } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import { SolutionsHeroVisual } from "./SolutionsHeroVisual";
-import type { SolutionPageContent } from "./solutions.types";
-import "./solutions.css";
-import "@/features/services/services.css";
+import Link from 'next/link';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { ROUTES } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import { SolutionsHeroVisual } from './SolutionsHeroVisual';
+import type { SolutionPageContent } from './solutions.types';
+import './solutions.css';
+import '@/features/services/services.css';
 
 interface SolutionDetailHeroProps {
   content: SolutionPageContent;
@@ -35,9 +35,9 @@ export async function SolutionDetailHero({
       spacing="lg"
       aria-labelledby={headingId}
       className={cn(
-        "solutions-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'solutions-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -70,12 +70,7 @@ export async function SolutionDetailHero({
           <MarketingBreadcrumbs items={breadcrumbs} className="mb-0" />
 
           <p className="solutions-hero__eyebrow">
-            <Icon
-              name={content.icon}
-              size="sm"
-              aria-hidden
-              className="h-[14px] w-[14px]"
-            />
+            <Icon name={content.icon} size="sm" aria-hidden className="h-[14px] w-[14px]" />
             {content.eyebrow}
           </p>
 
@@ -88,10 +83,7 @@ export async function SolutionDetailHero({
           <p className="solutions-hero__description">{content.intro}</p>
 
           <div className="solutions-hero__cta-row">
-            <Link
-              href={contactHref}
-              className="solutions-hero__btn solutions-hero__btn--primary"
-            >
+            <Link href={contactHref} className="solutions-hero__btn solutions-hero__btn--primary">
               {content.ctaPrimaryLabel}
               <Icon name="arrow-up-right" size="sm" aria-hidden />
             </Link>
@@ -109,11 +101,7 @@ export async function SolutionDetailHero({
               {content.outcomes.map((outcome) => (
                 <li key={outcome} className="solutions-hero__trust-item">
                   <span className="solutions-hero__trust-check" aria-hidden>
-                    <Icon
-                      name="check"
-                      size="sm"
-                      className="h-[11px] w-[11px]"
-                    />
+                    <Icon name="check" size="sm" className="h-[11px] w-[11px]" />
                   </span>
                   {outcome}
                 </li>
@@ -127,11 +115,7 @@ export async function SolutionDetailHero({
                 <li key={chip}>
                   <span className="solutions-hero__chip">
                     <span className="solutions-hero__chip-icon" aria-hidden>
-                      <Icon
-                        name="check"
-                        size="sm"
-                        className="h-[13px] w-[13px]"
-                      />
+                      <Icon name="check" size="sm" className="h-[13px] w-[13px]" />
                     </span>
                     {chip}
                   </span>

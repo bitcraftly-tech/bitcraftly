@@ -8,8 +8,11 @@
     "prebuild": "npm run db:generate",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
     "analyze": "cross-env ANALYZE=true next build",
     "test": "vitest run",
     "test:unit": "vitest run",
@@ -23,7 +26,17 @@
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,scss,md}": [
+      "prettier --write"
+    ]
   },
   "browserslist": [
     "chrome >= 111",
@@ -36,15 +49,20 @@
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "@swc/helpers": "0.5.15",
+    "framer-motion": "^11.18.2",
+    "lucide-react": "^0.511.0",
     "next": "16.2.10",
     "pg": "^8.22.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.81.0",
+    "react-icons": "^5.7.0",
+    "sweetalert2": "^11.26.25",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@axe-core/cli": "^4.12.1",
+    "@eslint/js": "^9.39.5",
     "@next/bundle-analyzer": "^16.2.10",
     "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
@@ -60,14 +78,24 @@
     "chrome-launcher": "^1.2.1",
     "cross-env": "^10.1.0",
     "dotenv": "^17.4.2",
-    "eslint": "^9",
+    "eslint": "^9.39.5",
     "eslint-config-next": "16.2.10",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.8.0",
     "happy-dom": "^15.11.7",
+    "husky": "^9.1.7",
     "lighthouse": "^13.4.0",
+    "lint-staged": "^17.2.0",
+    "prettier": "^3.9.6",
     "prisma": "^7.8.0",
     "sharp": "^0.35.3",
     "tailwindcss": "^4",
     "typescript": "^5",
+    "typescript-eslint": "^8.65.0",
     "vitest": "^4.1.10"
   }
 }

@@ -1,6 +1,6 @@
-import { FaqAccordion } from "@/components/patterns/faq-accordion";
-import { Container } from "@/components/ui/container";
-import { cn } from "@/lib/cn";
+import { FaqAccordion } from '@/components/patterns/faq-accordion';
+import { Container } from '@/components/ui/container';
+import { cn } from '@/lib/cn';
 import {
   ABOUT_FAQ_DESCRIPTION,
   ABOUT_FAQ_HEADING,
@@ -8,8 +8,8 @@ import {
   ABOUT_FAQ_LABEL,
   ABOUT_FAQ_SECTION_ID,
   ABOUT_FAQS,
-} from "./about.content";
-import "@/features/homepage/FAQ/faq.css";
+} from './about.content';
+import '@/features/homepage/FAQ/faq.css';
 
 /**
  * About FAQ — same markup, typography, and accordion treatment as homepage FAQ.
@@ -25,9 +25,9 @@ export function AboutFaqSection() {
         <div className="mx-auto max-w-[640px] text-center">
           <p
             className={cn(
-              "faq-label m-0 mb-[var(--space-2)]",
-              "font-sans text-[12px] font-[var(--font-weight-semibold)]",
-              "uppercase tracking-[0.16em]",
+              'faq-label m-0 mb-[var(--space-2)]',
+              'font-sans text-[12px] font-[var(--font-weight-semibold)]',
+              'uppercase tracking-[0.16em]',
             )}
           >
             {ABOUT_FAQ_LABEL}
@@ -36,9 +36,9 @@ export function AboutFaqSection() {
           <h2
             id={ABOUT_FAQ_HEADING_ID}
             className={cn(
-              "m-0 font-sans font-bold text-foreground",
-              "text-[28px] leading-[1.2] tracking-[-0.02em]",
-              "sm:text-[32px] lg:text-[34px]",
+              'm-0 font-sans font-bold text-foreground',
+              'text-[28px] leading-[1.2] tracking-[-0.02em]',
+              'sm:text-[32px] lg:text-[34px]',
             )}
           >
             {ABOUT_FAQ_HEADING}
@@ -46,9 +46,9 @@ export function AboutFaqSection() {
 
           <p
             className={cn(
-              "m-0 mx-auto mt-[var(--space-2)] max-w-[520px]",
-              "font-sans text-[15px] font-normal leading-[1.65] text-muted-foreground",
-              "sm:text-[16px]",
+              'm-0 mx-auto mt-[var(--space-2)] max-w-[520px]',
+              'font-sans text-[15px] font-normal leading-[1.65] text-muted-foreground',
+              'sm:text-[16px]',
             )}
           >
             {ABOUT_FAQ_DESCRIPTION}

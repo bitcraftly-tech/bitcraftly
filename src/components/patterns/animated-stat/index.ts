@@ -1,1 +1,1 @@
-export { AnimatedStat } from "./AnimatedStat";
+export { AnimatedStat } from './AnimatedStat';

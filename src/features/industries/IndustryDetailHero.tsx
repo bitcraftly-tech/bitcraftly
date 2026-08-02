@@ -1,15 +1,15 @@
-import Link from "next/link";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { NAV_ACTIONS, ROUTES } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import { IndustriesHeroVisual } from "./IndustriesHeroVisual";
-import type { IndustryModel } from "./industries.types";
-import "./industries.css";
+import Link from 'next/link';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import { IndustriesHeroVisual } from './IndustriesHeroVisual';
+import type { IndustryModel } from './industries.types';
+import './industries.css';
 
 interface IndustryDetailHeroProps {
   industry: IndustryModel;
@@ -19,10 +19,7 @@ interface IndustryDetailHeroProps {
 /**
  * Industry detail hero — same shell language as Industries landing hero.
  */
-export async function IndustryDetailHero({
-  industry,
-  breadcrumbs,
-}: IndustryDetailHeroProps) {
+export async function IndustryDetailHero({ industry, breadcrumbs }: IndustryDetailHeroProps) {
   const isMobile = await isMobileUserAgent();
   const headingId = `${industry.slug}-page-heading`;
 
@@ -31,9 +28,9 @@ export async function IndustryDetailHero({
       spacing="lg"
       aria-labelledby={headingId}
       className={cn(
-        "industries-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'industries-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -63,58 +60,38 @@ export async function IndustryDetailHero({
 
       <div className="industries-hero__layout relative">
         <div className="industries-hero__content min-w-0">
-          <MarketingBreadcrumbs
-            items={breadcrumbs}
-            className="mb-[var(--space-3)]"
-          />
+          <MarketingBreadcrumbs items={breadcrumbs} className="mb-[var(--space-3)]" />
 
           <p className="industries-hero__eyebrow">
-            <Icon
-              name={industry.icon}
-              size="sm"
-              aria-hidden
-              className="h-[14px] w-[14px]"
-            />
+            <Icon name={industry.icon} size="sm" aria-hidden className="h-[14px] w-[14px]" />
             Industry
           </p>
 
           <h1 id={headingId} className="industries-hero__title">
-            {industry.label}{" "}
-            <span className="industries-hero__title-mark">solutions</span>
+            {industry.label} <span className="industries-hero__title-mark">solutions</span>
           </h1>
 
           <p className="industries-hero__description">{industry.description}</p>
 
           {!isMobile ? (
-            <ul
-              className="industries-hero__highlights"
-              aria-label="Engagement snapshot"
-            >
+            <ul className="industries-hero__highlights" aria-label="Engagement snapshot">
               <li className="industries-hero__highlight industries-hero__highlight--primary">
                 <div className="industries-hero__highlight-head">
                   <span className="industries-hero__highlight-icon" aria-hidden>
                     <Icon name="layout-grid" size="sm" className="h-[18px] w-[18px]" />
                   </span>
-                  <span className="industries-hero__highlight-title">
-                    Company size
-                  </span>
+                  <span className="industries-hero__highlight-title">Company size</span>
                 </div>
-                <p className="industries-hero__highlight-desc">
-                  {industry.companySize}
-                </p>
+                <p className="industries-hero__highlight-desc">{industry.companySize}</p>
               </li>
               <li className="industries-hero__highlight industries-hero__highlight--accent">
                 <div className="industries-hero__highlight-head">
                   <span className="industries-hero__highlight-icon" aria-hidden>
                     <Icon name="zap" size="sm" className="h-[18px] w-[18px]" />
                   </span>
-                  <span className="industries-hero__highlight-title">
-                    Typical duration
-                  </span>
+                  <span className="industries-hero__highlight-title">Typical duration</span>
                 </div>
-                <p className="industries-hero__highlight-desc">
-                  {industry.projectDuration}
-                </p>
+                <p className="industries-hero__highlight-desc">{industry.projectDuration}</p>
               </li>
             </ul>
           ) : null}

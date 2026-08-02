@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import type { SuggestedQuestion } from "../types";
+import type { SuggestedQuestion } from '../types';
 
 interface SuggestedQuestionsProps {
   questions: readonly SuggestedQuestion[];
@@ -22,10 +22,7 @@ export function SuggestedQuestions({
       <p className="ai-assistant__suggestions-label" id="ai-suggested-questions">
         Suggested questions
       </p>
-      <ul
-        className="ai-assistant__suggestions-list"
-        aria-labelledby="ai-suggested-questions"
-      >
+      <ul className="ai-assistant__suggestions-list" aria-labelledby="ai-suggested-questions">
         {questions.map((question) => (
           <li key={question.id}>
             <button

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect, useId, useState } from "react";
-import { AdminSidebar } from "./AdminSidebar";
-import { AdminTopbar } from "./AdminTopbar";
+import { useEffect, useId, useState } from 'react';
+import { AdminSidebar } from './AdminSidebar';
+import { AdminTopbar } from './AdminTopbar';
 
 interface AdminShellProps {
   children: React.ReactNode;
@@ -17,12 +17,12 @@ export function AdminShell({ children }: AdminShellProps) {
       return;
     }
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         setMenuOpen(false);
       }
     };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
   }, [menuOpen]);
 
   return (
@@ -43,10 +43,7 @@ export function AdminShell({ children }: AdminShellProps) {
       <AdminSidebar open={menuOpen} onNavigate={() => setMenuOpen(false)} />
 
       <div className="admin-shell__main">
-        <AdminTopbar
-          menuOpen={menuOpen}
-          onMenuToggle={() => setMenuOpen((open) => !open)}
-        />
+        <AdminTopbar menuOpen={menuOpen} onMenuToggle={() => setMenuOpen((open) => !open)} />
         <main id={mainId} className="admin-shell__content" tabIndex={-1}>
           {children}
         </main>

@@ -348,7 +348,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .pricing-calc__option,
   .pricing-calc__estimate-card--enter {
     transition: none !important;

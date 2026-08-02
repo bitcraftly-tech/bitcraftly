@@ -25,9 +25,7 @@ function SkeletonCard() {
 /**
  * Loading placeholders for the Portfolio Grid (filter transitions / pending state).
  */
-export function WorkPortfolioGridSkeleton({
-  count = 6,
-}: WorkPortfolioGridSkeletonProps) {
+export function WorkPortfolioGridSkeleton({ count = 6 }: WorkPortfolioGridSkeletonProps) {
   return (
     <ul
       className="work-pf-grid work-portfolio-grid--skeleton"

@@ -1,15 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import {
-  getBlogAuthorById,
-  getBlogCategoryById,
-  type BlogPost,
-} from "@/content/blog";
-import { ROUTES } from "@/constants/navigation";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import { estimateReadingTimeMinutes, formatBlogDate } from "./blog.utils";
+import Image from 'next/image';
+import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { getBlogAuthorById, getBlogCategoryById, type BlogPost } from '@/content/blog';
+import { ROUTES } from '@/constants/navigation';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import { estimateReadingTimeMinutes, formatBlogDate } from './blog.utils';
 
 interface BlogPostHeaderProps {
   post: BlogPost;
@@ -27,18 +23,13 @@ export function BlogPostHeader({ post, breadcrumbs }: BlogPostHeaderProps) {
 
       <div className="flex flex-wrap items-center gap-[8px]">
         {category ? (
-          <Link
-            href={`${ROUTES.blog}?category=${category.id}`}
-            className="no-underline"
-          >
+          <Link href={`${ROUTES.blog}?category=${category.id}`} className="no-underline">
             <Badge variant="primary" size="sm">
               {category.label}
             </Badge>
           </Link>
         ) : null}
-        <span className="font-sans text-[13px] text-muted-foreground">
-          {readingTime} min read
-        </span>
+        <span className="font-sans text-[13px] text-muted-foreground">{readingTime} min read</span>
       </div>
 
       <h1
@@ -56,31 +47,20 @@ export function BlogPostHeader({ post, breadcrumbs }: BlogPostHeaderProps) {
         {author ? (
           <div className="flex items-center gap-[10px]">
             <span className="relative h-[40px] w-[40px] overflow-hidden rounded-full border border-border bg-surface">
-              <Image
-                src={author.avatarSrc}
-                alt=""
-                fill
-                sizes="40px"
-                className="object-cover"
-              />
+              <Image src={author.avatarSrc} alt="" fill sizes="40px" className="object-cover" />
             </span>
             <div className="min-w-0">
               <p className="m-0 font-sans text-[14px] font-semibold text-foreground">
                 {author.name}
               </p>
-              <p className="m-0 font-sans text-[12px] text-muted-foreground">
-                {author.role}
-              </p>
+              <p className="m-0 font-sans text-[12px] text-muted-foreground">{author.role}</p>
             </div>
           </div>
         ) : null}
 
         <span className="hidden h-[28px] w-px bg-border sm:block" aria-hidden />
 
-        <time
-          dateTime={post.publishedAt}
-          className="font-sans text-[13px] text-muted-foreground"
-        >
+        <time dateTime={post.publishedAt} className="font-sans text-[13px] text-muted-foreground">
           Published {formatBlogDate(post.publishedAt)}
         </time>
       </div>

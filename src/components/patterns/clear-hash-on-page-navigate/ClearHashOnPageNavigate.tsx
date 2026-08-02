@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 /**
  * Clears stale `#hash` fragments when navigating to normal page URLs.
@@ -18,16 +18,16 @@ export function ClearHashOnPageNavigate() {
       }
       if (!window.location.hash) return;
 
-      const anchor = (event.target as Element | null)?.closest?.("a[href]");
+      const anchor = (event.target as Element | null)?.closest?.('a[href]');
       if (!(anchor instanceof HTMLAnchorElement)) return;
-      if (anchor.target === "_blank" || anchor.hasAttribute("download")) return;
+      if (anchor.target === '_blank' || anchor.hasAttribute('download')) return;
 
-      const rawHref = anchor.getAttribute("href");
-      if (!rawHref || rawHref.startsWith("#")) return;
+      const rawHref = anchor.getAttribute('href');
+      if (!rawHref || rawHref.startsWith('#')) return;
       if (
-        rawHref.startsWith("mailto:") ||
-        rawHref.startsWith("tel:") ||
-        rawHref.startsWith("javascript:")
+        rawHref.startsWith('mailto:') ||
+        rawHref.startsWith('tel:') ||
+        rawHref.startsWith('javascript:')
       ) {
         return;
       }
@@ -49,18 +49,18 @@ export function ClearHashOnPageNavigate() {
       // Same path without hash (e.g. logo → / while on /#section).
       if (cleanTarget === cleanCurrent) {
         event.preventDefault();
-        window.history.replaceState(null, "", cleanCurrent);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        window.dispatchEvent(new HashChangeEvent("hashchange"));
+        window.history.replaceState(null, '', cleanCurrent);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.dispatchEvent(new HashChangeEvent('hashchange'));
         return;
       }
 
       // Different page — drop the current fragment before the router navigates.
-      window.history.replaceState(null, "", cleanCurrent);
+      window.history.replaceState(null, '', cleanCurrent);
     };
 
-    document.addEventListener("click", onClick, true);
-    return () => document.removeEventListener("click", onClick, true);
+    document.addEventListener('click', onClick, true);
+    return () => document.removeEventListener('click', onClick, true);
   }, []);
 
   useEffect(() => {
@@ -71,11 +71,7 @@ export function ClearHashOnPageNavigate() {
 
     // Leftover hash from a previous page (no matching element here) → clear.
     if (!document.getElementById(id)) {
-      window.history.replaceState(
-        null,
-        "",
-        `${pathname}${window.location.search}`,
-      );
+      window.history.replaceState(null, '', `${pathname}${window.location.search}`);
     }
   }, [pathname]);
 

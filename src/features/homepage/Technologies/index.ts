@@ -1,1 +1,0 @@
-export { TechnologiesSection } from "./TechnologiesSection";

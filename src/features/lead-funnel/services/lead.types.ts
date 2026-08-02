@@ -1,10 +1,10 @@
-import type { LeadIntent } from "../types";
+import type { LeadIntent } from '../types';
 
 /** Lead channel — maps to CRM entity types in a future FastAPI module. */
-export type LeadType = "contact" | "newsletter";
+export type LeadType = 'contact' | 'newsletter';
 
 /** Lifecycle state for future CRM/admin workflows. */
-export type LeadStatus = "new";
+export type LeadStatus = 'new';
 
 /**
  * Server-captured request metadata — populated in Server Actions from headers.
@@ -41,12 +41,7 @@ export interface LeadRecord {
 }
 
 export type SubmitLeadErrorCode =
-  | "VALIDATION"
-  | "HONEYPOT"
-  | "RATE_LIMIT"
-  | "PERSISTENCE"
-  | "DELIVERY"
-  | "UNKNOWN";
+  'VALIDATION' | 'HONEYPOT' | 'RATE_LIMIT' | 'PERSISTENCE' | 'DELIVERY' | 'UNKNOWN';
 
 export interface SubmitLeadSuccess {
   readonly ok: true;

@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect } from "react";
+import Link from 'next/link';
+import { useEffect } from 'react';
 
-import { reportClientError } from "@/lib/observability/report-client-error";
+import { reportClientError } from '@/lib/observability/report-client-error';
 
 interface AppErrorProps {
   readonly error: Error & { digest?: string };
@@ -12,7 +12,7 @@ interface AppErrorProps {
 
 export default function AppError({ error, reset }: AppErrorProps) {
   useEffect(() => {
-    reportClientError(error, { boundary: "route" });
+    reportClientError(error, { boundary: 'route' });
   }, [error]);
 
   return (
@@ -20,9 +20,7 @@ export default function AppError({ error, reset }: AppErrorProps) {
       id="main-content"
       className="flex min-h-[50vh] flex-col items-center justify-center px-[var(--space-4)] py-[var(--space-8)] text-center"
     >
-      <h1 className="font-sans text-2xl font-semibold text-foreground">
-        Something went wrong
-      </h1>
+      <h1 className="font-sans text-2xl font-semibold text-foreground">Something went wrong</h1>
       <p className="mt-[var(--space-2)] max-w-md font-sans text-sm text-muted-foreground">
         An unexpected error occurred. You can try again or return to the homepage.
       </p>

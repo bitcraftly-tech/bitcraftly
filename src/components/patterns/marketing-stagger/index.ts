@@ -1,1 +1,1 @@
-export { MarketingStagger } from "./MarketingStagger";
+export { MarketingStagger } from './MarketingStagger';

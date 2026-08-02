@@ -1,5 +1,5 @@
-import "dotenv/config";
-import { defineConfig } from "prisma/config";
+import 'dotenv/config';
+import { defineConfig } from 'prisma/config';
 
 function resolveDirectUrl(): string {
   const directUrl = process.env.DIRECT_URL?.trim();
@@ -13,16 +13,16 @@ function resolveDirectUrl(): string {
   }
 
   throw new Error(
-    "Missing DIRECT_URL. Set DIRECT_URL (Neon direct connection) in .env for Prisma CLI operations.",
+    'Missing DIRECT_URL. Set DIRECT_URL (Neon direct connection) in .env for Prisma CLI operations.',
   );
 }
 
 const shadowDatabaseUrl = process.env.SHADOW_DATABASE_URL?.trim();
 
 export default defineConfig({
-  schema: "prisma/schema.prisma",
+  schema: 'prisma/schema.prisma',
   migrations: {
-    path: "prisma/migrations",
+    path: 'prisma/migrations',
   },
   datasource: {
     url: resolveDirectUrl(),

@@ -1,15 +1,15 @@
-import Link from "next/link";
-import { AnimatedStat } from "@/components/patterns/animated-stat";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import { SOLUTIONS_LANDING } from "./solutions.content";
-import { SolutionsHeroVisual } from "./SolutionsHeroVisual";
-import "./solutions.css";
+import Link from 'next/link';
+import { AnimatedStat } from '@/components/patterns/animated-stat';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import { SOLUTIONS_LANDING } from './solutions.content';
+import { SolutionsHeroVisual } from './SolutionsHeroVisual';
+import './solutions.css';
 
 interface SolutionsHeroProps {
   breadcrumbs: readonly BreadcrumbItem[];
@@ -17,40 +17,40 @@ interface SolutionsHeroProps {
 
 const HERO_STATS = [
   {
-    id: "projects",
-    value: "200+",
-    label: "Projects Delivered",
-    icon: "layout-grid" as const,
-    tone: "violet",
+    id: 'projects',
+    value: '200+',
+    label: 'Projects Delivered',
+    icon: 'layout-grid' as const,
+    tone: 'violet',
   },
   {
-    id: "satisfaction",
-    value: "98%",
-    label: "Client Satisfaction",
-    icon: "star" as const,
-    tone: "emerald",
+    id: 'satisfaction',
+    value: '98%',
+    label: 'Client Satisfaction',
+    icon: 'star' as const,
+    tone: 'emerald',
   },
   {
-    id: "support",
-    value: "24/7",
-    label: "Support Available",
-    icon: "headset" as const,
-    tone: "sky",
+    id: 'support',
+    value: '24/7',
+    label: 'Support Available',
+    icon: 'headset' as const,
+    tone: 'sky',
   },
   {
-    id: "response",
-    value: "24h",
-    label: "Avg. Response Time",
-    icon: "zap" as const,
-    tone: "amber",
+    id: 'response',
+    value: '24h',
+    label: 'Avg. Response Time',
+    icon: 'zap' as const,
+    tone: 'amber',
   },
 ] as const;
 
 const HERO_CHIPS: readonly { id: string; label: string; icon: IconName }[] = [
-  { id: "crm", label: "CRM & ERP", icon: "workflow" },
-  { id: "ai", label: "AI Automation", icon: "shield" },
-  { id: "saas", label: "SaaS Platforms", icon: "rocket" },
-  { id: "analytics", label: "Analytics", icon: "trending-up" },
+  { id: 'crm', label: 'CRM & ERP', icon: 'workflow' },
+  { id: 'ai', label: 'AI Automation', icon: 'shield' },
+  { id: 'saas', label: 'SaaS Platforms', icon: 'rocket' },
+  { id: 'analytics', label: 'Analytics', icon: 'trending-up' },
 ];
 
 /**
@@ -58,9 +58,7 @@ const HERO_CHIPS: readonly { id: string; label: string; icon: IconName }[] = [
  */
 export async function SolutionsHero({ breadcrumbs }: SolutionsHeroProps) {
   const isMobile = await isMobileUserAgent();
-  const titleParts = SOLUTIONS_LANDING.title.split(
-    SOLUTIONS_LANDING.titleHighlight,
-  );
+  const titleParts = SOLUTIONS_LANDING.title.split(SOLUTIONS_LANDING.titleHighlight);
 
   const resolvedTrust = isMobile
     ? SOLUTIONS_LANDING.trustIndicators.slice(0, 2)
@@ -71,9 +69,9 @@ export async function SolutionsHero({ breadcrumbs }: SolutionsHeroProps) {
       spacing="lg"
       aria-labelledby="solutions-page-heading"
       className={cn(
-        "solutions-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'solutions-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -106,26 +104,17 @@ export async function SolutionsHero({ breadcrumbs }: SolutionsHeroProps) {
           <MarketingBreadcrumbs items={breadcrumbs} className="mb-0" />
 
           <p className="solutions-hero__eyebrow">
-            <Icon
-              name="workflow"
-              size="sm"
-              aria-hidden
-              className="h-[14px] w-[14px]"
-            />
+            <Icon name="workflow" size="sm" aria-hidden className="h-[14px] w-[14px]" />
             {SOLUTIONS_LANDING.eyebrow}
           </p>
 
           <h1 id="solutions-page-heading" className="solutions-hero__title">
             {titleParts[0]}
-            <span className="solutions-hero__title-accent">
-              {SOLUTIONS_LANDING.titleHighlight}
-            </span>
-            {titleParts[1] ?? ""}
+            <span className="solutions-hero__title-accent">{SOLUTIONS_LANDING.titleHighlight}</span>
+            {titleParts[1] ?? ''}
           </h1>
 
-          <p className="solutions-hero__description">
-            {SOLUTIONS_LANDING.description}
-          </p>
+          <p className="solutions-hero__description">{SOLUTIONS_LANDING.description}</p>
 
           <div className="solutions-hero__cta-row">
             <Link
@@ -148,11 +137,7 @@ export async function SolutionsHero({ breadcrumbs }: SolutionsHeroProps) {
             {resolvedTrust.map((item) => (
               <li key={item} className="solutions-hero__trust-item">
                 <span className="solutions-hero__trust-check" aria-hidden>
-                  <Icon
-                    name="check"
-                    size="sm"
-                    className="h-[11px] w-[11px]"
-                  />
+                  <Icon name="check" size="sm" className="h-[11px] w-[11px]" />
                 </span>
                 {item}
               </li>
@@ -186,11 +171,7 @@ export async function SolutionsHero({ breadcrumbs }: SolutionsHeroProps) {
                 <li key={chip.id}>
                   <span className="solutions-hero__chip">
                     <span className="solutions-hero__chip-icon" aria-hidden>
-                      <Icon
-                        name={chip.icon}
-                        size="sm"
-                        className="h-[13px] w-[13px]"
-                      />
+                      <Icon name={chip.icon} size="sm" className="h-[13px] w-[13px]" />
                     </span>
                     {chip.label}
                   </span>

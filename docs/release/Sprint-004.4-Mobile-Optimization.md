@@ -18,54 +18,54 @@ Key requirement: hide hero illustrations on small devices using **server-side co
 
 ### Mobile detection (new)
 
-| File | Change |
-|------|--------|
-| `src/lib/device/is-mobile-user-agent.ts` | **New** — server-only mobile gate via `user-agent` + optional `sec-ch-viewport-width` (≤767px) |
-| `src/lib/device/is-mobile-user-agent.test.ts` | **New** — unit tests for UA / viewport detection |
+| File                                          | Change                                                                                         |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `src/lib/device/is-mobile-user-agent.ts`      | **New** — server-only mobile gate via `user-agent` + optional `sec-ch-viewport-width` (≤767px) |
+| `src/lib/device/is-mobile-user-agent.test.ts` | **New** — unit tests for UA / viewport detection                                               |
 
 ### Global responsive guards (new)
 
-| File | Change |
-|------|--------|
-| `src/styles/mobile-layout.css` | **New** — `overflow-x: clip` on `#main-content`, compact hero padding, safe-area header insets |
-| `src/app/(marketing)/layout.tsx` | Import `mobile-layout.css` |
+| File                             | Change                                                                                         |
+| -------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `src/styles/mobile-layout.css`   | **New** — `overflow-x: clip` on `#main-content`, compact hero padding, safe-area header insets |
+| `src/app/(marketing)/layout.tsx` | Import `mobile-layout.css`                                                                     |
 
 ### Shared marketing hero shell
 
-| File | Change |
-|------|--------|
+| File                                                                     | Change                                                                                                                                               |
+| ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `src/components/patterns/hero-compositions/MarketingIllustratedHero.tsx` | Async server component; `renderVisual()` callback; mobile skips visual, decorations, meta (chips/stats), supporting copy, eyebrow; trust capped at 2 |
 
 ### Landing pages (renderVisual pattern)
 
-| File | Change |
-|------|--------|
-| `src/features/contact/ContactLandingPage.tsx` | `renderVisual={() => <ContactHeroVisual />}` |
-| `src/features/pricing/PricingLandingPage.tsx` | `renderVisual={() => <PricingHeroVisual />}` |
-| `src/features/about/AboutLandingPage.tsx` | `renderVisual={() => <AboutHeroVisual />}` |
+| File                                                   | Change                                           |
+| ------------------------------------------------------ | ------------------------------------------------ |
+| `src/features/contact/ContactLandingPage.tsx`          | `renderVisual={() => <ContactHeroVisual />}`     |
+| `src/features/pricing/PricingLandingPage.tsx`          | `renderVisual={() => <PricingHeroVisual />}`     |
+| `src/features/about/AboutLandingPage.tsx`              | `renderVisual={() => <AboutHeroVisual />}`       |
 | `src/features/case-studies/CaseStudiesLandingPage.tsx` | `renderVisual={() => <CaseStudiesHeroVisual />}` |
 
 ### Homepage hero
 
-| File | Change |
-|------|--------|
-| `src/features/homepage/Hero/HeroSection.tsx` | Async; skips `HeroIllustration` + background decorations on mobile; compact spacing |
-| `src/features/homepage/Hero/HeroContent.tsx` | `compactMobile` prop — shorter copy, hides eyebrow + capability tags |
-| `src/features/homepage/Hero/hero.constants.ts` | `HERO_DESCRIPTION_MOBILE` constant |
+| File                                           | Change                                                                              |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `src/features/homepage/Hero/HeroSection.tsx`   | Async; skips `HeroIllustration` + background decorations on mobile; compact spacing |
+| `src/features/homepage/Hero/HeroContent.tsx`   | `compactMobile` prop — shorter copy, hides eyebrow + capability tags                |
+| `src/features/homepage/Hero/hero.constants.ts` | `HERO_DESCRIPTION_MOBILE` constant                                                  |
 
 ### Hub heroes (Services, Solutions, Industries, Work)
 
-| File | Change |
-|------|--------|
-| `src/features/services/ServicesHero.tsx` | Async; mobile skips visual, tech stack, stats, features, decorations |
-| `src/features/solutions/SolutionsHero.tsx` | Async; mobile skips visual, stats, chips, decorations; trust capped at 2 |
+| File                                         | Change                                                                                  |
+| -------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `src/features/services/ServicesHero.tsx`     | Async; mobile skips visual, tech stack, stats, features, decorations                    |
+| `src/features/solutions/SolutionsHero.tsx`   | Async; mobile skips visual, stats, chips, decorations; trust capped at 2                |
 | `src/features/industries/IndustriesHero.tsx` | Async; mobile skips visual, highlights, trusted-by band, decorations; trust capped at 2 |
-| `src/features/work/WorkHero.tsx` | Async; mobile skips visual, tech stack, stats, decorations |
+| `src/features/work/WorkHero.tsx`             | Async; mobile skips visual, tech stack, stats, decorations                              |
 
 ### Navigation accessibility
 
-| File | Change |
-|------|--------|
+| File                                                | Change                                                   |
+| --------------------------------------------------- | -------------------------------------------------------- |
 | `src/features/homepage/Header/MobileNavigation.tsx` | Menu toggle touch target increased to **44×44px** (WCAG) |
 
 ### Below-the-fold lazy loading (unchanged — already in Phase A/B)
@@ -95,13 +95,13 @@ Request → isMobileUserAgent() [server headers]
 
 ## Bundle / payload reduction (mobile)
 
-| Area | Before (mobile) | After (mobile) |
-|------|-----------------|----------------|
-| Homepage hero | Full `HeroIllustration` + priority `/hero-opt.webp` in HTML | Illustration tree not instantiated |
-| Marketing heroes (Contact, Pricing, About, Case Studies) | Eager `*HeroVisual` in RSC tree | `renderVisual()` not invoked — no visual component output |
-| Hub heroes | Priority hero WebP + stats/chips/features HTML | Visual + secondary meta omitted server-side |
-| Homepage ATF | Eyebrow + capability tags + long description | Compact copy only; tags hidden |
-| Background decorations | 5 layered aurora/grid divs per hero | Omitted on mobile |
+| Area                                                     | Before (mobile)                                             | After (mobile)                                            |
+| -------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------- |
+| Homepage hero                                            | Full `HeroIllustration` + priority `/hero-opt.webp` in HTML | Illustration tree not instantiated                        |
+| Marketing heroes (Contact, Pricing, About, Case Studies) | Eager `*HeroVisual` in RSC tree                             | `renderVisual()` not invoked — no visual component output |
+| Hub heroes                                               | Priority hero WebP + stats/chips/features HTML              | Visual + secondary meta omitted server-side               |
+| Homepage ATF                                             | Eyebrow + capability tags + long description                | Compact copy only; tags hidden                            |
+| Background decorations                                   | 5 layered aurora/grid divs per hero                         | Omitted on mobile                                         |
 
 Desktop HTML and crawlable content remain unchanged for non-mobile requests.
 
@@ -115,21 +115,21 @@ Build ID for Sprint 004.4 audit: `rGWhEOrjsSUBBZdbL7vq1`
 
 ### Phase B baseline (Sprint 004.3)
 
-| Route | Perf | A11y | BP | SEO |
-|-------|------|------|-----|-----|
-| `/` | 73 | 100 | 100 | 100 |
-| `/services` | 73 | 100 | 100 | 100 |
-| `/pricing` | 74 | 100 | 100 | 100 |
-| `/contact` | 75 | 100 | 100 | 100 |
+| Route       | Perf | A11y | BP  | SEO |
+| ----------- | ---- | ---- | --- | --- |
+| `/`         | 73   | 100  | 100 | 100 |
+| `/services` | 73   | 100  | 100 | 100 |
+| `/pricing`  | 74   | 100  | 100 | 100 |
+| `/contact`  | 75   | 100  | 100 | 100 |
 
 ### Sprint 004.4 (this sprint — desktop CI)
 
-| Route | Perf | A11y | BP | SEO |
-|-------|------|------|-----|-----|
-| `/` | n/a (trace flake) | 100 | 100 | 100 |
-| `/services` | 54 | 100 | 100 | 100 |
-| `/pricing` | 50 | 100 | 100 | 100 |
-| `/contact` | 57 | 100 | 100 | 100 |
+| Route       | Perf              | A11y | BP  | SEO |
+| ----------- | ----------------- | ---- | --- | --- |
+| `/`         | n/a (trace flake) | 100  | 100 | 100 |
+| `/services` | 54                | 100  | 100 | 100 |
+| `/pricing`  | 50                | 100  | 100 | 100 |
+| `/contact`  | 57                | 100  | 100 | 100 |
 
 **Notes:**
 
@@ -141,13 +141,13 @@ Build ID for Sprint 004.4 audit: `rGWhEOrjsSUBBZdbL7vq1`
 
 ## Responsive coverage
 
-| Breakpoint | Approach |
-|------------|----------|
-| 320–767px | Server mobile hero reduction + `mobile-layout.css` overflow guard + compact hero padding |
-| 768–1023px | Desktop hero path (full layout) |
-| 1024px+ | Unchanged multi-column hero grids |
-| iOS safe areas | `env(safe-area-inset-*)` on `.header-adaptive` |
-| Touch targets | Mobile menu button ≥44px |
+| Breakpoint     | Approach                                                                                 |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| 320–767px      | Server mobile hero reduction + `mobile-layout.css` overflow guard + compact hero padding |
+| 768–1023px     | Desktop hero path (full layout)                                                          |
+| 1024px+        | Unchanged multi-column hero grids                                                        |
+| iOS safe areas | `env(safe-area-inset-*)` on `.header-adaptive`                                           |
+| Touch targets  | Mobile menu button ≥44px                                                                 |
 
 Portrait / landscape handled via existing responsive CSS; hero simplification applies to mobile UA regardless of orientation.
 
@@ -155,13 +155,13 @@ Portrait / landscape handled via existing responsive CSS; hero simplification ap
 
 ## Accessibility
 
-| Item | Status |
-|------|--------|
-| WCAG AA contrast | Preserved (no token changes) |
-| Skip link | Present in marketing layout (`#main-content`) |
-| Keyboard nav | Unchanged patterns preserved |
-| Touch targets ≥44px | Mobile menu toggle updated |
-| Semantic HTML | Hero headings / landmarks unchanged |
+| Item                   | Status                                                                       |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| WCAG AA contrast       | Preserved (no token changes)                                                 |
+| Skip link              | Present in marketing layout (`#main-content`)                                |
+| Keyboard nav           | Unchanged patterns preserved                                                 |
+| Touch targets ≥44px    | Mobile menu toggle updated                                                   |
+| Semantic HTML          | Hero headings / landmarks unchanged                                          |
 | Hidden mobile sections | Removed server-side (not `aria-hidden` traps) — desktop crawl content intact |
 
 ---
@@ -194,15 +194,15 @@ npm run lighthouse:ci # A11y/BP/SEO pass; home perf flake; perf warn-only thresh
 
 ## Acceptance criteria
 
-| Criterion | Target | Result |
-|-----------|--------|--------|
-| Zero horizontal scroll (mobile) | ✅ | `overflow-x: clip` on `#main-content` + hero compaction |
-| Mobile hero conditional render | ✅ | Server `isMobileUserAgent()` + `renderVisual()` |
-| Desktop layout unchanged | ✅ | Full hero for non-mobile UA |
-| A11y / BP / SEO | 100 | **100** on CI routes |
-| Performance | ≥95 | **Not met** (desktop CI 50–57; mobile not profiled in CI) |
-| No hydration errors | ✅ | Build + unit tests pass |
-| Responsive breakpoints | ✅ | CSS + server mobile path |
+| Criterion                       | Target | Result                                                    |
+| ------------------------------- | ------ | --------------------------------------------------------- |
+| Zero horizontal scroll (mobile) | ✅     | `overflow-x: clip` on `#main-content` + hero compaction   |
+| Mobile hero conditional render  | ✅     | Server `isMobileUserAgent()` + `renderVisual()`           |
+| Desktop layout unchanged        | ✅     | Full hero for non-mobile UA                               |
+| A11y / BP / SEO                 | 100    | **100** on CI routes                                      |
+| Performance                     | ≥95    | **Not met** (desktop CI 50–57; mobile not profiled in CI) |
+| No hydration errors             | ✅     | Build + unit tests pass                                   |
+| Responsive breakpoints          | ✅     | CSS + server mobile path                                  |
 
 ---
 

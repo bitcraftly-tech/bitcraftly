@@ -1,0 +1,8 @@
+/**
+ * Homepage above-the-fold CSS — single entry so Next emits one ATF stylesheet.
+ * Header chrome lives in marketing-chrome.css (layout). Hero + fail-open here.
+ */
+@import './homepage-critical.css';
+@import '../Hero/homepage-hero.css';
+@import '../Hero/system-composition.css';
+@import './homepage-polish.css';

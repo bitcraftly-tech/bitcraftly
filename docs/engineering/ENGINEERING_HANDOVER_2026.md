@@ -19,39 +19,39 @@ Bitcraftly Platform V2 is an enterprise Next.js marketing and lead-capture appli
 
 ## Current release branch
 
-| Item | Value |
-|------|--------|
-| Branch | `release/v1.0-launch` |
-| Remote | `origin` → `https://github.com/bitcraftly-tech/bitcraftly.git` |
-| Latest RC tag | `v1.0.0-rc5` |
-| Launch candidate tag | `v1.0-launch-candidate` |
+| Item                 | Value                                                          |
+| -------------------- | -------------------------------------------------------------- |
+| Branch               | `release/v1.0-launch`                                          |
+| Remote               | `origin` → `https://github.com/bitcraftly-tech/bitcraftly.git` |
+| Latest RC tag        | `v1.0.0-rc5`                                                   |
+| Launch candidate tag | `v1.0-launch-candidate`                                        |
 
 ## Production readiness
 
-| Area | Status |
-|------|--------|
-| Application build | ✅ Passes lint, typecheck, unit tests, build |
-| CI pipeline | ✅ GitHub Actions on `main`, `develop`, `release/**` |
-| Database | ✅ Prisma + Neon; migration workflow documented |
-| Lead capture | ✅ Persist + notify; confirmation email added 2026-07-22 |
-| Security | ✅ Headers, rate limits, owner auth, env validation |
-| SEO / A11y | ✅ Lighthouse A11y/BP/SEO 100 on key routes |
-| Performance | ⚠️ Perf 73–75 (target 90) — Phase C pending |
-| Email delivery | ⚠️ Requires Resend domain **Verified** (`bitcraftly.com`) |
-| DNS | ⚠️ Cloudflare migration in progress (2026-07-22) |
+| Area              | Status                                                    |
+| ----------------- | --------------------------------------------------------- |
+| Application build | ✅ Passes lint, typecheck, unit tests, build              |
+| CI pipeline       | ✅ GitHub Actions on `main`, `develop`, `release/**`      |
+| Database          | ✅ Prisma + Neon; migration workflow documented           |
+| Lead capture      | ✅ Persist + notify; confirmation email added 2026-07-22  |
+| Security          | ✅ Headers, rate limits, owner auth, env validation       |
+| SEO / A11y        | ✅ Lighthouse A11y/BP/SEO 100 on key routes               |
+| Performance       | ⚠️ Perf 73–75 (target 90) — Phase C pending               |
+| Email delivery    | ⚠️ Requires Resend domain **Verified** (`bitcraftly.com`) |
+| DNS               | ⚠️ Cloudflare migration in progress (2026-07-22)          |
 
 **Verdict:** **Conditional GO** — deploy-ready after Resend domain verification, Vercel env confirmation, and smoke tests.
 
 ## Pending work
 
-1. Complete Cloudflare nameserver propagation → Resend domain Verified  
-2. Set `LEAD_FROM_EMAIL=Bitcraftly <hello@bitcraftly.com>` in Vercel (all environments)  
-3. Lead capture smoke on staging + production  
-4. Sprint 004.3 **Phase C** — LCP / render-blocking CSS (Perf ≥ 90)  
-5. Distributed rate limiting (Redis/Upstash)  
-6. Sentry package integration (hooks exist)  
-7. Mobile Lighthouse in CI  
-8. Admin panel authentication  
+1. Complete Cloudflare nameserver propagation → Resend domain Verified
+2. Set `LEAD_FROM_EMAIL=Bitcraftly <hello@bitcraftly.com>` in Vercel (all environments)
+3. Lead capture smoke on staging + production
+4. Sprint 004.3 **Phase C** — LCP / render-blocking CSS (Perf ≥ 90)
+5. Distributed rate limiting (Redis/Upstash)
+6. Sentry package integration (hooks exist)
+7. Mobile Lighthouse in CI
+8. Admin panel authentication
 
 ---
 
@@ -59,28 +59,28 @@ Bitcraftly Platform V2 is an enterprise Next.js marketing and lead-capture appli
 
 ## Repositories
 
-| Repository | URL | Remote | Purpose | Status |
-|------------|-----|--------|---------|--------|
-| **bitcraftly** | `https://github.com/bitcraftly-tech/bitcraftly.git` | `origin` | Primary production monorepo | **Active** |
-| bitcraftly-platform | `https://github.com/uideveloper09/bitcraftly-platform.git` | `personal` | Developer mirror | Secondary |
+| Repository          | URL                                                        | Remote     | Purpose                     | Status     |
+| ------------------- | ---------------------------------------------------------- | ---------- | --------------------------- | ---------- |
+| **bitcraftly**      | `https://github.com/bitcraftly-tech/bitcraftly.git`        | `origin`   | Primary production monorepo | **Active** |
+| bitcraftly-platform | `https://github.com/uideveloper09/bitcraftly-platform.git` | `personal` | Developer mirror            | Secondary  |
 
 ## Deprecated / legacy
 
-| Item | Notes |
-|------|-------|
-| `origin/development` | Legacy integration branch |
-| `origin/release/v2-platform` | Superseded by `release/v1.0-launch` |
-| Legacy `feat/*` branches on origin | Historical; do not deploy |
+| Item                               | Notes                               |
+| ---------------------------------- | ----------------------------------- |
+| `origin/development`               | Legacy integration branch           |
+| `origin/release/v2-platform`       | Superseded by `release/v1.0-launch` |
+| Legacy `feat/*` branches on origin | Historical; do not deploy           |
 
 ## Branch strategy
 
-| Branch | Role |
-|--------|------|
-| `release/v1.0-launch` | **Current release** — deploy staging/production from here |
-| `main` | Stable integration target |
-| `develop` | Active development integration |
-| `feature/*` | Feature branches (merge to develop or release) |
-| `integration/release-v1` | Historical integration |
+| Branch                   | Role                                                      |
+| ------------------------ | --------------------------------------------------------- |
+| `release/v1.0-launch`    | **Current release** — deploy staging/production from here |
+| `main`                   | Stable integration target                                 |
+| `develop`                | Active development integration                            |
+| `feature/*`              | Feature branches (merge to develop or release)            |
+| `integration/release-v1` | Historical integration                                    |
 
 **CI triggers:** push/PR on `main`, `develop`, `release/**`
 
@@ -95,13 +95,13 @@ personal https://github.com/uideveloper09/bitcraftly-platform.git
 
 ## Tags (release markers)
 
-| Tag | Points to | Notes |
-|-----|-----------|-------|
-| `v1.0.0-rc5` | `6af0a1e` | Latest RC — confirmation emails |
-| `v1.0-launch-candidate` | `6af0a1e` | Launch candidate |
-| `v1.0.0-rc4` | `8f57e69` | Sprint 004.3 Phase A |
-| `v1.0-lead-intelligence` | `5def6fe` | Sprint 003 |
-| `v1.0.0` | `5def6fe` | Historical marker |
+| Tag                      | Points to | Notes                           |
+| ------------------------ | --------- | ------------------------------- |
+| `v1.0.0-rc5`             | `6af0a1e` | Latest RC — confirmation emails |
+| `v1.0-launch-candidate`  | `6af0a1e` | Launch candidate                |
+| `v1.0.0-rc4`             | `8f57e69` | Sprint 004.3 Phase A            |
+| `v1.0-lead-intelligence` | `5def6fe` | Sprint 003                      |
+| `v1.0.0`                 | `5def6fe` | Historical marker               |
 
 ---
 
@@ -109,18 +109,18 @@ personal https://github.com/uideveloper09/bitcraftly-platform.git
 
 ## Stack
 
-| Layer | Technology | Version |
-|-------|------------|---------|
-| Framework | Next.js (App Router) | 16.2.10 |
-| UI | React | 19.2.4 |
-| Language | TypeScript | 5.x strict |
-| Styling | Tailwind CSS | v4 |
-| ORM | Prisma | 7.8.0 |
-| Database | PostgreSQL (Neon) | — |
-| Email | Resend API | — |
-| Validation | Zod | 4.4.3 |
-| Forms | react-hook-form | 7.81.0 |
-| Planned backend | FastAPI + JWT | Not in this repo |
+| Layer           | Technology           | Version          |
+| --------------- | -------------------- | ---------------- |
+| Framework       | Next.js (App Router) | 16.2.10          |
+| UI              | React                | 19.2.4           |
+| Language        | TypeScript           | 5.x strict       |
+| Styling         | Tailwind CSS         | v4               |
+| ORM             | Prisma               | 7.8.0            |
+| Database        | PostgreSQL (Neon)    | —                |
+| Email           | Resend API           | —                |
+| Validation      | Zod                  | 4.4.3            |
+| Forms           | react-hook-form      | 7.81.0           |
+| Planned backend | FastAPI + JWT        | Not in this repo |
 
 ## Architectural principles
 
@@ -171,12 +171,12 @@ src/features/
 
 ## Authentication
 
-| Surface | Mechanism |
-|---------|-----------|
-| Owner CRM | Env credentials + HMAC session cookie (`bitcraftly_owner_session`) |
-| Public site | None |
-| Admin scaffold | **Not authenticated** (future sprint) |
-| End-user auth | Planned FastAPI JWT — not implemented |
+| Surface        | Mechanism                                                          |
+| -------------- | ------------------------------------------------------------------ |
+| Owner CRM      | Env credentials + HMAC session cookie (`bitcraftly_owner_session`) |
+| Public site    | None                                                               |
+| Admin scaffold | **Not authenticated** (future sprint)                              |
+| End-user auth  | Planned FastAPI JWT — not implemented                              |
 
 **Defense in depth:** Middleware + `requireOwnerSession()` in owner layout and CRM loader.
 
@@ -270,9 +270,9 @@ Establish engineering foundation, documentation, design-system direction, and pr
 
 ### Git commit
 
-| Commit | Message |
-|--------|---------|
-| `1ba49d6` | `docs: establish production-ready engineering foundation` |
+| Commit    | Message                                                         |
+| --------- | --------------------------------------------------------------- |
+| `1ba49d6` | `docs: establish production-ready engineering foundation`       |
 | `70ee7eb` | `feat(homepage): complete premium homepage redesign and freeze` |
 
 ### Lessons learned
@@ -377,8 +377,8 @@ Persist leads to PostgreSQL, add Owner CRM dashboard, owner authentication, and 
 
 ### Git commit
 
-| Commit | Message |
-|--------|---------|
+| Commit    | Message                                                          |
+| --------- | ---------------------------------------------------------------- |
 | `5def6fe` | `feat(lead-crm): complete Sprint 003 lead intelligence platform` |
 
 ### Lessons learned
@@ -425,8 +425,8 @@ All 7 deliverables ✅ in Sprint doc; lint/typecheck/build pass
 
 ### Git commit
 
-| Commit | Message |
-|--------|---------|
+| Commit    | Message                                                         |
+| --------- | --------------------------------------------------------------- |
 | `b738466` | `chore(infra): complete Sprint 004.1 production infrastructure` |
 
 ### Lessons learned
@@ -473,8 +473,8 @@ All 9 criteria ✅ in Sprint doc
 
 ### Git commit
 
-| Commit | Message |
-|--------|---------|
+| Commit    | Message                                                      |
+| --------- | ------------------------------------------------------------ |
 | `83db2a3` | `feat(security): complete Sprint 004.2 production hardening` |
 
 ### Lessons learned
@@ -521,8 +521,8 @@ Critical/High audit items fixed per Sprint doc
 
 ### Git commit
 
-| Commit | Message |
-|--------|---------|
+| Commit    | Message                                                            |
+| --------- | ------------------------------------------------------------------ |
 | `8f57e69` | `feat(performance): complete Sprint 004.3 production optimization` |
 
 ### Lessons learned
@@ -552,12 +552,12 @@ Header scroll island, services SSR catalog + filter island, lazy pricing/contact
 
 ### Performance impact
 
-| Route | Perf before (Phase A prod) | Perf after (Phase B) |
-|-------|---------------------------|----------------------|
-| `/` | n/a | **73** |
-| `/services` | 52 | **73** |
-| `/pricing` | 59 | **74** |
-| `/contact` | 49 | **75** |
+| Route       | Perf before (Phase A prod) | Perf after (Phase B) |
+| ----------- | -------------------------- | -------------------- |
+| `/`         | n/a                        | **73**               |
+| `/services` | 52                         | **73**               |
+| `/pricing`  | 59                         | **74**               |
+| `/contact`  | 49                         | **75**               |
 
 - TBT on `/services`: ~3980 ms → **120 ms**
 - Unused JS on `/services`: 539 KiB → **22 KiB**
@@ -577,8 +577,8 @@ Perf ≥ 90 **not met** — LCP ~3.2s remains; Phase C recommended
 
 ### Git commit
 
-| Commit | Message |
-|--------|---------|
+| Commit    | Message                                            |
+| --------- | -------------------------------------------------- |
 | `8c25779` | `feat(performance): complete Sprint 004.3 Phase B` |
 
 ### Lessons learned
@@ -590,8 +590,8 @@ Perf ≥ 90 **not met** — LCP ~3.2s remains; Phase C recommended
 
 ## Post-handover addition (2026-07-22)
 
-| Commit | Change |
-|--------|--------|
+| Commit    | Change                                                                                           |
+| --------- | ------------------------------------------------------------------------------------------------ |
 | `6af0a1e` | Submitter confirmation emails; `confirmationSent` on `SubmitLeadSuccess`; conditional success UI |
 
 ---
@@ -600,12 +600,12 @@ Perf ≥ 90 **not met** — LCP ~3.2s remains; Phase C recommended
 
 ## Prisma
 
-| Item | Location |
-|------|----------|
-| Schema | `prisma/schema.prisma` |
+| Item          | Location                                                 |
+| ------------- | -------------------------------------------------------- |
+| Schema        | `prisma/schema.prisma`                                   |
 | Client output | `src/generated/prisma/` (gitignored, generated at build) |
-| Runtime | `src/lib/db/prisma.ts` — pooled via `@prisma/adapter-pg` |
-| Config | `prisma.config.ts` |
+| Runtime       | `src/lib/db/prisma.ts` — pooled via `@prisma/adapter-pg` |
+| Config        | `prisma.config.ts`                                       |
 
 **Model:** `Lead` — contact/newsletter leads with notification status fields.
 
@@ -617,20 +617,20 @@ Perf ≥ 90 **not met** — LCP ~3.2s remains; Phase C recommended
 
 ## Migration workflow
 
-| Environment | Command | When |
-|-------------|---------|------|
-| Local dev | `npm run db:migrate` | Schema changes during development |
-| Production | `npm run db:deploy` | Via GitHub Actions only |
-| Never in prod | `prisma migrate dev`, `db push` | — |
+| Environment   | Command                         | When                              |
+| ------------- | ------------------------------- | --------------------------------- |
+| Local dev     | `npm run db:migrate`            | Schema changes during development |
+| Production    | `npm run db:deploy`             | Via GitHub Actions only           |
+| Never in prod | `prisma migrate dev`, `db push` | —                                 |
 
 **Workflow:** `.github/workflows/db-deploy.yml` — manual dispatch, must type `deploy`, uses GitHub `production` environment secrets.
 
 ## GitHub Actions
 
-| Workflow | Trigger | Jobs |
-|----------|---------|------|
-| `ci.yml` | push/PR `main`, `develop`, `release/**` | quality (lint, typecheck, coverage, build), e2e, lighthouse |
-| `db-deploy.yml` | manual | `prisma migrate deploy` + status check |
+| Workflow        | Trigger                                 | Jobs                                                        |
+| --------------- | --------------------------------------- | ----------------------------------------------------------- |
+| `ci.yml`        | push/PR `main`, `develop`, `release/**` | quality (lint, typecheck, coverage, build), e2e, lighthouse |
+| `db-deploy.yml` | manual                                  | `prisma migrate deploy` + status check                      |
 
 ## CI
 
@@ -654,11 +654,11 @@ Fails deploy startup if any of 8 required vars missing/invalid (see `server-env.
 
 ## Database deployment workflow
 
-1. Merge to release branch  
-2. Configure GitHub `production` environment secrets (`DATABASE_URL`, `DIRECT_URL`)  
-3. Run **Database Migrate Deploy** workflow  
-4. Verify `prisma migrate status` in workflow output  
-5. Deploy application to Vercel  
+1. Merge to release branch
+2. Configure GitHub `production` environment secrets (`DATABASE_URL`, `DIRECT_URL`)
+3. Run **Database Migrate Deploy** workflow
+4. Verify `prisma migrate status` in workflow output
+5. Deploy application to Vercel
 
 ---
 
@@ -668,17 +668,17 @@ Fails deploy startup if any of 8 required vars missing/invalid (see `server-env.
 
 **Source:** `src/lib/security/security-headers.ts` → `next.config.ts`
 
-| Header | Value / notes |
-|--------|---------------|
-| `Strict-Transport-Security` | `max-age=31536000; includeSubDomains; preload` |
-| `X-Content-Type-Options` | `nosniff` |
-| `X-Frame-Options` | `DENY` |
-| `Referrer-Policy` | `strict-origin-when-cross-origin` |
-| `Permissions-Policy` | Restrictive defaults |
-| `Content-Security-Policy` | See file — `frame-ancestors 'none'`, conditional Sentry |
-| `Cross-Origin-Opener-Policy` | `same-origin-allow-popups` |
-| `Cross-Origin-Resource-Policy` | `same-site` |
-| `X-Permitted-Cross-Domain-Policies` | `none` |
+| Header                              | Value / notes                                           |
+| ----------------------------------- | ------------------------------------------------------- |
+| `Strict-Transport-Security`         | `max-age=31536000; includeSubDomains; preload`          |
+| `X-Content-Type-Options`            | `nosniff`                                               |
+| `X-Frame-Options`                   | `DENY`                                                  |
+| `Referrer-Policy`                   | `strict-origin-when-cross-origin`                       |
+| `Permissions-Policy`                | Restrictive defaults                                    |
+| `Content-Security-Policy`           | See file — `frame-ancestors 'none'`, conditional Sentry |
+| `Cross-Origin-Opener-Policy`        | `same-origin-allow-popups`                              |
+| `Cross-Origin-Resource-Policy`      | `same-site`                                             |
+| `X-Permitted-Cross-Domain-Policies` | `none`                                                  |
 
 ## Middleware
 
@@ -686,12 +686,12 @@ Owner route protection only (`/owner/*`). See Section 3.
 
 ## Rate limits
 
-| Surface | Defaults | Env overrides |
-|---------|----------|---------------|
-| Lead per email+IP | 5 / 15 min | `LEAD_RATE_LIMIT_*` |
-| Lead per IP | 30 / 15 min | `LEAD_RATE_LIMIT_IP_*` |
-| Owner login per IP | 10 / 15 min | `OWNER_LOGIN_RATE_LIMIT_*` |
-| Owner login per account | 5 / 15 min | `OWNER_LOGIN_ACCOUNT_*` |
+| Surface                 | Defaults    | Env overrides              |
+| ----------------------- | ----------- | -------------------------- |
+| Lead per email+IP       | 5 / 15 min  | `LEAD_RATE_LIMIT_*`        |
+| Lead per IP             | 30 / 15 min | `LEAD_RATE_LIMIT_IP_*`     |
+| Owner login per IP      | 10 / 15 min | `OWNER_LOGIN_RATE_LIMIT_*` |
+| Owner login per account | 5 / 15 min  | `OWNER_LOGIN_ACCOUNT_*`    |
 
 **Limitation:** In-memory — not shared across Vercel instances.
 
@@ -710,8 +710,8 @@ Owner route protection only (`/owner/*`). See Section 3.
 
 ## Cookie strategy
 
-| Cookie | Purpose | Flags |
-|--------|---------|-------|
+| Cookie                     | Purpose           | Flags                                     |
+| -------------------------- | ----------------- | ----------------------------------------- |
 | `bitcraftly_owner_session` | Owner CRM session | httpOnly, secure (prod), strict, `/owner` |
 
 ## CSP
@@ -747,18 +747,18 @@ Disables unused browser features — see `security-headers.ts`.
 
 ## Before vs after (Phase A → Phase B)
 
-| Route | Perf (Phase A prod) | Perf (Phase B) | Δ |
-|-------|---------------------|----------------|---|
-| `/` | n/a | 73 | — |
-| `/services` | 52 | 73 | +21 |
-| `/pricing` | 59 | 74 | +15 |
-| `/contact` | 49 | 75 | +26 |
+| Route       | Perf (Phase A prod) | Perf (Phase B) | Δ   |
+| ----------- | ------------------- | -------------- | --- |
+| `/`         | n/a                 | 73             | —   |
+| `/services` | 52                  | 73             | +21 |
+| `/pricing`  | 59                  | 74             | +15 |
+| `/contact`  | 49                  | 75             | +26 |
 
-| Category | Phase B |
-|----------|---------|
-| Accessibility | **100** all routes |
-| Best Practices | **100** |
-| SEO | **100** |
+| Category       | Phase B            |
+| -------------- | ------------------ |
+| Accessibility  | **100** all routes |
+| Best Practices | **100**            |
+| SEO            | **100**            |
 
 ## Bundle sizes
 
@@ -808,10 +808,10 @@ Phase A: removed `HomepageBelowFoldClient` wrapper; direct SSR below-fold.
 
 ## Remaining bottlenecks
 
-1. **LCP ~3.2s** on `/services` — render-blocking CSS  
-2. Perf score 73–75 vs target 90  
-3. Mobile Lighthouse not in CI  
-4. No RUM / web-vitals bridge  
+1. **LCP ~3.2s** on `/services` — render-blocking CSS
+2. Perf score 73–75 vs target 90
+3. Mobile Lighthouse not in CI
+4. No RUM / web-vitals bridge
 
 **Phase C recommendations:** Defer `/services` CSS, hero LCP tuning, mobile CI profile.
 
@@ -843,21 +843,21 @@ Phase A: removed `HomepageBelowFoldClient` wrapper; direct SSR below-fold.
 
 Scoped files only (see `vitest.config.ts`):
 
-| Metric | Value |
-|--------|-------|
+| Metric     | Value  |
+| ---------- | ------ |
 | Statements | 85.33% |
-| Branches | 70.45% |
-| Functions | 85% |
-| Lines | 84.61% |
+| Branches   | 70.45% |
+| Functions  | 85%    |
+| Lines      | 84.61% |
 
 Thresholds: 80/80/70/80 — **passing**
 
 ## Current pass rate
 
-| Suite | Status |
-|-------|--------|
-| Unit | ✅ 90/90 |
-| E2E | ✅ in CI (marketing + admin) |
+| Suite      | Status                         |
+| ---------- | ------------------------------ |
+| Unit       | ✅ 90/90                       |
+| E2E        | ✅ in CI (marketing + admin)   |
 | Lighthouse | ✅ gates pass (perf warn-only) |
 
 ## Known issues
@@ -872,41 +872,41 @@ Thresholds: 80/80/70/80 — **passing**
 
 > Full audit: `docs/release/ENVIRONMENT-AUDIT.md`
 
-| Variable | Purpose | Required | Local | Preview | Production | Sensitive |
-|----------|---------|----------|-------|---------|------------|-----------|
-| `DATABASE_URL` | Pooled PostgreSQL runtime | Yes | Yes | Yes | Yes | **Yes** |
-| `DIRECT_URL` | Direct DB for Prisma CLI | Yes (migrations) | Yes | Yes | GitHub only | **Yes** |
-| `SHADOW_DATABASE_URL` | Local migrate shadow DB | No | Optional | No | No | **Yes** |
-| `RESEND_API_KEY` | Resend API auth | Yes | Yes | Yes | Yes | **Yes** |
-| `LEAD_NOTIFICATION_TO` | Team inbox for leads | Yes | Yes | Yes | Yes | No |
-| `LEAD_FROM_EMAIL` | Verified sender address | Yes | Yes | Yes | Yes | No |
-| `NEXT_PUBLIC_SITE_URL` | Canonical site URL | Yes | Yes | Yes | Yes | No |
-| `OWNER_AUTH_EMAIL` | Owner login email | Yes | Yes | Yes | Yes | No |
-| `OWNER_AUTH_PASSWORD` | Owner login password | Yes | Yes | Yes | Yes | **Yes** |
-| `OWNER_SESSION_SECRET` | Session HMAC secret | Yes | Yes | Yes | Yes | **Yes** |
-| `LEAD_RATE_LIMIT_MAX` | Lead rate limit | No | Optional | Optional | Optional | No |
-| `LEAD_RATE_LIMIT_IP_MAX` | Lead IP limit | No | Optional | Optional | Optional | No |
-| `LEAD_RATE_LIMIT_WINDOW_MS` | Lead window ms | No | Optional | Optional | Optional | No |
-| `OWNER_LOGIN_RATE_LIMIT_MAX` | Owner IP limit | No | Optional | Optional | Optional | No |
-| `OWNER_LOGIN_RATE_LIMIT_WINDOW_MS` | Owner IP window | No | Optional | Optional | Optional | No |
-| `OWNER_LOGIN_ACCOUNT_RATE_LIMIT_MAX` | Owner account limit | No | Optional | Optional | Optional | No |
-| `OWNER_LOGIN_ACCOUNT_RATE_LIMIT_WINDOW_MS` | Owner account window | No | Optional | Optional | Optional | No |
-| `NEXT_PUBLIC_CALENDLY_URL` | Calendly booking URL | No | Optional | Optional | Optional | No |
-| `NEXT_PUBLIC_APP_URL` | Fallback site URL | No | Optional | Optional | Optional | No |
-| `SENTRY_DSN` | Server Sentry (future) | No | Optional | Optional | Optional | Semi |
-| `NEXT_PUBLIC_SENTRY_DSN` | Client Sentry (future) | No | Optional | Optional | Optional | Semi |
-| `BUILD_ID` | Health metadata label | No | Optional | Optional | Optional | No |
-| `SKIP_ENV_VALIDATION` | Bypass startup validation | No | Dev/CI only | **Never** | **Never** | No |
-| `NODE_ENV` | Node environment | Auto | Auto | Auto | Auto | No |
-| `NEXT_PHASE` | Next build phase | Auto | Auto | Auto | Auto | No |
-| `VERCEL_GIT_COMMIT_SHA` | Deploy commit | Auto | — | Auto | Auto | No |
-| `VERCEL_DEPLOYMENT_ID` | Deploy ID | Auto | — | Auto | Auto | No |
-| `GITHUB_SHA` | CI commit SHA | Auto | — | CI | — | No |
-| `CI` | CI flag | Auto | — | CI | — | No |
-| `ANALYZE` | Bundle analyzer | No | Optional | No | No | No |
-| `LHCI_PORT` | Lighthouse port | No | Optional | CI | No | No |
-| `PLAYWRIGHT_PORT` | E2E port | No | Optional | CI | No | No |
-| `PLAYWRIGHT_BASE_URL` | E2E base URL | No | Optional | CI | No | No |
+| Variable                                   | Purpose                   | Required         | Local       | Preview   | Production  | Sensitive |
+| ------------------------------------------ | ------------------------- | ---------------- | ----------- | --------- | ----------- | --------- |
+| `DATABASE_URL`                             | Pooled PostgreSQL runtime | Yes              | Yes         | Yes       | Yes         | **Yes**   |
+| `DIRECT_URL`                               | Direct DB for Prisma CLI  | Yes (migrations) | Yes         | Yes       | GitHub only | **Yes**   |
+| `SHADOW_DATABASE_URL`                      | Local migrate shadow DB   | No               | Optional    | No        | No          | **Yes**   |
+| `RESEND_API_KEY`                           | Resend API auth           | Yes              | Yes         | Yes       | Yes         | **Yes**   |
+| `LEAD_NOTIFICATION_TO`                     | Team inbox for leads      | Yes              | Yes         | Yes       | Yes         | No        |
+| `LEAD_FROM_EMAIL`                          | Verified sender address   | Yes              | Yes         | Yes       | Yes         | No        |
+| `NEXT_PUBLIC_SITE_URL`                     | Canonical site URL        | Yes              | Yes         | Yes       | Yes         | No        |
+| `OWNER_AUTH_EMAIL`                         | Owner login email         | Yes              | Yes         | Yes       | Yes         | No        |
+| `OWNER_AUTH_PASSWORD`                      | Owner login password      | Yes              | Yes         | Yes       | Yes         | **Yes**   |
+| `OWNER_SESSION_SECRET`                     | Session HMAC secret       | Yes              | Yes         | Yes       | Yes         | **Yes**   |
+| `LEAD_RATE_LIMIT_MAX`                      | Lead rate limit           | No               | Optional    | Optional  | Optional    | No        |
+| `LEAD_RATE_LIMIT_IP_MAX`                   | Lead IP limit             | No               | Optional    | Optional  | Optional    | No        |
+| `LEAD_RATE_LIMIT_WINDOW_MS`                | Lead window ms            | No               | Optional    | Optional  | Optional    | No        |
+| `OWNER_LOGIN_RATE_LIMIT_MAX`               | Owner IP limit            | No               | Optional    | Optional  | Optional    | No        |
+| `OWNER_LOGIN_RATE_LIMIT_WINDOW_MS`         | Owner IP window           | No               | Optional    | Optional  | Optional    | No        |
+| `OWNER_LOGIN_ACCOUNT_RATE_LIMIT_MAX`       | Owner account limit       | No               | Optional    | Optional  | Optional    | No        |
+| `OWNER_LOGIN_ACCOUNT_RATE_LIMIT_WINDOW_MS` | Owner account window      | No               | Optional    | Optional  | Optional    | No        |
+| `NEXT_PUBLIC_CALENDLY_URL`                 | Calendly booking URL      | No               | Optional    | Optional  | Optional    | No        |
+| `NEXT_PUBLIC_APP_URL`                      | Fallback site URL         | No               | Optional    | Optional  | Optional    | No        |
+| `SENTRY_DSN`                               | Server Sentry (future)    | No               | Optional    | Optional  | Optional    | Semi      |
+| `NEXT_PUBLIC_SENTRY_DSN`                   | Client Sentry (future)    | No               | Optional    | Optional  | Optional    | Semi      |
+| `BUILD_ID`                                 | Health metadata label     | No               | Optional    | Optional  | Optional    | No        |
+| `SKIP_ENV_VALIDATION`                      | Bypass startup validation | No               | Dev/CI only | **Never** | **Never**   | No        |
+| `NODE_ENV`                                 | Node environment          | Auto             | Auto        | Auto      | Auto        | No        |
+| `NEXT_PHASE`                               | Next build phase          | Auto             | Auto        | Auto      | Auto        | No        |
+| `VERCEL_GIT_COMMIT_SHA`                    | Deploy commit             | Auto             | —           | Auto      | Auto        | No        |
+| `VERCEL_DEPLOYMENT_ID`                     | Deploy ID                 | Auto             | —           | Auto      | Auto        | No        |
+| `GITHUB_SHA`                               | CI commit SHA             | Auto             | —           | CI        | —           | No        |
+| `CI`                                       | CI flag                   | Auto             | —           | CI        | —           | No        |
+| `ANALYZE`                                  | Bundle analyzer           | No               | Optional    | No        | No          | No        |
+| `LHCI_PORT`                                | Lighthouse port           | No               | Optional    | CI        | No          | No        |
+| `PLAYWRIGHT_PORT`                          | E2E port                  | No               | Optional    | CI        | No          | No        |
+| `PLAYWRIGHT_BASE_URL`                      | E2E base URL              | No               | Optional    | CI        | No          | No        |
 
 ---
 
@@ -927,36 +927,36 @@ npm run dev                 # http://localhost:3000
 
 ## Staging
 
-1. Deploy `release/v1.0-launch` to Vercel Preview/ staging project  
-2. Set env vars with staging values (`NEXT_PUBLIC_SITE_URL=https://staging.bitcraftly.com`)  
-3. Use staging inbox for `LEAD_NOTIFICATION_TO`  
-4. Run `docs/engineering/lead-capture-staging-verification-checklist.md`  
+1. Deploy `release/v1.0-launch` to Vercel Preview/ staging project
+2. Set env vars with staging values (`NEXT_PUBLIC_SITE_URL=https://staging.bitcraftly.com`)
+3. Use staging inbox for `LEAD_NOTIFICATION_TO`
+4. Run `docs/engineering/lead-capture-staging-verification-checklist.md`
 
 ## Production
 
-1. Verify Resend domain **Verified**  
-2. Set all 8 required runtime env vars in Vercel Production  
-3. Run GitHub **Database Migrate Deploy** workflow  
-4. Merge/deploy `release/v1.0-launch`  
-5. Run post-deploy smoke (`docs/engineering/production-deployment.md`)  
-6. Run lead capture production checklist  
+1. Verify Resend domain **Verified**
+2. Set all 8 required runtime env vars in Vercel Production
+3. Run GitHub **Database Migrate Deploy** workflow
+4. Merge/deploy `release/v1.0-launch`
+5. Run post-deploy smoke (`docs/engineering/production-deployment.md`)
+6. Run lead capture production checklist
 
 ## Database deployment
 
-- **Never** `db:migrate` or `db push` against production manually from laptop  
-- Use `.github/workflows/db-deploy.yml` with `production` environment secrets  
+- **Never** `db:migrate` or `db push` against production manually from laptop
+- Use `.github/workflows/db-deploy.yml` with `production` environment secrets
 
 ## Rollback
 
-1. Revert Vercel deployment to previous build  
-2. Database migrations are **forward-only** — plan forward-fix migrations if schema changed  
-3. Tag/note deployment SHA before go-live (`v1.0.0-rc*` tags used as markers)  
+1. Revert Vercel deployment to previous build
+2. Database migrations are **forward-only** — plan forward-fix migrations if schema changed
+3. Tag/note deployment SHA before go-live (`v1.0.0-rc*` tags used as markers)
 
 ## Recovery
 
-- Lead data in Neon — point `DATABASE_URL` to backup/branch if Neon PITR enabled  
-- Resend delivery failures logged in `Lead.notificationError` field  
-- Health check: `GET /api/health`  
+- Lead data in Neon — point `DATABASE_URL` to backup/branch if Neon PITR enabled
+- Resend delivery failures logged in `Lead.notificationError` field
+- Health check: `GET /api/health`
 
 ---
 
@@ -966,22 +966,22 @@ npm run dev                 # http://localhost:3000
 
 Migration from Namecheap BasicDNS → **Cloudflare DNS** in progress for `bitcraftly.com`.
 
-| Provider | Role |
-|----------|------|
-| **Namecheap** | Domain registration; nameservers pointed to Cloudflare |
-| **Cloudflare** | Authoritative DNS (when active) |
-| **Vercel** | Hosting (`76.76.21.21` A record, `www` CNAME) |
-| **Resend** | Transactional email |
-| **Zoho** | Business mail verification (TXT records) |
+| Provider       | Role                                                   |
+| -------------- | ------------------------------------------------------ |
+| **Namecheap**  | Domain registration; nameservers pointed to Cloudflare |
+| **Cloudflare** | Authoritative DNS (when active)                        |
+| **Vercel**     | Hosting (`76.76.21.21` A record, `www` CNAME)          |
+| **Resend**     | Transactional email                                    |
+| **Zoho**       | Business mail verification (TXT records)               |
 
 ## Vercel
 
-| Record | Value |
-|--------|--------|
-| A `@` | `76.76.21.21` |
-| CNAME `www` | `cname.vercel-dns.com` |
-| CNAME `staging` | Vercel staging target |
-| TXT `_vercel` | Domain verification |
+| Record          | Value                  |
+| --------------- | ---------------------- |
+| A `@`           | `76.76.21.21`          |
+| CNAME `www`     | `cname.vercel-dns.com` |
+| CNAME `staging` | Vercel staging target  |
+| TXT `_vercel`   | Domain verification    |
 
 **Proxy:** DNS only (grey cloud) recommended for Vercel + email records.
 
@@ -993,30 +993,30 @@ Legacy Advanced DNS records copied to Cloudflare. After nameserver switch, **do 
 
 Required on subdomain `bounces`:
 
-| Type | Host | Value |
-|------|------|-------|
-| MX | `bounces` | `feedback-smtp.us-east-1.amazonses.com` (priority 10) |
-| TXT | `bounces` | `v=spf1 include:amazonses.com ~all` |
-| TXT | `resend._domainkey` | DKIM key from Resend dashboard |
+| Type | Host                | Value                                                 |
+| ---- | ------------------- | ----------------------------------------------------- |
+| MX   | `bounces`           | `feedback-smtp.us-east-1.amazonses.com` (priority 10) |
+| TXT  | `bounces`           | `v=spf1 include:amazonses.com ~all`                   |
+| TXT  | `resend._domainkey` | DKIM key from Resend dashboard                        |
 
 ## Zoho
 
-| Record | Purpose |
-|--------|---------|
-| TXT `@` | `zoho-verification=...` |
+| Record  | Purpose                                               |
+| ------- | ----------------------------------------------------- |
+| TXT `@` | `zoho-verification=...`                               |
 | TXT `@` | SPF including Zoho (separate from Resend bounces SPF) |
 
 ## SPF
 
-- **Resend sending:** `bounces` subdomain TXT  
-- **Zoho mail:** `@` TXT with `include:zoho.in` or similar  
+- **Resend sending:** `bounces` subdomain TXT
+- **Zoho mail:** `@` TXT with `include:zoho.in` or similar
 
 Do not merge into conflicting single SPF on same host.
 
 ## DKIM
 
-- `resend._domainkey` TXT (verified in Resend during setup)  
-- Optional `resend2._domainkey` CNAME  
+- `resend._domainkey` TXT (verified in Resend during setup)
+- Optional `resend2._domainkey` CNAME
 
 ## DMARC
 
@@ -1024,7 +1024,7 @@ Do not merge into conflicting single SPF on same host.
 
 ## MX
 
-- **Resend bounce handling:** `bounces.bitcraftly.com` MX → Amazon SES  
+- **Resend bounce handling:** `bounces.bitcraftly.com` MX → Amazon SES
 - **Zoho inbox mail:** separate MX on `@` if using Zoho hosted mail (configure per Zoho docs)
 
 ## Click tracking
@@ -1039,25 +1039,25 @@ Resend click tracking not enabled in current implementation. Links in emails are
 
 ## Expected configuration
 
-| Environment | Branch / trigger | Domain |
-|-------------|-------------------|--------|
+| Environment    | Branch / trigger                                       | Domain                                 |
+| -------------- | ------------------------------------------------------ | -------------------------------------- |
 | **Production** | `release/v1.0-launch` or `main` (confirm in dashboard) | `bitcraftly.com`, `www.bitcraftly.com` |
-| **Preview** | PR branches | `*.vercel.app` |
-| **Staging** | `staging.bitcraftly.com` → staging deployment | CNAME in Cloudflare |
+| **Preview**    | PR branches                                            | `*.vercel.app`                         |
+| **Staging**    | `staging.bitcraftly.com` → staging deployment          | CNAME in Cloudflare                    |
 
 ## Branch mapping (recommended)
 
-| Vercel env | Git branch | Notes |
-|------------|------------|-------|
-| Production | `release/v1.0-launch` | Tag deployments with `v1.0.0-rc5` |
-| Preview | PRs to release/main | Staging env vars |
-| Development | Optional | Local `vercel dev` only |
+| Vercel env  | Git branch            | Notes                             |
+| ----------- | --------------------- | --------------------------------- |
+| Production  | `release/v1.0-launch` | Tag deployments with `v1.0.0-rc5` |
+| Preview     | PRs to release/main   | Staging env vars                  |
+| Development | Optional              | Local `vercel dev` only           |
 
 ## Domains
 
-- `bitcraftly.com`  
-- `www.bitcraftly.com`  
-- `staging.bitcraftly.com`  
+- `bitcraftly.com`
+- `www.bitcraftly.com`
+- `staging.bitcraftly.com`
 
 ## Deployment protection
 
@@ -1069,10 +1069,10 @@ Staging may have Vercel Deployment Protection enabled — requires login to acce
 
 ## Lighthouse / performance
 
-- Perf 73–75 vs 90 target  
-- LCP ~3.2s on `/services`  
-- Render-blocking CSS on services page  
-- Mobile Lighthouse not in CI  
+- Perf 73–75 vs 90 target
+- LCP ~3.2s on `/services`
+- Render-blocking CSS on services page
+- Mobile Lighthouse not in CI
 
 ## Future Phase C
 
@@ -1080,20 +1080,20 @@ See `docs/release/Sprint-004.3-Phase-B.md` — defer CSS, LCP hero tuning, below
 
 ## Technical debt
 
-- In-memory rate limiter (multi-instance unsafe)  
-- Admin routes unauthenticated  
-- Feature JSON-LD still hardcodes URLs in some schema files  
-- `PROJECT_STATUS.md` outdated on lead capture status  
-- Middleware → proxy migration deferred (Next.js 16)  
-- Sentry hooks without `@sentry/nextjs` package  
+- In-memory rate limiter (multi-instance unsafe)
+- Admin routes unauthenticated
+- Feature JSON-LD still hardcodes URLs in some schema files
+- `PROJECT_STATUS.md` outdated on lead capture status
+- Middleware → proxy migration deferred (Next.js 16)
+- Sentry hooks without `@sentry/nextjs` package
 
 ## Future optimizations
 
-- Redis/Upstash rate limiting  
-- RUM / web-vitals  
-- GTM/GA when marketing approves  
-- OpenTelemetry  
-- E2E lead capture automation  
+- Redis/Upstash rate limiting
+- RUM / web-vitals
+- GTM/GA when marketing approves
+- OpenTelemetry
+- E2E lead capture automation
 
 ---
 
@@ -1101,32 +1101,32 @@ See `docs/release/Sprint-004.3-Phase-B.md` — defer CSS, LCP hero tuning, below
 
 ## Immediate (launch blockers)
 
-1. Cloudflare Active + Resend domain Verified  
-2. Vercel production env vars finalized  
-3. Production lead capture smoke test  
-4. Confirm staging deployment protection access for QA  
+1. Cloudflare Active + Resend domain Verified
+2. Vercel production env vars finalized
+3. Production lead capture smoke test
+4. Confirm staging deployment protection access for QA
 
 ## Next sprint
 
-- Sprint 004.3 **Phase C** — Performance ≥ 90  
-- Sentry integration  
-- Mobile Lighthouse CI  
-- Admin authentication  
+- Sprint 004.3 **Phase C** — Performance ≥ 90
+- Sentry integration
+- Mobile Lighthouse CI
+- Admin authentication
 
 ## Future
 
-- FastAPI backend integration  
-- End-user authentication  
-- CMS / CRM product modules  
-- Distributed rate limiting  
-- Feature JSON-LD URL migration  
+- FastAPI backend integration
+- End-user authentication
+- CMS / CRM product modules
+- Distributed rate limiting
+- Feature JSON-LD URL migration
 
 ## Long term
 
-- Multi-tenant platform modules  
-- AI services integration  
-- Full analytics stack  
-- Redis session store + rate limit backend  
+- Multi-tenant platform modules
+- AI services integration
+- Full analytics stack
+- Redis session store + rate limit backend
 
 ---
 
@@ -1134,85 +1134,85 @@ See `docs/release/Sprint-004.3-Phase-B.md` — defer CSS, LCP hero tuning, below
 
 ## Best practices
 
-- Read `docs/engineering/AI_CONTEXT.md` before coding  
-- Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`)  
-- One feature per branch / PR  
-- Run lint + typecheck + unit tests before push  
-- Never commit `.env.local` or secrets  
-- Use `db:migrate` locally, `db:deploy` in production CI only  
+- Read `docs/engineering/AI_CONTEXT.md` before coding
+- Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`)
+- One feature per branch / PR
+- Run lint + typecheck + unit tests before push
+- Never commit `.env.local` or secrets
+- Use `db:migrate` locally, `db:deploy` in production CI only
 
 ## Do not remove
 
-- Honeypot fields on lead forms  
-- `requireOwnerSession()` on owner routes  
-- Production env validation in `instrumentation.ts`  
-- Security headers in `next.config.ts`  
-- Protected homepage / services / solutions without explicit approval  
+- Honeypot fields on lead forms
+- `requireOwnerSession()` on owner routes
+- Production env validation in `instrumentation.ts`
+- Security headers in `next.config.ts`
+- Protected homepage / services / solutions without explicit approval
 
 ## Do not modify without approval
 
-- `src/features/homepage/**` (protected)  
-- `src/features/services/**` (protected)  
-- `src/features/solutions/**` (protected)  
-- Global design tokens  
-- Shared layout architecture  
-- `next.config.ts` security headers (unless security task)  
+- `src/features/homepage/**` (protected)
+- `src/features/services/**` (protected)
+- `src/features/solutions/**` (protected)
+- Global design tokens
+- Shared layout architecture
+- `next.config.ts` security headers (unless security task)
 
 ## Migration warnings
 
-- Production migrations are **forward-only**  
-- Always run `db-deploy` workflow before first traffic on schema changes  
-- `DIRECT_URL` must be set in GitHub production environment  
-- Never run `prisma migrate dev` against production database  
+- Production migrations are **forward-only**
+- Always run `db-deploy` workflow before first traffic on schema changes
+- `DIRECT_URL` must be set in GitHub production environment
+- Never run `prisma migrate dev` against production database
 
 ## Branch warnings
 
-- Deploy from `release/v1.0-launch` — not legacy `development` or `feat/*` branches  
-- `personal` remote is a mirror — `origin` is deploy source  
-- Tag releases with `v1.0.0-rc*` for rollback reference  
+- Deploy from `release/v1.0-launch` — not legacy `development` or `feat/*` branches
+- `personal` remote is a mirror — `origin` is deploy source
+- Tag releases with `v1.0.0-rc*` for rollback reference
 
 ## Deployment checklist
 
-1. CI green  
-2. Resend domain verified  
-3. Vercel env complete (8 required vars)  
-4. DB migrate workflow run  
-5. Deploy  
-6. Smoke: homepage, contact form, owner login, `/api/health`  
-7. Verify lead email (team + confirmation)  
+1. CI green
+2. Resend domain verified
+3. Vercel env complete (8 required vars)
+4. DB migrate workflow run
+5. Deploy
+6. Smoke: homepage, contact form, owner login, `/api/health`
+7. Verify lead email (team + confirmation)
 
 **Checklists:**
 
-- `docs/engineering/lead-capture-production-deployment-checklist.md`  
-- `docs/engineering/lead-capture-staging-verification-checklist.md`  
-- `docs/engineering/production-deployment.md`  
+- `docs/engineering/lead-capture-production-deployment-checklist.md`
+- `docs/engineering/lead-capture-staging-verification-checklist.md`
+- `docs/engineering/production-deployment.md`
 
 ## Repository ownership recommendations
 
-| Role | Access |
-|------|--------|
-| **bitcraftly-tech org** | Owns `origin` — production deploy keys, Vercel, Neon, Resend |
-| **Developers** | Write access to `release/v1.0-launch` via PR |
-| **CI secrets** | GitHub `production` environment — `DATABASE_URL`, `DIRECT_URL` only |
-| **Personal mirror** | `personal` remote optional — not for production deploy |
+| Role                    | Access                                                              |
+| ----------------------- | ------------------------------------------------------------------- |
+| **bitcraftly-tech org** | Owns `origin` — production deploy keys, Vercel, Neon, Resend        |
+| **Developers**          | Write access to `release/v1.0-launch` via PR                        |
+| **CI secrets**          | GitHub `production` environment — `DATABASE_URL`, `DIRECT_URL` only |
+| **Personal mirror**     | `personal` remote optional — not for production deploy              |
 
 ---
 
 ## Related documents
 
-| Document | Path |
-|----------|------|
-| AI context (read first) | `docs/engineering/AI_CONTEXT.md` |
-| Machine-readable state | `docs/engineering/PROJECT_STATE.json` |
-| Environment audit | `docs/release/ENVIRONMENT-AUDIT.md` |
-| Production deployment | `docs/engineering/production-deployment.md` |
-| Sprint 004.1 | `docs/release/Sprint-004.1.md` |
-| Sprint 004.2 | `docs/release/Sprint-004.2.md` |
-| Sprint 004.3 | `docs/release/Sprint-004.3.md` |
-| Sprint 004.3 Phase B | `docs/release/Sprint-004.3-Phase-B.md` |
-| Engineering standards | `.cursor/rules/Bitcraftly-Engineering-Standards.mdc` |
+| Document                | Path                                                         |
+| ----------------------- | ------------------------------------------------------------ |
+| AI context (read first) | `docs/engineering/AI_CONTEXT.md`                             |
+| Machine-readable state  | `docs/engineering/PROJECT_STATE.json`                        |
+| Environment audit       | `docs/release/ENVIRONMENT-AUDIT.md`                          |
+| Production deployment   | `docs/engineering/production-deployment.md`                  |
+| Sprint 004.1            | `docs/release/Sprint-004.1.md`                               |
+| Sprint 004.2            | `docs/release/Sprint-004.2.md`                               |
+| Sprint 004.3            | `docs/release/Sprint-004.3.md`                               |
+| Sprint 004.3 Phase B    | `docs/release/Sprint-004.3-Phase-B.md`                       |
+| Engineering standards   | `.cursor/rules/Bitcraftly-Engineering-Standards.mdc`         |
 | Architecture protection | `.cursor/rules/Bitcraftly-Architecture-Protection-Rules.mdc` |
 
 ---
 
-*End of Engineering Handover Report — 2026-07-22*
+_End of Engineering Handover Report — 2026-07-22_

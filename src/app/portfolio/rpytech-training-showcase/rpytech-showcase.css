@@ -1,0 +1,2858 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+.rpytech-showcase {
+  color-scheme: light;
+  --rpytech-navy: #1a2a4a;
+  --rpytech-orange: #f26522;
+  --rpytech-orange-hover: #d9541a;
+  --rpytech-light-bg: #f5f7fa;
+  --rpytech-text: #333333;
+  --rpytech-text-light: #666666;
+  --rpytech-border: #e0e0e0;
+  --rpytech-gutter: 2.5rem;
+  width: 100%;
+  overflow-x: clip;
+  font-family: 'Poppins', sans-serif;
+  color: var(--rpytech-text);
+}
+
+/* Single alignment shell — header, sections, footer share left/right edges */
+.rpytech-container {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: var(--rpytech-gutter);
+  box-sizing: border-box;
+}
+
+.rpytech-showcase .rpytech-top-bar .rpytech-container,
+.rpytech-showcase .rpytech-main-nav .rpytech-container,
+.rpytech-showcase .rpytech-hero .rpytech-container,
+.rpytech-showcase .rpytech-stats-bar .rpytech-container,
+.rpytech-showcase .rpytech-page-section > .rpytech-container,
+.rpytech-showcase .rpytech-footer-main .rpytech-container,
+.rpytech-showcase .rpytech-footer-bottom .rpytech-container {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .rpytech-showcase {
+    --rpytech-gutter: 1.25rem;
+  }
+}
+
+.rpytech-bar-row,
+.rpytech-nav-row,
+.rpytech-footer-bottom-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.rpytech-bar-row-start,
+.rpytech-nav-row-start,
+.rpytech-footer-bottom-start {
+  text-align: left;
+}
+
+.rpytech-bar-row-end,
+.rpytech-footer-bottom-end {
+  text-align: right;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Top bar */
+.rpytech-top-bar {
+  background: var(--rpytech-navy);
+  color: #cccccc;
+  font-size: 12px;
+  padding-block: 6px;
+}
+
+.rpytech-top-link {
+  margin-left: 1rem;
+  color: #cccccc;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.rpytech-top-link:hover {
+  color: #ffffff;
+}
+
+/* Compact quick-link chips in top bar */
+.rpytech-top-highlights {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 4px;
+}
+
+.rpytech-top-chip {
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1.4;
+  white-space: nowrap;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+.rpytech-top-chip--orange {
+  background: var(--rpytech-orange);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.rpytech-top-chip--blue {
+  background: #1a7fe8;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.rpytech-top-chip:hover,
+.rpytech-top-chip:focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 900px) {
+  .rpytech-top-highlights {
+    order: -1;
+    width: 100%;
+    margin: 0 0 4px;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 600px) {
+  .rpytech-top-chip {
+    font-size: 9px;
+    padding: 2px 7px;
+  }
+}
+
+.rpytech-top-social {
+  margin-left: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.rpytech-top-social-icon {
+  display: inline-flex;
+  font-size: 13px;
+  color: #cccccc;
+}
+
+/* Main nav */
+.rpytech-main-nav {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  height: 68px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 50;
+}
+
+.rpytech-nav-row {
+  height: 68px;
+  flex-wrap: nowrap;
+}
+
+.rpytech-nav-row-start {
+  flex-shrink: 0;
+}
+
+.rpytech-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.rpytech-logo-text {
+  min-width: 0;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.rpytech-logo-title {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.rpytech-logo-mark {
+  color: var(--rpytech-navy);
+}
+
+.rpytech-logo-tech {
+  color: var(--rpytech-orange);
+}
+
+.rpytech-logo-subtitle {
+  display: block;
+  margin-top: 2px;
+  font-weight: 400;
+  color: #888888;
+  line-height: 1.35;
+}
+
+.rpytech-logo-subtitle--compact {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rpytech-logo-subtitle--stacked {
+  white-space: normal;
+}
+
+.rpytech-logo-subtitle-line {
+  display: block;
+  font-size: 9px;
+  line-height: 1.35;
+}
+
+.rpytech-logo-subtitle-line + .rpytech-logo-subtitle-line {
+  margin-top: 1px;
+}
+
+.rpytech-logo--footer .rpytech-logo-title {
+  font-size: 20px;
+}
+
+.rpytech-logo--footer .rpytech-logo-mark {
+  color: #ffffff;
+}
+
+.rpytech-logo--footer .rpytech-logo-subtitle,
+.rpytech-logo--footer .rpytech-logo-subtitle-line {
+  color: #aaaaaa;
+  font-size: 10px;
+}
+
+@media (max-width: 900px) {
+  .rpytech-logo-title {
+    font-size: 16px;
+  }
+
+  .rpytech-logo-subtitle--compact {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+}
+
+.rpytech-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+}
+
+.rpytech-nav-links li {
+  flex-shrink: 0;
+}
+
+.rpytech-nav-links > li:not(.rpytech-nav-drop) button,
+.rpytech-nav-drop > button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--rpytech-navy);
+  font-size: 13.5px;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 0;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  line-height: 1.2;
+}
+
+.rpytech-nav-chevron {
+  width: 10px;
+  height: 10px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.rpytech-nav-links > li:not(.rpytech-nav-drop) button:hover,
+.rpytech-nav-drop > button:hover,
+.rpytech-nav-links > li:not(.rpytech-nav-drop) button.active,
+.rpytech-nav-drop > button.active {
+  color: var(--rpytech-orange);
+}
+
+.rpytech-nav-cta {
+  background: var(--rpytech-orange) !important;
+  color: #ffffff !important;
+  padding: 10px 22px !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+}
+
+.rpytech-nav-cta:hover {
+  background: var(--rpytech-orange-hover) !important;
+}
+
+.rpytech-nav-drop {
+  position: relative;
+}
+
+.rpytech-nav-drop--open > button,
+.rpytech-nav-drop:hover > button {
+  color: var(--rpytech-orange);
+}
+
+.rpytech-nav-drop--open .rpytech-nav-chevron {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+
+.rpytech-nav-chevron {
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.rpytech-nav-dropdown-wrap {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding-top: 10px;
+  animation: rpytech-dropdown-wrap-in 0.24s ease forwards;
+}
+
+@keyframes rpytech-dropdown-wrap-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rpytech-nav-dropdown {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: max-content;
+  min-width: min(100%, max-content);
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 10px 24px rgba(26, 42, 74, 0.12);
+  z-index: 60;
+  overflow: hidden;
+  text-align: left;
+  animation: rpytech-dropdown-in 0.26s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform-origin: top left;
+}
+
+@keyframes rpytech-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.rpytech-nav-dropdown li + li {
+  border-top: 1px solid #f2f2f2;
+}
+
+.rpytech-nav-dropdown li {
+  width: 100%;
+}
+
+.rpytech-nav-dropdown button {
+  position: relative;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 10px 16px 10px 18px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: left;
+  color: #444444;
+  white-space: nowrap;
+  transition:
+    color 0.22s ease,
+    background-color 0.22s ease;
+}
+
+.rpytech-nav-dropdown button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--rpytech-orange);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.22s ease;
+}
+
+.rpytech-nav-dropdown button:hover,
+.rpytech-nav-dropdown button:focus-visible {
+  background: #f8f9fc;
+  color: var(--rpytech-orange);
+}
+
+.rpytech-nav-dropdown button:hover::before,
+.rpytech-nav-dropdown button:focus-visible::before {
+  transform: scaleY(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rpytech-nav-dropdown-wrap,
+  .rpytech-nav-dropdown {
+    animation: none;
+  }
+
+  .rpytech-nav-dropdown button,
+  .rpytech-nav-dropdown button::before,
+  .rpytech-nav-chevron {
+    transition: none;
+  }
+
+  .rpytech-nav-dropdown button:hover,
+  .rpytech-nav-dropdown button:focus-visible {
+    transform: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .rpytech-nav-links {
+    gap: 14px;
+  }
+
+  .rpytech-nav-links button {
+    font-size: 11px;
+  }
+
+  .rpytech-nav-dropdown button {
+    font-size: 10px;
+    padding: 9px 14px;
+  }
+
+  .rpytech-nav-cta {
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .rpytech-nav-links {
+    display: none;
+  }
+}
+
+/* Hero */
+.rpytech-hero {
+  background: linear-gradient(135deg, #eef3fb 0%, #f8f9ff 60%, #ffffff 100%);
+  padding: 35px 0 0;
+  position: relative;
+  overflow: visible;
+}
+
+.rpytech-hero::before {
+  content: '';
+  position: absolute;
+  right: clamp(8rem, 14vw, 200px);
+  top: -60px;
+  width: clamp(280px, 32vw, 380px);
+  height: clamp(280px, 32vw, 380px);
+  border-radius: 50%;
+  border: 40px solid rgba(242, 101, 34, 0.08);
+  pointer-events: none;
+}
+
+.rpytech-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(500px, 54vw, 680px);
+  gap: 0;
+  align-items: stretch;
+  min-height: clamp(360px, 38vw, 460px);
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.rpytech-hero-left {
+  max-width: 560px;
+  text-align: left;
+  justify-self: start;
+  align-self: center;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 1.75rem;
+}
+
+.rpytech-hero-label {
+  color: var(--rpytech-orange);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.rpytech-hero-left h1 {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--rpytech-navy);
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.rpytech-hero-left h1 span {
+  color: var(--rpytech-orange);
+}
+
+.rpytech-hero-left > p {
+  color: #555555;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.rpytech-hero-left > p strong {
+  color: var(--rpytech-navy);
+}
+
+.rpytech-hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.rpytech-btn-primary {
+  background: var(--rpytech-orange);
+  color: #ffffff;
+  padding: 13px 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.rpytech-btn-primary:hover {
+  background: var(--rpytech-orange-hover);
+}
+
+.rpytech-btn-sm {
+  font-size: 13px;
+  padding: 11px 22px;
+}
+
+.rpytech-btn-outline {
+  background: transparent;
+  color: var(--rpytech-navy);
+  padding: 12px 26px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid var(--rpytech-navy);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.rpytech-btn-outline:hover {
+  background: var(--rpytech-navy);
+  color: #ffffff;
+}
+
+.rpytech-hero-badges {
+  display: flex;
+  gap: 20px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.rpytech-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #555555;
+}
+
+.rpytech-badge-icon {
+  width: 36px;
+  height: 36px;
+  background: #ffffff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rpytech-badge span strong {
+  display: block;
+  font-size: 11px;
+  color: var(--rpytech-navy);
+}
+
+.rpytech-hero-right {
+  position: relative;
+  flex-shrink: 0;
+  justify-self: end;
+  align-self: stretch;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 680px;
+  overflow: visible;
+  z-index: 1;
+}
+
+.rpytech-hero-img-wrap {
+  width: 100%;
+  max-width: 680px;
+  height: 100%;
+  min-height: clamp(340px, 36vw, 440px);
+  aspect-ratio: auto;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 0;
+  overflow: visible;
+  border: 2px solid rgba(186, 204, 230, 0.55);
+  border-bottom: none;
+  border-radius: 50% 50% 0 0 / 42% 42% 0 0;
+  box-shadow: 0 -8px 32px rgba(26, 42, 74, 0.06);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 72%);
+  position: relative;
+}
+
+.rpytech-hero-img-photo {
+  object-fit: contain;
+  object-position: right bottom;
+  transform: none;
+}
+
+/* Stats */
+.rpytech-stats-bar {
+  background: linear-gradient(90deg, #0b74d8 0%, #1288eb 50%, #0b74d8 100%);
+  padding: 28px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.rpytech-stats-bar .rpytech-container {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  align-items: start;
+}
+
+.rpytech-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  color: #ffffff;
+  padding: 0;
+  min-width: 0;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.5s ease var(--stat-delay, 0ms),
+    transform 0.5s ease var(--stat-delay, 0ms);
+}
+
+.rpytech-stat-item--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rpytech-stat-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+
+.rpytech-stat-icon {
+  width: 34px;
+  height: 34px;
+  opacity: 0.95;
+}
+
+.rpytech-stat-value {
+  display: block;
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.rpytech-stat-label {
+  display: block;
+  font-size: clamp(0.6rem, 0.85vw, 0.7rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  opacity: 0.92;
+  max-width: 11rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rpytech-stat-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* About */
+.rpytech-about-section {
+  background: #ffffff;
+}
+
+.rpytech-about-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.75rem, 3.5vw, 3rem);
+  align-items: stretch;
+}
+
+.rpytech-about-col--content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.rpytech-about-col--visual {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  width: 100%;
+}
+
+.rpytech-about-copy {
+  margin-top: 0.25rem;
+}
+
+.rpytech-about-title,
+.rpytech-about-body,
+.rpytech-about-readmore,
+.rpytech-about-cred,
+.rpytech-about-sector {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s ease var(--reveal-delay, 0ms),
+    transform 0.55s ease var(--reveal-delay, 0ms);
+}
+
+.rpytech-about-section--visible .rpytech-about-title,
+.rpytech-about-section--visible .rpytech-about-body,
+.rpytech-about-section--visible .rpytech-about-readmore,
+.rpytech-about-section--visible .rpytech-about-cred,
+.rpytech-about-section--visible .rpytech-about-sector,
+.rpytech-about-section--visible .rpytech-about-visual.rpytech-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rpytech-about-title {
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-weight: 800;
+  color: var(--rpytech-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+  margin: 0 0 1.1rem;
+}
+
+.rpytech-about-title span {
+  color: var(--rpytech-orange);
+}
+
+.rpytech-about-credentials {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1.1rem;
+}
+
+.rpytech-about-cred {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.65rem 0.8rem;
+  border-radius: 8px;
+  background: var(--rpytech-light-bg);
+  border: 1px solid var(--rpytech-border);
+}
+
+.rpytech-about-cred strong {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--rpytech-navy);
+}
+
+.rpytech-about-cred span {
+  font-size: 0.68rem;
+  color: var(--rpytech-text-light);
+  line-height: 1.35;
+}
+
+.rpytech-about-body {
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--rpytech-text);
+  margin: 0;
+}
+
+.rpytech-about-readmore {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--rpytech-orange);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.rpytech-about-readmore:hover {
+  color: var(--rpytech-orange-hover);
+}
+
+.rpytech-about-sectors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.15rem;
+}
+
+.rpytech-about-sector {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(242, 101, 34, 0.1);
+  color: var(--rpytech-orange);
+  border: 1px solid rgba(242, 101, 34, 0.18);
+}
+
+.rpytech-about-visual {
+  position: relative;
+  width: 100%;
+  min-height: clamp(220px, 28vw, 340px);
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--rpytech-border);
+  box-shadow: 0 14px 36px rgba(26, 42, 74, 0.1);
+  background: #e8eef5;
+}
+
+.rpytech-about-visual-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (min-width: 769px) {
+  .rpytech-about-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .rpytech-about-col--content {
+    padding-right: 0.5rem;
+  }
+
+  .rpytech-about-visual {
+    min-height: clamp(260px, 30vw, 380px);
+    height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rpytech-about-title,
+  .rpytech-about-body,
+  .rpytech-about-readmore,
+  .rpytech-about-cred,
+  .rpytech-about-sector,
+  .rpytech-about-visual.rpytech-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.rpytech-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s ease var(--reveal-delay, 0ms),
+    transform 0.55s ease var(--reveal-delay, 0ms);
+}
+
+.rpytech-director-section--visible .rpytech-reveal,
+.rpytech-mv-section--visible .rpytech-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Director message */
+.rpytech-director-section {
+  background: var(--rpytech-light-bg);
+}
+
+.rpytech-director-inner {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: stretch;
+}
+
+.rpytech-director-portrait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.75rem 1.25rem;
+  border-radius: 14px;
+  background: linear-gradient(165deg, var(--rpytech-navy) 0%, #243a66 55%, #1a2a4a 100%);
+  color: #ffffff;
+  box-shadow: 0 14px 34px rgba(26, 42, 74, 0.18);
+}
+
+.rpytech-director-portrait-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 112px;
+  height: 112px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.18);
+}
+
+.rpytech-director-portrait-meta {
+  text-align: center;
+}
+
+.rpytech-director-portrait-meta strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.rpytech-director-portrait-meta span {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.rpytech-director-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+  width: 100%;
+}
+
+.rpytech-director-highlight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0.45rem 0.25rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.rpytech-director-highlight strong {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--rpytech-orange);
+}
+
+.rpytech-director-highlight span {
+  font-size: 0.58rem;
+  line-height: 1.25;
+  opacity: 0.9;
+}
+
+.rpytech-director-copy {
+  position: relative;
+  padding-top: 0.25rem;
+}
+
+.rpytech-director-quote-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--rpytech-orange);
+  opacity: 0.45;
+  margin-bottom: 0.5rem;
+}
+
+.rpytech-director-quote {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--rpytech-text);
+  margin: 0 0 0.9rem;
+}
+
+.rpytech-director-signature {
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rpytech-border);
+}
+
+.rpytech-director-signature strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--rpytech-navy);
+}
+
+.rpytech-director-signature span {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.78rem;
+  color: var(--rpytech-text-light);
+}
+
+/* Mission / Vision */
+.rpytech-mv-section {
+  background: #ffffff;
+}
+
+.rpytech-mv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.rpytech-mv-card {
+  padding: 1.6rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--rpytech-border);
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(26, 42, 74, 0.06);
+}
+
+.rpytech-mv-card--mission {
+  border-top: 4px solid var(--rpytech-orange);
+}
+
+.rpytech-mv-card--vision {
+  border-top: 4px solid var(--rpytech-navy);
+}
+
+.rpytech-mv-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.rpytech-mv-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: rgba(242, 101, 34, 0.12);
+  color: var(--rpytech-orange);
+}
+
+.rpytech-mv-card--vision .rpytech-mv-icon {
+  background: rgba(26, 42, 74, 0.1);
+  color: var(--rpytech-navy);
+}
+
+.rpytech-mv-card-head h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--rpytech-navy);
+}
+
+.rpytech-mv-body {
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--rpytech-text);
+  margin: 0 0 1rem;
+}
+
+.rpytech-mv-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.rpytech-mv-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--rpytech-text);
+}
+
+.rpytech-mv-point svg {
+  color: var(--rpytech-orange);
+  margin-top: 0.1rem;
+}
+
+.rpytech-mv-card--vision .rpytech-mv-point svg {
+  color: var(--rpytech-navy);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rpytech-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Sections — content spans full shell width */
+.rpytech-page-section {
+  padding: 30px 0;
+}
+
+.rpytech-page-section > .rpytech-container {
+  display: block;
+}
+
+.rpytech-courses-grid,
+.rpytech-gallery-grid,
+.rpytech-testi-grid,
+.rpytech-placement-cards,
+.rpytech-contact-inner,
+.rpytech-franchise-inner,
+.rpytech-placement-inner,
+.rpytech-about-inner,
+.rpytech-director-inner,
+.rpytech-mv-grid {
+  width: 100%;
+}
+
+.rpytech-section-label {
+  color: var(--rpytech-orange);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.rpytech-section-label--left {
+  text-align: left;
+}
+
+.rpytech-section-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--rpytech-navy);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.rpytech-section-title--left {
+  text-align: left;
+}
+
+.rpytech-section-divider {
+  width: 50px;
+  height: 3px;
+  background: var(--rpytech-orange);
+  margin: 10px auto 18px;
+  border-radius: 2px;
+}
+
+.rpytech-section-divider--left {
+  margin-left: 0;
+}
+
+/* Verify flow */
+.rpytech-verify-section {
+  background: #ffffff;
+}
+
+.rpytech-verify-section--visible .rpytech-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rpytech-verify-flow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0;
+  width: 100%;
+  padding-top: 0.5rem;
+}
+
+.rpytech-verify-flow-item-wrap {
+  display: contents;
+}
+
+.rpytech-verify-flow-step {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.55rem;
+  padding: 0 0.35rem;
+}
+
+.rpytech-verify-flow-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 999px;
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(26, 42, 74, 0.14);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.rpytech-verify-flow-step:hover .rpytech-verify-flow-icon {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 14px 30px rgba(26, 42, 74, 0.18);
+}
+
+.rpytech-verify-flow-step--orange .rpytech-verify-flow-icon {
+  background: linear-gradient(145deg, #f26522 0%, #e85a18 100%);
+}
+
+.rpytech-verify-flow-step--green .rpytech-verify-flow-icon {
+  background: linear-gradient(145deg, #1fa86b 0%, #168a57 100%);
+}
+
+.rpytech-verify-flow-live {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  padding: 0.15rem 0.4rem;
+  border-radius: 999px;
+  background: var(--rpytech-navy);
+  color: #ffffff;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  animation: rpytech-verify-pulse 2s ease-in-out infinite;
+}
+
+@keyframes rpytech-verify-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(0.96);
+  }
+}
+
+.rpytech-verify-flow-step h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--rpytech-navy);
+  line-height: 1.35;
+  margin: 0.15rem 0 0;
+}
+
+.rpytech-verify-flow-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  margin: 0;
+  min-height: 2.4rem;
+}
+
+.rpytech-verify-flow-count {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--rpytech-orange);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.rpytech-verify-flow-stat span:last-child {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--rpytech-text-light);
+}
+
+.rpytech-verify-flow-action {
+  margin-top: 0.1rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #1a6fd4;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-family: inherit;
+}
+
+.rpytech-verify-flow-action:hover {
+  color: var(--rpytech-orange);
+}
+
+.rpytech-verify-connector {
+  flex: 0 0 clamp(2rem, 5vw, 4.5rem);
+  align-self: center;
+  margin-top: -2.5rem;
+  color: #b8c0cc;
+  height: 28px;
+}
+
+.rpytech-verify-connector svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.rpytech-verify-connector-path {
+  stroke: currentColor;
+  stroke-dasharray: 6 5;
+  stroke-dashoffset: 80;
+  transition: stroke-dashoffset 0.9s ease var(--connector-delay, 0ms);
+}
+
+.rpytech-verify-connector-head {
+  fill: currentColor;
+  opacity: 0;
+  transition: opacity 0.4s ease calc(var(--connector-delay, 0ms) + 0.55s);
+}
+
+.rpytech-verify-connector--active .rpytech-verify-connector-path {
+  stroke-dashoffset: 0;
+}
+
+.rpytech-verify-connector--active .rpytech-verify-connector-head {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rpytech-verify-flow-live {
+    animation: none;
+  }
+
+  .rpytech-verify-connector-path {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+
+  .rpytech-verify-connector-head {
+    opacity: 1;
+    transition: none;
+  }
+}
+
+/* Certifications */
+.rpytech-certs-section {
+  background: #ffffff;
+}
+
+.rpytech-certs-section--visible .rpytech-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rpytech-certs-services {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: clamp(1rem, 2vw, 1.35rem);
+}
+
+.rpytech-cert-service {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--rpytech-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(26, 42, 74, 0.07);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.rpytech-cert-service:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(26, 42, 74, 0.12);
+}
+
+.rpytech-cert-service-visual {
+  position: relative;
+  min-height: clamp(150px, 18vw, 190px);
+}
+
+.rpytech-cert-service-visual-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+.rpytech-cert-service--navy .rpytech-cert-service-visual-inner {
+  background: linear-gradient(135deg, #1a2a4a 0%, #2a4070 55%, #1a2a4a 100%);
+}
+
+.rpytech-cert-service--orange .rpytech-cert-service-visual-inner {
+  background: linear-gradient(135deg, #f26522 0%, #d9541a 48%, #1a2a4a 100%);
+}
+
+.rpytech-cert-service-watermark {
+  width: 3.25rem;
+  height: 3.25rem;
+  opacity: 0.35;
+}
+
+.rpytech-cert-service-visual-inner span {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.25;
+  max-width: 16rem;
+}
+
+.rpytech-cert-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 28px;
+  fill: #ffffff;
+}
+
+.rpytech-cert-service-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.1rem 1rem 1.25rem;
+  text-align: center;
+}
+
+.rpytech-cert-service-body h3 {
+  margin: 0;
+  font-size: clamp(0.78rem, 1.2vw, 0.9rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--rpytech-text);
+  line-height: 1.4;
+}
+
+.rpytech-cert-service-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 9.5rem;
+  padding: 0.55rem 1.25rem;
+  border: none;
+  border-radius: 4px;
+  background: var(--rpytech-navy);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.rpytech-cert-service-btn:hover {
+  background: var(--rpytech-orange);
+  transform: translateY(-1px);
+}
+
+.rpytech-certs-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.rpytech-cert-step {
+  position: relative;
+  min-height: clamp(120px, 14vw, 150px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  color: #ffffff;
+  text-align: center;
+  box-shadow: 0 10px 24px rgba(26, 42, 74, 0.12);
+  transition: transform 0.25s ease;
+}
+
+.rpytech-cert-step:hover {
+  transform: translateY(-3px);
+}
+
+.rpytech-cert-step--navy {
+  background: linear-gradient(145deg, rgba(26, 42, 74, 0.94) 0%, rgba(36, 58, 102, 0.9) 100%);
+}
+
+.rpytech-cert-step--orange {
+  background: linear-gradient(145deg, rgba(242, 101, 34, 0.94) 0%, rgba(217, 84, 26, 0.9) 100%);
+}
+
+.rpytech-cert-step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--rpytech-orange);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.rpytech-cert-step--navy .rpytech-cert-step-icon {
+  color: var(--rpytech-navy);
+}
+
+.rpytech-cert-step h4 {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* E-Learning */
+.rpytech-elearning-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--rpytech-light-bg);
+}
+
+.rpytech-elearning-section::before,
+.rpytech-elearning-section::after {
+  content: '';
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.rpytech-elearning-section::before {
+  width: clamp(180px, 22vw, 280px);
+  height: clamp(180px, 22vw, 280px);
+  left: -4rem;
+  top: 12%;
+  background: radial-gradient(circle, rgba(26, 42, 74, 0.08) 0%, transparent 70%);
+}
+
+.rpytech-elearning-section::after {
+  width: clamp(220px, 26vw, 320px);
+  height: clamp(220px, 26vw, 320px);
+  right: -5rem;
+  bottom: 8%;
+  background: radial-gradient(circle, rgba(242, 101, 34, 0.1) 0%, transparent 72%);
+}
+
+.rpytech-elearning-section--visible .rpytech-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rpytech-elearning-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.rpytech-elearning-cta {
+  flex-shrink: 0;
+  padding: 0.6rem 1.1rem;
+  border: none;
+  border-radius: 4px;
+  background: var(--rpytech-navy);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.rpytech-elearning-cta:hover {
+  background: var(--rpytech-orange);
+  transform: translateY(-1px);
+}
+
+.rpytech-elearning-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.rpytech-elearning-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid rgba(26, 42, 74, 0.06);
+  box-shadow: 0 6px 18px rgba(26, 42, 74, 0.06);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.rpytech-elearning-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(26, 42, 74, 0.1);
+}
+
+.rpytech-elearning-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 10px;
+}
+
+.rpytech-elearning-card--orange .rpytech-elearning-icon {
+  background: rgba(242, 101, 34, 0.12);
+  color: var(--rpytech-orange);
+}
+
+.rpytech-elearning-card--navy .rpytech-elearning-icon {
+  background: rgba(26, 42, 74, 0.1);
+  color: var(--rpytech-navy);
+}
+
+.rpytech-elearning-card h3 {
+  margin: 0;
+  font-size: clamp(0.82rem, 1.1vw, 0.95rem);
+  font-weight: 600;
+  color: var(--rpytech-navy);
+  line-height: 1.35;
+}
+
+/* How it works */
+.rpytech-hiw-section {
+  background: #ffffff;
+}
+
+.rpytech-hiw-section--visible .rpytech-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rpytech-hiw-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px) minmax(0, 1fr);
+  gap: clamp(1rem, 2.5vw, 2rem);
+  align-items: center;
+  margin-top: 0.35rem;
+}
+
+.rpytech-hiw-col {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.rpytech-hiw-step {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.rpytech-hiw-step--left {
+  flex-direction: row-reverse;
+}
+
+.rpytech-hiw-step--right {
+  flex-direction: row;
+}
+
+.rpytech-hiw-step-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.rpytech-hiw-step--left .rpytech-hiw-step-copy {
+  text-align: right;
+}
+
+.rpytech-hiw-step--right .rpytech-hiw-step-copy {
+  text-align: left;
+}
+
+.rpytech-hiw-step-copy h3 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(0.88rem, 1.2vw, 1rem);
+  font-weight: 700;
+  color: var(--rpytech-navy);
+  line-height: 1.35;
+}
+
+.rpytech-hiw-step-copy p {
+  margin: 0;
+  font-size: clamp(0.75rem, 1vw, 0.84rem);
+  line-height: 1.55;
+  color: var(--rpytech-text-light);
+}
+
+.rpytech-hiw-step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 999px;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(26, 42, 74, 0.14);
+  transition: transform 0.22s ease;
+}
+
+.rpytech-hiw-step:hover .rpytech-hiw-step-icon {
+  transform: scale(1.06);
+}
+
+.rpytech-hiw-step--navy .rpytech-hiw-step-icon {
+  background: linear-gradient(145deg, #1a2a4a 0%, #2a4070 100%);
+}
+
+.rpytech-hiw-step--orange .rpytech-hiw-step-icon {
+  background: linear-gradient(145deg, #f26522 0%, #d9541a 100%);
+}
+
+.rpytech-hiw-center {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 320px);
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.rpytech-hiw-center-outer {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at 50% 52%,
+    rgba(255, 255, 255, 0) 34%,
+    rgba(245, 247, 250, 0.55) 52%,
+    rgba(226, 232, 240, 0.82) 68%,
+    rgba(245, 247, 250, 0.35) 100%
+  );
+  pointer-events: none;
+}
+
+.rpytech-hiw-center-arc {
+  position: absolute;
+  border: 2px dashed rgba(26, 42, 74, 0.14);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.rpytech-hiw-center-arc--tl {
+  width: 88%;
+  height: 88%;
+  top: -4%;
+  left: -6%;
+  border-right: none;
+  border-bottom: none;
+  transform: rotate(-8deg);
+  opacity: 0.7;
+}
+
+.rpytech-hiw-center-arc--br {
+  width: 92%;
+  height: 92%;
+  right: -8%;
+  bottom: -6%;
+  border-left: none;
+  border-top: none;
+  transform: rotate(12deg);
+  opacity: 0.55;
+}
+
+.rpytech-hiw-center-ring {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  width: min(100%, 280px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  border: 2px dashed rgba(26, 42, 74, 0.28);
+  padding: clamp(0.65rem, 1.5vw, 1rem);
+  background: radial-gradient(circle at 50% 58%, #ffffff 0%, #f8fafc 72%, #eef2f7 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.9),
+    0 10px 28px rgba(26, 42, 74, 0.08);
+}
+
+.rpytech-hiw-center-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.rpytech-hiw-center-img {
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 8px 18px rgba(26, 42, 74, 0.08));
+}
+
+/* Courses */
+.rpytech-courses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  width: 100%;
+}
+
+.rpytech-courses-header h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--rpytech-navy);
+}
+
+.rpytech-view-all {
+  color: var(--rpytech-orange);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--rpytech-orange);
+  padding: 7px 16px;
+  border-radius: 5px;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.rpytech-view-all:hover {
+  background: var(--rpytech-orange);
+  color: #ffffff;
+}
+
+.rpytech-courses-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 14px;
+}
+
+.rpytech-course-card {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 3 / 4;
+}
+
+.rpytech-course-bg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+
+.rpytech-course-card--1 .rpytech-course-bg {
+  background: linear-gradient(160deg, #1a3a5c, #2a5a8c);
+}
+.rpytech-course-card--2 .rpytech-course-bg {
+  background: linear-gradient(160deg, #8b1a1a, #c0392b);
+}
+.rpytech-course-card--3 .rpytech-course-bg {
+  background: linear-gradient(160deg, #1a5c3a, #27ae60);
+}
+.rpytech-course-card--4 .rpytech-course-bg {
+  background: linear-gradient(160deg, #3a1a5c, #8e44ad);
+}
+.rpytech-course-card--5 .rpytech-course-bg {
+  background: linear-gradient(160deg, #5c3a1a, #e67e22);
+}
+.rpytech-course-card--6 .rpytech-course-bg {
+  background: linear-gradient(160deg, #1a4a5c, #16a085);
+}
+.rpytech-course-card--7 .rpytech-course-bg {
+  background: linear-gradient(160deg, #1a2a5c, #2980b9);
+}
+.rpytech-course-card--8 .rpytech-course-bg {
+  background: linear-gradient(160deg, #3a1a1a, #c0392b);
+}
+
+.rpytech-course-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 8px 6px;
+  text-align: center;
+}
+
+/* Placement */
+.rpytech-placement-section {
+  background: var(--rpytech-light-bg);
+}
+
+.rpytech-placement-inner {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+}
+
+.rpytech-placement-left {
+  max-width: 300px;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+.rpytech-placement-left h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--rpytech-navy);
+  margin-bottom: 12px;
+}
+
+.rpytech-placement-left p {
+  font-size: 14px;
+  color: var(--rpytech-text-light);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.rpytech-placement-cards {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.rpytech-place-card {
+  text-align: center;
+}
+
+.rpytech-company-logo {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 12px;
+  color: var(--rpytech-navy);
+  letter-spacing: 1px;
+}
+
+.rpytech-company-logo--orange {
+  color: var(--rpytech-orange);
+}
+
+.rpytech-company-logo--red {
+  color: #cc0000;
+}
+
+.rpytech-place-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #b8d4f0, #d4e3f7);
+  margin: 0 auto 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rpytech-navy);
+}
+
+.rpytech-place-card h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--rpytech-navy);
+}
+
+.rpytech-place-card span {
+  font-size: 12px;
+  color: var(--rpytech-text-light);
+}
+
+/* Gallery */
+.rpytech-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.rpytech-gal-item {
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, #d4e3f7, #b8d4f0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rpytech-navy);
+  opacity: 0.7;
+}
+
+.rpytech-gal-item:nth-child(even) {
+  background: linear-gradient(135deg, #f0d4c8, #e8c4b8);
+}
+
+.rpytech-gallery-footer {
+  text-align: center;
+}
+
+.rpytech-btn-gallery {
+  display: inline-block;
+  border: 1px solid var(--rpytech-orange);
+  color: var(--rpytech-orange);
+  padding: 10px 24px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.rpytech-btn-gallery:hover {
+  background: var(--rpytech-orange);
+  color: #ffffff;
+}
+
+/* Franchise */
+.rpytech-franchise-section {
+  background: var(--rpytech-light-bg);
+}
+
+.rpytech-franchise-inner {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.rpytech-franchise-left {
+  max-width: 280px;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+.rpytech-franchise-left h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--rpytech-navy);
+  margin-bottom: 10px;
+}
+
+.rpytech-franchise-left p {
+  font-size: 13px;
+  color: var(--rpytech-text-light);
+  margin-bottom: 18px;
+}
+
+.rpytech-map-placeholder {
+  flex: 1;
+  min-height: 260px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #c8dff0, #a8c8e8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rpytech-navy);
+  opacity: 0.6;
+}
+
+.rpytech-franchise-right {
+  min-width: 260px;
+}
+
+.rpytech-franchise-features {
+  background: var(--rpytech-navy);
+  border-radius: 12px;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.rpytech-ff-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Testimonials */
+.rpytech-testi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.rpytech-testi-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  margin: 0;
+}
+
+.rpytech-stars {
+  color: #f39c12;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.rpytech-testi-card p {
+  font-size: 13px;
+  color: var(--rpytech-text-light);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  font-style: italic;
+}
+
+.rpytech-testi-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rpytech-testi-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #b8d4f0, #d4e3f7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rpytech-navy);
+}
+
+.rpytech-testi-author h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--rpytech-navy);
+}
+
+.rpytech-testi-author span {
+  font-size: 11px;
+  color: var(--rpytech-text-light);
+}
+
+/* Contact */
+.rpytech-contact-section {
+  background: var(--rpytech-light-bg);
+}
+
+.rpytech-contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.rpytech-contact-info {
+  text-align: left;
+}
+
+.rpytech-contact-info h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--rpytech-navy);
+  margin-bottom: 20px;
+}
+
+.rpytech-contact-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rpytech-ci-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+.rpytech-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rpytech-contact-form input,
+.rpytech-contact-form textarea {
+  border: 1px solid var(--rpytech-border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  width: 100%;
+  outline: none;
+}
+
+.rpytech-contact-form input:focus,
+.rpytech-contact-form textarea:focus {
+  border-color: var(--rpytech-orange);
+}
+
+.rpytech-contact-map {
+  background: linear-gradient(135deg, #c8dff0, #a8c8e8);
+  border-radius: 12px;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rpytech-navy);
+  opacity: 0.6;
+  position: relative;
+  overflow: hidden;
+}
+
+.rpytech-map-badge {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--rpytech-navy);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  opacity: 1;
+}
+
+.rpytech-map-badge strong {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.rpytech-map-link {
+  color: var(--rpytech-orange);
+  font-size: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 4px;
+  font-family: inherit;
+}
+
+/* Footer */
+.rpytech-footer {
+  background: var(--rpytech-navy);
+  color: #cccccc;
+  width: 100%;
+}
+
+.rpytech-footer-main,
+.rpytech-footer-bottom {
+  width: 100%;
+}
+
+.rpytech-footer-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(
+      0,
+      1.35fr
+    );
+  gap: 32px;
+  padding-block: 25px 18px;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: start;
+}
+
+.rpytech-footer-brand {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  justify-self: start;
+}
+
+.rpytech-footer-col {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.rpytech-footer-contact {
+  justify-self: stretch;
+}
+
+.rpytech-footer-brand p {
+  font-size: 12.5px;
+  margin: 14px 0 18px;
+  line-height: 1.7;
+  color: #aaaaaa;
+  white-space: pre-line;
+}
+
+.rpytech-footer-social {
+  display: flex;
+  gap: 12px;
+  color: #aaaaaa;
+}
+
+.rpytech-footer-col h4 {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.rpytech-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rpytech-footer-col ul li {
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #aaaaaa;
+}
+
+.rpytech-footer-contact-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+  width: 100%;
+}
+
+.rpytech-footer-contact-details {
+  min-width: 0;
+}
+
+.rpytech-footer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+  align-items: stretch;
+  justify-self: end;
+}
+
+.rpytech-footer-contact ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.rpytech-footer-qr {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rpytech-footer-qr-label {
+  font-size: 11px;
+  color: #888888;
+  margin-top: 6px;
+}
+
+.rpytech-footer-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.625rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+}
+
+.rpytech-footer-action--orange {
+  background: var(--rpytech-orange);
+}
+.rpytech-footer-action--navy {
+  background: var(--rpytech-navy);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.rpytech-footer-action--green {
+  background: #25d366;
+}
+
+.rpytech-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+  color: #888888;
+  width: 100%;
+}
+
+.rpytech-footer-bottom-row {
+  padding-block: 8px;
+  width: 100%;
+}
+
+.rpytech-footer-bottom-start {
+  min-width: 0;
+}
+
+.rpytech-footer-bottom-sep {
+  margin-inline: 0.5rem;
+  opacity: 0.5;
+}
+
+.rpytech-footer-portfolio-link {
+  color: var(--rpytech-orange);
+  text-decoration: none;
+}
+
+.rpytech-footer-portfolio-link:hover {
+  text-decoration: underline;
+}
+
+.rpytech-floating-actions {
+  position: fixed;
+  right: max(var(--rpytech-gutter), env(safe-area-inset-right, 0px));
+  bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease,
+    visibility 0.28s ease;
+}
+
+.rpytech-floating-actions--visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.rpytech-floating-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.625rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.rpytech-floating-btn:hover,
+.rpytech-floating-btn:focus-visible {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+
+.rpytech-floating-btn--orange {
+  background: var(--rpytech-orange);
+}
+.rpytech-floating-btn--navy {
+  background: var(--rpytech-navy);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+.rpytech-floating-btn--green {
+  background: #25d366;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rpytech-floating-actions,
+  .rpytech-floating-btn {
+    transition: none;
+  }
+
+  .rpytech-floating-btn:hover,
+  .rpytech-floating-btn:focus-visible {
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .rpytech-floating-actions {
+    bottom: max(0.875rem, env(safe-area-inset-bottom, 0px));
+    gap: 0.4rem;
+  }
+
+  .rpytech-floating-btn {
+    font-size: 0.6875rem;
+    padding: 0.55rem 0.85rem;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .rpytech-stats-bar .rpytech-container {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: 1.5rem;
+  }
+
+  .rpytech-elearning-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rpytech-hiw-layout {
+    grid-template-columns: 1fr 240px 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .rpytech-director-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .rpytech-mv-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rpytech-cert-service {
+    scroll-margin-top: 7rem;
+  }
+
+  .rpytech-hiw-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .rpytech-hiw-center {
+    order: -1;
+    width: min(100%, 280px);
+    margin-inline: auto;
+  }
+
+  .rpytech-hiw-center-ring {
+    width: min(100%, 240px);
+  }
+
+  .rpytech-hiw-step--left .rpytech-hiw-step-copy,
+  .rpytech-hiw-step--right .rpytech-hiw-step-copy {
+    text-align: left;
+  }
+
+  .rpytech-hiw-step--left {
+    flex-direction: row;
+  }
+
+  .rpytech-elearning-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rpytech-elearning-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rpytech-certs-services,
+  .rpytech-certs-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .rpytech-verify-flow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.25rem;
+  }
+
+  .rpytech-verify-flow-item-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .rpytech-verify-connector {
+    flex: none;
+    width: 28px;
+    height: 44px;
+    margin: 0;
+    transform: rotate(90deg);
+  }
+
+  .rpytech-verify-flow-step {
+    width: 100%;
+    max-width: 280px;
+    margin-inline: auto;
+  }
+
+  .rpytech-courses-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .rpytech-placement-inner {
+    flex-direction: column;
+  }
+  .rpytech-placement-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .rpytech-testi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .rpytech-footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+  .rpytech-footer-contact-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .rpytech-footer-actions {
+    justify-self: start;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .rpytech-contact-inner {
+    grid-template-columns: 1fr;
+  }
+  .rpytech-franchise-inner {
+    flex-direction: column;
+  }
+  .rpytech-gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .rpytech-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .rpytech-hero-right {
+    justify-self: center;
+    max-width: min(100%, 480px);
+  }
+
+  .rpytech-hero-img-wrap {
+    max-width: 480px;
+    margin-inline: auto;
+  }
+
+  .rpytech-hero-img-photo {
+    object-position: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .rpytech-about-inner {
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+  }
+
+  .rpytech-about-col--visual {
+    order: 2;
+  }
+
+  .rpytech-about-visual {
+    min-height: clamp(200px, 52vw, 280px);
+  }
+}
+
+@media (max-width: 600px) {
+  .rpytech-hero {
+    padding: 20px 0;
+  }
+  .rpytech-hero-right {
+    display: none;
+  }
+  .rpytech-hero-left h1 {
+    font-size: 28px;
+  }
+  .rpytech-page-section {
+    padding: 20px 0;
+  }
+  .rpytech-stats-bar {
+    padding: 20px 0;
+  }
+
+  .rpytech-stats-bar .rpytech-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 1.25rem;
+    column-gap: 0.75rem;
+  }
+
+  .rpytech-stat-value {
+    font-size: 1.35rem;
+  }
+  .rpytech-director-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .rpytech-about-credentials {
+    grid-template-columns: 1fr;
+  }
+
+  .rpytech-courses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .rpytech-testi-grid {
+    grid-template-columns: 1fr;
+  }
+  .rpytech-footer-top {
+    grid-template-columns: 1fr;
+    padding-block: 15px;
+  }
+  .rpytech-footer-bottom-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .rpytech-footer-bottom-start {
+    text-align: left;
+  }
+  .rpytech-footer-bottom-end {
+    text-align: right;
+    width: auto;
+  }
+}

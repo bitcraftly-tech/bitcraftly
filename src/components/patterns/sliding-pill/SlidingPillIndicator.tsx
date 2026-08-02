@@ -1,12 +1,8 @@
-import type { CSSProperties } from "react";
-import { cn } from "@/lib/cn";
-import "./sliding-pill.css";
+import type { CSSProperties } from 'react';
+import { cn } from '@/lib/cn';
+import './sliding-pill.css';
 
-export type SlidingPillVariant =
-  | "gradient"
-  | "accent"
-  | "primary"
-  | "segment";
+export type SlidingPillVariant = 'gradient' | 'accent' | 'primary' | 'segment';
 
 interface SlidingPillIndicatorProps {
   style: CSSProperties;
@@ -19,16 +15,12 @@ interface SlidingPillIndicatorProps {
  */
 export function SlidingPillIndicator({
   style,
-  variant = "gradient",
+  variant = 'gradient',
   className,
 }: SlidingPillIndicatorProps) {
   return (
     <span
-      className={cn(
-        "sliding-pill-indicator",
-        `sliding-pill-indicator--${variant}`,
-        className,
-      )}
+      className={cn('sliding-pill-indicator', `sliding-pill-indicator--${variant}`, className)}
       style={style}
       aria-hidden
     />

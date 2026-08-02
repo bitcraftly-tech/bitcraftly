@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useCallback, useId, useRef, useState } from "react";
-import type { KeyboardEvent } from "react";
-import { Icon } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
+import { useCallback, useId, useRef, useState } from 'react';
+import type { KeyboardEvent } from 'react';
+import { Icon } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
 
 export interface FaqAccordionItem {
   id: string;
@@ -38,23 +38,23 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
   const onTriggerKeyDown = useCallback(
     (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
       switch (event.key) {
-        case "ArrowDown":
+        case 'ArrowDown':
           event.preventDefault();
           focusButton(index + 1);
           break;
-        case "ArrowUp":
+        case 'ArrowUp':
           event.preventDefault();
           focusButton(index - 1);
           break;
-        case "Home":
+        case 'Home':
           event.preventDefault();
           focusButton(0);
           break;
-        case "End":
+        case 'End':
           event.preventDefault();
           focusButton(items.length - 1);
           break;
-        case "Escape":
+        case 'Escape':
           if (openId !== null) {
             event.preventDefault();
             setOpenId(null);
@@ -79,8 +79,8 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
         return (
           <div
             key={item.id}
-            className={cn("faq-item overflow-hidden rounded-[16px]")}
-            data-open={isOpen ? "true" : "false"}
+            className={cn('faq-item overflow-hidden rounded-[16px]')}
+            data-open={isOpen ? 'true' : 'false'}
           >
             <h3 className="m-0">
               <button
@@ -96,15 +96,11 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
                 onKeyDown={(event) => onTriggerKeyDown(event, index)}
               >
                 <span className="faq-index" aria-hidden>
-                  {String(index + 1).padStart(2, "0")}
+                  {String(index + 1).padStart(2, '0')}
                 </span>
                 <span className="faq-question">{item.question}</span>
                 <span className="faq-icon-wrap" aria-hidden>
-                  <Icon
-                    name="chevron-down"
-                    size="sm"
-                    className="faq-icon h-[14px] w-[14px]"
-                  />
+                  <Icon name="chevron-down" size="sm" className="faq-icon h-[14px] w-[14px]" />
                 </span>
               </button>
             </h3>

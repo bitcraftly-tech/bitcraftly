@@ -1,23 +1,20 @@
-"use client";
+'use client';
 
-import { Icon } from "@/components/ui/icon";
-import { Button } from "@/components/ui/button";
-import { SUGGESTED_QUESTIONS } from "../assistant.config";
-import { useAssistantChat } from "../hooks/useAssistantChat";
-import type { AiProviderId } from "../types";
-import { ChatComposer } from "./ChatComposer";
-import { ChatMessageList } from "./ChatMessageList";
-import { SuggestedQuestions } from "./SuggestedQuestions";
+import { Icon } from '@/components/ui/icon';
+import { Button } from '@/components/ui/button';
+import { SUGGESTED_QUESTIONS } from '../assistant.config';
+import { useAssistantChat } from '../hooks/useAssistantChat';
+import type { AiProviderId } from '../types';
+import { ChatComposer } from './ChatComposer';
+import { ChatMessageList } from './ChatMessageList';
+import { SuggestedQuestions } from './SuggestedQuestions';
 
 export interface AssistantChatProps {
   providerId?: AiProviderId;
   className?: string;
 }
 
-export function AssistantChat({
-  providerId,
-  className,
-}: AssistantChatProps) {
+export function AssistantChat({ providerId, className }: AssistantChatProps) {
   const {
     messages,
     isStreaming,
@@ -30,11 +27,10 @@ export function AssistantChat({
   } = useAssistantChat({ providerId });
 
   const showSuggestions =
-    !isStreaming &&
-    messages.filter((message) => message.role === "user").length === 0;
+    !isStreaming && messages.filter((message) => message.role === 'user').length === 0;
 
   return (
-    <div className={className ? `ai-assistant ${className}` : "ai-assistant"}>
+    <div className={className ? `ai-assistant ${className}` : 'ai-assistant'}>
       <header className="ai-assistant__header">
         <div className="ai-assistant__identity">
           <span className="ai-assistant__avatar" aria-hidden="true">
@@ -46,7 +42,7 @@ export function AssistantChat({
             </h1>
             <p className="ai-assistant__subtitle">
               Provider: {providerLabel}
-              {providerConfigured ? " · Ready" : " · Adapter pending"}
+              {providerConfigured ? ' · Ready' : ' · Adapter pending'}
             </p>
           </div>
         </div>

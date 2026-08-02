@@ -1,20 +1,16 @@
-import Link from "next/link";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { NAV_ACTIONS, ROUTES } from "@/constants/navigation";
-import { buildWorkBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { WorkInternalHero } from "./WorkInternalHero";
-import { WorkPageCta } from "./WorkPageCta";
-import { WorkProjectCard } from "./WorkProjectCard";
-import {
-  getWorkProjectHref,
-  WORK_LANDING,
-  WORK_PROJECTS,
-} from "./work.content";
-import type { WorkProject } from "./work.types";
-import "./work.css";
+import Link from 'next/link';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { buildWorkBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { WorkInternalHero } from './WorkInternalHero';
+import { WorkPageCta } from './WorkPageCta';
+import { WorkProjectCard } from './WorkProjectCard';
+import { getWorkProjectHref, WORK_LANDING, WORK_PROJECTS } from './work.content';
+import type { WorkProject } from './work.types';
+import './work.css';
 
 interface WorkProjectDetailPageProps {
   project: WorkProject;
@@ -22,8 +18,7 @@ interface WorkProjectDetailPageProps {
 
 function getRelatedProjects(project: WorkProject): readonly WorkProject[] {
   const sameIndustry = WORK_PROJECTS.filter(
-    (item) =>
-      item.slug !== project.slug && item.industry === project.industry,
+    (item) => item.slug !== project.slug && item.industry === project.industry,
   );
   if (sameIndustry.length >= 3) {
     return sameIndustry.slice(0, 3);
@@ -36,18 +31,17 @@ function getRelatedProjects(project: WorkProject): readonly WorkProject[] {
  * Work project detail — Work landing design language (hero shell + narrative sections).
  */
 export function WorkProjectDetailPage({ project }: WorkProjectDetailPageProps) {
-  const breadcrumbs = buildWorkBreadcrumbs([
-    { label: project.title },
-  ]);
+  const breadcrumbs = buildWorkBreadcrumbs([{ label: project.title }]);
   const related = getRelatedProjects(project);
   const headingId = `work-project-${project.slug}-heading`;
   const contactHref = `${NAV_ACTIONS.freeConsultation.href}?intent=${encodeURIComponent(`project-${project.slug}`)}&source=work-project`;
+  const isInteractiveDemo = project.badge === 'Interactive demo';
   const primaryLive =
-    project.liveUrl && project.status !== "future"
+    project.liveUrl && project.status !== 'future'
       ? {
-          label: "View live site",
+          label: isInteractiveDemo ? 'Interactive demo' : 'Live Client',
           href: project.liveUrl,
-          external: Boolean(project.liveExternal),
+          external: Boolean(project.liveExternal) || isInteractiveDemo,
         }
       : {
           label: WORK_LANDING.primaryCta.label,
@@ -55,9 +49,7 @@ export function WorkProjectDetailPage({ project }: WorkProjectDetailPageProps) {
         };
 
   return (
-    <PageShell
-      className={`work-page work-detail-page work-detail-page--${project.accent}`}
-    >
+    <PageShell className={`work-page work-detail-page work-detail-page--${project.accent}`}>
       <WorkInternalHero
         breadcrumbs={breadcrumbs}
         headingId={headingId}
@@ -67,7 +59,7 @@ export function WorkProjectDetailPage({ project }: WorkProjectDetailPageProps) {
         description={project.summary}
         primaryCta={primaryLive}
         secondaryCta={{
-          label: "Discuss a similar build",
+          label: 'Discuss a similar build',
           href: contactHref,
         }}
         chips={[...project.services.slice(0, 3), ...project.techStack.slice(0, 3)]}
@@ -151,10 +143,7 @@ export function WorkProjectDetailPage({ project }: WorkProjectDetailPageProps) {
           </li>
           {project.services.map((service) => (
             <li key={service} className="work-detail-list__item">
-              <span
-                className="work-detail-list__icon work-detail-list__icon--accent"
-                aria-hidden
-              >
+              <span className="work-detail-list__icon work-detail-list__icon--accent" aria-hidden>
                 <Icon name="zap" size="sm" />
               </span>
               <span>{service}</span>
@@ -241,9 +230,7 @@ export function WorkProjectDetailPage({ project }: WorkProjectDetailPageProps) {
   );
 }
 
-export function resolveWorkProjectDetail(
-  slug: string,
-): WorkProject | undefined {
+export function resolveWorkProjectDetail(slug: string): WorkProject | undefined {
   return WORK_PROJECTS.find((item) => item.slug === slug);
 }
 

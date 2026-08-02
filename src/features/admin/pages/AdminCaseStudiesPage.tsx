@@ -1,6 +1,6 @@
-import { ADMIN_CASE_STUDY_ROWS } from "../admin.mock-data";
-import { AdminDataTable } from "../components/AdminDataTable";
-import { AdminPageHeader } from "../components/AdminPageHeader";
+import { ADMIN_CASE_STUDY_ROWS } from '../admin.mock-data';
+import { AdminDataTable } from '../components/AdminDataTable';
+import { AdminPageHeader } from '../components/AdminPageHeader';
 
 export function AdminCaseStudiesPage() {
   return (

@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { AdminBlogPage } from "@/features/admin";
+import type { Metadata } from 'next';
+import { AdminBlogPage } from '@/features/admin';
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: 'Blog',
 };
 
 export default function AdminBlogRoutePage() {

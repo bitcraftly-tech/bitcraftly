@@ -1,0 +1,392 @@
+/**
+ * Homepage Premium Visual Rhythm (Phase 2)
+ * Section surface cadence + soft transitions only.
+ * Does not touch Hero. Spacing / type scale / IA frozen.
+ */
+
+.home-story {
+  --hs-rhythm-white: #ffffff;
+  --hs-rhythm-lavender: #faf7ff;
+  --hs-rhythm-soft: #f4f2f8;
+  --hs-rhythm-dark: #0f172a;
+  --hs-rhythm-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+}
+
+/* Soft seam between adjacent surfaces (no hard rules) */
+.home-story > .hs-section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 72px;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--hs-rhythm-seam, transparent) 70%, transparent) 0%,
+    transparent 100%
+  );
+  opacity: 0.9;
+}
+
+.home-story > .hs-section {
+  position: relative;
+}
+
+/* —— 1. Business Outcomes → pure white —— */
+.home-story .hs-section--outcomes,
+.home-story .hs-outcomes-stage {
+  background: var(--hs-rhythm-white);
+  background-image: none;
+}
+
+.home-story .hs-section--outcomes {
+  --hs-rhythm-seam: color-mix(in srgb, var(--canvas) 55%, white);
+}
+
+.home-story .hs-outcomes-stage {
+  display: none;
+}
+
+/* —— 2. Delivery Path → soft lavender —— */
+.home-story .hs-section--path {
+  background:
+    radial-gradient(
+      90% 60% at 50% 0%,
+      color-mix(in srgb, var(--primary-end) 6%, transparent) 0%,
+      transparent 62%
+    ),
+    linear-gradient(180deg, var(--hs-rhythm-lavender), var(--hs-rhythm-lavender));
+  --hs-rhythm-seam: white;
+}
+
+/* —— 3. What's Included → white —— */
+.home-story .hs-section--included {
+  background: var(--hs-rhythm-white);
+  background-image: none;
+  --hs-rhythm-seam: var(--hs-rhythm-lavender);
+}
+
+/* —— 4. Industry Systems → subtle radial purple mesh —— */
+.home-story .hs-wave {
+  background: transparent;
+  background-image: none;
+}
+
+.home-story .hs-wave-stage {
+  background:
+    radial-gradient(
+      70% 55% at 18% 22%,
+      color-mix(in srgb, var(--primary-end) 14%, transparent) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      60% 50% at 88% 68%,
+      color-mix(in srgb, var(--primary) 10%, transparent) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      50% 40% at 50% 100%,
+      color-mix(in srgb, var(--primary-end) 6%, transparent) 0%,
+      transparent 55%
+    ),
+    linear-gradient(180deg, #f7f5fc 0%, #fbfafe 55%, #ffffff 100%);
+  --hs-rhythm-seam: white;
+}
+
+.home-story .hs-wave-stage::after {
+  display: block;
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  pointer-events: none;
+  background-image: var(--hs-rhythm-noise);
+  mix-blend-mode: soft-light;
+  z-index: 0;
+}
+
+.home-story .hs-wave {
+  --hs-rhythm-seam: white;
+}
+
+/* —— 5. AI Automation → white —— */
+.home-story .hs-auto {
+  background: transparent;
+  background-image: none;
+}
+
+.home-story .hs-auto-stage {
+  background: var(--hs-rhythm-white);
+  background-image: none;
+}
+
+.home-story .hs-auto {
+  --hs-rhythm-seam: color-mix(in srgb, var(--primary-end) 8%, white);
+}
+
+.home-story .hs-auto-stage::after {
+  display: none;
+}
+
+/* —— 6. Ecosystem Dashboard → deep premium dark + violet glow —— */
+.home-story .hs-dash {
+  background: transparent;
+  background-image: none;
+  --hs-ink: #f8fafc;
+  --hs-muted: color-mix(in srgb, #cbd5e1 88%, #94a3b8);
+  --hs-line: color-mix(in srgb, #ffffff 12%, transparent);
+  --hs-rhythm-seam: white;
+  color: var(--hs-ink);
+}
+
+.home-story .hs-dash-stage {
+  background:
+    radial-gradient(
+      55% 50% at 82% 30%,
+      color-mix(in srgb, var(--primary-end) 28%, transparent) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      45% 40% at 12% 78%,
+      color-mix(in srgb, var(--primary) 18%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      40% 35% at 50% 0%,
+      color-mix(in srgb, #6366f1 12%, transparent) 0%,
+      transparent 55%
+    ),
+    linear-gradient(180deg, #111827 0%, var(--hs-rhythm-dark) 48%, #0b1220 100%);
+}
+
+.home-story .hs-dash-stage::after {
+  display: block;
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  pointer-events: none;
+  background-image: var(--hs-rhythm-noise);
+  mix-blend-mode: soft-light;
+  z-index: 0;
+}
+
+.home-story .hs-dash-stage::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 88px;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, white 10%, transparent) 0%,
+    transparent 100%
+  );
+}
+
+.home-story .hs-dash-points li {
+  color: color-mix(in srgb, #e2e8f0 90%, #94a3b8);
+}
+
+.home-story .hs-dash-head__rule {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--primary) 65%, transparent),
+    color-mix(in srgb, #ffffff 14%, transparent)
+  );
+}
+
+/* Soft bottom fade into next white section */
+.home-story .hs-dash-stage {
+  box-shadow: inset 0 -64px 64px -48px color-mix(in srgb, white 8%, transparent);
+}
+
+/* —— 7. Connected Workflows → white —— */
+.home-story .hs-section--mesh {
+  background: transparent;
+  background-image: none;
+  --hs-rhythm-seam: color-mix(in srgb, var(--hs-rhythm-dark) 35%, transparent);
+}
+
+.home-story .hs-mesh-stage {
+  background:
+    radial-gradient(
+      70% 45% at 50% 0%,
+      color-mix(in srgb, var(--hs-rhythm-dark) 4%, transparent) 0%,
+      transparent 55%
+    ),
+    var(--hs-rhythm-white);
+}
+
+.home-story .hs-mesh-stage::after {
+  display: none;
+}
+
+.home-story .hs-mesh-stage__glow {
+  opacity: 0.35;
+}
+
+/* —— 8. Why Industry Systems → soft neutral gray/lavender —— */
+.home-story .hs-why {
+  background: transparent;
+  background-image: none;
+  --hs-rhythm-seam: white;
+}
+
+.home-story .hs-why-stage {
+  background:
+    radial-gradient(
+      80% 50% at 50% 0%,
+      color-mix(in srgb, var(--primary-end) 5%, transparent) 0%,
+      transparent 60%
+    ),
+    linear-gradient(180deg, var(--hs-rhythm-soft) 0%, #f7f6fa 100%);
+}
+
+.home-story .hs-why-stage::after {
+  display: block;
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.14;
+  pointer-events: none;
+  background-image: var(--hs-rhythm-noise);
+  mix-blend-mode: soft-light;
+  z-index: 0;
+}
+
+/* —— 9. Go Live Faster → white —— */
+.home-story .hs-live {
+  background: transparent;
+  background-image: none;
+  --hs-rhythm-seam: var(--hs-rhythm-soft);
+}
+
+.home-story .hs-live-stage {
+  background: var(--hs-rhythm-white);
+  background-image: none;
+}
+
+.home-story .hs-live-stage::after {
+  display: none;
+}
+
+/* —— 10. CTA Band → purple mesh gradient —— */
+.home-story .hs-invite {
+  background: transparent;
+  background-image: none;
+  --hs-rhythm-seam: white;
+}
+
+.home-story .hs-invite-stage {
+  border-block: 0;
+  background:
+    radial-gradient(
+      70% 55% at 12% 20%,
+      color-mix(in srgb, var(--primary) 16%, transparent) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      65% 50% at 90% 70%,
+      color-mix(in srgb, var(--primary-end) 18%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      50% 40% at 50% 100%,
+      color-mix(in srgb, var(--primary-end) 10%, transparent) 0%,
+      transparent 55%
+    ),
+    linear-gradient(
+      165deg,
+      #f5f0ff 0%,
+      color-mix(in srgb, var(--primary-end) 8%, #faf7ff) 45%,
+      #f3eeff 100%
+    );
+}
+
+.home-story .hs-invite-stage__glow {
+  display: block;
+  position: absolute;
+  inset: -10% 10% auto;
+  height: 55%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    color-mix(in srgb, var(--primary-end) 22%, transparent) 0%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  opacity: 0.7;
+}
+
+.home-story .hs-invite-stage__texture {
+  display: block;
+  opacity: 0.35;
+}
+
+.home-story .hs-invite-stage__texture::after {
+  display: block;
+  opacity: 0.28;
+}
+
+/* Soft top fade from previous white */
+.home-story .hs-invite-stage::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 80px;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, white 55%, transparent) 0%,
+    transparent 100%
+  );
+}
+
+/*
+ * Newsletter + Footer live in marketing chrome (outside .home-story).
+ * Scope to homepage via .homepage-sections sibling context when present —
+ * keep newsletter dark; leave footer as existing inverse.
+ */
+.newsletter-section {
+  background-color: var(--inverse, #000726);
+  background-image:
+    radial-gradient(
+      60% 50% at 80% 0%,
+      color-mix(in srgb, var(--primary-end) 18%, transparent) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      50% 40% at 10% 100%,
+      color-mix(in srgb, var(--primary) 12%, transparent) 0%,
+      transparent 60%
+    );
+}
+
+/* Soft seam into newsletter from invite */
+.newsletter-section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 64px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--primary-end) 12%, transparent) 0%,
+    transparent 100%
+  );
+}
+
+.newsletter-section {
+  position: relative;
+  isolation: isolate;
+}

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { Icon } from "@/components/ui/icon";
-import { Button } from "@/components/ui/button";
-import { ADMIN_AUTH_PREVIEW, ADMIN_META } from "../admin.config";
-import { ROUTES } from "@/constants/navigation";
+import Link from 'next/link';
+import { Icon } from '@/components/ui/icon';
+import { Button } from '@/components/ui/button';
+import { ADMIN_AUTH_PREVIEW, ADMIN_META } from '../admin.config';
+import { ROUTES } from '@/constants/navigation';
 
 interface AdminTopbarProps {
   onMenuToggle: () => void;
@@ -25,9 +25,7 @@ export function AdminTopbar({ onMenuToggle, menuOpen }: AdminTopbarProps) {
           onClick={onMenuToggle}
         >
           <Icon name="menu" size="sm" aria-hidden />
-          <span className="sr-only">
-            {menuOpen ? "Close navigation" : "Open navigation"}
-          </span>
+          <span className="sr-only">{menuOpen ? 'Close navigation' : 'Open navigation'}</span>
           Menu
         </Button>
         <p className="admin-topbar__product">

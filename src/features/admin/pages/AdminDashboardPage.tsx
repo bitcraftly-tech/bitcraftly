@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { ADMIN_ARCHITECTURE_NOTES, ADMIN_META } from "../admin.config";
-import { ADMIN_NAV } from "../admin.nav";
-import { ADMIN_OVERVIEW_STATS } from "../admin.mock-data";
-import { AdminPageHeader } from "../components/AdminPageHeader";
-import { AdminStatCard } from "../components/AdminStatCard";
+import Link from 'next/link';
+import { ADMIN_ARCHITECTURE_NOTES, ADMIN_META } from '../admin.config';
+import { ADMIN_NAV } from '../admin.nav';
+import { ADMIN_OVERVIEW_STATS } from '../admin.mock-data';
+import { AdminPageHeader } from '../components/AdminPageHeader';
+import { AdminStatCard } from '../components/AdminStatCard';
 
 export function AdminDashboardPage() {
   return (
@@ -20,12 +20,7 @@ export function AdminDashboardPage() {
         </h2>
         <div className="admin-stats">
           {ADMIN_OVERVIEW_STATS.map((stat) => (
-            <AdminStatCard
-              key={stat.id}
-              label={stat.label}
-              value={stat.value}
-              hint={stat.hint}
-            />
+            <AdminStatCard key={stat.id} label={stat.label} value={stat.value} hint={stat.hint} />
           ))}
         </div>
       </section>
@@ -35,7 +30,7 @@ export function AdminDashboardPage() {
           Modules
         </h2>
         <ul className="admin-module-grid">
-          {ADMIN_NAV.filter((item) => item.id !== "overview").map((item) => (
+          {ADMIN_NAV.filter((item) => item.id !== 'overview').map((item) => (
             <li key={item.id}>
               <Link href={item.href} className="admin-module-card">
                 <span className="admin-module-card__label">{item.label}</span>

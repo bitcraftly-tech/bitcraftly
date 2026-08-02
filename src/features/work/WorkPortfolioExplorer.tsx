@@ -1,22 +1,13 @@
-"use client";
+'use client';
 
-import { useDeferredValue, useMemo } from "react";
-import {
-  SlidingPillIndicator,
-  useSlidingPillIndicator,
-} from "@/components/patterns/sliding-pill";
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
-import {
-  WORK_PORTFOLIO_FILTERS,
-  WORK_PROJECTS,
-} from "./work.content";
-import {
-  filterProjectsByExplorer,
-  matchesPortfolioFilter,
-} from "./work.filters";
-import { useWorkExplorer } from "./work-explorer-context";
-import "./work.css";
+import { useDeferredValue, useMemo } from 'react';
+import { SlidingPillIndicator, useSlidingPillIndicator } from '@/components/patterns/sliding-pill';
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
+import { WORK_PORTFOLIO_FILTERS, WORK_PROJECTS } from './work.content';
+import { filterProjectsByExplorer, matchesPortfolioFilter } from './work.filters';
+import { useWorkExplorer } from './work-explorer-context';
+import './work.css';
 
 /**
  * Portfolio filter rail — segmented stack chips + sliding active pill.
@@ -30,8 +21,8 @@ export function WorkPortfolioExplorer() {
   );
   const pill = useSlidingPillIndicator(state.portfolioFilter);
 
-  const catalog = WORK_PROJECTS.filter((project) => project.status !== "future");
-  const visibleCount = matches.filter((p) => p.status !== "future").length;
+  const catalog = WORK_PROJECTS.filter((project) => project.status !== 'future');
+  const visibleCount = matches.filter((p) => p.status !== 'future').length;
 
   function onSelect(filterId: string) {
     startTransition(() => {
@@ -41,7 +32,7 @@ export function WorkPortfolioExplorer() {
         industries: [],
         services: [],
         technologies: [],
-        query: "",
+        query: '',
       }));
     });
   }
@@ -62,26 +53,21 @@ export function WorkPortfolioExplorer() {
         <div className="work-pf-toolbar__meta">
           <p className="work-pf-toolbar__label">Browse by stack</p>
           <p className="work-pf-filters__status" aria-live="polite">
-            Showing{" "}
-            <span className="work-pf-filters__status-count">{visibleCount}</span>{" "}
-            {visibleCount === 1 ? "project" : "projects"}
+            Showing <span className="work-pf-filters__status-count">{visibleCount}</span>{' '}
+            {visibleCount === 1 ? 'project' : 'projects'}
           </p>
         </div>
 
         <div className="work-pf-filters-shell">
-          <div
-            ref={pill.containerRef}
-            className="work-pf-filters sliding-pill-track"
-          >
+          <div ref={pill.containerRef} className="work-pf-filters sliding-pill-track">
             <SlidingPillIndicator style={pill.indicatorStyle} variant="gradient" />
             <ul className="work-pf-filters__list" aria-label="Project filters">
               {WORK_PORTFOLIO_FILTERS.map((filter) => {
                 const count =
-                  filter.id === "all"
+                  filter.id === 'all'
                     ? catalog.length
-                    : catalog.filter((project) =>
-                        matchesPortfolioFilter(project, filter.id),
-                      ).length;
+                    : catalog.filter((project) => matchesPortfolioFilter(project, filter.id))
+                        .length;
                 const active = state.portfolioFilter === filter.id;
                 return (
                   <li key={filter.id}>
@@ -89,8 +75,8 @@ export function WorkPortfolioExplorer() {
                       ref={pill.itemRef(filter.id)}
                       type="button"
                       className={cn(
-                        "work-pf-filter relative z-[1]",
-                        active && "work-pf-filter--active",
+                        'work-pf-filter relative z-[1]',
+                        active && 'work-pf-filter--active',
                       )}
                       aria-pressed={active}
                       onClick={() => onSelect(filter.id)}

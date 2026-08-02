@@ -1,139 +1,298 @@
-import type {
-  HeroAssistantSuggestion,
-  HeroAutomationStep,
-  HeroCapabilityTag,
-  HeroCta,
-  HeroDashboardStat,
-  HeroMetric,
-} from "./hero.types";
-import { getServiceHref } from "@/constants/services";
-import { NAV_ACTIONS, ROUTES, SECTION_IDS } from "@/constants/navigation";
+import { ROUTES, SECTION_IDS } from '@/constants/navigation';
+import type { HeroCapabilityTag, HeroCta } from './hero.types';
 
 export const HERO_ID = SECTION_IDS.hero;
-export const HERO_HEADING_ID = "hero-heading";
+export const HERO_HEADING_ID = 'hero-heading';
 
-export const HERO_EYEBROW_LABEL =
-  "AI-Powered • Performance Focused • Results Driven";
+export const HERO_BADGE = 'AI-Powered Digital Engineering Partner';
 
 export const HERO_HEADING = {
-  prefix: "We Build AI-Powered Digital Products That Drive",
-  highlight: "Business Growth",
-  suffix: "",
+  lead: 'Complete',
+  focus: 'Digital Systems',
+  sub: 'for Your Industry.',
+  /** Quiet sans opener before the script accent */
+  subLead: 'for Your',
+  /** Matches Digital Systems script treatment */
+  subAccent: 'Industry.',
+  /** @deprecated Prefer lead/focus/sub */
+  line1: 'Complete Digital Systems',
+  line2: 'for Your Industry.',
 } as const;
 
 export const HERO_DESCRIPTION =
-  "From high-performance websites to AI automation and custom software, we help businesses launch, scale, and lead in the digital era.";
+  'Website, AI, dashboard, analytics, and integrations — one Industry System, ready to launch.';
 
-/** Shorter hero copy for mobile ATF (Sprint 004.4). */
-export const HERO_DESCRIPTION_MOBILE =
-  "AI-powered websites, automation, and custom software built to launch and scale your business.";
+export const HERO_MODULE_CHIPS: readonly string[] = [
+  'Website',
+  'AI',
+  'Dashboard',
+  'Analytics',
+  'CMS',
+  'Leads',
+  'Integrations',
+  'Go-Live',
+];
+
+/** @deprecated Use HERO_MODULE_CHIPS — no generic feature cards */
+export const HERO_FEATURE_PILLS: readonly HeroCapabilityTag[] = [
+  { id: 'website', label: 'Website', icon: 'layout-grid' },
+  { id: 'ai', label: 'AI', icon: 'sparkles' },
+  { id: 'dashboard', label: 'Dashboard', icon: 'layout-grid' },
+  { id: 'analytics', label: 'Analytics', icon: 'trending-up' },
+];
 
 export const HERO_CTAS: HeroCta[] = [
   {
-    label: NAV_ACTIONS.freeConsultation.label,
-    href: NAV_ACTIONS.freeConsultation.href,
-    variant: "primary",
+    label: 'Explore Industry Systems',
+    href: ROUTES.industries,
+    variant: 'primary',
   },
   {
-    label: NAV_ACTIONS.viewWork.label,
-    href: NAV_ACTIONS.viewWork.href,
-    variant: "outline",
+    label: 'Book a Strategy Call',
+    href: `${ROUTES.contact}?intent=strategy`,
+    variant: 'outline',
   },
 ];
 
-export const HERO_CAPABILITY_TAGS: readonly HeroCapabilityTag[] = [
+export const HERO_TRUST = {
+  label: 'Trusted path for Healthcare, Real Estate, Restaurant & Corporate',
+  countBadge: '4',
+  avatars: [
+    { initials: 'HC', tone: 'violet' as const },
+    { initials: 'RE', tone: 'blue' as const },
+    { initials: 'RS', tone: 'rose' as const },
+    { initials: 'CS', tone: 'amber' as const },
+  ],
+};
+
+export const HERO_SYSTEM = {
+  industry: 'Healthcare System',
+  flow: ['Website', 'AI', 'Dashboard', 'Analytics'] as const,
+  website: {
+    brand: 'Medicare+',
+    headline: 'Compassionate Care.\nAdvanced Healthcare.',
+    cta: 'Book Appointment',
+  },
+  ai: {
+    title: 'AI Assistant',
+    message: 'I can help schedule a visit or answer service questions.',
+    suggestions: ['Book visit', 'Insurance', 'Doctors'],
+  },
+  dashboard: {
+    title: 'Operations',
+    panels: ['Leads', 'Schedule', 'Content', 'AI Activity'],
+  },
+  analytics: {
+    kpis: [
+      { label: 'Leads', value: '248' },
+      { label: 'Bookings', value: '86' },
+      { label: 'Conv.', value: '12.4%' },
+    ],
+  },
+} as const;
+
+/** Hero browser industry previews — auto-rotate every ~5.5s (layout frozen). */
+export const HERO_INDUSTRY_ROTATE_MS = 5500;
+
+const HERO_PREVIEW_WIDTHS = [480, 720, 960, 1280] as const;
+
+function heroPreviewImage(slug: string, naturalWidth: number, naturalHeight: number) {
+  const webpSrcSet = HERO_PREVIEW_WIDTHS.map(
+    (width) => `/products/hero/${slug}-${width}.webp ${width}w`,
+  ).join(', ');
+  const avifSrcSet = HERO_PREVIEW_WIDTHS.map(
+    (width) => `/products/hero/${slug}-${width}.avif ${width}w`,
+  ).join(', ');
+
+  return {
+    imageSrc: `/products/hero/${slug}-960.webp`,
+    imageWidth: naturalWidth,
+    imageHeight: naturalHeight,
+    imageWebpSrcSet: webpSrcSet,
+    imageAvifSrcSet: avifSrcSet,
+    imageSizes: '(max-width: 767px) 92vw, (max-width: 1023px) 50vw, 560px',
+  } as const;
+}
+
+export const HERO_INDUSTRY_PREVIEWS = [
   {
-    id: "ai-solutions",
-    label: "AI Solutions",
-    icon: "brain",
-    href: getServiceHref("ai-solutions"),
+    id: 'healthcare',
+    label: 'Healthcare System',
+    title: 'Medicare+',
+    industry: 'Healthcare',
+    host: 'medicare.bitcraftly.com',
+    ...heroPreviewImage('clinic-healthcare', 1024, 768),
+    ai: {
+      title: 'AI Assistant',
+      message: 'I can help schedule a visit or answer service questions.',
+      suggestions: ['Book visit', 'Insurance', 'Doctors'],
+    },
+    dashboard: {
+      title: 'Operations',
+      panels: ['Leads', 'Schedule', 'Content', 'AI Activity'],
+    },
+    analytics: {
+      kpis: [
+        { label: 'Leads', value: '248' },
+        { label: 'Bookings', value: '86' },
+        { label: 'Conv.', value: '12.4%' },
+      ],
+    },
   },
   {
-    id: "erp",
-    label: "ERP",
-    icon: "trending-up",
-    href: getServiceHref("custom-software-development"),
+    id: 'restaurant',
+    label: 'Restaurant System',
+    title: 'Shrishti Kitchen',
+    industry: 'Restaurant',
+    host: 'shrishti.bitcraftly.com',
+    ...heroPreviewImage('shrishti-cloud-kitchen', 1448, 1086),
+    ai: {
+      title: 'AI Concierge',
+      message: 'I can take orders, share the menu, or route a WhatsApp handoff.',
+      suggestions: ['Order now', 'Menu', 'Reserve'],
+    },
+    dashboard: {
+      title: 'Operations',
+      panels: ['Orders', 'Menu', 'Leads', 'AI Chats'],
+    },
+    analytics: {
+      kpis: [
+        { label: 'Orders', value: '412' },
+        { label: 'Avg. ticket', value: '₹640' },
+        { label: 'Repeat', value: '31%' },
+      ],
+    },
   },
   {
-    id: "crm",
-    label: "CRM",
-    icon: "bot",
-    href: getServiceHref("custom-software-development"),
+    id: 'real-estate',
+    label: 'Real Estate System',
+    title: 'Dayal Builders',
+    industry: 'Real Estate',
+    host: 'dayal.bitcraftly.com',
+    ...heroPreviewImage('builder-website', 1024, 768),
+    ai: {
+      title: 'AI Assistant',
+      message: 'I can match inventory, book site visits, or qualify a lead.',
+      suggestions: ['Site visit', 'Projects', 'Pricing'],
+    },
+    dashboard: {
+      title: 'Operations',
+      panels: ['Leads', 'Inventory', 'Visits', 'AI Activity'],
+    },
+    analytics: {
+      kpis: [
+        { label: 'Leads', value: '186' },
+        { label: 'Visits', value: '54' },
+        { label: 'Conv.', value: '9.8%' },
+      ],
+    },
   },
   {
-    id: "cms",
-    label: "CMS",
-    icon: "layout-grid",
-    href: getServiceHref("website-development"),
-  },
-  {
-    id: "saas",
-    label: "SaaS",
-    icon: "cloud",
-    href: getServiceHref("web-application-development"),
-  },
-  {
-    id: "automation",
-    label: "Automation",
-    icon: "workflow",
-    href: getServiceHref("ai-solutions"),
+    id: 'corporate',
+    label: 'Corporate Services System',
+    title: 'Local Services Pro',
+    industry: 'Corporate Services',
+    host: 'services.bitcraftly.com',
+    ...heroPreviewImage('local-services-lead-site', 1402, 1122),
+    ai: {
+      title: 'AI Assistant',
+      message: 'I can capture a brief, estimate scope, or book a strategy call.',
+      suggestions: ['Get quote', 'Services', 'Book call'],
+    },
+    dashboard: {
+      title: 'Operations',
+      panels: ['Leads', 'Pipeline', 'Content', 'AI Activity'],
+    },
+    analytics: {
+      kpis: [
+        { label: 'Leads', value: '164' },
+        { label: 'Qualified', value: '71' },
+        { label: 'Conv.', value: '14.2%' },
+      ],
+    },
   },
 ] as const;
 
-export const HERO_METRICS: HeroMetric[] = [
-  { value: "20+", label: "Years of Experience" },
-  { value: "200+", label: "Projects Delivered" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "24/7", label: "Support & Maintenance" },
+export type HeroIndustryPreview = (typeof HERO_INDUSTRY_PREVIEWS)[number];
+
+export const HERO_EYEBROW_LABEL = HERO_BADGE;
+export const HERO_DESCRIPTION_MOBILE = HERO_DESCRIPTION;
+export const HERO_CAPABILITY_TAGS = HERO_FEATURE_PILLS;
+
+export const HERO_HEADING_LEGACY = {
+  brand: 'Bitcraftly',
+  main: 'Complete Digital Systems for Your Industry.',
+  accent: 'Complete Digital Systems',
+} as const;
+
+export const HERO_METRICS = [
+  { value: '20+', label: 'Years of Experience' },
+  { value: '200+', label: 'Projects Delivered' },
+  { value: '98%', label: 'Client Satisfaction' },
+  { value: '24/7', label: 'Support & Maintenance' },
 ];
 
 export const HERO_DASHBOARD = {
-  url: "app.bitcraftly.com/analytics",
-  title: "Revenue Overview",
-  subtitle: "Last 30 days · live",
-  growth: "+18.6%",
-  revenueLabel: "Total Revenue",
-  revenueValue: "$24,850",
-  previousValue: "$20,940",
+  url: 'app.bitcraftly.com/analytics',
+  title: 'Revenue Overview',
+  subtitle: 'Last 30 days · live',
+  growth: '+24.8%',
+  revenueLabel: 'Total Revenue',
+  revenueValue: '₹24.8L',
+  previousValue: '₹19.9L',
 } as const;
 
-export const HERO_DASHBOARD_STATS: HeroDashboardStat[] = [
-  { label: "Projects", value: "32", change: "+12.4%" },
-  { label: "Leads", value: "248", change: "+15.2%" },
-  { label: "Success", value: "98%", change: "+2.1%" },
+export const HERO_DASHBOARD_STATS = [
+  { label: 'Projects', value: '32', change: '+12.4%' },
+  { label: 'Leads', value: '248', change: '+15.2%' },
+  { label: 'Success', value: '98%', change: '+2.1%' },
 ];
 
-export const HERO_ASSISTANT = {
-  name: "Bitcraftly AI",
-  version: "Assistant · Bitcraftly",
-  status: "Online",
-  message: "Tell us what you need — website, AI, or automation.",
+export const HERO_STAGE_PROGRESS = [
+  { label: 'AI Platform', value: 75 },
+  { label: 'CRM System', value: 60 },
+  { label: 'Mobile App', value: 40 },
+] as const;
+
+export const HERO_STAGE_USERS = {
+  value: '12,460',
+  change: '+24.8%',
 } as const;
 
-export const HERO_ASSISTANT_SUGGESTIONS: HeroAssistantSuggestion[] = [
+export const HERO_ASSISTANT = {
+  name: 'AI Assistant',
+  version: 'Bitcraftly · online',
+  status: 'Live',
+  message: 'Hello! How can I help you today?',
+} as const;
+
+export const HERO_ASSISTANT_SUGGESTIONS = [
   {
-    text: "Need a website",
-    href: `${ROUTES.contact}?intent=website&source=ask-ai`,
+    text: 'Website',
+    href: `${ROUTES.contact}?intent=website&source=hero-stage`,
   },
   {
-    text: "Need AI solution",
-    href: `${ROUTES.contact}?intent=ai&source=ask-ai`,
+    text: 'AI Chatbot',
+    href: `${ROUTES.contact}?intent=ai&source=hero-stage`,
   },
   {
-    text: "Need automation",
-    href: `${ROUTES.contact}?intent=automation&source=ask-ai`,
+    text: 'CRM',
+    href: `${ROUTES.contact}?intent=crm&source=hero-stage`,
+  },
+  {
+    text: 'Automation',
+    href: `${ROUTES.contact}?intent=automation&source=hero-stage`,
   },
 ];
 
 export const HERO_AUTOMATION = {
-  title: "Automation Flow",
-  subtitle: "4 steps · running",
-  status: "Live",
+  title: 'Automation Flow',
+  subtitle: 'Lead → qualify → notify',
+  status: 'Running',
 } as const;
 
-export const HERO_AUTOMATION_STEPS: HeroAutomationStep[] = [
-  { label: "Trigger", completed: true },
-  { label: "AI Process", completed: true },
-  { label: "Notify", completed: true },
-  { label: "Update CRM", completed: true },
+export const HERO_AUTOMATION_STEPS = [
+  { label: 'New Lead', completed: true },
+  { label: 'AI Qualify', completed: true },
+  { label: 'Notify Team', completed: true },
 ];

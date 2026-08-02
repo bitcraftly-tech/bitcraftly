@@ -3,14 +3,14 @@ import {
   listLeads,
   type LeadStatusCounts,
   type PersistedLeadRecord,
-} from "@/features/lead-funnel/services/lead.repository";
-import { requireOwnerSession } from "@/features/owner-auth/require-owner-session";
-import type { OwnerLeadsFilters } from "./owner-crm.types";
+} from '@/features/lead-funnel/services/lead.repository';
+import { requireOwnerSession } from '@/features/owner-auth/require-owner-session';
+import type { OwnerLeadsFilters } from './owner-crm.types';
 import {
   formatOwnerLeadSubmittedAt,
   resolveOwnerLeadNotificationStatus,
-} from "./owner-leads.utils";
-import type { OwnerLeadTableRow } from "./owner-crm.types";
+} from './owner-leads.utils';
+import type { OwnerLeadTableRow } from './owner-crm.types';
 
 export interface OwnerLeadsDashboardSuccess {
   readonly ok: true;
@@ -24,9 +24,7 @@ export interface OwnerLeadsDashboardFailure {
   readonly message: string;
 }
 
-export type OwnerLeadsDashboardResult =
-  | OwnerLeadsDashboardSuccess
-  | OwnerLeadsDashboardFailure;
+export type OwnerLeadsDashboardResult = OwnerLeadsDashboardSuccess | OwnerLeadsDashboardFailure;
 
 function mapLeadToTableRow(lead: PersistedLeadRecord): OwnerLeadTableRow {
   const notification = resolveOwnerLeadNotificationStatus(lead);
@@ -34,7 +32,7 @@ function mapLeadToTableRow(lead: PersistedLeadRecord): OwnerLeadTableRow {
   return {
     id: lead.id,
     name: lead.name,
-    company: lead.company ?? "—",
+    company: lead.company ?? '—',
     email: lead.email,
     intent: lead.intent,
     status: lead.status,
@@ -58,14 +56,14 @@ export async function loadOwnerLeadsDashboard(
   if (!countsResult.ok) {
     return {
       ok: false,
-      message: "Unable to load lead summary metrics.",
+      message: 'Unable to load lead summary metrics.',
     };
   }
 
   if (!leadsResult.ok) {
     return {
       ok: false,
-      message: "Unable to load leads.",
+      message: 'Unable to load leads.',
     };
   }
 

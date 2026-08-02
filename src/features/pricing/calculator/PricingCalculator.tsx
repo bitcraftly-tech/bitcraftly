@@ -1,36 +1,33 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useMemo } from "react";
-import { Controller, useForm, useWatch } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Icon } from "@/components/ui/icon";
-import { NAV_ACTIONS, ROUTES } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { AnimatedCurrency } from "./AnimatedCurrency";
+import Link from 'next/link';
+import { useMemo } from 'react';
+import { Controller, useForm, useWatch } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Icon } from '@/components/ui/icon';
+import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { AnimatedCurrency } from './AnimatedCurrency';
 import {
   BUDGET_OPTIONS,
   FEATURE_OPTIONS,
   PAGE_RANGE_OPTIONS,
   TIMELINE_OPTIONS,
   WEBSITE_TYPE_OPTIONS,
-} from "./pricing-calculator.config";
-import {
-  calculatePricingEstimate,
-  formatInr,
-} from "./pricing-calculator.engine";
+} from './pricing-calculator.config';
+import { calculatePricingEstimate, formatInr } from './pricing-calculator.engine';
 import {
   pricingCalculatorSchema,
   type PricingCalculatorFormValues,
-} from "./pricing-calculator.schema";
-import "./pricing-calculator.css";
+} from './pricing-calculator.schema';
+import './pricing-calculator.css';
 
 const DEFAULT_VALUES: PricingCalculatorFormValues = {
-  websiteType: "business",
-  pages: "6-10",
-  features: ["seo"],
-  timeline: "standard",
-  budget: "50k-1L",
+  websiteType: 'business',
+  pages: '6-10',
+  features: ['seo'],
+  timeline: 'standard',
+  budget: '50k-1L',
 };
 
 export interface PricingCalculatorProps {
@@ -44,24 +41,21 @@ function OptionButton({
   label,
   description,
   onSelect,
-  type = "radio",
+  type = 'radio',
 }: {
   selected: boolean;
   label: string;
   description: string;
   onSelect: () => void;
-  type?: "radio" | "checkbox";
+  type?: 'radio' | 'checkbox';
 }) {
   return (
     <button
       type="button"
-      role={type === "checkbox" ? "checkbox" : "radio"}
+      role={type === 'checkbox' ? 'checkbox' : 'radio'}
       aria-checked={selected}
       onClick={onSelect}
-      className={cn(
-        "pricing-calc__option",
-        selected && "pricing-calc__option--selected",
-      )}
+      className={cn('pricing-calc__option', selected && 'pricing-calc__option--selected')}
     >
       <span className="pricing-calc__option-label">{label}</span>
       <span className="pricing-calc__option-desc">{description}</span>
@@ -74,7 +68,7 @@ function OptionButton({
  */
 export function PricingCalculator({
   className,
-  headingId = "pricing-calculator-heading",
+  headingId = 'pricing-calculator-heading',
 }: PricingCalculatorProps) {
   const {
     control,
@@ -84,46 +78,43 @@ export function PricingCalculator({
   } = useForm<PricingCalculatorFormValues>({
     resolver: zodResolver(pricingCalculatorSchema),
     defaultValues: DEFAULT_VALUES,
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const values = useWatch({ control });
-  const estimate = useMemo(
-    () => calculatePricingEstimate(values),
-    [values],
-  );
+  const estimate = useMemo(() => calculatePricingEstimate(values), [values]);
 
   const budgetMessage =
-    estimate.budgetAlignment === "above"
-      ? "Estimate is above your selected budget — we can phase delivery."
-      : estimate.budgetAlignment === "below"
-        ? "Estimate sits under your budget range — room for stronger features."
-        : estimate.budgetAlignment === "within"
-          ? "Estimate aligns with your selected budget band."
-          : "Share a budget preference for a tighter recommendation.";
+    estimate.budgetAlignment === 'above'
+      ? 'Estimate is above your selected budget — we can phase delivery.'
+      : estimate.budgetAlignment === 'below'
+        ? 'Estimate sits under your budget range — room for stronger features.'
+        : estimate.budgetAlignment === 'within'
+          ? 'Estimate aligns with your selected budget band.'
+          : 'Share a budget preference for a tighter recommendation.';
 
   function onSubmit() {
-    const href = new URL(NAV_ACTIONS.freeConsultation.href, "https://bitcraftly.local");
-    href.searchParams.set("intent", "quote");
-    href.searchParams.set("source", "pricing-calculator");
-    href.searchParams.set("service", estimate.packageName);
+    const href = new URL(NAV_ACTIONS.freeConsultation.href, 'https://bitcraftly.local');
+    href.searchParams.set('intent', 'quote');
+    href.searchParams.set('source', 'pricing-calculator');
+    href.searchParams.set('service', estimate.packageName);
     href.searchParams.set(
-      "budget",
+      'budget',
       `${formatInr(estimate.estimatedMin)}–${formatInr(estimate.estimatedMax)}`,
     );
     window.location.assign(`${href.pathname}?${href.searchParams.toString()}`);
   }
 
   return (
-    <div className={cn("pricing-calc", className)}>
+    <div className={cn('pricing-calc', className)}>
       <div className="pricing-calc__intro">
         <p className="pricing-calc__eyebrow">Pricing calculator</p>
         <h2 id={headingId} className="pricing-calc__title">
           Build a transparent project estimate
         </h2>
         <p className="pricing-calc__description">
-          Choose website type, pages, features, timeline, and budget. Get a live
-          cost range and recommended package — written quote before any payment.
+          Choose website type, pages, features, timeline, and budget. Get a live cost range and
+          recommended package — written quote before any payment.
         </p>
       </div>
 
@@ -145,11 +136,7 @@ export function PricingCalculator({
               name="websiteType"
               control={control}
               render={({ field }) => (
-                <div
-                  className="pricing-calc__options"
-                  role="radiogroup"
-                  aria-label="Website type"
-                >
+                <div className="pricing-calc__options" role="radiogroup" aria-label="Website type">
                   {WEBSITE_TYPE_OPTIONS.map((option) => (
                     <OptionButton
                       key={option.id}
@@ -222,7 +209,7 @@ export function PricingCalculator({
                             ? field.value.filter((id) => id !== option.id)
                             : [...field.value, option.id];
                           field.onChange(next);
-                          setValue("features", next, { shouldValidate: true });
+                          setValue('features', next, { shouldValidate: true });
                         }}
                       />
                     );
@@ -293,11 +280,7 @@ export function PricingCalculator({
           </fieldset>
         </div>
 
-        <aside
-          className="pricing-calc__estimate"
-          aria-live="polite"
-          aria-atomic="true"
-        >
+        <aside className="pricing-calc__estimate" aria-live="polite" aria-atomic="true">
           <div className="pricing-calc__estimate-card pricing-calc__estimate-card--enter">
             <p className="pricing-calc__estimate-label">Cost estimate</p>
             <p className="pricing-calc__estimate-range">
@@ -322,9 +305,7 @@ export function PricingCalculator({
             <div className="pricing-calc__package">
               <p className="pricing-calc__package-label">Recommended package</p>
               <p className="pricing-calc__package-name">{estimate.packageName}</p>
-              <p className="pricing-calc__package-summary">
-                {estimate.packageSummary}
-              </p>
+              <p className="pricing-calc__package-summary">{estimate.packageSummary}</p>
             </div>
 
             <dl className="pricing-calc__meta">

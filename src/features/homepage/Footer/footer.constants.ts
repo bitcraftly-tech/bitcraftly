@@ -1,108 +1,103 @@
-import { ROUTES } from "@/constants/navigation";
+import { ROUTES } from '@/constants/navigation';
+import { getIndustryHref } from '@/constants/industries';
 import type {
   FooterBrandCopy,
   FooterContactItem,
   FooterNavColumn,
   FooterSocialLink,
-} from "./footer.types";
+} from './footer.types';
 
-export const FOOTER_ID = "footer";
+export const FOOTER_ID = 'footer';
 
 export const FOOTER_BRAND: FooterBrandCopy = {
   description:
-    "AI & Digital Engineering Partner helping businesses build, automate and grow with modern technology.",
+    'Complete Digital Systems for your industry — website, AI, dashboard, analytics, and integrations.',
 };
 
-/** Order: Instagram, YouTube, Twitter/X, Facebook */
+/** Order: LinkedIn, Instagram, YouTube, Twitter/X, Facebook */
 export const FOOTER_SOCIAL_LINKS: readonly FooterSocialLink[] = [
   {
-    id: "instagram",
-    label: "Bitcraftly on Instagram",
-    href: "https://www.instagram.com/bitcraftly",
-    icon: "instagram",
+    id: 'linkedin',
+    label: 'Bitcraftly on LinkedIn',
+    href: 'https://www.linkedin.com/company/bitcraftly',
+    icon: 'linkedin',
   },
   {
-    id: "youtube",
-    label: "Bitcraftly on YouTube",
-    href: "https://www.youtube.com/@bitcraftly",
-    icon: "youtube",
+    id: 'instagram',
+    label: 'Bitcraftly on Instagram',
+    href: 'https://www.instagram.com/bitcraftly',
+    icon: 'instagram',
   },
   {
-    id: "twitter",
-    label: "Bitcraftly on Twitter",
-    href: "https://x.com/bitcraftly",
-    icon: "x",
+    id: 'youtube',
+    label: 'Bitcraftly on YouTube',
+    href: 'https://www.youtube.com/@bitcraftly',
+    icon: 'youtube',
   },
   {
-    id: "facebook",
-    label: "Bitcraftly on Facebook",
-    href: "https://www.facebook.com/bitcraftly",
-    icon: "facebook",
+    id: 'twitter',
+    label: 'Bitcraftly on Twitter',
+    href: 'https://x.com/bitcraftly',
+    icon: 'x',
+  },
+  {
+    id: 'facebook',
+    label: 'Bitcraftly on Facebook',
+    href: 'https://www.facebook.com/bitcraftly',
+    icon: 'facebook',
   },
 ];
 
+/** Footer mirrors frozen IA: Industry Systems → Explore → Resources → Company */
 export const FOOTER_NAV_COLUMNS: readonly FooterNavColumn[] = [
   {
-    id: "services",
-    title: "Services",
+    id: 'industries',
+    title: 'Industry Systems',
     links: [
-      { label: "AI Solutions", href: `${ROUTES.services}/ai-solutions` },
+      { label: 'Healthcare System', href: getIndustryHref('healthcare') },
+      { label: 'Real Estate System', href: getIndustryHref('real-estate') },
+      { label: 'Restaurant System', href: getIndustryHref('restaurant') },
       {
-        label: "Web Development",
-        href: `${ROUTES.services}/website-development`,
+        label: 'Corporate Services System',
+        href: getIndustryHref('corporate-services'),
       },
-      {
-        label: "Web Applications",
-        href: `${ROUTES.services}/web-application-development`,
-      },
-      {
-        label: "Mobile Apps",
-        href: `${ROUTES.services}/mobile-app-development`,
-      },
-      {
-        label: "Custom Software",
-        href: `${ROUTES.services}/custom-software-development`,
-      },
-      { label: "Cloud & DevOps", href: `${ROUTES.services}/cloud-devops` },
+      { label: 'Explore all industries', href: ROUTES.industries },
     ],
   },
   {
-    id: "solutions",
-    title: "Solutions",
+    id: 'explore',
+    title: 'Explore',
     links: [
-      { label: "ERP Solutions", href: `${ROUTES.solutions}/erp` },
-      { label: "CRM Solutions", href: `${ROUTES.solutions}/crm` },
-      { label: "CMS Solutions", href: `${ROUTES.solutions}/cms` },
-      {
-        label: "AI Automation",
-        href: `${ROUTES.solutions}/ai-automation`,
-      },
-      { label: "SaaS Platforms", href: `${ROUTES.solutions}/saas-platforms` },
+      { label: 'Solutions', href: ROUTES.solutions },
+      { label: 'AI', href: ROUTES.assistant },
+      { label: 'Work', href: ROUTES.work },
+      { label: 'Pricing', href: ROUTES.pricing },
     ],
   },
   {
-    id: "resources",
-    title: "Resources",
+    id: 'resources',
+    title: 'Resources',
     links: [
-      { label: "Blog", href: ROUTES.blog },
-      { label: "Case Studies", href: ROUTES.caseStudies },
-      { label: "Documentation", href: `${ROUTES.resources}/documentation` },
-      { label: "Guides", href: `${ROUTES.resources}/guides` },
-      { label: "FAQ", href: ROUTES.resourcesFaq },
+      { label: 'Blog', href: ROUTES.blog },
+      { label: 'Case Studies', href: ROUTES.caseStudies },
+      { label: 'Documentation', href: `${ROUTES.resources}/documentation` },
+      { label: 'Guides', href: `${ROUTES.resources}/guides` },
+      { label: 'FAQ', href: ROUTES.resourcesFaq },
     ],
   },
   {
-    id: "company",
-    title: "Company",
+    id: 'company',
+    title: 'Company',
     links: [
-      { label: "About Us", href: ROUTES.about },
-      { label: "Our Process", href: "/#development-process" },
-      { label: "Careers", href: ROUTES.careers },
+      { label: 'About', href: ROUTES.about },
+      { label: 'Careers', href: ROUTES.careers },
+      { label: 'Contact', href: ROUTES.contact },
+      { label: 'Book Strategy Call', href: `${ROUTES.contact}?intent=strategy` },
     ],
   },
 ];
 
-/** Services / Solutions / Resources — middle grid columns */
+/** Industry Systems / Explore / Resources — middle grid columns */
 export const FOOTER_LINK_COLUMNS: readonly FooterNavColumn[] = [
   FOOTER_NAV_COLUMNS[0],
   FOOTER_NAV_COLUMNS[1],
@@ -112,22 +107,22 @@ export const FOOTER_LINK_COLUMNS: readonly FooterNavColumn[] = [
 export const FOOTER_COMPANY_COLUMN: FooterNavColumn = FOOTER_NAV_COLUMNS[3];
 export const FOOTER_CONTACT_ITEMS: readonly FooterContactItem[] = [
   {
-    id: "phone",
-    label: "+91 96677 10954",
-    href: "tel:+919667710954",
-    icon: "phone",
+    id: 'phone',
+    label: '+91 96677 10954',
+    href: 'tel:+919667710954',
+    icon: 'phone',
   },
   {
-    id: "email",
-    label: "hello@bitcraftly.com",
-    href: "mailto:hello@bitcraftly.com",
-    icon: "mail",
+    id: 'email',
+    label: 'hello@bitcraftly.com',
+    href: 'mailto:hello@bitcraftly.com',
+    icon: 'mail',
   },
   {
-    id: "location",
-    label: "Noida, Uttar Pradesh, India",
-    href: "https://maps.google.com/?q=Noida,+Uttar+Pradesh,+India",
-    icon: "map-pin",
+    id: 'location',
+    label: 'Noida, Uttar Pradesh, India',
+    href: 'https://maps.google.com/?q=Noida,+Uttar+Pradesh,+India',
+    icon: 'map-pin',
     external: true,
   },
 ];
@@ -136,8 +131,8 @@ export const FOOTER_COPYRIGHT = `© ${new Date().getFullYear()} Bitcraftly Techn
 
 /** Trust Center row — matches https://bitcraftly.com/ footer (Cookies opens prefs). */
 export const FOOTER_TRUST_LINKS = [
-  { id: "trust", label: "Trust Center", href: ROUTES.trust, kind: "link" as const },
-  { id: "privacy", label: "Privacy", href: ROUTES.privacy, kind: "link" as const },
-  { id: "terms", label: "Terms", href: ROUTES.terms, kind: "link" as const },
-  { id: "cookies", label: "Cookies", href: "#cookies", kind: "cookies" as const },
+  { id: 'trust', label: 'Trust Center', href: ROUTES.trust, kind: 'link' as const },
+  { id: 'privacy', label: 'Privacy', href: ROUTES.privacy, kind: 'link' as const },
+  { id: 'terms', label: 'Terms', href: ROUTES.terms, kind: 'link' as const },
+  { id: 'cookies', label: 'Cookies', href: '#cookies', kind: 'cookies' as const },
 ] as const;

@@ -1,14 +1,8 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import {
-  BlogPostDetailPage,
-  getBlogPostHref,
-} from "@/features/blog";
-import { createPageMetadata } from "@/lib/seo/createPageMetadata";
-import {
-  getAllBlogSlugs,
-  getBlogPostBySlug,
-} from "@/content/blog";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { BlogPostDetailPage, getBlogPostHref } from '@/features/blog';
+import { createPageMetadata } from '@/lib/seo/createPageMetadata';
+import { getAllBlogSlugs, getBlogPostBySlug } from '@/content/blog';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -18,16 +12,14 @@ export function generateStaticParams() {
   return getAllBlogSlugs().map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getBlogPostBySlug(slug);
 
   if (!post) {
     return createPageMetadata({
-      title: "Article not found",
-      description: "The requested blog article could not be found.",
+      title: 'Article not found',
+      description: 'The requested blog article could not be found.',
       path: getBlogPostHref(slug),
     });
   }
@@ -44,7 +36,7 @@ export async function generateMetadata({
     ...base,
     openGraph: {
       ...base.openGraph,
-      type: "article",
+      type: 'article',
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt ?? post.publishedAt,
       authors: [post.authorId],

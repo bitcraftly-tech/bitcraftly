@@ -1,11 +1,11 @@
-import { MarketingIllustratedHero } from "@/components/patterns/hero-compositions";
-import { JsonLdScript } from "@/components/patterns/json-ld";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { buildAboutBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { ABOUT_HERO, ABOUT_LANDING_META } from "./about.content";
-import { buildAboutJsonLd } from "./about-schema";
-import { AboutHeroVisual } from "./AboutHeroVisual";
-import { AboutFaqSection } from "./AboutFaqSection";
+import { MarketingIllustratedHero } from '@/components/patterns/hero-compositions';
+import { JsonLdScript } from '@/components/patterns/json-ld';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { buildAboutBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { ABOUT_HERO, ABOUT_LANDING_META } from './about.content';
+import { buildAboutJsonLd } from './about-schema';
+import { AboutHeroVisual } from './AboutHeroVisual';
+import { AboutFaqSection } from './AboutFaqSection';
 import {
   AboutCtaSection,
   AboutCultureSection,
@@ -19,8 +19,8 @@ import {
   AboutTrustedBySection,
   AboutTrustSection,
   AboutValuesSection,
-} from "./AboutSections";
-import "./about.css";
+} from './AboutSections';
+import './about.css';
 
 /**
  * About landing — enterprise company story, culture, and trust.

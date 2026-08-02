@@ -10,13 +10,13 @@ Schema definitions, migrations, and data model documentation for Bitcraftly Plat
 
 ## Commands
 
-| Command | Environment | Description |
-|---------|-------------|-------------|
-| `npm run db:generate` | All | Generate Prisma client (runs automatically before `npm run build`) |
-| `npm run db:migrate` | **Local dev only** | Create and apply migrations (`prisma migrate dev`) |
-| `npm run db:deploy` | **Production** | Apply pending migrations (`prisma migrate deploy`) |
-| `npm run db:push` | Local prototyping | Push schema without migration files |
-| `npm run db:studio` | Local dev | Prisma Studio GUI |
+| Command               | Environment        | Description                                                        |
+| --------------------- | ------------------ | ------------------------------------------------------------------ |
+| `npm run db:generate` | All                | Generate Prisma client (runs automatically before `npm run build`) |
+| `npm run db:migrate`  | **Local dev only** | Create and apply migrations (`prisma migrate dev`)                 |
+| `npm run db:deploy`   | **Production**     | Apply pending migrations (`prisma migrate deploy`)                 |
+| `npm run db:push`     | Local prototyping  | Push schema without migration files                                |
+| `npm run db:studio`   | Local dev          | Prisma Studio GUI                                                  |
 
 ## Production migrations
 

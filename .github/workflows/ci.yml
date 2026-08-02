@@ -14,12 +14,12 @@ on:
     branches:
       - main
       - develop
-      - "release/**"
+      - 'release/**'
   pull_request:
     branches:
       - main
       - develop
-      - "release/**"
+      - 'release/**'
 
 concurrency:
   group: bitcraftly-ci-${{ github.workflow }}-${{ github.ref }}
@@ -41,7 +41,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: '22'
           cache: npm
 
       - name: Install dependencies
@@ -72,7 +72,7 @@ jobs:
         env:
           CI: true
           NODE_ENV: production
-          SKIP_ENV_VALIDATION: "true"
+          SKIP_ENV_VALIDATION: 'true'
 
   e2e:
     name: Playwright E2E
@@ -87,7 +87,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: '22'
           cache: npm
 
       - name: Install dependencies
@@ -101,7 +101,7 @@ jobs:
         env:
           CI: true
           NODE_ENV: production
-          SKIP_ENV_VALIDATION: "true"
+          SKIP_ENV_VALIDATION: 'true'
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
@@ -110,7 +110,7 @@ jobs:
         run: npm run test:e2e
         env:
           CI: true
-          PLAYWRIGHT_PORT: "3000"
+          PLAYWRIGHT_PORT: '3000'
 
       - name: Upload Playwright report
         if: failure()
@@ -135,7 +135,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: '22'
           cache: npm
 
       - name: Install dependencies
@@ -149,7 +149,7 @@ jobs:
         env:
           CI: true
           NODE_ENV: production
-          SKIP_ENV_VALIDATION: "true"
+          SKIP_ENV_VALIDATION: 'true'
 
       - name: Run Lighthouse CI
         run: npm run lighthouse:ci

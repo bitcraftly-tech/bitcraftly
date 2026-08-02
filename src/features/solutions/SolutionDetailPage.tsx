@@ -1,25 +1,22 @@
-import Link from "next/link";
-import { JsonLdScript } from "@/components/patterns/json-ld";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { ROUTES } from "@/constants/navigation";
-import { ServiceCard } from "@/features/services/ServiceCard";
-import { ServiceFaqAccordion } from "@/features/services/ServiceFaqAccordion";
-import { buildSolutionsBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { cn } from "@/lib/cn";
-import "@/features/homepage/FAQ/faq.css";
-import "@/features/services/services.css";
-import { SolutionDetailHero } from "./SolutionDetailHero";
-import { SolutionsPageCta } from "./SolutionsPageCta";
-import {
-  getRelatedServiceLinks,
-  getRelatedSolutions,
-} from "./solutions.content";
-import { buildSolutionDetailJsonLd } from "./solutions-schema";
-import type { SolutionPageContent } from "./solutions.types";
-import "./solutions.css";
+import Link from 'next/link';
+import { JsonLdScript } from '@/components/patterns/json-ld';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { ROUTES } from '@/constants/navigation';
+import { ServiceCard } from '@/features/services/ServiceCard';
+import { ServiceFaqAccordion } from '@/features/services/ServiceFaqAccordion';
+import { buildSolutionsBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { cn } from '@/lib/cn';
+import '@/features/homepage/FAQ/faq.css';
+import '@/features/services/services.css';
+import { SolutionDetailHero } from './SolutionDetailHero';
+import { SolutionsPageCta } from './SolutionsPageCta';
+import { getRelatedServiceLinks, getRelatedSolutions } from './solutions.content';
+import { buildSolutionDetailJsonLd } from './solutions-schema';
+import type { SolutionPageContent } from './solutions.types';
+import './solutions.css';
 
 interface SolutionDetailPageProps {
   content: SolutionPageContent;
@@ -38,11 +35,7 @@ export function SolutionDetailPage({ content }: SolutionDetailPageProps) {
     <PageShell className="solutions-page solution-detail-page">
       <JsonLdScript data={buildSolutionDetailJsonLd(content)} />
 
-      <SolutionDetailHero
-        content={content}
-        breadcrumbs={breadcrumbs}
-        contactHref={contactHref}
-      />
+      <SolutionDetailHero content={content} breadcrumbs={breadcrumbs} contactHref={contactHref} />
 
       <Section
         spacing="lg"
@@ -85,10 +78,10 @@ export function SolutionDetailPage({ content }: SolutionDetailPageProps) {
               <article className="solutions-process__card">
                 <div className="solutions-process__top">
                   <span className="solutions-process__number" aria-hidden>
-                    {String(index + 1).padStart(2, "0")}
+                    {String(index + 1).padStart(2, '0')}
                   </span>
                   <span className="solutions-process__icon" aria-hidden>
-                    <Icon name={step.icon ?? "workflow"} size="sm" />
+                    <Icon name={step.icon ?? 'workflow'} size="sm" />
                   </span>
                 </div>
                 <h3 className="solutions-process__title">{step.title}</h3>
@@ -129,10 +122,7 @@ export function SolutionDetailPage({ content }: SolutionDetailPageProps) {
             title="Related solutions"
             description="Explore adjacent solution lines that often pair with this engagement."
           />
-          <Link
-            href={ROUTES.solutions}
-            className="solution-detail-related__all"
-          >
+          <Link href={ROUTES.solutions} className="solution-detail-related__all">
             View all solutions
             <Icon name="arrow-right" size="sm" aria-hidden />
           </Link>
@@ -140,8 +130,8 @@ export function SolutionDetailPage({ content }: SolutionDetailPageProps) {
 
         <ul
           className={cn(
-            "m-0 grid list-none gap-[24px] p-0",
-            "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
+            'm-0 grid list-none gap-[24px] p-0',
+            'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
           )}
         >
           {relatedSolutions.map((solution) => (
@@ -153,16 +143,11 @@ export function SolutionDetailPage({ content }: SolutionDetailPageProps) {
 
         {relatedServices.length > 0 ? (
           <div className="solution-detail-related-work">
-            <h3 className="solution-detail-related-work__title">
-              Related services
-            </h3>
+            <h3 className="solution-detail-related-work__title">Related services</h3>
             <ul className="solution-detail-related-work__list">
               {relatedServices.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="solution-detail-related-work__chip"
-                  >
+                  <Link href={link.href} className="solution-detail-related-work__chip">
                     {link.label}
                   </Link>
                 </li>

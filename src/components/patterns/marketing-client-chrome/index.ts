@@ -1,1 +1,1 @@
-export { MarketingClientChrome } from "./MarketingClientChrome";
+export { MarketingClientChrome } from './MarketingClientChrome';

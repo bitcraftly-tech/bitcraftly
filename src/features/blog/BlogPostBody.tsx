@@ -1,5 +1,5 @@
-import type { BlogBlock } from "@/content/blog";
-import { cn } from "@/lib/cn";
+import type { BlogBlock } from '@/content/blog';
+import { cn } from '@/lib/cn';
 
 interface BlogPostBodyProps {
   blocks: readonly BlogBlock[];
@@ -10,7 +10,7 @@ export function BlogPostBody({ blocks }: BlogPostBodyProps) {
     <div className="blog-prose flex flex-col gap-[18px]">
       {blocks.map((block, index) => {
         switch (block.type) {
-          case "paragraph":
+          case 'paragraph':
             return (
               <p
                 key={`p-${index}`}
@@ -19,7 +19,7 @@ export function BlogPostBody({ blocks }: BlogPostBodyProps) {
                 {block.text}
               </p>
             );
-          case "heading":
+          case 'heading':
             if (block.level === 2) {
               return (
                 <h2
@@ -40,7 +40,7 @@ export function BlogPostBody({ blocks }: BlogPostBodyProps) {
                 {block.text}
               </h3>
             );
-          case "list":
+          case 'list':
             return (
               <ul
                 key={`list-${index}`}
@@ -51,13 +51,13 @@ export function BlogPostBody({ blocks }: BlogPostBodyProps) {
                 ))}
               </ul>
             );
-          case "callout":
+          case 'callout':
             return (
               <aside
                 key={`callout-${index}`}
                 className={cn(
-                  "rounded-[14px] border border-primary/20 bg-primary/5 px-[16px] py-[14px]",
-                  "font-sans text-[15px] leading-[1.65] text-foreground",
+                  'rounded-[14px] border border-primary/20 bg-primary/5 px-[16px] py-[14px]',
+                  'font-sans text-[15px] leading-[1.65] text-foreground',
                 )}
               >
                 {block.text}

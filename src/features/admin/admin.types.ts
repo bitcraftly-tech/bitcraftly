@@ -1,4 +1,4 @@
-export type AdminContentStatus = "draft" | "review" | "published" | "archived";
+export type AdminContentStatus = 'draft' | 'review' | 'published' | 'archived';
 
 export interface AdminContentRow {
   readonly id: string;
@@ -37,6 +37,6 @@ export interface AdminSettingsField {
  */
 export interface AdminAuthContext {
   readonly authenticated: boolean;
-  readonly mode: "ui-preview";
-  readonly role: "admin" | "editor" | "viewer";
+  readonly mode: 'ui-preview';
+  readonly role: 'admin' | 'editor' | 'viewer';
 }

@@ -1,15 +1,15 @@
-import Image from "next/image";
-import Link from "next/link";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Container } from "@/components/ui/container";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import { WorkHeroVisual } from "./WorkHeroVisual";
-import "./work.css";
+import Image from 'next/image';
+import Link from 'next/link';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Container } from '@/components/ui/container';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import { WorkHeroVisual } from './WorkHeroVisual';
+import './work.css';
 
 export interface WorkInternalHeroMetric {
   id: string;
@@ -52,7 +52,7 @@ export async function WorkInternalHero({
   breadcrumbs,
   headingId,
   eyebrow,
-  eyebrowIcon = "sparkles",
+  eyebrowIcon = 'sparkles',
   title,
   titleMark,
   description,
@@ -64,9 +64,7 @@ export async function WorkInternalHero({
 }: WorkInternalHeroProps) {
   const isMobile = await isMobileUserAgent();
   const [titleBefore, titleAfter] =
-    titleMark && title.includes(titleMark)
-      ? title.split(titleMark)
-      : [title, ""];
+    titleMark && title.includes(titleMark) ? title.split(titleMark) : [title, ''];
 
   return (
     <Section
@@ -74,9 +72,9 @@ export async function WorkInternalHero({
       contained={false}
       aria-labelledby={headingId}
       className={cn(
-        "work-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'work-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -112,20 +110,14 @@ export async function WorkInternalHero({
         <div className="work-hero__grid">
           <div className="work-hero__content">
             <p className="work-hero__eyebrow">
-              <Icon
-                name={eyebrowIcon}
-                size="sm"
-                aria-hidden
-                className="work-hero__eyebrow-icon"
-              />
+              <Icon name={eyebrowIcon} size="sm" aria-hidden className="work-hero__eyebrow-icon" />
               <span>{eyebrow}</span>
             </p>
 
             <h1 id={headingId} className="work-hero__title">
               {titleMark && title.includes(titleMark) ? (
                 <>
-                  {titleBefore.trimEnd()}{" "}
-                  <span className="work-hero__title-mark">{titleMark}</span>
+                  {titleBefore.trimEnd()} <span className="work-hero__title-mark">{titleMark}</span>
                   {titleAfter}
                 </>
               ) : (
@@ -139,9 +131,7 @@ export async function WorkInternalHero({
               <Link
                 href={primaryCta.href}
                 className="work-hero__btn work-hero__btn--primary"
-                {...(primaryCta.external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
+                {...(primaryCta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               >
                 {primaryCta.label}
                 <Icon name="arrow-up-right" size="sm" aria-hidden />
@@ -149,9 +139,7 @@ export async function WorkInternalHero({
               <Link
                 href={secondaryCta.href}
                 className="work-hero__btn work-hero__btn--outline"
-                {...(secondaryCta.external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
+                {...(secondaryCta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               >
                 {secondaryCta.label}
                 <Icon name="arrow-up-right" size="sm" aria-hidden />

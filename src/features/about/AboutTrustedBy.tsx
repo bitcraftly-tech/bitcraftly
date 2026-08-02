@@ -1,5 +1,5 @@
-import { Section } from "@/components/ui/section";
-import type { AboutTrustedLogo } from "./about.types";
+import { Section } from '@/components/ui/section';
+import type { AboutTrustedLogo } from './about.types';
 
 interface AboutTrustedByProps {
   headingId: string;
@@ -15,12 +15,7 @@ function LogoPlaceholder({ logo }: { logo: AboutTrustedLogo }) {
   return (
     <li className="about-trusted__item">
       <span className="about-trusted__mark" role="img" aria-label={logo.label}>
-        <svg
-          viewBox={`0 0 ${width} 32`}
-          fill="none"
-          aria-hidden
-          className="about-trusted__svg"
-        >
+        <svg viewBox={`0 0 ${width} 32`} fill="none" aria-hidden className="about-trusted__svg">
           <rect
             x="0.5"
             y="0.5"
@@ -52,13 +47,7 @@ function LogoPlaceholder({ logo }: { logo: AboutTrustedLogo }) {
  * Reusable grayscale logo strip — pass approved logos when available.
  * Placeholders keep layout ready without inventing brand marks.
  */
-export function AboutTrustedBy({
-  headingId,
-  eyebrow,
-  heading,
-  lede,
-  logos,
-}: AboutTrustedByProps) {
+export function AboutTrustedBy({ headingId, eyebrow, heading, lede, logos }: AboutTrustedByProps) {
   return (
     <Section
       id="about-trusted-by"

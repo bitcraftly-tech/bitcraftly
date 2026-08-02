@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { trackLeadEvent } from "./analytics";
-import { ContactLeadFormLazy } from "./components/ContactLeadFormLazy";
-import { LeadChannelGrid } from "./components/LeadChannelGrid";
-import type { LeadFunnelDefaults, LeadIntent } from "./types";
-import "./lead-funnel.css";
+import { useState } from 'react';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { trackLeadEvent } from './analytics';
+import { ContactLeadFormLazy } from './components/ContactLeadFormLazy';
+import { LeadChannelGrid } from './components/LeadChannelGrid';
+import type { LeadFunnelDefaults, LeadIntent } from './types';
+import './lead-funnel.css';
 
 interface ContactLeadSectionProps {
   defaults?: LeadFunnelDefaults;
 }
 
 const TRUST_ITEMS = [
-  { icon: "check" as const, label: "Reply within 1 business day" },
-  { icon: "shield" as const, label: "Founder-led, no spam" },
-  { icon: "message" as const, label: "WhatsApp available" },
+  { icon: 'check' as const, label: 'Reply within 1 business day' },
+  { icon: 'shield' as const, label: 'Founder-led, no spam' },
+  { icon: 'message' as const, label: 'WhatsApp available' },
 ];
 
 /**
@@ -24,34 +24,29 @@ const TRUST_ITEMS = [
  * Channel buttons apply distinct form intents (discovery vs audit).
  */
 export function ContactLeadSection({ defaults }: ContactLeadSectionProps) {
-  const [appliedIntent, setAppliedIntent] = useState<LeadIntent | undefined>(
-    defaults?.intent,
-  );
+  const [appliedIntent, setAppliedIntent] = useState<LeadIntent | undefined>(defaults?.intent);
   const [intentFocusToken, setIntentFocusToken] = useState(0);
 
-  function applyChannelIntent(intent: Extract<LeadIntent, "discovery" | "audit">) {
+  function applyChannelIntent(intent: Extract<LeadIntent, 'discovery' | 'audit'>) {
     setAppliedIntent(intent);
     setIntentFocusToken((token) => token + 1);
-    trackLeadEvent(
-      intent === "audit" ? "audit_cta_click" : "calendly_click",
-      {
-        source: defaults?.source ?? "contact-page",
-        channel: intent === "audit" ? "contact" : "calendly",
-        intent,
-      },
-    );
+    trackLeadEvent(intent === 'audit' ? 'audit_cta_click' : 'calendly_click', {
+      source: defaults?.source ?? 'contact-page',
+      channel: intent === 'audit' ? 'contact' : 'calendly',
+      intent,
+    });
 
     window.requestAnimationFrame(() => {
       document
-        .getElementById("contact-lead")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        .getElementById('contact-lead')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 
   const mergedDefaults: LeadFunnelDefaults = {
     ...defaults,
     intent: appliedIntent ?? defaults?.intent,
-    source: defaults?.source ?? "contact-page",
+    source: defaults?.source ?? 'contact-page',
   };
 
   return (
@@ -68,8 +63,8 @@ export function ContactLeadSection({ defaults }: ContactLeadSectionProps) {
           Tell us about your project
         </h2>
         <p className="lead-funnel__lede">
-          Share goals, timeline, and constraints. We reply with clear next
-          steps — consultation, audit, or a written estimate.
+          Share goals, timeline, and constraints. We reply with clear next steps — consultation,
+          audit, or a written estimate.
         </p>
         <ul className="lead-funnel__trust">
           {TRUST_ITEMS.map((item) => (
@@ -88,13 +83,10 @@ export function ContactLeadSection({ defaults }: ContactLeadSectionProps) {
 
       <div className="lead-funnel__section">
         <div className="lead-funnel__panel">
-          <ContactLeadFormLazy
-            defaults={mergedDefaults}
-            intentFocusToken={intentFocusToken}
-          />
+          <ContactLeadFormLazy defaults={mergedDefaults} intentFocusToken={intentFocusToken} />
         </div>
         <LeadChannelGrid
-          source={defaults?.source ?? "contact-page"}
+          source={defaults?.source ?? 'contact-page'}
           onApplyIntent={applyChannelIntent}
         />
       </div>

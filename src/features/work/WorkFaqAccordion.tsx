@@ -1,3 +1,1 @@
-export {
-  FaqAccordion as WorkFaqAccordion,
-} from "@/components/patterns/faq-accordion";
+export { FaqAccordion as WorkFaqAccordion } from '@/components/patterns/faq-accordion';

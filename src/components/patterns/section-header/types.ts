@@ -1,9 +1,9 @@
-import type { ReactNode } from "react";
-import type { HeadingLevel } from "@/components/ui/typography";
+import type { ReactNode } from 'react';
+import type { HeadingLevel } from '@/components/ui/typography';
 
-export type SectionHeaderAlign = "left" | "center";
+export type SectionHeaderAlign = 'left' | 'center';
 
-export type SectionHeaderMaxWidth = "sm" | "md" | "lg";
+export type SectionHeaderMaxWidth = 'sm' | 'md' | 'lg';
 
 export interface SectionHeaderProps {
   eyebrow?: string;

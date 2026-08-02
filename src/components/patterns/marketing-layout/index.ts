@@ -1,24 +1,24 @@
-export { PageShell } from "./PageShell";
-export type { PageShellProps } from "./PageShell";
+export { PageShell } from './PageShell';
+export type { PageShellProps } from './PageShell';
 
-export { PageHeader } from "./PageHeader";
-export type { PageHeaderProps } from "./PageHeader";
+export { PageHeader } from './PageHeader';
+export type { PageHeaderProps } from './PageHeader';
 
-export { SectionContent } from "./SectionContent";
-export type { SectionContentProps } from "./SectionContent";
+export { SectionContent } from './SectionContent';
+export type { SectionContentProps } from './SectionContent';
 
-export { PageFooter } from "./PageFooter";
-export type { PageFooterProps } from "./PageFooter";
+export { PageFooter } from './PageFooter';
+export type { PageFooterProps } from './PageFooter';
 
-export { SectionHeader } from "@/components/patterns/section-header";
+export { SectionHeader } from '@/components/patterns/section-header';
 export type {
   SectionHeaderAlign,
   SectionHeaderMaxWidth,
   SectionHeaderProps,
-} from "@/components/patterns/section-header";
+} from '@/components/patterns/section-header';
 
-export { Section } from "@/components/ui/section";
-export { Container } from "@/components/ui/container";
+export { Section } from '@/components/ui/section';
+export { Container } from '@/components/ui/container';
 
 export {
   CONTAINER_INSET_CLASS,
@@ -27,4 +27,4 @@ export {
   PAGE_GRID_CLASS,
   PAGE_GRID_2_CLASS,
   PAGE_GRID_4_CLASS,
-} from "@/lib/layout/page-shell";
+} from '@/lib/layout/page-shell';

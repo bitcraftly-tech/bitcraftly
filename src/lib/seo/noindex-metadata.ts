@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
 /** Prevent indexing of error and missing routes. */
-export const NOINDEX_ROBOTS: NonNullable<Metadata["robots"]> = {
+export const NOINDEX_ROBOTS: NonNullable<Metadata['robots']> = {
   index: false,
   follow: false,
   googleBot: {
@@ -10,9 +10,7 @@ export const NOINDEX_ROBOTS: NonNullable<Metadata["robots"]> = {
   },
 };
 
-export function createNoIndexMetadata(
-  overrides: Metadata = {},
-): Metadata {
+export function createNoIndexMetadata(overrides: Metadata = {}): Metadata {
   return {
     ...overrides,
     robots: NOINDEX_ROBOTS,

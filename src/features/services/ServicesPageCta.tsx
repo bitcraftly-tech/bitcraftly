@@ -1,5 +1,5 @@
-import { MarketingFinalCtaBand } from "@/components/patterns/marketing-final-cta-band";
-import { SERVICES_LANDING } from "./services.content";
+import { MarketingFinalCtaBand } from '@/components/patterns/marketing-final-cta-band';
+import { SERVICES_LANDING } from './services.content';
 
 export function ServicesPageCta() {
   return (

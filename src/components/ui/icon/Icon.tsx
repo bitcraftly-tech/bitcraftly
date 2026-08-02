@@ -1,19 +1,19 @@
-import { cn } from "@/lib/cn";
-import { iconRegistry } from "./icons";
-import type { IconProps, IconSize } from "./types";
+import { cn } from '@/lib/cn';
+import { iconRegistry } from './icons';
+import type { IconProps, IconSize } from './types';
 
 const sizeStyles: Record<IconSize, string> = {
-  sm: "size-[var(--font-size-sm)]",
-  md: "size-[var(--font-size-base)]",
-  lg: "size-[var(--font-size-lg)]",
-  xl: "size-[var(--font-size-xl)]",
+  sm: 'size-[var(--font-size-sm)]',
+  md: 'size-[var(--font-size-base)]',
+  lg: 'size-[var(--font-size-lg)]',
+  xl: 'size-[var(--font-size-xl)]',
 };
 
 export function Icon({
   name,
-  size = "md",
+  size = 'md',
   className,
-  "aria-hidden": ariaHidden,
+  'aria-hidden': ariaHidden,
   title,
 }: IconProps) {
   const icon = iconRegistry[name];
@@ -23,15 +23,15 @@ export function Icon({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox={icon.viewBox ?? "0 0 24 24"}
-      fill={icon.fill ?? "none"}
+      viewBox={icon.viewBox ?? '0 0 24 24'}
+      fill={icon.fill ?? 'none'}
       stroke="currentColor"
       strokeWidth={icon.strokeWidth ?? 2}
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={cn("shrink-0 text-current", sizeStyles[size], className)}
+      className={cn('shrink-0 text-current', sizeStyles[size], className)}
       aria-hidden={resolvedAriaHidden ? true : undefined}
-      role={isMeaningful ? "img" : undefined}
+      role={isMeaningful ? 'img' : undefined}
       aria-label={isMeaningful ? title : undefined}
     >
       {title ? <title>{title}</title> : null}

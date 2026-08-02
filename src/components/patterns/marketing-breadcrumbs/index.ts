@@ -1,1 +1,1 @@
-export { MarketingBreadcrumbs } from "./MarketingBreadcrumbs";
+export { MarketingBreadcrumbs } from './MarketingBreadcrumbs';

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
-import { ROUTES } from "@/constants/navigation";
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { ROUTES } from '@/constants/navigation';
 
 /**
  * Minimal scroll island — toggles document data attributes for header CSS.
@@ -16,12 +16,12 @@ export function HeaderHomeScrollEffect() {
     const root = document.documentElement;
 
     if (!isHome) {
-      root.dataset.headerMode = "solid";
+      root.dataset.headerMode = 'solid';
       delete root.dataset.headerScrolled;
       return;
     }
 
-    root.dataset.headerMode = "home";
+    root.dataset.headerMode = 'home';
     let frame = 0;
     let idleId = 0;
     let timeoutId = 0;
@@ -29,7 +29,7 @@ export function HeaderHomeScrollEffect() {
 
     function updateScrolled() {
       if (window.scrollY > 12) {
-        root.dataset.headerScrolled = "true";
+        root.dataset.headerScrolled = 'true';
       } else {
         delete root.dataset.headerScrolled;
       }
@@ -43,24 +43,24 @@ export function HeaderHomeScrollEffect() {
     function attach() {
       if (attached) return;
       attached = true;
-      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener('scroll', onScroll, { passive: true });
       frame = requestAnimationFrame(updateScrolled);
     }
 
-    if (typeof window.requestIdleCallback === "function") {
+    if (typeof window.requestIdleCallback === 'function') {
       idleId = window.requestIdleCallback(attach, { timeout: 1200 });
     } else {
       timeoutId = window.setTimeout(attach, 200);
     }
 
     return () => {
-      if (idleId && typeof window.cancelIdleCallback === "function") {
+      if (idleId && typeof window.cancelIdleCallback === 'function') {
         window.cancelIdleCallback(idleId);
       }
       if (timeoutId) window.clearTimeout(timeoutId);
       cancelAnimationFrame(frame);
       if (attached) {
-        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener('scroll', onScroll);
       }
       delete root.dataset.headerMode;
       delete root.dataset.headerScrolled;

@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { AdminDashboardPage } from "@/features/admin";
+import type { Metadata } from 'next';
+import { AdminDashboardPage } from '@/features/admin';
 
 export const metadata: Metadata = {
-  title: "Overview",
+  title: 'Overview',
 };
 
 export default function AdminRootPage() {

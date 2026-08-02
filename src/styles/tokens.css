@@ -14,37 +14,48 @@
 :root {
   color-scheme: light;
 
-  /* Colors — brand & neutral */
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
+  /* Colors — brand from Bitcraftly mark (cyan → electric blue → violet) */
+  --primary: #3d5bff;
+  --primary-hover: #2f48e6;
   --primary-foreground: #ffffff;
+  --primary-end: #7b5cff;
 
-  --secondary: #64748b;
-  --secondary-hover: #475569;
+  --secondary: #4a6b7c;
+  --secondary-hover: #346c84;
   --secondary-foreground: #ffffff;
 
-  --accent: #7c3aed;
-  --accent-hover: #6d28d9;
-  --accent-foreground: #ffffff;
+  --accent: #00c4dc;
+  --accent-hover: #00a8c0;
+  --accent-foreground: #041018;
 
   --background: #ffffff;
-  --foreground: #0f172a;
+  --foreground: #000826;
 
-  --surface: #f8fafc;
-  --surface-hover: #f1f5f9;
-  --surface-foreground: #0f172a;
+  /* Section / page titles — sampled from logo wordmark navy */
+  --heading: #000726;
+  --heading-accent: var(--primary);
 
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
+  /* Soft cool wash — logo-adjacent canvas */
+  --canvas: #f3f8fc;
 
-  --muted: #64748b;
-  --muted-foreground: #475569;
+  --surface: #ffffff;
+  --surface-hover: #eef6fb;
+  --surface-foreground: #000826;
 
-  /* Inverse surface — marketing chrome (footer) */
-  --inverse: #0b1220;
+  --border: #d7e4ee;
+  --border-strong: #b7c9d8;
+
+  --muted: #4a6b7c;
+  --muted-foreground: #346c84;
+
+  /* Brand ambient — cyan/blue glow */
+  --glow: color-mix(in srgb, var(--accent) 16%, color-mix(in srgb, var(--primary) 14%, transparent));
+
+  /* Inverse surface — marketing chrome (footer): sampled from logo lockup navy */
+  --inverse: #000726;
   --inverse-foreground: #ffffff;
-  --inverse-muted: #94a3b8;
-  --inverse-border: color-mix(in srgb, var(--inverse-muted) 20%, transparent);
+  --inverse-muted: #8eabc0;
+  --inverse-border: color-mix(in srgb, var(--inverse-muted) 22%, transparent);
   --inverse-elevated: color-mix(in srgb, var(--inverse-muted) 14%, transparent);
 
   /* Colors — semantic feedback */
@@ -60,9 +71,9 @@
   --error-foreground: #ffffff;
   --error-subtle: #fef2f2;
 
-  --info: #0284c7;
+  --info: #00a8d8;
   --info-foreground: #ffffff;
-  --info-subtle: #f0f9ff;
+  --info-subtle: #eefaff;
 
   /* Typography — families (injected by next/font in layout.tsx) */
   --font-family-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -179,14 +190,14 @@
   --token-shadow-lg: 0 10px 15px -3px rgb(15 23 42 / 0.1), 0 4px 6px -4px rgb(15 23 42 / 0.1);
   --token-shadow-xl: 0 20px 25px -5px rgb(15 23 42 / 0.1), 0 8px 10px -6px rgb(15 23 42 / 0.1);
 
-  /* Container */
+  /* Container — shared edges for Header, Hero, sections, Footer */
   --container-sm: 640px;
   --container-md: 768px;
   --container-lg: 1024px;
-  --container-xl: 1280px;
+  --container-xl: 1400px;
   --container-2xl: 1536px;
-  /* Mobile-first gutter — matches Header Container (see responsive overrides below) */
-  --container-padding: var(--space-2);
+  /* Mobile-first gutter — Header + every marketing Container */
+  --container-padding: 1.25rem; /* 20px */
 
   /* Breakpoints (reference values — Tailwind uses these in @theme) */
   --breakpoint-sm: 640px;
@@ -219,15 +230,9 @@
 }
 
 /* Container horizontal inset — shared by Header + every marketing section */
-@media (min-width: 640px) {
-  :root {
-    --container-padding: var(--space-2-5); /* 20px */
-  }
-}
-
 @media (min-width: 768px) {
   :root {
-    --container-padding: var(--space-3); /* 24px */
+    --container-padding: var(--space-4); /* 32px */
     --card-padding: var(--card-padding-tablet);
     --section-spacing: var(--section-spacing-tablet);
   }
@@ -235,9 +240,20 @@
 
 @media (min-width: 1024px) {
   :root {
-    --container-padding: var(--space-4); /* 32px — desktop unchanged */
     --card-padding: var(--card-padding-desktop);
     --section-spacing: var(--section-spacing-desktop);
+  }
+}
+
+@media (min-width: 1360px) {
+  :root {
+    --container-padding: var(--space-6); /* 48px */
+  }
+}
+
+@media (min-width: 1480px) {
+  :root {
+    --container-padding: 3.5rem; /* 56px — matches header bar */
   }
 }
 
@@ -249,24 +265,31 @@
   :root {
     color-scheme: dark;
 
-    --primary: #3b82f6;
-    --primary-hover: #60a5fa;
-    --primary-foreground: #0f172a;
+    --primary: #6b8cff;
+    --primary-hover: #8aa4ff;
+    --primary-foreground: #050b18;
+    --primary-end: #a78bff;
 
-    --secondary: #94a3b8;
-    --secondary-hover: #cbd5e1;
-    --secondary-foreground: #0f172a;
+    --secondary: #8eabc0;
+    --secondary-hover: #b7c9d8;
+    --secondary-foreground: #050b18;
 
-    --accent: #8b5cf6;
-    --accent-hover: #a78bfa;
-    --accent-foreground: #0f172a;
+    --accent: #33e0f0;
+    --accent-hover: #66ebf5;
+    --accent-foreground: #041018;
 
-    --background: #09090b;
-    --foreground: #fafafa;
+    --background: #050b18;
+    --foreground: #f4f8fc;
+    --heading: #f4f8fc;
+    --heading-accent: var(--accent);
 
-    --surface: #18181b;
-    --surface-hover: #27272a;
-    --surface-foreground: #fafafa;
+    --canvas: #050b18;
+
+    --surface: #0c1524;
+    --surface-hover: #142033;
+    --surface-foreground: #f4f8fc;
+
+    --glow: color-mix(in srgb, var(--accent) 20%, color-mix(in srgb, var(--primary) 16%, transparent));
 
     --border: #27272a;
     --border-strong: #3f3f46;
@@ -286,9 +309,9 @@
     --error-foreground: #450a0a;
     --error-subtle: #7f1d1d;
 
-    --info: #0ea5e9;
-    --info-foreground: #082f49;
-    --info-subtle: #0c4a6e;
+    --info: #33d6f0;
+    --info-foreground: #041018;
+    --info-subtle: #0a3040;
 
     --token-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
     --token-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
@@ -303,27 +326,34 @@
 /* -------------------------------------------------------------------------- */
 
 .dark,
-[data-theme="dark"] {
+[data-theme='dark'] {
   color-scheme: dark;
 
-  --primary: #3b82f6;
-  --primary-hover: #60a5fa;
-  --primary-foreground: #0f172a;
+  --primary: #6b8cff;
+  --primary-hover: #8aa4ff;
+  --primary-foreground: #050b18;
+  --primary-end: #a78bff;
 
-  --secondary: #94a3b8;
-  --secondary-hover: #cbd5e1;
-  --secondary-foreground: #0f172a;
+  --secondary: #8eabc0;
+  --secondary-hover: #b7c9d8;
+  --secondary-foreground: #050b18;
 
-  --accent: #8b5cf6;
-  --accent-hover: #a78bfa;
-  --accent-foreground: #0f172a;
+  --accent: #33e0f0;
+  --accent-hover: #66ebf5;
+  --accent-foreground: #041018;
 
-  --background: #09090b;
-  --foreground: #fafafa;
+  --background: #050b18;
+  --foreground: #f4f8fc;
+  --heading: #f4f8fc;
+  --heading-accent: var(--accent);
 
-  --surface: #18181b;
-  --surface-hover: #27272a;
-  --surface-foreground: #fafafa;
+  --canvas: #050b18;
+
+  --surface: #0c1524;
+  --surface-hover: #142033;
+  --surface-foreground: #f4f8fc;
+
+  --glow: color-mix(in srgb, var(--accent) 20%, color-mix(in srgb, var(--primary) 16%, transparent));
 
   --border: #27272a;
   --border-strong: #3f3f46;
@@ -343,9 +373,9 @@
   --error-foreground: #450a0a;
   --error-subtle: #7f1d1d;
 
-  --info: #0ea5e9;
-  --info-foreground: #082f49;
-  --info-subtle: #0c4a6e;
+  --info: #33d6f0;
+  --info-foreground: #041018;
+  --info-subtle: #0a3040;
 
   --token-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --token-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);

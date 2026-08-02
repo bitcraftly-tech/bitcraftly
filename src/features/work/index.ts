@@ -1,42 +1,36 @@
-export { WorkLandingPage, WORK_LANDING_META } from "./WorkLandingPage";
-export { WorkHero } from "./WorkHero";
-export { WorkHeroVisual } from "./WorkHeroVisual";
-export { WorkFeaturedSection } from "./WorkFeaturedSection";
-export { WorkFeaturedProjectCard } from "./WorkFeaturedProjectCard";
-export { WorkFeaturedShowcase } from "./WorkFeaturedShowcase";
-export { WorkPortfolioExplorer } from "./WorkPortfolioExplorer";
-export { WorkPortfolioGrid } from "./WorkPortfolioGrid";
-export { WorkPortfolioEmptyState } from "./WorkPortfolioEmptyState";
-export { WorkPortfolioGridSkeleton } from "./WorkPortfolioGridSkeleton";
-export { WorkProjectCard } from "./WorkProjectCard";
-export { WorkResultsSection } from "./WorkResultsSection";
-export { WorkResultsDashboardVisual } from "./WorkResultsDashboardVisual";
-export { WorkTechSection } from "./WorkTechSection";
-export { WorkTechArchitectureVisual } from "./WorkTechArchitectureVisual";
-export { WorkProcessSection } from "./WorkProcessSection";
-export { WorkTrustSection, WorkTestimonialsSection } from "./WorkTrustSection";
-export { WorkTestimonialCard } from "./WorkTestimonialCard";
-export { WorkTestimonialsPanel } from "./WorkTestimonialsPanel";
-export { WorkFaqSection } from "./WorkFaqSection";
-export { WorkFaqAccordion } from "./WorkFaqAccordion";
-export { WorkRelatedServicesSection } from "./WorkRelatedServicesSection";
-export { WorkPageCta } from "./WorkPageCta";
+export { WorkLandingPage, WORK_LANDING_META } from './WorkLandingPage';
+export { WorkHero } from './WorkHero';
+export { WorkHeroVisual } from './WorkHeroVisual';
+export { WorkFeaturedSection } from './WorkFeaturedSection';
+export { WorkFeaturedProjectCard } from './WorkFeaturedProjectCard';
+export { WorkFeaturedShowcase } from './WorkFeaturedShowcase';
+export { WorkPortfolioExplorer } from './WorkPortfolioExplorer';
+export { WorkPortfolioGrid } from './WorkPortfolioGrid';
+export { WorkPortfolioEmptyState } from './WorkPortfolioEmptyState';
+export { WorkPortfolioGridSkeleton } from './WorkPortfolioGridSkeleton';
+export { WorkProjectCard } from './WorkProjectCard';
+export { WorkResultsSection } from './WorkResultsSection';
+export { WorkResultsDashboardVisual } from './WorkResultsDashboardVisual';
+export { WorkTechSection } from './WorkTechSection';
+export { WorkTechArchitectureVisual } from './WorkTechArchitectureVisual';
+export { WorkProcessSection } from './WorkProcessSection';
+export { WorkTrustSection, WorkTestimonialsSection } from './WorkTrustSection';
+export { WorkTestimonialCard } from './WorkTestimonialCard';
+export { WorkTestimonialsPanel } from './WorkTestimonialsPanel';
+export { WorkFaqSection } from './WorkFaqSection';
+export { WorkFaqAccordion } from './WorkFaqAccordion';
+export { WorkRelatedServicesSection } from './WorkRelatedServicesSection';
+export { WorkPageCta } from './WorkPageCta';
 export {
   WorkExplorerProvider,
   useOptionalWorkExplorer,
   useWorkExplorer,
-} from "./work-explorer-context";
-export {
-  WorkCategoriesSection,
-  WorkPortfolioSection,
-} from "./WorkSections";
-export { WorkHubPage, WorkHubFallbackPage } from "./WorkHubPage";
-export { WorkProjectDetailPage } from "./WorkProjectDetailPage";
-export {
-  WorkTestimonialDetailPage,
-  type WorkTestimonialDetail,
-} from "./WorkTestimonialDetailPage";
-export { WorkInternalHero } from "./WorkInternalHero";
+} from './work-explorer-context';
+export { WorkCategoriesSection, WorkPortfolioSection } from './WorkSections';
+export { WorkHubPage, WorkHubFallbackPage } from './WorkHubPage';
+export { WorkProjectDetailPage } from './WorkProjectDetailPage';
+export { WorkTestimonialDetailPage, type WorkTestimonialDetail } from './WorkTestimonialDetailPage';
+export { WorkInternalHero } from './WorkInternalHero';
 export {
   getApprovedTestimonials,
   getFeaturedWorkProjects,
@@ -72,7 +66,7 @@ export {
   WORK_TRUST_COPY,
   WORK_TRUST_FALLBACK_TOPICS,
   WORK_TRUST_PILLARS,
-} from "./work.content";
+} from './work.content';
 export {
   EMPTY_WORK_EXPLORER_STATE,
   filterProjectsByExplorer,
@@ -81,17 +75,9 @@ export {
   matchesWorkExplorer,
   matchesWorkFilter,
   toggleChipValue,
-} from "./work.filters";
-export type {
-  WorkExplorerGroup,
-  WorkExplorerGroupId,
-  WorkExplorerState,
-} from "./work.filters";
-export {
-  buildWorkHubJsonLd,
-  buildWorkListingJsonLd,
-  buildWorkProjectJsonLd,
-} from "./work-schema";
+} from './work.filters';
+export type { WorkExplorerGroup, WorkExplorerGroupId, WorkExplorerState } from './work.filters';
+export { buildWorkHubJsonLd, buildWorkListingJsonLd, buildWorkProjectJsonLd } from './work-schema';
 export type {
   WorkCaseStudy,
   WorkCategory,
@@ -111,4 +97,4 @@ export type {
   WorkTrustBandItem,
   WorkTrustFallbackTopic,
   WorkTrustPillar,
-} from "./work.types";
+} from './work.types';

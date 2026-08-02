@@ -9,7 +9,7 @@
  * - resources.ts
  */
 
-import { INDUSTRIES_FEATURED, INDUSTRY_GROUPS } from "./industries";
+import { INDUSTRIES_FEATURED, INDUSTRY_GROUPS } from './industries';
 import {
   createDropdownNav,
   createSimpleNavLink,
@@ -18,11 +18,11 @@ import {
   type NavChildLink,
   type SiteNavAction,
   type SiteNavLink,
-} from "./nav.types";
-import { RESOURCES_FEATURED, RESOURCE_GROUPS } from "./resources";
-import { ALL_SERVICES, SERVICE_GROUPS, SERVICES_FEATURED } from "./services";
-import { SOLUTION_GROUPS, SOLUTIONS_FEATURED } from "./solutions";
-import { WORK_FEATURED, WORK_GROUPS } from "./work";
+} from './nav.types';
+import { RESOURCES_FEATURED, RESOURCE_GROUPS } from './resources';
+import { ALL_SERVICES, SERVICE_GROUPS, SERVICES_FEATURED } from './services';
+import { SOLUTION_GROUPS, SOLUTIONS_FEATURED } from './solutions';
+import { WORK_FEATURED, WORK_GROUPS } from './work';
 
 export type {
   NavChildLink,
@@ -31,7 +31,7 @@ export type {
   NavLinkItem,
   SiteNavAction,
   SiteNavLink,
-} from "./nav.types";
+} from './nav.types';
 
 export {
   createDropdownNav,
@@ -40,7 +40,7 @@ export {
   getSiteNavChildren,
   hasMegaMenu,
   toNavChildLink,
-} from "./nav.types";
+} from './nav.types';
 
 export {
   ALL_SERVICES,
@@ -49,7 +49,7 @@ export {
   SERVICES_FEATURED,
   getServiceBySlug,
   getServiceHref,
-} from "./services";
+} from './services';
 
 export {
   ALL_SOLUTIONS,
@@ -58,7 +58,7 @@ export {
   SOLUTIONS_FEATURED,
   getSolutionBySlug,
   getSolutionHref,
-} from "./solutions";
+} from './solutions';
 
 export {
   ALL_INDUSTRIES,
@@ -67,14 +67,9 @@ export {
   INDUSTRY_SLUGS,
   getIndustryBySlug,
   getIndustryHref,
-} from "./industries";
+} from './industries';
 
-export {
-  ALL_RESOURCES,
-  RESOURCE_GROUPS,
-  RESOURCES_FEATURED,
-  getResourceBySlug,
-} from "./resources";
+export { ALL_RESOURCES, RESOURCE_GROUPS, RESOURCES_FEATURED, getResourceBySlug } from './resources';
 
 export {
   ALL_WORK_LINKS,
@@ -91,53 +86,53 @@ export {
   getWorkHref,
   getWorkLinkBySlug,
   getWorkPageBySlug,
-} from "./work";
+} from './work';
 
 export const ROUTES = {
-  home: "/",
-  services: "/services",
-  solutions: "/solutions",
-  industries: "/industries",
-  work: "/work",
-  workCaseStudies: "/work/case-studies",
-  workPortfolio: "/work/portfolio",
-  workFeaturedProjects: "/work/featured-projects",
-  workTestimonials: "/work/testimonials",
-  workProjects: "/work/projects",
-  resources: "/resources",
-  resourcesFaq: "/resources/faq",
-  blog: "/blog",
-  caseStudies: "/case-studies",
-  careers: "/careers",
-  events: "/events",
-  press: "/press",
-  privacy: "/privacy",
-  terms: "/terms",
-  trust: "/trust",
-  pricing: "/pricing",
-  packages: "/packages",
-  about: "/about",
-  contact: "/contact",
-  assistant: "/assistant",
-  login: "/login",
-  admin: "/admin",
+  home: '/',
+  services: '/services',
+  solutions: '/solutions',
+  industries: '/industries',
+  work: '/work',
+  workCaseStudies: '/work/case-studies',
+  workPortfolio: '/work/portfolio',
+  workFeaturedProjects: '/work/featured-projects',
+  workTestimonials: '/work/testimonials',
+  workProjects: '/work/projects',
+  resources: '/resources',
+  resourcesFaq: '/resources/faq',
+  blog: '/blog',
+  caseStudies: '/case-studies',
+  careers: '/careers',
+  events: '/events',
+  press: '/press',
+  privacy: '/privacy',
+  terms: '/terms',
+  trust: '/trust',
+  pricing: '/pricing',
+  packages: '/packages',
+  about: '/about',
+  contact: '/contact',
+  assistant: '/assistant',
+  login: '/login',
+  admin: '/admin',
 } as const;
 
 export type AppRoute = (typeof ROUTES)[keyof typeof ROUTES];
 
 /** Homepage in-page section ids (landing page only — not primary nav). */
 export const SECTION_IDS = {
-  hero: "hero",
-  services: "services",
-  industries: "industries",
-  technologies: "technologies",
-  process: "development-process",
-  about: "why-bitcraftly",
-  work: "testimonials",
-  faq: "faq",
-  cta: "final-cta",
-  founderMessage: "founder-message",
-  costCalculator: "cost-calculator",
+  hero: 'hero',
+  services: 'services',
+  industries: 'industries',
+  technologies: 'technologies',
+  process: 'development-process',
+  about: 'why-bitcraftly',
+  work: 'testimonials',
+  faq: 'faq',
+  cta: 'final-cta',
+  founderMessage: 'founder-message',
+  costCalculator: 'cost-calculator',
 } as const;
 
 export type SectionId = (typeof SECTION_IDS)[keyof typeof SECTION_IDS];
@@ -170,85 +165,85 @@ export const RESOURCE_CHILD_ROUTES: readonly NavChildLink[] = flattenNavGroups(
 
 export const MAIN_NAV_LINKS: SiteNavLink[] = [
   createDropdownNav({
-    label: "Services",
+    label: 'Services',
     href: ROUTES.services,
-    description: "End-to-end digital engineering services",
+    description: 'End-to-end digital engineering services',
     groups: SERVICE_GROUPS,
     featured: SERVICES_FEATURED,
-    exploreAllLabel: "Explore all services",
-    viewAllLabel: "View all services",
+    exploreAllLabel: 'Explore all services',
+    viewAllLabel: 'View all services',
   }),
   createDropdownNav({
-    label: "Solutions",
+    label: 'Solutions',
     href: ROUTES.solutions,
-    description: "Solutions that deliver measurable results",
+    description: 'Solutions that deliver measurable results',
     groups: SOLUTION_GROUPS,
     featured: SOLUTIONS_FEATURED,
-    exploreAllLabel: "Explore all solutions",
-    viewAllLabel: "View all solutions",
+    exploreAllLabel: 'Explore all solutions',
+    viewAllLabel: 'View all solutions',
   }),
   createDropdownNav({
-    label: "Industries",
+    label: 'Industries',
     href: ROUTES.industries,
-    description: "Industry-focused digital solutions",
+    description: 'Industry-focused digital solutions',
     groups: INDUSTRY_GROUPS,
     featured: INDUSTRIES_FEATURED,
-    exploreAllLabel: "Explore all industries",
-    viewAllLabel: "View all industries",
+    exploreAllLabel: 'Explore all industries',
+    viewAllLabel: 'View all industries',
   }),
   createDropdownNav({
-    label: "Work",
+    label: 'Work',
     href: ROUTES.work,
-    description: "Projects, case studies, portfolio, and outcomes",
+    description: 'Projects, case studies, portfolio, and outcomes',
     groups: WORK_GROUPS,
     featured: WORK_FEATURED,
-    exploreAllLabel: "View all work",
-    viewAllLabel: "View all work",
-    menuVariant: "compact",
+    exploreAllLabel: 'View all work',
+    viewAllLabel: 'View all work',
+    menuVariant: 'compact',
   }),
   createDropdownNav({
-    label: "Resources",
+    label: 'Resources',
     href: ROUTES.resources,
-    description: "Guides, FAQ, and insights",
+    description: 'Guides, FAQ, and insights',
     groups: RESOURCE_GROUPS,
     featured: RESOURCES_FEATURED,
-    exploreAllLabel: "Explore all resources",
-    viewAllLabel: "View all resources",
+    exploreAllLabel: 'Explore all resources',
+    viewAllLabel: 'View all resources',
   }),
   createSimpleNavLink({
-    label: "About",
+    label: 'About',
     href: ROUTES.about,
-    description: "Why teams choose Bitcraftly",
+    description: 'Why teams choose Bitcraftly',
   }),
 ];
 
 export const NAV_ACTIONS = {
   bookCall: {
-    label: "Book a Call",
+    label: 'Book a Call',
     href: ROUTES.contact,
   },
   consultation: {
-    label: "Get Consultation",
+    label: 'Get Consultation',
     href: ROUTES.contact,
   },
   freeConsultation: {
-    label: "Get Free Consultation",
+    label: 'Get Free Consultation',
     href: ROUTES.contact,
   },
   viewWork: {
-    label: "View Our Work",
+    label: 'View Our Work',
     href: ROUTES.work,
   },
   exploreServices: {
-    label: "Explore All Services",
+    label: 'Explore All Services',
     href: ROUTES.services,
   },
   viewAllProjects: {
-    label: "View All Projects",
+    label: 'View All Projects',
     href: ROUTES.work,
   },
   viewAllFaq: {
-    label: "View All FAQ",
+    label: 'View All FAQ',
     href: ROUTES.resourcesFaq,
   },
 } as const satisfies Record<string, SiteNavAction>;
@@ -263,32 +258,32 @@ export const NAVIGATION = {
   actions: NAV_ACTIONS,
   footer: [
     {
-      id: "services",
-      title: "Services",
+      id: 'services',
+      title: 'Services',
       href: ROUTES.services,
       items: flattenNavGroups(SERVICE_GROUPS, ROUTES.services),
     },
     {
-      id: "solutions",
-      title: "Solutions",
+      id: 'solutions',
+      title: 'Solutions',
       href: ROUTES.solutions,
       items: flattenNavGroups(SOLUTION_GROUPS, ROUTES.solutions),
     },
     {
-      id: "industries",
-      title: "Industries",
+      id: 'industries',
+      title: 'Industries',
       href: ROUTES.industries,
       items: flattenNavGroups(INDUSTRY_GROUPS, ROUTES.industries),
     },
     {
-      id: "work",
-      title: "Work",
+      id: 'work',
+      title: 'Work',
       href: ROUTES.work,
       items: flattenNavGroups(WORK_GROUPS, ROUTES.work),
     },
     {
-      id: "resources",
-      title: "Resources",
+      id: 'resources',
+      title: 'Resources',
       href: ROUTES.resources,
       items: flattenNavGroups(RESOURCE_GROUPS, ROUTES.resources),
     },

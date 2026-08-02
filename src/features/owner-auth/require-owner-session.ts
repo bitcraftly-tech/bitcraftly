@@ -1,12 +1,9 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-import {
-  OWNER_AUTH_ROUTES,
-  OWNER_SESSION_COOKIE,
-} from "./owner-auth.constants";
-import { readOwnerSessionSecret } from "./owner-auth.env";
-import { verifyOwnerSessionToken } from "./owner-session";
+import { OWNER_AUTH_ROUTES, OWNER_SESSION_COOKIE } from './owner-auth.constants';
+import { readOwnerSessionSecret } from './owner-auth.env';
+import { verifyOwnerSessionToken } from './owner-session';
 
 /**
  * Defense-in-depth owner session gate for server components, loaders, and actions.

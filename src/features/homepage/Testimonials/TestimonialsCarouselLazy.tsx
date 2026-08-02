@@ -1,10 +1,9 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
 const TestimonialsCarousel = dynamic(
-  () =>
-    import("./TestimonialsCarousel").then((mod) => mod.TestimonialsCarousel),
+  () => import('./TestimonialsCarousel').then((mod) => mod.TestimonialsCarousel),
   {
     ssr: true,
     loading: () => (

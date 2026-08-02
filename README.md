@@ -30,6 +30,7 @@ Enterprise web platform for Bitcraftly — a unified frontend built with Next.js
 ---
 
 > [!NOTE]
+>
 > ### Project Status
 >
 > - 🚧 **Development Status:** Active Development
@@ -89,37 +90,37 @@ Our long-term vision is to:
 
 ### Frontend
 
-| Technology | Purpose |
-|------------|---------|
+| Technology              | Purpose                     |
+| ----------------------- | --------------------------- |
 | Next.js 16 (App Router) | React framework and routing |
-| React 19 | User interface library |
-| TypeScript 5 | Type-safe development |
-| Tailwind CSS v4 | Utility-first styling |
-| Framer Motion | Animations and transitions |
-| shadcn/ui | Reusable UI components |
+| React 19                | User interface library      |
+| TypeScript 5            | Type-safe development       |
+| Tailwind CSS v4         | Utility-first styling       |
+| Framer Motion           | Animations and transitions  |
+| shadcn/ui               | Reusable UI components      |
 
 ---
 
 ### Backend
 
-| Technology | Purpose |
-|------------|---------|
-| FastAPI | REST API framework |
-| PostgreSQL | Relational database |
-| JWT | Authentication and authorization |
+| Technology | Purpose                          |
+| ---------- | -------------------------------- |
+| FastAPI    | REST API framework               |
+| PostgreSQL | Relational database              |
+| JWT        | Authentication and authorization |
 
 ---
 
 ### Development & Tooling
 
-| Technology | Purpose |
-|------------|---------|
-| ESLint | Code quality |
-| Prettier | Code formatting *(if used)* |
-| Git & GitHub | Version control |
-| Cursor AI | AI-assisted development |
-| Claude Code | AI code assistance |
-| ChatGPT | Architecture, documentation, and development support |
+| Technology   | Purpose                                              |
+| ------------ | ---------------------------------------------------- |
+| ESLint       | Code quality                                         |
+| Prettier     | Code formatting _(if used)_                          |
+| Git & GitHub | Version control                                      |
+| Cursor AI    | AI-assisted development                              |
+| Claude Code  | AI code assistance                                   |
+| ChatGPT      | Architecture, documentation, and development support |
 
 ---
 
@@ -271,17 +272,17 @@ Business-specific components should remain inside their respective feature modul
 
 Each layer has a single responsibility:
 
-| Layer | Responsibility |
-|--------|----------------|
-| `app/` | Routing & Layout |
-| `features/` | Business Features |
-| `components/` | Shared UI |
-| `services/` | API Integration |
-| `hooks/` | Reusable React Hooks |
-| `lib/` | Framework Adapters |
-| `utils/` | Pure Utility Functions |
-| `types/` | Shared Type Definitions |
-| `config/` | Application Configuration |
+| Layer         | Responsibility            |
+| ------------- | ------------------------- |
+| `app/`        | Routing & Layout          |
+| `features/`   | Business Features         |
+| `components/` | Shared UI                 |
+| `services/`   | API Integration           |
+| `hooks/`      | Reusable React Hooks      |
+| `lib/`        | Framework Adapters        |
+| `utils/`      | Pure Utility Functions    |
+| `types/`      | Shared Type Definitions   |
+| `config/`     | Application Configuration |
 
 ---
 
@@ -381,19 +382,19 @@ bitcraftly-platform/
 
 ## Directory Responsibilities
 
-| Directory | Responsibility |
-|-----------|----------------|
-| `src/app` | Routing, layouts, metadata |
-| `src/features` | Business features and domain logic |
-| `src/components` | Shared and reusable UI components |
-| `src/services` | API communication and integrations |
-| `src/hooks` | Shared React hooks |
-| `src/lib` | Framework adapters and helper libraries |
-| `src/utils` | Pure utility functions |
-| `src/types` | Shared TypeScript types |
-| `src/config` | Global application configuration |
-| `docs` | Project documentation |
-| `.cursor` | AI rules and Cursor configuration |
+| Directory        | Responsibility                          |
+| ---------------- | --------------------------------------- |
+| `src/app`        | Routing, layouts, metadata              |
+| `src/features`   | Business features and domain logic      |
+| `src/components` | Shared and reusable UI components       |
+| `src/services`   | API communication and integrations      |
+| `src/hooks`      | Shared React hooks                      |
+| `src/lib`        | Framework adapters and helper libraries |
+| `src/utils`      | Pure utility functions                  |
+| `src/types`      | Shared TypeScript types                 |
+| `src/config`     | Global application configuration        |
+| `docs`           | Project documentation                   |
+| `.cursor`        | AI rules and Cursor configuration       |
 
 ---
 
@@ -418,13 +419,13 @@ Follow the steps below to set up the Bitcraftly Platform for local development.
 
 Ensure the following tools are installed:
 
-| Tool | Recommended Version |
-|------|---------------------|
-| Node.js | 20.x or later |
-| npm | Latest LTS |
-| Git | Latest |
-| Cursor *(Optional)* | Latest |
-| Claude Code *(Optional)* | Latest |
+| Tool                     | Recommended Version |
+| ------------------------ | ------------------- |
+| Node.js                  | 20.x or later       |
+| npm                      | Latest LTS          |
+| Git                      | Latest              |
+| Cursor _(Optional)_      | Latest              |
+| Claude Code _(Optional)_ | Latest              |
 
 For full-stack development, ensure the FastAPI backend and PostgreSQL database are available.
 
@@ -515,19 +516,19 @@ The following scripts are available for local development and production builds.
 
 ### Development
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start the Next.js development server with Turbopack |
-| `npm run build` | Create an optimized production build |
-| `npm run start` | Start the production server |
+| Command         | Description                                         |
+| --------------- | --------------------------------------------------- |
+| `npm run dev`   | Start the Next.js development server with Turbopack |
+| `npm run build` | Create an optimized production build                |
+| `npm run start` | Start the production server                         |
 
 ---
 
 ### Code Quality
 
-| Command | Description |
-|---------|-------------|
-| `npm run lint` | Run ESLint across the project |
+| Command             | Description                                        |
+| ------------------- | -------------------------------------------------- |
+| `npm run lint`      | Run ESLint across the project                      |
 | `npm run typecheck` | Run the TypeScript compiler without emitting files |
 
 ---
@@ -555,12 +556,12 @@ These commands help ensure that:
 
 The following scripts may be introduced as the project grows:
 
-| Command | Purpose |
-|---------|---------|
-| `npm run test` | Run unit and integration tests |
-| `npm run test:e2e` | Execute end-to-end tests |
-| `npm run analyze` | Analyze bundle size |
-| `npm run format` | Format source code |
+| Command            | Purpose                        |
+| ------------------ | ------------------------------ |
+| `npm run test`     | Run unit and integration tests |
+| `npm run test:e2e` | Execute end-to-end tests       |
+| `npm run analyze`  | Analyze bundle size            |
+| `npm run format`   | Format source code             |
 
 ---
 
@@ -627,6 +628,7 @@ A feature is considered complete only when:
 - The implementation is ready for production deployment.
 
 ---
+
 ## Branch Strategy
 
 Bitcraftly Platform follows a lightweight Git workflow designed to keep changes isolated, reviewable, and production-ready.
@@ -635,16 +637,16 @@ Bitcraftly Platform follows a lightweight Git workflow designed to keep changes 
 
 ### Branch Naming Convention
 
-| Branch | Purpose |
-|--------|---------|
-| `main` | Production-ready code (protected) |
-| `develop` | Integration branch for upcoming releases *(optional)* |
-| `feature/*` | New features (e.g. `feature/auth-login`) |
-| `fix/*` | Bug fixes (e.g. `fix/navbar-overflow`) |
+| Branch       | Purpose                                                  |
+| ------------ | -------------------------------------------------------- |
+| `main`       | Production-ready code (protected)                        |
+| `develop`    | Integration branch for upcoming releases _(optional)_    |
+| `feature/*`  | New features (e.g. `feature/auth-login`)                 |
+| `fix/*`      | Bug fixes (e.g. `fix/navbar-overflow`)                   |
 | `refactor/*` | Code quality improvements without changing functionality |
-| `docs/*` | Documentation updates |
-| `chore/*` | Tooling, dependencies, and maintenance tasks |
-| `hotfix/*` | Critical production fixes |
+| `docs/*`     | Documentation updates                                    |
+| `chore/*`    | Tooling, dependencies, and maintenance tasks             |
+| `hotfix/*`   | Critical production fixes                                |
 
 ---
 
@@ -718,18 +720,18 @@ refactor(homepage): simplify hero component
 
 ### Commit Types
 
-| Type | Purpose |
-|------|---------|
-| `feat` | Introduce a new feature |
-| `fix` | Resolve a bug |
+| Type       | Purpose                                |
+| ---------- | -------------------------------------- |
+| `feat`     | Introduce a new feature                |
+| `fix`      | Resolve a bug                          |
 | `refactor` | Improve code without changing behavior |
-| `docs` | Documentation changes |
-| `style` | Formatting and style changes only |
-| `test` | Add or update tests |
-| `perf` | Performance improvements |
-| `build` | Build system or dependency updates |
-| `ci` | Continuous Integration changes |
-| `chore` | Maintenance and tooling tasks |
+| `docs`     | Documentation changes                  |
+| `style`    | Formatting and style changes only      |
+| `test`     | Add or update tests                    |
+| `perf`     | Performance improvements               |
+| `build`    | Build system or dependency updates     |
+| `ci`       | Continuous Integration changes         |
+| `chore`    | Maintenance and tooling tasks          |
 
 ---
 
@@ -776,14 +778,14 @@ Every commit should:
 
 The roadmap outlines the planned evolution of the Bitcraftly Platform. Priorities may evolve based on business requirements and customer feedback.
 
-| Phase | Status | Focus |
-|-------|--------|-------|
-| **Phase 1 – Foundation** | ✅ Completed | Next.js App Router, project architecture, documentation, AI rules, engineering standards |
-| **Phase 2 – Design System** | 🚧 In Progress | Design tokens, reusable UI components, layouts, animations |
-| **Phase 3 – Authentication** | ⏳ Planned | JWT authentication, protected routes, session management |
-| **Phase 4 – Core Platform** | ⏳ Planned | Homepage, navigation, dashboard shell, global layouts |
-| **Phase 5 – Business Modules** | ⏳ Planned | CRM, CMS, AI services, portfolio, case studies |
-| **Phase 6 – Production Readiness** | ⏳ Planned | Monitoring, analytics, security hardening, CI/CD, deployment |
+| Phase                              | Status         | Focus                                                                                    |
+| ---------------------------------- | -------------- | ---------------------------------------------------------------------------------------- |
+| **Phase 1 – Foundation**           | ✅ Completed   | Next.js App Router, project architecture, documentation, AI rules, engineering standards |
+| **Phase 2 – Design System**        | 🚧 In Progress | Design tokens, reusable UI components, layouts, animations                               |
+| **Phase 3 – Authentication**       | ⏳ Planned     | JWT authentication, protected routes, session management                                 |
+| **Phase 4 – Core Platform**        | ⏳ Planned     | Homepage, navigation, dashboard shell, global layouts                                    |
+| **Phase 5 – Business Modules**     | ⏳ Planned     | CRM, CMS, AI services, portfolio, case studies                                           |
+| **Phase 6 – Production Readiness** | ⏳ Planned     | Monitoring, analytics, security hardening, CI/CD, deployment                             |
 
 ---
 
@@ -819,14 +821,14 @@ The roadmap prioritizes:
 
 ## Documentation Map
 
-| Resource | Description |
-|----------|-------------|
-| 📘 `README.md` | Project overview and onboarding guide |
-| 🤖 `AGENTS.md` | Primary AI agent instructions |
-| 🧠 `PROJECT_CONTEXT.md` | AI project context and conventions |
+| Resource                          | Description                                  |
+| --------------------------------- | -------------------------------------------- |
+| 📘 `README.md`                    | Project overview and onboarding guide        |
+| 🤖 `AGENTS.md`                    | Primary AI agent instructions                |
+| 🧠 `PROJECT_CONTEXT.md`           | AI project context and conventions           |
 | 🏗️ `PROJECT_FOUNDATION_REVIEW.md` | Architecture review and technical foundation |
-| 💬 `CLAUDE.md` | Claude Code entry point |
-| ⚙️ `.cursor/rules/` | AI engineering and development standards | 
+| 💬 `CLAUDE.md`                    | Claude Code entry point                      |
+| ⚙️ `.cursor/rules/`               | AI engineering and development standards     |
 
 ---
 
@@ -838,20 +840,20 @@ The project documentation is organized to support onboarding, development, archi
 
 ### Documentation Map
 
-| Resource | Purpose |
-|----------|---------|
-| `README.md` | Project overview, setup, architecture, and development guide |
-| `AGENTS.md` | Primary AI agent instructions and workflow |
-| `CLAUDE.md` | Claude Code entry point and AI guidance |
-| `PROJECT_CONTEXT.md` | AI project context, conventions, and development priorities |
-| `PROJECT_FOUNDATION_REVIEW.md` | Architecture review, technical decisions, and project foundation |
-| `.cursor/rules/` | Engineering, architecture, accessibility, performance, SEO, and code review standards |
-| `docs/architecture/` | Architecture Decision Records (ADRs) and system design |
-| `docs/design/` | Design system, UI guidelines, and design tokens |
-| `docs/engineering/` | Engineering standards, coding guidelines, and workflows |
-| `docs/product/` | Product requirements and specifications |
-| `docs/prompts/` | AI prompt library and reusable prompts |
-| `docs/reviews/` | Technical reviews, audits, and assessment reports |
+| Resource                       | Purpose                                                                               |
+| ------------------------------ | ------------------------------------------------------------------------------------- |
+| `README.md`                    | Project overview, setup, architecture, and development guide                          |
+| `AGENTS.md`                    | Primary AI agent instructions and workflow                                            |
+| `CLAUDE.md`                    | Claude Code entry point and AI guidance                                               |
+| `PROJECT_CONTEXT.md`           | AI project context, conventions, and development priorities                           |
+| `PROJECT_FOUNDATION_REVIEW.md` | Architecture review, technical decisions, and project foundation                      |
+| `.cursor/rules/`               | Engineering, architecture, accessibility, performance, SEO, and code review standards |
+| `docs/architecture/`           | Architecture Decision Records (ADRs) and system design                                |
+| `docs/design/`                 | Design system, UI guidelines, and design tokens                                       |
+| `docs/engineering/`            | Engineering standards, coding guidelines, and workflows                               |
+| `docs/product/`                | Product requirements and specifications                                               |
+| `docs/prompts/`                | AI prompt library and reusable prompts                                                |
+| `docs/reviews/`                | Technical reviews, audits, and assessment reports                                     |
 
 ---
 
@@ -958,14 +960,14 @@ Bitcraftly Platform is optimized for AI-assisted development. All AI tools shoul
 
 ### Rule Hierarchy
 
-| Category | Applies | Purpose |
-|----------|---------|---------|
-| **Engineering Standards** | ✅ Always | Coding standards, TypeScript, React, project conventions |
-| **Architecture Protection** | ✅ Always | Preserve architecture and protect frozen pages |
-| **Accessibility Standards** | ✅ Always | WCAG 2.2 AA compliance and semantic HTML |
-| **Performance Standards** | 🎯 When Relevant | Core Web Vitals, rendering, bundle optimization |
-| **SEO Standards** | 🎯 When Relevant | Metadata, structured data, crawlability |
-| **Code Review Standards** | 🎯 Before Completion | Self-review, quality assurance, production readiness |
+| Category                    | Applies              | Purpose                                                  |
+| --------------------------- | -------------------- | -------------------------------------------------------- |
+| **Engineering Standards**   | ✅ Always            | Coding standards, TypeScript, React, project conventions |
+| **Architecture Protection** | ✅ Always            | Preserve architecture and protect frozen pages           |
+| **Accessibility Standards** | ✅ Always            | WCAG 2.2 AA compliance and semantic HTML                 |
+| **Performance Standards**   | 🎯 When Relevant     | Core Web Vitals, rendering, bundle optimization          |
+| **SEO Standards**           | 🎯 When Relevant     | Metadata, structured data, crawlability                  |
+| **Code Review Standards**   | 🎯 Before Completion | Self-review, quality assurance, production readiness     |
 
 ---
 

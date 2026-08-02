@@ -1,15 +1,9 @@
-import type { ReactNode } from "react";
-import { INDUSTRIES_LANDING } from "./industries.content";
+import type { ReactNode } from 'react';
+import { INDUSTRIES_LANDING } from './industries.content';
 
-type BrandId = (typeof INDUSTRIES_LANDING.trustedBy.brands)[number]["id"];
+type BrandId = (typeof INDUSTRIES_LANDING.trustedBy.brands)[number]['id'];
 
-function BrandMark({
-  label,
-  children,
-}: {
-  label: string;
-  children: ReactNode;
-}) {
+function BrandMark({ label, children }: { label: string; children: ReactNode }) {
   return (
     <span className="industries-trusted__mark" role="img" aria-label={label}>
       {children}
@@ -21,7 +15,7 @@ function TextWordmark({
   label,
   text,
   fontSize = 14,
-  tracking = "0",
+  tracking = '0',
   weight = 700,
 }: {
   label: string;
@@ -33,12 +27,7 @@ function TextWordmark({
   const width = Math.max(72, Math.round(text.length * fontSize * 0.62));
   return (
     <BrandMark label={label}>
-      <svg
-        viewBox={`0 0 ${width} 28`}
-        fill="none"
-        aria-hidden
-        className="industries-trusted__svg"
-      >
+      <svg viewBox={`0 0 ${width} 28`} fill="none" aria-hidden className="industries-trusted__svg">
         <text
           x="0"
           y="19"
@@ -59,12 +48,7 @@ const BRAND_MARKS: Record<BrandId, ReactNode> = {
   medanta: (
     <BrandMark label="Medanta">
       <svg viewBox="0 0 132 28" fill="none" aria-hidden className="industries-trusted__svg">
-        <path
-          d="M14 5v18M8 14h12"
-          stroke="currentColor"
-          strokeWidth="3.2"
-          strokeLinecap="round"
-        />
+        <path d="M14 5v18M8 14h12" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" />
         <text
           x="30"
           y="19"
@@ -133,9 +117,7 @@ const BRAND_MARKS: Record<BrandId, ReactNode> = {
       </svg>
     </BrandMark>
   ),
-  zepto: (
-    <TextWordmark label="Zepto" text="zepto" fontSize={18} tracking="-0.03em" />
-  ),
+  zepto: <TextWordmark label="Zepto" text="zepto" fontSize={18} tracking="-0.03em" />,
   reliance: (
     <BrandMark label="Reliance Industries Limited">
       <svg viewBox="0 0 148 28" fill="none" aria-hidden className="industries-trusted__svg">
@@ -168,24 +150,14 @@ const BRAND_MARKS: Record<BrandId, ReactNode> = {
     </BrandMark>
   ),
   delhivery: (
-    <TextWordmark
-      label="Delhivery"
-      text="DELHIVERY"
-      fontSize={13}
-      tracking="0.08em"
-      weight={800}
-    />
+    <TextWordmark label="Delhivery" text="DELHIVERY" fontSize={13} tracking="0.08em" weight={800} />
   ),
   apollo: <TextWordmark label="Apollo" text="Apollo" fontSize={15} weight={700} />,
-  hdfc: (
-    <TextWordmark label="HDFC Bank" text="HDFC Bank" fontSize={14} weight={700} />
-  ),
+  hdfc: <TextWordmark label="HDFC Bank" text="HDFC Bank" fontSize={14} weight={700} />,
   infosys: <TextWordmark label="Infosys" text="Infosys" fontSize={15} weight={700} />,
   swiggy: <TextWordmark label="Swiggy" text="Swiggy" fontSize={15} weight={700} />,
   nestle: <TextWordmark label="Nestlé" text="Nestlé" fontSize={15} weight={700} />,
-  pharmeasy: (
-    <TextWordmark label="PharmEasy" text="PharmEasy" fontSize={14} weight={700} />
-  ),
+  pharmeasy: <TextWordmark label="PharmEasy" text="PharmEasy" fontSize={14} weight={700} />,
 };
 
 /**
@@ -200,10 +172,7 @@ export function IndustriesTrustedBy() {
       <p className="industries-hero__trusted-label">{label}</p>
       <div className="industries-hero__trusted-divider" aria-hidden />
 
-      <div
-        className="industries-hero__trusted-marquee"
-        aria-label="Client brands"
-      >
+      <div className="industries-hero__trusted-marquee" aria-label="Client brands">
         <div className="industries-hero__trusted-track">
           {loop.map((brand, index) => (
             <div

@@ -3,21 +3,21 @@
  */
 
 /* Hero metrics — About-scoped hierarchy (shared MarketingIllustratedHero markup). */
-.about-page dl[aria-label="Bitcraftly highlights"] {
+.about-page dl[aria-label='Bitcraftly highlights'] {
   gap: 12px;
   max-width: 44rem;
 }
 
-.about-page dl[aria-label="Bitcraftly highlights"]>div {
+.about-page dl[aria-label='Bitcraftly highlights'] > div {
   padding: 14px 16px;
 }
 
-.about-page dl[aria-label="Bitcraftly highlights"] dt {
+.about-page dl[aria-label='Bitcraftly highlights'] dt {
   font-size: 22px;
   letter-spacing: -0.03em;
 }
 
-.about-page dl[aria-label="Bitcraftly highlights"] dd {
+.about-page dl[aria-label='Bitcraftly highlights'] dd {
   margin-top: 6px;
   font-size: 12px;
   line-height: 1.4;
@@ -86,7 +86,7 @@
   }
 }
 
-.about-page .about-prose+.about-prose {
+.about-page .about-prose + .about-prose {
   margin-top: var(--space-4);
 }
 
@@ -219,7 +219,7 @@
   }
 
   .about-page .about-process-step:not(:last-child) .about-process-step__rail::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 18px;
     bottom: -24px;
@@ -256,10 +256,11 @@
   border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
   border-radius: 16px;
   padding: 28px;
-  background:
-    linear-gradient(160deg,
-      color-mix(in srgb, var(--primary) 6%, var(--background)),
-      var(--background) 42%);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--primary) 6%, var(--background)),
+    var(--background) 42%
+  );
 }
 
 @media (min-width: 768px) {

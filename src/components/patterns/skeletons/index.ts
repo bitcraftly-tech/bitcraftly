@@ -1,4 +1,4 @@
-export { HeroLoadingSkeleton } from "./HeroLoadingSkeleton";
+export { HeroLoadingSkeleton } from './HeroLoadingSkeleton';
 export {
   BlogCardSkeleton,
   CardGridSkeleton,
@@ -6,7 +6,7 @@ export {
   CaseStudyCardSkeleton,
   PricingCardSkeleton,
   ServiceCardSkeleton,
-} from "./CardSkeletons";
+} from './CardSkeletons';
 export {
   AvatarSkeleton,
   ChartSkeleton,
@@ -15,7 +15,7 @@ export {
   ImageSkeleton,
   LeadListSkeleton,
   TableSkeleton,
-} from "./DataSkeletons";
+} from './DataSkeletons';
 export {
   CalculatorSectionSkeleton,
   FaqSectionSkeleton,
@@ -25,4 +25,4 @@ export {
   TechnologiesSectionSkeleton,
   TestimonialsSectionSkeleton,
   type MarketingLoadingVariant,
-} from "./MarketingRouteLoading";
+} from './MarketingRouteLoading';

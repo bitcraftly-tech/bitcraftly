@@ -1,14 +1,29 @@
 /**
  * Sprint 004.4 — global responsive guards (layout only, no brand changes).
+ * Compact hero artwork: phones + tablets (below Tailwind `lg` / 1024px).
  */
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   #main-content {
     overflow-x: clip;
   }
 
-  .marketing-hero--compact {
+  .marketing-hero--compact,
+  .hero-section--compact {
     padding-top: var(--space-4);
     padding-bottom: var(--space-4);
+  }
+
+  /* Right-side / stacked hero illustrations — hide on mobile + tablet */
+  .hero-section-media,
+  .marketing-hero-visual,
+  .services-hero__visual,
+  .solutions-hero__visual,
+  .industries-hero__visual,
+  .work-hero__visual,
+  .trust-hero__visual,
+  .legal-hero__visual,
+  .resources-hero__visual {
+    display: none !important;
   }
 }

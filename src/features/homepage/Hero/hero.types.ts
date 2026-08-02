@@ -6,7 +6,7 @@ export interface HeroEyebrowSegment {
 export interface HeroCta {
   label: string;
   href: string;
-  variant: "primary" | "outline";
+  variant: 'primary' | 'outline';
 }
 
 export interface HeroMetric {
@@ -33,6 +33,6 @@ export interface HeroAutomationStep {
 export interface HeroCapabilityTag {
   id: string;
   label: string;
-  icon: import("@/components/ui/icon").IconName;
+  icon: import('@/components/ui/icon').IconName;
   href?: string;
 }

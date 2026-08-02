@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   useCallback,
@@ -7,7 +7,7 @@ import {
   useState,
   type CSSProperties,
   type RefCallback,
-} from "react";
+} from 'react';
 
 export interface SlidingPillBox {
   left: number;
@@ -43,14 +43,13 @@ export function useSlidingPillIndicator(activeId: string | null | undefined) {
     else itemRefs.current.delete(id);
   }, []);
 
-  const itemRef =
-    useCallback(
-      (id: string): RefCallback<HTMLElement> =>
-        (node) => {
-          setItemRef(id, node);
-        },
-      [setItemRef],
-    );
+  const itemRef = useCallback(
+    (id: string): RefCallback<HTMLElement> =>
+      (node) => {
+        setItemRef(id, node);
+      },
+    [setItemRef],
+  );
 
   const update = useCallback(() => {
     const container = containerRef.current;
@@ -89,10 +88,10 @@ export function useSlidingPillIndicator(activeId: string | null | undefined) {
       resizeObserver.observe(item);
     }
 
-    window.addEventListener("resize", update);
+    window.addEventListener('resize', update);
     return () => {
       resizeObserver.disconnect();
-      window.removeEventListener("resize", update);
+      window.removeEventListener('resize', update);
     };
   }, [update, activeId]);
 

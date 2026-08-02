@@ -1,5 +1,5 @@
-import { Section } from "@/components/ui/section";
-import type { CaseStudy } from "@/content/case-studies";
+import { Section } from '@/components/ui/section';
+import type { CaseStudy } from '@/content/case-studies';
 
 interface CaseStudyOverviewProps {
   study: CaseStudy;
@@ -7,13 +7,13 @@ interface CaseStudyOverviewProps {
 
 export function CaseStudyOverview({ study }: CaseStudyOverviewProps) {
   const items = [
-    { label: "Client", value: study.client.name },
-    { label: "Industry", value: study.client.industry },
-    { label: "Company size", value: study.client.size },
-    { label: "Location", value: study.client.location },
-    { label: "Engagement", value: study.engagement.role },
-    { label: "Duration", value: study.engagement.duration },
-    { label: "Year", value: String(study.engagement.year) },
+    { label: 'Client', value: study.client.name },
+    { label: 'Industry', value: study.client.industry },
+    { label: 'Company size', value: study.client.size },
+    { label: 'Location', value: study.client.location },
+    { label: 'Engagement', value: study.engagement.role },
+    { label: 'Duration', value: study.engagement.duration },
+    { label: 'Year', value: String(study.engagement.year) },
   ] as const;
 
   return (

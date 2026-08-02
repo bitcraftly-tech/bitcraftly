@@ -1,11 +1,11 @@
-import Link from "next/link";
-import { AnimatedStat } from "@/components/patterns/animated-stat";
-import { FaqAccordion } from "@/components/patterns/faq-accordion";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { PAGE_GRID_CLASS, PAGE_GRID_4_CLASS } from "@/lib/layout/page-shell";
-import { cn } from "@/lib/cn";
-import "@/features/homepage/FAQ/faq.css";
+import Link from 'next/link';
+import { AnimatedStat } from '@/components/patterns/animated-stat';
+import { FaqAccordion } from '@/components/patterns/faq-accordion';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { PAGE_GRID_CLASS, PAGE_GRID_4_CLASS } from '@/lib/layout/page-shell';
+import { cn } from '@/lib/cn';
+import '@/features/homepage/FAQ/faq.css';
 import {
   INDUSTRIES_CATALOG,
   INDUSTRIES_LANDING,
@@ -20,8 +20,8 @@ import {
   INDUSTRY_SOLUTION_OFFERS,
   INDUSTRY_TECH_GROUPS,
   INDUSTRY_WHY,
-} from "./industries.content";
-import { IndustryCard } from "./IndustryCard";
+} from './industries.content';
+import { IndustryCard } from './IndustryCard';
 
 function SectionIntro({
   eyebrow,
@@ -61,7 +61,7 @@ export function IndustriesFeaturedSection() {
         heading={INDUSTRIES_LANDING.featuredHeading}
         description={INDUSTRIES_LANDING.featuredDescription}
       />
-      <ul className={cn("m-0 list-none p-0 industries-featured-rail")}>
+      <ul className={cn('m-0 list-none p-0 industries-featured-rail')}>
         {featured.map((industry) => (
           <li key={industry.slug} className="min-w-0 h-full">
             <IndustryCard industry={industry} emphasizePriority />
@@ -86,7 +86,7 @@ export function IndustriesGridSection() {
         heading={INDUSTRIES_LANDING.gridHeading}
         description={INDUSTRIES_LANDING.gridDescription}
       />
-      <ul className={cn("m-0 list-none p-0 grid gap-[20px]", PAGE_GRID_CLASS, "lg:grid-cols-3")}>
+      <ul className={cn('m-0 list-none p-0 grid gap-[20px]', PAGE_GRID_CLASS, 'lg:grid-cols-3')}>
         {INDUSTRIES_CATALOG.map((industry) => (
           <li key={industry.slug} className="min-w-0 h-full">
             <IndustryCard industry={industry} />
@@ -115,7 +115,7 @@ export function IndustriesProofSection() {
         {INDUSTRY_PROOF.map((item) => (
           <li
             key={item.id}
-            className={cn("industries-proof__card", `industries-proof__card--${item.tone}`)}
+            className={cn('industries-proof__card', `industries-proof__card--${item.tone}`)}
           >
             <span className="industries-proof__icon" aria-hidden>
               <Icon name={item.icon} size="sm" className="h-[18px] w-[18px]" />
@@ -148,10 +148,7 @@ export function IndustriesChallengesSection() {
         {INDUSTRY_CHALLENGES.map((challenge) => (
           <li
             key={challenge.id}
-            className={cn(
-              "industries-challenge",
-              `industries-challenge--${challenge.tone}`,
-            )}
+            className={cn('industries-challenge', `industries-challenge--${challenge.tone}`)}
           >
             <span className="industries-challenge__badge">Challenge</span>
             <div className="industries-challenge__head">
@@ -201,12 +198,7 @@ export function IndustriesSolutionsSection() {
       <ul className="industries-solutions">
         {INDUSTRY_SOLUTION_OFFERS.map((offer) => (
           <li key={offer.id}>
-            <article
-              className={cn(
-                "industries-solution",
-                `industries-solution--${offer.tone}`,
-              )}
-            >
+            <article className={cn('industries-solution', `industries-solution--${offer.tone}`)}>
               <div className="industries-solution__head">
                 <span className="industries-solution__icon" aria-hidden>
                   <Icon name={offer.icon} size="sm" className="h-[18px] w-[18px]" />
@@ -218,11 +210,11 @@ export function IndustriesSolutionsSection() {
               <dl className="industries-solution__meta">
                 <div>
                   <dt>Recommended services</dt>
-                  <dd>{offer.recommendedServices.join(" · ")}</dd>
+                  <dd>{offer.recommendedServices.join(' · ')}</dd>
                 </div>
                 <div>
                   <dt>Technology stack</dt>
-                  <dd>{offer.technologyStack.join(" · ")}</dd>
+                  <dd>{offer.technologyStack.join(' · ')}</dd>
                 </div>
                 <div>
                   <dt>Delivery model</dt>
@@ -236,12 +228,7 @@ export function IndustriesSolutionsSection() {
 
               <Link href={offer.href} className="industries-solution__cta">
                 {offer.ctaLabel}
-                <Icon
-                  name="arrow-right"
-                  size="sm"
-                  aria-hidden
-                  className="h-[13px] w-[13px]"
-                />
+                <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
               </Link>
             </article>
           </li>
@@ -265,17 +252,11 @@ export function IndustriesTechSection() {
         description={INDUSTRIES_LANDING.techDescription}
       />
 
-      <ul
-        className="industries-tech-groups"
-        aria-label="Technology stack by category"
-      >
+      <ul className="industries-tech-groups" aria-label="Technology stack by category">
         {INDUSTRY_TECH_GROUPS.map((group) => (
           <li
             key={group.id}
-            className={cn(
-              "industries-tech-group",
-              `industries-tech-group--${group.tone}`,
-            )}
+            className={cn('industries-tech-group', `industries-tech-group--${group.tone}`)}
           >
             <div className="industries-tech-group__head">
               <span className="industries-tech-group__icon" aria-hidden>
@@ -286,12 +267,7 @@ export function IndustriesTechSection() {
             <ul className="industries-tech-group__items">
               {group.items.map((tech) => (
                 <li key={tech.name}>
-                  <Icon
-                    name={tech.icon}
-                    size="sm"
-                    aria-hidden
-                    className="h-[12px] w-[12px]"
-                  />
+                  <Icon name={tech.icon} size="sm" aria-hidden className="h-[12px] w-[12px]" />
                   {tech.name}
                 </li>
               ))}
@@ -319,12 +295,7 @@ export function IndustriesCaseStudiesSection() {
       <ul className="industries-cases">
         {INDUSTRY_CASE_STUDIES.map((study) => (
           <li key={study.id}>
-            <article
-              className={cn(
-                "industries-case",
-                `industries-case--${study.tone}`,
-              )}
-            >
+            <article className={cn('industries-case', `industries-case--${study.tone}`)}>
               <div className="industries-case__metric-panel">
                 <div className="industries-case__metric-row">
                   <p className="industries-case__metric">{study.metric}</p>
@@ -347,12 +318,7 @@ export function IndustriesCaseStudiesSection() {
               <div className="industries-case__body">
                 <div className="industries-case__meta">
                   <span className="industries-case__badge">
-                    <Icon
-                      name={study.icon}
-                      size="sm"
-                      aria-hidden
-                      className="h-[12px] w-[12px]"
-                    />
+                    <Icon name={study.icon} size="sm" aria-hidden className="h-[12px] w-[12px]" />
                     {study.industry}
                   </span>
                   <span className="industries-case__client">{study.clientType}</span>
@@ -375,12 +341,7 @@ export function IndustriesCaseStudiesSection() {
 
                 <Link href={study.href} className="industries-case__cta">
                   {study.ctaLabel}
-                  <Icon
-                    name="arrow-right"
-                    size="sm"
-                    aria-hidden
-                    className="h-[13px] w-[13px]"
-                  />
+                  <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
                 </Link>
               </div>
             </article>
@@ -409,10 +370,7 @@ export function IndustriesMetricsSection() {
         {INDUSTRY_ROI.map((item) => (
           <li
             key={item.id}
-            className={cn(
-              "industries-roi__card",
-              `industries-roi__card--${item.tone}`,
-            )}
+            className={cn('industries-roi__card', `industries-roi__card--${item.tone}`)}
           >
             <div className="industries-roi__head">
               <span className="industries-roi__icon" aria-hidden>
@@ -448,23 +406,18 @@ export function IndustriesProcessSection() {
         {INDUSTRY_PROCESS.map((step, index) => (
           <li
             key={step.id}
-            className={cn(
-              "industries-process__step",
-              `industries-process__step--${step.tone}`,
-            )}
+            className={cn('industries-process__step', `industries-process__step--${step.tone}`)}
             data-step={index + 1}
           >
             <span className="industries-process__watermark" aria-hidden>
-              {String(index + 1).padStart(2, "0")}
+              {String(index + 1).padStart(2, '0')}
             </span>
 
             <div className="industries-process__top">
               <span className="industries-process__icon" aria-hidden>
                 <Icon name={step.icon} size="sm" className="h-[18px] w-[18px]" />
               </span>
-              <p className="industries-process__index">
-                Step {String(index + 1).padStart(2, "0")}
-              </p>
+              <p className="industries-process__index">Step {String(index + 1).padStart(2, '0')}</p>
             </div>
 
             <h3 className="industries-process__title">{step.title}</h3>
@@ -554,10 +507,7 @@ export function IndustriesWhySection() {
         {INDUSTRY_WHY.map((item) => (
           <li
             key={item.id}
-            className={cn(
-              "industries-why__card",
-              `industries-why__card--${item.tone}`,
-            )}
+            className={cn('industries-why__card', `industries-why__card--${item.tone}`)}
           >
             <div className="industries-why__head">
               <span className="industries-why__icon" aria-hidden>
@@ -609,17 +559,13 @@ export function IndustriesRelatedServicesSection() {
         heading={INDUSTRIES_LANDING.relatedHeading}
         description={INDUSTRIES_LANDING.relatedDescription}
       />
-      <ul className={cn("m-0 list-none p-0 grid gap-[16px]", PAGE_GRID_4_CLASS)}>
+      <ul className={cn('m-0 list-none p-0 grid gap-[16px]', PAGE_GRID_4_CLASS)}>
         {INDUSTRY_RELATED_SERVICES.map((service) => (
           <li key={service.id} className="min-w-0 h-full">
             <Link href={service.href} className="industries-offer">
               <div className="industries-offer__head">
                 <span className="industries-offer__icon" aria-hidden>
-                  <Icon
-                    name={service.icon}
-                    size="sm"
-                    className="h-[18px] w-[18px]"
-                  />
+                  <Icon name={service.icon} size="sm" className="h-[18px] w-[18px]" />
                 </span>
                 <h3 className="industries-offer__title">{service.title}</h3>
               </div>
@@ -629,12 +575,7 @@ export function IndustriesRelatedServicesSection() {
               </p>
               <span className="industries-offer__cta">
                 {service.ctaLabel}
-                <Icon
-                  name="arrow-right"
-                  size="sm"
-                  aria-hidden
-                  className="h-[13px] w-[13px]"
-                />
+                <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
               </span>
             </Link>
           </li>

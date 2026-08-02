@@ -1,11 +1,11 @@
-import type { ReactNode } from "react";
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
+import type { ReactNode } from 'react';
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
 
 export interface PageFooterProps {
   children: ReactNode;
   className?: string;
-  "aria-labelledby"?: string;
+  'aria-labelledby'?: string;
 }
 
 /**
@@ -15,14 +15,14 @@ export interface PageFooterProps {
 export function PageFooter({
   children,
   className,
-  "aria-labelledby": ariaLabelledBy,
+  'aria-labelledby': ariaLabelledBy,
 }: PageFooterProps) {
   return (
     <Section
       spacing="lg"
       background="default"
       aria-labelledby={ariaLabelledBy}
-      className={cn("border-t border-border/40", className)}
+      className={cn('border-t border-border/40', className)}
     >
       {children}
     </Section>

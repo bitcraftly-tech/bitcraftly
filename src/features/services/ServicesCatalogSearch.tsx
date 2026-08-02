@@ -1,17 +1,14 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useDeferredValue, useEffect, useMemo, useState } from "react";
-import {
-  SlidingPillIndicator,
-  useSlidingPillIndicator,
-} from "@/components/patterns/sliding-pill";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
-import { SERVICES_LANDING } from "./services.content";
-import { cardMatchesSearch } from "./services-catalog.utils";
-import type { ServiceCardModel } from "./services.types";
+import Link from 'next/link';
+import { useDeferredValue, useEffect, useMemo, useState } from 'react';
+import { SlidingPillIndicator, useSlidingPillIndicator } from '@/components/patterns/sliding-pill';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
+import { SERVICES_LANDING } from './services.content';
+import { cardMatchesSearch } from './services-catalog.utils';
+import type { ServiceCardModel } from './services.types';
 
 interface ServicesCatalogSearchProps {
   readonly groups: ReadonlyArray<{
@@ -21,15 +18,14 @@ interface ServicesCatalogSearchProps {
 }
 
 export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
   const isFiltering = Boolean(deferredQuery || activeFilter);
   const popularActiveId =
-    SERVICES_LANDING.popularSearches.find(
-      (term) => query.toLowerCase() === term.toLowerCase(),
-    ) ?? null;
-  const filterActiveId = activeFilter ?? "all";
+    SERVICES_LANDING.popularSearches.find((term) => query.toLowerCase() === term.toLowerCase()) ??
+    null;
+  const filterActiveId = activeFilter ?? 'all';
   const popularPill = useSlidingPillIndicator(popularActiveId);
   const filterPill = useSlidingPillIndicator(filterActiveId);
 
@@ -40,27 +36,23 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
     return groups.reduce(
       (sum, group) =>
         sum +
-        group.items.filter((card) =>
-          cardMatchesSearch(card, deferredQuery, activeFilter),
-        ).length,
+        group.items.filter((card) => cardMatchesSearch(card, deferredQuery, activeFilter)).length,
       0,
     );
   }, [groups, deferredQuery, activeFilter, isFiltering]);
 
   useEffect(() => {
-    const root = document.getElementById("services-catalog");
+    const root = document.getElementById('services-catalog');
     if (!root) return;
 
     let totalVisible = 0;
-    const cardNodes = root.querySelectorAll<HTMLElement>("[data-service-card]");
+    const cardNodes = root.querySelectorAll<HTMLElement>('[data-service-card]');
     const cardsByGroup = new Map<string, HTMLElement[]>();
 
     cardNodes.forEach((node) => {
-      const groupId = node.dataset.serviceGroup ?? "";
-      const slug = node.dataset.serviceSlug ?? "";
-      const card = groups
-        .flatMap((group) => group.items)
-        .find((item) => item.slug === slug);
+      const groupId = node.dataset.serviceGroup ?? '';
+      const slug = node.dataset.serviceSlug ?? '';
+      const card = groups.flatMap((group) => group.items).find((item) => item.slug === slug);
       if (!card) return;
 
       const visible = cardMatchesSearch(card, deferredQuery, activeFilter);
@@ -73,13 +65,11 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
       }
     });
 
-    root.querySelectorAll<HTMLElement>("[data-service-group]").forEach((groupEl) => {
-      const groupId = groupEl.dataset.serviceGroup ?? "";
+    root.querySelectorAll<HTMLElement>('[data-service-group]').forEach((groupEl) => {
+      const groupId = groupEl.dataset.serviceGroup ?? '';
       const visibleInGroup = cardsByGroup.get(groupId)?.length ?? 0;
-      const emptyMessage = groupEl.querySelector<HTMLElement>(
-        "[data-group-filter-empty]",
-      );
-      const body = groupEl.querySelector<HTMLElement>("[data-group-body]");
+      const emptyMessage = groupEl.querySelector<HTMLElement>('[data-group-filter-empty]');
+      const body = groupEl.querySelector<HTMLElement>('[data-group-body]');
 
       if (isFiltering && visibleInGroup === 0) {
         groupEl.hidden = false;
@@ -94,16 +84,16 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
       }
     });
 
-    root.querySelectorAll<HTMLElement>("[data-catalog-featured]").forEach((el) => {
+    root.querySelectorAll<HTMLElement>('[data-catalog-featured]').forEach((el) => {
       el.hidden = isFiltering;
     });
 
-    const related = root.querySelector<HTMLElement>("[data-catalog-related]");
+    const related = root.querySelector<HTMLElement>('[data-catalog-related]');
     if (related) {
       related.hidden = isFiltering;
     }
 
-    const emptyState = root.querySelector<HTMLElement>("[data-catalog-empty]");
+    const emptyState = root.querySelector<HTMLElement>('[data-catalog-empty]');
     if (emptyState) {
       emptyState.hidden = totalVisible > 0 || !isFiltering;
     }
@@ -115,7 +105,7 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
   }
 
   function clearFilters() {
-    setQuery("");
+    setQuery('');
     setActiveFilter(null);
   }
 
@@ -129,10 +119,7 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
         <div className="services-search-panel">
           <div className="services-search-panel__header">
             <div className="services-search-panel__intro">
-              <h2
-                id="services-search-heading"
-                className="services-search-panel__title"
-              >
+              <h2 id="services-search-heading" className="services-search-panel__title">
                 Search Services
               </h2>
               <p className="services-search-panel__subtitle">
@@ -146,18 +133,13 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
               >
                 {visibleCount}
               </span>
-              service{visibleCount === 1 ? "" : "s"} shown
+              service{visibleCount === 1 ? '' : 's'} shown
             </p>
           </div>
 
           <label className="services-search-field">
             <span className="sr-only">Search services</span>
-            <Icon
-              name="search"
-              size="sm"
-              aria-hidden
-              className="services-search-field__icon"
-            />
+            <Icon name="search" size="sm" aria-hidden className="services-search-field__icon" />
             <input
               type="search"
               value={query}
@@ -175,10 +157,7 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
                 ref={popularPill.containerRef}
                 className="services-search-guide__chips sliding-pill-track"
               >
-                <SlidingPillIndicator
-                  style={popularPill.indicatorStyle}
-                  variant="gradient"
-                />
+                <SlidingPillIndicator style={popularPill.indicatorStyle} variant="gradient" />
                 {SERVICES_LANDING.popularSearches.map((term) => {
                   const pressed = query.toLowerCase() === term.toLowerCase();
                   return (
@@ -189,8 +168,8 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
                       onClick={() => applySearchTerm(term)}
                       aria-pressed={pressed}
                       className={cn(
-                        "services-search-chip relative z-[1]",
-                        pressed && "services-search-chip--active",
+                        'services-search-chip relative z-[1]',
+                        pressed && 'services-search-chip--active',
                       )}
                     >
                       {term}
@@ -219,28 +198,21 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
             </div>
           </div>
 
-          <div
-            className="services-search-filters"
-            role="group"
-            aria-label="Filter by capability"
-          >
+          <div className="services-search-filters" role="group" aria-label="Filter by capability">
             <p className="services-search-guide__label">Browse by capability</p>
             <div
               ref={filterPill.containerRef}
               className="services-search-filters__row sliding-pill-track"
             >
-              <SlidingPillIndicator
-                style={filterPill.indicatorStyle}
-                variant="gradient"
-              />
+              <SlidingPillIndicator style={filterPill.indicatorStyle} variant="gradient" />
               <button
-                ref={filterPill.itemRef("all")}
+                ref={filterPill.itemRef('all')}
                 type="button"
                 onClick={() => setActiveFilter(null)}
                 aria-pressed={activeFilter === null}
                 className={cn(
-                  "services-search-chip services-search-chip--filter relative z-[1]",
-                  activeFilter === null && "services-search-chip--active",
+                  'services-search-chip services-search-chip--filter relative z-[1]',
+                  activeFilter === null && 'services-search-chip--active',
                 )}
               >
                 All
@@ -252,15 +224,11 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
                     key={chip}
                     ref={filterPill.itemRef(chip)}
                     type="button"
-                    onClick={() =>
-                      setActiveFilter((current) =>
-                        current === chip ? null : chip,
-                      )
-                    }
+                    onClick={() => setActiveFilter((current) => (current === chip ? null : chip))}
                     aria-pressed={pressed}
                     className={cn(
-                      "services-search-chip services-search-chip--filter relative z-[1]",
-                      pressed && "services-search-chip--active",
+                      'services-search-chip services-search-chip--filter relative z-[1]',
+                      pressed && 'services-search-chip--active',
                     )}
                   >
                     {chip}
@@ -272,13 +240,7 @@ export function ServicesCatalogSearch({ groups }: ServicesCatalogSearchProps) {
         </div>
       </Section>
 
-      <Section
-        spacing="lg"
-        className="bg-background"
-        aria-live="polite"
-        data-catalog-empty
-        hidden
-      >
+      <Section spacing="lg" className="bg-background" aria-live="polite" data-catalog-empty hidden>
         <p className="m-0 font-sans text-[15px] text-muted-foreground">
           No services match your search. Try a popular search or clear filters.
         </p>

@@ -1,15 +1,15 @@
-import Link from "next/link";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import { INDUSTRIES_LANDING } from "./industries.content";
-import { IndustriesHeroVisual } from "./IndustriesHeroVisual";
-import { IndustriesTrustedBy } from "./IndustriesTrustedBy";
-import "./industries.css";
+import Link from 'next/link';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import { INDUSTRIES_LANDING } from './industries.content';
+import { IndustriesHeroVisual } from './IndustriesHeroVisual';
+import { IndustriesTrustedBy } from './IndustriesTrustedBy';
+import './industries.css';
 
 interface IndustriesHeroProps {
   breadcrumbs: readonly BreadcrumbItem[];
@@ -26,20 +26,18 @@ export async function IndustriesHero({ breadcrumbs }: IndustriesHeroProps) {
   const highlight = INDUSTRIES_LANDING.titleHighlight;
   const [titleBefore, titleAfter] = title.includes(highlight)
     ? title.split(highlight)
-    : [title, ""];
+    : [title, ''];
 
-  const resolvedTrust = isMobile
-    ? INDUSTRIES_LANDING.trust.slice(0, 2)
-    : INDUSTRIES_LANDING.trust;
+  const resolvedTrust = isMobile ? INDUSTRIES_LANDING.trust.slice(0, 2) : INDUSTRIES_LANDING.trust;
 
   return (
     <Section
       spacing="lg"
       aria-labelledby="industries-page-heading"
       className={cn(
-        "industries-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'industries-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -84,9 +82,7 @@ export async function IndustriesHero({ breadcrumbs }: IndustriesHeroProps) {
             {titleAfter}
           </h1>
 
-          <p className="industries-hero__description">
-            {INDUSTRIES_LANDING.description}
-          </p>
+          <p className="industries-hero__description">{INDUSTRIES_LANDING.description}</p>
 
           {!isMobile ? (
             <ul className="industries-hero__highlights" aria-label="Why Bitcraftly for industries">
@@ -94,7 +90,7 @@ export async function IndustriesHero({ breadcrumbs }: IndustriesHeroProps) {
                 <li
                   key={item.id}
                   className={cn(
-                    "industries-hero__highlight",
+                    'industries-hero__highlight',
                     `industries-hero__highlight--${item.tone}`,
                   )}
                 >

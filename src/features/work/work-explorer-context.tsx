@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   createContext,
@@ -11,11 +11,8 @@ import {
   type ReactNode,
   type SetStateAction,
   type TransitionStartFunction,
-} from "react";
-import {
-  EMPTY_WORK_EXPLORER_STATE,
-  type WorkExplorerState,
-} from "./work.filters";
+} from 'react';
+import { EMPTY_WORK_EXPLORER_STATE, type WorkExplorerState } from './work.filters';
 
 interface WorkExplorerContextValue {
   state: WorkExplorerState;
@@ -48,17 +45,13 @@ export function WorkExplorerProvider({ children }: { children: ReactNode }) {
     [state, clearFilters, startTransition, isPending],
   );
 
-  return (
-    <WorkExplorerContext.Provider value={value}>
-      {children}
-    </WorkExplorerContext.Provider>
-  );
+  return <WorkExplorerContext.Provider value={value}>{children}</WorkExplorerContext.Provider>;
 }
 
 export function useWorkExplorer(): WorkExplorerContextValue {
   const context = useContext(WorkExplorerContext);
   if (!context) {
-    throw new Error("useWorkExplorer must be used within WorkExplorerProvider");
+    throw new Error('useWorkExplorer must be used within WorkExplorerProvider');
   }
   return context;
 }

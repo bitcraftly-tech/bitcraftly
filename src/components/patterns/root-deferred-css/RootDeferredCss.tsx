@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 /** Loads non-ATF global motion CSS after first paint (all routes). */
 export function RootDeferredCss() {
@@ -10,7 +10,7 @@ export function RootDeferredCss() {
     const raf1 = window.requestAnimationFrame(() => {
       raf2 = window.requestAnimationFrame(() => {
         if (!cancelled) {
-          void import("@/styles/animations.css").catch(() => {
+          void import('@/styles/animations.css').catch(() => {
             /* non-critical */
           });
         }

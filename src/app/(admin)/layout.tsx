@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import { AdminShell } from "@/features/admin";
-import "@/features/admin/admin.css";
+import type { Metadata } from 'next';
+import { AdminShell } from '@/features/admin';
+import '@/features/admin/admin.css';
 
 export const metadata: Metadata = {
   title: {
-    default: "Admin",
-    template: "%s | Bitcraftly Admin",
+    default: 'Admin',
+    template: '%s | Bitcraftly Admin',
   },
-  description: "Bitcraftly admin panel — UI architecture preview.",
+  description: 'Bitcraftly admin panel — UI architecture preview.',
   robots: {
     index: false,
     follow: false,

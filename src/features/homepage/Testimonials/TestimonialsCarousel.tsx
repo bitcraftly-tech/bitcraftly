@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useState } from "react";
-import Image from "next/image";
-import { Icon } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
-import { TESTIMONIALS } from "./testimonials.constants";
+import { useCallback, useEffect, useState } from 'react';
+import Image from 'next/image';
+import { Icon } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
+import { TESTIMONIALS } from './testimonials.constants';
 
 const AUTO_PLAY_MS = 6000;
 
@@ -23,9 +23,7 @@ export function TestimonialsCarousel() {
   useEffect(() => {
     if (paused || total <= 1) return;
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) return;
 
     const timer = window.setInterval(() => {
@@ -54,11 +52,11 @@ export function TestimonialsCarousel() {
             <figure
               key={item.id}
               className={cn(
-                "testimonials-card testimonials-slide m-0 flex h-full min-h-full flex-col !p-[16px]",
-                active && "is-active",
+                'testimonials-card testimonials-slide m-0 flex h-full min-h-full flex-col !p-[16px]',
+                active && 'is-active',
               )}
               aria-hidden={!active}
-              aria-live={active ? "polite" : undefined}
+              aria-live={active ? 'polite' : undefined}
               aria-atomic={active ? true : undefined}
             >
               {item.rating > 0 ? (
@@ -81,9 +79,9 @@ export function TestimonialsCarousel() {
               <blockquote className="m-0">
                 <p
                   className={cn(
-                    "m-0 font-sans text-[16px] font-medium leading-[1.65]",
-                    "tracking-[-0.01em] text-foreground",
-                    "sm:text-[18px]",
+                    'm-0 font-sans text-[16px] font-medium leading-[1.65]',
+                    'tracking-[-0.01em] text-foreground',
+                    'sm:text-[18px]',
                   )}
                 >
                   “{item.quote}”
@@ -104,8 +102,8 @@ export function TestimonialsCarousel() {
                 ) : (
                   <span
                     className={cn(
-                      "testimonials-avatar grid size-[44px] place-items-center",
-                      "rounded-full font-sans text-[13px] font-bold",
+                      'testimonials-avatar grid size-[44px] place-items-center',
+                      'rounded-full font-sans text-[13px] font-bold',
                     )}
                     aria-hidden
                   >
@@ -113,9 +111,7 @@ export function TestimonialsCarousel() {
                   </span>
                 )}
                 <div className="min-w-0">
-                  <p className="m-0 font-sans text-[14px] font-bold text-foreground">
-                    {item.name}
-                  </p>
+                  <p className="m-0 font-sans text-[14px] font-bold text-foreground">{item.name}</p>
                   <p className="m-0 font-sans text-[13px] text-muted-foreground">
                     {item.role}, {item.company}
                   </p>
@@ -148,20 +144,11 @@ export function TestimonialsCarousel() {
             aria-label="Next slide"
             onClick={() => goTo(index + 1)}
           >
-            <Icon
-              name="arrow-right"
-              size="sm"
-              aria-hidden
-              className="h-[14px] w-[14px]"
-            />
+            <Icon name="arrow-right" size="sm" aria-hidden className="h-[14px] w-[14px]" />
           </button>
         </div>
 
-        <div
-          className="testimonials-controls__dots"
-          role="tablist"
-          aria-label="Proof slides"
-        >
+        <div className="testimonials-controls__dots" role="tablist" aria-label="Proof slides">
           {TESTIMONIALS.map((entry, dotIndex) => (
             <button
               key={entry.id}
@@ -169,10 +156,7 @@ export function TestimonialsCarousel() {
               role="tab"
               aria-selected={dotIndex === index}
               aria-label={`Show slide ${dotIndex + 1}`}
-              className={cn(
-                "testimonials-dot",
-                dotIndex === index && "is-active",
-              )}
+              className={cn('testimonials-dot', dotIndex === index && 'is-active')}
               onClick={() => goTo(dotIndex)}
             />
           ))}

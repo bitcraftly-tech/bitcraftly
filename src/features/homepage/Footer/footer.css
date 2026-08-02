@@ -1,57 +1,74 @@
 /**
- * Footer surface — maps approved inverse chrome to semantic utilities.
- * Colors come only from design tokens (`--inverse*`, `--primary*`, `--background`).
+ * Footer / newsletter — shared flat logo-navy surface (no gradients).
  */
 
-.footer-surface {
-  background-color: var(--inverse);
-  color: var(--inverse-foreground);
+.footer-surface,
+#footer.footer-surface,
+#newsletter.footer-surface {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  color: var(--inverse-foreground) !important;
+  background-color: var(--inverse) !important;
+  background-image: none !important;
 }
 
-/**
- * Footer column labels (Services, Solutions, Resources, Company, Contact Us).
- * Not page headings — explicit label typography, not h1–h6 / Heading styles.
- */
+.footer-surface::before {
+  content: none;
+}
+
+.footer-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
 .footer-heading {
   margin: 0 0 var(--space-md);
   font-family: var(--font-family-sans);
-  font-size: var(--font-size-sm); /* 14px */
-  font-weight: var(--font-weight-semibold); /* 600 */
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
   line-height: 20px;
   letter-spacing: 0;
-  color: var(--inverse-foreground);
+  color: #ffffff;
 }
 
 .footer-muted {
-  color: var(--inverse-muted);
+  color: color-mix(in srgb, #8eabc0 88%, #ffffff);
 }
 
 .footer-link {
   font-family: var(--font-family-sans);
   font-size: 13px;
-  font-weight: var(--font-weight-normal); /* 400 */
+  font-weight: var(--font-weight-normal);
   line-height: var(--line-height-snug);
-  color: var(--inverse-muted);
+  color: color-mix(in srgb, #b7c9d8 90%, #ffffff);
   transition: color var(--duration-fast) var(--ease-out);
 }
 
 .footer-link:hover {
-  color: var(--inverse-foreground);
+  color: #33e0f0;
 }
 
 .footer-social-link {
-  color: var(--inverse-foreground);
-  background-color: var(--inverse-elevated);
+  color: #ffffff;
+  background-color: color-mix(in srgb, var(--primary) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
   transition:
     background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
     color var(--duration-fast) var(--ease-out),
     transform var(--duration-fast) var(--ease-out);
 }
 
 .footer-social-link:hover {
-  background-color: color-mix(in srgb, var(--inverse-muted) 28%, transparent);
-  color: var(--inverse-foreground);
+  background-color: color-mix(in srgb, var(--primary) 32%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  color: #ffffff;
   transform: translateY(-3px) scale(1.04);
+}
+
+.footer-bottom {
+  border-top: 1px solid color-mix(in srgb, var(--accent) 16%, transparent);
 }
 
 .footer-focus-ring {
@@ -59,6 +76,6 @@
 }
 
 .footer-focus-ring:focus-visible {
-  outline: 2px solid var(--primary);
+  outline: 2px solid #33e0f0;
   outline-offset: 2px;
 }

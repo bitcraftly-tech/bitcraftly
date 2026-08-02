@@ -1,65 +1,62 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useMemo, useState } from "react";
-import {
-  SlidingPillIndicator,
-  useSlidingPillIndicator,
-} from "@/components/patterns/sliding-pill";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
+import Link from 'next/link';
+import { useMemo, useState } from 'react';
+import { SlidingPillIndicator, useSlidingPillIndicator } from '@/components/patterns/sliding-pill';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
 import {
   CAREER_ROLES,
   getCareersApplyHref,
   type CareerLevel,
   type CareerTeam,
-} from "./careers.content";
+} from './careers.content';
 
 const TEAM_FILTERS: readonly {
-  id: "all" | CareerTeam;
+  id: 'all' | CareerTeam;
   label: string;
   short: string;
   icon: IconName;
 }[] = [
-  { id: "all", label: "All teams", short: "All", icon: "layout-grid" },
-  { id: "engineering", label: "Engineering", short: "Eng", icon: "code" },
-  { id: "design", label: "Design", short: "Design", icon: "sparkles" },
-  { id: "product", label: "Product", short: "Product", icon: "rocket" },
+  { id: 'all', label: 'All teams', short: 'All', icon: 'layout-grid' },
+  { id: 'engineering', label: 'Engineering', short: 'Eng', icon: 'code' },
+  { id: 'design', label: 'Design', short: 'Design', icon: 'sparkles' },
+  { id: 'product', label: 'Product', short: 'Product', icon: 'rocket' },
 ];
 
 const LEVEL_FILTERS: readonly {
-  id: "all" | CareerLevel;
+  id: 'all' | CareerLevel;
   label: string;
   short: string;
 }[] = [
-  { id: "all", label: "All levels", short: "All" },
-  { id: "mid", label: "Mid", short: "Mid" },
-  { id: "senior", label: "Senior", short: "Sr" },
-  { id: "lead", label: "Lead", short: "Lead" },
+  { id: 'all', label: 'All levels', short: 'All' },
+  { id: 'mid', label: 'Mid', short: 'Mid' },
+  { id: 'senior', label: 'Senior', short: 'Sr' },
+  { id: 'lead', label: 'Lead', short: 'Lead' },
 ];
 
-function countTeam(id: "all" | CareerTeam): number {
-  if (id === "all") return CAREER_ROLES.length;
+function countTeam(id: 'all' | CareerTeam): number {
+  if (id === 'all') return CAREER_ROLES.length;
   return CAREER_ROLES.filter((role) => role.team === id).length;
 }
 
-function countLevel(id: "all" | CareerLevel): number {
-  if (id === "all") return CAREER_ROLES.length;
+function countLevel(id: 'all' | CareerLevel): number {
+  if (id === 'all') return CAREER_ROLES.length;
   return CAREER_ROLES.filter((role) => role.level === id).length;
 }
 
 const focusRing = cn(
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-  "focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+  'focus-visible:ring-offset-2 focus-visible:ring-offset-background',
 );
 
 /**
  * Roles browser — empty-state message when hiring is paused.
  */
 export function CareersRolesBoard() {
-  const [team, setTeam] = useState<"all" | CareerTeam>("all");
-  const [level, setLevel] = useState<"all" | CareerLevel>("all");
-  const [query, setQuery] = useState("");
+  const [team, setTeam] = useState<'all' | CareerTeam>('all');
+  const [level, setLevel] = useState<'all' | CareerLevel>('all');
+  const [query, setQuery] = useState('');
   const teamPill = useSlidingPillIndicator(team);
   const levelPill = useSlidingPillIndicator(level);
   const hasOpenings = CAREER_ROLES.length > 0;
@@ -67,16 +64,11 @@ export function CareersRolesBoard() {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return CAREER_ROLES.filter((role) => {
-      if (team !== "all" && role.team !== team) return false;
-      if (level !== "all" && role.level !== level) return false;
+      if (team !== 'all' && role.team !== team) return false;
+      if (level !== 'all' && role.level !== level) return false;
       if (!q) return true;
-      const haystack = [
-        role.title,
-        role.summary,
-        role.skills.join(" "),
-        role.location,
-      ]
-        .join(" ")
+      const haystack = [role.title, role.summary, role.skills.join(' '), role.location]
+        .join(' ')
         .toLowerCase();
       return haystack.includes(q);
     });
@@ -89,25 +81,18 @@ export function CareersRolesBoard() {
           <span className="careers-roles-empty__icon" aria-hidden>
             <Icon name="calendar" size="sm" className="h-[18px] w-[18px]" />
           </span>
-          <h3 className="careers-roles-empty__title">
-            No open positions right now
-          </h3>
+          <h3 className="careers-roles-empty__title">No open positions right now</h3>
         </div>
         <p className="careers-roles-empty__body">
-          We are not actively hiring at the moment. You can still send a general
-          application — we review every profile when roles reopen.
+          We are not actively hiring at the moment. You can still send a general application — we
+          review every profile when roles reopen.
         </p>
         <Link
-          href={getCareersApplyHref("general")}
-          className={cn("careers-roles-empty__cta", focusRing)}
+          href={getCareersApplyHref('general')}
+          className={cn('careers-roles-empty__cta', focusRing)}
         >
           Send general application
-          <Icon
-            name="arrow-right"
-            size="sm"
-            aria-hidden
-            className="h-[13px] w-[13px]"
-          />
+          <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
         </Link>
       </div>
     );
@@ -119,8 +104,8 @@ export function CareersRolesBoard() {
         <div className="careers-roles__panel-head">
           <div className="careers-roles__general">
             <Link
-              href={getCareersApplyHref("general")}
-              className={cn("careers-roles__general-btn", focusRing)}
+              href={getCareersApplyHref('general')}
+              className={cn('careers-roles__general-btn', focusRing)}
             >
               General application
             </Link>
@@ -131,12 +116,7 @@ export function CareersRolesBoard() {
 
           <label className="careers-roles__search">
             <span className="sr-only">Search roles</span>
-            <Icon
-              name="search"
-              size="sm"
-              aria-hidden
-              className="h-[16px] w-[16px]"
-            />
+            <Icon name="search" size="sm" aria-hidden className="h-[16px] w-[16px]" />
             <input
               type="search"
               value={query}
@@ -156,10 +136,7 @@ export function CareersRolesBoard() {
             role="tablist"
             aria-labelledby="careers-team-label"
           >
-            <SlidingPillIndicator
-              style={teamPill.indicatorStyle}
-              variant="accent"
-            />
+            <SlidingPillIndicator style={teamPill.indicatorStyle} variant="accent" />
             {TEAM_FILTERS.map((item) => {
               const active = team === item.id;
               return (
@@ -170,8 +147,8 @@ export function CareersRolesBoard() {
                   role="tab"
                   aria-selected={active}
                   className={cn(
-                    "careers-roles__chip careers-roles__chip--pill",
-                    active && "careers-roles__chip--active",
+                    'careers-roles__chip careers-roles__chip--pill',
+                    active && 'careers-roles__chip--active',
                     focusRing,
                   )}
                   onClick={() => setTeam(item.id)}
@@ -183,15 +160,9 @@ export function CareersRolesBoard() {
                       aria-hidden
                       className="careers-roles__chip-icon h-[14px] w-[14px]"
                     />
-                    <span className="careers-roles__chip-label">
-                      {item.label}
-                    </span>
-                    <span className="careers-roles__chip-short">
-                      {item.short}
-                    </span>
-                    <span className="careers-roles__chip-count">
-                      {countTeam(item.id)}
-                    </span>
+                    <span className="careers-roles__chip-label">{item.label}</span>
+                    <span className="careers-roles__chip-short">{item.short}</span>
+                    <span className="careers-roles__chip-count">{countTeam(item.id)}</span>
                   </span>
                 </button>
               );
@@ -209,10 +180,7 @@ export function CareersRolesBoard() {
             role="tablist"
             aria-labelledby="careers-level-label"
           >
-            <SlidingPillIndicator
-              style={levelPill.indicatorStyle}
-              variant="segment"
-            />
+            <SlidingPillIndicator style={levelPill.indicatorStyle} variant="segment" />
             {LEVEL_FILTERS.map((item) => {
               const active = level === item.id;
               return (
@@ -223,22 +191,16 @@ export function CareersRolesBoard() {
                   role="tab"
                   aria-selected={active}
                   className={cn(
-                    "careers-roles__chip careers-roles__chip--segment",
-                    active && "careers-roles__chip--segment-active",
+                    'careers-roles__chip careers-roles__chip--segment',
+                    active && 'careers-roles__chip--segment-active',
                     focusRing,
                   )}
                   onClick={() => setLevel(item.id)}
                 >
                   <span className="careers-roles__chip-inner">
-                    <span className="careers-roles__chip-label">
-                      {item.label}
-                    </span>
-                    <span className="careers-roles__chip-short">
-                      {item.short}
-                    </span>
-                    <span className="careers-roles__chip-count">
-                      {countLevel(item.id)}
-                    </span>
+                    <span className="careers-roles__chip-label">{item.label}</span>
+                    <span className="careers-roles__chip-short">{item.short}</span>
+                    <span className="careers-roles__chip-count">{countLevel(item.id)}</span>
                   </span>
                 </button>
               );
@@ -252,13 +214,9 @@ export function CareersRolesBoard() {
           <li key={role.slug} className="min-w-0">
             <article className="careers-roles__card">
               <div className="careers-roles__card-top">
-                {role.featured ? (
-                  <span className="careers-roles__tag">Featured role</span>
-                ) : null}
+                {role.featured ? <span className="careers-roles__tag">Featured role</span> : null}
                 {role.badge ? (
-                  <span className="careers-roles__tag careers-roles__tag--muted">
-                    {role.badge}
-                  </span>
+                  <span className="careers-roles__tag careers-roles__tag--muted">{role.badge}</span>
                 ) : null}
               </div>
               <h3 className="careers-roles__title">{role.title}</h3>
@@ -277,15 +235,10 @@ export function CareersRolesBoard() {
                 <p className="careers-roles__location">{role.location}</p>
                 <Link
                   href={getCareersApplyHref(role.slug)}
-                  className={cn("careers-roles__apply", focusRing)}
+                  className={cn('careers-roles__apply', focusRing)}
                 >
                   Apply now
-                  <Icon
-                    name="arrow-right"
-                    size="sm"
-                    aria-hidden
-                    className="h-[13px] w-[13px]"
-                  />
+                  <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
                 </Link>
               </div>
             </article>
@@ -295,10 +248,8 @@ export function CareersRolesBoard() {
 
       {filtered.length === 0 ? (
         <p className="careers-roles__empty">
-          No roles match these filters.{" "}
-          <Link href={getCareersApplyHref("general")}>
-            Send a general application
-          </Link>
+          No roles match these filters.{' '}
+          <Link href={getCareersApplyHref('general')}>Send a general application</Link>
         </p>
       ) : null}
     </div>

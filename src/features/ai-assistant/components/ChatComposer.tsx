@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useId, useState, type FormEvent, type KeyboardEvent } from "react";
-import { Icon } from "@/components/ui/icon";
-import { Button } from "@/components/ui/button";
+import { useId, useState, type FormEvent, type KeyboardEvent } from 'react';
+import { Icon } from '@/components/ui/icon';
+import { Button } from '@/components/ui/button';
 
 interface ChatComposerProps {
   onSubmit: (value: string) => void;
@@ -19,7 +19,7 @@ export function ChatComposer({
 }: ChatComposerProps) {
   const inputId = useId();
   const helpId = useId();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -28,18 +28,18 @@ export function ChatComposer({
       return;
     }
     onSubmit(next);
-    setValue("");
+    setValue('');
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
-    if (event.key === "Enter" && !event.shiftKey) {
+    if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       const next = value.trim();
       if (!next || isStreaming || disabled) {
         return;
       }
       onSubmit(next);
-      setValue("");
+      setValue('');
     }
   }
 

@@ -1,16 +1,16 @@
-import Link from "next/link";
-import { AnimatedStat } from "@/components/patterns/animated-stat";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Container } from "@/components/ui/container";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import { WORK_LANDING } from "./work.content";
-import { WorkHeroVisual } from "./WorkHeroVisual";
-import "./work.css";
+import Link from 'next/link';
+import { AnimatedStat } from '@/components/patterns/animated-stat';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Container } from '@/components/ui/container';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import { WORK_LANDING } from './work.content';
+import { WorkHeroVisual } from './WorkHeroVisual';
+import './work.css';
 
 interface WorkHeroProps {
   breadcrumbs: readonly BreadcrumbItem[];
@@ -21,13 +21,13 @@ const HERO_TECH_STACK: readonly {
   label: string;
   icon: IconName;
 }[] = [
-  { id: "next", label: "Next.js", icon: "globe" },
-  { id: "react", label: "React", icon: "code" },
-  { id: "ts", label: "TypeScript", icon: "zap" },
-  { id: "fastapi", label: "FastAPI", icon: "database" },
-  { id: "postgres", label: "PostgreSQL", icon: "database" },
-  { id: "aws", label: "AWS", icon: "cloud" },
-  { id: "openai", label: "OpenAI", icon: "brain" },
+  { id: 'next', label: 'Next.js', icon: 'globe' },
+  { id: 'react', label: 'React', icon: 'code' },
+  { id: 'ts', label: 'TypeScript', icon: 'zap' },
+  { id: 'fastapi', label: 'FastAPI', icon: 'database' },
+  { id: 'postgres', label: 'PostgreSQL', icon: 'database' },
+  { id: 'aws', label: 'AWS', icon: 'cloud' },
+  { id: 'openai', label: 'OpenAI', icon: 'brain' },
 ] as const;
 
 const HERO_STATS: readonly {
@@ -35,35 +35,35 @@ const HERO_STATS: readonly {
   value: string;
   label: string;
   icon: IconName;
-  tone: "violet" | "sky" | "indigo" | "amber";
+  tone: 'violet' | 'sky' | 'indigo' | 'amber';
 }[] = [
   {
-    id: "projects",
-    value: "200+",
-    label: "Projects Delivered",
-    icon: "layout-grid",
-    tone: "violet",
+    id: 'projects',
+    value: '200+',
+    label: 'Projects Delivered',
+    icon: 'layout-grid',
+    tone: 'violet',
   },
   {
-    id: "enterprise",
-    value: "40+",
-    label: "Enterprise Clients",
-    icon: "shield",
-    tone: "sky",
+    id: 'enterprise',
+    value: '40+',
+    label: 'Enterprise Clients',
+    icon: 'shield',
+    tone: 'sky',
   },
   {
-    id: "industries",
-    value: "12+",
-    label: "Industries Served",
-    icon: "globe",
-    tone: "indigo",
+    id: 'industries',
+    value: '12+',
+    label: 'Industries Served',
+    icon: 'globe',
+    tone: 'indigo',
   },
   {
-    id: "years",
-    value: "8+",
-    label: "Years Experience",
-    icon: "star",
-    tone: "amber",
+    id: 'years',
+    value: '8+',
+    label: 'Years Experience',
+    icon: 'star',
+    tone: 'amber',
   },
 ] as const;
 
@@ -76,7 +76,7 @@ export async function WorkHero({ breadcrumbs }: WorkHeroProps) {
   const highlight = WORK_LANDING.titleHighlight;
   const [titleBefore, titleAfter] = title.includes(highlight)
     ? title.split(highlight)
-    : [title, ""];
+    : [title, ''];
 
   return (
     <Section
@@ -84,9 +84,9 @@ export async function WorkHero({ breadcrumbs }: WorkHeroProps) {
       contained={false}
       aria-labelledby="work-page-heading"
       className={cn(
-        "work-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'work-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -122,12 +122,7 @@ export async function WorkHero({ breadcrumbs }: WorkHeroProps) {
         <div className="work-hero__grid">
           <div className="work-hero__content">
             <p className="work-hero__eyebrow">
-              <Icon
-                name="sparkles"
-                size="sm"
-                aria-hidden
-                className="work-hero__eyebrow-icon"
-              />
+              <Icon name="sparkles" size="sm" aria-hidden className="work-hero__eyebrow-icon" />
               <span>{WORK_LANDING.eyebrow}</span>
             </p>
 

@@ -1,13 +1,9 @@
-import "@/styles/route-loading.css";
-import { LeadListSkeleton } from "@/components/patterns/skeletons";
+import '@/styles/route-loading.css';
+import { LeadListSkeleton } from '@/components/patterns/skeletons';
 
 export default function OwnerLeadsLoading() {
   return (
-    <div
-      className="admin-page owner-leads-page"
-      aria-busy="true"
-      aria-live="polite"
-    >
+    <div className="admin-page owner-leads-page" aria-busy="true" aria-live="polite">
       <div className="admin-page-header">
         <div className="admin-page-header__copy">
           <h1 className="admin-page-header__title">Lead Intelligence</h1>

@@ -1,31 +1,27 @@
-import type { ZodError } from "zod";
-import type { SubmitLeadActionInput } from "./lead-action.input";
-import { guardLeadSubmission } from "./lead-guard.service";
-import { sendLeadNotification } from "./lead-notification.service";
-import { saveLead, markNotificationFailed, markNotificationSent } from "./lead.repository";
+import type { ZodError } from 'zod';
+import type { SubmitLeadActionInput } from './lead-action.input';
+import { guardLeadSubmission } from './lead-guard.service';
+import { sendLeadNotification } from './lead-notification.service';
+import { saveLead, markNotificationFailed, markNotificationSent } from './lead.repository';
 import {
   createLeadRecordFromContactInput,
   createLeadRecordFromNewsletterInput,
   submitContactLeadInputSchema,
   submitNewsletterLeadInputSchema,
-} from "./lead-payload.schema";
+} from './lead-payload.schema';
 import {
   buildLeadServerMetadata,
   readLeadRequestHeaders,
   type LeadRequestHeaders,
-} from "./lead-server-context";
-import type {
-  LeadRecord,
-  SubmitLeadFailure,
-  SubmitLeadResult,
-} from "./lead.types";
+} from './lead-server-context';
+import type { LeadRecord, SubmitLeadFailure, SubmitLeadResult } from './lead.types';
 
 function validationFailure(error: ZodError): SubmitLeadFailure {
   const firstIssue = error.issues[0];
   return {
     ok: false,
-    code: "VALIDATION",
-    message: firstIssue?.message ?? "Invalid submission.",
+    code: 'VALIDATION',
+    message: firstIssue?.message ?? 'Invalid submission.',
   };
 }
 
@@ -34,15 +30,15 @@ function resolveEmailForGuard(input: SubmitLeadActionInput): string {
 }
 
 const DELIVERY_FAILURE_MESSAGE =
-  "We could not deliver your message right now. Please try again or contact us on WhatsApp.";
+  'We could not deliver your message right now. Please try again or contact us on WhatsApp.';
 
 const PERSISTENCE_FAILURE_MESSAGE =
-  "We could not save your request right now. Please try again or contact us on WhatsApp.";
+  'We could not save your request right now. Please try again or contact us on WhatsApp.';
 
 function persistenceFailure(): SubmitLeadFailure {
   return {
     ok: false,
-    code: "PERSISTENCE",
+    code: 'PERSISTENCE',
     message: PERSISTENCE_FAILURE_MESSAGE,
   };
 }
@@ -50,7 +46,7 @@ function persistenceFailure(): SubmitLeadFailure {
 function deliveryFailure(message: string = DELIVERY_FAILURE_MESSAGE): SubmitLeadFailure {
   return {
     ok: false,
-    code: "DELIVERY",
+    code: 'DELIVERY',
     message,
   };
 }
@@ -59,8 +55,7 @@ async function deliverLeadRecord(record: LeadRecord): Promise<SubmitLeadResult> 
   const notification = await sendLeadNotification(record);
 
   if (!notification.ok) {
-    const deliveryMessage =
-      notification.message.trim() || DELIVERY_FAILURE_MESSAGE;
+    const deliveryMessage = notification.message.trim() || DELIVERY_FAILURE_MESSAGE;
 
     await markNotificationFailed(record.id, deliveryMessage);
 
@@ -76,9 +71,7 @@ async function deliverLeadRecord(record: LeadRecord): Promise<SubmitLeadResult> 
   };
 }
 
-async function persistAndDeliverLeadRecord(
-  record: LeadRecord,
-): Promise<SubmitLeadResult> {
+async function persistAndDeliverLeadRecord(record: LeadRecord): Promise<SubmitLeadResult> {
   const persisted = await saveLead(record);
 
   if (!persisted.ok) {
@@ -116,7 +109,7 @@ export async function processLeadSubmission(
     return guardFailure;
   }
 
-  if (input.leadType === "contact") {
+  if (input.leadType === 'contact') {
     const parsed = submitContactLeadInputSchema.safeParse(input);
 
     if (!parsed.success) {
@@ -149,9 +142,7 @@ export async function processLeadSubmission(
   return persistAndDeliverLeadRecord(record);
 }
 
-export async function submitLead(
-  input: SubmitLeadActionInput,
-): Promise<SubmitLeadResult> {
+export async function submitLead(input: SubmitLeadActionInput): Promise<SubmitLeadResult> {
   const requestHeaders = await readLeadRequestHeaders();
   return processLeadSubmission(input, requestHeaders);
 }

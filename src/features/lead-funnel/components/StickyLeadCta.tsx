@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useSyncExternalStore } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Icon } from "@/components/ui/icon";
-import { NAV_ACTIONS } from "@/constants/navigation";
-import { trackLeadEvent } from "../analytics";
-import { LEAD_FUNNEL_CONFIG } from "../lead-funnel.config";
-import { WhatsAppCta } from "./WhatsAppCta";
+import { useEffect, useState, useSyncExternalStore } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Icon } from '@/components/ui/icon';
+import { NAV_ACTIONS } from '@/constants/navigation';
+import { trackLeadEvent } from '../analytics';
+import { LEAD_FUNNEL_CONFIG } from '../lead-funnel.config';
+import { WhatsAppCta } from './WhatsAppCta';
 
 const dismissListeners = new Set<() => void>();
 
@@ -20,9 +20,7 @@ function subscribeDismiss(onStoreChange: () => void): () => void {
 
 function getDismissedSnapshot(): boolean {
   try {
-    return (
-      sessionStorage.getItem(LEAD_FUNNEL_CONFIG.stickyCtaStorageKey) === "1"
-    );
+    return sessionStorage.getItem(LEAD_FUNNEL_CONFIG.stickyCtaStorageKey) === '1';
   } catch {
     return false;
   }
@@ -34,7 +32,7 @@ function getDismissedServerSnapshot(): boolean {
 
 function markDismissed(): void {
   try {
-    sessionStorage.setItem(LEAD_FUNNEL_CONFIG.stickyCtaStorageKey, "1");
+    sessionStorage.setItem(LEAD_FUNNEL_CONFIG.stickyCtaStorageKey, '1');
   } catch {
     // ignore
   }
@@ -62,12 +60,12 @@ export function StickyLeadCta() {
       setScrolledPast(window.scrollY > 480);
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
     const timer = window.setTimeout(onScroll, 0);
 
     return () => {
       window.clearTimeout(timer);
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener('scroll', onScroll);
     };
   }, [pathname]);
 
@@ -76,7 +74,7 @@ export function StickyLeadCta() {
       return;
     }
     const timer = window.setTimeout(() => {
-      trackLeadEvent("sticky_cta_shown", { source: "sticky-cta" });
+      trackLeadEvent('sticky_cta_shown', { source: 'sticky-cta' });
       setTrackedShow(true);
     }, 0);
     return () => window.clearTimeout(timer);
@@ -87,10 +85,7 @@ export function StickyLeadCta() {
   }
 
   return (
-    <aside
-      className="lead-funnel__sticky"
-      aria-label="Quick contact options"
-    >
+    <aside className="lead-funnel__sticky" aria-label="Quick contact options">
       <div className="lead-funnel__sticky-inner">
         <p className="lead-funnel__sticky-copy">
           Ready to talk? Free consultation — reply within 24 hours.
@@ -100,9 +95,9 @@ export function StickyLeadCta() {
             href={`${LEAD_FUNNEL_CONFIG.contactHref}?intent=consultation&source=sticky-cta`}
             className="lead-funnel__channel-btn lead-funnel__channel-btn--primary lead-funnel__sticky-primary"
             onClick={() => {
-              trackLeadEvent("sticky_cta_click", {
-                source: "sticky-cta",
-                channel: "contact",
+              trackLeadEvent('sticky_cta_click', {
+                source: 'sticky-cta',
+                channel: 'contact',
               });
             }}
           >
@@ -121,7 +116,7 @@ export function StickyLeadCta() {
           aria-label="Dismiss sticky contact bar"
           onClick={() => {
             markDismissed();
-            trackLeadEvent("sticky_cta_dismiss", { source: "sticky-cta" });
+            trackLeadEvent('sticky_cta_dismiss', { source: 'sticky-cta' });
           }}
         >
           <Icon name="close" size="sm" aria-hidden />

@@ -11,9 +11,9 @@ We take security seriously and appreciate responsible disclosure of potential vu
 The following table indicates which versions are currently supported with security updates.
 
 | Version | Supported |
-|---------|-----------|
-| 2.x | ✅ Yes |
-| 1.x | ❌ No |
+| ------- | --------- |
+| 2.x     | ✅ Yes    |
+| 1.x     | ❌ No     |
 
 ---
 

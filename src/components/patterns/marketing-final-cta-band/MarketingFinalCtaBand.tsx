@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { cn } from "@/lib/cn";
-import { WHATSAPP_CONSULTATION_HREF } from "@/features/homepage/shared/contact-links";
-import "@/features/homepage/FinalCTA/final-cta.css";
+import Link from 'next/link';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { cn } from '@/lib/cn';
+import { WHATSAPP_CONSULTATION_HREF } from '@/features/homepage/shared/contact-links';
+import '@/components/patterns/marketing-final-cta-band/final-cta.css';
 
 interface MarketingCtaLink {
   label: string;
@@ -24,19 +24,19 @@ interface MarketingFinalCtaBandProps {
 }
 
 const focusRing = cn(
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground",
-  "focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e144a]",
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground',
+  'focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e144a]',
 );
 
 const buttonBase = cn(
-  "inline-flex items-center justify-center gap-[8px]",
-  "no-underline font-sans text-[15px] font-semibold",
+  'inline-flex items-center justify-center gap-[8px]',
+  'no-underline font-sans text-[15px] font-semibold',
   focusRing,
 );
 
 /**
  * Dark final-CTA band used on Services / Solutions landings.
- * Visual shell shared with Homepage FinalCTA (`final-cta.css`).
+ * Visual shell shared via `final-cta.css` in this folder.
  */
 export function MarketingFinalCtaBand({
   headingId,
@@ -46,31 +46,22 @@ export function MarketingFinalCtaBand({
   primaryCta,
   tertiaryCta,
   trust,
-  whatsappLabel = "WhatsApp",
+  whatsappLabel = 'WhatsApp',
 }: MarketingFinalCtaBandProps) {
   return (
-    <Section
-      spacing="lg"
-      background="default"
-      aria-labelledby={headingId}
-    >
+    <Section spacing="lg" background="default" aria-labelledby={headingId}>
       <div className="final-cta-card final-cta-card--band w-full">
         <h2 id={headingId} className="final-cta-title relative z-[1]">
           {heading}
         </h2>
         <p className="final-cta-description relative z-[1]">{description}</p>
-        {reassurance ? (
-          <p className="final-cta-reassurance relative z-[1]">{reassurance}</p>
-        ) : null}
+        {reassurance ? <p className="final-cta-reassurance relative z-[1]">{reassurance}</p> : null}
 
         <div className="final-cta-actions">
-          <Link
-            href={primaryCta.href}
-            className={cn("final-cta-button-primary", buttonBase)}
-          >
+          <Link href={primaryCta.href} className={cn('final-cta-button-primary', buttonBase)}>
             {primaryCta.label}
             <Icon
-              name={primaryCta.icon ?? "arrow-up-right"}
+              name={primaryCta.icon ?? 'arrow-up-right'}
               size="sm"
               aria-hidden
               className="h-[14px] w-[14px]"
@@ -80,22 +71,14 @@ export function MarketingFinalCtaBand({
             href={WHATSAPP_CONSULTATION_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className={cn("final-cta-button-secondary", buttonBase)}
+            className={cn('final-cta-button-secondary', buttonBase)}
           >
-            <Icon
-              name="message"
-              size="sm"
-              aria-hidden
-              className="h-[15px] w-[15px]"
-            />
+            <Icon name="message" size="sm" aria-hidden className="h-[15px] w-[15px]" />
             {whatsappLabel}
           </Link>
-          <Link
-            href={tertiaryCta.href}
-            className={cn("final-cta-button-secondary", buttonBase)}
-          >
+          <Link href={tertiaryCta.href} className={cn('final-cta-button-secondary', buttonBase)}>
             <Icon
-              name={tertiaryCta.icon ?? "calendar"}
+              name={tertiaryCta.icon ?? 'calendar'}
               size="sm"
               aria-hidden
               className="h-[15px] w-[15px]"

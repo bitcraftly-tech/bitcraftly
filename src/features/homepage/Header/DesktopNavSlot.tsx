@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
-import { DesktopNavFallback } from "./DesktopNavFallback";
+import dynamic from 'next/dynamic';
+import { DesktopNavFallback } from './DesktopNavFallback';
 
 const DesktopNavigation = dynamic(
-  () => import("./DesktopNavigation").then((mod) => mod.DesktopNavigation),
+  () => import('./DesktopNavigation').then((mod) => mod.DesktopNavigation),
   {
     loading: () => <DesktopNavFallback />,
   },

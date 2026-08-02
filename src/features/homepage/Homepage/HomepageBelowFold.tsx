@@ -1,41 +1,10 @@
-import { TrustedBySection } from "../TrustedBy";
-import { ServicesSection } from "../Services";
-import { TechnologiesSection } from "../Technologies";
-import { PortfolioSection } from "../Portfolio";
-import { DashboardShowcaseSection } from "../DashboardShowcase";
-import {
-  CostCalculatorSection,
-  FounderMessageSection,
-} from "../CostCalculator";
-import { ProcessSection } from "../Process";
-import { PerformanceSection } from "../Performance";
-import { WebsiteAuditSection } from "../WebsiteAudit";
-import { WhyBitcraftlySection } from "../WhyBitcraftly";
-import { TestimonialsSection } from "../Testimonials";
-import { FAQSection } from "../FAQ";
-import { FinalCTASection } from "../FinalCTA";
+import { HomeStorySections } from '../HomeStory';
 
 /**
- * Below-ATF homepage stack — Server Components (SSR HTML always present).
- * Includes TrustedBy/Services so Hero is the only ATF section in the shell.
+ * Below-ATF homepage — frozen IA section order.
+ * Portfolio carousel lives inside the Hero browser window.
+ * FAQ is not part of the frozen homepage IA; it lives under Resources.
  */
 export function HomepageBelowFold() {
-  return (
-    <>
-      <TrustedBySection />
-      <ServicesSection />
-      <TechnologiesSection />
-      <PortfolioSection />
-      <DashboardShowcaseSection />
-      <FounderMessageSection />
-      <CostCalculatorSection />
-      <ProcessSection />
-      <PerformanceSection />
-      <WebsiteAuditSection />
-      <WhyBitcraftlySection />
-      <TestimonialsSection />
-      <FAQSection />
-      <FinalCTASection />
-    </>
-  );
+  return <HomeStorySections />;
 }

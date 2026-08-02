@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { useActionState } from "react";
-import { Button } from "@/components/ui/button";
-import { loginOwnerAction, type OwnerLoginState } from "../actions/owner-auth.actions";
+import { useActionState } from 'react';
+import { Button } from '@/components/ui/button';
+import { loginOwnerAction, type OwnerLoginState } from '../actions/owner-auth.actions';
 
 interface OwnerLoginFormProps {
   readonly nextPath: string;
 }
 
 export function OwnerLoginForm({ nextPath }: OwnerLoginFormProps) {
-  const [state, formAction, pending] = useActionState<
-    OwnerLoginState | null,
-    FormData
-  >(loginOwnerAction, null);
+  const [state, formAction, pending] = useActionState<OwnerLoginState | null, FormData>(
+    loginOwnerAction,
+    null,
+  );
 
   return (
     <form action={formAction} className="owner-auth-form" noValidate>
@@ -27,7 +27,7 @@ export function OwnerLoginForm({ nextPath }: OwnerLoginFormProps) {
           autoComplete="username"
           required
           aria-invalid={state ? true : undefined}
-          aria-describedby={state ? "owner-login-error" : undefined}
+          aria-describedby={state ? 'owner-login-error' : undefined}
         />
       </div>
 
@@ -40,7 +40,7 @@ export function OwnerLoginForm({ nextPath }: OwnerLoginFormProps) {
           autoComplete="current-password"
           required
           aria-invalid={state ? true : undefined}
-          aria-describedby={state ? "owner-login-error" : undefined}
+          aria-describedby={state ? 'owner-login-error' : undefined}
         />
       </div>
 

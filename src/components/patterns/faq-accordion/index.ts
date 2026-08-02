@@ -1,2 +1,2 @@
-export { FaqAccordion } from "./FaqAccordion";
-export type { FaqAccordionItem } from "./FaqAccordion";
+export { FaqAccordion } from './FaqAccordion';
+export type { FaqAccordionItem } from './FaqAccordion';

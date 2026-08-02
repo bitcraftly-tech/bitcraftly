@@ -1,9 +1,6 @@
-import {
-  FloatMetricCard,
-  HeroStage,
-} from "@/components/patterns/hero-compositions";
-import { Icon } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
+import { FloatMetricCard, HeroStage } from '@/components/patterns/hero-compositions';
+import { Icon } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
 
 /**
  * Case Studies-only: before/after, ROI, and growth metrics composition.
@@ -13,8 +10,8 @@ export function CaseStudiesHeroVisual() {
     <HeroStage>
       <div
         className={cn(
-          "mh-panel absolute inset-x-[4%] top-[6%] z-[1] grid grid-cols-2 gap-[10px] p-[14px]",
-          "mh-bob",
+          'mh-panel absolute inset-x-[4%] top-[6%] z-[1] grid grid-cols-2 gap-[10px] p-[14px]',
+          'mh-bob',
         )}
       >
         <div className="rounded-[var(--token-radius-lg)] border border-[color:var(--hp-card-border,var(--border))] bg-surface p-[12px]">
@@ -61,8 +58,8 @@ export function CaseStudiesHeroVisual() {
 
       <div
         className={cn(
-          "mh-panel absolute bottom-[8%] left-[4%] z-[2] w-[48%] p-[14px]",
-          "mh-bob mh-bob-delay-1",
+          'mh-panel absolute bottom-[8%] left-[4%] z-[2] w-[48%] p-[14px]',
+          'mh-bob mh-bob-delay-1',
         )}
       >
         <div className="flex items-center gap-[8px]">
@@ -85,8 +82,8 @@ export function CaseStudiesHeroVisual() {
 
       <div
         className={cn(
-          "mh-panel absolute bottom-[8%] right-[4%] z-[2] w-[40%] p-[12px] mh-hide-sm",
-          "mh-bob mh-bob-delay-2",
+          'mh-panel absolute bottom-[8%] right-[4%] z-[2] w-[40%] p-[12px] mh-hide-sm',
+          'mh-bob mh-bob-delay-2',
         )}
         aria-hidden
       >

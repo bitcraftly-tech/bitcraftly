@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 interface AdminPageHeaderProps {
   title: string;
@@ -10,8 +10,8 @@ interface AdminPageHeaderProps {
 export function AdminPageHeader({
   title,
   description,
-  actionLabel = "Create new",
-  actionDisabledReason = "Mutations require backend wiring",
+  actionLabel = 'Create new',
+  actionDisabledReason = 'Mutations require backend wiring',
 }: AdminPageHeaderProps) {
   return (
     <header className="admin-page-header">

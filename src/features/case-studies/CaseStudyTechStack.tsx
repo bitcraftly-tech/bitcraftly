@@ -1,6 +1,6 @@
-import { Badge } from "@/components/ui/badge";
-import { Section } from "@/components/ui/section";
-import type { CaseStudy } from "@/content/case-studies";
+import { Badge } from '@/components/ui/badge';
+import { Section } from '@/components/ui/section';
+import type { CaseStudy } from '@/content/case-studies';
 
 interface CaseStudyTechStackProps {
   study: CaseStudy;

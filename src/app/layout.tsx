@@ -1,30 +1,32 @@
-import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { AppBootShell } from "@/components/patterns/app-boot-splash";
-import { RootDeferredCss } from "@/components/patterns/root-deferred-css/RootDeferredCss";
-import StructuredData from "@/components/seo/StructuredData";
-import { getSiteUrl } from "@/lib/seo/site";
-import "@/styles/globals.css";
+import type { Metadata, Viewport } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import { headers } from 'next/headers';
+import { AppBootShell } from '@/components/patterns/app-boot-splash';
+import { RootDeferredCss } from '@/components/patterns/root-deferred-css/RootDeferredCss';
+import StructuredData from '@/components/seo/StructuredData';
+import { getSiteUrl } from '@/lib/seo/site';
+import { isInteractiveDemoPath } from '@/components/patterns/app-boot-splash/boot-path';
+import '@/styles/globals.css';
 
-const SITE_TITLE = "Bitcraftly | AI & Digital Engineering Partner";
+const SITE_TITLE = 'Bitcraftly | AI-Powered Digital Engineering Partner';
 
 const SITE_DESCRIPTION =
-  "Bitcraftly builds AI-powered websites, SaaS, and automation — founder-led delivery with clear scope and measurable outcomes.";
+  'Complete Digital Systems for your industry — website, AI, dashboard, analytics, and integrations engineered as one Industry System.';
 
 const SITE_URL = getSiteUrl();
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+  display: 'swap',
   preload: true,
   adjustFontFallback: true,
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+  display: 'swap',
   preload: false,
   adjustFontFallback: true,
 });
@@ -34,33 +36,33 @@ export const metadata: Metadata = {
 
   title: {
     default: SITE_TITLE,
-    template: "%s | Bitcraftly",
+    template: '%s | Bitcraftly',
   },
 
   description: SITE_DESCRIPTION,
 
   keywords: [
-    "Bitcraftly",
-    "AI Development",
-    "Web Development",
-    "Next.js",
-    "React",
-    "SaaS Development",
-    "Automation",
-    "Digital Engineering",
-    "Enterprise Software",
+    'Bitcraftly',
+    'Industry Systems',
+    'Complete Digital Systems',
+    'AI-Powered Digital Engineering Partner',
+    'Intelligent Business Automation',
+    'Digital Engineering',
+    'Next.js',
+    'Healthcare Industry System',
+    'Real Estate Industry System',
   ],
 
   authors: [
     {
-      name: "Bitcraftly",
+      name: 'Bitcraftly',
       url: SITE_URL,
     },
   ],
 
-  creator: "Bitcraftly",
+  creator: 'Bitcraftly',
 
-  publisher: "Bitcraftly",
+  publisher: 'Bitcraftly',
 
   robots: {
     index: true,
@@ -68,66 +70,87 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
 
   openGraph: {
-    type: "website",
+    type: 'website',
     url: SITE_URL,
-    siteName: "Bitcraftly",
+    siteName: 'Bitcraftly',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
 
     images: [
       {
-        url: "/opengraph-image.webp",
+        url: '/opengraph-image.webp',
         width: 1200,
         height: 630,
-        alt: "Bitcraftly - AI & Digital Engineering Partner",
+        alt: 'Bitcraftly — Complete Digital Systems for Your Industry',
       },
     ],
   },
 
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/twitter-image.webp"],
+    images: ['/twitter-image.webp'],
   },
 
   icons: {
     icon: [
-      { url: "/brand/icon.webp", type: "image/webp" },
-      { url: "/brand/icon.png", type: "image/png", sizes: "96x96" },
+      { url: '/brand/favicon-16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/brand/favicon-32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
     ],
-    shortcut: "/brand/favicon.ico",
-    apple: "/brand/apple-touch-icon.png",
+    shortcut: '/favicon.ico',
+    apple: [{ url: '/brand/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
 };
 
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
-  themeColor: "#0B1220",
+  themeColor: '#050B18',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headerList = await headers();
+  const headerMode = headerList.get('x-bc-boot-mode');
+  const pathname = headerList.get('x-pathname') ?? '';
+  /** Homepage skips the boot gate — hiding body until CSS/fonts/images was ~LCP 4s. */
+  const skipBoot = pathname === '/' || pathname === '';
+  const bootMode =
+    headerMode === 'demo' || headerMode === 'brand'
+      ? headerMode
+      : isInteractiveDemoPath(pathname)
+        ? 'demo'
+        : 'brand';
+  const bootClass = skipBoot
+    ? 'bc-app-ready'
+    : bootMode === 'demo'
+      ? 'bc-demo-booting'
+      : 'bc-booting';
+
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} bc-booting h-full antialiased`}
-      aria-busy="true"
+      className={`${geistSans.variable} ${geistMono.variable} ${bootClass} h-full antialiased`}
+      aria-busy={skipBoot ? 'false' : 'true'}
       suppressHydrationWarning
+      {...(!skipBoot && bootMode === 'demo'
+        ? { 'data-demo-boot': '1', 'data-demo-path': pathname }
+        : {})}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <AppBootShell />
+        {!skipBoot ? <AppBootShell mode={bootMode} pathname={pathname} /> : null}
         <RootDeferredCss />
         <StructuredData />
         {children}

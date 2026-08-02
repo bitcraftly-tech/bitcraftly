@@ -359,7 +359,7 @@
   margin-bottom: 16px !important;
 }
 
-.services-page [id="development-process-heading"] + p {
+.services-page [id='development-process-heading'] + p {
   margin-top: 20px !important;
 }
 
@@ -372,7 +372,7 @@
   border-color: color-mix(in srgb, var(--primary) 28%, var(--border));
 }
 
-.services-faq-section .faq-item[data-open="true"] {
+.services-faq-section .faq-item[data-open='true'] {
   border-color: color-mix(in srgb, var(--primary) 42%, var(--border));
 }
 
@@ -450,7 +450,9 @@
 
 .services-filter-chip:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 4px var(--primary);
 }
 
 .services-filter-chip--active {
@@ -479,13 +481,12 @@
   padding-inline: var(--space-2);
   border-radius: var(--services-panel-radius);
   border: 1px solid var(--hp-card-border);
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, var(--background) 92%, var(--primary)) 0%,
-      var(--background) 48%,
-      color-mix(in srgb, var(--background) 96%, var(--surface)) 100%
-    );
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--background) 92%, var(--primary)) 0%,
+    var(--background) 48%,
+    color-mix(in srgb, var(--background) 96%, var(--surface)) 100%
+  );
   box-shadow: var(--token-shadow-xs);
 }
 
@@ -675,7 +676,9 @@
 
 .services-search-chip:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--primary);
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px var(--primary);
 }
 
 .services-search-chip--active {
@@ -735,13 +738,12 @@
   padding-inline: var(--space-2);
   border-radius: var(--services-panel-radius);
   border: 1px solid var(--hp-card-border);
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, var(--background) 70%, var(--primary)) 0%,
-      color-mix(in srgb, var(--surface) 88%, var(--background)) 48%,
-      var(--background) 100%
-    );
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--background) 70%, var(--primary)) 0%,
+    color-mix(in srgb, var(--surface) 88%, var(--background)) 48%,
+    var(--background) 100%
+  );
   box-shadow: var(--token-shadow-xs);
 }
 
@@ -917,12 +919,11 @@
 }
 
 .services-featured-block {
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--primary) 4%, var(--background)),
-      var(--background) 55%
-    );
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary) 4%, var(--background)),
+    var(--background) 55%
+  );
   box-shadow: var(--token-shadow-xs);
 }
 
@@ -1042,7 +1043,7 @@
   box-shadow: var(--token-shadow-xs);
 }
 
-.services-page-faq-item[data-open="true"] {
+.services-page-faq-item[data-open='true'] {
   border-color: color-mix(in srgb, var(--primary) 36%, var(--border));
   box-shadow: var(--token-shadow-md);
 }
@@ -1053,7 +1054,7 @@
   transition: grid-template-rows 0.35s var(--ease-out);
 }
 
-.services-page-faq-item[data-open="true"] .services-page-faq-panel {
+.services-page-faq-item[data-open='true'] .services-page-faq-panel {
   grid-template-rows: 1fr;
 }
 
@@ -1133,8 +1134,8 @@
     column-gap: var(--services-hero-gap);
     row-gap: 0;
     grid-template-areas:
-      "content visual"
-      "features features";
+      'content visual'
+      'features features';
   }
 
   .services-hero__content {
@@ -1595,12 +1596,11 @@
   list-style: none;
   border-radius: var(--services-panel-radius);
   border: 1px solid var(--hp-card-border);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--background) 92%, var(--primary)) 0%,
-      color-mix(in srgb, var(--surface) 92%, var(--border)) 100%
-    );
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--background) 92%, var(--primary)) 0%,
+    color-mix(in srgb, var(--surface) 92%, var(--border)) 100%
+  );
   box-shadow: var(--token-shadow-xs);
   backdrop-filter: blur(10px);
   min-height: 0;
@@ -1683,7 +1683,7 @@
 .services-hero-features__icon--violet {
   background: linear-gradient(145deg, #f5e9ff 0%, #ebe4ff 100%);
   border-color: color-mix(in srgb, #7c3aed 16%, transparent);
-  color: #6d28d9;
+  color: var(--primary);
 }
 
 .services-hero-features__icon--sky {

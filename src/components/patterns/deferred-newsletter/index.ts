@@ -1,1 +1,1 @@
-export { DeferredNewsletter } from "./DeferredNewsletter";
+export { DeferredNewsletter } from './DeferredNewsletter';

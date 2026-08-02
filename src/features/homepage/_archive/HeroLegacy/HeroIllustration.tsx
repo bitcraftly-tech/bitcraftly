@@ -1,0 +1,34 @@
+import Image from 'next/image';
+import { cn } from '@/lib/cn';
+
+const HERO_IMAGE_SRC = '/hero-opt.webp';
+
+/**
+ * Keeps its own aspect box so the graphic stays large and fully visible.
+ * Matches `feature/homepage` — cube only (Ask AI lives in AskAiTab).
+ */
+export function HeroIllustration() {
+  return (
+    <div
+      className={cn(
+        'relative mx-auto h-full w-full min-h-[360px] min-w-0 max-w-xl aspect-[5/4]',
+        'lg:mx-0 lg:h-full lg:min-h-full lg:max-w-none lg:aspect-auto',
+      )}
+    >
+      <div
+        className="pointer-events-none absolute inset-[8%] -z-10 rounded-[32px] hero-brand-gradient opacity-40 blur-3xl"
+        aria-hidden
+      />
+      <Image
+        src={HERO_IMAGE_SRC}
+        alt="Bitcraftly product dashboard — AI, revenue, projects and analytics overview"
+        fill
+        priority
+        fetchPriority="high"
+        quality={55}
+        sizes="(max-width: 768px) 92vw, (max-width: 1280px) 42vw, 640px"
+        className="hero-illustration-image hero-illustration-reveal h-full w-full object-contain object-center"
+      />
+    </div>
+  );
+}

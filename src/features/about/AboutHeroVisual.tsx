@@ -1,9 +1,6 @@
-import {
-  FloatMetricCard,
-  HeroStage,
-} from "@/components/patterns/hero-compositions";
-import { Icon } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
+import { FloatMetricCard, HeroStage } from '@/components/patterns/hero-compositions';
+import { Icon } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
 
 /**
  * About hero visual — company operating system metaphor (no photos required).
@@ -11,12 +8,7 @@ import { cn } from "@/lib/cn";
 export function AboutHeroVisual() {
   return (
     <HeroStage>
-      <div
-        className={cn(
-          "mh-panel absolute inset-x-[5%] top-[6%] z-[1] p-[16px]",
-          "mh-bob",
-        )}
-      >
+      <div className={cn('mh-panel absolute inset-x-[5%] top-[6%] z-[1] p-[16px]', 'mh-bob')}>
         <div className="mb-[14px] flex items-center justify-between gap-[8px]">
           <div>
             <p className="m-0 font-sans text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
@@ -33,10 +25,10 @@ export function AboutHeroVisual() {
 
         <ul className="m-0 grid list-none gap-[8px] p-0 sm:grid-cols-2">
           {[
-            { label: "Focus", value: "AI + product engineering" },
-            { label: "Model", value: "Written scope · milestones" },
-            { label: "Stack", value: "Next.js · React · TypeScript" },
-            { label: "Bar", value: "Performance · a11y · SEO" },
+            { label: 'Focus', value: 'AI + product engineering' },
+            { label: 'Model', value: 'Written scope · milestones' },
+            { label: 'Stack', value: 'Next.js · React · TypeScript' },
+            { label: 'Bar', value: 'Performance · a11y · SEO' },
           ].map((row) => (
             <li
               key={row.label}
@@ -55,35 +47,27 @@ export function AboutHeroVisual() {
 
       <div
         className={cn(
-          "mh-panel absolute bottom-[8%] left-[5%] z-[2] w-[52%] p-[12px]",
-          "mh-bob mh-bob-delay-1",
+          'mh-panel absolute bottom-[8%] left-[5%] z-[2] w-[52%] p-[12px]',
+          'mh-bob mh-bob-delay-1',
         )}
         aria-hidden
       >
         <div className="mb-[8px] flex items-center gap-[6px]">
-          <Icon
-            name="shield"
-            size="sm"
-            className="h-[14px] w-[14px] text-primary"
-          />
+          <Icon name="shield" size="sm" className="h-[14px] w-[14px] text-primary" />
           <p className="m-0 font-sans text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
             Delivery bar
           </p>
         </div>
         <div className="space-y-[6px]">
-          {["Core Web Vitals", "WCAG AA checks", "Clear handoff docs"].map(
-            (item) => (
-              <div
-                key={item}
-                className="flex items-center gap-[8px] rounded-[var(--token-radius-md)] border border-[color:var(--hp-card-border,var(--border))] bg-surface px-[10px] py-[6px]"
-              >
-                <span className="size-[6px] rounded-full bg-primary" />
-                <span className="font-sans text-[11px] font-semibold text-foreground">
-                  {item}
-                </span>
-              </div>
-            ),
-          )}
+          {['Core Web Vitals', 'WCAG AA checks', 'Clear handoff docs'].map((item) => (
+            <div
+              key={item}
+              className="flex items-center gap-[8px] rounded-[var(--token-radius-md)] border border-[color:var(--hp-card-border,var(--border))] bg-surface px-[10px] py-[6px]"
+            >
+              <span className="size-[6px] rounded-full bg-primary" />
+              <span className="font-sans text-[11px] font-semibold text-foreground">{item}</span>
+            </div>
+          ))}
         </div>
       </div>
 

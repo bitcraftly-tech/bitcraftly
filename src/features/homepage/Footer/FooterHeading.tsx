@@ -1,5 +1,5 @@
-import { cn } from "@/lib/cn";
-import type { ReactNode } from "react";
+import { cn } from '@/lib/cn';
+import type { ReactNode } from 'react';
 
 interface FooterHeadingProps {
   id: string;
@@ -14,7 +14,7 @@ interface FooterHeadingProps {
  */
 export function FooterHeading({ id, children, className }: FooterHeadingProps) {
   return (
-    <p id={id} className={cn("footer-heading", className)}>
+    <p id={id} className={cn('footer-heading', className)}>
       {children}
     </p>
   );

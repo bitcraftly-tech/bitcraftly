@@ -1,5 +1,5 @@
-import type { CSSProperties, ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import type { CSSProperties, ReactNode } from 'react';
+import { cn } from '@/lib/cn';
 
 interface HomepageRevealProps {
   children: ReactNode;
@@ -17,25 +17,12 @@ interface HomepageRevealProps {
  * Always visible by default (`is-visible`): IntersectionObserver was removed.
  * Homepage critical CSS also fail-opens; this keeps non-homepage routes correct.
  */
-export function HomepageReveal({
-  children,
-  className,
-  delayMs = 0,
-  name,
-}: HomepageRevealProps) {
-  const style =
-    delayMs > 0
-      ? ({ "--reveal-delay": `${delayMs}ms` } as CSSProperties)
-      : undefined;
+export function HomepageReveal({ children, className, delayMs = 0, name }: HomepageRevealProps) {
+  const style = delayMs > 0 ? ({ '--reveal-delay': `${delayMs}ms` } as CSSProperties) : undefined;
 
   return (
     <div
-      className={cn(
-        `${name}-reveal`,
-        "is-visible",
-        "hp-scroll-reveal",
-        className,
-      )}
+      className={cn(`${name}-reveal`, 'is-visible', 'hp-scroll-reveal', className)}
       style={style}
     >
       {children}

@@ -1,24 +1,21 @@
-import Link from "next/link";
-import { JsonLdScript } from "@/components/patterns/json-ld";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { getRelatedWorkForService, ROUTES } from "@/constants/navigation";
-import { buildServicesBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { cn } from "@/lib/cn";
-import "@/features/homepage/FAQ/faq.css";
-import { ServiceCard } from "./ServiceCard";
-import { ServiceDetailHero } from "./ServiceDetailHero";
-import { ServiceFaqAccordion } from "./ServiceFaqAccordion";
-import { ServicesPageCta } from "./ServicesPageCta";
-import {
-  getRelatedServices,
-  getRelatedWorkLinks,
-} from "./services.content";
-import { buildServiceDetailJsonLd } from "./services-schema";
-import type { ServicePageContent } from "./services.types";
-import "./services.css";
+import Link from 'next/link';
+import { JsonLdScript } from '@/components/patterns/json-ld';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { getRelatedWorkForService, ROUTES } from '@/constants/navigation';
+import { buildServicesBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { cn } from '@/lib/cn';
+import '@/features/homepage/FAQ/faq.css';
+import { ServiceCard } from './ServiceCard';
+import { ServiceDetailHero } from './ServiceDetailHero';
+import { ServiceFaqAccordion } from './ServiceFaqAccordion';
+import { ServicesPageCta } from './ServicesPageCta';
+import { getRelatedServices, getRelatedWorkLinks } from './services.content';
+import { buildServiceDetailJsonLd } from './services-schema';
+import type { ServicePageContent } from './services.types';
+import './services.css';
 
 interface ServiceDetailPageProps {
   content: ServicePageContent;
@@ -30,20 +27,14 @@ interface ServiceDetailPageProps {
 export function ServiceDetailPage({ content }: ServiceDetailPageProps) {
   const breadcrumbs = buildServicesBreadcrumbs([{ label: content.label }]);
   const relatedServices = getRelatedServices(content.slug);
-  const relatedWork = getRelatedWorkLinks(
-    getRelatedWorkForService(content.slug),
-  );
+  const relatedWork = getRelatedWorkLinks(getRelatedWorkForService(content.slug));
   const contactHref = `${ROUTES.contact}?intent=${encodeURIComponent(content.slug)}&source=service-page`;
 
   return (
     <PageShell className="services-page service-detail-page">
       <JsonLdScript data={buildServiceDetailJsonLd(content)} />
 
-      <ServiceDetailHero
-        content={content}
-        breadcrumbs={breadcrumbs}
-        contactHref={contactHref}
-      />
+      <ServiceDetailHero content={content} breadcrumbs={breadcrumbs} contactHref={contactHref} />
 
       <Section
         spacing="lg"
@@ -83,9 +74,7 @@ export function ServiceDetailPage({ content }: ServiceDetailPageProps) {
         <ol className="service-detail-process">
           {content.process.map((step, index) => (
             <li key={step.title} className="service-detail-process__item">
-              <p className="service-detail-process__index">
-                {String(index + 1).padStart(2, "0")}
-              </p>
+              <p className="service-detail-process__index">{String(index + 1).padStart(2, '0')}</p>
               <h3 className="service-detail-process__title">{step.title}</h3>
               <p className="service-detail-process__body">{step.description}</p>
             </li>
@@ -123,10 +112,7 @@ export function ServiceDetailPage({ content }: ServiceDetailPageProps) {
             title="Related services"
             description="Explore adjacent service lines that often pair with this engagement."
           />
-          <Link
-            href={ROUTES.services}
-            className="service-detail-related__all"
-          >
+          <Link href={ROUTES.services} className="service-detail-related__all">
             View all services
             <Icon name="arrow-right" size="sm" aria-hidden />
           </Link>
@@ -134,8 +120,8 @@ export function ServiceDetailPage({ content }: ServiceDetailPageProps) {
 
         <ul
           className={cn(
-            "m-0 grid list-none gap-[24px] p-0",
-            "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
+            'm-0 grid list-none gap-[24px] p-0',
+            'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
           )}
         >
           {relatedServices.map((service) => (

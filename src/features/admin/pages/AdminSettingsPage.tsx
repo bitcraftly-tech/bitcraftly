@@ -1,5 +1,5 @@
-import { ADMIN_SETTINGS_GROUPS } from "../admin.mock-data";
-import { AdminPageHeader } from "../components/AdminPageHeader";
+import { ADMIN_SETTINGS_GROUPS } from '../admin.mock-data';
+import { AdminPageHeader } from '../components/AdminPageHeader';
 
 export function AdminSettingsPage() {
   return (
@@ -18,10 +18,7 @@ export function AdminSettingsPage() {
             className="admin-settings__group"
             aria-labelledby={`settings-${group.id}-title`}
           >
-            <h2
-              id={`settings-${group.id}-title`}
-              className="admin-settings__title"
-            >
+            <h2 id={`settings-${group.id}-title`} className="admin-settings__title">
               {group.title}
             </h2>
             <p className="admin-settings__desc">{group.description}</p>
@@ -29,9 +26,7 @@ export function AdminSettingsPage() {
               {group.fields.map((field) => (
                 <div key={field.id} className="admin-settings__field">
                   <dt>
-                    <label htmlFor={`settings-field-${field.id}`}>
-                      {field.label}
-                    </label>
+                    <label htmlFor={`settings-field-${field.id}`}>{field.label}</label>
                   </dt>
                   <dd>
                     <input
@@ -41,16 +36,11 @@ export function AdminSettingsPage() {
                       readOnly={field.readOnly ?? true}
                       disabled={field.readOnly ?? true}
                       aria-describedby={
-                        field.helper
-                          ? `settings-field-${field.id}-help`
-                          : undefined
+                        field.helper ? `settings-field-${field.id}-help` : undefined
                       }
                     />
                     {field.helper ? (
-                      <p
-                        id={`settings-field-${field.id}-help`}
-                        className="admin-settings__helper"
-                      >
+                      <p id={`settings-field-${field.id}-help`} className="admin-settings__helper">
                         {field.helper}
                       </p>
                     ) : null}

@@ -1,14 +1,11 @@
-import {
-  FloatMetricCard,
-  HeroStage,
-} from "@/components/patterns/hero-compositions";
-import { Icon } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
+import { FloatMetricCard, HeroStage } from '@/components/patterns/hero-compositions';
+import { Icon } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
 
 const PLANS = [
-  { name: "Starter", price: "₹9.9k", hint: "landing / brochure" },
-  { name: "Growth", price: "₹49k+", hint: "product MVP" },
-  { name: "Enterprise", price: "Custom", hint: "systems & AI" },
+  { name: 'Starter', price: '₹9.9k', hint: 'landing / brochure' },
+  { name: 'Growth', price: '₹49k+', hint: 'product MVP' },
+  { name: 'Enterprise', price: 'Custom', hint: 'systems & AI' },
 ] as const;
 
 /**
@@ -17,12 +14,7 @@ const PLANS = [
 export function PricingHeroVisual() {
   return (
     <HeroStage>
-      <div
-        className={cn(
-          "mh-panel absolute inset-x-[4%] top-[4%] z-[1] p-[14px]",
-          "mh-bob",
-        )}
-      >
+      <div className={cn('mh-panel absolute inset-x-[4%] top-[4%] z-[1] p-[14px]', 'mh-bob')}>
         <div className="mb-[12px] flex items-center justify-between gap-[8px]">
           <div>
             <p className="m-0 font-sans text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
@@ -40,10 +32,10 @@ export function PricingHeroVisual() {
             <div
               key={plan.name}
               className={cn(
-                "rounded-[12px] border p-[10px]",
-                plan.name === "Growth"
-                  ? "border-primary/30 bg-gradient-to-br from-[color-mix(in_srgb,var(--primary)_10%,var(--background))] to-[color-mix(in_srgb,var(--primary)_8%,var(--border))]"
-                  : "border-[color:var(--hp-card-border,var(--border))] bg-background",
+                'rounded-[12px] border p-[10px]',
+                plan.name === 'Growth'
+                  ? 'border-primary/30 bg-gradient-to-br from-[color-mix(in_srgb,var(--primary)_10%,var(--background))] to-[color-mix(in_srgb,var(--primary)_8%,var(--border))]'
+                  : 'border-[color:var(--hp-card-border,var(--border))] bg-background',
               )}
             >
               <p className="m-0 font-sans text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
@@ -62,8 +54,8 @@ export function PricingHeroVisual() {
 
       <div
         className={cn(
-          "mh-panel absolute bottom-[8%] left-[4%] z-[2] w-[55%] p-[12px]",
-          "mh-bob mh-bob-delay-1",
+          'mh-panel absolute bottom-[8%] left-[4%] z-[2] w-[55%] p-[12px]',
+          'mh-bob mh-bob-delay-1',
         )}
         aria-hidden
       >
@@ -71,14 +63,12 @@ export function PricingHeroVisual() {
           Estimate interface
         </p>
         <div className="space-y-[6px]">
-          {["Website", "AI automation", "Integrations"].map((row) => (
+          {['Website', 'AI automation', 'Integrations'].map((row) => (
             <div
               key={row}
               className="flex items-center justify-between gap-[8px] rounded-[var(--token-radius-md)] border border-[color:var(--hp-card-border,var(--border))] bg-surface px-[10px] py-[6px]"
             >
-              <span className="font-sans text-[11px] font-semibold text-foreground">
-                {row}
-              </span>
+              <span className="font-sans text-[11px] font-semibold text-foreground">{row}</span>
               <span className="size-[14px] rounded-[var(--token-radius-sm)] border border-primary/40 bg-[color-mix(in_srgb,var(--primary)_10%,var(--background))]" />
             </div>
           ))}
@@ -87,8 +77,8 @@ export function PricingHeroVisual() {
 
       <div
         className={cn(
-          "mh-panel absolute bottom-[8%] right-[4%] z-[2] w-[36%] p-[12px] mh-hide-sm",
-          "mh-bob mh-bob-delay-2",
+          'mh-panel absolute bottom-[8%] right-[4%] z-[2] w-[36%] p-[12px] mh-hide-sm',
+          'mh-bob mh-bob-delay-2',
         )}
         aria-hidden
       >

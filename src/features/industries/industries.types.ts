@@ -1,4 +1,4 @@
-import type { IconName } from "@/components/ui/icon";
+import type { IconName } from '@/components/ui/icon';
 
 export interface IndustryPainSolution {
   pain: string;
@@ -12,18 +12,18 @@ export interface IndustryModel {
   description: string;
   icon: IconName;
   illustration:
-    | "care"
-    | "learn"
-    | "shop"
-    | "factory"
-    | "finance"
-    | "property"
-    | "ship"
-    | "stay"
-    | "travel"
-    | "civic"
-    | "launch"
-    | "saas";
+    | 'care'
+    | 'learn'
+    | 'shop'
+    | 'factory'
+    | 'finance'
+    | 'property'
+    | 'ship'
+    | 'stay'
+    | 'travel'
+    | 'civic'
+    | 'launch'
+    | 'saas';
   painPoints: readonly string[];
   solutions: readonly string[];
   /** Typical buyer size band shown on cards. */
@@ -35,7 +35,7 @@ export interface IndustryModel {
   /** Common business goals shown as secondary CTA context. */
   businessGoals: readonly string[];
   featured?: boolean;
-  accent: "teal" | "indigo" | "amber" | "rose" | "sky" | "emerald";
+  accent: 'teal' | 'indigo' | 'amber' | 'rose' | 'sky' | 'emerald';
 }
 
 export interface IndustryProofItem {
@@ -43,7 +43,7 @@ export interface IndustryProofItem {
   industry: string;
   outcome: string;
   icon: IconName;
-  tone: "primary" | "accent" | "emerald" | "amber" | "sky";
+  tone: 'primary' | 'accent' | 'emerald' | 'amber' | 'sky';
 }
 
 export interface IndustryChallenge {
@@ -54,7 +54,7 @@ export interface IndustryChallenge {
   approach: string;
   outcome: string;
   icon: IconName;
-  tone: "primary" | "accent" | "emerald" | "amber";
+  tone: 'primary' | 'accent' | 'emerald' | 'amber';
 }
 
 export interface IndustrySolutionOffer {
@@ -68,14 +68,14 @@ export interface IndustrySolutionOffer {
   icon: IconName;
   href: string;
   ctaLabel: string;
-  tone: "primary" | "accent" | "emerald" | "amber";
+  tone: 'primary' | 'accent' | 'emerald' | 'amber';
 }
 
 export interface IndustryTechItem {
   name: string;
   category: string;
   icon: IconName;
-  tone: "primary" | "accent" | "emerald" | "sky" | "amber" | "rose";
+  tone: 'primary' | 'accent' | 'emerald' | 'sky' | 'amber' | 'rose';
 }
 
 export interface IndustryCaseStudy {
@@ -90,7 +90,7 @@ export interface IndustryCaseStudy {
   href: string;
   ctaLabel: string;
   icon: IconName;
-  tone: "teal" | "amber" | "emerald";
+  tone: 'teal' | 'amber' | 'emerald';
 }
 
 export interface IndustryMetric {
@@ -99,7 +99,7 @@ export interface IndustryMetric {
   label: string;
   hint: string;
   icon: IconName;
-  tone: "primary" | "accent" | "emerald" | "amber";
+  tone: 'primary' | 'accent' | 'emerald' | 'amber';
 }
 
 export interface IndustryRoiOutcome {
@@ -108,7 +108,7 @@ export interface IndustryRoiOutcome {
   example: string;
   value: string;
   icon: IconName;
-  tone: "primary" | "accent" | "emerald" | "amber" | "sky";
+  tone: 'primary' | 'accent' | 'emerald' | 'amber' | 'sky';
 }
 
 export interface IndustryComparisonRow {
@@ -123,7 +123,7 @@ export interface IndustryProcessStep {
   title: string;
   description: string;
   icon: IconName;
-  tone: "primary" | "accent" | "emerald" | "amber";
+  tone: 'primary' | 'accent' | 'emerald' | 'amber';
 }
 
 export interface IndustryWhyItem {
@@ -132,7 +132,7 @@ export interface IndustryWhyItem {
   description: string;
   metric: string;
   icon: IconName;
-  tone: "primary" | "accent" | "emerald" | "amber";
+  tone: 'primary' | 'accent' | 'emerald' | 'amber';
 }
 
 export interface IndustryFaqItem {

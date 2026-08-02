@@ -1,20 +1,20 @@
-import type { IconName } from "@/components/ui/icon";
+import type { IconName } from '@/components/ui/icon';
 
-export type WorkAccent = "teal" | "indigo" | "amber" | "rose" | "sky" | "emerald";
+export type WorkAccent = 'teal' | 'indigo' | 'amber' | 'rose' | 'sky' | 'emerald';
 
 /** Portfolio category taxonomy (Sprint 5). */
 export type WorkCategoryId =
-  | "web-applications"
-  | "enterprise-software"
-  | "crm"
-  | "erp"
-  | "ai-automation"
-  | "saas"
-  | "mobile-apps"
-  | "dashboards"
-  | "cloud";
+  | 'web-applications'
+  | 'enterprise-software'
+  | 'crm'
+  | 'erp'
+  | 'ai-automation'
+  | 'saas'
+  | 'mobile-apps'
+  | 'dashboards'
+  | 'cloud';
 
-export type WorkFilterId = "all" | "featured" | WorkCategoryId | (string & {});
+export type WorkFilterId = 'all' | 'featured' | WorkCategoryId | (string & {});
 
 export interface WorkMetric {
   id: string;
@@ -47,7 +47,7 @@ export interface WorkProject {
   metrics: readonly WorkMetric[];
   featured?: boolean;
   /** Live shipped work vs upcoming / in-progress showcase. */
-  status?: "live" | "future";
+  status?: 'live' | 'future';
   /** Label on media (Live client / Interactive demo / Future). */
   badge?: string;
   /** Public live demo or production URL. */
@@ -76,12 +76,12 @@ export interface WorkResultKpi {
   label: string;
   hint?: string;
   icon: IconName;
-  tone: "primary" | "accent" | "emerald" | "amber" | "sky";
+  tone: 'primary' | 'accent' | 'emerald' | 'amber' | 'sky';
   /** Visual treatment on the KPI card (CSS-only micro chart). */
-  chart: "ring" | "sparkline" | "bars" | "trend";
+  chart: 'ring' | 'sparkline' | 'bars' | 'trend';
   /** 0–100 progress for ring charts / relative bar strength. */
   progress: number;
-  trend?: "up" | "down";
+  trend?: 'up' | 'down';
 }
 
 export interface WorkResultHighlight {
@@ -97,7 +97,7 @@ export interface WorkProcessStep {
   description: string;
   items: readonly string[];
   icon: IconName;
-  tone: "primary" | "accent" | "emerald" | "amber" | "sky";
+  tone: 'primary' | 'accent' | 'emerald' | 'amber' | 'sky';
 }
 
 export interface WorkProcessTrustItem {
@@ -108,9 +108,9 @@ export interface WorkProcessTrustItem {
 
 export interface WorkTechGroup {
   id: string;
-  category: "Frontend" | "Backend" | "Cloud" | "AI" | "Automation" | "Database";
+  category: 'Frontend' | 'Backend' | 'Cloud' | 'AI' | 'Automation' | 'Database';
   icon: IconName;
-  tone: "primary" | "accent" | "emerald" | "amber" | "sky" | "rose";
+  tone: 'primary' | 'accent' | 'emerald' | 'amber' | 'sky' | 'rose';
   items: readonly string[];
 }
 
@@ -130,7 +130,7 @@ export interface WorkTrustPillar {
   title: string;
   items: readonly string[];
   icon: IconName;
-  tone: "primary" | "accent" | "emerald" | "amber" | "sky";
+  tone: 'primary' | 'accent' | 'emerald' | 'amber' | 'sky';
 }
 
 export interface WorkTrustFallbackTopic {

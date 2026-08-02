@@ -67,8 +67,8 @@
     column-gap: var(--legal-hero-gap);
     row-gap: 0;
     grid-template-areas:
-      "content visual"
-      "features features";
+      'content visual'
+      'features features';
   }
 
   .legal-hero__content {

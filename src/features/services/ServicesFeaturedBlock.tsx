@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { Icon } from "@/components/ui/icon";
-import { IconBox } from "@/components/ui/icon-box";
-import { getServiceHref } from "@/constants/services";
-import { cn } from "@/lib/cn";
-import type { FeaturedServiceBlock } from "./services.types";
-import "./services.css";
+import Link from 'next/link';
+import { Icon } from '@/components/ui/icon';
+import { IconBox } from '@/components/ui/icon-box';
+import { getServiceHref } from '@/constants/services';
+import { cn } from '@/lib/cn';
+import type { FeaturedServiceBlock } from './services.types';
+import './services.css';
 
 interface ServicesFeaturedBlockProps {
   featured: FeaturedServiceBlock;
@@ -14,15 +14,15 @@ export function ServicesFeaturedBlock({ featured }: ServicesFeaturedBlockProps) 
   return (
     <article
       className={cn(
-        "services-featured-block services-page-card group relative overflow-hidden",
-        "mb-[24px] rounded-[16px] border border-[color:var(--hp-card-border)] card-padding",
+        'services-featured-block services-page-card group relative overflow-hidden',
+        'mb-[24px] rounded-[16px] border border-[color:var(--hp-card-border)] card-padding',
       )}
     >
       <div
         className="pointer-events-none absolute -right-[10%] -top-[30%] size-[280px] rounded-full opacity-40 blur-3xl"
         style={{
           background:
-            "radial-gradient(circle, color-mix(in srgb, var(--accent) 35%, transparent), transparent 70%)",
+            'radial-gradient(circle, color-mix(in srgb, var(--accent) 35%, transparent), transparent 70%)',
         }}
         aria-hidden
       />
@@ -39,7 +39,7 @@ export function ServicesFeaturedBlock({ featured }: ServicesFeaturedBlockProps) 
             {featured.badge ? (
               <span
                 className={cn(
-                  "services-page-badge",
+                  'services-page-badge',
                   `services-page-badge--${featured.badge.toLowerCase()}`,
                 )}
               >
@@ -58,8 +58,8 @@ export function ServicesFeaturedBlock({ featured }: ServicesFeaturedBlockProps) 
           <Link
             href={getServiceHref(featured.slug)}
             className={cn(
-              "services-featured-cta",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+              'services-featured-cta',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
             )}
           >
             {featured.ctaLabel}
@@ -84,12 +84,7 @@ export function ServicesFeaturedBlock({ featured }: ServicesFeaturedBlockProps) 
                   className="flex items-start gap-[8px] font-sans text-[13px] text-foreground"
                 >
                   <span className="services-page-check !h-[20px] !w-[20px] !rounded-[6px]">
-                    <Icon
-                      name="check"
-                      size="sm"
-                      aria-hidden
-                      className="h-[11px] w-[11px]"
-                    />
+                    <Icon name="check" size="sm" aria-hidden className="h-[11px] w-[11px]" />
                   </span>
                   {item}
                 </li>

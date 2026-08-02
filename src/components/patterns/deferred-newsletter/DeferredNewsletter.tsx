@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
-import { DeferredMount } from "@/components/patterns/deferred-mount";
+import dynamic from 'next/dynamic';
+import { DeferredMount } from '@/components/patterns/deferred-mount';
 
 function NewsletterUnavailable() {
   return <div className="min-h-[14rem] w-full bg-surface/30" aria-hidden />;
@@ -9,7 +9,7 @@ function NewsletterUnavailable() {
 
 const NewsletterSection = dynamic(
   () =>
-    import("@/features/homepage/Newsletter/NewsletterSection")
+    import('@/features/homepage/Newsletter/NewsletterSection')
       .then((mod) => mod.NewsletterSection)
       .catch(() => NewsletterUnavailable),
   {

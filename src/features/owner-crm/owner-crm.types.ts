@@ -1,7 +1,7 @@
-import type { PersistedLeadStatus } from "@/features/lead-funnel/services/lead.repository";
+import type { PersistedLeadStatus } from '@/features/lead-funnel/services/lead.repository';
 
 export const OWNER_CRM_ROUTES = {
-  leads: "/owner/leads",
+  leads: '/owner/leads',
 } as const;
 
 export interface OwnerLeadsFilters {
@@ -9,7 +9,7 @@ export interface OwnerLeadsFilters {
   readonly status?: PersistedLeadStatus;
 }
 
-export type OwnerLeadNotificationStatus = "sent" | "failed" | "pending";
+export type OwnerLeadNotificationStatus = 'sent' | 'failed' | 'pending';
 
 export interface OwnerLeadTableRow {
   readonly id: string;
@@ -25,24 +25,22 @@ export interface OwnerLeadTableRow {
 }
 
 export const OWNER_LEAD_STATUS_VALUES = [
-  "new",
-  "contacted",
-  "qualified",
-  "closed",
-  "spam",
+  'new',
+  'contacted',
+  'qualified',
+  'closed',
+  'spam',
 ] as const satisfies readonly PersistedLeadStatus[];
 
 export const OWNER_LEAD_STATUS_LABELS: Record<PersistedLeadStatus, string> = {
-  new: "New",
-  contacted: "Contacted",
-  qualified: "Qualified",
-  closed: "Closed",
-  spam: "Spam",
+  new: 'New',
+  contacted: 'Contacted',
+  qualified: 'Qualified',
+  closed: 'Closed',
+  spam: 'Spam',
 };
 
-export const OWNER_LEAD_STATUS_FILTER_OPTIONS = OWNER_LEAD_STATUS_VALUES.map(
-  (status) => ({
-    value: status,
-    label: OWNER_LEAD_STATUS_LABELS[status],
-  }),
-);
+export const OWNER_LEAD_STATUS_FILTER_OPTIONS = OWNER_LEAD_STATUS_VALUES.map((status) => ({
+  value: status,
+  label: OWNER_LEAD_STATUS_LABELS[status],
+}));

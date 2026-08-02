@@ -1,4 +1,4 @@
-import { timingSafeEqual } from "node:crypto";
+import { timingSafeEqual } from 'node:crypto';
 
 export interface OwnerAuthConfig {
   readonly email: string;
@@ -16,9 +16,9 @@ function readRequiredEnv(name: string): string {
 
 export function readOwnerAuthConfig(): OwnerAuthConfig {
   return {
-    email: readRequiredEnv("OWNER_AUTH_EMAIL"),
-    password: readRequiredEnv("OWNER_AUTH_PASSWORD"),
-    sessionSecret: readRequiredEnv("OWNER_SESSION_SECRET"),
+    email: readRequiredEnv('OWNER_AUTH_EMAIL'),
+    password: readRequiredEnv('OWNER_AUTH_PASSWORD'),
+    sessionSecret: readRequiredEnv('OWNER_SESSION_SECRET'),
   };
 }
 

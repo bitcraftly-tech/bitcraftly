@@ -1,12 +1,12 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Icon } from "@/components/ui/icon";
-import { NAV_ACTIONS, ROUTES } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { getWorkProjectHref } from "./work.content";
-import type { WorkProject } from "./work.types";
+import Image from 'next/image';
+import Link from 'next/link';
+import { Icon } from '@/components/ui/icon';
+import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { getWorkProjectHref } from './work.content';
+import type { WorkProject } from './work.types';
 
-export type WorkProjectCardSize = "large" | "medium" | "compact";
+export type WorkProjectCardSize = 'large' | 'medium' | 'compact';
 
 interface WorkProjectCardProps {
   project: WorkProject;
@@ -23,28 +23,24 @@ function caseStudyHref(project: WorkProject): string {
 
 /**
  * Portfolio catalog card — matches bitcraftly.com/portfolio rhythm:
- * image → title → summary → tags → Case Study + Live Demo.
+ * image → title → summary → tags → Case Study + Live Client / Interactive demo.
  */
-export function WorkProjectCard({
-  project,
-  className,
-}: WorkProjectCardProps) {
-  const isFuture = project.status === "future";
-  const caseHref = isFuture
-    ? NAV_ACTIONS.freeConsultation.href
-    : caseStudyHref(project);
+export function WorkProjectCard({ project, className }: WorkProjectCardProps) {
+  const isFuture = project.status === 'future';
+  const isInteractiveDemo = project.badge === 'Interactive demo';
+  const caseHref = isFuture ? NAV_ACTIONS.freeConsultation.href : caseStudyHref(project);
   const liveHref = project.liveUrl ?? caseHref;
-  const liveExternal = Boolean(project.liveExternal);
-  const coverAlt =
-    project.coverImageAlt ?? `${project.title} product screenshot`;
-  const badge = project.badge ?? (isFuture ? "Future project" : project.industry);
+  const liveExternal = Boolean(project.liveExternal) || isInteractiveDemo;
+  const coverAlt = project.coverImageAlt ?? `${project.title} product screenshot`;
+  const badge = project.badge ?? (isFuture ? 'Future project' : project.industry);
+  const demoLabel = isInteractiveDemo ? 'Interactive demo' : 'Live Client';
 
   return (
     <article
       className={cn(
-        "work-pf-card",
+        'work-pf-card',
         `work-pf-card--${project.accent}`,
-        isFuture && "work-pf-card--future",
+        isFuture && 'work-pf-card--future',
         className,
       )}
     >
@@ -61,9 +57,7 @@ export function WorkProjectCard({
         <div className="work-pf-card__media-overlay" aria-hidden />
         <div className="work-pf-card__media-badges">
           <span className="work-pf-card__chip">{project.industry}</span>
-          <span className="work-pf-card__chip work-pf-card__chip--accent">
-            {badge}
-          </span>
+          <span className="work-pf-card__chip work-pf-card__chip--accent">{badge}</span>
         </div>
       </div>
 
@@ -78,23 +72,18 @@ export function WorkProjectCard({
 
       <div className="work-pf-card__actions">
         <Link href={caseHref} className="work-pf-card__btn work-pf-card__btn--primary">
-          {isFuture ? "Discuss build" : "Case Study"}
+          {isFuture ? 'Discuss build' : 'Case Study'}
           <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
         </Link>
         {!isFuture ? (
           <Link
             href={liveHref}
-            target={liveExternal ? "_blank" : undefined}
-            rel={liveExternal ? "noopener noreferrer" : undefined}
+            target={liveExternal ? '_blank' : undefined}
+            rel={liveExternal ? 'noopener noreferrer' : undefined}
             className="work-pf-card__btn work-pf-card__btn--outline"
           >
-            Live Demo
-            <Icon
-              name="arrow-up-right"
-              size="sm"
-              aria-hidden
-              className="h-[13px] w-[13px]"
-            />
+            {demoLabel}
+            <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
           </Link>
         ) : null}
       </div>

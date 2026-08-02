@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { ContactLandingPage, CONTACT_LANDING_META } from "@/features/contact";
-import { createPageMetadata } from "@/lib/seo/createPageMetadata";
+import type { Metadata } from 'next';
+import { ContactLandingPage, CONTACT_LANDING_META } from '@/features/contact';
+import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 
 export const metadata: Metadata = createPageMetadata({
   title: CONTACT_LANDING_META.title,

@@ -1,1 +1,1 @@
-export { OwnerLeadsPage } from "./OwnerLeadsRoutePage";
+export { OwnerLeadsPage } from './OwnerLeadsRoutePage';

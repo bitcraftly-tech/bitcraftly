@@ -1,5 +1,5 @@
-import type { IconName } from "@/components/ui/icon/types";
-import { ADMIN_ROUTES, type AdminRouteId } from "./admin.routes";
+import type { IconName } from '@/components/ui/icon/types';
+import { ADMIN_ROUTES, type AdminRouteId } from './admin.routes';
 
 export interface AdminNavItem {
   readonly id: AdminRouteId;
@@ -11,46 +11,46 @@ export interface AdminNavItem {
 
 export const ADMIN_NAV: readonly AdminNavItem[] = [
   {
-    id: "overview",
-    label: "Overview",
+    id: 'overview',
+    label: 'Overview',
     href: ADMIN_ROUTES.root,
-    description: "Dashboard summary and publishing health",
-    icon: "layout-grid",
+    description: 'Dashboard summary and publishing health',
+    icon: 'layout-grid',
   },
   {
-    id: "blog",
-    label: "Blog",
+    id: 'blog',
+    label: 'Blog',
     href: ADMIN_ROUTES.blog,
-    description: "Posts, drafts, and categories",
-    icon: "message",
+    description: 'Posts, drafts, and categories',
+    icon: 'message',
   },
   {
-    id: "case-studies",
-    label: "Case Studies",
+    id: 'case-studies',
+    label: 'Case Studies',
     href: ADMIN_ROUTES.caseStudies,
-    description: "Client stories and outcomes",
-    icon: "star",
+    description: 'Client stories and outcomes',
+    icon: 'star',
   },
   {
-    id: "services",
-    label: "Services",
+    id: 'services',
+    label: 'Services',
     href: ADMIN_ROUTES.services,
-    description: "Service catalog and SEO copy",
-    icon: "workflow",
+    description: 'Service catalog and SEO copy',
+    icon: 'workflow',
   },
   {
-    id: "testimonials",
-    label: "Testimonials",
+    id: 'testimonials',
+    label: 'Testimonials',
     href: ADMIN_ROUTES.testimonials,
-    description: "Quotes and social proof",
-    icon: "quote",
+    description: 'Quotes and social proof',
+    icon: 'quote',
   },
   {
-    id: "settings",
-    label: "Settings",
+    id: 'settings',
+    label: 'Settings',
     href: ADMIN_ROUTES.settings,
-    description: "Workspace preferences and integrations",
-    icon: "shield",
+    description: 'Workspace preferences and integrations',
+    icon: 'shield',
   },
 ] as const;
 

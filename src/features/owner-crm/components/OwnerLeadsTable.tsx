@@ -1,6 +1,6 @@
-import type { OwnerLeadTableRow } from "../owner-crm.types";
-import { OwnerLeadNotificationBadge } from "./OwnerLeadNotificationBadge";
-import { OwnerLeadStatusBadge } from "./OwnerLeadStatusBadge";
+import type { OwnerLeadTableRow } from '../owner-crm.types';
+import { OwnerLeadNotificationBadge } from './OwnerLeadNotificationBadge';
+import { OwnerLeadStatusBadge } from './OwnerLeadStatusBadge';
 
 interface OwnerLeadsTableProps {
   readonly rows: readonly OwnerLeadTableRow[];

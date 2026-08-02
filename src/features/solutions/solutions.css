@@ -176,7 +176,10 @@
   height: 22px;
   flex-shrink: 0;
   border-radius: var(--token-radius-full);
-  background: var(--services-icon-surface, color-mix(in srgb, var(--primary) 8%, var(--background)));
+  background: var(
+    --services-icon-surface,
+    color-mix(in srgb, var(--primary) 8%, var(--background))
+  );
   color: var(--primary);
 }
 
@@ -384,7 +387,7 @@
 
 @media (min-width: 1024px) {
   .solutions-process__item:not(:last-child)::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 36px;
     right: -10px;
@@ -410,15 +413,13 @@
   gap: 12px;
   padding: 20px 18px 22px;
   border-radius: 18px;
-  border: 1px solid
-    var(--hp-card-border, color-mix(in srgb, var(--primary) 12%, var(--border)));
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, var(--background) 88%, var(--primary)) 0%,
-      var(--background) 48%,
-      var(--background) 100%
-    );
+  border: 1px solid var(--hp-card-border, color-mix(in srgb, var(--primary) 12%, var(--border)));
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--background) 88%, var(--primary)) 0%,
+    var(--background) 48%,
+    var(--background) 100%
+  );
   box-shadow: var(--token-shadow-xs);
   overflow: hidden;
   transition:
@@ -428,7 +429,7 @@
 }
 
 .solutions-process__card::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -439,7 +440,7 @@
 }
 
 .solutions-process__card::after {
-  content: "";
+  content: '';
   position: absolute;
   right: -18px;
   bottom: -28px;

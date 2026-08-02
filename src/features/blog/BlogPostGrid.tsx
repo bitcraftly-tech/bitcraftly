@@ -1,5 +1,5 @@
-import type { BlogPostSummary } from "@/content/blog";
-import { BlogPostCard } from "./BlogPostCard";
+import type { BlogPostSummary } from '@/content/blog';
+import { BlogPostCard } from './BlogPostCard';
 
 interface BlogPostGridProps {
   posts: readonly BlogPostSummary[];

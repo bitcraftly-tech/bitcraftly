@@ -1,5 +1,5 @@
-import { MarketingFinalCtaBand } from "@/components/patterns/marketing-final-cta-band";
-import { WORK_CTA_COPY } from "./work.content";
+import { MarketingFinalCtaBand } from '@/components/patterns/marketing-final-cta-band';
+import { WORK_CTA_COPY } from './work.content';
 
 /**
  * Final CTA — same MarketingFinalCtaBand shell as /services.

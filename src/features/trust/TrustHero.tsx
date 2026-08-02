@@ -1,20 +1,17 @@
-import Link from "next/link";
-import { AnimatedStat } from "@/components/patterns/animated-stat";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Container } from "@/components/ui/container";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { LegalSiteNav } from "@/features/legal/LegalSiteNav";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import {
-  getTrustOverviewStats,
-  TRUST_LANDING,
-} from "./trust.content";
-import { TrustHeroVisual } from "./TrustHeroVisual";
-import "./trust.css";
+import Link from 'next/link';
+import { AnimatedStat } from '@/components/patterns/animated-stat';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Container } from '@/components/ui/container';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { LegalSiteNav } from '@/features/legal/LegalSiteNav';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import { getTrustOverviewStats, TRUST_LANDING } from './trust.content';
+import { TrustHeroVisual } from './TrustHeroVisual';
+import './trust.css';
 
 interface TrustHeroProps {
   breadcrumbs: readonly BreadcrumbItem[];
@@ -25,35 +22,35 @@ const HERO_FEATURES: readonly {
   title: string;
   description: string;
   icon: IconName;
-  tone: "violet" | "sky" | "emerald" | "amber";
+  tone: 'violet' | 'sky' | 'emerald' | 'amber';
 }[] = [
   {
-    id: "public",
-    title: "Public summaries",
-    description: "Approved standards visible to visitors",
-    icon: "globe",
-    tone: "violet",
+    id: 'public',
+    title: 'Public summaries',
+    description: 'Approved standards visible to visitors',
+    icon: 'globe',
+    tone: 'violet',
   },
   {
-    id: "governed",
-    title: "Governed areas",
-    description: "Business through Responsible AI coverage",
-    icon: "layout-grid",
-    tone: "sky",
+    id: 'governed',
+    title: 'Governed areas',
+    description: 'Business through Responsible AI coverage',
+    icon: 'layout-grid',
+    tone: 'sky',
   },
   {
-    id: "access",
-    title: "Controlled access",
-    description: "Full library stays in the dashboard",
-    icon: "shield",
-    tone: "emerald",
+    id: 'access',
+    title: 'Controlled access',
+    description: 'Full library stays in the dashboard',
+    icon: 'shield',
+    tone: 'emerald',
   },
   {
-    id: "founder",
-    title: "Founder-led",
-    description: "Clear ownership and accountability",
-    icon: "star",
-    tone: "amber",
+    id: 'founder',
+    title: 'Founder-led',
+    description: 'Clear ownership and accountability',
+    icon: 'star',
+    tone: 'amber',
   },
 ] as const;
 
@@ -72,9 +69,9 @@ export async function TrustHero({ breadcrumbs }: TrustHeroProps) {
       contained={false}
       aria-labelledby="trust-page-heading"
       className={cn(
-        "trust-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'trust-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -110,24 +107,17 @@ export async function TrustHero({ breadcrumbs }: TrustHeroProps) {
         <div className="trust-hero__grid">
           <div className="trust-hero__content">
             <p className="trust-hero__eyebrow">
-              <Icon
-                name="shield"
-                size="sm"
-                aria-hidden
-                className="trust-hero__eyebrow-icon"
-              />
+              <Icon name="shield" size="sm" aria-hidden className="trust-hero__eyebrow-icon" />
               <span>{TRUST_LANDING.eyebrow}</span>
             </p>
 
             <h1 id="trust-page-heading" className="trust-hero__title">
               {titleParts[0]}
               <span className="trust-hero__title-accent">{highlight}</span>
-              {titleParts[1] ?? ""}
+              {titleParts[1] ?? ''}
             </h1>
 
-            <p className="trust-hero__description">
-              {TRUST_LANDING.description}
-            </p>
+            <p className="trust-hero__description">{TRUST_LANDING.description}</p>
 
             <LegalSiteNav active="trust" className="trust-hero__site-nav" />
 
@@ -151,11 +141,7 @@ export async function TrustHero({ breadcrumbs }: TrustHeroProps) {
             </div>
 
             {!isMobile ? (
-              <div
-                className="trust-hero-stats"
-                role="list"
-                aria-label="Trust Center overview"
-              >
+              <div className="trust-hero-stats" role="list" aria-label="Trust Center overview">
                 <div role="listitem" className="trust-hero-stats__item">
                   <dl className="trust-hero-stats__pair m-0">
                     <dt className="trust-hero-stats__value">
@@ -184,10 +170,7 @@ export async function TrustHero({ breadcrumbs }: TrustHeroProps) {
                         </span>
                         <span className="trust-hero-stats__value-text">
                           <AnimatedStat value={`${stats.approvedPdfs}`} />
-                          <span className="trust-hero-stats__suffix">
-                            {" "}
-                            approved
-                          </span>
+                          <span className="trust-hero-stats__suffix"> approved</span>
                         </span>
                       </span>
                     </dt>
@@ -205,10 +188,7 @@ export async function TrustHero({ breadcrumbs }: TrustHeroProps) {
           ) : null}
 
           {!isMobile ? (
-            <ul
-              className="trust-hero-features"
-              aria-label="Trust Center principles"
-            >
+            <ul className="trust-hero-features" aria-label="Trust Center principles">
               {HERO_FEATURES.map((item) => (
                 <li key={item.id} className="trust-hero-features__item">
                   <span className="trust-hero-features__head">
@@ -218,13 +198,9 @@ export async function TrustHero({ breadcrumbs }: TrustHeroProps) {
                     >
                       <Icon name={item.icon} size="sm" />
                     </span>
-                    <span className="trust-hero-features__title">
-                      {item.title}
-                    </span>
+                    <span className="trust-hero-features__title">{item.title}</span>
                   </span>
-                  <span className="trust-hero-features__desc">
-                    {item.description}
-                  </span>
+                  <span className="trust-hero-features__desc">{item.description}</span>
                 </li>
               ))}
             </ul>

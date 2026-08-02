@@ -1,29 +1,24 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import type { ChatMessage } from "../types";
-import { ChatMessageBubble } from "./ChatMessageBubble";
-import { TypingIndicator } from "./TypingIndicator";
+import { useEffect, useRef } from 'react';
+import type { ChatMessage } from '../types';
+import { ChatMessageBubble } from './ChatMessageBubble';
+import { TypingIndicator } from './TypingIndicator';
 
 interface ChatMessageListProps {
   messages: readonly ChatMessage[];
   isStreaming: boolean;
 }
 
-export function ChatMessageList({
-  messages,
-  isStreaming,
-}: ChatMessageListProps) {
+export function ChatMessageList({ messages, isStreaming }: ChatMessageListProps) {
   const endRef = useRef<HTMLDivElement>(null);
   const regionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     endRef.current?.scrollIntoView({
-      behavior: reduceMotion ? "auto" : "smooth",
-      block: "end",
+      behavior: reduceMotion ? 'auto' : 'smooth',
+      block: 'end',
     });
   }, [messages, isStreaming]);
 
@@ -31,8 +26,8 @@ export function ChatMessageList({
     isStreaming &&
     messages.some(
       (message) =>
-        message.role === "assistant" &&
-        message.status === "streaming" &&
+        message.role === 'assistant' &&
+        message.status === 'streaming' &&
         message.content.length === 0,
     );
 

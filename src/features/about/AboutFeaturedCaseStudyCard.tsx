@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { Icon } from "@/components/ui/icon";
-import type { AboutFeaturedCaseStudy } from "./about.types";
+import Link from 'next/link';
+import { Icon } from '@/components/ui/icon';
+import type { AboutFeaturedCaseStudy } from './about.types';
 
 interface AboutFeaturedCaseStudyCardProps {
   study: AboutFeaturedCaseStudy;
@@ -9,9 +9,7 @@ interface AboutFeaturedCaseStudyCardProps {
 /**
  * Reusable featured case study block — Project / Challenge / Solution / Results / CTA.
  */
-export function AboutFeaturedCaseStudyCard({
-  study,
-}: AboutFeaturedCaseStudyCardProps) {
+export function AboutFeaturedCaseStudyCard({ study }: AboutFeaturedCaseStudyCardProps) {
   return (
     <article className="about-case" aria-labelledby={`${study.id}-heading`}>
       <header className="about-case__header">
@@ -55,12 +53,7 @@ export function AboutFeaturedCaseStudyCard({
 
       <Link href={study.ctaHref} className="about-case__cta">
         {study.ctaLabel}
-        <Icon
-          name="arrow-up-right"
-          size="sm"
-          aria-hidden
-          className="h-[14px] w-[14px]"
-        />
+        <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[14px] w-[14px]" />
       </Link>
     </article>
   );

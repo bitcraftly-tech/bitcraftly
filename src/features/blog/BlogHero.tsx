@@ -1,85 +1,85 @@
-import Link from "next/link";
-import { AnimatedStat } from "@/components/patterns/animated-stat";
-import { MarketingBreadcrumbs } from "@/components/patterns/marketing-breadcrumbs";
-import { Container } from "@/components/ui/container";
-import { Icon, type IconName } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { BLOG_CATEGORIES } from "@/content/blog";
-import type { BlogCategoryId } from "@/content/blog";
-import { NAV_ACTIONS, ROUTES } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import { isMobileUserAgent } from "@/lib/device/is-mobile-user-agent";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import "@/features/homepage/Hero/hero.css";
-import "@/features/services/services.css";
-import { BlogHeroVisual } from "./BlogHeroVisual";
-import "./blog.css";
+import Link from 'next/link';
+import { AnimatedStat } from '@/components/patterns/animated-stat';
+import { MarketingBreadcrumbs } from '@/components/patterns/marketing-breadcrumbs';
+import { Container } from '@/components/ui/container';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { BLOG_CATEGORIES } from '@/content/blog';
+import type { BlogCategoryId } from '@/content/blog';
+import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import '@/features/homepage/Hero/hero.css';
+import '@/features/services/services.css';
+import { BlogHeroVisual } from './BlogHeroVisual';
+import './blog.css';
 
 interface BlogHeroProps {
   breadcrumbs: readonly BreadcrumbItem[];
-  activeCategory?: BlogCategoryId | "all";
+  activeCategory?: BlogCategoryId | 'all';
   query?: string;
 }
 
 function buildListingHref(options: {
-  category?: BlogCategoryId | "all";
+  category?: BlogCategoryId | 'all';
   q?: string;
   page?: number;
 }): string {
   const params = new URLSearchParams();
-  if (options.category && options.category !== "all") {
-    params.set("category", options.category);
+  if (options.category && options.category !== 'all') {
+    params.set('category', options.category);
   }
   if (options.q?.trim()) {
-    params.set("q", options.q.trim());
+    params.set('q', options.q.trim());
   }
   if (options.page && options.page > 1) {
-    params.set("page", String(options.page));
+    params.set('page', String(options.page));
   }
   const qs = params.toString();
   return qs ? `${ROUTES.blog}?${qs}` : ROUTES.blog;
 }
 
-const HERO_TITLE = "Engineering notes for builders shipping real products";
-const HERO_HIGHLIGHT = "real products";
+const HERO_TITLE = 'Engineering notes for builders shipping real products';
+const HERO_HIGHLIGHT = 'real products';
 
 const HERO_LEAD =
-  "Practical writing on AI development, Next.js, React, performance, and SEO — from the Bitcraftly delivery desk.";
+  'Practical writing on AI development, Next.js, React, performance, and SEO — from the Bitcraftly delivery desk.';
 
 const HERO_STATS: readonly {
   id: string;
   value: string;
   label: string;
   icon: IconName;
-  tone: "violet" | "sky" | "indigo" | "amber";
+  tone: 'violet' | 'sky' | 'indigo' | 'amber';
 }[] = [
   {
-    id: "topics",
+    id: 'topics',
     value: String(BLOG_CATEGORIES.length),
-    label: "Topic categories",
-    icon: "layout-grid",
-    tone: "violet",
+    label: 'Topic categories',
+    icon: 'layout-grid',
+    tone: 'violet',
   },
   {
-    id: "ai",
-    value: "AI",
-    label: "Product & LLM notes",
-    icon: "brain",
-    tone: "sky",
+    id: 'ai',
+    value: 'AI',
+    label: 'Product & LLM notes',
+    icon: 'brain',
+    tone: 'sky',
   },
   {
-    id: "web",
-    value: "Web",
-    label: "Next.js & React",
-    icon: "code",
-    tone: "indigo",
+    id: 'web',
+    value: 'Web',
+    label: 'Next.js & React',
+    icon: 'code',
+    tone: 'indigo',
   },
   {
-    id: "seo",
-    value: "SEO",
-    label: "Performance & growth",
-    icon: "trending-up",
-    tone: "amber",
+    id: 'seo',
+    value: 'SEO',
+    label: 'Performance & growth',
+    icon: 'trending-up',
+    tone: 'amber',
   },
 ] as const;
 
@@ -88,50 +88,46 @@ const HERO_FEATURES: readonly {
   title: string;
   description: string;
   icon: IconName;
-  tone: "violet" | "sky" | "emerald" | "amber";
+  tone: 'violet' | 'sky' | 'emerald' | 'amber';
 }[] = [
   {
-    id: "practical",
-    title: "Delivery-first",
-    description: "Notes from real client builds — not theory dumps",
-    icon: "check",
-    tone: "violet",
+    id: 'practical',
+    title: 'Delivery-first',
+    description: 'Notes from real client builds — not theory dumps',
+    icon: 'check',
+    tone: 'violet',
   },
   {
-    id: "stack",
-    title: "Modern stack",
-    description: "Next.js, React, TypeScript, and AI tooling",
-    icon: "zap",
-    tone: "sky",
+    id: 'stack',
+    title: 'Modern stack',
+    description: 'Next.js, React, TypeScript, and AI tooling',
+    icon: 'zap',
+    tone: 'sky',
   },
   {
-    id: "perf",
-    title: "Performance minded",
-    description: "Core Web Vitals, SEO, and shipping discipline",
-    icon: "rocket",
-    tone: "emerald",
+    id: 'perf',
+    title: 'Performance minded',
+    description: 'Core Web Vitals, SEO, and shipping discipline',
+    icon: 'rocket',
+    tone: 'emerald',
   },
   {
-    id: "builders",
-    title: "For builders",
-    description: "Founders, engineers, and product teams",
-    icon: "sparkles",
-    tone: "amber",
+    id: 'builders',
+    title: 'For builders',
+    description: 'Founders, engineers, and product teams',
+    icon: 'sparkles',
+    tone: 'amber',
   },
 ] as const;
 
 /**
  * Blog hero — same aurora / services-hero shell as Services landing.
  */
-export async function BlogHero({
-  breadcrumbs,
-  activeCategory = "all",
-  query = "",
-}: BlogHeroProps) {
+export async function BlogHero({ breadcrumbs, activeCategory = 'all', query = '' }: BlogHeroProps) {
   const isMobile = await isMobileUserAgent();
   const [titleBefore, titleAfter] = HERO_TITLE.includes(HERO_HIGHLIGHT)
     ? HERO_TITLE.split(HERO_HIGHLIGHT)
-    : [HERO_TITLE, ""];
+    : [HERO_TITLE, ''];
 
   return (
     <Section
@@ -139,9 +135,9 @@ export async function BlogHero({
       contained={false}
       aria-labelledby="blog-page-heading"
       className={cn(
-        "services-hero blog-hero relative overflow-hidden hero-surface",
-        "border-b border-border/60",
-        isMobile && "marketing-hero--compact",
+        'services-hero blog-hero relative overflow-hidden hero-surface',
+        'border-b border-border/60',
+        isMobile && 'marketing-hero--compact',
       )}
     >
       {!isMobile ? (
@@ -177,21 +173,14 @@ export async function BlogHero({
         <div className="services-hero__grid">
           <div className="services-hero__content">
             <p className="services-hero__eyebrow">
-              <Icon
-                name="quote"
-                size="sm"
-                aria-hidden
-                className="services-hero__eyebrow-icon"
-              />
+              <Icon name="quote" size="sm" aria-hidden className="services-hero__eyebrow-icon" />
               <span>Blog</span>
             </p>
 
             <h1 id="blog-page-heading" className="services-hero__title">
               {titleBefore}
               {HERO_TITLE.includes(HERO_HIGHLIGHT) ? (
-                <span className="services-hero__title-accent">
-                  {HERO_HIGHLIGHT}
-                </span>
+                <span className="services-hero__title-accent">{HERO_HIGHLIGHT}</span>
               ) : null}
               {titleAfter}
             </h1>
@@ -206,22 +195,14 @@ export async function BlogHero({
                 {NAV_ACTIONS.freeConsultation.label}
                 <Icon name="arrow-up-right" size="sm" aria-hidden />
               </Link>
-              <a
-                href="#blog-articles"
-                className="services-hero__btn services-hero__btn--outline"
-              >
+              <a href="#blog-articles" className="services-hero__btn services-hero__btn--outline">
                 Browse articles
                 <Icon name="arrow-up-right" size="sm" aria-hidden />
               </a>
             </div>
 
-            <form
-              action={ROUTES.blog}
-              method="get"
-              role="search"
-              className="blog-hero__search"
-            >
-              {activeCategory !== "all" ? (
+            <form action={ROUTES.blog} method="get" role="search" className="blog-hero__search">
+              {activeCategory !== 'all' ? (
                 <input type="hidden" name="category" value={activeCategory} />
               ) : null}
               <label htmlFor="blog-search" className="sr-only">
@@ -245,10 +226,10 @@ export async function BlogHero({
               <Link
                 href={buildListingHref({ q: query || undefined })}
                 className={cn(
-                  "blog-hero__chip",
-                  activeCategory === "all" && "blog-hero__chip--active",
+                  'blog-hero__chip',
+                  activeCategory === 'all' && 'blog-hero__chip--active',
                 )}
-                aria-current={activeCategory === "all" ? "page" : undefined}
+                aria-current={activeCategory === 'all' ? 'page' : undefined}
               >
                 All
               </Link>
@@ -260,12 +241,10 @@ export async function BlogHero({
                     q: query || undefined,
                   })}
                   className={cn(
-                    "blog-hero__chip",
-                    activeCategory === category.id && "blog-hero__chip--active",
+                    'blog-hero__chip',
+                    activeCategory === category.id && 'blog-hero__chip--active',
                   )}
-                  aria-current={
-                    activeCategory === category.id ? "page" : undefined
-                  }
+                  aria-current={activeCategory === category.id ? 'page' : undefined}
                 >
                   {category.label}
                 </Link>
@@ -273,17 +252,9 @@ export async function BlogHero({
             </nav>
 
             {!isMobile ? (
-              <div
-                className="services-hero-stats"
-                role="list"
-                aria-label="Blog highlights"
-              >
+              <div className="services-hero-stats" role="list" aria-label="Blog highlights">
                 {HERO_STATS.map((stat) => (
-                  <div
-                    key={stat.id}
-                    role="listitem"
-                    className="services-hero-stats__item"
-                  >
+                  <div key={stat.id} role="listitem" className="services-hero-stats__item">
                     <dl className="services-hero-stats__pair m-0">
                       <dt className="services-hero-stats__value">
                         <span className="services-hero-stats__head">
@@ -296,9 +267,7 @@ export async function BlogHero({
                           <AnimatedStat value={stat.value} />
                         </span>
                       </dt>
-                      <dd className="services-hero-stats__label">
-                        {stat.label}
-                      </dd>
+                      <dd className="services-hero-stats__label">{stat.label}</dd>
                     </dl>
                   </div>
                 ))}
@@ -313,10 +282,7 @@ export async function BlogHero({
           ) : null}
 
           {!isMobile ? (
-            <ul
-              className="services-hero-features"
-              aria-label="What you will find"
-            >
+            <ul className="services-hero-features" aria-label="What you will find">
               {HERO_FEATURES.map((item) => (
                 <li key={item.id} className="services-hero-features__item">
                   <span className="services-hero-features__head">
@@ -326,13 +292,9 @@ export async function BlogHero({
                     >
                       <Icon name={item.icon} size="sm" />
                     </span>
-                    <span className="services-hero-features__title">
-                      {item.title}
-                    </span>
+                    <span className="services-hero-features__title">{item.title}</span>
                   </span>
-                  <span className="services-hero-features__desc">
-                    {item.description}
-                  </span>
+                  <span className="services-hero-features__desc">{item.description}</span>
                 </li>
               ))}
             </ul>

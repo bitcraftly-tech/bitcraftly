@@ -1,1 +1,1 @@
-export { MarketingPageShell } from "./MarketingPageShell";
+export { MarketingPageShell } from './MarketingPageShell';

@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { OwnerLoginPage } from "@/features/owner-auth";
+import type { Metadata } from 'next';
+import { OwnerLoginPage } from '@/features/owner-auth';
 
 export const metadata: Metadata = {
-  title: "Sign in",
+  title: 'Sign in',
 };
 
 interface OwnerLoginRouteProps {
@@ -11,9 +11,7 @@ interface OwnerLoginRouteProps {
   }>;
 }
 
-export default async function OwnerLoginRoute({
-  searchParams,
-}: OwnerLoginRouteProps) {
+export default async function OwnerLoginRoute({ searchParams }: OwnerLoginRouteProps) {
   const params = await searchParams;
   return <OwnerLoginPage nextPath={params.next} />;
 }

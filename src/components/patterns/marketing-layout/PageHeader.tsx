@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
-import { Heading, Text } from "@/components/ui/typography";
-import { cn } from "@/lib/cn";
+import type { ReactNode } from 'react';
+import { Heading, Text } from '@/components/ui/typography';
+import { cn } from '@/lib/cn';
 
 export interface PageHeaderProps {
   headingId: string;
@@ -26,14 +26,10 @@ export function PageHeader({
   className,
 }: PageHeaderProps) {
   return (
-    <header className={cn("w-full", className)}>
-      {breadcrumbs ? (
-        <div className="mb-[var(--space-4)]">{breadcrumbs}</div>
-      ) : null}
+    <header className={cn('w-full', className)}>
+      {breadcrumbs ? <div className="mb-[var(--space-4)]">{breadcrumbs}</div> : null}
 
-      {eyebrow ? (
-        <div className="mb-[var(--space-1-5,0.75rem)]">{eyebrow}</div>
-      ) : null}
+      {eyebrow ? <div className="mb-[var(--space-1-5,0.75rem)]">{eyebrow}</div> : null}
 
       <Heading id={headingId} level={1} className="max-w-3xl text-balance">
         {title}

@@ -1,21 +1,17 @@
-import Link from "next/link";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { MarketingSectionIntro } from "@/components/patterns/marketing-section-intro";
-import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
-import { NAV_ACTIONS, ROUTES } from "@/constants/navigation";
-import { buildWorkBreadcrumbs } from "@/lib/seo/breadcrumbs";
-import { WorkInternalHero } from "./WorkInternalHero";
-import { WorkPageCta } from "./WorkPageCta";
-import { WorkProjectCard } from "./WorkProjectCard";
-import {
-  WORK_HUBS,
-  WORK_LANDING,
-  WORK_PROJECTS,
-} from "./work.content";
-import { filterWorkProjects } from "./work.filters";
-import type { WorkHubContent, WorkProject } from "./work.types";
-import "./work.css";
+import Link from 'next/link';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
+import { Icon } from '@/components/ui/icon';
+import { Section } from '@/components/ui/section';
+import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { buildWorkBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { WorkInternalHero } from './WorkInternalHero';
+import { WorkPageCta } from './WorkPageCta';
+import { WorkProjectCard } from './WorkProjectCard';
+import { WORK_HUBS, WORK_LANDING, WORK_PROJECTS } from './work.content';
+import { filterWorkProjects } from './work.filters';
+import type { WorkHubContent, WorkProject } from './work.types';
+import './work.css';
 
 interface WorkHubPageProps {
   hub: WorkHubContent;
@@ -48,10 +44,10 @@ export function WorkHubPage({ hub }: WorkHubPageProps) {
           href: WORK_LANDING.primaryCta.href,
         }}
         secondaryCta={{
-          label: "Browse all work",
+          label: 'Browse all work',
           href: ROUTES.work,
         }}
-        chips={[hub.filterPreset === "all" ? "All projects" : hub.title]}
+        chips={[hub.filterPreset === 'all' ? 'All projects' : hub.title]}
       />
 
       <Section
@@ -62,15 +58,11 @@ export function WorkHubPage({ hub }: WorkHubPageProps) {
         <MarketingSectionIntro
           eyebrow="Portfolio"
           headingId={`${hub.slug}-projects-heading`}
-          title={
-            projects.length > 0
-              ? "Selected work in this collection"
-              : "Projects coming soon"
-          }
+          title={projects.length > 0 ? 'Selected work in this collection' : 'Projects coming soon'}
           description={
             projects.length > 0
               ? `Live and showcase projects filtered for ${hub.title.toLowerCase()}.`
-              : "This hub is ready — project cards will appear as we publish matching work."
+              : 'This hub is ready — project cards will appear as we publish matching work.'
           }
         />
 
@@ -84,11 +76,9 @@ export function WorkHubPage({ hub }: WorkHubPageProps) {
           </ul>
         ) : (
           <p className="work-detail-empty">
-            No projects match this hub yet.{" "}
-            <Link href={NAV_ACTIONS.freeConsultation.href}>
-              Book a consultation
-            </Link>{" "}
-            to discuss a similar build.
+            No projects match this hub yet.{' '}
+            <Link href={NAV_ACTIONS.freeConsultation.href}>Book a consultation</Link> to discuss a
+            similar build.
           </p>
         )}
       </Section>
@@ -115,15 +105,10 @@ export function WorkHubPage({ hub }: WorkHubPageProps) {
           <ul className="work-detail-hubs">
             {relatedHubs.map((item) => (
               <li key={item.slug}>
-                <Link
-                  href={`${ROUTES.work}/${item.slug}`}
-                  className="work-detail-hub-card"
-                >
+                <Link href={`${ROUTES.work}/${item.slug}`} className="work-detail-hub-card">
                   <span className="work-detail-hub-card__eyebrow">Hub</span>
                   <span className="work-detail-hub-card__title">{item.title}</span>
-                  <span className="work-detail-hub-card__desc">
-                    {item.description}
-                  </span>
+                  <span className="work-detail-hub-card__desc">{item.description}</span>
                   <span className="work-detail-hub-card__cta">
                     View collection
                     <Icon name="arrow-right" size="sm" aria-hidden />
@@ -149,10 +134,10 @@ export function WorkHubFallbackPage({
   description: string;
 }) {
   const syntheticHub: WorkHubContent = {
-    slug: "collection",
+    slug: 'collection',
     title,
     description,
-    filterPreset: "all",
+    filterPreset: 'all',
     seoTitle: `${title} | Work`,
     seoDescription: description,
   };

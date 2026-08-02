@@ -1,2 +1,2 @@
-export { StickyCategoryNav } from "./StickyCategoryNav";
-export type { StickyCategoryNavGroup } from "./StickyCategoryNav";
+export { StickyCategoryNav } from './StickyCategoryNav';
+export type { StickyCategoryNavGroup } from './StickyCategoryNav';

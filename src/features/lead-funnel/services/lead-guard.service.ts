@@ -1,11 +1,11 @@
-import { isHoneypotTripped } from "./lead-payload.schema";
+import { isHoneypotTripped } from './lead-payload.schema';
 import {
   buildLeadIpRateLimitKey,
   buildLeadRateLimitKey,
   checkLeadIpRateLimit,
   checkLeadRateLimit,
-} from "./lead-rate-limit";
-import type { SubmitLeadFailure } from "./lead.types";
+} from './lead-rate-limit';
+import type { SubmitLeadFailure } from './lead.types';
 
 export interface LeadGuardInput {
   readonly honeypot?: string;
@@ -15,15 +15,14 @@ export interface LeadGuardInput {
 
 const HONEYPOT_FAILURE: SubmitLeadFailure = {
   ok: false,
-  code: "HONEYPOT",
-  message: "Unable to submit your request. Please try again.",
+  code: 'HONEYPOT',
+  message: 'Unable to submit your request. Please try again.',
 };
 
 const RATE_LIMIT_FAILURE: SubmitLeadFailure = {
   ok: false,
-  code: "RATE_LIMIT",
-  message:
-    "Too many submissions in a short time. Please wait a few minutes and try again.",
+  code: 'RATE_LIMIT',
+  message: 'Too many submissions in a short time. Please wait a few minutes and try again.',
 };
 
 /**

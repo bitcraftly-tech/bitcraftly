@@ -1,16 +1,16 @@
-import type { ReactNode } from "react";
-import Link from "next/link";
-import { MarketingFinalCtaBand } from "@/components/patterns/marketing-final-cta-band";
-import { PageShell } from "@/components/patterns/marketing-layout";
-import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
-import { NAV_ACTIONS, ROUTES } from "@/constants/navigation";
-import { cn } from "@/lib/cn";
-import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
-import type { LegalDocument } from "./legal.content";
-import { LegalDocumentHero } from "./LegalDocumentHero";
-import type { LegalSiteNavActive } from "./LegalSiteNav";
-import "./legal.css";
+import type { ReactNode } from 'react';
+import Link from 'next/link';
+import { MarketingFinalCtaBand } from '@/components/patterns/marketing-final-cta-band';
+import { PageShell } from '@/components/patterns/marketing-layout';
+import { Container } from '@/components/ui/container';
+import { Section } from '@/components/ui/section';
+import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { cn } from '@/lib/cn';
+import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
+import type { LegalDocument } from './legal.content';
+import { LegalDocumentHero } from './LegalDocumentHero';
+import type { LegalSiteNavActive } from './LegalSiteNav';
+import './legal.css';
 
 interface LegalDocumentPageProps {
   document: LegalDocument;
@@ -26,8 +26,8 @@ interface LegalDocumentPageProps {
 }
 
 const focusRing = cn(
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-  "focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+  'focus-visible:ring-offset-2 focus-visible:ring-offset-background',
 );
 
 function SectionBody({
@@ -39,13 +39,13 @@ function SectionBody({
   body: string;
   contactNote?: string;
 }): ReactNode {
-  if (sectionId === "contact" && contactNote) {
+  if (sectionId === 'contact' && contactNote) {
     return (
       <>
-        For privacy-related questions or requests, contact us at{" "}
+        For privacy-related questions or requests, contact us at{' '}
         <Link
           href={`mailto:${contactNote}`}
-          className={cn("font-semibold text-primary no-underline", focusRing)}
+          className={cn('font-semibold text-primary no-underline', focusRing)}
         >
           {contactNote}
         </Link>
@@ -67,15 +67,11 @@ export function LegalDocumentPage({
   cta,
 }: LegalDocumentPageProps) {
   const resolvedCta = cta ?? {
-    heading: "Ready to start a project?",
+    heading: 'Ready to start a project?',
     description:
-      "Book a free consultation — clear scope, written next steps, and founder-led delivery.",
-    tertiaryCta: { label: "View services", href: ROUTES.services },
-    trust: [
-      "Free discovery session",
-      "Written next steps",
-      "Response within 24 hours",
-    ],
+      'Book a free consultation — clear scope, written next steps, and founder-led delivery.',
+    tertiaryCta: { label: 'View services', href: ROUTES.services },
+    trust: ['Free discovery session', 'Written next steps', 'Response within 24 hours'],
   };
 
   return (
@@ -101,10 +97,7 @@ export function LegalDocumentPage({
                 className="legal-page__block scroll-mt-24"
                 aria-labelledby={`${headingId}-${section.id}`}
               >
-                <h2
-                  id={`${headingId}-${section.id}`}
-                  className="legal-page__heading"
-                >
+                <h2 id={`${headingId}-${section.id}`} className="legal-page__heading">
                   {section.title}
                 </h2>
                 <p className="legal-page__body">

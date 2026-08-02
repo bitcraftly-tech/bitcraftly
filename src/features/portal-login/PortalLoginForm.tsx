@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useId, useState, type FormEvent } from "react";
-import { Icon } from "@/components/ui/icon";
-import { cn } from "@/lib/cn";
-import { PORTAL_LOGIN_LANDING } from "./portal-login.content";
+import Link from 'next/link';
+import { useId, useState, type FormEvent } from 'react';
+import { Icon } from '@/components/ui/icon';
+import { cn } from '@/lib/cn';
+import { PORTAL_LOGIN_LANDING } from './portal-login.content';
 
-type AuthMode = "signin" | "signup";
+type AuthMode = 'signin' | 'signup';
 
 interface PortalLoginFormProps {
   callbackUrl: string;
@@ -17,7 +17,7 @@ interface PortalLoginFormProps {
  * (email/Google auth backend is not wired in this platform yet).
  */
 export function PortalLoginForm({ callbackUrl }: PortalLoginFormProps) {
-  const [mode, setMode] = useState<AuthMode>("signin");
+  const [mode, setMode] = useState<AuthMode>('signin');
   const [showPassword, setShowPassword] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const passwordId = useId();
@@ -41,29 +41,23 @@ export function PortalLoginForm({ callbackUrl }: PortalLoginFormProps) {
             </span>
             <span className="portal-login__benefit-copy">
               <span className="portal-login__benefit-title">{item.title}</span>
-              <span className="portal-login__benefit-desc">
-                {item.description}
-              </span>
+              <span className="portal-login__benefit-desc">{item.description}</span>
             </span>
           </li>
         ))}
       </ul>
 
-      <div
-        className="portal-login__mode"
-        role="tablist"
-        aria-label="Authentication mode"
-      >
+      <div className="portal-login__mode" role="tablist" aria-label="Authentication mode">
         <button
           type="button"
           role="tab"
-          aria-selected={mode === "signin"}
+          aria-selected={mode === 'signin'}
           className={cn(
-            "portal-login__mode-btn",
-            mode === "signin" && "portal-login__mode-btn--active",
+            'portal-login__mode-btn',
+            mode === 'signin' && 'portal-login__mode-btn--active',
           )}
           onClick={() => {
-            setMode("signin");
+            setMode('signin');
             setNotice(null);
           }}
         >
@@ -72,13 +66,13 @@ export function PortalLoginForm({ callbackUrl }: PortalLoginFormProps) {
         <button
           type="button"
           role="tab"
-          aria-selected={mode === "signup"}
+          aria-selected={mode === 'signup'}
           className={cn(
-            "portal-login__mode-btn",
-            mode === "signup" && "portal-login__mode-btn--active",
+            'portal-login__mode-btn',
+            mode === 'signup' && 'portal-login__mode-btn--active',
           )}
           onClick={() => {
-            setMode("signup");
+            setMode('signup');
             setNotice(null);
           }}
         >
@@ -87,7 +81,7 @@ export function PortalLoginForm({ callbackUrl }: PortalLoginFormProps) {
       </div>
 
       <form className="portal-login__form" onSubmit={handleSubmit} noValidate>
-        {mode === "signup" ? (
+        {mode === 'signup' ? (
           <div className="portal-login__field">
             <label className="sr-only" htmlFor={nameId}>
               Full name
@@ -126,10 +120,8 @@ export function PortalLoginForm({ callbackUrl }: PortalLoginFormProps) {
           <input
             id={passwordId}
             name="password"
-            type={showPassword ? "text" : "password"}
-            autoComplete={
-              mode === "signin" ? "current-password" : "new-password"
-            }
+            type={showPassword ? 'text' : 'password'}
+            autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
             placeholder="Password"
             className="portal-login__input portal-login__input--password"
             required
@@ -138,17 +130,17 @@ export function PortalLoginForm({ callbackUrl }: PortalLoginFormProps) {
           <button
             type="button"
             className="portal-login__password-toggle"
-            aria-label={showPassword ? "Hide password" : "Show password"}
+            aria-label={showPassword ? 'Hide password' : 'Show password'}
             aria-pressed={showPassword}
             aria-controls={passwordId}
             onClick={() => setShowPassword((value) => !value)}
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ? 'Hide' : 'Show'}
           </button>
         </div>
 
         <button type="submit" className="portal-login__submit">
-          {mode === "signin" ? "Sign in with email" : "Sign up with email"}
+          {mode === 'signin' ? 'Sign in with email' : 'Sign up with email'}
         </button>
       </form>
 
@@ -164,12 +156,7 @@ export function PortalLoginForm({ callbackUrl }: PortalLoginFormProps) {
         <span className="portal-login__divider-line" />
       </div>
 
-      <button
-        type="button"
-        className="portal-login__google"
-        disabled
-        aria-disabled="true"
-      >
+      <button type="button" className="portal-login__google" disabled aria-disabled="true">
         <svg viewBox="0 0 24 24" aria-hidden className="portal-login__google-icon">
           <path
             fill="#EA4335"
@@ -179,16 +166,11 @@ export function PortalLoginForm({ callbackUrl }: PortalLoginFormProps) {
         Continue with Google
       </button>
 
-      <p className="portal-login__google-notice">
-        {PORTAL_LOGIN_LANDING.googleNotice}
-      </p>
+      <p className="portal-login__google-notice">{PORTAL_LOGIN_LANDING.googleNotice}</p>
 
       <p className="portal-login__footer">
-        {PORTAL_LOGIN_LANDING.discoveryCta.prefix}{" "}
-        <Link
-          href={PORTAL_LOGIN_LANDING.discoveryCta.href}
-          className="portal-login__footer-link"
-        >
+        {PORTAL_LOGIN_LANDING.discoveryCta.prefix}{' '}
+        <Link href={PORTAL_LOGIN_LANDING.discoveryCta.href} className="portal-login__footer-link">
           {PORTAL_LOGIN_LANDING.discoveryCta.label}
         </Link>
       </p>
