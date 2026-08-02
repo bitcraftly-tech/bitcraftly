@@ -2,16 +2,16 @@
  * Shared boot readiness helpers for Bitcraftly + interactive-demo splashes.
  */
 
-export const BOOT_CSS_WAIT_MS = 1200;
-export const BOOT_FONT_WAIT_MS = 800;
-export const BOOT_IMAGE_WAIT_MS = 2000;
+export const BOOT_CSS_WAIT_MS = 900;
+export const BOOT_FONT_WAIT_MS = 600;
+export const BOOT_IMAGE_WAIT_MS = 1200;
 /** Hard ceiling — never trap the document behind the splash. */
-export const BOOT_TOTAL_MAX_MS = 1800;
-export const BOOT_HOME_MAX_MS = 900;
-export const BOOT_REDUCED_MOTION_MAX_MS = 600;
-export const BOOT_FADE_OUT_MS = 280;
+export const BOOT_TOTAL_MAX_MS = 1400;
+export const BOOT_HOME_MAX_MS = 700;
+export const BOOT_REDUCED_MOTION_MAX_MS = 450;
+export const BOOT_FADE_OUT_MS = 220;
 /** DOM failsafe (runs even if React hydration stalls). */
-export const BOOT_DOM_FAILSAFE_MS = 2000;
+export const BOOT_DOM_FAILSAFE_MS = 1200;
 
 export function withBootTimeout<T>(promise: Promise<T>, ms: number): Promise<T | void> {
   return Promise.race([

@@ -22,7 +22,7 @@ export function AppBootShell({ mode, pathname = '' }: { mode: BootSplashMode; pa
         dangerouslySetInnerHTML={{ __html: APP_BOOT_FAILSAFE_SCRIPT }}
       />
       <noscript>
-        <style>{`html.bc-booting body > *,html.bc-demo-booting body > *{opacity:1!important;visibility:visible!important;pointer-events:auto!important}#bc-boot-splash,#bc-demo-boot-splash{display:none!important}`}</style>
+        <style>{`#bc-boot-splash,#bc-demo-boot-splash{display:none!important}`}</style>
       </noscript>
       {mode === 'demo' ? <DemoBootSplash active pathname={pathname} /> : <AppBootSplash />}
     </>

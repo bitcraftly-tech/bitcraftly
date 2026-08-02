@@ -80,15 +80,14 @@ export function AppBootSplash() {
     >
       <div className="bc-boot-splash__inner">
         <div className="bc-boot-splash__logo-wrap" aria-hidden>
-          <span className="bc-boot-splash__ring bc-boot-splash__ring--delayed" />
           <span className="bc-boot-splash__ring" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="bc-boot-splash__logo"
             src="/logo.png"
             alt=""
-            width={40}
-            height={28}
+            width={34}
+            height={34}
             decoding="async"
             fetchPriority="high"
           />

@@ -2,6 +2,9 @@
  * Critical boot CSS — inlined so the splash never depends on the CSS bundle.
  * Bitcraftly logo splash: `html.bc-booting` + `#bc-boot-splash`
  * Interactive demos: `html.bc-demo-booting` + `#bc-demo-boot-splash` (no Bitcraftly logo)
+ *
+ * Overlay-only: never hide body children with opacity/visibility — that trapped
+ * the page when the splash client island stalled. Opaque splash covers content.
  */
 export const APP_BOOT_CRITICAL_CSS = `
 html.bc-booting,
@@ -14,16 +17,6 @@ html.bc-demo-booting {
 html.bc-booting body,
 html.bc-demo-booting body {
   overflow: hidden !important;
-}
-html.bc-booting body > *:not(#bc-boot-splash) {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-html.bc-demo-booting body > *:not(#bc-demo-boot-splash) {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
 }
 html.bc-demo-booting #bc-boot-splash {
   display: none !important;
@@ -41,7 +34,7 @@ html.bc-booting #bc-demo-boot-splash {
   margin: 0;
   padding: 24px;
   background: #ffffff;
-  transition: opacity 280ms ease, visibility 280ms ease;
+  transition: opacity 220ms ease, visibility 220ms ease;
 }
 #bc-demo-boot-splash {
   background: var(--demo-boot-bg, #f8fafc);
@@ -65,8 +58,8 @@ html.bc-booting #bc-demo-boot-splash {
   position: relative;
   display: grid;
   place-items: center;
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
 }
 .bc-demo-boot__mark-wrap {
   width: 56px;
@@ -77,28 +70,24 @@ html.bc-booting #bc-demo-boot-splash {
   position: absolute;
   inset: 0;
   border-radius: 999px;
-  border: 1.5px solid rgba(37, 99, 235, 0.12);
+  border: 2px solid rgba(37, 99, 235, 0.14);
   border-top-color: #2563eb;
-  border-right-color: rgba(37, 99, 235, 0.45);
-  animation: bc-boot-spin 0.9s linear infinite;
+  animation: bc-boot-spin 0.85s linear infinite;
+  box-shadow: none;
+  filter: none;
+  background: transparent;
 }
 .bc-demo-boot__ring {
   border-color: color-mix(in srgb, var(--demo-boot-accent, #0f766e) 18%, transparent);
   border-top-color: var(--demo-boot-accent, #0f766e);
-  border-right-color: color-mix(in srgb, var(--demo-boot-accent, #0f766e) 55%, transparent);
 }
-.bc-boot-splash__ring--delayed,
 .bc-demo-boot__ring--delayed {
   inset: -4px;
   border-width: 1px;
-  border-color: rgba(37, 99, 235, 0.08);
-  border-bottom-color: rgba(37, 99, 235, 0.55);
-  animation-duration: 1.35s;
-  animation-direction: reverse;
-}
-.bc-demo-boot__ring--delayed {
   border-color: color-mix(in srgb, var(--demo-boot-accent, #0f766e) 12%, transparent);
   border-bottom-color: color-mix(in srgb, var(--demo-boot-accent, #0f766e) 60%, transparent);
+  animation-duration: 1.35s;
+  animation-direction: reverse;
 }
 .bc-demo-boot__glow {
   position: absolute;
@@ -110,11 +99,11 @@ html.bc-booting #bc-demo-boot-splash {
 .bc-boot-splash__logo {
   position: relative;
   z-index: 1;
-  width: 40px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
-  border-radius: 0;
-  background: transparent;
+  border-radius: 8px;
+  background: #000726;
   box-shadow: none;
   filter: none;
   animation: bc-boot-float 1.6s ease-in-out infinite;
@@ -159,7 +148,7 @@ html.bc-booting #bc-demo-boot-splash {
 }
 @keyframes bc-boot-float {
   0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-3px) scale(1.05); }
+  50% { transform: translateY(-2px) scale(1.03); }
 }
 @keyframes bc-boot-glow {
   0%, 100% { opacity: 0.4; transform: scale(0.9); }
