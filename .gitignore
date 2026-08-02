@@ -70,3 +70,5 @@ docs/design/temp/
 # Local oversized source footage (keep web-optimized hero.mp4 / hero-mobile.mp4 only)
 public/dayal-builders/hero-source.mp4
 
+tmp/**
+
