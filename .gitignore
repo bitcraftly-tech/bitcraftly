@@ -17,6 +17,9 @@
 /blob-report/
 /playwright/.cache/
 /.lighthouseci/
+.qa-*.json
+.qa-*.log
+.qa-*.err.log
 
 # next.js
 /.next/
