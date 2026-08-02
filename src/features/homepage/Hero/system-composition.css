@@ -4,8 +4,8 @@
  */
 
 .sys {
-  --sys-px: 0px;
-  --sys-py: 0px;
+  --sys-px: 0;
+  --sys-py: 0;
   /* Apple-like soft easing — CSS only */
   --sys-ease: cubic-bezier(0.33, 0.1, 0.25, 1);
   --sys-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -15,6 +15,8 @@
   width: min(100%, 620px);
   height: 520px;
   margin-inline: auto;
+  /* Promote layer so float + track transforms stay live on iOS */
+  transform: translateZ(0);
 }
 
 @media (min-width: 1024px) {
@@ -404,6 +406,10 @@
   min-height: 280px;
   max-height: 280px;
   overflow: hidden;
+  border-radius: 16px;
+  /* Safari iOS: clip transformed/filtered screenshot children to frame radius */
+  isolation: isolate;
+  transform: translateZ(0);
   gap: 0;
   padding: 0;
   border-color: color-mix(in srgb, var(--foreground) 9%, transparent);
@@ -532,6 +538,10 @@
   width: 100%;
   height: 240px;
   overflow: hidden;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  isolation: isolate;
+  transform: translateZ(0);
   background:
     linear-gradient(
       165deg,
@@ -559,6 +569,8 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
   background:
     linear-gradient(
       165deg,
@@ -751,11 +763,15 @@
 @keyframes sys-float-a {
   0%,
   100% {
-    transform: translate3d(calc(var(--sys-px) * 0.55), calc(var(--sys-py) * 0.45), 0)
+    transform: translate3d(calc(var(--sys-px) * 0.55 * 1px), calc(var(--sys-py) * 0.45 * 1px), 0)
       translateZ(-28px);
   }
   50% {
-    transform: translate3d(calc(var(--sys-px) * 0.55), calc(var(--sys-py) * 0.45 - 3px), 0)
+    transform: translate3d(
+        calc(var(--sys-px) * 0.55 * 1px),
+        calc(var(--sys-py) * 0.45 * 1px - 3px),
+        0
+      )
       translateZ(-28px);
   }
 }
@@ -764,12 +780,16 @@
   0%,
   100% {
     transform: rotate(-3.5deg)
-      translate3d(calc(var(--sys-px) * -0.35), calc(var(--sys-py) * 0.3), 0)
+      translate3d(calc(var(--sys-px) * -0.35 * 1px), calc(var(--sys-py) * 0.3 * 1px), 0)
       translateZ(-12px);
   }
   50% {
     transform: rotate(-3.5deg)
-      translate3d(calc(var(--sys-px) * -0.35), calc(var(--sys-py) * 0.3 - 4px), 0)
+      translate3d(
+        calc(var(--sys-px) * -0.35 * 1px),
+        calc(var(--sys-py) * 0.3 * 1px - 4px),
+        0
+      )
       translateZ(-12px);
   }
 }
@@ -778,12 +798,16 @@
   0%,
   100% {
     transform: rotate(4.5deg)
-      translate3d(calc(var(--sys-px) * 0.4), calc(var(--sys-py) * -0.25), 0)
+      translate3d(calc(var(--sys-px) * 0.4 * 1px), calc(var(--sys-py) * -0.25 * 1px), 0)
       translateZ(6px);
   }
   50% {
     transform: rotate(4.5deg)
-      translate3d(calc(var(--sys-px) * 0.4), calc(var(--sys-py) * -0.25 - 3px), 0)
+      translate3d(
+        calc(var(--sys-px) * 0.4 * 1px),
+        calc(var(--sys-py) * -0.25 * 1px - 3px),
+        0
+      )
       translateZ(6px);
   }
 }
@@ -792,12 +816,16 @@
   0%,
   100% {
     transform: rotate(-1.25deg)
-      translate3d(calc(var(--sys-px) * 0.18), calc(var(--sys-py) * 0.14), 0)
+      translate3d(calc(var(--sys-px) * 0.18 * 1px), calc(var(--sys-py) * 0.14 * 1px), 0)
       translateZ(18px);
   }
   50% {
     transform: rotate(-1.25deg)
-      translate3d(calc(var(--sys-px) * 0.18), calc(var(--sys-py) * 0.14 - 2.5px), 0)
+      translate3d(
+        calc(var(--sys-px) * 0.18 * 1px),
+        calc(var(--sys-py) * 0.14 * 1px - 2.5px),
+        0
+      )
       translateZ(18px);
   }
 }

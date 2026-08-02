@@ -106,9 +106,6 @@ export function SystemBrowserCarousel({
         >
           {items.map((item, slideIndex) => {
             const isActive = slideIndex === activeIndex;
-            const nextIndex = (activeIndex + 1) % total;
-            // Only active + next slide: keeps LCP payload minimal.
-            const shouldRender = isActive || slideIndex === nextIndex;
 
             return (
               <div
@@ -117,31 +114,29 @@ export function SystemBrowserCarousel({
                   isActive ? 'sys__browser-page is-active' : 'sys__browser-page'
                 }
               >
-                {shouldRender ? (
-                  <picture>
-                    <source
-                      type="image/avif"
-                      srcSet={item.imageAvifSrcSet}
-                      sizes={item.imageSizes}
-                    />
-                    <source
-                      type="image/webp"
-                      srcSet={item.imageWebpSrcSet}
-                      sizes={item.imageSizes}
-                    />
-                    <img
-                      src={item.imageSrc}
-                      alt=""
-                      width={item.imageWidth}
-                      height={item.imageHeight}
-                      className="sys__browser-shot"
-                      decoding="async"
-                      loading={isActive ? 'eager' : 'lazy'}
-                      fetchPriority={isActive ? 'high' : 'low'}
-                      draggable={false}
-                    />
-                  </picture>
-                ) : null}
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcSet={item.imageAvifSrcSet}
+                    sizes={item.imageSizes}
+                  />
+                  <source
+                    type="image/webp"
+                    srcSet={item.imageWebpSrcSet}
+                    sizes={item.imageSizes}
+                  />
+                  <img
+                    src={item.imageSrc}
+                    alt=""
+                    width={item.imageWidth}
+                    height={item.imageHeight}
+                    className="sys__browser-shot"
+                    decoding="async"
+                    loading={isActive ? 'eager' : 'lazy'}
+                    fetchPriority={isActive ? 'high' : 'low'}
+                    draggable={false}
+                  />
+                </picture>
                 <div className="sys__browser-shade" />
                 <div className="sys__browser-caption">
                   <p className="sys__site-brand">{item.title}</p>
