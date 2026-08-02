@@ -62,13 +62,13 @@ export function AppBootSplash() {
           <span className="bc-boot-splash__ring bc-boot-splash__ring--delayed" />
           <span className="bc-boot-splash__ring" />
           <span className="bc-boot-splash__logo-glow" />
-          {/* Native img — available before Next/Image hydrates; matches header brand icon. */}
+          {/* Native img — available before Next/Image hydrates; matches header brand mark. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="bc-boot-splash__logo"
-            src="/brand/icon.webp"
+            src="/logo.png"
             alt=""
-            width={28}
+            width={40}
             height={28}
             decoding="async"
             fetchPriority="high"

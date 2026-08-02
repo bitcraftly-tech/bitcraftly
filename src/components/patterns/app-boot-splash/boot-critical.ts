@@ -65,8 +65,8 @@ html.bc-booting #bc-demo-boot-splash {
   position: relative;
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
 }
 .bc-demo-boot__mark-wrap {
   width: 56px;
@@ -117,10 +117,10 @@ html.bc-booting #bc-demo-boot-splash {
 .bc-boot-splash__logo {
   position: relative;
   z-index: 1;
-  width: 28px;
+  width: 40px;
   height: 28px;
   object-fit: contain;
-  border-radius: 7px;
+  border-radius: 0;
   animation: bc-boot-float 1.6s ease-in-out infinite;
   filter: drop-shadow(0 4px 8px rgba(37, 99, 235, 0.2));
 }
