@@ -15,8 +15,7 @@ export function HeaderElement({ children }: HeaderElementProps) {
       <header
         id={HEADER_ID}
         className={cn(
-          'header-adaptive sticky top-0 z-[var(--z-sticky)] flex w-full min-w-0 items-center overflow-x-clip border-b',
-          'xl:overflow-visible',
+          'header-adaptive sticky top-0 z-[var(--z-sticky)] flex w-full min-w-0 items-center border-b',
           'transition-[background-color,border-color,backdrop-filter] duration-200 ease-out',
         )}
         style={{ height: HEADER_HEIGHT_PX }}

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { CookiePreferencesButton } from '@/features/legal';
-import '@/features/legal/cookie-prefs.css';
 import { cn } from '@/lib/cn';
 import { FOOTER_COPYRIGHT, FOOTER_TRUST_LINKS } from './footer.constants';
 
@@ -22,8 +21,8 @@ export function FooterBottom({ className }: { className?: string }) {
               key={link.id}
               className={cn(
                 'footer-muted rounded-md px-1 py-0.5',
-                'font-sans text-[12px] font-semibold text-muted-foreground',
-                'transition-colors hover:text-foreground',
+                'font-sans text-[12px] font-semibold',
+                'transition-colors hover:text-inverse-foreground',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
               )}
             />
@@ -33,8 +32,8 @@ export function FooterBottom({ className }: { className?: string }) {
               href={link.href}
               className={cn(
                 'footer-muted rounded-md px-1 py-0.5 no-underline',
-                'font-sans text-[12px] font-semibold text-muted-foreground',
-                'transition-colors hover:text-foreground',
+                'font-sans text-[12px] font-semibold',
+                'transition-colors hover:text-inverse-foreground',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
               )}
             >

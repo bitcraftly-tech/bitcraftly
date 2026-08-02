@@ -3,7 +3,6 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/cn';
-import './cookie-prefs.css';
 
 const STORAGE_KEY = 'bitcraftly_cookie_preferences';
 
@@ -51,6 +50,8 @@ export function CookiePreferencesButton({
   useEffect(() => {
     if (open) {
       setPrefs(readPreferences());
+      /* Dialog skin — never render-blocking on first paint. */
+      void import('./cookie-prefs.css');
     }
   }, [open]);
 
@@ -67,9 +68,16 @@ export function CookiePreferencesButton({
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [open]);
 
+  // Restore focus after close only — skip initial mount (open starts false).
+  const wasOpenRef = useRef(false);
   useEffect(() => {
-    if (!open) {
+    if (open) {
+      wasOpenRef.current = true;
+      return;
+    }
+    if (wasOpenRef.current) {
       buttonRef.current?.focus();
+      wasOpenRef.current = false;
     }
   }, [open]);
 

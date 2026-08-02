@@ -1683,7 +1683,7 @@
 .services-hero-features__icon--violet {
   background: linear-gradient(145deg, #f5e9ff 0%, #ebe4ff 100%);
   border-color: color-mix(in srgb, #7c3aed 16%, transparent);
-  color: #6d28d9;
+  color: var(--primary);
 }
 
 .services-hero-features__icon--sky {

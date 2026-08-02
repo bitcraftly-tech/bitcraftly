@@ -3,7 +3,7 @@ import { Icon, type IconName } from '@/components/ui/icon';
 import { Section } from '@/components/ui/section';
 import { cn } from '@/lib/cn';
 import { WHATSAPP_CONSULTATION_HREF } from '@/features/homepage/shared/contact-links';
-import '@/features/homepage/FinalCTA/final-cta.css';
+import '@/components/patterns/marketing-final-cta-band/final-cta.css';
 
 interface MarketingCtaLink {
   label: string;
@@ -36,7 +36,7 @@ const buttonBase = cn(
 
 /**
  * Dark final-CTA band used on Services / Solutions landings.
- * Visual shell shared with Homepage FinalCTA (`final-cta.css`).
+ * Visual shell shared via `final-cta.css` in this folder.
  */
 export function MarketingFinalCtaBand({
   headingId,

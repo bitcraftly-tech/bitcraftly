@@ -3,20 +3,25 @@ import { HomepageShell } from '@/features/homepage';
 import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 import { ROUTES } from '@/constants/navigation';
 
+const HOME_TITLE = 'Bitcraftly | Complete Digital Systems for Your Industry';
+const HOME_DESCRIPTION =
+  'AI-Powered Digital Engineering Partner. Launch Complete Digital Systems — website, AI, dashboard, analytics, and integrations — engineered as one Industry System.';
+
 export const metadata: Metadata = createPageMetadata({
-  title: 'Bitcraftly | AI & Digital Engineering Partner',
-  description:
-    'Bitcraftly builds AI-powered websites, SaaS, and automation — founder-led delivery with clear scope and measurable outcomes.',
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
   path: ROUTES.home,
   keywords: [
     'Bitcraftly',
-    'AI website development',
-    'Next.js agency India',
-    'SaaS product development',
-    'founder-led web studio',
-    'Delhi NCR web development',
+    'Industry Systems',
+    'Complete Digital Systems',
+    'AI-Powered Digital Engineering Partner',
+    'Healthcare Industry System',
+    'Real Estate Industry System',
+    'Restaurant Industry System',
+    'Corporate Services Industry System',
+    'Intelligent Business Automation',
   ],
-  image: '/hero.webp',
 });
 
 const homepageJsonLd = {
@@ -28,6 +33,8 @@ const homepageJsonLd = {
       name: 'Bitcraftly',
       url: 'https://bitcraftly.com',
       logo: 'https://bitcraftly.com/brand/icon.png',
+      description:
+        'AI-Powered Digital Engineering Partner delivering Complete Digital Systems — Industry Systems with website, AI, dashboard, analytics, and integrations.',
       email: 'hello@bitcraftly.com',
       telephone: '+91-96677-10954',
       address: {
@@ -48,6 +55,7 @@ const homepageJsonLd = {
       '@id': 'https://bitcraftly.com/#website',
       url: 'https://bitcraftly.com',
       name: 'Bitcraftly',
+      description: HOME_DESCRIPTION,
       publisher: { '@id': 'https://bitcraftly.com/#organization' },
       inLanguage: 'en-IN',
     },
@@ -55,11 +63,14 @@ const homepageJsonLd = {
       '@type': 'WebPage',
       '@id': 'https://bitcraftly.com/#webpage',
       url: 'https://bitcraftly.com',
-      name: 'Bitcraftly | AI & Digital Engineering Partner',
+      name: HOME_TITLE,
       isPartOf: { '@id': 'https://bitcraftly.com/#website' },
       about: { '@id': 'https://bitcraftly.com/#organization' },
-      description:
-        'Bitcraftly builds AI-powered websites, SaaS, and automation — founder-led delivery with clear scope and measurable outcomes.',
+      description: HOME_DESCRIPTION,
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: 'https://bitcraftly.com/opengraph-image.webp',
+      },
     },
   ],
 };

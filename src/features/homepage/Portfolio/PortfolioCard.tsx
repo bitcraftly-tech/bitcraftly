@@ -9,18 +9,21 @@ interface PortfolioCardProps {
   className?: string;
 }
 
+function liveCtaLabel(badge: PortfolioProject['badge']): string {
+  return badge === 'Interactive demo' ? 'Interactive demo' : 'Live Client';
+}
+
 export function PortfolioCard({ project, className }: PortfolioCardProps) {
   const liveExternal = Boolean(project.livePreviewExternal);
   const caseExternal = project.caseStudyHref.startsWith('http');
-  const isInteractiveDemo = project.badge === 'Interactive demo';
-  const demoLabel = isInteractiveDemo ? 'Interactive demo' : 'Live Client';
+  const demoLabel = liveCtaLabel(project.badge);
 
   return (
     <article
       className={cn('portfolio-card flex h-full flex-col rounded-[16px] !p-[16px]', className)}
     >
-      <div className="portfolio-card-media">
-        <div className="portfolio-card-media-visual">
+      <div className="portfolio-card-media relative">
+        <div className="portfolio-card-media-visual absolute inset-0">
           <Image
             src={project.imageSrc}
             alt={project.imageAlt}

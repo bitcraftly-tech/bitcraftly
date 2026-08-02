@@ -10,7 +10,8 @@ import {
   FAQ_LABEL,
   FAQ_SECTION_ID,
 } from './faq.constants';
-/* FAQ styles: homepage-deferred.css (post-paint). JSON-LD lives on HomepageShell (ATF SEO). */
+/* FAQ styles loaded locally (Resources FAQ + this section). */
+import './faq.css';
 
 export function FAQSection() {
   return (

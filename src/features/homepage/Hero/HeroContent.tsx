@@ -1,65 +1,101 @@
-import { Icon } from '@/components/ui/icon';
+import Link from 'next/link';
+import { ButtonArrow } from '@/components/ui/button';
 import { cn } from '@/lib/cn';
 import {
+  HERO_BADGE,
+  HERO_CTAS,
   HERO_DESCRIPTION,
-  HERO_DESCRIPTION_MOBILE,
-  HERO_EYEBROW_LABEL,
   HERO_HEADING,
   HERO_HEADING_ID,
+  HERO_MODULE_CHIPS,
+  HERO_TRUST,
 } from './hero.constants';
-import { HeroActions } from './HeroActions';
-import { HeroTags } from './HeroTags';
+import { HeroTypedFocus } from './HeroTypedFocus';
 
-interface HeroContentProps {
-  compactMobile?: boolean;
-}
-
-export function HeroContent({ compactMobile = false }: HeroContentProps) {
+/**
+ * Hero copy — premium ATF editorial column.
+ */
+export function HeroContent() {
   return (
-    <div
-      className={cn(
-        'hero-content flex w-full flex-col',
-        'items-center text-center',
-        'md:items-stretch md:text-left',
-      )}
-    >
-      <p
-        role="doc-subtitle"
-        className={cn(
-          'hero-eyebrow m-0 inline-flex items-center gap-[6px] sm:gap-[8px]',
-          'rounded-full px-[10px] py-[6px] sm:px-[14px] sm:py-[8px]',
-          'font-sans text-[10px] font-semibold uppercase tracking-[0.12em] sm:text-[11px] sm:tracking-[0.14em]',
-          'md:self-start',
-        )}
-      >
-        <Icon
-          name="sparkles"
-          size="sm"
-          aria-hidden
-          className="h-[12px] w-[12px] shrink-0 sm:h-[14px] sm:w-[14px]"
-        />
-        <span>{HERO_EYEBROW_LABEL}</span>
+    <div className="hp-hero-content">
+      <p className="hp-hero-brand">
+        <span className="hp-hero-brand__tag">
+          <span className="hp-hero-brand__dot" aria-hidden="true" />
+          <span className="hp-hero-brand__text">{HERO_BADGE}</span>
+        </span>
       </p>
 
       <h1
         id={HERO_HEADING_ID}
-        className={cn(
-          'hero-heading m-0 w-full max-w-[640px] font-sans font-semibold text-foreground text-balance',
-          'leading-[1.1] tracking-[-0.04em]',
-        )}
+        className="hp-hero-heading"
+        style={{ ['--type-len' as string]: HERO_HEADING.focus.length }}
       >
-        {HERO_HEADING.prefix} <span className="hero-gradient-text">{HERO_HEADING.highlight}</span>
+        <span className="hp-hero-heading__lead">
+          <span className="hp-hero-heading__lead-text">{HERO_HEADING.lead}</span>
+        </span>
+        <HeroTypedFocus />
+        <span className="hp-hero-heading__sub" aria-label={HERO_HEADING.sub}>
+          <span className="hp-hero-heading__sub-lead">{HERO_HEADING.subLead}</span>
+          <span className="hp-hero-heading__sub-accent" aria-hidden="true">
+            {Array.from(HERO_HEADING.subAccent).map((char, index) => (
+              <span
+                key={`${char}-${index}`}
+                className="hp-hero-heading__char hp-hero-heading__char--sub"
+                style={{ ['--i' as string]: index }}
+              >
+                {char}
+              </span>
+            ))}
+          </span>
+        </span>
       </h1>
 
-      <p
-        className={cn('hero-description m-0 w-full max-w-[560px] font-sans text-muted-foreground')}
-      >
-        {compactMobile ? HERO_DESCRIPTION_MOBILE : HERO_DESCRIPTION}
-      </p>
+      <p className="hp-hero-description">{HERO_DESCRIPTION}</p>
 
-      <div className="flex w-full flex-col gap-[var(--space-3)]">
-        <HeroActions />
-        {!compactMobile ? <HeroTags /> : null}
+      <ul className="hp-hero-modules" aria-label="Industry System modules">
+        {HERO_MODULE_CHIPS.map((chip, index) => (
+          <li
+            key={chip}
+            className="hp-hero-modules__item"
+            style={{ ['--chip-i' as string]: index }}
+          >
+            <span className="hp-hero-modules__dot" aria-hidden="true" />
+            <span className="hp-hero-modules__label">{chip}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div className="hp-hero-actions">
+        {HERO_CTAS.map((cta) => {
+          const isPrimary = cta.variant === 'primary';
+          return (
+            <Link
+              key={cta.label}
+              href={cta.href}
+              className={cn(
+                'hp-hero-cta',
+                isPrimary ? 'hp-hero-cta--primary' : 'hp-hero-cta--secondary',
+              )}
+            >
+              <span>{cta.label}</span>
+              {isPrimary ? <ButtonArrow className="hp-hero-cta__arrow text-[14px]" /> : null}
+            </Link>
+          );
+        })}
+      </div>
+
+      <div className="hp-hero-trust">
+        <div className="hp-hero-trust__avatars" aria-hidden="true">
+          {HERO_TRUST.avatars.map((avatar) => (
+            <span
+              key={avatar.initials}
+              className={cn('hp-hero-trust__avatar', `hp-hero-trust__avatar--${avatar.tone}`)}
+            >
+              {avatar.initials}
+            </span>
+          ))}
+        </div>
+        <p className="hp-hero-trust__label">{HERO_TRUST.label}</p>
       </div>
     </div>
   );

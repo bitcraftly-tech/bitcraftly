@@ -6,7 +6,7 @@ import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 export const metadata: Metadata = createPageMetadata({
   title: 'FAQ',
   description:
-    'Frequently asked questions about Bitcraftly services, process, timelines, and engagement models.',
+    'Answers about Bitcraftly Industry Systems, Complete Digital Systems, Wave 1 industries, AI workflows, and how to get started.',
   path: ROUTES.resourcesFaq,
 });
 

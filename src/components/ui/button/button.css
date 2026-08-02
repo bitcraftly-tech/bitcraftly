@@ -1,5 +1,238 @@
+/**
+ * Bitcraftly button pattern — logo palette (cyan → blue → violet).
+ *
+ * Use via <Button /> or class helpers from `buttonVariants`.
+ * Single place to restyle all marketing / app CTAs.
+ */
+
+:root {
+  --btn-radius: 12px;
+  --btn-font: var(--font-family-sans);
+  --btn-weight: 600;
+  --btn-transition:
+    filter 180ms var(--ease-out, ease),
+    transform 180ms var(--ease-out, ease),
+    box-shadow 180ms var(--ease-out, ease),
+    background-color 180ms var(--ease-out, ease),
+    border-color 180ms var(--ease-out, ease),
+    color 180ms var(--ease-out, ease),
+    opacity 180ms var(--ease-out, ease);
+
+  /* Logo CTA — two-stop only: electric blue → violet */
+  --btn-grad: linear-gradient(115deg, var(--primary) 0%, var(--primary-end) 100%);
+  --btn-grad-hover: linear-gradient(115deg, var(--primary-hover) 0%, var(--primary-end) 100%);
+  --btn-shadow: 0 12px 28px -14px color-mix(in srgb, var(--primary) 70%, transparent);
+  --btn-shadow-hover: 0 16px 32px -12px color-mix(in srgb, var(--primary) 78%, transparent);
+  --btn-ring: var(--primary);
+}
+
+/* —— Base —— */
+.bc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-sizing: border-box;
+  margin: 0;
+  border-radius: var(--btn-radius);
+  border: 1px solid transparent;
+  font-family: var(--btn-font);
+  font-weight: var(--btn-weight);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: var(--btn-transition);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bc-btn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--background, #fff),
+    0 0 0 4px var(--btn-ring);
+}
+
+.bc-btn:disabled,
+.bc-btn[aria-disabled='true'] {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* —— Sizes —— */
+.bc-btn--sm {
+  min-height: 32px;
+  height: 32px;
+  padding-inline: 12px;
+  font-size: 13px;
+  gap: 6px;
+}
+
+.bc-btn--md {
+  min-height: 40px;
+  height: 40px;
+  padding-inline: 16px;
+  font-size: 14px;
+  gap: 8px;
+}
+
+.bc-btn--lg {
+  min-height: 48px;
+  height: 48px;
+  padding-inline: 22px;
+  font-size: 15px;
+  gap: 10px;
+}
+
+.bc-btn--xl {
+  min-height: 52px;
+  height: 52px;
+  padding-inline: 24px;
+  font-size: 16px;
+  gap: 10px;
+}
+
+.bc-btn--block {
+  width: 100%;
+}
+
+.bc-btn--pill {
+  border-radius: 999px;
+}
+
+/* —— Variants (logo theme) —— */
+.bc-btn--primary {
+  border: 0;
+  background-color: var(--primary);
+  background-image: var(--btn-grad);
+  color: var(--primary-foreground);
+  box-shadow: var(--btn-shadow);
+}
+
+.bc-btn--primary:hover {
+  background-image: var(--btn-grad-hover);
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+  box-shadow: var(--btn-shadow-hover);
+}
+
+.bc-btn--primary:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
+}
+
+.bc-btn--secondary {
+  background-color: color-mix(in srgb, var(--primary) 10%, var(--background));
+  border-color: color-mix(in srgb, var(--primary) 22%, var(--border));
+  color: var(--primary);
+}
+
+.bc-btn--secondary:hover {
+  background-color: color-mix(in srgb, var(--primary) 16%, var(--background));
+  border-color: color-mix(in srgb, var(--primary) 36%, var(--border));
+  transform: translateY(-1px);
+}
+
+.bc-btn--outline {
+  background-color: transparent;
+  border-color: color-mix(in srgb, var(--foreground) 14%, transparent);
+  color: var(--foreground);
+}
+
+.bc-btn--outline:hover {
+  border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
+  color: var(--primary);
+  background-color: color-mix(in srgb, var(--primary) 6%, transparent);
+  transform: translateY(-1px);
+}
+
+.bc-btn--ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--foreground);
+}
+
+.bc-btn--ghost:hover {
+  color: var(--primary);
+  background-color: color-mix(in srgb, var(--primary) 8%, transparent);
+}
+
+.bc-btn--soft {
+  background-color: color-mix(in srgb, var(--accent) 12%, var(--background));
+  border-color: color-mix(in srgb, var(--accent) 28%, transparent);
+  color: color-mix(in srgb, var(--foreground) 80%, var(--primary));
+}
+
+.bc-btn--soft:hover {
+  background-color: color-mix(in srgb, var(--accent) 18%, var(--background));
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  transform: translateY(-1px);
+}
+
+.bc-btn--destructive {
+  background-color: var(--error);
+  color: var(--error-foreground);
+  --btn-ring: var(--error);
+}
+
+.bc-btn--destructive:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+/* Inverse surfaces (footer / dark bands) */
+.bc-btn--on-inverse.bc-btn--ghost {
+  color: var(--inverse-foreground);
+}
+
+.bc-btn--on-inverse.bc-btn--ghost:hover {
+  color: var(--accent);
+  background-color: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.bc-btn--on-inverse.bc-btn--outline {
+  border-color: color-mix(in srgb, #ffffff 28%, transparent);
+  color: #ffffff;
+}
+
+.bc-btn--on-inverse.bc-btn--outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* Icon / arrow slots — no chip background */
+.bc-btn__icon {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: none;
+}
+
+/* Standard CTA arrow: tilted up-right, bare icon */
+.bc-btn__arrow {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  color: currentColor;
+  transition: transform 180ms var(--ease-out, ease);
+}
+
+.bc-btn:hover .bc-btn__arrow,
+.group:hover .bc-btn__arrow {
+  transform: translate(2px, -2px);
+}
+
 .button--loading {
-  animation: button-loading-pulse var(--duration-normal) ease-in-out infinite;
+  animation: button-loading-pulse var(--duration-normal, 300ms) ease-in-out infinite;
 }
 
 @keyframes button-loading-pulse {
@@ -13,6 +246,16 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .bc-btn,
+  .bc-btn--primary:hover,
+  .bc-btn--secondary:hover,
+  .bc-btn--outline:hover,
+  .bc-btn--soft:hover,
+  .bc-btn--destructive:hover {
+    transition: none;
+    transform: none;
+  }
+
   .button--loading {
     animation: none;
     opacity: 0.9;

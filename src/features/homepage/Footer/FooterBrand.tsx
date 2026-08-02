@@ -4,36 +4,45 @@ import { cn } from '@/lib/cn';
 import { FOOTER_BRAND } from './footer.constants';
 import { FooterSocial } from './FooterSocial';
 
+const LOGO_MARK_H = 44;
+const LOGO_MARK_W = Math.round(LOGO_MARK_H * (377 / 255));
+
 export function FooterBrand({ className }: { className?: string }) {
   return (
     <div
-      className={cn('flex w-full max-w-[240px] min-w-0 flex-col gap-[var(--space-2)]', className)}
+      className={cn('flex w-full max-w-[280px] min-w-0 flex-col gap-[var(--space-2)]', className)}
     >
       <Link
         href="/"
         aria-label="Bitcraftly home"
         className={cn(
-          'footer-focus-ring inline-flex w-fit items-center gap-[var(--space-1)] no-underline',
+          'footer-focus-ring group inline-flex w-fit max-w-full items-end gap-[10px] no-underline',
           'rounded-[var(--token-radius-md)]',
           'transition-opacity duration-[var(--duration-fast)] hover:opacity-90',
         )}
       >
-        <Image
-          src="/brand/icon.webp"
-          alt=""
-          width={36}
-          height={36}
-          loading="lazy"
-          quality={75}
-          className="h-[36px] w-[36px] shrink-0"
-        />
         <span
-          className={cn(
-            'font-sans text-[22px] font-[var(--font-weight-bold)]',
-            'leading-none tracking-[-0.02em] text-inverse-foreground',
-          )}
+          className="relative shrink-0 bg-transparent"
+          style={{ height: LOGO_MARK_H, width: LOGO_MARK_W }}
         >
-          Bitcraftly
+          <Image
+            src="/logo.png"
+            alt=""
+            fill
+            loading="lazy"
+            quality={80}
+            unoptimized
+            sizes={`${LOGO_MARK_W}px`}
+            className="object-contain object-left"
+          />
+        </span>
+        <span className="flex min-w-0 flex-col justify-end gap-[5px] pb-px">
+          <span className="whitespace-nowrap font-sans text-[18px] font-bold leading-none tracking-[-0.03em] text-white">
+            Bitcraftly
+          </span>
+          <span className="max-w-[200px] truncate font-sans text-[10px] font-medium leading-none tracking-[0.01em] text-[#8eabc0]">
+            AI & Digital Engineering Partner
+          </span>
         </span>
       </Link>
 

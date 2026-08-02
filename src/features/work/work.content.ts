@@ -136,7 +136,7 @@ export const WORK_PROJECTS: readonly WorkProject[] = [
     title: 'SaaSPro Dashboard',
     summary:
       'Future SaaS product shell — analytics, billing UX, and operator workflows in one control plane.',
-    coverImage: '/work/projects/saaspro-dashboard.webp',
+    coverImage: workProductImage('Next-Gen SaaS Platform.png'),
     coverImageAlt: 'SaaSPro future project dashboard preview',
     previewHost: 'saaspro.preview',
     badge: 'Future project',

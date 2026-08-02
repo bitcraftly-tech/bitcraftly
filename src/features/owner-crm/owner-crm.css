@@ -146,7 +146,7 @@
 
 .owner-leads-badge--contacted {
   background: color-mix(in oklab, #7c3aed 12%, transparent);
-  color: #6d28d9;
+  color: var(--primary);
 }
 
 .owner-leads-badge--qualified {

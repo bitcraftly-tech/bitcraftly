@@ -1,4 +1,5 @@
 import { ROUTES } from '@/constants/navigation';
+import { getIndustryHref } from '@/constants/industries';
 import type {
   FooterBrandCopy,
   FooterContactItem,
@@ -10,7 +11,7 @@ export const FOOTER_ID = 'footer';
 
 export const FOOTER_BRAND: FooterBrandCopy = {
   description:
-    'AI & Digital Engineering Partner helping businesses build, automate and grow with modern technology.',
+    'Complete Digital Systems for your industry — website, AI, dashboard, analytics, and integrations.',
 };
 
 /** Order: LinkedIn, Instagram, YouTube, Twitter/X, Facebook */
@@ -47,43 +48,30 @@ export const FOOTER_SOCIAL_LINKS: readonly FooterSocialLink[] = [
   },
 ];
 
+/** Footer mirrors frozen IA: Industry Systems → Explore → Resources → Company */
 export const FOOTER_NAV_COLUMNS: readonly FooterNavColumn[] = [
   {
-    id: 'services',
-    title: 'Services',
+    id: 'industries',
+    title: 'Industry Systems',
     links: [
-      { label: 'AI Solutions', href: `${ROUTES.services}/ai-solutions` },
+      { label: 'Healthcare System', href: getIndustryHref('healthcare') },
+      { label: 'Real Estate System', href: getIndustryHref('real-estate') },
+      { label: 'Restaurant System', href: getIndustryHref('restaurant') },
       {
-        label: 'Web Development',
-        href: `${ROUTES.services}/website-development`,
+        label: 'Corporate Services System',
+        href: getIndustryHref('corporate-services'),
       },
-      {
-        label: 'Web Applications',
-        href: `${ROUTES.services}/web-application-development`,
-      },
-      {
-        label: 'Mobile Apps',
-        href: `${ROUTES.services}/mobile-app-development`,
-      },
-      {
-        label: 'Custom Software',
-        href: `${ROUTES.services}/custom-software-development`,
-      },
-      { label: 'Cloud & DevOps', href: `${ROUTES.services}/cloud-devops` },
+      { label: 'Explore all industries', href: ROUTES.industries },
     ],
   },
   {
-    id: 'solutions',
-    title: 'Solutions',
+    id: 'explore',
+    title: 'Explore',
     links: [
-      { label: 'ERP Solutions', href: `${ROUTES.solutions}/erp` },
-      { label: 'CRM Solutions', href: `${ROUTES.solutions}/crm` },
-      { label: 'CMS Solutions', href: `${ROUTES.solutions}/cms` },
-      {
-        label: 'AI Automation',
-        href: `${ROUTES.solutions}/ai-automation`,
-      },
-      { label: 'SaaS Platforms', href: `${ROUTES.solutions}/saas-platforms` },
+      { label: 'Solutions', href: ROUTES.solutions },
+      { label: 'AI', href: ROUTES.assistant },
+      { label: 'Work', href: ROUTES.work },
+      { label: 'Pricing', href: ROUTES.pricing },
     ],
   },
   {
@@ -101,14 +89,15 @@ export const FOOTER_NAV_COLUMNS: readonly FooterNavColumn[] = [
     id: 'company',
     title: 'Company',
     links: [
-      { label: 'About Us', href: ROUTES.about },
-      { label: 'Our Process', href: '/#development-process' },
+      { label: 'About', href: ROUTES.about },
       { label: 'Careers', href: ROUTES.careers },
+      { label: 'Contact', href: ROUTES.contact },
+      { label: 'Book Strategy Call', href: `${ROUTES.contact}?intent=strategy` },
     ],
   },
 ];
 
-/** Services / Solutions / Resources — middle grid columns */
+/** Industry Systems / Explore / Resources — middle grid columns */
 export const FOOTER_LINK_COLUMNS: readonly FooterNavColumn[] = [
   FOOTER_NAV_COLUMNS[0],
   FOOTER_NAV_COLUMNS[1],

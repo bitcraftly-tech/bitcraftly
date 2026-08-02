@@ -6,28 +6,155 @@
 }
 
 .header-surface-solid {
-  background-color: color-mix(in srgb, var(--background) 94%, transparent);
+  background-color: color-mix(in srgb, var(--background) 92%, transparent);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
 
 .header-adaptive {
-  border-color: transparent;
-  background-color: transparent;
+  container-type: inline-size;
+  container-name: site-header;
+  border-color: color-mix(in srgb, var(--foreground) 6%, transparent);
+  background-color: color-mix(in srgb, white 78%, transparent);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  box-shadow: 0 1px 0 color-mix(in srgb, white 65%, transparent) inset;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+/* Header bar — logo | nav | actions (same width + inset as Container xl) */
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--container-xl);
+  min-width: 0;
+  height: 100%;
+  margin-inline: auto;
+  padding-inline: max(var(--container-padding), env(safe-area-inset-left, 0px))
+    max(var(--container-padding), env(safe-area-inset-right, 0px));
+}
+
+.header-bar__brand {
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.header-bar__nav {
+  display: none;
+  min-width: 0;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 8px;
+}
+
+.header-bar__actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-bar__ctas {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-bar__mobile {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo-tagline {
+  display: none;
+}
+
+/* Desktop chrome when header itself is wide enough (survives zoom + side panels) */
+@container site-header (min-width: 1180px) {
+  .header-adaptive {
+    overflow: visible;
+  }
+
+  .header-bar {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .header-bar__nav {
+    display: flex;
+  }
+
+  .header-bar__ctas {
+    display: flex;
+  }
+
+  .header-bar__mobile,
+  .header-mobile-trigger,
+  .header-mobile-menu {
+    display: none !important;
+  }
+
+  .header-logo-tagline {
+    display: block;
+  }
+}
+
+@container site-header (min-width: 1360px) {
+  .header-bar {
+    gap: 36px;
+  }
+
+  #header-main-navigation {
+    gap: 14px;
+    font-size: 13.5px;
+  }
+}
+
+@container site-header (min-width: 1480px) {
+  .header-bar {
+    gap: 40px;
+  }
+
+  #header-main-navigation {
+    gap: 18px;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 1279px) {
-  .header-adaptive > .mx-auto {
+  .header-adaptive > .header-bar {
     max-width: 100%;
   }
 }
 
-html[data-header-mode='solid'] .header-adaptive,
-html[data-header-scrolled='true'] .header-adaptive {
-  background-color: color-mix(in srgb, var(--background) 94%, transparent);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-color: var(--border);
+/* Inner pages — keep a readable solid glass bar */
+html[data-header-mode='solid'] .header-adaptive {
+  background-color: color-mix(in srgb, white 88%, transparent);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  border-color: color-mix(in srgb, var(--foreground) 9%, transparent);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 70%, transparent) inset,
+    0 10px 30px -24px color-mix(in srgb, var(--foreground) 28%, transparent);
+}
+
+/* Home scroll — lighter / more transparent frosted glass */
+html[data-header-mode='home'][data-header-scrolled='true'] .header-adaptive {
+  background-color: color-mix(in srgb, white 52%, transparent);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  border-color: color-mix(in srgb, var(--foreground) 7%, transparent);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 55%, transparent) inset,
+    0 8px 24px -22px color-mix(in srgb, var(--foreground) 18%, transparent);
 }
 
 .header-cta-shadow {
@@ -36,7 +163,7 @@ html[data-header-scrolled='true'] .header-adaptive {
 
 #header-main-navigation a:not(.header-nav-active),
 #header-main-navigation button:not(.header-nav-active) {
-  color: var(--foreground) !important;
+  color: color-mix(in srgb, var(--foreground) 78%, transparent) !important;
 }
 
 #header-main-navigation a:hover,
@@ -51,15 +178,20 @@ html[data-header-scrolled='true'] .header-adaptive {
   color: var(--primary) !important;
 }
 
+#header-main-navigation .header-nav-item {
+  border-radius: 8px;
+  padding-inline: 4px;
+}
+
 #header-main-navigation .header-nav-item.header-nav-active::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
   height: 2px;
   border-radius: 9999px;
-  background-color: var(--primary);
+  background: linear-gradient(90deg, var(--primary), var(--primary-end));
 }
 
 .header-mobile-menu {

@@ -1,8 +1,8 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'soft' | 'destructive';
 
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 export type ButtonType = 'button' | 'submit' | 'reset';
 

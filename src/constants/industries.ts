@@ -4,15 +4,39 @@ const INDUSTRIES_BASE = '/industries';
 
 export const INDUSTRY_GROUPS = [
   {
-    id: 'industries',
-    title: 'Industries',
+    id: 'wave-1',
+    title: 'Wave 1 Industry Systems',
     items: [
       {
         slug: 'healthcare',
-        label: 'Healthcare',
-        description: 'Secure, compliant products for care teams.',
+        label: 'Healthcare System',
+        description: 'Patient-ready website, ops dashboard, AI intake, and analytics.',
         icon: 'shield',
       },
+      {
+        slug: 'real-estate',
+        label: 'Real Estate System',
+        description: 'Listings, lead pipeline, AI assistant, and performance analytics.',
+        icon: 'globe',
+      },
+      {
+        slug: 'restaurant',
+        label: 'Restaurant System',
+        description: 'Brand site, reservations/leads, AI concierge, and ops dashboard.',
+        icon: 'sparkles',
+      },
+      {
+        slug: 'corporate-services',
+        label: 'Corporate Services System',
+        description: 'Authority website, CRM leads, AI assistant, and executive analytics.',
+        icon: 'workflow',
+      },
+    ],
+  },
+  {
+    id: 'more-industries',
+    title: 'More industries',
+    items: [
       {
         slug: 'education',
         label: 'Education',
@@ -44,12 +68,6 @@ export const INDUSTRY_GROUPS = [
         icon: 'database',
       },
       {
-        slug: 'real-estate',
-        label: 'Real Estate',
-        description: 'Property platforms and digital experiences.',
-        icon: 'globe',
-      },
-      {
         slug: 'travel',
         label: 'Travel',
         description: 'Booking, operations, and traveler products.',
@@ -77,6 +95,13 @@ export const ALL_INDUSTRIES: readonly NavLinkItem[] = INDUSTRY_GROUPS.flatMap((g
 
 export const INDUSTRY_SLUGS = ALL_INDUSTRIES.map((industry) => industry.slug);
 
+export const WAVE1_INDUSTRY_SLUGS = [
+  'healthcare',
+  'real-estate',
+  'restaurant',
+  'corporate-services',
+] as const;
+
 export function getIndustryBySlug(slug: string): NavLinkItem | undefined {
   return ALL_INDUSTRIES.find((industry) => industry.slug === slug);
 }
@@ -86,17 +111,18 @@ export function getIndustryHref(slug: string): string {
 }
 
 export const INDUSTRIES_FEATURED: NavFeaturedCard = {
-  eyebrow: 'Featured',
-  label: 'Industry Expertise',
-  description: 'Domain-aware delivery across regulated and growth markets.',
+  eyebrow: 'Wave 1',
+  label: 'Industry Systems',
+  description:
+    'Complete Digital Systems for Healthcare, Real Estate, Restaurant, and Corporate Services.',
   href: INDUSTRIES_BASE,
   icon: 'star',
-  ctaLabel: 'Learn More',
-  badge: 'Expertise',
+  ctaLabel: 'Explore Industry Systems',
+  badge: 'Systems',
   highlights: [
-    'Healthcare & FinTech',
-    'Retail & Logistics',
-    'Startups to Enterprise',
-    'Compliant delivery',
+    'Website + AI + Dashboard',
+    'Analytics + Integrations',
+    'CMS + Lead Management',
+    'Deployment Ready',
   ],
 };

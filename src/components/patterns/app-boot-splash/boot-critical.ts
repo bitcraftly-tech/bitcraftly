@@ -203,6 +203,13 @@ export const APP_BOOT_INIT_SCRIPT = `
     var root = document.documentElement;
     if (root.classList.contains('bc-app-ready')) return;
     var path = location.pathname || '';
+    /* Homepage: never gate first paint behind the boot splash. */
+    if (path === '/' || path === '') {
+      root.classList.remove('bc-booting', 'bc-demo-booting');
+      root.classList.add('bc-app-ready');
+      root.setAttribute('aria-busy', 'false');
+      return;
+    }
     var isDemo =
       path.indexOf('/interactive-demos/') === 0 ||
       (path.indexOf('/portfolio/') === 0 && path.length > '/portfolio/'.length);

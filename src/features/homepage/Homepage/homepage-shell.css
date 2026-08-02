@@ -19,12 +19,15 @@
 .homepage-sections {
   --hp-card-radius: 16px;
   --hp-card-padding: var(--card-padding);
-  --hp-card-border: #eef2ff;
-  --hp-card-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.04);
+  --hp-card-border: color-mix(in srgb, var(--primary-end) 12%, var(--border));
+  --hp-card-shadow:
+    0 1px 0 color-mix(in srgb, white 75%, transparent) inset,
+    0 16px 36px -26px color-mix(in srgb, var(--foreground) 22%, transparent);
   --hp-card-shadow-hover:
-    var(--token-shadow-md), 0 16px 36px -20px color-mix(in srgb, var(--primary) 28%, transparent);
-  --hp-card-lift: -6px;
-  --hp-card-transition: 220ms var(--ease-out);
+    0 1px 0 color-mix(in srgb, white 75%, transparent) inset,
+    0 26px 52px -28px color-mix(in srgb, var(--primary) 30%, transparent);
+  --hp-card-lift: -3px;
+  --hp-card-transition: var(--duration-fast) var(--ease-out);
 }
 
 /**

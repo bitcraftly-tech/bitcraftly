@@ -144,7 +144,8 @@ export function DesktopNavigation() {
       ref={navRef}
       id={HEADER_NAV_ID}
       aria-label="Main navigation"
-      className="relative hidden max-w-full items-center justify-center gap-x-[20px] xl:flex 2xl:gap-x-[24px]"
+      className="relative flex max-w-full min-w-0 flex-nowrap items-center justify-center gap-x-[10px] text-[13px]"
+
       onMouseLeave={() => closeMenu()}
     >
       {HEADER_NAV_LINKS.map((link) => {
@@ -181,12 +182,12 @@ export function DesktopNavigation() {
               type="button"
               className={cn(
                 'header-nav-item relative inline-flex items-center gap-[4px] py-[8px]',
-                'font-sans text-[14px] font-medium leading-none tracking-[-0.01em] whitespace-nowrap',
+                'font-sans text-[13px] font-medium leading-none tracking-[-0.01em] whitespace-nowrap',
                 'transition-colors duration-200 ease-out',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
                 isActive || isOpen
                   ? 'header-nav-active text-primary'
-                  : 'text-foreground hover:text-primary',
+                  : 'text-foreground/80 hover:text-primary',
               )}
               aria-expanded={isOpen}
               aria-haspopup="true"

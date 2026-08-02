@@ -17,7 +17,7 @@ const LeadFunnelWidgets = dynamic(
 
 /**
  * Non-critical marketing chrome — client-only, code-split, idle-deferred.
- * Ask AI is off for now (ASK_AI_ENABLED in AskAiTab + not mounted here).
+ * Ask AI launcher is archived under `features/homepage/_archive/AskAi` (not mounted).
  */
 export function MarketingClientChrome() {
   return (

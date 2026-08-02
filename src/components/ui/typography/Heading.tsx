@@ -31,7 +31,7 @@ export function Heading({ as, level, className, children, ...props }: HeadingPro
 
   return (
     <Component
-      className={cn('font-sans text-foreground text-balance', visualClasses, className)}
+      className={cn('font-sans text-heading text-balance', visualClasses, className)}
       {...props}
     >
       {children}

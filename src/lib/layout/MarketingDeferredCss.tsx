@@ -3,8 +3,9 @@
 import { useEffect } from 'react';
 
 /**
- * Loads footer + deferred chrome widget CSS after first paint
+ * Loads deferred chrome widget CSS after first paint
  * so they are not render-blocking on LCP.
+ * Footer + newsletter skins load sync via marketing layout.
  */
 export function MarketingDeferredCss() {
   useEffect(() => {

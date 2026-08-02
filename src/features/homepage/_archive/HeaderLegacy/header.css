@@ -3,16 +3,17 @@
  */
 
 .header-adaptive {
-  border-color: transparent;
-  background-color: transparent;
+  border-color: color-mix(in srgb, var(--foreground) 5%, transparent);
+  background-color: var(--background);
+  margin-bottom: 0;
 }
 
 html[data-header-mode='solid'] .header-adaptive,
 html[data-header-scrolled='true'] .header-adaptive {
-  background-color: color-mix(in srgb, var(--background) 94%, transparent);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-color: var(--border);
+  background-color: var(--background);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-color: transparent;
 }
 
 .header-brand-gradient {
@@ -32,7 +33,7 @@ html[data-header-scrolled='true'] .header-adaptive {
 /* Default / hover / active nav colors — match approved design */
 #header-main-navigation a:not(.header-nav-active),
 #header-main-navigation button:not(.header-nav-active) {
-  color: var(--foreground) !important;
+  color: color-mix(in srgb, var(--foreground) 80%, transparent) !important;
 }
 
 #header-main-navigation a:hover,

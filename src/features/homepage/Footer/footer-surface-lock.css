@@ -1,0 +1,10 @@
+/**
+ * Loaded last — keep newsletter + footer on the same flat inverse navy.
+ */
+.footer-surface,
+#footer.footer-surface,
+#newsletter.footer-surface {
+  color: var(--inverse-foreground) !important;
+  background-color: var(--inverse) !important;
+  background-image: none !important;
+}

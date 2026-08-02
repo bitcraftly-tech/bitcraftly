@@ -1,0 +1,375 @@
+/**
+ * Homepage Premium Visual Polish Pass
+ * Visual chrome only — does not change layout, IA, type scale, or spacing system.
+ */
+
+/* Section divider rhythm — opacity only, spacing untouched */
+.homepage-sections > * + * {
+  border-top-color: color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+.homepage-sections,
+.hp-hero {
+  /* Borders */
+  --hp-border: color-mix(in srgb, var(--foreground) 7%, transparent);
+  --hp-border-strong: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --hp-border-hover: color-mix(in srgb, var(--primary) 24%, transparent);
+  --hp-border-accent: color-mix(in srgb, var(--primary) 28%, transparent);
+
+  /* Elevation recipe */
+  --hp-inset: 0 1px 0 color-mix(in srgb, white 75%, transparent) inset;
+  --hp-elev-1:
+    var(--hp-inset), 0 16px 36px -26px color-mix(in srgb, var(--foreground) 22%, transparent);
+  --hp-elev-2:
+    var(--hp-inset),
+    0 22px 48px -28px color-mix(in srgb, var(--foreground) 28%, transparent),
+    0 10px 20px -14px color-mix(in srgb, var(--foreground) 10%, transparent);
+  --hp-elev-hover:
+    var(--hp-inset), 0 26px 52px -28px color-mix(in srgb, var(--primary) 30%, transparent);
+  --hp-elev-cta:
+    0 1px 0 color-mix(in srgb, white 30%, transparent) inset,
+    0 20px 44px -18px color-mix(in srgb, var(--primary) 62%, transparent);
+  --hp-elev-cta-hover:
+    0 1px 0 color-mix(in srgb, white 30%, transparent) inset,
+    0 26px 50px -16px color-mix(in srgb, var(--primary) 76%, transparent);
+
+  /* Interaction */
+  --hp-lift-sm: -1px;
+  --hp-lift-md: -3px;
+  --hp-interact: var(--duration-fast) var(--ease-out);
+  --hp-focus-ring: 2px solid var(--primary);
+  --hp-focus-offset: 3px;
+
+  /* Shared card tokens (reconcile critical + shell) */
+  --hp-card-border: color-mix(in srgb, var(--primary-end) 12%, var(--border));
+  --hp-card-shadow: var(--hp-elev-1);
+  --hp-card-shadow-hover: var(--hp-elev-hover);
+  --hp-card-lift: var(--hp-lift-md);
+  --hp-card-transition: var(--hp-interact);
+}
+
+/* —— Focus language —— */
+.hp-hero-cta:focus-visible,
+.hp-hero-modules__item:focus-visible,
+.hs-text-link:focus-visible,
+.hs-system__cta:focus-visible,
+.hs-auto-link:focus-visible,
+.hs-wave-all:focus-visible,
+.hp-work-rail__cta:focus-visible,
+.hp-work-carousel__btn:focus-visible,
+.hp-work-carousel__dot:focus-visible {
+  outline: var(--hp-focus-ring);
+  outline-offset: var(--hp-focus-offset);
+}
+
+.footer-focus-ring:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: var(--hp-focus-offset);
+}
+
+/* —— Hero CTAs —— */
+.hp-hero-cta {
+  transition:
+    filter var(--hp-interact),
+    transform var(--hp-interact),
+    box-shadow var(--hp-interact),
+    border-color var(--hp-interact),
+    color var(--hp-interact),
+    background-color var(--hp-interact);
+}
+
+.hp-hero-cta--primary {
+  /* Shared logo button gradient (--btn-grad from button.css) */
+  background: var(--btn-grad, linear-gradient(115deg, var(--primary), var(--primary-end)));
+  box-shadow: var(--btn-shadow, var(--hp-elev-cta));
+}
+
+.hp-hero-cta--primary:hover {
+  transform: translateY(var(--hp-lift-sm));
+  box-shadow: var(--hp-elev-cta-hover);
+}
+
+.hp-hero-cta--secondary {
+  border-color: var(--hp-border-strong);
+  box-shadow: var(--hp-inset);
+}
+
+.hp-hero-cta--secondary:hover {
+  border-color: var(--hp-border-hover);
+  box-shadow:
+    var(--hp-inset),
+    0 10px 22px -16px color-mix(in srgb, var(--primary) 28%, transparent);
+  transform: translateY(var(--hp-lift-sm));
+}
+
+/* —— Module chips —— */
+.hp-hero-modules__item {
+  border-color: color-mix(in srgb, var(--primary) 14%, var(--border));
+  box-shadow: var(--hp-inset);
+  transition:
+    border-color var(--hp-interact),
+    background-color var(--hp-interact),
+    transform var(--hp-interact),
+    box-shadow var(--hp-interact);
+}
+
+.hp-hero-modules__item:hover {
+  border-color: var(--hp-border-hover);
+  transform: translateY(var(--hp-lift-sm));
+  box-shadow:
+    var(--hp-inset),
+    0 8px 18px -14px color-mix(in srgb, var(--primary) 36%, transparent);
+}
+
+/* —— Hero stage / glow —— */
+.hp-hero-visual::before {
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 70%, transparent) inset,
+    0 40px 80px -48px color-mix(in srgb, var(--foreground) 28%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--primary) 8%, transparent);
+}
+
+.hp-hero-bg__orb--a,
+.hp-hero-bg__orb--b,
+.hp-hero-bg__orb--c {
+  opacity: 0.9;
+}
+
+/* —— System composition depth —— */
+.sys__glow {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--primary) 32%, transparent) 0%,
+    color-mix(in srgb, var(--primary-end) 12%, transparent) 42%,
+    transparent 72%
+  );
+  filter: blur(68px);
+}
+
+.sys__ring {
+  border-color: color-mix(in srgb, var(--primary) 18%, transparent);
+  box-shadow:
+    0 0 0 16px color-mix(in srgb, var(--primary) 5%, transparent),
+    inset 0 0 36px color-mix(in srgb, var(--primary) 7%, transparent);
+  opacity: 0.75;
+}
+
+.sys__panel {
+  border-color: var(--hp-border);
+  box-shadow: var(--hp-elev-2);
+}
+
+.sys__flow {
+  border-color: var(--hp-border);
+  box-shadow:
+    var(--hp-inset),
+    0 12px 28px -20px color-mix(in srgb, var(--foreground) 28%, transparent);
+}
+
+.sys__flow-arrow {
+  color: color-mix(in srgb, var(--primary) 50%, var(--muted));
+}
+
+.sys__label {
+  border-color: color-mix(in srgb, var(--primary) 20%, transparent);
+  box-shadow: var(--hp-inset);
+}
+
+.sys__site-cta {
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 28%, transparent) inset,
+    0 12px 24px -12px color-mix(in srgb, var(--primary) 58%, transparent);
+  transition:
+    transform var(--hp-interact),
+    box-shadow var(--hp-interact),
+    filter var(--hp-interact);
+}
+
+.sys__site-cta:hover {
+  transform: translateY(var(--hp-lift-sm));
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 28%, transparent) inset,
+    0 16px 28px -12px color-mix(in srgb, var(--primary) 68%, transparent);
+}
+
+/* —— HomeStory cards / workflow / duel —— */
+.hs-system,
+.hs-flow,
+.hs-path-step,
+.hs-duel__row,
+.hs-modules,
+.hs-eco__node,
+.hs-sync__channel {
+  transition:
+    transform var(--hp-interact),
+    border-color var(--hp-interact),
+    box-shadow var(--hp-interact),
+    background-color var(--hp-interact);
+}
+
+.hs-system,
+.hs-flow {
+  border-color: var(--hp-border);
+  box-shadow: var(--hp-elev-1);
+}
+
+.hs-system:hover,
+.hs-flow:hover {
+  transform: translateY(var(--hp-lift-md));
+  border-color: var(--hp-border-hover);
+  box-shadow: var(--hp-elev-hover);
+}
+
+.hs-path-step {
+  border-color: var(--hp-border);
+}
+
+.hs-path-step:hover {
+  transform: translateY(var(--hp-lift-sm));
+  border-color: var(--hp-border-hover);
+  box-shadow:
+    var(--hp-inset),
+    0 10px 24px -18px color-mix(in srgb, var(--primary) 36%, transparent);
+}
+
+.hs-flow__connector,
+.hs-flow__arrow,
+.hs-path-step__arrow,
+.hs-workflow-arrow {
+  color: color-mix(in srgb, var(--primary) 50%, var(--muted));
+}
+
+.hs-system__cta,
+.hs-auto-link,
+.hs-wave-all {
+  transition:
+    gap var(--hp-interact),
+    color var(--hp-interact),
+    transform var(--hp-interact);
+}
+
+.hs-system__cta-arrow {
+  transition: transform var(--hp-interact);
+}
+
+/* Comparison / duel readability */
+.hs-duel__row {
+  border-color: color-mix(in srgb, var(--border) 90%, transparent);
+  box-shadow:
+    var(--hp-inset),
+    0 12px 28px -22px color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+.hs-duel__side--them {
+  border: 1px dashed color-mix(in srgb, var(--border) 92%, transparent);
+  background: color-mix(in srgb, var(--muted) 4%, white);
+}
+
+.hs-duel__side--us {
+  border: 1px solid var(--hp-border-accent);
+  box-shadow:
+    var(--hp-inset),
+    0 10px 22px -16px color-mix(in srgb, var(--primary) 34%, transparent);
+}
+
+.hs-duel__vs {
+  border-color: color-mix(in srgb, var(--primary) 22%, transparent);
+  box-shadow: var(--hp-inset);
+}
+
+/* —— Work carousel chrome (if present) —— */
+.hp-work-rail__cta,
+.hp-work-carousel__btn {
+  transition:
+    border-color var(--hp-interact),
+    color var(--hp-interact),
+    background-color var(--hp-interact),
+    transform var(--hp-interact),
+    box-shadow var(--hp-interact);
+}
+
+.hp-work-slide {
+  box-shadow: var(--hp-elev-2);
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out);
+}
+
+.hp-work-slide.is-active {
+  box-shadow: var(--hp-elev-hover);
+}
+
+/* —— Newsletter / footer interaction —— */
+/* Subscribe uses shared .bc-btn--primary / --btn-grad (no local color override) */
+.newsletter-subscribe.bc-btn--primary {
+  background-color: var(--primary);
+  background-image: var(--btn-grad);
+  box-shadow: var(--btn-shadow);
+  transition: var(--btn-transition, var(--hp-interact));
+}
+
+.newsletter-subscribe.bc-btn--primary:hover {
+  background-image: var(--btn-grad-hover);
+  transform: translateY(var(--hp-lift-sm, -1px));
+  box-shadow: var(--btn-shadow-hover);
+  filter: brightness(1.04);
+}
+
+.newsletter-form-shell:focus-within,
+.newsletter-input:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+.footer-social-link {
+  transition:
+    transform var(--hp-interact),
+    border-color var(--hp-interact),
+    background-color var(--hp-interact),
+    color var(--hp-interact);
+}
+
+.footer-social-link:hover {
+  transform: translateY(var(--hp-lift-sm));
+}
+
+/* —— Hero CTA glow: quieter ambient so hover wins —— */
+@keyframes hp-hero-cta-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 1px 0 color-mix(in srgb, white 30%, transparent) inset,
+      0 20px 44px -18px color-mix(in srgb, var(--primary) 55%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 1px 0 color-mix(in srgb, white 32%, transparent) inset,
+      0 22px 48px -16px color-mix(in srgb, var(--primary) 68%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hp-hero-cta--primary,
+  .hp-hero-cta--secondary,
+  .hp-hero-modules__item,
+  .hs-system,
+  .hs-flow,
+  .hs-path-step,
+  .newsletter-subscribe,
+  .footer-social-link,
+  .sys__site-cta {
+    transition: none;
+  }
+
+  .hp-hero-cta--primary:hover,
+  .hp-hero-cta--secondary:hover,
+  .hp-hero-modules__item:hover,
+  .hs-system:hover,
+  .hs-flow:hover,
+  .hs-path-step:hover,
+  .newsletter-subscribe:hover,
+  .footer-social-link:hover,
+  .sys__site-cta:hover {
+    transform: none;
+  }
+}

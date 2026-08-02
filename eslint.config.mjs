@@ -17,6 +17,8 @@ const eslintConfig = defineConfig([
     '.lighthouseci/**',
     'playwright-report/**',
     'test-results/**',
+    // Legacy homepage archive (not production)
+    'src/features/homepage/_archive/**',
   ]),
 ]);
 

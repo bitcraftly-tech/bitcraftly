@@ -7,6 +7,7 @@ import { cn } from '@/lib/cn';
 import { HeroDashboard } from '../Hero/HeroDashboard';
 import { HomepageReveal } from '../shared/HomepageReveal';
 import { bitcraftlyProductImage } from '../shared/contact-links';
+import './dashboard-showcase.css';
 
 export const DASHBOARD_SECTION_ID = 'enterprise-dashboard';
 export const DASHBOARD_HEADING_ID = 'enterprise-dashboard-heading';
@@ -118,7 +119,7 @@ export function DashboardShowcaseSection() {
           <li className="min-w-0">
             <HomepageReveal name="dashboard" delayMs={80} className="h-full">
               <article className="dashboard-featured-card h-full">
-                <div className="dashboard-featured-media dashboard-featured-media--dashboard">
+                <div className="dashboard-featured-media dashboard-featured-media--dashboard relative">
                   <span className="dashboard-saas-badge">Featured Project</span>
                   <div className="dashboard-panel">
                     <HeroDashboard decorative={false} showBrowserChrome />
@@ -147,7 +148,7 @@ export function DashboardShowcaseSection() {
           <li className="min-w-0">
             <HomepageReveal name="dashboard" delayMs={140} className="h-full">
               <article className="dashboard-featured-card h-full">
-                <div className="dashboard-featured-media">
+                <div className="dashboard-featured-media relative">
                   <Image
                     src={bitcraftlyProductImage('Next-Gen SaaS Platform.png')}
                     alt="Multi-tenant SaaS product UI preview"

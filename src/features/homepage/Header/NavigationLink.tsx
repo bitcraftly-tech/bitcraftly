@@ -18,10 +18,10 @@ export function NavigationLink({
       onClick={onClick}
       className={cn(
         'header-nav-item relative inline-flex items-center gap-[4px] py-[8px] no-underline',
-        'font-sans text-[14px] font-medium leading-none tracking-[-0.01em] whitespace-nowrap',
+        'font-sans text-[13px] font-medium leading-none tracking-[-0.01em] whitespace-nowrap',
         'transition-colors duration-200 ease-out',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-        isActive ? 'header-nav-active text-primary' : 'text-foreground hover:text-primary',
+        isActive ? 'header-nav-active text-primary' : 'text-foreground/80 hover:text-primary',
         className,
       )}
     >

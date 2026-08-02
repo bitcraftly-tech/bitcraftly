@@ -17,7 +17,7 @@ type PortfolioShowcaseCardProps = {
 };
 
 const BTN_PRIMARY =
-  'inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-[#7C3AED] px-4 text-sm font-semibold text-white transition-colors duration-250 hover:bg-[#6D28D9] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED]';
+  'inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors duration-250 hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary';
 
 const BTN_GHOST =
   'inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 text-sm font-semibold text-[#374151] transition-colors duration-250 hover:border-[#D1D5DB] hover:bg-[#F9FAFB] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED] dark:border-dark-border-primary dark:bg-dark-bg-secondary dark:text-dark-text-primary dark:hover:border-dark-border-secondary dark:hover:bg-dark-bg-card';

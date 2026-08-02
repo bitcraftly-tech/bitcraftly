@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import { usePathname } from 'next/navigation';
+import { ButtonArrow } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/cn';
@@ -188,24 +189,15 @@ export function NewsletterSection() {
                 type="submit"
                 disabled={isLoading}
                 className={cn(
-                  'newsletter-subscribe group/newsletter',
-                  'inline-flex min-h-[44px] w-full shrink-0 items-center justify-center gap-[6px] sm:h-full sm:w-auto',
-                  'rounded-none rounded-b-[calc(var(--token-radius-xl)-1px)] px-[5px] sm:px-[16px]',
+                  'bc-btn bc-btn--primary newsletter-subscribe group/newsletter',
+                  'min-h-[44px] w-full shrink-0 gap-[6px] sm:h-full sm:w-auto',
+                  'rounded-none rounded-b-[calc(var(--token-radius-xl)-1px)] px-[5px] text-[13px] sm:px-[16px]',
                   'sm:rounded-b-none sm:rounded-r-[calc(var(--token-radius-xl)-1px)]',
-                  'border-0 font-sans text-[13px] font-[var(--font-weight-semibold)]',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2',
                   'disabled:cursor-not-allowed disabled:opacity-80',
                 )}
               >
                 {isLoading ? NEWSLETTER_COPY.loadingLabel : NEWSLETTER_COPY.submitLabel}
-                {!isLoading ? (
-                  <Icon
-                    name="arrow-up-right"
-                    size="sm"
-                    aria-hidden
-                    className="h-[14px] w-[14px] transition-transform duration-[var(--duration-fast)] group-hover/newsletter:translate-x-[2px] group-hover/newsletter:-translate-y-[2px]"
-                  />
-                ) : null}
+                {!isLoading ? <ButtonArrow className="text-[14px]" /> : null}
               </button>
             </form>
           )}

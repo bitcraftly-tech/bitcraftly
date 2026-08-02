@@ -7,7 +7,8 @@ import { Icon } from '@/components/ui/icon';
 import { Container } from '@/components/ui/container';
 import { cn } from '@/lib/cn';
 import {
-  HEADER_CTA,
+  HEADER_CTA_PRIMARY,
+  HEADER_CTA_SECONDARY,
   HEADER_HEIGHT_PX,
   HEADER_MOBILE_MENU_ID,
   HEADER_NAV_LINKS,
@@ -104,7 +105,7 @@ export function MobileNavigation() {
         ref={triggerRef}
         type="button"
         className={cn(
-          'inline-flex size-[44px] min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-lg xl:hidden',
+          'header-mobile-trigger inline-flex size-[44px] min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-lg',
           'text-foreground transition-colors duration-200 hover:bg-surface',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
         )}
@@ -143,7 +144,8 @@ export function MobileNavigation() {
           role="dialog"
           aria-modal="true"
           aria-labelledby={menuLabelId}
-          className="header-mobile-menu fixed inset-x-0 z-[calc(var(--z-sticky)-1)] flex flex-col border-t border-border bg-background/95 backdrop-blur-xl xl:hidden"
+          className="header-mobile-menu fixed inset-x-0 z-[calc(var(--z-sticky)-1)] flex flex-col border-t border-border bg-background/95 backdrop-blur-xl"
+
           style={{
             top: HEADER_HEIGHT_PX,
             height: `calc(100dvh - ${HEADER_HEIGHT_PX}px)`,
@@ -170,17 +172,26 @@ export function MobileNavigation() {
               )}
             >
               <Link
-                href={HEADER_CTA.href}
+                href={HEADER_CTA_SECONDARY.href}
                 onClick={() => closeMenu()}
                 className={cn(
                   mobileMenuButtonBase,
-                  'border-0 bg-primary text-primary-foreground',
-                  'shadow-[0_8px_20px_-10px_color-mix(in_srgb,var(--primary)_55%,transparent)]',
-                  'hover:bg-primary/90 hover:-translate-y-px',
+                  'rounded-[8px] border border-foreground/12 bg-background text-foreground',
+                  'hover:bg-canvas',
                 )}
               >
-                {HEADER_CTA.label}
-                <Icon name="arrow-right" size="sm" aria-hidden className="h-[15px] w-[15px]" />
+                {HEADER_CTA_SECONDARY.label}
+              </Link>
+              <Link
+                href={HEADER_CTA_PRIMARY.href}
+                onClick={() => closeMenu()}
+                className={cn(
+                  mobileMenuButtonBase,
+                  'rounded-[8px] border-0 bg-primary text-primary-foreground',
+                  'hover:bg-primary/90',
+                )}
+              >
+                {HEADER_CTA_PRIMARY.label}
               </Link>
             </div>
           </Container>

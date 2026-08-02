@@ -24,6 +24,35 @@ body {
 /* -------------------------------------------------------------------------- */
 
 h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-display,
+.text-heading-lg,
+.text-heading-md,
+.text-heading-sm {
+  color: var(--heading);
+}
+
+/* Dark / inverse bands keep light titles */
+.footer-surface h1,
+.footer-surface h2,
+.footer-surface h3,
+.footer-surface h4,
+.footer-surface h5,
+.footer-surface h6,
+[data-theme='dark'] h1,
+[data-theme='dark'] h2,
+[data-theme='dark'] h3,
+[data-theme='dark'] h4,
+[data-theme='dark'] h5,
+[data-theme='dark'] h6 {
+  color: inherit;
+}
+
+h1,
 .text-display {
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);

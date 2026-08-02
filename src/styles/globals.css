@@ -10,7 +10,17 @@
 @import './card-spacing.css';
 @import './section-rhythm.css';
 @import './typography.css';
-/* animations.css — loaded post-paint via MarketingDeferredCss (not ATF-critical) */
+@import '../components/ui/button/button.css';
+/* animations.css — loaded post-paint via RootDeferredCss (not ATF-critical) */
+
+/* Shrink shared CSS: archived / demo-only trees must not inflate marketing CSS. */
+@source not '../features/homepage/_archive/**/*';
+@source not '../app/portfolio/**/*';
+@source not '../app/interactive-demos/**/*';
+@source not '../components/dayal/**/*';
+@source not '../components/portfolio/**/*';
+@source not '../lib/dayal/**/*';
+@source not '../app/dayal-builders/**/*';
 
 /* -------------------------------------------------------------------------- */
 /* Tailwind v4 theme — maps raw tokens to utility classes                     */
@@ -21,6 +31,7 @@
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-end: var(--primary-end);
 
   --color-secondary: var(--secondary);
   --color-secondary-hover: var(--secondary-hover);
@@ -32,6 +43,10 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-heading: var(--heading);
+  --color-heading-accent: var(--heading-accent);
+  --color-canvas: var(--canvas);
+  --color-glow: var(--glow);
 
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);

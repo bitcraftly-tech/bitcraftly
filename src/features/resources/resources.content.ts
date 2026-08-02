@@ -210,9 +210,9 @@ export const RESOURCES_DOCUMENTATION: ResourceTopicPageContent = {
 
 export const RESOURCES_FAQ_COPY = {
   eyebrow: 'FAQ',
-  title: 'Frequently asked questions',
+  title: 'Industry Systems — common questions',
   description:
-    'Answers to common questions about working with Bitcraftly — from discovery and delivery to support.',
+    'Answers about Complete Digital Systems, Wave 1 industries, Intelligent Business Automation, and how to get started with Bitcraftly.',
 } as const;
 
 export function getResourceTopicBySlug(slug: string): ResourceTopicPageContent | undefined {

@@ -8,6 +8,9 @@ export { MegaMenuItem } from './MegaMenuItem';
 export { MobileNavAccordion } from './MobileNavAccordion';
 export {
   HEADER_CTA,
+  HEADER_CTA_PRIMARY,
+  HEADER_CTA_SECONDARY,
+  HEADER_LOGIN,
   HEADER_HEIGHT_PX,
   HEADER_ID,
   HEADER_MOBILE_MENU_ID,
