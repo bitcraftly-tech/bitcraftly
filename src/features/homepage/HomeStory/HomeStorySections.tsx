@@ -26,19 +26,19 @@ const OUTCOMES = [
     index: '01',
     label: 'Launch',
     title: 'Go live faster',
-    body: 'Start from a deployment-ready Industry System instead of a blank brief.',
+    body: 'Start from a ready Industry System — not a blank brief.',
   },
   {
     index: '02',
     label: 'Growth',
     title: 'Convert and capture demand',
-    body: 'Marketing site and lead management work as one growth surface.',
+    body: 'Site and lead management work as one growth surface.',
   },
   {
     index: '03',
     label: 'Operations',
     title: 'Operate with intelligence',
-    body: 'Dashboard, AI workflows, and analytics keep the business running after launch.',
+    body: 'Dashboard, AI, and analytics keep ops running after launch.',
   },
 ] as const;
 
@@ -58,7 +58,7 @@ const WAVE1 = [
     name: 'Healthcare System',
     short: 'Healthcare',
     href: getIndustryHref('healthcare'),
-    blurb: 'Patient-ready website, ops dashboard, AI intake, and analytics.',
+    blurb: 'Patient site, ops dashboard, AI intake, and live analytics.',
     modules: ['Website', 'AI Intake', 'Dashboard', 'Analytics'] as const,
     tone: 'violet',
   },
@@ -67,7 +67,7 @@ const WAVE1 = [
     name: 'Real Estate System',
     short: 'Real Estate',
     href: getIndustryHref('real-estate'),
-    blurb: 'Listing experience, lead pipeline, AI assistant, and performance analytics.',
+    blurb: 'Listings, lead pipeline, AI assistant, and performance analytics.',
     modules: ['Listings', 'Leads', 'AI', 'Analytics'] as const,
     tone: 'sky',
   },
@@ -76,7 +76,7 @@ const WAVE1 = [
     name: 'Restaurant System',
     short: 'Restaurant',
     href: getIndustryHref('restaurant'),
-    blurb: 'Brand site, reservations/leads, AI concierge, and ops dashboard.',
+    blurb: 'Brand site, reservations, AI concierge, and ops dashboard.',
     modules: ['Brand Site', 'Reservations', 'AI Concierge', 'Ops'] as const,
     tone: 'rose',
   },
@@ -85,7 +85,7 @@ const WAVE1 = [
     name: 'Corporate Services System',
     short: 'Corporate',
     href: getIndustryHref('corporate-services'),
-    blurb: 'Authority website, CRM leads, AI assistant, and executive analytics.',
+    blurb: 'Authority site, CRM leads, AI assistant, and exec analytics.',
     modules: ['Authority Site', 'CRM', 'AI', 'Exec Analytics'] as const,
     tone: 'amber',
   },
@@ -125,13 +125,13 @@ const WORKFLOWS = [
 const COMPARISON = [
   {
     dim: 'Starting point',
-    agency: 'Blank brief / custom from scratch',
+    agency: 'Blank brief / build from scratch',
     ours: 'Industry System foundation',
   },
   {
     dim: 'Deliverable',
     agency: 'Mostly a website',
-    ours: 'Website + Dashboard + CMS + AI + Leads + Analytics + Integrations',
+    ours: 'Website + Dashboard + CMS + AI + Leads + Analytics',
   },
   {
     dim: 'Speed',
@@ -141,12 +141,12 @@ const COMPARISON = [
   {
     dim: 'AI',
     agency: 'Bolt-on or absent',
-    ours: 'Intelligent Business Automation inside the system',
+    ours: 'Automation built into the system',
   },
   {
     dim: 'Ops',
     agency: 'Fragmented tools',
-    ours: 'Admin dashboard + lead management included',
+    ours: 'Dashboard + lead management included',
   },
   {
     dim: 'Accountability',
@@ -156,10 +156,10 @@ const COMPARISON = [
 ] as const;
 
 const GO_LIVE = [
-  { step: '01', title: 'Choose Industry', body: 'Pick a Wave 1 Industry System.' },
-  { step: '02', title: 'Configure System', body: 'Select modules and workflows.' },
-  { step: '03', title: 'Customize Brand', body: 'Identity, content, and domain.' },
-  { step: '04', title: 'Launch', body: 'Go live deployment-ready.' },
+  { step: '01', title: 'Choose Industry', body: 'Pick your Wave 1 Industry System.' },
+  { step: '02', title: 'Configure System', body: 'Select the modules you need.' },
+  { step: '03', title: 'Customize Brand', body: 'Apply identity, content, and domain.' },
+  { step: '04', title: 'Launch', body: 'Ship deployment-ready — go live.' },
 ] as const;
 
 export function HomeStorySections() {
@@ -181,7 +181,7 @@ export function HomeStorySections() {
               Outcomes your business <em>can expect</em>
             </h2>
             <p className="hs-outcomes-lede">
-              One Industry System — launch, convert, and run the business as a connected loop.
+              Launch faster, convert demand, and run ops — one connected Industry System.
             </p>
           </header>
 
@@ -214,7 +214,7 @@ export function HomeStorySections() {
               From problem to <em>launch</em>
             </h2>
             <p className="hs-path-lede">
-              A clear sequence from business problem to a live Industry System.
+              From business problem to a live Industry System — in a clear sequence.
             </p>
           </header>
 
@@ -263,7 +263,7 @@ export function HomeStorySections() {
               What&apos;s included in every <em>Industry System</em>
             </h2>
             <p className="hs-included-lede">
-              Eight modules. One product. No generic feature cards — these are the system.
+              Eight modules ship as one product — everything needed to launch and operate.
             </p>
           </header>
 
@@ -300,12 +300,12 @@ export function HomeStorySections() {
                     Explore <em>Industry Systems</em>
                   </h2>
                   <p className="hs-wave-lede">
-                    Four launch-ready systems — website, AI, dashboard, and analytics engineered as
-                    one connected product for your vertical.
+                    Four launch-ready systems — website, AI, dashboard, and analytics as one
+                    product for your vertical.
                   </p>
                 </div>
                 <Link href={ROUTES.industries} className="hs-wave-all">
-                  View all industries
+                  Browse all industries
                   <span aria-hidden="true">→</span>
                 </Link>
               </div>
@@ -337,8 +337,12 @@ export function HomeStorySections() {
                       </li>
                     ))}
                   </ul>
-                  <Link href={system.href} className="hs-system__cta">
-                    View System
+                  <Link
+                    href={system.href}
+                    className="hs-system__cta"
+                    aria-label={`Explore ${system.short} System`}
+                  >
+                    Explore system
                     <span className="hs-system__cta-arrow" aria-hidden="true">
                       →
                     </span>
@@ -364,8 +368,7 @@ export function HomeStorySections() {
                 Intelligent <em>Business Automation</em>
               </h2>
               <p className="hs-auto-lede">
-                AI as business workflows — not a feature list. Input becomes action inside every
-                Industry System.
+                AI as workflows — not a feature list. Input becomes action in every Industry System.
               </p>
             </header>
 
@@ -419,7 +422,7 @@ export function HomeStorySections() {
 
             <p className="hs-auto-after">
               <Link href={ROUTES.assistant} className="hs-auto-link">
-                See automation inside Industry Systems
+                See AI inside Industry Systems
                 <span aria-hidden="true">→</span>
               </Link>
             </p>
@@ -442,8 +445,8 @@ export function HomeStorySections() {
                   An ecosystem dashboard — <em>not a single chart</em>
                 </h2>
                 <p className="hs-dash-lede">
-                  Leads, content, AI activity, and KPIs as one connected control plane — so operators
-                  act from signal, not scattered tools.
+                  Leads, content, AI, and KPIs in one control plane — act from signal, not scattered
+                  tools.
                 </p>
                 <ul className="hs-dash-points">
                   <li>
@@ -555,8 +558,8 @@ export function HomeStorySections() {
                 Connected workflows — <em>not a logo wall</em>
               </h2>
               <p className="hs-mesh-lede">
-                Your industry system sits at the center. Payments, calendar, CRM, messaging, and
-                email stay in sync — without bolting on another disconnected tool.
+                Your Industry System stays central. Payments, calendar, CRM, messaging, and email
+                stay in sync — no bolt-on tool sprawl.
               </p>
             </header>
 
@@ -626,8 +629,7 @@ export function HomeStorySections() {
                 Why <em>Industry Systems?</em>
               </h2>
               <p className="hs-why-lede">
-                How Bitcraftly differs from traditional agencies — same ambition, a different
-                operating model.
+                Same ambition as an agency — a clearer operating model built for launch and ops.
               </p>
             </header>
 
@@ -676,8 +678,7 @@ export function HomeStorySections() {
                 Go <em>Live Faster</em>
               </h2>
               <p className="hs-live-lede">
-                A clear path from industry pick to launch — configure once, brand it, ship
-                deployment-ready.
+                Pick an industry, configure modules, brand it, and ship deployment-ready.
               </p>
             </header>
 
@@ -731,8 +732,7 @@ export function HomeStorySections() {
                   Ready to explore your <em>Industry System?</em>
                 </h2>
                 <p className="hs-invite-lede">
-                  Pick a Wave 1 system, configure what you need, and go live — or book a strategy
-                  call and we&apos;ll map the path with you.
+                  Choose a Wave 1 system and go live — or book a call and we&apos;ll map your path.
                 </p>
               </header>
 
@@ -756,15 +756,15 @@ export function HomeStorySections() {
                     className: 'hs-invite-btn',
                   })}
                 >
-                  Book Strategy Call
+                  Book a Strategy Call
                 </Link>
               </div>
             </div>
 
             <ul className="hs-invite-notes" aria-label="What to expect">
-              <li>Wave 1 systems ready</li>
+              <li>4 Wave 1 systems ready</li>
               <li>Configure → brand → launch</li>
-              <li>Strategy call available</li>
+              <li>Strategy call in 24 hours</li>
             </ul>
           </Container>
         </div>

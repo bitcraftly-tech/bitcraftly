@@ -20,7 +20,7 @@ export const HERO_HEADING = {
 } as const;
 
 export const HERO_DESCRIPTION =
-  'Website, AI, dashboard, analytics, and integrations — engineered as one Industry System, ready to launch.';
+  'Website, AI, dashboard, analytics, and integrations — one Industry System, ready to launch.';
 
 export const HERO_MODULE_CHIPS: readonly string[] = [
   'Website',
@@ -30,7 +30,7 @@ export const HERO_MODULE_CHIPS: readonly string[] = [
   'CMS',
   'Leads',
   'Integrations',
-  'Deploy',
+  'Go-Live',
 ];
 
 /** @deprecated Use HERO_MODULE_CHIPS — no generic feature cards */
@@ -48,14 +48,14 @@ export const HERO_CTAS: HeroCta[] = [
     variant: 'primary',
   },
   {
-    label: 'Book Strategy Call',
+    label: 'Book a Strategy Call',
     href: `${ROUTES.contact}?intent=strategy`,
     variant: 'outline',
   },
 ];
 
 export const HERO_TRUST = {
-  label: 'Industry Systems for Healthcare, Real Estate, Restaurant & Corporate Services',
+  label: 'Trusted path for Healthcare, Real Estate, Restaurant & Corporate',
   countBadge: '4',
   avatars: [
     { initials: 'HC', tone: 'violet' as const },
