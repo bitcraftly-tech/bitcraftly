@@ -9,14 +9,20 @@
 export const APP_BOOT_CRITICAL_CSS = `
 html.bc-booting,
 html.bc-demo-booting {
-  background: #ffffff;
+  background: #ffffff !important;
+  background-image: none !important;
 }
 html.bc-demo-booting {
-  background: var(--demo-boot-bg, #f8fafc);
+  background: var(--demo-boot-bg, #f8fafc) !important;
 }
 html.bc-booting body,
 html.bc-demo-booting body {
   overflow: hidden !important;
+  background: #ffffff !important;
+  background-image: none !important;
+}
+html.bc-demo-booting body {
+  background: var(--demo-boot-bg, #f8fafc) !important;
 }
 html.bc-demo-booting #bc-boot-splash {
   display: none !important;
@@ -33,11 +39,13 @@ html.bc-booting #bc-demo-boot-splash {
   place-items: center;
   margin: 0;
   padding: 24px;
-  background: #ffffff;
+  background: #ffffff !important;
+  background-image: none !important;
+  box-shadow: none !important;
   transition: opacity 220ms ease, visibility 220ms ease;
 }
 #bc-demo-boot-splash {
-  background: var(--demo-boot-bg, #f8fafc);
+  background: var(--demo-boot-bg, #f8fafc) !important;
   color: var(--demo-boot-fg, #0f172a);
 }
 #bc-boot-splash[data-done="true"],
@@ -58,8 +66,10 @@ html.bc-booting #bc-demo-boot-splash {
   position: relative;
   display: grid;
   place-items: center;
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
+  background: transparent;
+  box-shadow: none;
 }
 .bc-demo-boot__mark-wrap {
   width: 56px;
@@ -70,24 +80,34 @@ html.bc-booting #bc-demo-boot-splash {
   position: absolute;
   inset: 0;
   border-radius: 999px;
-  border: 2px solid rgba(37, 99, 235, 0.14);
+  /* No gray full track — only blue arcs */
+  border: 2.5px solid transparent;
   border-top-color: #2563eb;
+  border-right-color: rgba(37, 99, 235, 0.35);
   animation: bc-boot-spin 0.85s linear infinite;
   box-shadow: none;
   filter: none;
   background: transparent;
 }
 .bc-demo-boot__ring {
-  border-color: color-mix(in srgb, var(--demo-boot-accent, #0f766e) 18%, transparent);
+  border-color: transparent;
   border-top-color: var(--demo-boot-accent, #0f766e);
+  border-right-color: color-mix(in srgb, var(--demo-boot-accent, #0f766e) 35%, transparent);
 }
+.bc-boot-splash__ring--delayed,
 .bc-demo-boot__ring--delayed {
-  inset: -4px;
-  border-width: 1px;
-  border-color: color-mix(in srgb, var(--demo-boot-accent, #0f766e) 12%, transparent);
-  border-bottom-color: color-mix(in srgb, var(--demo-boot-accent, #0f766e) 60%, transparent);
+  inset: -5px;
+  border-width: 1.5px;
+  border-color: transparent;
+  border-bottom-color: rgba(37, 99, 235, 0.55);
+  border-left-color: rgba(37, 99, 235, 0.25);
   animation-duration: 1.35s;
   animation-direction: reverse;
+}
+.bc-demo-boot__ring--delayed {
+  border-color: transparent;
+  border-bottom-color: color-mix(in srgb, var(--demo-boot-accent, #0f766e) 55%, transparent);
+  border-left-color: color-mix(in srgb, var(--demo-boot-accent, #0f766e) 25%, transparent);
 }
 .bc-demo-boot__glow {
   position: absolute;
@@ -99,13 +119,14 @@ html.bc-booting #bc-demo-boot-splash {
 .bc-boot-splash__logo {
   position: relative;
   z-index: 1;
-  width: 40px;
-  height: 28px;
+  width: 36px;
+  height: 26px;
   object-fit: contain;
   border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  filter: none;
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+  outline: none;
   animation: bc-boot-float 1.6s ease-in-out infinite;
 }
 .bc-demo-boot__mark {
@@ -163,7 +184,7 @@ html.bc-booting #bc-demo-boot-splash {
     animation: none;
   }
   .bc-boot-splash__ring {
-    border-color: rgba(37, 99, 235, 0.2);
+    border-color: transparent;
     border-top-color: #2563eb;
   }
   .bc-demo-boot__ring {
