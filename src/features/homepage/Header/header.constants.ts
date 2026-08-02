@@ -19,7 +19,8 @@ export const HEADER_MOBILE_MENU_ID = 'header-mobile-menu';
 export const HEADER_HEIGHT_PX = 88;
 
 /**
- * Frozen nav — Solutions → Industries → AI → Work → Pricing → Resources → About → Contact
+ * Primary nav — Pricing / About / Contact live in the footer.
+ * Order: Solutions → Industries → AI → Work → Resources
  */
 export const HEADER_NAV_LINKS: readonly SiteNavLink[] = [
   createDropdownNav({
@@ -55,11 +56,6 @@ export const HEADER_NAV_LINKS: readonly SiteNavLink[] = [
     viewAllLabel: 'View all work',
     menuVariant: 'compact',
   }),
-  createSimpleNavLink({
-    label: 'Pricing',
-    href: ROUTES.pricing,
-    description: 'Packages and engagement options',
-  }),
   createDropdownNav({
     label: 'Resources',
     href: ROUTES.resources,
@@ -68,16 +64,6 @@ export const HEADER_NAV_LINKS: readonly SiteNavLink[] = [
     featured: RESOURCES_FEATURED,
     exploreAllLabel: 'Explore all resources',
     viewAllLabel: 'View all resources',
-  }),
-  createSimpleNavLink({
-    label: 'About',
-    href: ROUTES.about,
-    description: 'Why teams partner with Bitcraftly',
-  }),
-  createSimpleNavLink({
-    label: 'Contact',
-    href: ROUTES.contact,
-    description: 'Book a strategy call',
   }),
 ];
 

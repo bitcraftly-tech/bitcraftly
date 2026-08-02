@@ -78,6 +78,7 @@ export const FOOTER_NAV_COLUMNS: readonly FooterNavColumn[] = [
     id: 'resources',
     title: 'Resources',
     links: [
+      { label: 'All Resources', href: ROUTES.resources },
       { label: 'Blog', href: ROUTES.blog },
       { label: 'Case Studies', href: ROUTES.caseStudies },
       { label: 'Documentation', href: `${ROUTES.resources}/documentation` },
