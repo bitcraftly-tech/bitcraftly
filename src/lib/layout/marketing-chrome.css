@@ -72,7 +72,34 @@
 }
 
 .header-logo-tagline {
-  display: none;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Compact lockup below desktop chrome breakpoint — keep header height (88px) */
+@media (max-width: 1179px) {
+  .header-logo {
+    gap: 8px;
+  }
+
+  .header-logo__wordmark {
+    font-size: 17px;
+  }
+
+  .header-logo-tagline {
+    max-width: min(168px, 46vw);
+    font-size: 9px;
+    letter-spacing: 0.01em;
+  }
+}
+
+@media (max-width: 379px) {
+  .header-logo-tagline {
+    max-width: min(128px, 40vw);
+    font-size: 8.5px;
+  }
 }
 
 /* Desktop chrome when header itself is wide enough (survives zoom + side panels) */
@@ -104,6 +131,16 @@
 
   .header-logo-tagline {
     display: block;
+    max-width: 260px;
+    font-size: 11px;
+  }
+
+  .header-logo__wordmark {
+    font-size: 20px;
+  }
+
+  .header-logo {
+    gap: 12px;
   }
 }
 

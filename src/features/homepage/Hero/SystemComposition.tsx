@@ -25,11 +25,22 @@ export function SystemComposition() {
   });
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) return;
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let timer = 0;
 
-    const timer = window.setInterval(onRotate, HERO_INDUSTRY_ROTATE_MS);
-    return () => window.clearInterval(timer);
+    const sync = () => {
+      window.clearInterval(timer);
+      timer = 0;
+      if (media.matches) return;
+      timer = window.setInterval(onRotate, HERO_INDUSTRY_ROTATE_MS);
+    };
+
+    sync();
+    media.addEventListener('change', sync);
+    return () => {
+      media.removeEventListener('change', sync);
+      window.clearInterval(timer);
+    };
   }, []);
 
   useEffect(() => {
@@ -47,14 +58,15 @@ export function SystemComposition() {
         const rect = root.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width - 0.5;
         const y = (event.clientY - rect.top) / rect.height - 0.5;
-        root.style.setProperty('--sys-px', `${(x * 10).toFixed(2)}px`);
-        root.style.setProperty('--sys-py', `${(y * 8).toFixed(2)}px`);
+        // Unitless — Safari rejects calc(var(--len) * number) when --len is a length.
+        root.style.setProperty('--sys-px', (x * 10).toFixed(2));
+        root.style.setProperty('--sys-py', (y * 8).toFixed(2));
       });
     };
 
     const onLeave = () => {
-      root.style.setProperty('--sys-px', '0px');
-      root.style.setProperty('--sys-py', '0px');
+      root.style.setProperty('--sys-px', '0');
+      root.style.setProperty('--sys-py', '0');
     };
 
     root.addEventListener('pointermove', onMove, { passive: true });

@@ -12,7 +12,7 @@ export function Logo({ className, priority = false }: { className?: string; prio
     <Link
       href="/"
       className={cn(
-        'group inline-flex max-w-full min-w-0 items-end gap-[12px]',
+        'header-logo group inline-flex max-w-full min-w-0 items-end gap-[12px]',
         'text-foreground no-underline hover:no-underline hover:text-foreground',
         'rounded-md transition-opacity duration-200 hover:opacity-95',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
@@ -20,7 +20,7 @@ export function Logo({ className, priority = false }: { className?: string; prio
       )}
     >
       <span
-        className="relative shrink-0 bg-transparent transition-transform duration-200 group-hover:scale-[1.03]"
+        className="header-logo__mark relative shrink-0 bg-transparent transition-transform duration-200 group-hover:scale-[1.03]"
         style={{ height: LOGO_MARK_H, width: markW }}
       >
         <Image
@@ -34,8 +34,8 @@ export function Logo({ className, priority = false }: { className?: string; prio
           className="object-contain object-left"
         />
       </span>
-      <span className="flex min-w-0 flex-col justify-end gap-[6px] pb-px">
-        <span className="whitespace-nowrap font-sans text-[20px] font-bold leading-none tracking-[-0.03em] text-[#000726]">
+      <span className="header-logo__text flex min-w-0 flex-col justify-end gap-[6px] pb-px">
+        <span className="header-logo__wordmark whitespace-nowrap font-sans text-[20px] font-bold leading-none tracking-[-0.03em] text-[#000726]">
           Bitcraftly
         </span>
         <span className="header-logo-tagline max-w-[260px] truncate font-sans text-[11px] font-medium leading-none tracking-[0.01em] text-[#346c84]">
