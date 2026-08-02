@@ -1,0 +1,356 @@
+/**
+ * Phase 3 — Enterprise Component System
+ * Shared reusable UI language for HomeStory components.
+ * Elevation / radius / border / hover / CTA / chip consistency only.
+ * No layout moves, no section redesign, no type-scale or color-token changes.
+ */
+
+.home-story {
+  /* Align to existing card tokens; keep palette variables untouched */
+  --ecs-radius: var(--ec-radius, 18px);
+  --ecs-radius-sm: var(--ec-radius-sm, 14px);
+  --ecs-radius-xs: var(--ec-radius-xs, 12px);
+  --ecs-duration: 150ms;
+  --ecs-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ecs-lift: -2px;
+  --ecs-lift-sm: -1px;
+  --ecs-border: var(--ec-border, color-mix(in srgb, var(--foreground) 8%, transparent));
+  --ecs-border-hover: var(
+    --ec-border-hover,
+    color-mix(in srgb, var(--primary) 28%, transparent)
+  );
+  --ecs-shadow: var(--ec-shadow);
+  --ecs-shadow-hover: var(--ec-shadow-hover);
+  --ecs-glass: var(--ec-glass);
+  --ecs-chip-pad-y: 5px;
+  --ecs-chip-pad-x: 10px;
+  --ecs-cta-pad-y: 0;
+  --ecs-cta-min: 44px;
+  --ecs-interact:
+    transform var(--ecs-duration) var(--ecs-ease),
+    border-color var(--ecs-duration) var(--ecs-ease),
+    box-shadow var(--ecs-duration) var(--ecs-ease),
+    background-color var(--ecs-duration) var(--ecs-ease),
+    gap var(--ecs-duration) var(--ecs-ease),
+    filter var(--ecs-duration) var(--ecs-ease);
+}
+
+/* —— Shared text-link / arrow CTA language —— */
+.home-story .hs-system__cta,
+.home-story .hs-wave-all,
+.home-story .hs-auto-link,
+.home-story .hs-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--ecs-interact);
+}
+
+.home-story .hs-system__cta-arrow,
+.home-story .hs-wave-all svg,
+.home-story .hs-auto-link svg,
+.home-story .bc-btn__arrow {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  line-height: 1;
+  transition: transform var(--ecs-duration) var(--ecs-ease);
+}
+
+/* —— 1. Industry System Cards — hierarchy + CTA affordance —— */
+.home-story .hs-system__top {
+  align-items: center;
+  min-height: 28px;
+}
+
+.home-story .hs-system__index {
+  line-height: 1;
+}
+
+.home-story .hs-system__title {
+  margin-top: 4px;
+}
+
+.home-story .hs-system__cta {
+  min-height: 36px;
+  padding: 0 12px;
+  align-items: center;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.home-story .hs-system__cta:hover .hs-system__cta-arrow,
+.home-story .hs-system:hover .hs-system__cta .hs-system__cta-arrow {
+  transform: translate(2px, -1px);
+}
+
+.home-story .hs-system__cta:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+/* —— 2. Business Outcome Cards — hierarchy —— */
+.home-story .hs-outcome__body {
+  gap: 8px;
+}
+
+.home-story .hs-outcome__label {
+  line-height: 1;
+}
+
+.home-story .hs-outcome h3 {
+  line-height: 1.22;
+}
+
+.home-story .hs-outcome__body > p:last-child {
+  margin-top: 2px;
+}
+
+/* —— 3. AI Workflow Cards — grouping + labels —— */
+.home-story .hs-flow__top {
+  align-items: center;
+  min-height: 28px;
+}
+
+.home-story .hs-flow__index {
+  line-height: 1;
+}
+
+.home-story .hs-flow__title {
+  line-height: 1.25;
+}
+
+.home-story .hs-flow__label {
+  line-height: 1;
+}
+
+.home-story .hs-flow__value {
+  line-height: 1.35;
+}
+
+.home-story .hs-flow__connector {
+  align-self: center;
+}
+
+.home-story .hs-flow__arrow {
+  display: block;
+}
+
+/* —— 4. What's Included module grid —— */
+.home-story .hs-module {
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.home-story .hs-module__index {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.6em;
+  line-height: 1;
+  margin-top: 3px;
+}
+
+.home-story .hs-module__name {
+  line-height: 1.35;
+}
+
+/* —— 5. Dashboard metric cards —— */
+.home-story .hs-eco__node-head {
+  align-items: center;
+  min-height: 18px;
+}
+
+.home-story .hs-eco__node-label,
+.home-story .hs-eco__node-trend {
+  line-height: 1;
+}
+
+.home-story .hs-eco__node-value {
+  line-height: 1.1;
+}
+
+.home-story .hs-eco__node-meta {
+  line-height: 1.2;
+}
+
+/* —— 6. Comparison table —— */
+.home-story .hs-duel__dim {
+  align-items: center;
+}
+
+.home-story .hs-duel__index {
+  line-height: 1;
+}
+
+.home-story .hs-duel__dim-label {
+  line-height: 1.25;
+}
+
+.home-story .hs-duel__vs {
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.home-story .hs-duel__side {
+  line-height: 1.45;
+}
+
+/* —— 7. Timeline cards —— */
+.home-story .hs-launch__num {
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.home-story .hs-launch__title {
+  line-height: 1.25;
+}
+
+.home-story .hs-launch__body {
+  line-height: 1.5;
+}
+
+.home-story .hs-launch__copy {
+  transition: var(--ecs-interact);
+}
+
+/* —— 8. CTA Buttons (invite + shared bc-btn in story) —— */
+.home-story .hs-invite-btn.bc-btn {
+  min-height: var(--ecs-cta-min);
+  border-radius: var(--ecs-radius-sm);
+  box-shadow: var(--ecs-glass), var(--btn-shadow, none);
+  transition: var(--ecs-interact);
+}
+
+.home-story .hs-invite-btn.bc-btn--primary {
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 30%, transparent) inset,
+    var(--btn-shadow);
+}
+
+.home-story .hs-invite-btn.bc-btn--primary:hover {
+  transform: translateY(var(--ecs-lift));
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 34%, transparent) inset,
+    var(--btn-shadow-hover);
+}
+
+.home-story .hs-invite-btn.bc-btn--outline {
+  border-color: var(--ecs-border);
+  box-shadow: var(--ecs-glass);
+}
+
+.home-story .hs-invite-btn.bc-btn--outline:hover {
+  transform: translateY(var(--ecs-lift-sm));
+  border-color: var(--ecs-border-hover);
+  box-shadow:
+    var(--ecs-glass),
+    0 12px 24px -16px color-mix(in srgb, var(--primary) 28%, transparent);
+}
+
+.home-story .hs-invite-btn.bc-btn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--background, #fff),
+    0 0 0 4px color-mix(in srgb, var(--primary) 70%, transparent);
+}
+
+.home-story .hs-invite-btn .bc-btn__arrow {
+  margin-inline-start: 2px;
+}
+
+.home-story .hs-invite-btn:hover .bc-btn__arrow {
+  transform: translate(2px, -2px);
+}
+
+.home-story .hs-wave-all:focus-visible,
+.home-story .hs-auto-link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.home-story .hs-wave-all:hover,
+.home-story .hs-auto-link:hover {
+  gap: 10px;
+}
+
+.home-story .hs-wave-all:hover svg,
+.home-story .hs-auto-link:hover svg {
+  transform: translateX(2px);
+}
+
+/* —— 9. Module chips (system + shared chip feel) —— */
+.home-story .hs-system__module,
+.home-story .hs-system__tag,
+.home-story .hs-sync__channel-status,
+.home-story .hs-flow__label {
+  letter-spacing: 0.02em;
+}
+
+.home-story .hs-system__module {
+  padding: var(--ecs-chip-pad-y) var(--ecs-chip-pad-x);
+  border-radius: 999px;
+  line-height: 1;
+  transition:
+    border-color var(--ecs-duration) var(--ecs-ease),
+    background-color var(--ecs-duration) var(--ecs-ease),
+    color var(--ecs-duration) var(--ecs-ease),
+    box-shadow var(--ecs-duration) var(--ecs-ease);
+}
+
+.home-story .hs-system__tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 10px;
+  line-height: 1;
+}
+
+.home-story .hs-sync__channel-mark {
+  flex-shrink: 0;
+}
+
+.home-story .hs-sync__channel-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  line-height: 1;
+}
+
+/* Soft premium hover language — shared, restrained */
+.home-story .hs-system:hover,
+.home-story .hs-flow:hover,
+.home-story .hs-duel__row:hover,
+.home-story .hs-sync__channel:hover {
+  transform: translateY(var(--ecs-lift));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-story .hs-system__cta,
+  .home-story .hs-wave-all,
+  .home-story .hs-auto-link,
+  .home-story .hs-invite-btn.bc-btn,
+  .home-story .hs-system__cta-arrow,
+  .home-story .bc-btn__arrow,
+  .home-story .hs-system__module,
+  .home-story .hs-launch__copy {
+    transition: none;
+  }
+
+  .home-story .hs-system:hover,
+  .home-story .hs-flow:hover,
+  .home-story .hs-duel__row:hover,
+  .home-story .hs-sync__channel:hover,
+  .home-story .hs-invite-btn.bc-btn--primary:hover,
+  .home-story .hs-invite-btn.bc-btn--outline:hover {
+    transform: none;
+  }
+
+  .home-story .hs-invite-btn:hover .bc-btn__arrow,
+  .home-story .hs-system__cta:hover .hs-system__cta-arrow,
+  .home-story .hs-wave-all:hover svg,
+  .home-story .hs-auto-link:hover svg {
+    transform: none;
+  }
+}

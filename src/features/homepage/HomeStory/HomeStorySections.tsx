@@ -7,6 +7,7 @@ import './home-story.css';
 import '../Homepage/homepage-polish.css';
 import '../Homepage/homepage-visual-rhythm.css';
 import '../Homepage/homepage-enterprise-cards.css';
+import '../Homepage/homepage-enterprise-components.css';
 
 const MODULES = [
   'Marketing Website',
