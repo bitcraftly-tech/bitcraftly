@@ -125,32 +125,26 @@ export default async function RootLayout({
   const headerList = await headers();
   const headerMode = headerList.get('x-bc-boot-mode');
   const pathname = headerList.get('x-pathname') ?? '';
-  /** Homepage skips the boot gate — hiding body until CSS/fonts/images was ~LCP 4s. */
-  const skipBoot = pathname === '/' || pathname === '';
   const bootMode =
     headerMode === 'demo' || headerMode === 'brand'
       ? headerMode
       : isInteractiveDemoPath(pathname)
         ? 'demo'
         : 'brand';
-  const bootClass = skipBoot
-    ? 'bc-app-ready'
-    : bootMode === 'demo'
-      ? 'bc-demo-booting'
-      : 'bc-booting';
+  const bootClass = bootMode === 'demo' ? 'bc-demo-booting' : 'bc-booting';
 
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${bootClass} h-full antialiased`}
-      aria-busy={skipBoot ? 'false' : 'true'}
+      aria-busy="true"
       suppressHydrationWarning
-      {...(!skipBoot && bootMode === 'demo'
+      {...(bootMode === 'demo'
         ? { 'data-demo-boot': '1', 'data-demo-path': pathname }
         : {})}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        {!skipBoot ? <AppBootShell mode={bootMode} pathname={pathname} /> : null}
+        <AppBootShell mode={bootMode} pathname={pathname} />
         <RootDeferredCss />
         <StructuredData />
         {children}

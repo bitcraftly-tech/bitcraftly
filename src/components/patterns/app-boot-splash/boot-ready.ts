@@ -2,12 +2,16 @@
  * Shared boot readiness helpers for Bitcraftly + interactive-demo splashes.
  */
 
-export const BOOT_CSS_WAIT_MS = 2500;
-export const BOOT_FONT_WAIT_MS = 1200;
-export const BOOT_IMAGE_WAIT_MS = 3500;
-export const BOOT_TOTAL_MAX_MS = 5000;
-export const BOOT_REDUCED_MOTION_MAX_MS = 900;
-export const BOOT_FADE_OUT_MS = 340;
+export const BOOT_CSS_WAIT_MS = 1200;
+export const BOOT_FONT_WAIT_MS = 800;
+export const BOOT_IMAGE_WAIT_MS = 2000;
+/** Hard ceiling — never trap the document behind the splash. */
+export const BOOT_TOTAL_MAX_MS = 1800;
+export const BOOT_HOME_MAX_MS = 900;
+export const BOOT_REDUCED_MOTION_MAX_MS = 600;
+export const BOOT_FADE_OUT_MS = 280;
+/** DOM failsafe (runs even if React hydration stalls). */
+export const BOOT_DOM_FAILSAFE_MS = 2000;
 
 export function withBootTimeout<T>(promise: Promise<T>, ms: number): Promise<T | void> {
   return Promise.race([
@@ -83,14 +87,24 @@ export function prefersBootReducedMotion(): boolean {
 }
 
 /** Waits for CSS/fonts/images with fail-open timeouts. */
-export async function waitUntilBootReady(): Promise<void> {
-  const maxMs = prefersBootReducedMotion() ? BOOT_REDUCED_MOTION_MAX_MS : BOOT_TOTAL_MAX_MS;
+export async function waitUntilBootReady(options?: {
+  /** Homepage: show brand splash briefly without waiting on heavy ATF images. */
+  readonly fast?: boolean;
+}): Promise<void> {
+  const fast = options?.fast === true;
+  const maxMs = prefersBootReducedMotion()
+    ? BOOT_REDUCED_MOTION_MAX_MS
+    : fast
+      ? BOOT_HOME_MAX_MS
+      : BOOT_TOTAL_MAX_MS;
 
   await withBootTimeout(
     (async () => {
       await withBootTimeout(waitForStylesheets(), BOOT_CSS_WAIT_MS);
       await withBootTimeout(waitForFonts(), BOOT_FONT_WAIT_MS);
-      await withBootTimeout(waitForImages(), BOOT_IMAGE_WAIT_MS);
+      if (!fast) {
+        await withBootTimeout(waitForImages(), BOOT_IMAGE_WAIT_MS);
+      }
     })(),
     maxMs,
   );
@@ -104,5 +118,27 @@ export function revealBootedDocument(): void {
   root.removeAttribute('data-demo-path');
   root.setAttribute('aria-busy', 'false');
 }
+
+/**
+ * Inline DOM failsafe — reveals content even if the React splash island never hydrates.
+ */
+export const APP_BOOT_FAILSAFE_SCRIPT = `
+(function () {
+  try {
+    window.setTimeout(function () {
+      var root = document.documentElement;
+      if (root.classList.contains('bc-app-ready')) return;
+      root.classList.remove('bc-booting', 'bc-demo-booting');
+      root.classList.add('bc-app-ready');
+      root.setAttribute('aria-busy', 'false');
+      var ids = ['bc-boot-splash', 'bc-demo-boot-splash'];
+      for (var i = 0; i < ids.length; i++) {
+        var el = document.getElementById(ids[i]);
+        if (el) el.setAttribute('data-done', 'true');
+      }
+    }, ${BOOT_DOM_FAILSAFE_MS});
+  } catch (_) {}
+})();
+`.trim();
 
 export { isInteractiveDemoPath } from './boot-path';
