@@ -84,7 +84,7 @@ export function AppBootSplash() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="bc-boot-splash__logo"
-            src="/logo.png"
+            src="/brand/logo-mark.webp"
             alt=""
             width={40}
             height={28}
