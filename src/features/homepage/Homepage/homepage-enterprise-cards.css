@@ -1,0 +1,522 @@
+/**
+ * Phase 3 — Enterprise Card System
+ * One reusable visual language for HomeStory cards.
+ * Does not change IA, copy, spacing system, type scale, Hero, or visual rhythm.
+ */
+
+.home-story {
+  --ec-radius: 18px;
+  --ec-radius-sm: 14px;
+  --ec-radius-xs: 12px;
+  --ec-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ec-duration: 160ms;
+  --ec-lift: -3px;
+  --ec-border: color-mix(in srgb, var(--foreground) 8%, transparent);
+  --ec-border-hover: color-mix(in srgb, var(--primary) 28%, transparent);
+  --ec-glass: 0 1px 0 color-mix(in srgb, white 88%, transparent) inset,
+    0 0 0 0.5px color-mix(in srgb, white 45%, transparent) inset;
+  --ec-shadow:
+    var(--ec-glass),
+    0 1px 2px color-mix(in srgb, var(--foreground) 4%, transparent),
+    0 12px 28px -18px color-mix(in srgb, var(--foreground) 22%, transparent),
+    0 22px 44px -26px color-mix(in srgb, var(--foreground) 16%, transparent);
+  --ec-shadow-hover:
+    var(--ec-glass),
+    0 2px 4px color-mix(in srgb, var(--foreground) 5%, transparent),
+    0 16px 32px -16px color-mix(in srgb, var(--primary) 28%, transparent),
+    0 28px 52px -24px color-mix(in srgb, var(--primary-end) 22%, transparent);
+  --ec-fill: color-mix(in srgb, white 94%, transparent);
+  --ec-fill-soft: color-mix(in srgb, white 88%, var(--canvas));
+  --ec-interact:
+    transform var(--ec-duration) var(--ec-ease),
+    border-color var(--ec-duration) var(--ec-ease),
+    box-shadow var(--ec-duration) var(--ec-ease),
+    background-color var(--ec-duration) var(--ec-ease),
+    filter var(--ec-duration) var(--ec-ease);
+}
+
+/* Shared interactive card language */
+.home-story .hs-system,
+.home-story .hs-flow,
+.home-story .hs-duel__row,
+.home-story .hs-sync__channel,
+.home-story .hs-eco__node,
+.home-story .hs-outcome,
+.home-story .hs-module,
+.home-story .hs-launch {
+  transition: var(--ec-interact);
+}
+
+/* —— Shell cards (Outcomes / Modules) —— */
+.home-story .hs-outcomes,
+.home-story .hs-modules {
+  border-radius: var(--ec-radius);
+  border: 1px solid var(--ec-border);
+  background: var(--ec-fill);
+  box-shadow: var(--ec-shadow);
+  backdrop-filter: blur(14px) saturate(1.05);
+  -webkit-backdrop-filter: blur(14px) saturate(1.05);
+}
+
+.home-story .hs-outcome {
+  transition:
+    background-color var(--ec-duration) var(--ec-ease),
+    box-shadow var(--ec-duration) var(--ec-ease);
+}
+
+.home-story .hs-outcome:hover {
+  background: color-mix(in srgb, var(--primary) 5%, white);
+}
+
+.home-story .hs-outcome:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
+  outline-offset: -2px;
+}
+
+.home-story .hs-outcome__mark {
+  transition:
+    color var(--ec-duration) var(--ec-ease),
+    transform var(--ec-duration) var(--ec-ease);
+}
+
+.home-story .hs-outcome:hover .hs-outcome__mark {
+  transform: translateY(-3px);
+}
+
+.home-story .hs-module:hover {
+  background: color-mix(in srgb, var(--primary) 5%, white);
+}
+
+.home-story .hs-module:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
+  outline-offset: -2px;
+}
+
+/* —— Industry System cards (priority) —— */
+.home-story .hs-system {
+  gap: 12px;
+  padding: 26px 24px 22px;
+  border-radius: var(--ec-radius);
+  border: 1px solid var(--ec-border);
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, white 96%, transparent) 0%,
+      color-mix(in srgb, var(--canvas) 35%, white) 100%
+    );
+  box-shadow: var(--ec-shadow);
+  backdrop-filter: blur(14px) saturate(1.06);
+  -webkit-backdrop-filter: blur(14px) saturate(1.06);
+}
+
+.home-story .hs-system::before {
+  height: 3px;
+  opacity: 0.9;
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    var(--primary-end) 55%,
+    color-mix(in srgb, var(--primary-end) 40%, transparent) 100%
+  );
+}
+
+.home-story .hs-system::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 70%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, white 22%, transparent);
+  opacity: 0.9;
+}
+
+.home-story .hs-system:hover {
+  transform: translateY(var(--ec-lift));
+  border-color: var(--ec-border-hover);
+  box-shadow:
+    var(--ec-shadow-hover),
+    0 0 0 1px color-mix(in srgb, var(--primary) 8%, transparent);
+}
+
+.home-story .hs-system:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--primary) 60%, transparent);
+  outline-offset: 3px;
+}
+
+.home-story .hs-system__title {
+  margin-top: 2px;
+  letter-spacing: -0.032em;
+  line-height: 1.22;
+}
+
+.home-story .hs-system__blurb {
+  margin-top: 2px;
+  line-height: 1.55;
+}
+
+.home-story .hs-system__tag {
+  border-color: color-mix(in srgb, var(--primary) 22%, transparent);
+  box-shadow: 0 1px 0 color-mix(in srgb, white 70%, transparent) inset;
+}
+
+/* Module chips — cleaner pills, same size budget */
+.home-story .hs-system__modules {
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.home-story .hs-system__module {
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  background: color-mix(in srgb, white 82%, var(--canvas));
+  color: color-mix(in srgb, var(--foreground) 78%, var(--muted));
+  box-shadow: 0 1px 0 color-mix(in srgb, white 75%, transparent) inset;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.home-story .hs-system__sep {
+  display: none;
+}
+
+.home-story .hs-system:hover .hs-system__module {
+  border-color: color-mix(in srgb, var(--primary) 22%, transparent);
+  background: color-mix(in srgb, var(--primary) 6%, white);
+  color: color-mix(in srgb, var(--primary) 70%, var(--foreground));
+}
+
+/* CTA discoverability without growing the card */
+.home-story .hs-system__cta {
+  margin-top: auto;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+  background: color-mix(in srgb, var(--primary) 7%, white);
+  box-shadow: 0 1px 0 color-mix(in srgb, white 75%, transparent) inset;
+  transition:
+    gap var(--ec-duration) var(--ec-ease),
+    color var(--ec-duration) var(--ec-ease),
+    background-color var(--ec-duration) var(--ec-ease),
+    border-color var(--ec-duration) var(--ec-ease),
+    box-shadow var(--ec-duration) var(--ec-ease),
+    transform var(--ec-duration) var(--ec-ease);
+}
+
+.home-story .hs-system:hover .hs-system__cta,
+.home-story .hs-system__cta:hover {
+  gap: 10px;
+  border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+  background: color-mix(in srgb, var(--primary) 12%, white);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 80%, transparent) inset,
+    0 10px 20px -14px color-mix(in srgb, var(--primary) 40%, transparent);
+}
+
+.home-story .hs-system__cta:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.home-story .hs-system__cta-arrow {
+  transition: transform var(--ec-duration) var(--ec-ease);
+}
+
+.home-story .hs-system__cta:hover .hs-system__cta-arrow {
+  transform: translate(2px, -1px);
+}
+
+/* —— AI Workflow cards —— */
+.home-story .hs-flow {
+  gap: 20px;
+  padding: 24px 22px 22px;
+  border-radius: var(--ec-radius);
+  border: 1px solid var(--ec-border);
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, white 96%, transparent) 0%,
+      color-mix(in srgb, var(--canvas) 30%, white) 100%
+    );
+  box-shadow: var(--ec-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.home-story .hs-flow::before {
+  width: 3px;
+  opacity: 0.95;
+  border-radius: 0 2px 2px 0;
+}
+
+.home-story .hs-flow:hover {
+  transform: translateY(var(--ec-lift));
+  border-color: var(--ec-border-hover);
+  box-shadow: var(--ec-shadow-hover);
+}
+
+.home-story .hs-flow:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--primary) 60%, transparent);
+  outline-offset: 3px;
+}
+
+.home-story .hs-flow__rail {
+  gap: 8px;
+  padding: 14px;
+  border-radius: var(--ec-radius-sm);
+  border: 1px solid color-mix(in srgb, var(--foreground) 7%, transparent);
+  background: color-mix(in srgb, var(--canvas) 70%, white);
+  box-shadow: 0 1px 0 color-mix(in srgb, white 70%, transparent) inset;
+}
+
+.home-story .hs-flow__step {
+  gap: 7px;
+  padding: 13px 12px;
+  border-radius: var(--ec-radius-xs);
+  border: 1px solid color-mix(in srgb, var(--foreground) 7%, transparent);
+  background: color-mix(in srgb, white 94%, transparent);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 80%, transparent) inset,
+    0 8px 16px -14px color-mix(in srgb, var(--foreground) 18%, transparent);
+}
+
+.home-story .hs-flow__step--mid {
+  border-color: color-mix(in srgb, var(--primary) 22%, transparent);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--primary) 9%, white) 0%,
+    color-mix(in srgb, white 94%, transparent) 100%
+  );
+}
+
+.home-story .hs-flow__step--out {
+  border-color: color-mix(in srgb, var(--primary-end) 24%, transparent);
+}
+
+.home-story .hs-flow__label {
+  letter-spacing: 0.1em;
+  opacity: 0.92;
+}
+
+.home-story .hs-flow__connector {
+  color: color-mix(in srgb, var(--primary) 55%, var(--muted));
+}
+
+/* —— Dashboard metric cards —— */
+.home-story .hs-eco__node {
+  padding: 12px 14px;
+  border-radius: var(--ec-radius-sm);
+  border: 1px solid var(--ec-border);
+  background: color-mix(in srgb, white 95%, transparent);
+  box-shadow: var(--ec-shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.home-story .hs-eco__node:hover {
+  border-color: var(--ec-border-hover);
+  box-shadow: var(--ec-shadow-hover);
+}
+
+.home-story .hs-eco {
+  border-radius: 20px;
+  border-color: var(--ec-border);
+  box-shadow: var(--ec-shadow);
+}
+
+.home-story .hs-eco__hub {
+  border-radius: 16px;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 32%, transparent) inset,
+    0 18px 36px -14px color-mix(in srgb, var(--primary) 62%, transparent),
+    0 0 0 1px color-mix(in srgb, white 18%, transparent);
+}
+
+/* —— Workflow integration channel cards —— */
+.home-story .hs-sync__channel {
+  padding: 13px 14px;
+  border-radius: var(--ec-radius-sm);
+  border: 1px solid var(--ec-border);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, white 96%, transparent) 0%,
+      color-mix(in srgb, var(--primary) 4%, white) 100%
+    );
+  box-shadow: var(--ec-shadow);
+}
+
+.home-story .hs-sync__channel:hover {
+  transform: translateY(-2px);
+  border-color: var(--ec-border-hover);
+  box-shadow: var(--ec-shadow-hover);
+}
+
+.home-story .hs-sync__channel:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
+  outline-offset: 2px;
+}
+
+.home-story .hs-sync__channel-status {
+  border: 1px solid color-mix(in srgb, #16a34a 18%, transparent);
+  box-shadow: 0 1px 0 color-mix(in srgb, white 70%, transparent) inset;
+}
+
+/* —— Comparison table rows —— */
+.home-story .hs-duel__list {
+  gap: 12px;
+}
+
+.home-story .hs-duel__row {
+  padding: 16px;
+  border-radius: var(--ec-radius);
+  border: 1px solid var(--ec-border);
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, white 96%, transparent) 0%,
+      color-mix(in srgb, var(--canvas) 25%, white) 100%
+    );
+  box-shadow: var(--ec-shadow);
+}
+
+.home-story .hs-duel__row:hover {
+  transform: translateY(-2px);
+  border-color: var(--ec-border-hover);
+  box-shadow: var(--ec-shadow-hover);
+}
+
+.home-story .hs-duel__row:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
+  outline-offset: 2px;
+}
+
+.home-story .hs-duel__dim {
+  gap: 10px;
+}
+
+@media (min-width: 820px) {
+  .home-story .hs-duel__dim {
+    border-right-color: color-mix(in srgb, var(--foreground) 8%, transparent);
+  }
+}
+
+.home-story .hs-duel__side {
+  padding: 13px 14px;
+  border-radius: var(--ec-radius-xs);
+}
+
+.home-story .hs-duel__side--them {
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  background: color-mix(in srgb, var(--canvas) 75%, white);
+}
+
+.home-story .hs-duel__side--us {
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--primary) 11%, white) 0%,
+      color-mix(in srgb, var(--primary) 5%, white) 100%
+    );
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 80%, transparent) inset,
+    0 10px 20px -14px color-mix(in srgb, var(--primary) 34%, transparent);
+}
+
+.home-story .hs-duel__vs {
+  width: 34px;
+  height: 34px;
+  border: 1px solid color-mix(in srgb, var(--primary) 26%, transparent);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 80%, transparent) inset,
+    0 8px 16px -12px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+/* —— Go Live timeline —— */
+.home-story .hs-launch {
+  padding: 28px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--ec-border);
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, white 96%, transparent) 0%,
+      color-mix(in srgb, var(--canvas) 40%, white) 100%
+    );
+  box-shadow: var(--ec-shadow);
+}
+
+.home-story .hs-launch__num {
+  width: 46px;
+  height: 46px;
+  border: 1px solid color-mix(in srgb, var(--primary) 26%, transparent);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 80%, transparent) inset,
+    0 12px 24px -14px color-mix(in srgb, var(--primary) 36%, transparent),
+    0 0 0 6px color-mix(in srgb, var(--primary) 7%, transparent);
+}
+
+.home-story .hs-launch__rail {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--primary) 50%, transparent),
+    color-mix(in srgb, var(--primary) 16%, transparent)
+  );
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary) 8%, transparent);
+}
+
+@media (min-width: 900px) {
+  .home-story .hs-launch__rail {
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--primary) 58%, transparent),
+      color-mix(in srgb, var(--primary) 42%, transparent)
+    );
+  }
+}
+
+.home-story .hs-launch__copy {
+  padding: 12px 14px;
+  border-radius: var(--ec-radius-sm);
+  border: 1px solid color-mix(in srgb, var(--foreground) 6%, transparent);
+  background: color-mix(in srgb, white 90%, transparent);
+  box-shadow: 0 1px 0 color-mix(in srgb, white 75%, transparent) inset;
+}
+
+.home-story .hs-launch__step:hover .hs-launch__copy {
+  border-color: color-mix(in srgb, var(--primary) 20%, transparent);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 80%, transparent) inset,
+    0 10px 20px -14px color-mix(in srgb, var(--primary) 24%, transparent);
+}
+
+.home-story .hs-launch__step + .hs-launch__step {
+  border-top-color: color-mix(in srgb, var(--foreground) 7%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-story .hs-system,
+  .home-story .hs-flow,
+  .home-story .hs-duel__row,
+  .home-story .hs-sync__channel,
+  .home-story .hs-eco__node,
+  .home-story .hs-outcome,
+  .home-story .hs-module,
+  .home-story .hs-system__cta,
+  .home-story .hs-system__cta-arrow,
+  .home-story .hs-outcome__mark {
+    transition: none;
+  }
+
+  .home-story .hs-system:hover,
+  .home-story .hs-flow:hover,
+  .home-story .hs-duel__row:hover,
+  .home-story .hs-sync__channel:hover,
+  .home-story .hs-outcome:hover .hs-outcome__mark {
+    transform: none;
+  }
+}

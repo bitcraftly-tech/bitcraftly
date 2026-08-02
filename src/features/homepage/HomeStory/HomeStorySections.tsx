@@ -6,6 +6,7 @@ import { ROUTES } from '@/constants/navigation';
 import './home-story.css';
 import '../Homepage/homepage-polish.css';
 import '../Homepage/homepage-visual-rhythm.css';
+import '../Homepage/homepage-enterprise-cards.css';
 
 const MODULES = [
   'Marketing Website',
