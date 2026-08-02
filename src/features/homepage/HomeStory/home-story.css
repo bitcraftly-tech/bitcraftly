@@ -983,7 +983,7 @@
 }
 
 .hs-system:hover {
-  transform: translateY(-5px);
+  /* Lift owned by enterprise/motion production layers */
   border-color: color-mix(in srgb, var(--primary) 22%, transparent);
   box-shadow:
     0 1px 0 color-mix(in srgb, white 80%, transparent) inset,

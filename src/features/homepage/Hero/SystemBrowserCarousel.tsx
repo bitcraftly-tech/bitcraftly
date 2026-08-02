@@ -9,6 +9,22 @@ type SystemBrowserCarouselProps = {
   durationMs: number;
 };
 
+const PREVIEW_SLUG: Record<string, string> = {
+  healthcare: 'clinic-healthcare',
+  restaurant: 'shrishti-cloud-kitchen',
+  'real-estate': 'builder-website',
+  corporate: 'local-services-lead-site',
+};
+
+function previewSrcForViewport(item: HeroIndustryPreview): string {
+  const slug = PREVIEW_SLUG[item.id] ?? item.id;
+  if (typeof window === 'undefined') {
+    return item.imageSrc;
+  }
+  const width = window.innerWidth < 768 ? 480 : window.innerWidth < 1024 ? 720 : 960;
+  return `/products/hero/${slug}-${width}.avif`;
+}
+
 function warmImage(src: string) {
   return new Promise<void>((resolve) => {
     const img = new window.Image();
@@ -34,16 +50,17 @@ export function SystemBrowserCarousel({
   useEffect(() => {
     let cancelled = false;
     const run = async () => {
-      for (const item of items) {
-        if (cancelled) return;
-        await warmImage(item.imageSrc);
-      }
+      // Warm only the next slide at a viewport-sized AVIF — avoid preloading all 960 assets.
+      const nextIndex = (activeIndex + 1) % total;
+      const next = items[nextIndex];
+      if (!next || cancelled) return;
+      await warmImage(previewSrcForViewport(next));
     };
     void run();
     return () => {
       cancelled = true;
     };
-  }, [items]);
+  }, [activeIndex, items, total]);
 
   return (
     <div className="sys__panel sys__panel--site">
@@ -89,10 +106,9 @@ export function SystemBrowserCarousel({
         >
           {items.map((item, slideIndex) => {
             const isActive = slideIndex === activeIndex;
-            const isNear =
-              Math.abs(slideIndex - activeIndex) <= 1 ||
-              (activeIndex === 0 && slideIndex === total - 1) ||
-              (activeIndex === total - 1 && slideIndex === 0);
+            const nextIndex = (activeIndex + 1) % total;
+            // Only active + next slide: keeps LCP payload minimal.
+            const shouldRender = isActive || slideIndex === nextIndex;
 
             return (
               <div
@@ -101,15 +117,30 @@ export function SystemBrowserCarousel({
                   isActive ? 'sys__browser-page is-active' : 'sys__browser-page'
                 }
               >
-                {isNear || isActive ? (
-                  <img
-                    src={item.imageSrc}
-                    alt=""
-                    className="sys__browser-shot"
-                    decoding="async"
-                    fetchPriority={isActive ? 'high' : 'low'}
-                    draggable={false}
-                  />
+                {shouldRender ? (
+                  <picture>
+                    <source
+                      type="image/avif"
+                      srcSet={item.imageAvifSrcSet}
+                      sizes={item.imageSizes}
+                    />
+                    <source
+                      type="image/webp"
+                      srcSet={item.imageWebpSrcSet}
+                      sizes={item.imageSizes}
+                    />
+                    <img
+                      src={item.imageSrc}
+                      alt=""
+                      width={item.imageWidth}
+                      height={item.imageHeight}
+                      className="sys__browser-shot"
+                      decoding="async"
+                      loading={isActive ? 'eager' : 'lazy'}
+                      fetchPriority={isActive ? 'high' : 'low'}
+                      draggable={false}
+                    />
+                  </picture>
                 ) : null}
                 <div className="sys__browser-shade" />
                 <div className="sys__browser-caption">

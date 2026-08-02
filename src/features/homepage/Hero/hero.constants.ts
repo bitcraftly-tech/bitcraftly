@@ -94,6 +94,26 @@ export const HERO_SYSTEM = {
 /** Hero browser industry previews — auto-rotate every ~5.5s (layout frozen). */
 export const HERO_INDUSTRY_ROTATE_MS = 5500;
 
+const HERO_PREVIEW_WIDTHS = [480, 720, 960, 1280] as const;
+
+function heroPreviewImage(slug: string, naturalWidth: number, naturalHeight: number) {
+  const webpSrcSet = HERO_PREVIEW_WIDTHS.map(
+    (width) => `/products/hero/${slug}-${width}.webp ${width}w`,
+  ).join(', ');
+  const avifSrcSet = HERO_PREVIEW_WIDTHS.map(
+    (width) => `/products/hero/${slug}-${width}.avif ${width}w`,
+  ).join(', ');
+
+  return {
+    imageSrc: `/products/hero/${slug}-960.webp`,
+    imageWidth: naturalWidth,
+    imageHeight: naturalHeight,
+    imageWebpSrcSet: webpSrcSet,
+    imageAvifSrcSet: avifSrcSet,
+    imageSizes: '(max-width: 767px) 92vw, (max-width: 1023px) 50vw, 560px',
+  } as const;
+}
+
 export const HERO_INDUSTRY_PREVIEWS = [
   {
     id: 'healthcare',
@@ -101,7 +121,7 @@ export const HERO_INDUSTRY_PREVIEWS = [
     title: 'Medicare+',
     industry: 'Healthcare',
     host: 'medicare.bitcraftly.com',
-    imageSrc: '/products/Clinic%20%26%20Healthcare.png',
+    ...heroPreviewImage('clinic-healthcare', 1024, 768),
     ai: {
       title: 'AI Assistant',
       message: 'I can help schedule a visit or answer service questions.',
@@ -125,7 +145,7 @@ export const HERO_INDUSTRY_PREVIEWS = [
     title: 'Shrishti Kitchen',
     industry: 'Restaurant',
     host: 'shrishti.bitcraftly.com',
-    imageSrc: '/products/Shrishti%20Cloud%20Kitchen.png',
+    ...heroPreviewImage('shrishti-cloud-kitchen', 1448, 1086),
     ai: {
       title: 'AI Concierge',
       message: 'I can take orders, share the menu, or route a WhatsApp handoff.',
@@ -149,7 +169,7 @@ export const HERO_INDUSTRY_PREVIEWS = [
     title: 'Dayal Builders',
     industry: 'Real Estate',
     host: 'dayal.bitcraftly.com',
-    imageSrc: '/products/Builder%20Website.png',
+    ...heroPreviewImage('builder-website', 1024, 768),
     ai: {
       title: 'AI Assistant',
       message: 'I can match inventory, book site visits, or qualify a lead.',
@@ -173,7 +193,7 @@ export const HERO_INDUSTRY_PREVIEWS = [
     title: 'Local Services Pro',
     industry: 'Corporate Services',
     host: 'services.bitcraftly.com',
-    imageSrc: '/products/Local%20Services%20Lead%20Site.png',
+    ...heroPreviewImage('local-services-lead-site', 1402, 1122),
     ai: {
       title: 'AI Assistant',
       message: 'I can capture a brief, estimate scope, or book a strategy call.',

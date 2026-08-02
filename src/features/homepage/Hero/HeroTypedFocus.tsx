@@ -22,11 +22,8 @@ export function HeroTypedFocus() {
   }, []);
 
   return (
-    <span
-      className="hp-hero-heading__focus"
-      aria-label={HERO_HEADING.focus}
-    >
-      <span key={cycle} className="hp-hero-heading__letters" aria-hidden="true">
+    <span className="hp-hero-heading__focus" aria-hidden="true">
+      <span key={cycle} className="hp-hero-heading__letters">
         {Array.from(HERO_HEADING.focus).map((char, index) => (
           <span
             key={`${cycle}-${char}-${index}`}

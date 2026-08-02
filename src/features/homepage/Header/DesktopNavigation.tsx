@@ -36,6 +36,7 @@ export function DesktopNavigation() {
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navRef = useRef<HTMLElement>(null);
   const triggerRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+  const keyboardOpenRef = useRef(false);
 
   const clearTimers = useCallback(() => {
     if (openTimerRef.current) {
@@ -49,8 +50,9 @@ export function DesktopNavigation() {
   }, []);
 
   const openMenu = useCallback(
-    (href: string, immediate = false) => {
+    (href: string, immediate = false, viaKeyboard = false) => {
       clearTimers();
+      keyboardOpenRef.current = viaKeyboard;
       if (immediate) {
         setOpenState({ path: pathname, href });
         return;
@@ -63,17 +65,24 @@ export function DesktopNavigation() {
   );
 
   const closeMenu = useCallback(
-    (immediate = false) => {
+    (immediate = false, restoreTrigger = false) => {
       clearTimers();
+      const href = openHref;
+      keyboardOpenRef.current = false;
       if (immediate) {
         setOpenState(null);
+        if (restoreTrigger && href) {
+          queueMicrotask(() => {
+            triggerRefs.current.get(href)?.focus({ preventScroll: true });
+          });
+        }
         return;
       }
       closeTimerRef.current = setTimeout(() => {
         setOpenState(null);
       }, HOVER_DELAY_MS);
     },
-    [clearTimers],
+    [clearTimers, openHref],
   );
 
   useEffect(() => {
@@ -88,11 +97,58 @@ export function DesktopNavigation() {
     const panel = document.getElementById(`${baseId}-${openHref}-menu`);
     const trigger = triggerRefs.current.get(openHref);
 
+    function getPanelFocusable() {
+      if (!panel) {
+        return [] as HTMLElement[];
+      }
+      return Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR));
+    }
+
     function handleDocumentKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         event.preventDefault();
         setOpenState(null);
-        trigger?.focus();
+        keyboardOpenRef.current = false;
+        trigger?.focus({ preventScroll: true });
+        return;
+      }
+
+      if (event.key !== 'Tab' || !panel || !trigger) {
+        return;
+      }
+
+      const focusable = getPanelFocusable();
+      if (focusable.length === 0) {
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      // Keep Tab cycling within trigger ↔ panel while the menu is open.
+      if (event.shiftKey) {
+        if (active === first || active === panel) {
+          event.preventDefault();
+          trigger.focus({ preventScroll: true });
+          return;
+        }
+        if (active === trigger) {
+          event.preventDefault();
+          last?.focus({ preventScroll: true });
+        }
+        return;
+      }
+
+      if (active === trigger) {
+        event.preventDefault();
+        first?.focus({ preventScroll: true });
+        return;
+      }
+
+      if (active === last) {
+        event.preventDefault();
+        trigger.focus({ preventScroll: true });
       }
     }
 
@@ -108,6 +164,7 @@ export function DesktopNavigation() {
         return;
       }
 
+      keyboardOpenRef.current = false;
       setOpenState(null);
     }
 
@@ -125,17 +182,17 @@ export function DesktopNavigation() {
   function handleTriggerKeyDown(event: ReactKeyboardEvent<HTMLButtonElement>, link: SiteNavLink) {
     if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      openMenu(link.href, true);
+      openMenu(link.href, true, true);
       requestAnimationFrame(() => {
         const panel = document.getElementById(`${baseId}-${link.href}-menu`);
         const first = panel?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
-        first?.focus();
+        first?.focus({ preventScroll: true });
       });
     }
 
     if (event.key === 'Escape') {
       event.preventDefault();
-      closeMenu(true);
+      closeMenu(true, true);
     }
   }
 
@@ -145,8 +202,11 @@ export function DesktopNavigation() {
       id={HEADER_NAV_ID}
       aria-label="Main navigation"
       className="relative flex max-w-full min-w-0 flex-nowrap items-center justify-center gap-x-[10px] text-[13px]"
-
-      onMouseLeave={() => closeMenu()}
+      onMouseLeave={() => {
+        if (!keyboardOpenRef.current) {
+          closeMenu();
+        }
+      }}
     >
       {HEADER_NAV_LINKS.map((link) => {
         const isActive = isNavLinkActive(pathname, link.href);
@@ -196,7 +256,7 @@ export function DesktopNavigation() {
                 if (isOpen) {
                   closeMenu(true);
                 } else {
-                  openMenu(link.href, true);
+                  openMenu(link.href, true, false);
                 }
               }}
               onKeyDown={(event) => handleTriggerKeyDown(event, link)}
@@ -221,8 +281,12 @@ export function DesktopNavigation() {
         <div
           className="fixed inset-x-0 z-[var(--z-popover)]"
           style={{ top: HEADER_HEIGHT_PX }}
-          onMouseEnter={() => openMenu(openLink.href, true)}
-          onMouseLeave={() => closeMenu()}
+          onMouseEnter={() => openMenu(openLink.href, true, keyboardOpenRef.current)}
+          onMouseLeave={() => {
+            if (!keyboardOpenRef.current) {
+              closeMenu();
+            }
+          }}
         >
           <Container size="xl">
             <MegaMenuPanel

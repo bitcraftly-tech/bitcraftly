@@ -1,0 +1,10 @@
+/**
+ * HomeStory production CSS — single import path for below-fold homepage.
+ * Layer order: base story → rhythm → enterprise cards/components → motion.
+ * Duplicate hover lifts live only in enterprise/motion (not the monolith).
+ */
+@import './home-story.css';
+@import '../Homepage/homepage-visual-rhythm.css';
+@import '../Homepage/homepage-enterprise-cards.css';
+@import '../Homepage/homepage-enterprise-components.css';
+@import '../Homepage/homepage-premium-motion.css';

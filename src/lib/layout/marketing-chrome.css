@@ -146,15 +146,15 @@ html[data-header-mode='solid'] .header-adaptive {
     0 10px 30px -24px color-mix(in srgb, var(--foreground) 28%, transparent);
 }
 
-/* Home scroll — lighter / more transparent frosted glass */
+/* Home scroll — opaque enough that dark bands (newsletter/footer) don't bleed through */
 html[data-header-mode='home'][data-header-scrolled='true'] .header-adaptive {
-  background-color: color-mix(in srgb, white 52%, transparent);
-  backdrop-filter: blur(20px) saturate(1.3);
-  -webkit-backdrop-filter: blur(20px) saturate(1.3);
-  border-color: color-mix(in srgb, var(--foreground) 7%, transparent);
+  background-color: color-mix(in srgb, white 92%, transparent);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  border-color: color-mix(in srgb, var(--foreground) 9%, transparent);
   box-shadow:
-    0 1px 0 color-mix(in srgb, white 55%, transparent) inset,
-    0 8px 24px -22px color-mix(in srgb, var(--foreground) 18%, transparent);
+    0 1px 0 color-mix(in srgb, white 70%, transparent) inset,
+    0 10px 30px -24px color-mix(in srgb, var(--foreground) 28%, transparent);
 }
 
 .header-cta-shadow {

@@ -420,7 +420,7 @@
   font-weight: 500;
   line-height: 1.65;
   letter-spacing: -0.011em;
-  animation: hp-hero-rise 860ms cubic-bezier(0.22, 1, 0.36, 1) 280ms both;
+  /* No entrance opacity/delay — this node is the mobile LCP element. */
 }
 
 @keyframes hp-hero-type-char {

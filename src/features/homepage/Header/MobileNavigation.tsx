@@ -33,18 +33,26 @@ export function MobileNavigation() {
   const panelId = HEADER_MOBILE_MENU_ID;
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   const closeMenu = useCallback((restoreFocus = false) => {
     setOpenForPath(null);
     if (restoreFocus) {
       queueMicrotask(() => {
-        triggerRef.current?.focus({ preventScroll: true });
+        (previouslyFocusedRef.current ?? triggerRef.current)?.focus({ preventScroll: true });
+        previouslyFocusedRef.current = null;
       });
     }
   }, []);
 
   const toggleMenu = useCallback(() => {
-    setOpenForPath((current) => (current === pathname ? null : pathname));
+    setOpenForPath((current) => {
+      if (current === pathname) {
+        return null;
+      }
+      previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
+      return pathname;
+    });
   }, [pathname]);
 
   useEffect(() => {
@@ -53,33 +61,62 @@ export function MobileNavigation() {
     }
 
     const root = document.documentElement;
+    const main = document.getElementById('main-content');
+    const previousMainInert = main?.inert ?? false;
+
     root.classList.add('overflow-hidden');
+    if (main) {
+      main.inert = true;
+    }
 
     const panel = panelRef.current;
     if (!panel) {
       return () => {
         root.classList.remove('overflow-hidden');
+        if (main) {
+          main.inert = previousMainInert;
+        }
       };
     }
 
-    const focusableElements = Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR));
-    const firstFocusable = focusableElements[0];
-    const lastFocusable = focusableElements[focusableElements.length - 1];
+    const getFocusable = () =>
+      Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+        (el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true',
+      );
+
+    // Move focus into the dialog after paint.
+    queueMicrotask(() => {
+      const focusable = getFocusable();
+      (focusable[0] ?? panel).focus({ preventScroll: true });
+    });
 
     function handleKeyDown(event: KeyboardEvent) {
+      if (!panel) {
+        return;
+      }
+
       if (event.key === 'Escape') {
         event.preventDefault();
         closeMenu(true);
         return;
       }
 
-      if (event.key !== 'Tab' || focusableElements.length === 0) {
+      if (event.key !== 'Tab') {
         return;
       }
 
+      const focusableElements = getFocusable();
+      if (focusableElements.length === 0) {
+        event.preventDefault();
+        panel.focus({ preventScroll: true });
+        return;
+      }
+
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
       const activeElement = document.activeElement;
 
-      if (event.shiftKey && activeElement === firstFocusable) {
+      if (event.shiftKey && (activeElement === firstFocusable || activeElement === panel)) {
         event.preventDefault();
         lastFocusable?.focus({ preventScroll: true });
         return;
@@ -95,6 +132,9 @@ export function MobileNavigation() {
 
     return () => {
       root.classList.remove('overflow-hidden');
+      if (main) {
+        main.inert = previousMainInert;
+      }
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [closeMenu, open]);
@@ -111,6 +151,7 @@ export function MobileNavigation() {
         )}
         aria-expanded={open}
         aria-controls={panelId}
+        aria-haspopup="dialog"
         aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
         onClick={toggleMenu}
       >
@@ -144,8 +185,8 @@ export function MobileNavigation() {
           role="dialog"
           aria-modal="true"
           aria-labelledby={menuLabelId}
+          tabIndex={-1}
           className="header-mobile-menu fixed inset-x-0 z-[calc(var(--z-sticky)-1)] flex flex-col border-t border-border bg-background/95 backdrop-blur-xl"
-
           style={{
             top: HEADER_HEIGHT_PX,
             height: `calc(100dvh - ${HEADER_HEIGHT_PX}px)`,

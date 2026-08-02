@@ -3,12 +3,7 @@ import { bcButtonClassName, ButtonArrow } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { getIndustryHref } from '@/constants/industries';
 import { ROUTES } from '@/constants/navigation';
-import './home-story.css';
-import '../Homepage/homepage-polish.css';
-import '../Homepage/homepage-visual-rhythm.css';
-import '../Homepage/homepage-enterprise-cards.css';
-import '../Homepage/homepage-enterprise-components.css';
-import '../Homepage/homepage-premium-motion.css';
+import './home-story-production.css';
 
 const MODULES = [
   'Marketing Website',
