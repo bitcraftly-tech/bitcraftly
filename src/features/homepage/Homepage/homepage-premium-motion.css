@@ -96,15 +96,18 @@
     0 28px 52px -24px color-mix(in srgb, var(--primary-end) 18%, transparent);
 }
 
-.home-story .hs-outcome,
-.home-story .hs-module {
+.home-story .hs-outcome {
   transition:
     background-color var(--motion-fast) var(--motion-ease),
     box-shadow var(--motion-base) var(--motion-ease);
 }
 
-.home-story .hs-outcome:hover,
-.home-story .hs-module:hover {
+.home-story .hs-module {
+  transition:
+    background-color var(--motion-fast) var(--motion-ease);
+}
+
+.home-story .hs-outcome:hover {
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 12%, transparent);
 }
 

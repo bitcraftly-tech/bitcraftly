@@ -169,11 +169,23 @@
   /* Tighter card density */
   .home-story .hs-outcome,
   .home-story .hs-system,
-  .home-story .hs-module,
   .home-story .hs-flow,
   .home-story .hs-duel__side,
   .home-story .hs-launch__step {
     padding-inline: 18px;
+  }
+
+  .home-story .hs-module {
+    min-height: 116px;
+    padding: 24px 12px 20px;
+  }
+
+  .home-story .hs-module__index {
+    font-size: clamp(2.8rem, 16vw, 3.4rem);
+  }
+
+  .home-story .hs-modules {
+    gap: 0;
   }
 
   .home-story .hs-system__head,

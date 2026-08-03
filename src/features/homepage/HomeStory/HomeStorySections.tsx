@@ -311,10 +311,12 @@ export function HomeStorySections() {
                     {system.index}
                   </span>
                   <div className="hs-system__top">
-                    <span className="hs-system__index">{system.index}</span>
+                    <div className="hs-system__heading">
+                      <span className="hs-system__index">{system.index}</span>
+                      <h3 className="hs-system__title">{system.name}</h3>
+                    </div>
                     <span className="hs-system__tag">{system.short}</span>
                   </div>
-                  <h3 className="hs-system__title">{system.name}</h3>
                   <p className="hs-system__blurb">{system.blurb}</p>
                   <ul className="hs-system__modules" aria-label="Core modules">
                     {system.modules.map((mod, modIndex) => (

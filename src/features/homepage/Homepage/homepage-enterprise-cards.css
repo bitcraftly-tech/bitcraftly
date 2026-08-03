@@ -47,15 +47,23 @@
   transition: var(--ec-interact);
 }
 
-/* —— Shell cards (Outcomes / Modules) —— */
-.home-story .hs-outcomes,
-.home-story .hs-modules {
+/* —— Shell cards (Outcomes) —— */
+.home-story .hs-outcomes {
   border-radius: var(--ec-radius);
   border: 1px solid var(--ec-border);
   background: var(--ec-fill);
   box-shadow: var(--ec-shadow);
   backdrop-filter: blur(14px) saturate(1.05);
   -webkit-backdrop-filter: blur(14px) saturate(1.05);
+}
+
+/* Included modules — open tile grid (not a single table shell) */
+.home-story .hs-modules {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .home-story .hs-outcome {
@@ -83,13 +91,9 @@
   transform: translateY(-3px);
 }
 
-.home-story .hs-module:hover {
-  background: color-mix(in srgb, var(--primary) 5%, white);
-}
-
 .home-story .hs-module:focus-within {
   outline: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
-  outline-offset: -2px;
+  outline-offset: 2px;
 }
 
 /* —— Industry System cards (priority) —— */
@@ -146,7 +150,7 @@
 }
 
 .home-story .hs-system__title {
-  margin-top: 2px;
+  margin-top: 0;
   letter-spacing: -0.032em;
   line-height: 1.22;
 }

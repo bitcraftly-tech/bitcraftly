@@ -59,16 +59,21 @@
 
 /* —— 1. Industry System Cards — hierarchy + CTA affordance —— */
 .home-story .hs-system__top {
-  align-items: center;
+  align-items: flex-start;
   min-height: 28px;
 }
 
+.home-story .hs-system__heading {
+  align-items: baseline;
+  gap: 10px;
+}
+
 .home-story .hs-system__index {
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .home-story .hs-system__title {
-  margin-top: 4px;
+  margin-top: 0;
 }
 
 .home-story .hs-system__cta {
@@ -137,22 +142,23 @@
   display: block;
 }
 
-/* —— 4. What's Included module grid —— */
+/* —— 4. What's Included — editorial ledger —— */
 .home-story .hs-module {
-  align-items: flex-start;
-  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
 }
 
 .home-story .hs-module__index {
-  display: inline-grid;
-  place-items: center;
-  min-width: 1.6em;
-  line-height: 1;
-  margin-top: 3px;
+  display: block;
+  line-height: 0.85;
+  margin-top: 0;
 }
 
 .home-story .hs-module__name {
-  line-height: 1.35;
+  line-height: 1.25;
+  text-align: center;
 }
 
 /* —— 5. Dashboard metric cards —— */
