@@ -9,10 +9,10 @@ import './homepage-atf.css';
 const HOMEPAGE_CRITICAL_INLINE_CSS = `
 #main-content{min-height:100vh}
 .homepage-sections{display:block}
-.hp-hero{position:relative;isolation:isolate;width:100%;color:var(--foreground,#000826);background:var(--canvas,#f8fafc)}
+.hp-hero{position:relative;isolation:isolate;overflow:clip;width:100%;color:var(--foreground,#000826);background:var(--canvas,#f8fafc)}
 .hp-hero__shell{position:relative;z-index:1;box-sizing:border-box;width:100%;max-width:var(--container-xl,1400px);margin-inline:auto;padding-block:32px 28px;padding-inline:max(var(--container-padding,1.25rem),env(safe-area-inset-left,0px)) max(var(--container-padding,1.25rem),env(safe-area-inset-right,0px))}
 .hp-hero__grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;width:100%}
-.hp-hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;width:100%;max-width:540px}
+.hp-hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;width:100%;max-width:540px}
 .hp-hero-brand{display:block;margin:0 0 28px}
 .hp-hero-brand__tag{display:inline-flex;align-items:center;gap:8px;min-height:30px;padding:0 12px 0 10px;border-radius:999px;border:1px solid color-mix(in srgb,var(--primary,#3d5bff) 18%,var(--border,#e2e8f0));background:color-mix(in srgb,var(--primary,#3d5bff) 6%,#fff);color:color-mix(in srgb,var(--foreground,#000826) 72%,var(--primary,#3d5bff));font-size:12px;font-weight:600;letter-spacing:.02em;line-height:1}
 .hp-hero-brand__dot{width:6px;height:6px;border-radius:999px;background:linear-gradient(135deg,var(--primary,#3d5bff),var(--primary-end,#7b5cff));box-shadow:0 0 0 3px color-mix(in srgb,var(--primary,#3d5bff) 14%,transparent)}
