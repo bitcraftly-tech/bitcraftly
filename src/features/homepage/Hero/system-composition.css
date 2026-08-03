@@ -873,13 +873,13 @@
 
   .sys__layer {
     transform-style: flat;
-    will-change: transform;
+    will-change: auto;
   }
 
   .sys__glow,
   .sys__glow--mesh {
-    filter: blur(28px);
-    animation-duration: 8s;
+    filter: blur(24px);
+    animation-duration: 5.5s;
   }
 
   .sys__panel {
@@ -887,10 +887,35 @@
     -webkit-backdrop-filter: none;
   }
 
+  /* More visible float on small screens (desktop stays 2–4px) */
+  .sys__analytics {
+    animation-name: sys-float-a-mobile;
+    animation-duration: 4.8s;
+  }
+
+  .sys__dashboard {
+    animation-name: sys-float-b-mobile;
+    animation-duration: 5.2s;
+  }
+
+  .sys__ai {
+    animation-name: sys-float-c-mobile;
+    animation-duration: 4.6s;
+  }
+
+  .sys__website {
+    animation-name: sys-float-d-mobile;
+    animation-duration: 5.4s;
+  }
+
   .sys__analytics,
   .sys__dashboard,
   .sys__ai,
-  .sys__website {
+  .sys__website,
+  .sys__glow,
+  .sys__glow--mesh,
+  .sys__live,
+  .sys__panel--analytics {
     animation-play-state: running;
   }
 
@@ -914,6 +939,46 @@
   .sys__browser-page img,
   .sys__browser-shot {
     transform: scale(1.02);
+  }
+}
+
+@keyframes sys-float-a-mobile {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes sys-float-b-mobile {
+  0%,
+  100% {
+    transform: rotate(-3.5deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(-3.5deg) translate3d(0, -9px, 0);
+  }
+}
+
+@keyframes sys-float-c-mobile {
+  0%,
+  100% {
+    transform: rotate(4.5deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(4.5deg) translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes sys-float-d-mobile {
+  0%,
+  100% {
+    transform: rotate(-1.25deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(-1.25deg) translate3d(0, -7px, 0);
   }
 }
 
@@ -953,6 +1018,13 @@
   .sys__url--swap,
   .sys__swap {
     animation: none;
+  }
+
+  .sys__analytics,
+  .sys__dashboard,
+  .sys__ai,
+  .sys__website {
+    animation-name: none;
   }
 
   .sys__parallax-a,

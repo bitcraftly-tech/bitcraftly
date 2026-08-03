@@ -11,14 +11,31 @@ export function HeroTypedFocus() {
   const [cycle, setCycle] = useState(0);
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) return;
+    const reduceMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduceMedia.matches) return;
 
-    const timer = window.setInterval(() => {
-      setCycle((current) => current + 1);
-    }, TYPE_CYCLE_MS);
+    let raf = 0;
+    let lastTick = performance.now();
+    let running = true;
 
-    return () => window.clearInterval(timer);
+    const tick = (now: number) => {
+      if (!running) return;
+      raf = window.requestAnimationFrame(tick);
+      if (reduceMedia.matches || document.visibilityState === 'hidden') {
+        lastTick = now;
+        return;
+      }
+      if (now - lastTick >= TYPE_CYCLE_MS) {
+        lastTick = now;
+        setCycle((current) => current + 1);
+      }
+    };
+
+    raf = window.requestAnimationFrame(tick);
+    return () => {
+      running = false;
+      window.cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (

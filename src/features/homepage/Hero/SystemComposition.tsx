@@ -8,6 +8,40 @@ import {
 } from './hero.constants';
 import { SystemBrowserCarousel } from './SystemBrowserCarousel';
 
+const MOBILE_ROTATE_MS = 4200;
+const FLOAT_LAYER_SELECTOR =
+  '.sys__analytics, .sys__dashboard, .sys__ai, .sys__website, .sys__glow, .sys__live, .sys__panel--analytics';
+
+function prefersReducedMotion(): boolean {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function isCompactViewport(): boolean {
+  return window.matchMedia('(max-width: 1023px)').matches;
+}
+
+function subscribeMedia(media: MediaQueryList, onChange: () => void): () => void {
+  if (typeof media.addEventListener === 'function') {
+    media.addEventListener('change', onChange);
+    return () => media.removeEventListener('change', onChange);
+  }
+  // Safari < 14
+  media.addListener(onChange);
+  return () => media.removeListener(onChange);
+}
+
+/** iOS WebKit often freezes CSS animations until a paint kick after load/touch. */
+function restartCssAnimations(root: HTMLElement) {
+  const nodes = root.querySelectorAll<HTMLElement>(FLOAT_LAYER_SELECTOR);
+  nodes.forEach((node) => {
+    const prev = node.style.animation;
+    node.style.animation = 'none';
+    // Force reflow so WebKit drops the paused compositor state.
+    void node.offsetWidth;
+    node.style.animation = prev;
+  });
+}
+
 /**
  * Connected Industry System composition (layout frozen):
  * Website → AI → Dashboard → Analytics + floating ops cards.
@@ -17,6 +51,7 @@ export function SystemComposition() {
   const rootRef = useRef<HTMLDivElement>(null);
   const [industryIndex, setIndustryIndex] = useState(0);
   const [contentKey, setContentKey] = useState(0);
+  const [rotateMs, setRotateMs] = useState(HERO_INDUSTRY_ROTATE_MS);
   const preview = HERO_INDUSTRY_PREVIEWS[industryIndex] ?? HERO_INDUSTRY_PREVIEWS[0];
 
   const onRotate = useEffectEvent(() => {
@@ -25,37 +60,87 @@ export function SystemComposition() {
   });
 
   useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let timer = 0;
+    const syncRotateMs = () => {
+      setRotateMs(isCompactViewport() ? MOBILE_ROTATE_MS : HERO_INDUSTRY_ROTATE_MS);
+    };
+    syncRotateMs();
+    const mq = window.matchMedia('(max-width: 1023px)');
+    return subscribeMedia(mq, syncRotateMs);
+  }, []);
 
-    const clear = () => {
-      window.clearInterval(timer);
-      timer = 0;
+  /* Industry auto-rotate — rAF ticker (setInterval is heavily throttled on iOS). */
+  useEffect(() => {
+    const reduceMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let raf = 0;
+    let lastTick = performance.now();
+    let running = true;
+
+    const tick = (now: number) => {
+      if (!running) return;
+      raf = window.requestAnimationFrame(tick);
+
+      if (reduceMedia.matches || document.visibilityState === 'hidden') {
+        lastTick = now;
+        return;
+      }
+
+      const interval = isCompactViewport() ? MOBILE_ROTATE_MS : HERO_INDUSTRY_ROTATE_MS;
+      if (now - lastTick >= interval) {
+        lastTick = now;
+        onRotate();
+      }
     };
 
-    const start = () => {
-      clear();
-      if (media.matches || document.visibilityState === 'hidden') return;
-      timer = window.setInterval(onRotate, HERO_INDUSTRY_ROTATE_MS);
+    const onVisible = () => {
+      lastTick = performance.now();
+      const root = rootRef.current;
+      if (root && !reduceMedia.matches) {
+        restartCssAnimations(root);
+      }
     };
 
-    start();
-    media.addEventListener('change', start);
-    document.addEventListener('visibilitychange', start);
+    raf = window.requestAnimationFrame(tick);
+    document.addEventListener('visibilitychange', onVisible);
+    window.addEventListener('pageshow', onVisible);
+    const unsubscribe = subscribeMedia(reduceMedia, onVisible);
+
     return () => {
-      media.removeEventListener('change', start);
-      document.removeEventListener('visibilitychange', start);
-      clear();
+      running = false;
+      window.cancelAnimationFrame(raf);
+      document.removeEventListener('visibilitychange', onVisible);
+      window.removeEventListener('pageshow', onVisible);
+      unsubscribe();
     };
   }, []);
 
+  /* Kick frozen WebKit animations after first touch / short delay. */
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (reduceMotion || !finePointer) return;
+    const kick = () => {
+      if (prefersReducedMotion()) return;
+      restartCssAnimations(root);
+    };
+
+    const delay = window.setTimeout(kick, 350);
+    document.addEventListener('touchstart', kick, { once: true, passive: true });
+    document.addEventListener('pointerdown', kick, { once: true });
+
+    return () => {
+      window.clearTimeout(delay);
+      document.removeEventListener('touchstart', kick);
+      document.removeEventListener('pointerdown', kick);
+    };
+  }, []);
+
+  /* Desktop-only pointer parallax */
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    if (prefersReducedMotion() || !finePointer.matches) return;
 
     let frame = 0;
 
@@ -65,7 +150,6 @@ export function SystemComposition() {
         const rect = root.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width - 0.5;
         const y = (event.clientY - rect.top) / rect.height - 0.5;
-        // Unitless — Safari rejects calc(var(--len) * number) when --len is a length.
         root.style.setProperty('--sys-px', (x * 10).toFixed(2));
         root.style.setProperty('--sys-py', (y * 8).toFixed(2));
       });
@@ -168,7 +252,7 @@ export function SystemComposition() {
           <SystemBrowserCarousel
             items={HERO_INDUSTRY_PREVIEWS}
             activeIndex={industryIndex}
-            durationMs={HERO_INDUSTRY_ROTATE_MS}
+            durationMs={rotateMs}
           />
         </div>
       </div>

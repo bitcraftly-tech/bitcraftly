@@ -15,6 +15,13 @@
   background: var(--canvas);
 }
 
+@media (max-width: 1023px) {
+  /* overflow:clip can freeze descendant CSS animations on iOS WebKit */
+  .hp-hero {
+    overflow: visible;
+  }
+}
+
 .hp-hero__shell {
   position: relative;
   z-index: 1;
