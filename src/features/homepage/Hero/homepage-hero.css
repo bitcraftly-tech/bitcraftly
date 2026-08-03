@@ -16,9 +16,13 @@
 }
 
 @media (max-width: 1023px) {
-  /* overflow:clip can freeze descendant CSS animations on iOS WebKit */
+  /*
+   * Keep overflow:clip so atmosphere cannot paint over copy.
+   * (overflow:visible + translateZ glows was stacking bg above content.)
+   * Motion stays alive via filter-free radials + sys--live kick.
+   */
   .hp-hero {
-    overflow: visible;
+    overflow: clip;
   }
 
   /*
@@ -30,7 +34,8 @@
   .hp-hero-bg__orb {
     filter: none !important;
     will-change: auto;
-    transform: translateZ(0);
+    /* Do NOT use translateZ here — promotes layers above shell on mobile WebKit/Blink */
+    transform: none;
   }
 
   .hp-hero-bg__aurora {
@@ -99,6 +104,28 @@
         transparent 55%
       ),
       linear-gradient(180deg, #ffffff 0%, #f5f8fb 55%, var(--canvas, #f5f8fb) 100%);
+  }
+
+  /* Explicit stack: atmosphere under copy; contain system glow in visual only */
+  .hp-hero-bg {
+    z-index: 0;
+    isolation: isolate;
+  }
+
+  .hp-hero__shell {
+    z-index: 1;
+    isolation: isolate;
+  }
+
+  .hp-hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hp-hero-visual {
+    z-index: 1;
+    overflow: hidden;
+    isolation: isolate;
   }
 }
 

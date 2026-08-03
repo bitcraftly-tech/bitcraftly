@@ -867,10 +867,24 @@
 @media (max-width: 1023px) {
   /* Flatten 3D on phones/tablets — preserve-3d + filters freeze motion on iOS/Android */
   .sys {
-    isolation: auto;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .sys__glow,
+  .sys__glow--mesh,
+  .sys__ring,
+  .sys__shadow {
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .sys__meta {
+    z-index: 20;
   }
 
   .sys__stage {
+    z-index: 10;
     perspective: none;
     transform-style: flat;
   }
@@ -883,6 +897,7 @@
   /*
    * Glow without filter:blur — Android GPUs frequently cull large blurred
    * layers, which also poisons compositor animations for sibling floats.
+   * Contained by .sys overflow:hidden + .hp-hero-visual overflow:hidden.
    */
   .sys__glow,
   .sys__glow--mesh {
