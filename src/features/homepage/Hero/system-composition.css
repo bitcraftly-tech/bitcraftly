@@ -865,7 +865,11 @@
 }
 
 @media (max-width: 1023px) {
-  /* Flatten 3D on phones/tablets — preserve-3d + filters freeze motion on iOS */
+  /* Flatten 3D on phones/tablets — preserve-3d + filters freeze motion on iOS/Android */
+  .sys {
+    isolation: auto;
+  }
+
   .sys__stage {
     perspective: none;
     transform-style: flat;
@@ -876,13 +880,75 @@
     will-change: auto;
   }
 
+  /*
+   * Glow without filter:blur — Android GPUs frequently cull large blurred
+   * layers, which also poisons compositor animations for sibling floats.
+   */
   .sys__glow,
   .sys__glow--mesh {
-    filter: blur(24px);
+    filter: none !important;
+    opacity: 0.85;
     animation-duration: 5.5s;
   }
 
+  .sys__glow {
+    width: 120%;
+    height: 115%;
+    background:
+      radial-gradient(
+        circle at 42% 48%,
+        rgba(37, 99, 235, 0.3) 0%,
+        rgba(37, 99, 235, 0.14) 34%,
+        transparent 68%
+      ),
+      radial-gradient(
+        circle at 62% 42%,
+        rgba(99, 102, 241, 0.24) 0%,
+        rgba(99, 102, 241, 0.08) 40%,
+        transparent 70%
+      ),
+      radial-gradient(
+        circle at 50% 58%,
+        rgba(0, 196, 220, 0.16) 0%,
+        transparent 62%
+      );
+  }
+
+  .sys__glow--mesh {
+    width: 95%;
+    height: 90%;
+    opacity: 0.7;
+    background:
+      radial-gradient(
+        circle at 38% 44%,
+        rgba(99, 102, 241, 0.28) 0%,
+        rgba(99, 102, 241, 0.1) 36%,
+        transparent 72%
+      ),
+      radial-gradient(
+        circle at 68% 56%,
+        rgba(37, 99, 235, 0.18) 0%,
+        transparent 68%
+      );
+  }
+
+  .sys__shadow {
+    filter: none !important;
+    opacity: 0.55;
+    background: radial-gradient(
+      ellipse,
+      rgba(15, 23, 42, 0.22) 0%,
+      transparent 72%
+    );
+  }
+
   .sys__panel {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .sys__label,
+  .sys__flow {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
@@ -891,21 +957,29 @@
   .sys__analytics {
     animation-name: sys-float-a-mobile;
     animation-duration: 4.8s;
+    animation-timing-function: var(--sys-ease-float);
+    animation-iteration-count: infinite;
   }
 
   .sys__dashboard {
     animation-name: sys-float-b-mobile;
     animation-duration: 5.2s;
+    animation-timing-function: var(--sys-ease-float);
+    animation-iteration-count: infinite;
   }
 
   .sys__ai {
     animation-name: sys-float-c-mobile;
     animation-duration: 4.6s;
+    animation-timing-function: var(--sys-ease-float);
+    animation-iteration-count: infinite;
   }
 
   .sys__website {
     animation-name: sys-float-d-mobile;
     animation-duration: 5.4s;
+    animation-timing-function: var(--sys-ease-float);
+    animation-iteration-count: infinite;
   }
 
   .sys__analytics,
@@ -917,6 +991,18 @@
   .sys__live,
   .sys__panel--analytics {
     animation-play-state: running;
+  }
+
+  /* Class kick target — remount animations after WebKit/Blink freeze */
+  .sys:not(.sys--live) .sys__analytics,
+  .sys:not(.sys--live) .sys__dashboard,
+  .sys:not(.sys--live) .sys__ai,
+  .sys:not(.sys--live) .sys__website,
+  .sys:not(.sys--live) .sys__glow,
+  .sys:not(.sys--live) .sys__glow--mesh,
+  .sys:not(.sys--live) .sys__live,
+  .sys:not(.sys--live) .sys__panel--analytics {
+    animation: none !important;
   }
 
   .sys__browser-page .sys__browser-shot {

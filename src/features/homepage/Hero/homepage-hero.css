@@ -20,6 +20,86 @@
   .hp-hero {
     overflow: visible;
   }
+
+  /*
+   * Android Chrome / Samsung Internet often discard large filter:blur layers
+   * (looks like “no glow” and can stall sibling CSS animations). Use soft
+   * radial stops instead — desktop blur path unchanged above 1023px.
+   */
+  .hp-hero-bg__aurora,
+  .hp-hero-bg__orb {
+    filter: none !important;
+    will-change: auto;
+    transform: translateZ(0);
+  }
+
+  .hp-hero-bg__aurora {
+    inset: -18% -12% auto;
+    height: 78%;
+    opacity: 0.9;
+    background:
+      radial-gradient(
+        60% 55% at 72% 28%,
+        rgba(37, 99, 235, 0.22) 0%,
+        rgba(37, 99, 235, 0.1) 32%,
+        transparent 70%
+      ),
+      radial-gradient(
+        50% 45% at 58% 42%,
+        rgba(99, 102, 241, 0.16) 0%,
+        transparent 68%
+      ),
+      radial-gradient(
+        45% 40% at 78% 48%,
+        rgba(0, 196, 220, 0.14) 0%,
+        transparent 65%
+      );
+  }
+
+  .hp-hero-bg__orb--a {
+    opacity: 0.95;
+    background: radial-gradient(
+      circle at 40% 45%,
+      rgba(37, 99, 235, 0.32) 0%,
+      rgba(37, 99, 235, 0.14) 38%,
+      transparent 72%
+    );
+  }
+
+  .hp-hero-bg__orb--b {
+    opacity: 0.9;
+    background: radial-gradient(
+      circle at 50% 40%,
+      rgba(99, 102, 241, 0.26) 0%,
+      rgba(99, 102, 241, 0.1) 40%,
+      transparent 70%
+    );
+  }
+
+  .hp-hero-bg__orb--c {
+    opacity: 0.85;
+    background: radial-gradient(
+      circle,
+      rgba(103, 232, 249, 0.22) 0%,
+      rgba(103, 232, 249, 0.08) 42%,
+      transparent 74%
+    );
+  }
+
+  .hp-hero-bg__base {
+    background:
+      radial-gradient(
+        90% 70% at 88% 16%,
+        rgba(37, 99, 235, 0.12) 0%,
+        transparent 58%
+      ),
+      radial-gradient(
+        70% 60% at 12% 78%,
+        rgba(99, 102, 241, 0.08) 0%,
+        transparent 55%
+      ),
+      linear-gradient(180deg, #ffffff 0%, #f5f8fb 55%, var(--canvas, #f5f8fb) 100%);
+  }
 }
 
 .hp-hero__shell {

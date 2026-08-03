@@ -9,8 +9,6 @@ import {
 import { SystemBrowserCarousel } from './SystemBrowserCarousel';
 
 const MOBILE_ROTATE_MS = 4200;
-const FLOAT_LAYER_SELECTOR =
-  '.sys__analytics, .sys__dashboard, .sys__ai, .sys__website, .sys__glow, .sys__live, .sys__panel--analytics';
 
 function prefersReducedMotion(): boolean {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -25,27 +23,29 @@ function subscribeMedia(media: MediaQueryList, onChange: () => void): () => void
     media.addEventListener('change', onChange);
     return () => media.removeEventListener('change', onChange);
   }
-  // Safari < 14
   media.addListener(onChange);
   return () => media.removeListener(onChange);
 }
 
-/** iOS WebKit often freezes CSS animations until a paint kick after load/touch. */
-function restartCssAnimations(root: HTMLElement) {
-  const nodes = root.querySelectorAll<HTMLElement>(FLOAT_LAYER_SELECTOR);
-  nodes.forEach((node) => {
-    const prev = node.style.animation;
-    node.style.animation = 'none';
-    // Force reflow so WebKit drops the paused compositor state.
-    void node.offsetWidth;
-    node.style.animation = prev;
+/**
+ * Remount CSS animations via class toggle.
+ * Works on iOS WebKit + Android Blink when compositor freezes after load.
+ */
+function kickCssMotion(root: HTMLElement) {
+  if (prefersReducedMotion()) return;
+  root.classList.remove('sys--live');
+  // Double rAF: ensure style flush across WebKit and Chromium.
+  window.requestAnimationFrame(() => {
+    void root.offsetWidth;
+    window.requestAnimationFrame(() => {
+      root.classList.add('sys--live');
+    });
   });
 }
 
 /**
  * Connected Industry System composition (layout frozen):
  * Website → AI → Dashboard → Analytics + floating ops cards.
- * Premium motion: industry auto-rotate, parallax, float, analytics pulse.
  */
 export function SystemComposition() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -68,38 +68,53 @@ export function SystemComposition() {
     return subscribeMedia(mq, syncRotateMs);
   }, []);
 
-  /* Industry auto-rotate — rAF ticker (setInterval is heavily throttled on iOS). */
+  /*
+   * Industry auto-rotate:
+   * - rAF when the tab is active (smooth)
+   * - setTimeout fallback (Android often pauses rAF until interaction)
+   * - respects prefers-reduced-motion
+   */
   useEffect(() => {
     const reduceMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
     let raf = 0;
+    let timeout = 0;
     let lastTick = performance.now();
     let running = true;
 
-    const tick = (now: number) => {
-      if (!running) return;
-      raf = window.requestAnimationFrame(tick);
+    const intervalMs = () =>
+      isCompactViewport() ? MOBILE_ROTATE_MS : HERO_INDUSTRY_ROTATE_MS;
 
+    const maybeRotate = (now: number) => {
       if (reduceMedia.matches || document.visibilityState === 'hidden') {
         lastTick = now;
         return;
       }
-
-      const interval = isCompactViewport() ? MOBILE_ROTATE_MS : HERO_INDUSTRY_ROTATE_MS;
-      if (now - lastTick >= interval) {
+      if (now - lastTick >= intervalMs()) {
         lastTick = now;
         onRotate();
       }
     };
 
+    const rafLoop = (now: number) => {
+      if (!running) return;
+      maybeRotate(now);
+      raf = window.requestAnimationFrame(rafLoop);
+    };
+
+    const timeoutLoop = () => {
+      if (!running) return;
+      maybeRotate(performance.now());
+      timeout = window.setTimeout(timeoutLoop, Math.min(500, intervalMs() / 8));
+    };
+
     const onVisible = () => {
       lastTick = performance.now();
       const root = rootRef.current;
-      if (root && !reduceMedia.matches) {
-        restartCssAnimations(root);
-      }
+      if (root) kickCssMotion(root);
     };
 
-    raf = window.requestAnimationFrame(tick);
+    raf = window.requestAnimationFrame(rafLoop);
+    timeout = window.setTimeout(timeoutLoop, 400);
     document.addEventListener('visibilitychange', onVisible);
     window.addEventListener('pageshow', onVisible);
     const unsubscribe = subscribeMedia(reduceMedia, onVisible);
@@ -107,34 +122,32 @@ export function SystemComposition() {
     return () => {
       running = false;
       window.cancelAnimationFrame(raf);
+      window.clearTimeout(timeout);
       document.removeEventListener('visibilitychange', onVisible);
       window.removeEventListener('pageshow', onVisible);
       unsubscribe();
     };
   }, []);
 
-  /* Kick frozen WebKit animations after first touch / short delay. */
+  /* Enable + kick motion after mount / first input (cross-browser). */
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
 
-    const kick = () => {
-      if (prefersReducedMotion()) return;
-      restartCssAnimations(root);
-    };
-
-    const delay = window.setTimeout(kick, 350);
-    document.addEventListener('touchstart', kick, { once: true, passive: true });
-    document.addEventListener('pointerdown', kick, { once: true });
+    root.classList.add('sys--live');
+    const delay = window.setTimeout(() => kickCssMotion(root), 120);
+    const onInput = () => kickCssMotion(root);
+    document.addEventListener('touchstart', onInput, { once: true, passive: true });
+    document.addEventListener('pointerdown', onInput, { once: true });
 
     return () => {
       window.clearTimeout(delay);
-      document.removeEventListener('touchstart', kick);
-      document.removeEventListener('pointerdown', kick);
+      document.removeEventListener('touchstart', onInput);
+      document.removeEventListener('pointerdown', onInput);
     };
   }, []);
 
-  /* Desktop-only pointer parallax */
+  /* Desktop-only pointer parallax — unchanged for fine pointers. */
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -170,7 +183,7 @@ export function SystemComposition() {
   }, []);
 
   return (
-    <div className="sys" ref={rootRef} aria-hidden="true">
+    <div className="sys sys--live" ref={rootRef} aria-hidden="true">
       <div className="sys__glow" />
       <div className="sys__glow sys__glow--mesh" />
       <div className="sys__ring" />
