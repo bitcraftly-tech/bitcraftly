@@ -10,90 +10,59 @@ const GO_LIVE = [
   { step: '04', title: 'Launch', body: 'Ship deployment-ready — go live.' },
 ] as const;
 
-const AUTOPLAY_MS = 1600;
-const RESUME_MS = 5000;
-
-function prefersReducedMotion(): boolean {
-  if (typeof window === 'undefined') {
-    return false;
-  }
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
+/** Negative delays into the shared 6.5s timeline (matches rail/node keyframes). */
+const SEEK_DELAYS_S = [0, 0.52, 1.17, 1.82] as const;
+const COMPACT_QUERY = '(max-width: 899px)';
 
 export function GoLiveLaunch() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
+  const [compact, setCompact] = useState(false);
+  const [seek, setSeek] = useState(0);
+  const [animKey, setAnimKey] = useState(0);
 
   useEffect(() => {
-    setReduceMotion(prefersReducedMotion());
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const onChange = () => setReduceMotion(media.matches);
-    media.addEventListener('change', onChange);
-    return () => media.removeEventListener('change', onChange);
+    const media = window.matchMedia(COMPACT_QUERY);
+    const sync = () => setCompact(media.matches);
+    sync();
+    media.addEventListener('change', sync);
+    return () => media.removeEventListener('change', sync);
   }, []);
-
-  useEffect(() => {
-    if (paused || reduceMotion) {
-      return;
-    }
-
-    const id = window.setInterval(() => {
-      setActive((current) => (current + 1) % GO_LIVE.length);
-    }, AUTOPLAY_MS);
-
-    return () => window.clearInterval(id);
-  }, [paused, reduceMotion]);
-
-  useEffect(() => {
-    if (!paused || reduceMotion) {
-      return;
-    }
-
-    const id = window.setTimeout(() => setPaused(false), RESUME_MS);
-    return () => window.clearTimeout(id);
-  }, [paused, active, reduceMotion]);
 
   const selectStep = useCallback((index: number) => {
-    setActive(index);
-    setPaused(true);
+    setSeek(index);
+    setAnimKey((key) => key + 1);
   }, []);
 
+  const seekDelay = `-${SEEK_DELAYS_S[seek] ?? 0}s`;
+
   return (
-    <div className="hs-launch hs-launch--interactive" data-active-step={active}>
+    <div
+      key={animKey}
+      className="hs-launch"
+      style={{ ['--hs-launch-seek' as string]: compact ? seekDelay : '0s' }}
+    >
       <ol className="hs-launch__steps">
         {GO_LIVE.map((item, index) => {
           const isLast = index === GO_LIVE.length - 1;
-          const state = reduceMotion
-            ? 'done'
-            : index < active
-              ? 'done'
-              : index === active
-                ? 'active'
-                : 'pending';
 
           return (
             <li
               key={item.step}
-              className={cn(
-                'hs-launch__step',
-                isLast && 'hs-launch__step--end',
-                state === 'active' && 'hs-launch__step--active',
-                state === 'done' && 'hs-launch__step--done',
-                state === 'pending' && 'hs-launch__step--pending',
-              )}
+              className={cn('hs-launch__step', isLast && 'hs-launch__step--end')}
               style={{ ['--hs-launch-i' as string]: index }}
             >
               <div className="hs-launch__node">
-                <button
-                  type="button"
-                  className="hs-launch__num"
-                  aria-current={state === 'active' ? 'step' : undefined}
-                  aria-label={`Step ${item.step}: ${item.title}`}
-                  onClick={() => selectStep(index)}
-                >
-                  {item.step}
-                </button>
+                {compact ? (
+                  <button
+                    type="button"
+                    className="hs-launch__num"
+                    aria-label={`Step ${item.step}: ${item.title}`}
+                    onClick={() => selectStep(index)}
+                  >
+                    {item.step}
+                  </button>
+                ) : (
+                  <span className="hs-launch__num">{item.step}</span>
+                )}
                 {!isLast ? (
                   <span className="hs-launch__rail" aria-hidden="true">
                     <i className="hs-launch__rail-flow" />

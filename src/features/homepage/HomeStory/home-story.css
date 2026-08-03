@@ -3381,13 +3381,7 @@
     0 10px 22px -14px color-mix(in srgb, var(--primary) 30%, transparent),
     0 0 0 6px color-mix(in srgb, var(--primary) 6%, transparent);
   animation: hs-launch-node-1 6.5s linear infinite;
-  transition:
-    border-color 0.35s ease,
-    background 0.35s ease,
-    color 0.35s ease,
-    box-shadow 0.35s ease,
-    transform 0.35s ease,
-    opacity 0.35s ease;
+  animation-delay: var(--hs-launch-seek, 0s);
 }
 
 .hs-launch__num:focus-visible {
@@ -3467,6 +3461,7 @@
       color-mix(in srgb, var(--primary) 35%, transparent)
     );
     animation: hs-launch-rail-v1 6.5s linear infinite;
+    animation-delay: var(--hs-launch-seek, 0s);
   }
 
   .home-story .hs-launch__rail {
@@ -3486,13 +3481,23 @@
     position: absolute;
     left: 50%;
     top: 0;
-    width: 3px;
-    height: 18px;
-    margin-left: -1.5px;
+    width: 4px;
+    height: 28px;
+    margin-left: -2px;
     border-radius: 999px;
-    background: color-mix(in srgb, var(--primary) 90%, white);
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      color-mix(in srgb, white 85%, var(--primary)) 35%,
+      var(--primary) 55%,
+      transparent 100%
+    );
+    box-shadow:
+      0 0 10px color-mix(in srgb, var(--primary) 75%, white),
+      0 0 18px color-mix(in srgb, var(--primary) 45%, transparent);
     opacity: 0;
     animation: hs-launch-flow-v1 6.5s linear infinite;
+    animation-delay: var(--hs-launch-seek, 0s);
   }
 
   .hs-launch__step:nth-child(2) .hs-launch__rail-flow {
@@ -3525,6 +3530,7 @@
     );
     overflow: visible;
     animation: hs-launch-rail-1 6.5s linear infinite;
+    animation-delay: var(--hs-launch-seek, 0s);
   }
 
   .hs-launch__step:nth-child(2) .hs-launch__rail {
@@ -3540,13 +3546,23 @@
     position: absolute;
     top: 50%;
     left: 0;
-    width: 22px;
+    width: 28px;
     height: 3px;
     margin-top: -1.5px;
     border-radius: 999px;
-    background: color-mix(in srgb, var(--primary) 90%, white);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, white 85%, var(--primary)) 35%,
+      var(--primary) 55%,
+      transparent 100%
+    );
+    box-shadow:
+      0 0 10px color-mix(in srgb, var(--primary) 75%, white),
+      0 0 18px color-mix(in srgb, var(--primary) 45%, transparent);
     opacity: 0;
     animation: hs-launch-flow-1 6.5s linear infinite;
+    animation-delay: var(--hs-launch-seek, 0s);
   }
 
   .hs-launch__step:nth-child(2) .hs-launch__rail-flow {
@@ -4108,91 +4124,6 @@
 
   .hs-launch__rail-flow {
     display: none;
-  }
-}
-
-/* Interactive stepper — tap any circle; autoplay advances until user interacts */
-.hs-launch--interactive .hs-launch__num,
-.hs-launch--interactive .hs-launch__rail,
-.hs-launch--interactive .hs-launch__rail-flow {
-  animation: none !important;
-}
-
-.hs-launch--interactive .hs-launch__rail-flow {
-  display: none !important;
-}
-
-.hs-launch--interactive .hs-launch__rail {
-  transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.35s ease;
-}
-
-.hs-launch--interactive .hs-launch__step--pending .hs-launch__num {
-  border-color: color-mix(in srgb, var(--primary) 22%, transparent);
-  background: linear-gradient(
-    145deg,
-    color-mix(in srgb, white 90%, var(--primary)) 0%,
-    color-mix(in srgb, var(--primary) 8%, white) 100%
-  );
-  color: var(--primary);
-  box-shadow:
-    0 10px 22px -14px color-mix(in srgb, var(--primary) 30%, transparent),
-    0 0 0 6px color-mix(in srgb, var(--primary) 6%, transparent);
-  transform: scale(0.94);
-  opacity: 0.62;
-}
-
-.hs-launch--interactive .hs-launch__step--active .hs-launch__num,
-.hs-launch--interactive .hs-launch__step--done .hs-launch__num {
-  border-color: transparent;
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    color-mix(in srgb, var(--primary-end) 55%, var(--primary)) 100%
-  );
-  color: var(--primary-foreground);
-  box-shadow:
-    0 12px 26px -12px color-mix(in srgb, var(--primary) 55%, transparent),
-    0 0 0 6px color-mix(in srgb, var(--primary) 14%, transparent);
-  transform: scale(1);
-  opacity: 1;
-}
-
-.hs-launch--interactive .hs-launch__step--active .hs-launch__num {
-  box-shadow:
-    0 12px 26px -12px color-mix(in srgb, var(--primary) 55%, transparent),
-    0 0 0 7px color-mix(in srgb, var(--primary) 18%, transparent);
-}
-
-@media (max-width: 899px) {
-  .hs-launch--interactive .hs-launch__rail {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-
-  .hs-launch--interactive .hs-launch__step--done .hs-launch__rail {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-}
-
-@media (min-width: 900px) {
-  .hs-launch--interactive .hs-launch__rail {
-    transform: scaleX(0);
-    opacity: 0;
-  }
-
-  .hs-launch--interactive .hs-launch__step--done .hs-launch__rail {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hs-launch--interactive .hs-launch__rail,
-  .hs-launch--interactive .hs-launch__num {
-    transition: none;
   }
 }
 
