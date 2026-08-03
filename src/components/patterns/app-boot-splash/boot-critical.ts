@@ -70,7 +70,7 @@ html.bc-app-ready #bc-boot-splash,
 html.bc-app-ready #bc-demo-boot-splash {
   opacity: 0;
   visibility: hidden;
-  pointer-events: none;
+  pointer-events: none !important;
 }
 .bc-boot-splash__inner,
 .bc-demo-boot__inner {

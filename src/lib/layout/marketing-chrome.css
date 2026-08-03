@@ -78,17 +78,15 @@ html:has(.bc-marketing) body {
   overflow-y: visible;
 }
 
-/* Mobile menu open — kill glass so iOS doesn't composite hero text through the sheet */
+/* Mobile menu open — solid header above the sheet; do not hide #main-content
+   (visibility:hidden caused unreliable open/paint on some mobile browsers). */
 html[data-mobile-nav-open='true'] .header-adaptive {
+  z-index: calc(var(--z-modal) + 1);
   background-color: var(--background);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow: none;
   border-color: var(--border);
-}
-
-html[data-mobile-nav-open='true'] #main-content {
-  visibility: hidden;
 }
 
 /* Header bar — logo | nav | actions (same width + inset as Container xl) */
@@ -137,6 +135,17 @@ html[data-mobile-nav-open='true'] #main-content {
 .header-bar__mobile {
   display: flex;
   align-items: center;
+  position: relative;
+  z-index: calc(var(--z-modal) + 2);
+  pointer-events: auto;
+}
+
+.header-mobile-trigger {
+  position: relative;
+  z-index: calc(var(--z-modal) + 2);
+  pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .header-logo-tagline {
@@ -301,13 +310,13 @@ html[data-header-mode='home'][data-header-scrolled='true'] .header-adaptive {
 
 .header-mobile-menu {
   animation: header-mobile-slide 220ms ease-out;
-  /* Portal to body + solid fill — avoids header backdrop-filter bleed on iOS */
   isolation: isolate;
   background-color: var(--background);
   background-image: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   opacity: 1;
+  pointer-events: auto;
 }
 
 .header-mega-menu {

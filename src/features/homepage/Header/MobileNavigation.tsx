@@ -28,9 +28,8 @@ const mobileMenuButtonBase = cn(
 
 export function MobileNavigation() {
   const pathname = usePathname();
-  const [openForPath, setOpenForPath] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const open = openForPath === pathname;
   const menuLabelId = useId();
   const panelId = HEADER_MOBILE_MENU_ID;
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -41,8 +40,13 @@ export function MobileNavigation() {
     setMounted(true);
   }, []);
 
+  // Close on route change without coupling open state to pathname equality.
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   const closeMenu = useCallback((restoreFocus = false) => {
-    setOpenForPath(null);
+    setOpen(false);
     if (restoreFocus) {
       queueMicrotask(() => {
         (previouslyFocusedRef.current ?? triggerRef.current)?.focus({ preventScroll: true });
@@ -52,55 +56,41 @@ export function MobileNavigation() {
   }, []);
 
   const toggleMenu = useCallback(() => {
-    setOpenForPath((current) => {
-      if (current === pathname) {
-        return null;
+    setOpen((wasOpen) => {
+      if (wasOpen) {
+        return false;
       }
       previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
-      return pathname;
+      return true;
     });
-  }, [pathname]);
+  }, []);
 
   useEffect(() => {
-    if (!open || !mounted) {
+    const root = document.documentElement;
+    if (!open) {
+      root.removeAttribute('data-mobile-nav-open');
       return;
     }
 
-    const root = document.documentElement;
+    root.setAttribute('data-mobile-nav-open', 'true');
+    root.classList.add('overflow-hidden');
+
     const main = document.getElementById('main-content');
     const previousMainInert = main?.inert ?? false;
-
-    root.classList.add('overflow-hidden');
-    root.setAttribute('data-mobile-nav-open', 'true');
     if (main) {
       main.inert = true;
     }
 
     const panel = panelRef.current;
-    if (!panel) {
-      return () => {
-        root.classList.remove('overflow-hidden');
-        root.removeAttribute('data-mobile-nav-open');
-        if (main) {
-          main.inert = previousMainInert;
-        }
-      };
-    }
 
-    const getFocusable = () =>
-      Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+    const getFocusable = () => {
+      if (!panel) {
+        return [] as HTMLElement[];
+      }
+      return Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
         (el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true',
       );
-
-    // Focus the dialog shell — not the first nav button. Focusing the first
-    // control after a touch open makes iOS/Safari paint a :focus-visible ring
-    // on "Solutions" until the menu is closed/reopened.
-    queueMicrotask(() => {
-      panel.focus({
-        preventScroll: true,
-        focusVisible: false,
-      });
-    });
+    };
 
     function handleKeyDown(event: KeyboardEvent) {
       if (!panel) {
@@ -120,7 +110,7 @@ export function MobileNavigation() {
       const focusableElements = getFocusable();
       if (focusableElements.length === 0) {
         event.preventDefault();
-        panel.focus({ preventScroll: true, focusVisible: false });
+        panel.focus({ preventScroll: true });
         return;
       }
 
@@ -143,14 +133,14 @@ export function MobileNavigation() {
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      root.classList.remove('overflow-hidden');
       root.removeAttribute('data-mobile-nav-open');
+      root.classList.remove('overflow-hidden');
       if (main) {
         main.inert = previousMainInert;
       }
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [closeMenu, mounted, open]);
+  }, [closeMenu, open]);
 
   const menuPanel =
     open && mounted ? (
@@ -161,10 +151,11 @@ export function MobileNavigation() {
         aria-modal="true"
         aria-labelledby={menuLabelId}
         tabIndex={-1}
-        className="header-mobile-menu fixed inset-x-0 z-[calc(var(--z-sticky)-1)] flex flex-col border-t border-border bg-background"
+        className="header-mobile-menu fixed inset-x-0 flex flex-col border-t border-border bg-background outline-none focus:outline-none"
         style={{
           top: HEADER_HEIGHT_PX,
           height: `calc(100dvh - ${HEADER_HEIGHT_PX}px)`,
+          zIndex: 'var(--z-modal)',
         }}
       >
         <Container size="xl" className="flex min-h-0 flex-1 flex-col py-[var(--space-4)]">
@@ -220,17 +211,20 @@ export function MobileNavigation() {
         ref={triggerRef}
         type="button"
         className={cn(
-          'header-mobile-trigger inline-flex size-[44px] min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-lg',
-          'text-foreground transition-colors duration-200 hover:bg-surface',
+          'header-mobile-trigger relative z-[calc(var(--z-modal)+2)] inline-flex size-[44px] min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-lg',
+          'pointer-events-auto touch-manipulation text-foreground transition-colors duration-200 hover:bg-surface',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
         )}
         aria-expanded={open}
         aria-controls={panelId}
         aria-haspopup="dialog"
         aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
-        onClick={toggleMenu}
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          toggleMenu();
+        }}
       >
-        {/* Stack both icons so open/close swap never reflows the button box. */}
         <span className="relative inline-flex size-[24px] shrink-0 items-center justify-center">
           <Icon
             name="menu"

@@ -17,9 +17,19 @@ const nextConfig: NextConfig = {
 
   /**
    * Allow LAN / loopback hosts to load Next.js dig assets (HMR + client chunks).
-   * Without this, phone/desktop via 192.168.x.x gets a frozen hero carousel.
+   * Without this, phone QA via http://192.168.x.x:3000 gets SSR HTML but no
+   * React hydration — hamburger / carousels appear frozen.
+   * Hostnames only (no CIDR). Restart `next dig` after changing this list.
+   * Optional: ALLOWED_DEV_ORIGINS=192.168.1.10,10.0.0.5
    */
-  allowedDevOrigins: ['127.0.0.1', 'localhost', '192.168.29.173'],
+  allowedDevOrigins: [
+    '127.0.0.1',
+    'localhost',
+    '192.168.29.173',
+    ...(process.env.ALLOWED_DEV_ORIGINS?.split(',')
+      .map((origin) => origin.trim())
+      .filter(Boolean) ?? []),
+  ],
 
   /**
    * Enable gzip/brotli compression.
