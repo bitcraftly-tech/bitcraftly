@@ -92,10 +92,14 @@ export function MobileNavigation() {
         (el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true',
       );
 
-    // Move focus into the dialog after paint.
+    // Focus the dialog shell — not the first nav button. Focusing the first
+    // control after a touch open makes iOS/Safari paint a :focus-visible ring
+    // on "Solutions" until the menu is closed/reopened.
     queueMicrotask(() => {
-      const focusable = getFocusable();
-      (focusable[0] ?? panel).focus({ preventScroll: true });
+      panel.focus({
+        preventScroll: true,
+        focusVisible: false,
+      });
     });
 
     function handleKeyDown(event: KeyboardEvent) {
@@ -116,7 +120,7 @@ export function MobileNavigation() {
       const focusableElements = getFocusable();
       if (focusableElements.length === 0) {
         event.preventDefault();
-        panel.focus({ preventScroll: true });
+        panel.focus({ preventScroll: true, focusVisible: false });
         return;
       }
 
