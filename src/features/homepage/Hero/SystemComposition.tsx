@@ -28,18 +28,24 @@ export function SystemComposition() {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     let timer = 0;
 
-    const sync = () => {
+    const clear = () => {
       window.clearInterval(timer);
       timer = 0;
-      if (media.matches) return;
+    };
+
+    const start = () => {
+      clear();
+      if (media.matches || document.visibilityState === 'hidden') return;
       timer = window.setInterval(onRotate, HERO_INDUSTRY_ROTATE_MS);
     };
 
-    sync();
-    media.addEventListener('change', sync);
+    start();
+    media.addEventListener('change', start);
+    document.addEventListener('visibilitychange', start);
     return () => {
-      media.removeEventListener('change', sync);
-      window.clearInterval(timer);
+      media.removeEventListener('change', start);
+      document.removeEventListener('visibilitychange', start);
+      clear();
     };
   }, []);
 
@@ -48,7 +54,8 @@ export function SystemComposition() {
     if (!root) return;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) return;
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (reduceMotion || !finePointer) return;
 
     let frame = 0;
 

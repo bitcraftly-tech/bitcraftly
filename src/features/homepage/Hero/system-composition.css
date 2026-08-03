@@ -15,8 +15,8 @@
   width: min(100%, 620px);
   height: 520px;
   margin-inline: auto;
-  /* Promote layer so float + track transforms stay live on iOS */
-  transform: translateZ(0);
+  /* Avoid translateZ(0) here — iOS freezes nested 3D float animations inside it */
+  isolation: isolate;
 }
 
 @media (min-width: 1024px) {
@@ -208,7 +208,27 @@
   transform-style: preserve-3d;
 }
 
-/* Parallax depth is applied inside float keyframes via --sys-px / --sys-py */
+/*
+ * Parallax via individual `translate` so float keyframes can own `transform`
+ * without Safari invalidating calc(var(--sys-px) * …) inside @keyframes.
+ */
+@media (hover: hover) and (pointer: fine) {
+  .sys__parallax-a {
+    translate: calc(var(--sys-px) * 0.55 * 1px) calc(var(--sys-py) * 0.45 * 1px);
+  }
+
+  .sys__parallax-b {
+    translate: calc(var(--sys-px) * -0.35 * 1px) calc(var(--sys-py) * 0.3 * 1px);
+  }
+
+  .sys__parallax-c {
+    translate: calc(var(--sys-px) * 0.4 * 1px) calc(var(--sys-py) * -0.25 * 1px);
+  }
+
+  .sys__parallax-d {
+    translate: calc(var(--sys-px) * 0.18 * 1px) calc(var(--sys-py) * 0.14 * 1px);
+  }
+}
 
 .sys__panel {
   overflow: hidden;
@@ -407,9 +427,10 @@
   max-height: 280px;
   overflow: hidden;
   border-radius: 16px;
-  /* Safari iOS: clip transformed/filtered screenshot children to frame radius */
+  /* Safari iOS: clip children to radius — avoid translateZ on this node (breaks overflow clip) */
   isolation: isolate;
-  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   gap: 0;
   padding: 0;
   border-color: color-mix(in srgb, var(--foreground) 9%, transparent);
@@ -541,7 +562,8 @@
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
   isolation: isolate;
-  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   background:
     linear-gradient(
       165deg,
@@ -570,7 +592,8 @@
   height: 100%;
   overflow: hidden;
   isolation: isolate;
-  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   background:
     linear-gradient(
       165deg,
@@ -757,76 +780,47 @@
 }
 
 /*
- * Subtle 2–4px float — layer rotations refined for depth only.
+ * Subtle 2–4px float — fixed px only (Safari-safe).
+ * Pointer parallax is applied separately via `translate` (desktop hover).
  * Positions (left/top/width) remain frozen.
  */
 @keyframes sys-float-a {
   0%,
   100% {
-    transform: translate3d(calc(var(--sys-px) * 0.55 * 1px), calc(var(--sys-py) * 0.45 * 1px), 0)
-      translateZ(-28px);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translate3d(
-        calc(var(--sys-px) * 0.55 * 1px),
-        calc(var(--sys-py) * 0.45 * 1px - 3px),
-        0
-      )
-      translateZ(-28px);
+    transform: translate3d(0, -3px, 0);
   }
 }
 
 @keyframes sys-float-b {
   0%,
   100% {
-    transform: rotate(-3.5deg)
-      translate3d(calc(var(--sys-px) * -0.35 * 1px), calc(var(--sys-py) * 0.3 * 1px), 0)
-      translateZ(-12px);
+    transform: rotate(-3.5deg) translate3d(0, 0, 0);
   }
   50% {
-    transform: rotate(-3.5deg)
-      translate3d(
-        calc(var(--sys-px) * -0.35 * 1px),
-        calc(var(--sys-py) * 0.3 * 1px - 4px),
-        0
-      )
-      translateZ(-12px);
+    transform: rotate(-3.5deg) translate3d(0, -4px, 0);
   }
 }
 
 @keyframes sys-float-c {
   0%,
   100% {
-    transform: rotate(4.5deg)
-      translate3d(calc(var(--sys-px) * 0.4 * 1px), calc(var(--sys-py) * -0.25 * 1px), 0)
-      translateZ(6px);
+    transform: rotate(4.5deg) translate3d(0, 0, 0);
   }
   50% {
-    transform: rotate(4.5deg)
-      translate3d(
-        calc(var(--sys-px) * 0.4 * 1px),
-        calc(var(--sys-py) * -0.25 * 1px - 3px),
-        0
-      )
-      translateZ(6px);
+    transform: rotate(4.5deg) translate3d(0, -3px, 0);
   }
 }
 
 @keyframes sys-float-d {
   0%,
   100% {
-    transform: rotate(-1.25deg)
-      translate3d(calc(var(--sys-px) * 0.18 * 1px), calc(var(--sys-py) * 0.14 * 1px), 0)
-      translateZ(18px);
+    transform: rotate(-1.25deg) translate3d(0, 0, 0);
   }
   50% {
-    transform: rotate(-1.25deg)
-      translate3d(
-        calc(var(--sys-px) * 0.18 * 1px),
-        calc(var(--sys-py) * 0.14 * 1px - 2.5px),
-        0
-      )
-      translateZ(18px);
+    transform: rotate(-1.25deg) translate3d(0, -2.5px, 0);
   }
 }
 
@@ -863,12 +857,63 @@
   from {
     opacity: 0;
     transform: translate3d(0, 5px, 0) scale(0.985);
-    filter: blur(1px);
   }
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
-    filter: blur(0);
+  }
+}
+
+@media (max-width: 1023px) {
+  /* Flatten 3D on phones/tablets — preserve-3d + filters freeze motion on iOS */
+  .sys__stage {
+    perspective: none;
+    transform-style: flat;
+  }
+
+  .sys__layer {
+    transform-style: flat;
+    will-change: transform;
+  }
+
+  .sys__glow,
+  .sys__glow--mesh {
+    filter: blur(28px);
+    animation-duration: 8s;
+  }
+
+  .sys__panel {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .sys__analytics,
+  .sys__dashboard,
+  .sys__ai,
+  .sys__website {
+    animation-play-state: running;
+  }
+
+  .sys__browser-page .sys__browser-shot {
+    /* Softer scale on mobile — large scale + filter breaks Safari corner clip */
+    opacity: 0.85;
+    transform: scale(1.03) translate3d(0, 0, 0);
+    transition:
+      opacity 280ms var(--sys-ease),
+      transform 720ms var(--sys-ease-out);
+    filter: none;
+  }
+
+  .sys__browser-page.is-active .sys__browser-shot {
+    opacity: 1;
+    transform: scale(1.02) translate3d(0, 0, 0);
+    filter: none;
+  }
+
+  .sys__browser-page > span,
+  .sys__browser-page img,
+  .sys__browser-shot {
+    transform: scale(1.02);
   }
 }
 
