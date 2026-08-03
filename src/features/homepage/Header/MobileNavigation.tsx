@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { bcButtonClassName, ButtonArrow } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Container } from '@/components/ui/container';
 import { cn } from '@/lib/cn';
@@ -19,12 +20,19 @@ import { MobileNavAccordion } from './MobileNavAccordion';
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-const mobileMenuButtonBase = cn(
-  'inline-flex h-[48px] w-full items-center justify-center gap-[8px]',
-  'rounded-[12px] text-[15px] font-semibold leading-none no-underline',
-  'transition-[opacity,transform,box-shadow,border-color,background-color] duration-200',
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-);
+const secondaryCtaClassName = bcButtonClassName({
+  variant: 'outline',
+  size: 'lg',
+  fullWidth: true,
+  className: 'h-[48px] justify-center rounded-[12px] text-[15px]',
+});
+
+const primaryCtaClassName = bcButtonClassName({
+  variant: 'primary',
+  size: 'lg',
+  fullWidth: true,
+  className: 'group h-[48px] justify-center rounded-[12px] text-[15px]',
+});
 
 export function MobileNavigation() {
   const pathname = usePathname();
@@ -44,6 +52,26 @@ export function MobileNavigation() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  // Portaled menu sits on document.body, so container-query hide on the header
+  // does not apply — close when the window reaches desktop chrome width.
+  useEffect(() => {
+    const desktopChrome = window.matchMedia('(min-width: 1180px)');
+    const closeIfDesktop = () => {
+      if (desktopChrome.matches) {
+        setOpen(false);
+      }
+    };
+
+    closeIfDesktop();
+    desktopChrome.addEventListener('change', closeIfDesktop);
+    window.addEventListener('resize', closeIfDesktop);
+
+    return () => {
+      desktopChrome.removeEventListener('change', closeIfDesktop);
+      window.removeEventListener('resize', closeIfDesktop);
+    };
+  }, []);
 
   const closeMenu = useCallback((restoreFocus = false) => {
     setOpen(false);
@@ -151,7 +179,7 @@ export function MobileNavigation() {
         aria-modal="true"
         aria-labelledby={menuLabelId}
         tabIndex={-1}
-        className="header-mobile-menu fixed inset-x-0 flex flex-col border-t border-border bg-background outline-none focus:outline-none"
+        className="header-mobile-menu fixed inset-x-0 flex flex-col border-t border-border/70 outline-none focus:outline-none"
         style={{
           top: HEADER_HEIGHT_PX,
           height: `calc(100dvh - ${HEADER_HEIGHT_PX}px)`,
@@ -163,7 +191,11 @@ export function MobileNavigation() {
             Mobile navigation menu
           </p>
 
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+          <p className="header-mobile-menu__eyebrow" aria-hidden>
+            Browse
+          </p>
+
+          <div className="header-mobile-menu__scroll min-h-0 flex-1 overflow-y-auto overscroll-contain">
             <MobileNavAccordion
               links={HEADER_NAV_LINKS}
               pathname={pathname}
@@ -171,35 +203,27 @@ export function MobileNavigation() {
             />
           </div>
 
-          <div
-            className={cn(
-              'mt-[var(--space-4)] flex shrink-0 flex-col gap-[var(--space-2)]',
-              'border-t border-border pt-[var(--space-4)]',
-              'pb-[max(var(--space-2),env(safe-area-inset-bottom,0px))]',
-            )}
-          >
-            <Link
-              href={HEADER_CTA_SECONDARY.href}
-              onClick={() => closeMenu()}
-              className={cn(
-                mobileMenuButtonBase,
-                'rounded-[8px] border border-foreground/12 bg-background text-foreground',
-                'hover:bg-canvas',
-              )}
-            >
-              {HEADER_CTA_SECONDARY.label}
-            </Link>
-            <Link
-              href={HEADER_CTA_PRIMARY.href}
-              onClick={() => closeMenu()}
-              className={cn(
-                mobileMenuButtonBase,
-                'rounded-[8px] border-0 bg-primary text-primary-foreground',
-                'hover:bg-primary/90',
-              )}
-            >
-              {HEADER_CTA_PRIMARY.label}
-            </Link>
+          <div className="header-mobile-menu__cta shrink-0">
+            <p className="header-mobile-menu__cta-hint">
+              Ready to ship an Industry System? Start with a strategy call.
+            </p>
+            <div className="header-mobile-menu__cta-stack">
+              <Link
+                href={HEADER_CTA_SECONDARY.href}
+                onClick={() => closeMenu()}
+                className={secondaryCtaClassName}
+              >
+                {HEADER_CTA_SECONDARY.label}
+              </Link>
+              <Link
+                href={HEADER_CTA_PRIMARY.href}
+                onClick={() => closeMenu()}
+                className={primaryCtaClassName}
+              >
+                <span>{HEADER_CTA_PRIMARY.label}</span>
+                <ButtonArrow className="text-[15px]" />
+              </Link>
+            </div>
           </div>
         </Container>
       </div>

@@ -20,6 +20,9 @@
 .qa-*.json
 .qa-*.log
 .qa-*.err.log
+.qa-hero-layer/
+.qa-chrome-profile/
+.qa-chrome-profile-*/
 
 # next.js
 /.next/
