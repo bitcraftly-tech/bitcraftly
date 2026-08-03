@@ -88,19 +88,8 @@
 
   /*
    * soft-light grain composites a muted film across the atmosphere group
-   * on mobile WebKit/Blink — disable blend, keep barely-there texture.
+   * on mobile WebKit/Blink — neutralized in the later mobile cascade block.
    */
-  .hp-hero-bg__grain {
-    mix-blend-mode: normal;
-    opacity: 0.05;
-  }
-
-  /* Mid orb sits under chips/CTAs on a single-column layout — park it lower */
-  .hp-hero-bg__orb--c {
-    top: auto;
-    bottom: 4%;
-    left: 58%;
-  }
 
   .hp-hero-bg__orb--a {
     opacity: 0.95;
@@ -167,24 +156,6 @@
     z-index: 1;
     overflow: hidden;
     isolation: isolate;
-  }
-
-  /*
-   * Translucent frosted surfaces let the atmosphere read as a veil on top of
-   * chips/CTAs. Keep shapes — only make fills opaque on mobile.
-   */
-  .hp-hero-modules__item {
-    background: var(--background, #fff);
-  }
-
-  .hp-hero-cta--secondary {
-    background: var(--background, #fff);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  .hp-hero-brand__tag {
-    background: var(--background, #fff);
   }
 }
 
@@ -1015,6 +986,36 @@
   .hp-hero-visual::before,
   .hp-hero-visual::after {
     display: none;
+  }
+
+  /*
+   * These must come AFTER base .hp-hero-bg__grain / CTA / chip rules or the
+   * earlier mobile block loses the cascade (soft-light + translucent fills return).
+   */
+  .hp-hero-bg__grain {
+    mix-blend-mode: normal;
+    opacity: 0.05;
+  }
+
+  /* Mid orb sits under chips/CTAs on a single-column layout — park it lower */
+  .hp-hero-bg__orb--c {
+    top: auto;
+    bottom: 4%;
+    left: 58%;
+  }
+
+  .hp-hero-modules__item {
+    background: var(--background, #fff);
+  }
+
+  .hp-hero-cta--secondary {
+    background: var(--background, #fff);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .hp-hero-brand__tag {
+    background: var(--background, #fff);
   }
 }
 
