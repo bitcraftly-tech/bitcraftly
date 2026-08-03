@@ -3358,6 +3358,8 @@
   width: 44px;
   height: 44px;
   flex-shrink: 0;
+  margin: 0;
+  padding: 0;
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
   background: linear-gradient(
@@ -3370,10 +3372,27 @@
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.04em;
+  line-height: 1;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  touch-action: manipulation;
   box-shadow:
     0 10px 22px -14px color-mix(in srgb, var(--primary) 30%, transparent),
     0 0 0 6px color-mix(in srgb, var(--primary) 6%, transparent);
   animation: hs-launch-node-1 6.5s linear infinite;
+  transition:
+    border-color 0.35s ease,
+    background 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease,
+    opacity 0.35s ease;
+}
+
+.hs-launch__num:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
 }
 
 .hs-launch__step:nth-child(2) .hs-launch__num {
@@ -3407,35 +3426,51 @@
   display: none;
 }
 
-/* Mobile / tablet: vertical draw between steps (desktop uses horizontal rails below) */
+/* Mobile / tablet: vertical draw that reaches the next circle */
 @media (max-width: 899px) {
   .hs-launch__step {
     align-items: stretch;
   }
 
+  .hs-launch__step + .hs-launch__step {
+    /* Continuous timeline — border breaks the animated connector */
+    border-top: 0;
+  }
+
   .hs-launch__node {
+    position: relative;
     align-self: stretch;
     min-height: 100%;
   }
 
+  /*
+   * Rail sits under the current number and extends through this step’s
+   * bottom padding + the next step’s top padding so the draw meets 02/03/04.
+   */
   .hs-launch__rail {
-    position: relative;
-    flex: 1 1 auto;
-    align-self: center;
+    position: absolute;
+    left: 50%;
+    top: calc(44px + 8px);
+    bottom: calc(-1 * (14px + 14px));
     width: 2px;
-    min-height: 40px;
-    margin-top: 10px;
-    margin-bottom: 2px;
+    min-height: 0;
+    margin: 0 0 0 -1px;
+    flex: none;
+    align-self: auto;
     transform-origin: top center;
     transform: scaleY(0);
     opacity: 0;
     overflow: visible;
     background: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--primary) 55%, transparent),
-      color-mix(in srgb, var(--primary) 28%, transparent)
+      color-mix(in srgb, var(--primary) 60%, transparent),
+      color-mix(in srgb, var(--primary) 35%, transparent)
     );
     animation: hs-launch-rail-v1 6.5s linear infinite;
+  }
+
+  .home-story .hs-launch__rail {
+    top: calc(46px + 8px);
   }
 
   .hs-launch__step:nth-child(2) .hs-launch__rail {
@@ -4073,6 +4108,91 @@
 
   .hs-launch__rail-flow {
     display: none;
+  }
+}
+
+/* Interactive stepper — tap any circle; autoplay advances until user interacts */
+.hs-launch--interactive .hs-launch__num,
+.hs-launch--interactive .hs-launch__rail,
+.hs-launch--interactive .hs-launch__rail-flow {
+  animation: none !important;
+}
+
+.hs-launch--interactive .hs-launch__rail-flow {
+  display: none !important;
+}
+
+.hs-launch--interactive .hs-launch__rail {
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease;
+}
+
+.hs-launch--interactive .hs-launch__step--pending .hs-launch__num {
+  border-color: color-mix(in srgb, var(--primary) 22%, transparent);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, white 90%, var(--primary)) 0%,
+    color-mix(in srgb, var(--primary) 8%, white) 100%
+  );
+  color: var(--primary);
+  box-shadow:
+    0 10px 22px -14px color-mix(in srgb, var(--primary) 30%, transparent),
+    0 0 0 6px color-mix(in srgb, var(--primary) 6%, transparent);
+  transform: scale(0.94);
+  opacity: 0.62;
+}
+
+.hs-launch--interactive .hs-launch__step--active .hs-launch__num,
+.hs-launch--interactive .hs-launch__step--done .hs-launch__num {
+  border-color: transparent;
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    color-mix(in srgb, var(--primary-end) 55%, var(--primary)) 100%
+  );
+  color: var(--primary-foreground);
+  box-shadow:
+    0 12px 26px -12px color-mix(in srgb, var(--primary) 55%, transparent),
+    0 0 0 6px color-mix(in srgb, var(--primary) 14%, transparent);
+  transform: scale(1);
+  opacity: 1;
+}
+
+.hs-launch--interactive .hs-launch__step--active .hs-launch__num {
+  box-shadow:
+    0 12px 26px -12px color-mix(in srgb, var(--primary) 55%, transparent),
+    0 0 0 7px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+@media (max-width: 899px) {
+  .hs-launch--interactive .hs-launch__rail {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+
+  .hs-launch--interactive .hs-launch__step--done .hs-launch__rail {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@media (min-width: 900px) {
+  .hs-launch--interactive .hs-launch__rail {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+
+  .hs-launch--interactive .hs-launch__step--done .hs-launch__rail {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hs-launch--interactive .hs-launch__rail,
+  .hs-launch--interactive .hs-launch__num {
+    transition: none;
   }
 }
 

@@ -3,6 +3,7 @@ import { bcButtonClassName, ButtonArrow } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { getIndustryHref } from '@/constants/industries';
 import { ROUTES } from '@/constants/navigation';
+import { GoLiveLaunch } from './GoLiveLaunch';
 import './home-story-production.css';
 
 const MODULES = [
@@ -148,13 +149,6 @@ const COMPARISON = [
     agency: 'Project closeout',
     ours: 'Digital Engineering Partner',
   },
-] as const;
-
-const GO_LIVE = [
-  { step: '01', title: 'Choose Industry', body: 'Pick your Wave 1 Industry System.' },
-  { step: '02', title: 'Configure System', body: 'Select the modules you need.' },
-  { step: '03', title: 'Customize Brand', body: 'Apply identity, content, and domain.' },
-  { step: '04', title: 'Launch', body: 'Ship deployment-ready — go live.' },
 ] as const;
 
 export function HomeStorySections() {
@@ -677,35 +671,7 @@ export function HomeStorySections() {
               </p>
             </header>
 
-            <div className="hs-launch">
-              <ol className="hs-launch__steps">
-                {GO_LIVE.map((item, index) => {
-                  const isLast = index === GO_LIVE.length - 1;
-                  return (
-                    <li
-                      key={item.step}
-                      className={
-                        isLast ? 'hs-launch__step hs-launch__step--end' : 'hs-launch__step'
-                      }
-                      style={{ ['--hs-launch-i' as string]: index }}
-                    >
-                      <div className="hs-launch__node">
-                        <span className="hs-launch__num">{item.step}</span>
-                        {!isLast ? (
-                          <span className="hs-launch__rail" aria-hidden="true">
-                            <i className="hs-launch__rail-flow" />
-                          </span>
-                        ) : null}
-                      </div>
-                      <div className="hs-launch__copy">
-                        <strong className="hs-launch__title">{item.title}</strong>
-                        <p className="hs-launch__body">{item.body}</p>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ol>
-            </div>
+            <GoLiveLaunch />
           </Container>
         </div>
       </section>
