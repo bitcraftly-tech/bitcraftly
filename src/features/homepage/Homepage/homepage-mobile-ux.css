@@ -5,11 +5,10 @@
 
 /* —— Phone + small tablet —— */
 @media (max-width: 1023px) {
-  .home-story .hs-section,
-  .home-story .hs-section--soft,
-  .home-story .hs-section--outcomes,
-  .home-story .hs-section--path,
-  .home-story .hs-section--included,
+  /*
+   * Stage-wrapped sections already pad via *-stage. Don't also pad the
+   * section shell — that doubles the white gap between blocks (esp. mesh → why).
+   */
   .home-story .hs-section--mesh,
   .home-story .hs-wave,
   .home-story .hs-auto,
@@ -17,7 +16,34 @@
   .home-story .hs-why,
   .home-story .hs-live,
   .home-story .hs-invite {
-    padding-block: max(36px, calc(var(--section-spacing) * 0.85));
+    padding-block: 0;
+  }
+
+  /* Sections that pad on the shell itself */
+  .home-story .hs-section--soft,
+  .home-story .hs-section--outcomes,
+  .home-story .hs-section--path,
+  .home-story .hs-section--included {
+    padding-block: 32px;
+  }
+
+  .home-story .hs-wave-stage,
+  .home-story .hs-auto-stage,
+  .home-story .hs-dash-stage,
+  .home-story .hs-mesh-stage,
+  .home-story .hs-why-stage,
+  .home-story .hs-live-stage,
+  .home-story .hs-invite-stage {
+    padding-block: 32px;
+  }
+
+  /* Tighten integrations → Why Us seam */
+  .home-story .hs-section--mesh .hs-mesh-stage {
+    padding-bottom: 16px;
+  }
+
+  .home-story .hs-why .hs-why-stage {
+    padding-top: 16px;
   }
 
   /* Touch targets ≥44px for text CTAs */
@@ -109,19 +135,29 @@
 
 /* —— Narrow phones —— */
 @media (max-width: 767px) {
-  .home-story .hs-section,
   .home-story .hs-section--soft,
   .home-story .hs-section--outcomes,
   .home-story .hs-section--path,
-  .home-story .hs-section--included,
-  .home-story .hs-section--mesh,
-  .home-story .hs-wave,
-  .home-story .hs-auto,
-  .home-story .hs-dash,
-  .home-story .hs-why,
-  .home-story .hs-live,
-  .home-story .hs-invite {
-    padding-block: 36px;
+  .home-story .hs-section--included {
+    padding-block: 28px;
+  }
+
+  .home-story .hs-wave-stage,
+  .home-story .hs-auto-stage,
+  .home-story .hs-dash-stage,
+  .home-story .hs-mesh-stage,
+  .home-story .hs-why-stage,
+  .home-story .hs-live-stage,
+  .home-story .hs-invite-stage {
+    padding-block: 28px;
+  }
+
+  .home-story .hs-section--mesh .hs-mesh-stage {
+    padding-bottom: 12px;
+  }
+
+  .home-story .hs-why .hs-why-stage {
+    padding-top: 12px;
   }
 
   /* Outcomes watermark less dominant over copy */
