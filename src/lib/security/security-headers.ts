@@ -1,4 +1,12 @@
 const isProduction = process.env.NODE_ENV === 'production';
+/**
+ * Local `next start` over http://LAN-IP must not emit HTTPS-only directives —
+ * `upgrade-insecure-requests` + HSTS turn CSS/JS into https://… and Android
+ * shows a blank white boot screen (SSL protocol error).
+ * Set BC_ALLOW_INSECURE_HTTP=true for device QA; leave unset on Vercel.
+ */
+const allowInsecureHttp = process.env.BC_ALLOW_INSECURE_HTTP === 'true';
+const enableHttpsHardening = isProduction && !allowInsecureHttp;
 
 /**
  * Production security headers for all routes.
@@ -25,14 +33,18 @@ export function buildSecurityHeaders(): ReadonlyArray<{
     `connect-src 'self' https:${sentryConnectSrc}`,
     "worker-src 'self' blob:",
     "manifest-src 'self'",
-    ...(isProduction ? ['upgrade-insecure-requests'] : []),
+    ...(enableHttpsHardening ? ['upgrade-insecure-requests'] : []),
   ].join('; ');
 
   return [
-    {
-      key: 'Strict-Transport-Security',
-      value: 'max-age=31536000; includeSubDomains; preload',
-    },
+    ...(enableHttpsHardening
+      ? [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload',
+          },
+        ]
+      : []),
     {
       key: 'X-Content-Type-Options',
       value: 'nosniff',

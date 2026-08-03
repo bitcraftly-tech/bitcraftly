@@ -7,12 +7,14 @@ import './homepage-atf.css';
  * geometry applies before first paint (keeps footer out of the LCP viewport).
  */
 const HOMEPAGE_CRITICAL_INLINE_CSS = `
+html:has(.bc-marketing),.bc-marketing,.homepage-sections{color-scheme:light;--primary:#3d5bff;--primary-hover:#2f48e6;--primary-foreground:#ffffff;--primary-end:#7b5cff;--foreground:#000826;--heading:#000726;--canvas:#f3f8fc;--background:#ffffff;--surface:#ffffff;--muted:#4a6b7c;--muted-foreground:#346c84;--border:#d7e4ee;--hp-hero-ink:#000826;--hp-hero-muted:#346c84}
 #main-content{min-height:100vh}
 .homepage-sections{display:block}
-.hp-hero{position:relative;isolation:isolate;width:100%;color:var(--foreground,#000826);background:var(--canvas,#f8fafc)}
-.hp-hero__shell{position:relative;z-index:1;box-sizing:border-box;width:100%;max-width:var(--container-xl,1400px);margin-inline:auto;padding-block:32px 28px;padding-inline:max(var(--container-padding,1.25rem),env(safe-area-inset-left,0px)) max(var(--container-padding,1.25rem),env(safe-area-inset-right,0px))}
-.hp-hero__grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;width:100%}
-.hp-hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;width:100%;max-width:540px}
+.hp-hero{position:relative;isolation:isolate;overflow:clip;width:100%;color:var(--foreground,#000826);background:var(--canvas,#f8fafc)}
+@media (max-width:1023px){.hp-hero{overflow:visible}}
+.hp-hero__shell{position:relative;z-index:1;isolation:isolate;box-sizing:border-box;width:100%;max-width:var(--container-xl,1400px);margin-inline:auto;padding-block:32px 28px;padding-inline:max(var(--container-padding,1.25rem),env(safe-area-inset-left,0px)) max(var(--container-padding,1.25rem),env(safe-area-inset-right,0px))}
+.hp-hero__grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:start;width:100%}
+.hp-hero-content,.hp-hero-intro,.hp-hero-meta{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;width:100%;max-width:540px}
 .hp-hero-brand{display:block;margin:0 0 28px}
 .hp-hero-brand__tag{display:inline-flex;align-items:center;gap:8px;min-height:30px;padding:0 12px 0 10px;border-radius:999px;border:1px solid color-mix(in srgb,var(--primary,#3d5bff) 18%,var(--border,#e2e8f0));background:color-mix(in srgb,var(--primary,#3d5bff) 6%,#fff);color:color-mix(in srgb,var(--foreground,#000826) 72%,var(--primary,#3d5bff));font-size:12px;font-weight:600;letter-spacing:.02em;line-height:1}
 .hp-hero-brand__dot{width:6px;height:6px;border-radius:999px;background:linear-gradient(135deg,var(--primary,#3d5bff),var(--primary-end,#7b5cff));box-shadow:0 0 0 3px color-mix(in srgb,var(--primary,#3d5bff) 14%,transparent)}
@@ -23,7 +25,10 @@ h1#hero-heading .hp-hero-heading__focus{display:block;position:relative;width:fi
 h1#hero-heading .hp-hero-heading__sub{display:inline-flex;align-items:baseline;gap:.3em;margin:0;font-size:.5em;line-height:1.05}
 h1#hero-heading .hp-hero-heading__sub-lead{color:color-mix(in srgb,var(--foreground,#000826) 70%,var(--muted,#64748b)) !important;font-weight:600}
 h1#hero-heading .hp-hero-heading__sub-accent{font-family:var(--font-hero-hand),cursive;color:var(--primary,#3d5bff) !important;font-size:1.42em;font-weight:700}
-@media (min-width:1024px){.hp-hero__grid{grid-template-columns:minmax(0,42%) minmax(0,58%);column-gap:40px}}
+@media (min-width:1024px){.hp-hero__grid{grid-template-columns:minmax(0,42%) minmax(0,58%);grid-template-areas:"intro visual" "meta visual";column-gap:40px;row-gap:0;align-items:start}.hp-hero-intro{grid-area:intro}.hp-hero-visual{grid-area:visual;align-self:center}.hp-hero-meta{grid-area:meta}}
+@media (max-width:1023px){.hp-hero__grid{gap:16px}.hp-hero-intro .hp-hero-actions{margin-bottom:0}.hp-hero-visual{box-sizing:border-box;width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding-inline:max(var(--container-padding,1.25rem),env(safe-area-inset-left,0px)) max(var(--container-padding,1.25rem),env(safe-area-inset-right,0px))}}
+.sys__browser-pager{display:inline-flex!important;position:absolute;right:12px;bottom:12px;z-index:30;align-items:baseline;gap:4px;min-height:28px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:#0f172a;color:#fff;font-size:12px;font-weight:800;line-height:1;pointer-events:none}
+.sys__browser-progress{display:none!important}
 @media (min-width:1280px){.hp-hero__shell{padding-block:36px 32px}}
 @media (max-width:767px){h1#hero-heading.hp-hero-heading{font-size:2.25rem !important}}
 `;

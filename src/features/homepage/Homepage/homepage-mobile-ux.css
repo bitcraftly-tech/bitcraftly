@@ -1,0 +1,236 @@
+/**
+ * Homepage mobile UX polish — HomeStory + invite.
+ * Desktop (≥1024) unchanged. Spacing, touch targets, stacking only.
+ */
+
+/* —— Phone + small tablet —— */
+@media (max-width: 1023px) {
+  .home-story .hs-section,
+  .home-story .hs-section--soft,
+  .home-story .hs-section--outcomes,
+  .home-story .hs-section--path,
+  .home-story .hs-section--included,
+  .home-story .hs-section--mesh,
+  .home-story .hs-wave,
+  .home-story .hs-auto,
+  .home-story .hs-dash,
+  .home-story .hs-why,
+  .home-story .hs-live,
+  .home-story .hs-invite {
+    padding-block: max(36px, calc(var(--section-spacing) * 0.85));
+  }
+
+  /* Touch targets ≥44px for text CTAs */
+  .home-story .hs-system__cta,
+  .home-story .hs-auto-link,
+  .home-story .hs-wave-all {
+    min-height: 44px;
+    padding: 10px 4px;
+    align-items: center;
+  }
+
+  /* Delivery path — always stacked on tablet portrait */
+  .home-story .hs-path {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .home-story .hs-path-step {
+    width: 100%;
+  }
+
+  .home-story .hs-path-step__label {
+    white-space: normal;
+  }
+
+  .home-story .hs-path-step__arrow {
+    margin-left: auto;
+    transform: rotate(90deg);
+  }
+
+  /* Automation rails — vertical before mid-card wrap */
+  .home-story .hs-flow__connector {
+    display: none;
+  }
+
+  .home-story .hs-flow__rail {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* Integrations channels — avoid 4-col crush */
+  .home-story .hs-sync__channel {
+    grid-template-columns: 10px minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    row-gap: 6px;
+    padding: 14px;
+  }
+
+  .home-story .hs-sync__channel-mark {
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+
+  .home-story .hs-sync__channel-copy {
+    grid-column: 2 / span 2;
+  }
+
+  .home-story .hs-sync__channel-copy span {
+    white-space: normal;
+  }
+
+  .home-story .hs-sync__channel-lag {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .home-story .hs-sync__channel-status {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  /* Final invite — full-width stacked CTAs */
+  .home-story .hs-invite-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .home-story .hs-invite-btn.bc-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+}
+
+/* —— Narrow phones —— */
+@media (max-width: 767px) {
+  .home-story .hs-section,
+  .home-story .hs-section--soft,
+  .home-story .hs-section--outcomes,
+  .home-story .hs-section--path,
+  .home-story .hs-section--included,
+  .home-story .hs-section--mesh,
+  .home-story .hs-wave,
+  .home-story .hs-auto,
+  .home-story .hs-dash,
+  .home-story .hs-why,
+  .home-story .hs-live,
+  .home-story .hs-invite {
+    padding-block: 36px;
+  }
+
+  /* Outcomes watermark less dominant over copy */
+  .home-story .hs-outcome__mark {
+    font-size: clamp(2.4rem, 14vw, 3rem);
+    opacity: 0.85;
+  }
+
+  /* Tighter card density */
+  .home-story .hs-outcome,
+  .home-story .hs-system,
+  .home-story .hs-module,
+  .home-story .hs-flow,
+  .home-story .hs-duel__side,
+  .home-story .hs-launch__step {
+    padding-inline: 18px;
+  }
+
+  .home-story .hs-system__head,
+  .home-story .hs-outcome__body {
+    margin-bottom: 0;
+  }
+
+  /* Wave module chips — clearer wrap */
+  .home-story .hs-system__modules {
+    row-gap: 8px;
+    column-gap: 0;
+  }
+
+  .home-story .hs-system__sep {
+    display: none;
+  }
+
+  .home-story .hs-system__module {
+    margin-right: 8px;
+  }
+
+  /* Dashboard eco — less crowded nodes */
+  .home-story .hs-eco {
+    min-height: 300px;
+  }
+
+  .home-story .hs-eco__canvas {
+    min-height: 270px;
+  }
+
+  .home-story .hs-eco__node {
+    min-width: 88px;
+    max-width: 42%;
+    padding: 8px 9px;
+  }
+
+  .home-story .hs-eco__node-value {
+    font-size: 14px;
+  }
+
+  /* Duel comparison — readable stacked cells */
+  .home-story .hs-duel__side {
+    min-width: 0;
+  }
+
+  .home-story .hs-duel__cell,
+  .home-story .hs-duel__ours,
+  .home-story .hs-duel__theirs {
+    font-size: 12.5px;
+    line-height: 1.45;
+    word-break: break-word;
+  }
+
+  /* Launch steps — comfortable reading */
+  .home-story .hs-launch__copy {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Headings breathe without dominating viewport */
+  .home-story .hs-head__title {
+    letter-spacing: -0.03em;
+  }
+
+  .home-story .hs-head {
+    margin-bottom: 22px;
+    gap: 10px;
+  }
+
+  /* Reduce motion-heavy hover lifts on coarse pointers */
+  .home-story .hs-sync__channel:hover,
+  .home-story .hs-flow:hover,
+  .home-story .hs-path-step:hover,
+  .home-story .hs-system:hover,
+  .home-story .hs-outcome:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .home-story .hs-invite-notes {
+    gap: 8px 14px;
+    padding-top: 16px;
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-story .hs-sync__channel:hover,
+  .home-story .hs-flow:hover,
+  .home-story .hs-path-step:hover,
+  .home-story .hs-system:hover,
+  .home-story .hs-outcome:hover {
+    transform: none;
+  }
+}

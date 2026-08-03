@@ -38,14 +38,32 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 48px;
-  align-items: center;
+  align-items: start;
   width: 100%;
 }
 
 @media (min-width: 1024px) {
   .hp-hero__grid {
     grid-template-columns: minmax(0, 42%) minmax(0, 58%);
+    grid-template-areas:
+      'intro visual'
+      'meta visual';
     column-gap: 40px;
+    row-gap: 0;
+    align-items: start;
+  }
+
+  .hp-hero-intro {
+    grid-area: intro;
+  }
+
+  .hp-hero-visual {
+    grid-area: visual;
+    align-self: center;
+  }
+
+  .hp-hero-meta {
+    grid-area: meta;
   }
 }
 
@@ -217,7 +235,9 @@
 }
 
 /* —— Copy column —— */
-.hp-hero-content {
+.hp-hero-content,
+.hp-hero-intro,
+.hp-hero-meta {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -838,13 +858,102 @@
 }
 
 @media (max-width: 1023px) {
+  /*
+   * Mobile single-column stack: .hp-hero-visual is a later sibling of copy.
+   * Oversized .sys__glow (filter:blur) was painting upward over the copy
+   * column → grey/white veil + faded CTAs. Contain glow on .sys / visual;
+   * keep desktop blur / glass / glow unchanged above 1023px.
+   *
+   * overflow:clip on .hp-hero freezes descendant CSS animations on iOS WebKit —
+   * use visible here; clip only the visual stage.
+   *
+   * Real-device Safari: mix-blend-mode:soft-light on full-bleed grain was
+   * compositing with copy (dark text → washed white, primary CTA white → dark).
+   * Keep grain opacity; disable only the unsafe blend mode on small viewports.
+   */
+  .hp-hero {
+    overflow: visible;
+  }
+
+  .hp-hero-bg {
+    z-index: 0;
+    isolation: isolate;
+    /* Keep filtered atmosphere in its own compositor layer, behind shell */
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  .hp-hero-bg__grain {
+    mix-blend-mode: normal;
+  }
+
+  .hp-hero__shell {
+    z-index: 1;
+    isolation: isolate;
+  }
+
+  /* Tighter space: intro → carousel → modules */
+  .hp-hero__grid {
+    gap: 16px;
+  }
+
+  .hp-hero-content,
+  .hp-hero-intro,
+  .hp-hero-meta {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    /* Promote copy above filtered atmosphere on WebKit */
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* CTA sits just above carousel — drop large bottom margin */
+  .hp-hero-intro .hp-hero-actions {
+    margin-bottom: 0;
+  }
+
+  .hp-hero-meta .hp-hero-modules {
+    margin-bottom: 20px;
+  }
+
+  .hp-hero-visual {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    isolation: isolate;
+    box-sizing: border-box;
+    min-height: 0;
+    align-items: stretch;
+    justify-content: stretch;
+    /*
+     * Match header-bar gutters exactly:
+     * break out of shell padding, then re-apply --container-padding.
+     */
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-inline: max(var(--container-padding), env(safe-area-inset-left, 0px))
+      max(var(--container-padding), env(safe-area-inset-right, 0px));
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Mobile: carousel only — no glass plates behind the browser frame */
+  .hp-hero-visual::before,
+  .hp-hero-visual::after {
+    content: none !important;
+    display: none !important;
+  }
+
   .hp-hero-heading {
     font-size: 2.15rem;
   }
 
-  .hp-hero-visual::before,
-  .hp-hero-visual::after {
-    display: none;
+  /* will-change + filter can promote orbs above shell on WebKit/Blink */
+  .hp-hero-bg__orb {
+    will-change: auto;
   }
 }
 

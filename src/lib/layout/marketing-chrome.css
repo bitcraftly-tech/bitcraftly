@@ -1,5 +1,60 @@
 /** Marketing ATF-critical CSS — header + section rhythm only (footer deferred). */
 
+/**
+ * Marketing surfaces are light-designed (hero plates, glass, primary CTAs).
+ * OS dark mode flips :root tokens → light text on light plates + dark text on
+ * the primary gradient. Lock the light palette on html + marketing shell so
+ * real phones match desktop regardless of system appearance.
+ * Specificity (html:has) beats :root dark-media rules.
+ */
+html:has(.bc-marketing),
+.bc-marketing,
+.bc-marketing[data-theme='light'] {
+  color-scheme: light;
+  --primary: #3d5bff;
+  --primary-hover: #2f48e6;
+  --primary-foreground: #ffffff;
+  --primary-end: #7b5cff;
+  --secondary: #4a6b7c;
+  --secondary-hover: #346c84;
+  --secondary-foreground: #ffffff;
+  --accent: #00c4dc;
+  --accent-hover: #00a8c0;
+  --accent-foreground: #041018;
+  --background: #ffffff;
+  --foreground: #000826;
+  --heading: #000726;
+  --heading-accent: var(--primary);
+  --canvas: #f3f8fc;
+  --surface: #ffffff;
+  --surface-hover: #eef6fb;
+  --surface-foreground: #000826;
+  --border: #d7e4ee;
+  --border-strong: #b7c9d8;
+  --muted: #4a6b7c;
+  --muted-foreground: #346c84;
+  --glow: color-mix(in srgb, var(--accent) 16%, color-mix(in srgb, var(--primary) 14%, transparent));
+  --inverse: #000726;
+  --inverse-foreground: #ffffff;
+  --inverse-muted: #8eabc0;
+  --inverse-border: color-mix(in srgb, var(--inverse-muted) 22%, transparent);
+  --inverse-elevated: color-mix(in srgb, var(--inverse-muted) 14%, transparent);
+  --hp-hero-ink: #000826;
+  --hp-hero-muted: #346c84;
+  --hp-hero-surface: #ffffff;
+}
+
+html:has(.bc-marketing) body {
+  background-color: var(--canvas);
+  color: var(--foreground);
+}
+
+.bc-marketing {
+  background-color: var(--canvas);
+  color: var(--foreground);
+  min-height: 100%;
+}
+
 /* --- header --- */
 .header-brand-gradient {
   background-image: linear-gradient(to right, var(--primary), var(--accent));
@@ -21,6 +76,19 @@
   box-shadow: 0 1px 0 color-mix(in srgb, white 65%, transparent) inset;
   overflow-x: clip;
   overflow-y: visible;
+}
+
+/* Mobile menu open — kill glass so iOS doesn't composite hero text through the sheet */
+html[data-mobile-nav-open='true'] .header-adaptive {
+  background-color: var(--background);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  border-color: var(--border);
+}
+
+html[data-mobile-nav-open='true'] #main-content {
+  visibility: hidden;
 }
 
 /* Header bar — logo | nav | actions (same width + inset as Container xl) */
@@ -233,6 +301,13 @@ html[data-header-mode='home'][data-header-scrolled='true'] .header-adaptive {
 
 .header-mobile-menu {
   animation: header-mobile-slide 220ms ease-out;
+  /* Portal to body + solid fill — avoids header backdrop-filter bleed on iOS */
+  isolation: isolate;
+  background-color: var(--background);
+  background-image: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  opacity: 1;
 }
 
 .header-mega-menu {

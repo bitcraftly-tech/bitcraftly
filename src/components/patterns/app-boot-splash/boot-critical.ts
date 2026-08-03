@@ -5,21 +5,30 @@
  *
  * Overlay-only: never hide body children with opacity/visibility — that trapped
  * the page when the splash client island stalled. Opaque splash covers content.
+ *
+ * iOS WebKit: avoid `overflow:hidden` on `body` during boot — it freezes
+ * descendant CSS animations (same class of bug as hero `overflow:clip`).
  */
 export const APP_BOOT_CRITICAL_CSS = `
 html.bc-booting,
 html.bc-demo-booting {
   background: #ffffff !important;
   background-image: none !important;
+  /* Lock scroll on html — not body — so splash ring/logo animations stay live on iOS */
+  overflow: hidden !important;
+  height: 100% !important;
+  overscroll-behavior: none;
 }
 html.bc-demo-booting {
   background: var(--demo-boot-bg, #f8fafc) !important;
 }
 html.bc-booting body,
 html.bc-demo-booting body {
-  overflow: hidden !important;
+  overflow: visible !important;
   background: #ffffff !important;
   background-image: none !important;
+  overscroll-behavior: none;
+  touch-action: none;
 }
 html.bc-demo-booting body {
   background: var(--demo-boot-bg, #f8fafc) !important;
@@ -39,9 +48,16 @@ html.bc-booting #bc-demo-boot-splash {
   place-items: center;
   margin: 0;
   padding: 24px;
+  overflow: visible;
   background: #ffffff !important;
   background-image: none !important;
   box-shadow: none !important;
+  /* Own compositor layer — keeps infinite spin alive on iOS Safari */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  isolation: isolate;
   transition: opacity 220ms ease, visibility 220ms ease;
 }
 #bc-demo-boot-splash {
@@ -49,7 +65,9 @@ html.bc-booting #bc-demo-boot-splash {
   color: var(--demo-boot-fg, #0f172a);
 }
 #bc-boot-splash[data-done="true"],
-#bc-demo-boot-splash[data-done="true"] {
+#bc-demo-boot-splash[data-done="true"],
+html.bc-app-ready #bc-boot-splash,
+html.bc-app-ready #bc-demo-boot-splash {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -60,6 +78,8 @@ html.bc-booting #bc-demo-boot-splash {
   flex-direction: column;
   align-items: center;
   gap: 0.85rem;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 .bc-boot-splash__logo-wrap,
 .bc-demo-boot__mark-wrap {
@@ -70,6 +90,9 @@ html.bc-booting #bc-demo-boot-splash {
   height: 56px;
   background: transparent;
   box-shadow: none;
+  overflow: visible;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 .bc-demo-boot__mark-wrap {
   width: 56px;
@@ -79,15 +102,22 @@ html.bc-booting #bc-demo-boot-splash {
 .bc-demo-boot__ring {
   position: absolute;
   inset: 0;
-  border-radius: 999px;
+  box-sizing: border-box;
+  border-radius: 50%;
   /* No gray full track — only blue arcs */
   border: 2.5px solid transparent;
   border-top-color: #2563eb;
   border-right-color: rgba(37, 99, 235, 0.35);
-  animation: bc-boot-spin 0.85s linear infinite;
   box-shadow: none;
   filter: none;
   background: transparent;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+  -webkit-animation: bc-boot-spin 0.85s linear infinite;
+  animation: bc-boot-spin 0.85s linear infinite;
+  -webkit-animation-play-state: running;
+  animation-play-state: running;
 }
 .bc-demo-boot__ring {
   border-color: transparent;
@@ -101,7 +131,9 @@ html.bc-booting #bc-demo-boot-splash {
   border-color: transparent;
   border-bottom-color: rgba(37, 99, 235, 0.55);
   border-left-color: rgba(37, 99, 235, 0.25);
+  -webkit-animation-duration: 1.35s;
   animation-duration: 1.35s;
+  -webkit-animation-direction: reverse;
   animation-direction: reverse;
 }
 .bc-demo-boot__ring--delayed {
@@ -114,6 +146,8 @@ html.bc-booting #bc-demo-boot-splash {
   inset: 6px;
   border-radius: 14px;
   background: radial-gradient(circle, color-mix(in srgb, var(--demo-boot-accent, #0f766e) 40%, transparent), transparent 72%);
+  will-change: transform, opacity;
+  -webkit-animation: bc-boot-glow 1.6s ease-in-out infinite;
   animation: bc-boot-glow 1.6s ease-in-out infinite;
 }
 .bc-boot-splash__logo {
@@ -127,7 +161,13 @@ html.bc-booting #bc-demo-boot-splash {
   box-shadow: none !important;
   filter: none !important;
   outline: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+  -webkit-animation: bc-boot-float 1.6s ease-in-out infinite;
   animation: bc-boot-float 1.6s ease-in-out infinite;
+  -webkit-animation-play-state: running;
+  animation-play-state: running;
 }
 .bc-demo-boot__mark {
   position: relative;
@@ -143,6 +183,8 @@ html.bc-booting #bc-demo-boot-splash {
   font-weight: 800;
   letter-spacing: 0.02em;
   line-height: 1;
+  will-change: transform;
+  -webkit-animation: bc-boot-float 1.6s ease-in-out infinite;
   animation: bc-boot-float 1.6s ease-in-out infinite;
   box-shadow: 0 6px 16px color-mix(in srgb, var(--demo-boot-accent, #0f766e) 35%, transparent);
 }
@@ -164,16 +206,29 @@ html.bc-booting #bc-demo-boot-splash {
   text-transform: uppercase;
   opacity: 0.55;
 }
+@-webkit-keyframes bc-boot-spin {
+  from { -webkit-transform: translate3d(0, 0, 0) rotate(0deg); transform: translate3d(0, 0, 0) rotate(0deg); }
+  to { -webkit-transform: translate3d(0, 0, 0) rotate(360deg); transform: translate3d(0, 0, 0) rotate(360deg); }
+}
 @keyframes bc-boot-spin {
-  to { transform: rotate(360deg); }
+  from { -webkit-transform: translate3d(0, 0, 0) rotate(0deg); transform: translate3d(0, 0, 0) rotate(0deg); }
+  to { -webkit-transform: translate3d(0, 0, 0) rotate(360deg); transform: translate3d(0, 0, 0) rotate(360deg); }
+}
+@-webkit-keyframes bc-boot-float {
+  0%, 100% { -webkit-transform: translate3d(0, 0, 0) scale(1); transform: translate3d(0, 0, 0) scale(1); }
+  50% { -webkit-transform: translate3d(0, -2px, 0) scale(1.03); transform: translate3d(0, -2px, 0) scale(1.03); }
 }
 @keyframes bc-boot-float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-2px) scale(1.03); }
+  0%, 100% { -webkit-transform: translate3d(0, 0, 0) scale(1); transform: translate3d(0, 0, 0) scale(1); }
+  50% { -webkit-transform: translate3d(0, -2px, 0) scale(1.03); transform: translate3d(0, -2px, 0) scale(1.03); }
+}
+@-webkit-keyframes bc-boot-glow {
+  0%, 100% { opacity: 0.4; -webkit-transform: scale(0.9); transform: scale(0.9); }
+  50% { opacity: 1; -webkit-transform: scale(1.12); transform: scale(1.12); }
 }
 @keyframes bc-boot-glow {
-  0%, 100% { opacity: 0.4; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.12); }
+  0%, 100% { opacity: 0.4; -webkit-transform: scale(0.9); transform: scale(0.9); }
+  50% { opacity: 1; -webkit-transform: scale(1.12); transform: scale(1.12); }
 }
 @media (prefers-reduced-motion: reduce) {
   .bc-boot-splash__logo,
@@ -181,7 +236,9 @@ html.bc-booting #bc-demo-boot-splash {
   .bc-demo-boot__mark,
   .bc-demo-boot__glow,
   .bc-demo-boot__ring {
-    animation: none;
+    -webkit-animation: none !important;
+    animation: none !important;
+    will-change: auto;
   }
   .bc-boot-splash__ring {
     border-color: transparent;

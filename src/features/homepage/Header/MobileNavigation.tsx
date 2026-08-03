@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Icon } from '@/components/ui/icon';
 import { Container } from '@/components/ui/container';
 import { cn } from '@/lib/cn';
@@ -28,12 +29,17 @@ const mobileMenuButtonBase = cn(
 export function MobileNavigation() {
   const pathname = usePathname();
   const [openForPath, setOpenForPath] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
   const open = openForPath === pathname;
   const menuLabelId = useId();
   const panelId = HEADER_MOBILE_MENU_ID;
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const closeMenu = useCallback((restoreFocus = false) => {
     setOpenForPath(null);
@@ -56,7 +62,7 @@ export function MobileNavigation() {
   }, [pathname]);
 
   useEffect(() => {
-    if (!open) {
+    if (!open || !mounted) {
       return;
     }
 
@@ -65,6 +71,7 @@ export function MobileNavigation() {
     const previousMainInert = main?.inert ?? false;
 
     root.classList.add('overflow-hidden');
+    root.setAttribute('data-mobile-nav-open', 'true');
     if (main) {
       main.inert = true;
     }
@@ -73,6 +80,7 @@ export function MobileNavigation() {
     if (!panel) {
       return () => {
         root.classList.remove('overflow-hidden');
+        root.removeAttribute('data-mobile-nav-open');
         if (main) {
           main.inert = previousMainInert;
         }
@@ -132,12 +140,75 @@ export function MobileNavigation() {
 
     return () => {
       root.classList.remove('overflow-hidden');
+      root.removeAttribute('data-mobile-nav-open');
       if (main) {
         main.inert = previousMainInert;
       }
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [closeMenu, open]);
+  }, [closeMenu, mounted, open]);
+
+  const menuPanel =
+    open && mounted ? (
+      <div
+        id={panelId}
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={menuLabelId}
+        tabIndex={-1}
+        className="header-mobile-menu fixed inset-x-0 z-[calc(var(--z-sticky)-1)] flex flex-col border-t border-border bg-background"
+        style={{
+          top: HEADER_HEIGHT_PX,
+          height: `calc(100dvh - ${HEADER_HEIGHT_PX}px)`,
+        }}
+      >
+        <Container size="xl" className="flex min-h-0 flex-1 flex-col py-[var(--space-4)]">
+          <p id={menuLabelId} className="sr-only">
+            Mobile navigation menu
+          </p>
+
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+            <MobileNavAccordion
+              links={HEADER_NAV_LINKS}
+              pathname={pathname}
+              onNavigate={() => closeMenu()}
+            />
+          </div>
+
+          <div
+            className={cn(
+              'mt-[var(--space-4)] flex shrink-0 flex-col gap-[var(--space-2)]',
+              'border-t border-border pt-[var(--space-4)]',
+              'pb-[max(var(--space-2),env(safe-area-inset-bottom,0px))]',
+            )}
+          >
+            <Link
+              href={HEADER_CTA_SECONDARY.href}
+              onClick={() => closeMenu()}
+              className={cn(
+                mobileMenuButtonBase,
+                'rounded-[8px] border border-foreground/12 bg-background text-foreground',
+                'hover:bg-canvas',
+              )}
+            >
+              {HEADER_CTA_SECONDARY.label}
+            </Link>
+            <Link
+              href={HEADER_CTA_PRIMARY.href}
+              onClick={() => closeMenu()}
+              className={cn(
+                mobileMenuButtonBase,
+                'rounded-[8px] border-0 bg-primary text-primary-foreground',
+                'hover:bg-primary/90',
+              )}
+            >
+              {HEADER_CTA_PRIMARY.label}
+            </Link>
+          </div>
+        </Container>
+      </div>
+    ) : null;
 
   return (
     <>
@@ -178,66 +249,7 @@ export function MobileNavigation() {
         </span>
       </button>
 
-      {open ? (
-        <div
-          id={panelId}
-          ref={panelRef}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby={menuLabelId}
-          tabIndex={-1}
-          className="header-mobile-menu fixed inset-x-0 z-[calc(var(--z-sticky)-1)] flex flex-col border-t border-border bg-background/95 backdrop-blur-xl"
-          style={{
-            top: HEADER_HEIGHT_PX,
-            height: `calc(100dvh - ${HEADER_HEIGHT_PX}px)`,
-          }}
-        >
-          <Container size="xl" className="flex min-h-0 flex-1 flex-col py-[var(--space-4)]">
-            <p id={menuLabelId} className="sr-only">
-              Mobile navigation menu
-            </p>
-
-            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-              <MobileNavAccordion
-                links={HEADER_NAV_LINKS}
-                pathname={pathname}
-                onNavigate={() => closeMenu()}
-              />
-            </div>
-
-            <div
-              className={cn(
-                'mt-[var(--space-4)] flex shrink-0 flex-col gap-[var(--space-2)]',
-                'border-t border-border pt-[var(--space-4)]',
-                'pb-[max(var(--space-2),env(safe-area-inset-bottom,0px))]',
-              )}
-            >
-              <Link
-                href={HEADER_CTA_SECONDARY.href}
-                onClick={() => closeMenu()}
-                className={cn(
-                  mobileMenuButtonBase,
-                  'rounded-[8px] border border-foreground/12 bg-background text-foreground',
-                  'hover:bg-canvas',
-                )}
-              >
-                {HEADER_CTA_SECONDARY.label}
-              </Link>
-              <Link
-                href={HEADER_CTA_PRIMARY.href}
-                onClick={() => closeMenu()}
-                className={cn(
-                  mobileMenuButtonBase,
-                  'rounded-[8px] border-0 bg-primary text-primary-foreground',
-                  'hover:bg-primary/90',
-                )}
-              >
-                {HEADER_CTA_PRIMARY.label}
-              </Link>
-            </div>
-          </Container>
-        </div>
-      ) : null}
+      {menuPanel ? createPortal(menuPanel, document.body) : null}
     </>
   );
 }

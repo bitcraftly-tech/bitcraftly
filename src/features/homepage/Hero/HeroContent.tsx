@@ -13,11 +13,11 @@ import {
 import { HeroTypedFocus } from './HeroTypedFocus';
 
 /**
- * Hero copy — premium ATF editorial column.
+ * Hero intro — badge, headline, description, CTAs (above carousel on mobile).
  */
-export function HeroContent() {
+export function HeroIntro() {
   return (
-    <div className="hp-hero-content">
+    <div className="hp-hero-intro">
       <p className="hp-hero-brand">
         <span className="hp-hero-brand__tag">
           <span className="hp-hero-brand__dot" aria-hidden="true" />
@@ -53,19 +53,6 @@ export function HeroContent() {
 
       <p className="hp-hero-description">{HERO_DESCRIPTION}</p>
 
-      <ul className="hp-hero-modules" aria-label="Industry System modules">
-        {HERO_MODULE_CHIPS.map((chip, index) => (
-          <li
-            key={chip}
-            className="hp-hero-modules__item"
-            style={{ ['--chip-i' as string]: index }}
-          >
-            <span className="hp-hero-modules__dot" aria-hidden="true" />
-            <span className="hp-hero-modules__label">{chip}</span>
-          </li>
-        ))}
-      </ul>
-
       <div className="hp-hero-actions">
         {HERO_CTAS.map((cta) => {
           const isPrimary = cta.variant === 'primary';
@@ -84,6 +71,28 @@ export function HeroContent() {
           );
         })}
       </div>
+    </div>
+  );
+}
+
+/**
+ * Hero meta — modules + trust (below carousel on mobile; under CTAs on desktop).
+ */
+export function HeroMeta() {
+  return (
+    <div className="hp-hero-meta">
+      <ul className="hp-hero-modules" aria-label="Industry System modules">
+        {HERO_MODULE_CHIPS.map((chip, index) => (
+          <li
+            key={chip}
+            className="hp-hero-modules__item"
+            style={{ ['--chip-i' as string]: index }}
+          >
+            <span className="hp-hero-modules__dot" aria-hidden="true" />
+            <span className="hp-hero-modules__label">{chip}</span>
+          </li>
+        ))}
+      </ul>
 
       <div className="hp-hero-trust">
         <div className="hp-hero-trust__avatars" aria-hidden="true">
@@ -98,6 +107,18 @@ export function HeroContent() {
         </div>
         <p className="hp-hero-trust__label">{HERO_TRUST.label}</p>
       </div>
+    </div>
+  );
+}
+
+/**
+ * @deprecated Prefer {@link HeroIntro} + {@link HeroMeta} for mobile UX order.
+ */
+export function HeroContent() {
+  return (
+    <div className="hp-hero-content">
+      <HeroIntro />
+      <HeroMeta />
     </div>
   );
 }

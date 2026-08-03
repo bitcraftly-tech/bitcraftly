@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import {
@@ -11,12 +11,13 @@ import { SystemBrowserCarousel } from './SystemBrowserCarousel';
 /**
  * Connected Industry System composition (layout frozen):
  * Website → AI → Dashboard → Analytics + floating ops cards.
- * Premium motion: industry auto-rotate, parallax, float, analytics pulse.
+ * Premium motion: industry auto-rotate, float, analytics pulse.
  */
 export function SystemComposition() {
   const rootRef = useRef<HTMLDivElement>(null);
   const [industryIndex, setIndustryIndex] = useState(0);
   const [contentKey, setContentKey] = useState(0);
+  const [rotateEpoch, setRotateEpoch] = useState(0);
   const preview = HERO_INDUSTRY_PREVIEWS[industryIndex] ?? HERO_INDUSTRY_PREVIEWS[0];
 
   const onRotate = useEffectEvent(() => {
@@ -24,62 +25,35 @@ export function SystemComposition() {
     setContentKey((key) => key + 1);
   });
 
+  const onSelectIndex = useEffectEvent((index: number) => {
+    setIndustryIndex(index);
+    setContentKey((key) => key + 1);
+    setRotateEpoch((epoch) => epoch + 1);
+  });
+
+  /* Industry auto-rotate — restarts after swipe so dwell time feels natural. */
   useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const root = rootRef.current;
+    if (root) root.dataset.sysClient = 'mounted';
+
     let timer = 0;
 
-    const sync = () => {
+    const start = () => {
       window.clearInterval(timer);
-      timer = 0;
-      if (media.matches) return;
+      if (document.visibilityState === 'hidden') return;
       timer = window.setInterval(onRotate, HERO_INDUSTRY_ROTATE_MS);
     };
 
-    sync();
-    media.addEventListener('change', sync);
+    start();
+    document.addEventListener('visibilitychange', start);
     return () => {
-      media.removeEventListener('change', sync);
+      document.removeEventListener('visibilitychange', start);
       window.clearInterval(timer);
     };
-  }, []);
-
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) return;
-
-    let frame = 0;
-
-    const onMove = (event: PointerEvent) => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const rect = root.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-        // Unitless — Safari rejects calc(var(--len) * number) when --len is a length.
-        root.style.setProperty('--sys-px', (x * 10).toFixed(2));
-        root.style.setProperty('--sys-py', (y * 8).toFixed(2));
-      });
-    };
-
-    const onLeave = () => {
-      root.style.setProperty('--sys-px', '0');
-      root.style.setProperty('--sys-py', '0');
-    };
-
-    root.addEventListener('pointermove', onMove, { passive: true });
-    root.addEventListener('pointerleave', onLeave);
-    return () => {
-      cancelAnimationFrame(frame);
-      root.removeEventListener('pointermove', onMove);
-      root.removeEventListener('pointerleave', onLeave);
-    };
-  }, []);
+  }, [rotateEpoch]);
 
   return (
-    <div className="sys" ref={rootRef} aria-hidden="true">
+    <div className="sys" ref={rootRef} aria-hidden="true" data-sys-client="pending">
       <div className="sys__glow" />
       <div className="sys__glow sys__glow--mesh" />
       <div className="sys__ring" />
@@ -162,6 +136,7 @@ export function SystemComposition() {
             items={HERO_INDUSTRY_PREVIEWS}
             activeIndex={industryIndex}
             durationMs={HERO_INDUSTRY_ROTATE_MS}
+            onSelectIndex={onSelectIndex}
           />
         </div>
       </div>

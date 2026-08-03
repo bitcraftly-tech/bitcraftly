@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   /**
+   * Allow LAN / loopback hosts to load Next.js dig assets (HMR + client chunks).
+   * Without this, phone/desktop via 192.168.x.x gets a frozen hero carousel.
+   */
+  allowedDevOrigins: ['127.0.0.1', 'localhost', '192.168.29.173'],
+
+  /**
    * Enable gzip/brotli compression.
    */
   compress: true,

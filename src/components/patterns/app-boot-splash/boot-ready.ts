@@ -7,11 +7,13 @@ export const BOOT_FONT_WAIT_MS = 600;
 export const BOOT_IMAGE_WAIT_MS = 1200;
 /** Hard ceiling — never trap the document behind the splash. */
 export const BOOT_TOTAL_MAX_MS = 1400;
-export const BOOT_HOME_MAX_MS = 700;
+export const BOOT_HOME_MAX_MS = 900;
 export const BOOT_REDUCED_MOTION_MAX_MS = 450;
 export const BOOT_FADE_OUT_MS = 220;
+/** Keep splash visible long enough for the iOS ring/logo animation to read. */
+export const BOOT_MIN_VISIBLE_MS = 750;
 /** DOM failsafe (runs even if React hydration stalls). */
-export const BOOT_DOM_FAILSAFE_MS = 1200;
+export const BOOT_DOM_FAILSAFE_MS = 1600;
 
 export function withBootTimeout<T>(promise: Promise<T>, ms: number): Promise<T | void> {
   return Promise.race([
@@ -92,11 +94,13 @@ export async function waitUntilBootReady(options?: {
   readonly fast?: boolean;
 }): Promise<void> {
   const fast = options?.fast === true;
-  const maxMs = prefersBootReducedMotion()
+  const reduced = prefersBootReducedMotion();
+  const maxMs = reduced
     ? BOOT_REDUCED_MOTION_MAX_MS
     : fast
       ? BOOT_HOME_MAX_MS
       : BOOT_TOTAL_MAX_MS;
+  const startedAt = performance.now();
 
   await withBootTimeout(
     (async () => {
@@ -108,6 +112,14 @@ export async function waitUntilBootReady(options?: {
     })(),
     maxMs,
   );
+
+  /* Ensure the logo spinner is visible long enough (esp. fast iOS caches). */
+  if (!reduced) {
+    const remaining = BOOT_MIN_VISIBLE_MS - (performance.now() - startedAt);
+    if (remaining > 0) {
+      await withBootTimeout(Promise.resolve(), remaining);
+    }
+  }
 }
 
 export function revealBootedDocument(): void {
@@ -121,6 +133,8 @@ export function revealBootedDocument(): void {
 
 /**
  * Inline DOM failsafe — reveals content even if the React splash island never hydrates.
+ * Do NOT mutate splash `data-done` here: that attribute is owned by AppBootSplash and
+ * changing it before hydrate causes a mismatch that can stall client islands (carousel).
  */
 export const APP_BOOT_FAILSAFE_SCRIPT = `
 (function () {
@@ -131,11 +145,6 @@ export const APP_BOOT_FAILSAFE_SCRIPT = `
       root.classList.remove('bc-booting', 'bc-demo-booting');
       root.classList.add('bc-app-ready');
       root.setAttribute('aria-busy', 'false');
-      var ids = ['bc-boot-splash', 'bc-demo-boot-splash'];
-      for (var i = 0; i < ids.length; i++) {
-        var el = document.getElementById(ids[i]);
-        if (el) el.setAttribute('data-done', 'true');
-      }
     }, ${BOOT_DOM_FAILSAFE_MS});
   } catch (_) {}
 })();

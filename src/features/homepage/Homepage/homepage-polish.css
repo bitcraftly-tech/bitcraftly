@@ -179,17 +179,6 @@
   box-shadow:
     0 1px 0 color-mix(in srgb, white 28%, transparent) inset,
     0 12px 24px -12px color-mix(in srgb, var(--primary) 58%, transparent);
-  transition:
-    transform var(--hp-interact),
-    box-shadow var(--hp-interact),
-    filter var(--hp-interact);
-}
-
-.sys__site-cta:hover {
-  transform: translateY(var(--hp-lift-sm));
-  box-shadow:
-    0 1px 0 color-mix(in srgb, white 28%, transparent) inset,
-    0 16px 28px -12px color-mix(in srgb, var(--primary) 68%, transparent);
 }
 
 /* —— HomeStory cards / workflow / duel —— */

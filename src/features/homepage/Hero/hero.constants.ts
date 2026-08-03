@@ -1,4 +1,6 @@
 import { ROUTES, SECTION_IDS } from '@/constants/navigation';
+import { getWorkProjectHref, WORK_PROJECTS } from '@/features/work/work.content';
+import type { WorkProject } from '@/features/work/work.types';
 import type { HeroCapabilityTag, HeroCta } from './hero.types';
 
 export const HERO_ID = SECTION_IDS.hero;
@@ -91,12 +93,54 @@ export const HERO_SYSTEM = {
   },
 } as const;
 
-/** Hero browser industry previews — auto-rotate every ~5.5s (layout frozen). */
-export const HERO_INDUSTRY_ROTATE_MS = 5500;
+/** Hero browser portfolio previews — auto-rotate every ~5s (layout frozen). */
+export const HERO_INDUSTRY_ROTATE_MS = 5000;
 
 const HERO_PREVIEW_WIDTHS = [480, 720, 960, 1280] as const;
+const HERO_IMAGE_SIZES = '(max-width: 767px) 92vw, (max-width: 1023px) 50vw, 560px';
 
-function heroPreviewImage(slug: string, naturalWidth: number, naturalHeight: number) {
+/** Work slugs with responsive AVIF/WebP under `public/products/hero`. */
+const HERO_OPTIMIZED_ASSET_SLUGS = new Set([
+  'clinic-healthcare',
+  'shrishti-cloud-kitchen',
+  'builder-website',
+  'local-services-lead-site',
+]);
+
+export type HeroIndustryPreview = {
+  readonly id: string;
+  readonly label: string;
+  readonly title: string;
+  readonly industry: string;
+  readonly host: string;
+  readonly imageSrc: string;
+  readonly imageWidth: number;
+  readonly imageHeight: number;
+  readonly imageWebpSrcSet: string;
+  readonly imageAvifSrcSet: string;
+  readonly imageSizes: string;
+  /** True when AVIF/WebP srcsets point at `/products/hero/*` assets. */
+  readonly usesHeroOptimized: boolean;
+  readonly ai: {
+    readonly title: string;
+    readonly message: string;
+    readonly suggestions: readonly string[];
+  };
+  readonly dashboard: {
+    readonly title: string;
+    readonly panels: readonly string[];
+  };
+  readonly analytics: {
+    readonly kpis: readonly { readonly label: string; readonly value: string }[];
+  };
+};
+
+type HeroPreviewOverlay = Pick<
+  HeroIndustryPreview,
+  'label' | 'title' | 'industry' | 'host' | 'ai' | 'dashboard' | 'analytics'
+>;
+
+function heroOptimizedImage(slug: string, naturalWidth: number, naturalHeight: number) {
   const webpSrcSet = HERO_PREVIEW_WIDTHS.map(
     (width) => `/products/hero/${slug}-${width}.webp ${width}w`,
   ).join(', ');
@@ -110,18 +154,53 @@ function heroPreviewImage(slug: string, naturalWidth: number, naturalHeight: num
     imageHeight: naturalHeight,
     imageWebpSrcSet: webpSrcSet,
     imageAvifSrcSet: avifSrcSet,
-    imageSizes: '(max-width: 767px) 92vw, (max-width: 1023px) 50vw, 560px',
+    imageSizes: HERO_IMAGE_SIZES,
+    usesHeroOptimized: true,
   } as const;
 }
 
-export const HERO_INDUSTRY_PREVIEWS = [
-  {
-    id: 'healthcare',
+function heroCoverImage(coverImage: string) {
+  return {
+    imageSrc: coverImage,
+    imageWidth: 1280,
+    imageHeight: 960,
+    imageWebpSrcSet: coverImage,
+    imageAvifSrcSet: coverImage,
+    imageSizes: HERO_IMAGE_SIZES,
+    usesHeroOptimized: false,
+  } as const;
+}
+
+/** Browser chrome URL — exact live route / URL as defined on the work project. */
+function heroBrowserHost(project: WorkProject): string {
+  const live = project.liveUrl?.trim();
+  if (live) {
+    if (live.startsWith('http://') || live.startsWith('https://')) {
+      try {
+        const url = new URL(live);
+        const host = url.hostname.replace(/^www\./, '');
+        const path = url.pathname.replace(/\/$/, '');
+        return path && path !== '/' ? `${host}${path}` : host;
+      } catch {
+        /* fall through */
+      }
+    }
+    if (live.startsWith('/')) {
+      return live.replace(/\/$/, '') || live;
+    }
+  }
+
+  return getWorkProjectHref(project.slug);
+}
+
+type HeroRichOverlay = Omit<HeroPreviewOverlay, 'host'>;
+
+/** Rich desktop overlays for flagship industry systems (keyed by work slug). */
+const HERO_RICH_OVERLAYS: Readonly<Record<string, HeroRichOverlay>> = {
+  'clinic-healthcare': {
     label: 'Healthcare System',
     title: 'Medicare+',
     industry: 'Healthcare',
-    host: 'medicare.bitcraftly.com',
-    ...heroPreviewImage('clinic-healthcare', 1024, 768),
     ai: {
       title: 'AI Assistant',
       message: 'I can help schedule a visit or answer service questions.',
@@ -139,13 +218,10 @@ export const HERO_INDUSTRY_PREVIEWS = [
       ],
     },
   },
-  {
-    id: 'restaurant',
+  'shrishti-cloud-kitchen': {
     label: 'Restaurant System',
     title: 'Shrishti Kitchen',
     industry: 'Restaurant',
-    host: 'shrishti.bitcraftly.com',
-    ...heroPreviewImage('shrishti-cloud-kitchen', 1448, 1086),
     ai: {
       title: 'AI Concierge',
       message: 'I can take orders, share the menu, or route a WhatsApp handoff.',
@@ -163,13 +239,10 @@ export const HERO_INDUSTRY_PREVIEWS = [
       ],
     },
   },
-  {
-    id: 'real-estate',
+  'builder-website': {
     label: 'Real Estate System',
     title: 'Dayal Builders',
     industry: 'Real Estate',
-    host: 'dayal.bitcraftly.com',
-    ...heroPreviewImage('builder-website', 1024, 768),
     ai: {
       title: 'AI Assistant',
       message: 'I can match inventory, book site visits, or qualify a lead.',
@@ -187,13 +260,10 @@ export const HERO_INDUSTRY_PREVIEWS = [
       ],
     },
   },
-  {
-    id: 'corporate',
+  'local-services-lead-site': {
     label: 'Corporate Services System',
     title: 'Local Services Pro',
     industry: 'Corporate Services',
-    host: 'services.bitcraftly.com',
-    ...heroPreviewImage('local-services-lead-site', 1402, 1122),
     ai: {
       title: 'AI Assistant',
       message: 'I can capture a brief, estimate scope, or book a strategy call.',
@@ -211,9 +281,64 @@ export const HERO_INDUSTRY_PREVIEWS = [
       ],
     },
   },
-] as const;
+};
 
-export type HeroIndustryPreview = (typeof HERO_INDUSTRY_PREVIEWS)[number];
+const HERO_OPTIMIZED_DIMENSIONS: Readonly<Record<string, readonly [number, number]>> = {
+  'clinic-healthcare': [1024, 768],
+  'shrishti-cloud-kitchen': [1448, 1086],
+  'builder-website': [1024, 768],
+  'local-services-lead-site': [1402, 1122],
+};
+
+function genericOverlay(project: WorkProject): HeroRichOverlay {
+  const summary =
+    project.summary.length > 96 ? `${project.summary.slice(0, 93).trimEnd()}…` : project.summary;
+
+  return {
+    label: `${project.industry} System`,
+    title: project.title,
+    industry: project.industry,
+    ai: {
+      title: 'AI Assistant',
+      message: summary,
+      suggestions: ['Learn more', 'Get quote', 'Book call'],
+    },
+    dashboard: {
+      title: 'Operations',
+      panels: ['Leads', 'Pipeline', 'Content', 'AI Activity'],
+    },
+    analytics: {
+      kpis: [
+        { label: 'Focus', value: 'Live' },
+        { label: 'Stack', value: 'System' },
+        { label: 'Ready', value: 'Go-live' },
+      ],
+    },
+  };
+}
+
+function buildHeroPreview(project: WorkProject): HeroIndustryPreview {
+  const overlay = HERO_RICH_OVERLAYS[project.slug] ?? genericOverlay(project);
+  const images = HERO_OPTIMIZED_ASSET_SLUGS.has(project.slug)
+    ? heroOptimizedImage(
+        project.slug,
+        HERO_OPTIMIZED_DIMENSIONS[project.slug]?.[0] ?? 1280,
+        HERO_OPTIMIZED_DIMENSIONS[project.slug]?.[1] ?? 960,
+      )
+    : heroCoverImage(project.coverImage);
+
+  return {
+    id: project.slug,
+    ...overlay,
+    ...images,
+    host: heroBrowserHost(project),
+  };
+}
+
+/** Full portfolio catalog in hero browser order (unique work slugs). */
+export const HERO_INDUSTRY_PREVIEWS: readonly HeroIndustryPreview[] = WORK_PROJECTS.filter(
+  (project, index, all) => all.findIndex((entry) => entry.slug === project.slug) === index,
+).map(buildHeroPreview);
 
 export const HERO_EYEBROW_LABEL = HERO_BADGE;
 export const HERO_DESCRIPTION_MOBILE = HERO_DESCRIPTION;

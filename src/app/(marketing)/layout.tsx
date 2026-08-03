@@ -23,7 +23,12 @@ export default function MarketingLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    /**
+     * Light marketing shell — brand pages are designed for the light token set.
+     * Re-assert light vars under OS dark mode so hero/CTAs match desktop
+     * (phones often use prefers-color-scheme: dark; Playwright usually does not).
+     */
+    <div className="bc-marketing" data-theme="light">
       <MarketingLayoutClientHeadLoader />
       <a
         href="#main-content"
@@ -39,6 +44,6 @@ export default function MarketingLayout({
       <MarketingLayoutClientMidLoader />
       <FooterSection />
       <MarketingLayoutClientTailLoader />
-    </>
+    </div>
   );
 }
