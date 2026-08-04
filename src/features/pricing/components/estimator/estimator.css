@@ -1,0 +1,302 @@
+/* Scoped to .pp-estimator — pricing AI estimator only */
+
+.pp-estimator {
+  --ae-ease: var(--ms-ease);
+}
+
+.pp-estimator__thread {
+  max-height: min(52vh, 420px);
+}
+
+.pp-estimator__thread.is-compact {
+  max-height: min(48vh, 380px);
+}
+
+.ae-greeting {
+  animation: ae-fade-up 320ms var(--ae-ease) both;
+}
+
+.ae-greeting__hi {
+  margin: 0 0 2px;
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.ae-greeting__name {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--foreground) 70%, var(--primary));
+}
+
+.ae-greeting__body {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+
+.ae-error {
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--destructive) 28%, var(--border));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--destructive) 6%, var(--background));
+  color: var(--foreground);
+  font-size: 13px;
+  line-height: 1.4;
+  animation: ae-fade-up 220ms var(--ae-ease) both;
+}
+
+.ae-loading {
+  animation: ae-fade-up 280ms var(--ae-ease) both;
+}
+
+.ae-loading__title {
+  margin: 0 0 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.ae-loading__steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.ae-loading__steps li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--muted-foreground);
+  opacity: 0.45;
+  transition:
+    opacity 180ms ease,
+    color 180ms ease;
+}
+
+.ae-loading__steps li.is-active {
+  opacity: 1;
+  color: var(--foreground);
+  font-weight: 650;
+}
+
+.ae-loading__steps li.is-done {
+  opacity: 0.9;
+  color: color-mix(in srgb, var(--muted-foreground) 35%, var(--primary));
+}
+
+.ae-loading__mark {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1.5px solid var(--pp-border);
+  font-size: 10px;
+  line-height: 1;
+}
+
+.ae-loading__steps li.is-active .ae-loading__mark {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 12%, var(--background));
+  color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent);
+}
+
+.ae-loading__steps li.is-done .ae-loading__mark {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.ae-result {
+  animation: ae-fade-up 360ms var(--ae-ease) both;
+}
+
+.ae-result-card {
+  position: relative;
+  overflow: hidden;
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--border));
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--primary) 9%, var(--background)) 0%,
+      var(--background) 42%
+    );
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--foreground) 4%, transparent),
+    0 18px 40px -24px color-mix(in srgb, var(--primary) 28%, transparent);
+}
+
+.ae-result-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--accent) 70%, var(--primary)));
+}
+
+.ae-result-card__eyebrow {
+  margin: 0 0 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.ae-result-card__grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 420px) {
+  .ae-result-card__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ae-result-card__field {
+  min-width: 0;
+}
+
+.ae-result-card__field--full {
+  grid-column: 1 / -1;
+}
+
+.ae-result-card__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.ae-result-card__label svg {
+  color: var(--primary);
+}
+
+.ae-result-card__value {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.ae-result-card__value--lg {
+  font-size: clamp(1.15rem, 2.4vw, 1.35rem);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+
+.ae-result-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ae-result-card__chips li {
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--pp-border);
+  background: color-mix(in srgb, var(--background) 85%, var(--surface));
+  font-size: 11.5px;
+  font-weight: 650;
+}
+
+.ae-result-card__why {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--primary) 16%, var(--border));
+  background: color-mix(in srgb, var(--primary) 5%, var(--background));
+  animation: ae-fade-up 420ms var(--ae-ease) both;
+}
+
+.ae-result-card__why-title {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: -0.015em;
+}
+
+.ae-result-card__why-body {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+
+.ae-result-card__note {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+}
+
+.ae-result-card__actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+@media (min-width: 520px) {
+  .ae-result-card__actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ae-result-card__actions > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.ae-result-card__actions a {
+  transition:
+    transform 160ms var(--ae-ease),
+    box-shadow 160ms ease;
+}
+
+.ae-result-card__actions a:hover {
+  transform: translateY(-1px);
+}
+
+@keyframes ae-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ae-greeting,
+  .ae-error,
+  .ae-loading,
+  .ae-result,
+  .ae-result-card__why,
+  .ae-result-card__actions a {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

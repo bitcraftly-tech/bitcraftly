@@ -18,7 +18,6 @@ export { WorkTrustSection, WorkTestimonialsSection } from './WorkTrustSection';
 export { WorkTestimonialCard } from './WorkTestimonialCard';
 export { WorkTestimonialsPanel } from './WorkTestimonialsPanel';
 export { WorkFaqSection } from './WorkFaqSection';
-export { WorkFaqAccordion } from './WorkFaqAccordion';
 export { WorkRelatedServicesSection } from './WorkRelatedServicesSection';
 export { WorkPageCta } from './WorkPageCta';
 export {

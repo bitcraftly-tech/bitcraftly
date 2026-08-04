@@ -111,14 +111,18 @@
 .process-side-cta {
   width: 100%;
   padding: 16px;
-  border: 1px solid var(--hp-card-border, #eef2ff);
+  border: 1px solid var(--hp-card-border, var(--border));
   border-radius: var(--hp-card-radius, 16px);
-  background: linear-gradient(135deg, #0e144a 0%, #1c2885 100%);
-  color: var(--primary-foreground);
+  background: linear-gradient(
+    135deg,
+    var(--inverse) 0%,
+    color-mix(in srgb, var(--primary) 42%, var(--inverse)) 100%
+  );
+  color: var(--inverse-foreground);
   box-shadow:
     var(--hp-card-shadow, 0 1px 2px 0 rgb(15 23 42 / 0.04)),
     var(--token-shadow-md),
-    0 20px 40px -24px rgb(14 20 74 / 0.55);
+    0 20px 40px -24px color-mix(in srgb, var(--inverse) 55%, transparent);
 }
 
 .process-side-cta-title {

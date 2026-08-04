@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { FaqAccordion } from '@/components/patterns/faq-accordion';
 import { JsonLdScript } from '@/components/patterns/json-ld';
 import { PageShell } from '@/components/patterns/marketing-layout';
 import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
@@ -7,10 +8,8 @@ import { Section } from '@/components/ui/section';
 import { getRelatedWorkForService, ROUTES } from '@/constants/navigation';
 import { buildServicesBreadcrumbs } from '@/lib/seo/breadcrumbs';
 import { cn } from '@/lib/cn';
-import '@/features/homepage/FAQ/faq.css';
 import { ServiceCard } from './ServiceCard';
 import { ServiceDetailHero } from './ServiceDetailHero';
-import { ServiceFaqAccordion } from './ServiceFaqAccordion';
 import { ServicesPageCta } from './ServicesPageCta';
 import { getRelatedServices, getRelatedWorkLinks } from './services.content';
 import { buildServiceDetailJsonLd } from './services-schema';
@@ -95,7 +94,7 @@ export function ServiceDetailPage({ content }: ServiceDetailPageProps) {
             description={`Common questions about ${content.label} engagements with Bitcraftly.`}
           />
           <div className="service-detail-faq">
-            <ServiceFaqAccordion items={[...content.faqs]} />
+            <FaqAccordion items={[...content.faqs]} />
           </div>
         </Section>
       ) : null}

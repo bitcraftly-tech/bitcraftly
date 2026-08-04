@@ -29,11 +29,11 @@
   font-weight: var(--font-weight-semibold);
   line-height: 20px;
   letter-spacing: 0;
-  color: #ffffff;
+  color: var(--inverse-foreground);
 }
 
 .footer-muted {
-  color: color-mix(in srgb, #8eabc0 88%, #ffffff);
+  color: color-mix(in srgb, var(--inverse-muted) 88%, var(--inverse-foreground));
 }
 
 .footer-link {
@@ -41,16 +41,16 @@
   font-size: 13px;
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-snug);
-  color: color-mix(in srgb, #b7c9d8 90%, #ffffff);
+  color: color-mix(in srgb, var(--border-strong) 90%, var(--inverse-foreground));
   transition: color var(--duration-fast) var(--ease-out);
 }
 
 .footer-link:hover {
-  color: #33e0f0;
+  color: var(--accent);
 }
 
 .footer-social-link {
-  color: #ffffff;
+  color: var(--inverse-foreground);
   background-color: color-mix(in srgb, var(--primary) 16%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
   transition:
@@ -63,7 +63,7 @@
 .footer-social-link:hover {
   background-color: color-mix(in srgb, var(--primary) 32%, transparent);
   border-color: color-mix(in srgb, var(--accent) 55%, transparent);
-  color: #ffffff;
+  color: var(--inverse-foreground);
   transform: translateY(-3px) scale(1.04);
 }
 
@@ -76,6 +76,6 @@
 }
 
 .footer-focus-ring:focus-visible {
-  outline: 2px solid #33e0f0;
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }

@@ -55,7 +55,7 @@
   flex-direction: column;
   gap: var(--space-4, 1rem);
   padding: var(--space-4, 1rem);
-  border-right: 1px solid color-mix(in oklab, var(--color-border, #e5e7eb) 90%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--color-border, #e5e7eb) 90%, transparent);
   background: var(--color-surface, hsl(var(--surface)));
   transform: translateX(-105%);
   transition: transform 200ms ease;
@@ -114,7 +114,7 @@
 }
 
 .admin-sidebar__link:hover {
-  background: color-mix(in oklab, var(--color-primary, hsl(var(--primary))) 8%, transparent);
+  background: color-mix(in srgb, var(--color-primary, hsl(var(--primary))) 8%, transparent);
 }
 
 .admin-sidebar__link:focus-visible {
@@ -123,7 +123,7 @@
 }
 
 .admin-sidebar__link--active {
-  background: color-mix(in oklab, var(--color-primary, hsl(var(--primary))) 12%, transparent);
+  background: color-mix(in srgb, var(--color-primary, hsl(var(--primary))) 12%, transparent);
   font-weight: 600;
 }
 
@@ -166,8 +166,8 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid color-mix(in oklab, var(--color-border, #e5e7eb) 90%, transparent);
-  background: color-mix(in oklab, var(--color-background, #fff) 92%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border, #e5e7eb) 90%, transparent);
+  background: color-mix(in srgb, var(--color-background, #fff) 92%, transparent);
   backdrop-filter: blur(8px);
 }
 
@@ -286,7 +286,7 @@
 }
 
 .admin-stat {
-  border: 1px solid color-mix(in oklab, var(--color-border, #e5e7eb) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border, #e5e7eb) 85%, transparent);
   border-radius: var(--token-radius-lg, 0.75rem);
   padding: 1rem;
   background: var(--color-surface, hsl(var(--surface)));
@@ -325,7 +325,7 @@
   gap: 0.35rem;
   padding: 1rem;
   border-radius: var(--token-radius-lg, 0.75rem);
-  border: 1px solid color-mix(in oklab, var(--color-border, #e5e7eb) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border, #e5e7eb) 85%, transparent);
   background: var(--color-background, #fff);
   text-decoration: none;
   color: inherit;
@@ -333,7 +333,7 @@
 }
 
 .admin-module-card:hover {
-  border-color: color-mix(in oklab, var(--color-primary, hsl(var(--primary))) 40%, transparent);
+  border-color: color-mix(in srgb, var(--color-primary, hsl(var(--primary))) 40%, transparent);
 }
 
 .admin-module-card:focus-visible {
@@ -368,7 +368,7 @@
 
 .admin-table-wrap {
   overflow-x: auto;
-  border: 1px solid color-mix(in oklab, var(--color-border, #e5e7eb) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border, #e5e7eb) 85%, transparent);
   border-radius: var(--token-radius-lg, 0.75rem);
   background: var(--color-background, #fff);
 }
@@ -383,7 +383,7 @@
 .admin-table td {
   padding: 0.85rem 1rem;
   text-align: left;
-  border-bottom: 1px solid color-mix(in oklab, var(--color-border, #e5e7eb) 80%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border, #e5e7eb) 80%, transparent);
   vertical-align: top;
 }
 
@@ -392,7 +392,7 @@
   text-transform: uppercase;
   letter-spacing: 0.03em;
   color: var(--color-muted-foreground, hsl(var(--muted-foreground)));
-  background: color-mix(in oklab, var(--color-surface, #f8fafc) 80%, transparent);
+  background: color-mix(in srgb, var(--color-surface, #f8fafc) 80%, transparent);
 }
 
 .admin-table tr:last-child td {
@@ -443,28 +443,28 @@
 }
 
 .admin-badge--draft {
-  background: color-mix(in oklab, #64748b 14%, transparent);
+  background: color-mix(in srgb, #64748b 14%, transparent);
   color: #334155;
 }
 
 .admin-badge--review {
-  background: color-mix(in oklab, #d97706 16%, transparent);
+  background: color-mix(in srgb, #d97706 16%, transparent);
   color: #92400e;
 }
 
 .admin-badge--published {
-  background: color-mix(in oklab, #15803d 14%, transparent);
+  background: color-mix(in srgb, #15803d 14%, transparent);
   color: #166534;
 }
 
 .admin-badge--archived {
-  background: color-mix(in oklab, #6b7280 14%, transparent);
+  background: color-mix(in srgb, #6b7280 14%, transparent);
   color: #374151;
 }
 
 .admin-empty {
   padding: 2rem;
-  border: 1px dashed color-mix(in oklab, var(--color-border, #e5e7eb) 90%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--color-border, #e5e7eb) 90%, transparent);
   border-radius: var(--token-radius-lg, 0.75rem);
   text-align: center;
   color: var(--color-muted-foreground, hsl(var(--muted-foreground)));
@@ -476,7 +476,7 @@
 }
 
 .admin-settings__group {
-  border: 1px solid color-mix(in oklab, var(--color-border, #e5e7eb) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border, #e5e7eb) 85%, transparent);
   border-radius: var(--token-radius-lg, 0.75rem);
   padding: 1.15rem;
   background: var(--color-background, #fff);
@@ -521,7 +521,7 @@
   min-height: 2.5rem;
   border-radius: var(--token-radius-md, 0.5rem);
   border: 1px solid var(--color-border, #e5e7eb);
-  background: color-mix(in oklab, var(--color-surface, #f8fafc) 70%, transparent);
+  background: color-mix(in srgb, var(--color-surface, #f8fafc) 70%, transparent);
   padding: 0.55rem 0.75rem;
   font: inherit;
   color: inherit;

@@ -4415,11 +4415,11 @@
   gap: 18px;
   padding: clamp(28px, 5vw, 48px);
   border-radius: 16px;
-  border: 1px solid color-mix(in srgb, #6366f1 35%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
   background:
     radial-gradient(
       60rem 28rem at 12% -10%,
-      color-mix(in srgb, #6366f1 35%, transparent),
+      color-mix(in srgb, var(--primary) 35%, transparent),
       transparent 55%
     ),
     radial-gradient(
@@ -4427,7 +4427,7 @@
       color-mix(in srgb, #22d3ee 18%, transparent),
       transparent 50%
     ),
-    linear-gradient(160deg, #0b1228 0%, #121a3a 55%, #0e144a 100%);
+    linear-gradient(160deg, var(--inverse) 0%, color-mix(in srgb, var(--primary) 22%, var(--inverse)) 55%, var(--inverse) 100%);
   box-shadow:
     0 1px 0 color-mix(in srgb, white 8%, transparent),
     0 28px 48px -28px rgb(15 23 42 / 0.55);
@@ -4808,7 +4808,7 @@
 .work-page .work-feat__badge--future {
   color: #fff;
   border-color: color-mix(in srgb, var(--primary) 40%, transparent);
-  background: color-mix(in srgb, var(--primary) 88%, #111827);
+  background: color-mix(in srgb, var(--primary) 88%, var(--inverse));
 }
 .work-page .work-feat__index {
   margin: 0;
@@ -5361,7 +5361,7 @@
   height: 100%;
   padding: 24px;
   border-radius: 16px;
-  border: 1px solid #eef2ff;
+  border: 1px solid var(--border);
   background: var(--background);
   box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
   transition:
@@ -5372,7 +5372,7 @@
 .work-page .work-pf-card:hover,
 .work-page .work-pf-card:focus-within {
   transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--primary) 45%, #eef2ff);
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
   box-shadow: 0 18px 34px -22px color-mix(in srgb, var(--primary) 35%, transparent);
 }
 .work-pf-card__media {
@@ -5380,7 +5380,7 @@
   overflow: hidden;
   border-radius: 12px;
   aspect-ratio: 16 / 10;
-  background: #eef2ff;
+  background: color-mix(in srgb, var(--primary) 8%, var(--background));
 }
 .work-pf-card__media-visual {
   position: absolute;
@@ -5420,7 +5420,7 @@
   color: var(--foreground);
 }
 .work-pf-card__chip--accent {
-  background: color-mix(in srgb, var(--primary) 90%, #111827);
+  background: color-mix(in srgb, var(--primary) 90%, var(--inverse));
   color: var(--primary-foreground);
 }
 .work-pf-card__title {
@@ -6211,7 +6211,7 @@
   border-radius: 26px;
   padding: 10px;
   border: 1px solid color-mix(in srgb, var(--border) 70%, white);
-  background: linear-gradient(180deg, #111827, #0f172a);
+  background: linear-gradient(180deg, var(--inverse), color-mix(in srgb, var(--primary) 12%, var(--inverse)));
   box-shadow: 0 24px 40px -20px rgb(15 23 42 / 0.55);
 }
 .work-care__phone-notch {

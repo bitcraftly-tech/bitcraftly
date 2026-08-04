@@ -7,8 +7,8 @@
   position: relative;
   overflow: clip;
   isolation: isolate;
-  color: #0f172a !important;
-  background: #f9fafb !important;
+  color: var(--foreground) !important;
+  background: var(--canvas) !important;
 }
 
 .hero-section--light.hero-section--compact {
@@ -85,7 +85,7 @@
   margin: 0;
   max-width: 38rem;
   width: 100%;
-  color: #0a0a0a;
+  color: var(--heading);
   font-size: clamp(2.25rem, 4.6vw, 3.65rem);
   font-weight: 800;
   line-height: 1.04;
@@ -98,13 +98,13 @@
 }
 
 .hero-heading-accent {
-  color: #7c3aed;
+  color: var(--heading-accent);
 }
 
 .hero-description {
   margin: 0;
   max-width: 36rem;
-  color: #4b5563;
+  color: var(--muted);
   font-size: clamp(1rem, 1.45vw, 1.125rem);
   font-weight: 500;
   line-height: 1.6;
@@ -125,9 +125,9 @@
   gap: 0.4rem;
   padding: 0.42rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  background: rgba(248, 250, 252, 0.95);
-  color: #374151;
+  border: 1px solid color-mix(in srgb, var(--foreground) 6%, transparent);
+  background: color-mix(in srgb, var(--canvas) 95%, var(--background));
+  color: var(--muted-foreground);
   font-size: 0.8125rem;
   font-weight: 600;
 }
@@ -138,16 +138,16 @@
   width: 1.2rem;
   height: 1.2rem;
   border-radius: 999px;
-  background: rgba(124, 58, 237, 0.12);
-  color: #7c3aed;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
 }
 
 .hero-pill-icon--industries,
 .hero-pill-icon--designs,
 .hero-pill-icon--ai,
 .hero-pill-icon--launch {
-  background: rgba(124, 58, 237, 0.12);
-  color: #7c3aed;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
 }
 
 .hero-actions {
@@ -180,7 +180,7 @@
 .hero-cta-primary {
   border: 1px solid transparent;
   background: linear-gradient(135deg, var(--primary), var(--primary-end));
-  color: #ffffff;
+  color: var(--primary-foreground);
   box-shadow: 0 14px 28px -14px color-mix(in srgb, var(--primary) 55%, transparent);
 }
 
@@ -191,14 +191,14 @@
 }
 
 .hero-cta-ghost {
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  background: #ffffff;
-  color: #111827;
+  border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
+  background: var(--surface);
+  color: var(--foreground);
 }
 
 .hero-cta-ghost:hover {
   transform: translateY(-2px);
-  border-color: rgba(99, 102, 241, 0.28);
+  border-color: color-mix(in srgb, var(--primary) 28%, transparent);
 }
 
 .hero-cta-play {
@@ -207,12 +207,12 @@
   width: 1.55rem;
   height: 1.55rem;
   border-radius: 999px;
-  background: rgba(99, 102, 241, 0.12);
-  color: #6366f1;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
 }
 
 .hero-cta:focus-visible {
-  outline: 2px solid #6366f1;
+  outline: 2px solid var(--ring);
   outline-offset: 3px;
 }
 
@@ -235,9 +235,9 @@
   width: 2.15rem;
   height: 2.15rem;
   margin-left: -0.5rem;
-  border: 2px solid #fff;
+  border: 2px solid var(--surface);
   border-radius: 999px;
-  color: #fff;
+  color: var(--primary-foreground);
   font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -270,13 +270,13 @@
 .hero-trust-label {
   margin: 0;
   max-width: 18rem;
-  color: #6b7280;
+  color: var(--muted-foreground);
   font-size: 0.8125rem;
   line-height: 1.45;
 }
 
 .hero-trust-label strong {
-  color: #111827;
+  color: var(--foreground);
   font-weight: 700;
 }
 
@@ -398,7 +398,7 @@
   box-shadow:
     0 50px 100px -32px rgba(15, 23, 42, 0.22),
     0 24px 48px -24px rgba(15, 23, 42, 0.14),
-    0 8px 24px -10px rgba(124, 58, 237, 0.1);
+    0 8px 24px -10px color-mix(in srgb, var(--primary) 10%, transparent);
 }
 
 .hero-back-chrome {
@@ -484,7 +484,7 @@
   box-shadow:
     0 60px 120px -36px rgba(15, 23, 42, 0.28),
     0 28px 56px -28px rgba(15, 23, 42, 0.16),
-    0 12px 32px -16px rgba(124, 58, 237, 0.14);
+    0 12px 32px -16px color-mix(in srgb, var(--primary) 14%, transparent);
 }
 
 .hero-window-nav {
@@ -678,7 +678,7 @@
   align-items: flex-start;
   gap: 0.05rem;
   max-width: 8.5rem;
-  color: #7c3aed;
+  color: var(--primary);
   pointer-events: none;
   transform: rotate(9deg);
 }
@@ -696,7 +696,7 @@
   width: 2.5rem;
   height: 2.5rem;
   margin-left: 0.85rem;
-  color: #8b5cf6;
+  color: var(--primary);
   transform: rotate(-28deg);
 }
 
@@ -715,13 +715,13 @@
   width: 0.42rem;
   height: 0.42rem;
   border-radius: 999px;
-  background: #d1d5db;
+  background: color-mix(in srgb, var(--muted-foreground) 35%, transparent);
 }
 
 .hero-dot--active {
   width: 0.5rem;
   height: 0.5rem;
-  background: #7c3aed;
+  background: var(--primary);
 }
 
 @keyframes hero-copy-enter {

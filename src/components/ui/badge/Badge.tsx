@@ -5,7 +5,7 @@ const variantStyles: Record<BadgeVariant, string> = {
   default: 'border border-border bg-surface text-surface-foreground',
   primary: 'border border-primary/20 bg-primary/10 text-primary',
   secondary: 'border border-transparent bg-secondary text-secondary-foreground',
-  success: 'border border-success/20 bg-success-subtle text-[#14532d] dark:text-[#bbf7d0]',
+  success: 'border border-success/20 bg-success-subtle text-success',
   warning: 'border border-warning/20 bg-warning-subtle text-warning',
   outline: 'border border-border bg-transparent text-foreground',
 };

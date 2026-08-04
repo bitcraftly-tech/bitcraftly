@@ -25,7 +25,7 @@ interface MarketingFinalCtaBandProps {
 
 const focusRing = cn(
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground',
-  'focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e144a]',
+  'focus-visible:ring-offset-2 focus-visible:ring-offset-inverse',
 );
 
 const buttonBase = cn(

@@ -7,7 +7,7 @@
 }
 
 .why-card {
-  border: 1px solid var(--hp-card-border, #eef2ff);
+  border: 1px solid var(--hp-card-border, var(--border));
   background-color: var(--background);
   box-shadow: var(--hp-card-shadow, 0 1px 2px 0 rgb(15 23 42 / 0.04));
   transition:
@@ -19,7 +19,7 @@
 .why-card:hover,
 .why-card:focus-within {
   transform: translateY(var(--hp-card-lift, -6px));
-  border-color: color-mix(in srgb, var(--primary) 45%, #eef2ff);
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
   box-shadow: var(--hp-card-shadow-hover);
 }
 

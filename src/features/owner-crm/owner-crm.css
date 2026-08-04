@@ -5,7 +5,7 @@
 }
 
 .owner-shell__header {
-  border-bottom: 1px solid color-mix(in oklab, var(--color-border, #e5e7eb) 90%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border, #e5e7eb) 90%, transparent);
   background: var(--color-surface, hsl(var(--surface)));
 }
 
@@ -140,42 +140,42 @@
 }
 
 .owner-leads-badge--new {
-  background: color-mix(in oklab, #2563eb 12%, transparent);
+  background: color-mix(in srgb, #2563eb 12%, transparent);
   color: #1d4ed8;
 }
 
 .owner-leads-badge--contacted {
-  background: color-mix(in oklab, #7c3aed 12%, transparent);
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
   color: var(--primary);
 }
 
 .owner-leads-badge--qualified {
-  background: color-mix(in oklab, #059669 12%, transparent);
+  background: color-mix(in srgb, #059669 12%, transparent);
   color: #047857;
 }
 
 .owner-leads-badge--closed {
-  background: color-mix(in oklab, #475569 12%, transparent);
+  background: color-mix(in srgb, #475569 12%, transparent);
   color: #334155;
 }
 
 .owner-leads-badge--spam {
-  background: color-mix(in oklab, #dc2626 12%, transparent);
+  background: color-mix(in srgb, #dc2626 12%, transparent);
   color: #b91c1c;
 }
 
 .owner-leads-notification--sent {
-  background: color-mix(in oklab, #059669 12%, transparent);
+  background: color-mix(in srgb, #059669 12%, transparent);
   color: #047857;
 }
 
 .owner-leads-notification--failed {
-  background: color-mix(in oklab, #dc2626 12%, transparent);
+  background: color-mix(in srgb, #dc2626 12%, transparent);
   color: #b91c1c;
 }
 
 .owner-leads-notification--pending {
-  background: color-mix(in oklab, #d97706 12%, transparent);
+  background: color-mix(in srgb, #d97706 12%, transparent);
   color: #b45309;
 }
 
@@ -196,7 +196,7 @@
 .owner-leads-loading__card,
 .owner-leads-loading__row {
   border-radius: var(--token-radius-md, 0.5rem);
-  background: color-mix(in oklab, var(--color-border, #e5e7eb) 35%, transparent);
+  background: color-mix(in srgb, var(--color-border, #e5e7eb) 35%, transparent);
   animation: owner-leads-pulse 1.4s ease-in-out infinite;
 }
 

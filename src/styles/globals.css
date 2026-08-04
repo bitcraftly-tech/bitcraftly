@@ -52,6 +52,10 @@
   --color-surface-hover: var(--surface-hover);
   --color-surface-foreground: var(--surface-foreground);
 
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-ring: var(--ring);
+
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
 
@@ -75,6 +79,9 @@
   --color-error: var(--error);
   --color-error-foreground: var(--error-foreground);
   --color-error-subtle: var(--error-subtle);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
 
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
@@ -189,6 +196,6 @@ body {
 
 /* Focus visible — accessible keyboard focus ring */
 :focus-visible {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--ring);
   outline-offset: 2px;
 }

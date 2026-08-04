@@ -24,14 +24,17 @@ export const PAGE_SHELL_CLASS = `mx-auto w-full max-w-[var(--container-xl)] ${CO
 
 /**
  * Homepage section rhythm (padding-block):
- * mobile 36 · tablet 48 · desktop 60
+ * Fixed 48px on all breakpoints via `--section-spacing` / `.page-shell`.
  * Applied via `.page-shell` in page-shell.css
  */
 export const PAGE_SECTION_CLASS = 'page-shell';
 
 /** Shared marketing grid for cards / lists. */
-export const PAGE_GRID_CLASS = 'grid w-full grid-cols-1 gap-[24px] sm:grid-cols-2 lg:grid-cols-3';
+export const PAGE_GRID_CLASS =
+  'grid w-full grid-cols-1 gap-[var(--section-grid-gap)] sm:grid-cols-2 lg:grid-cols-3';
 
-export const PAGE_GRID_2_CLASS = 'grid w-full grid-cols-1 gap-[24px] sm:grid-cols-2';
+export const PAGE_GRID_2_CLASS =
+  'grid w-full grid-cols-1 gap-[var(--section-grid-gap)] sm:grid-cols-2';
 
-export const PAGE_GRID_4_CLASS = 'grid w-full grid-cols-1 gap-[24px] sm:grid-cols-2 lg:grid-cols-4';
+export const PAGE_GRID_4_CLASS =
+  'grid w-full grid-cols-1 gap-[var(--section-grid-gap)] sm:grid-cols-2 lg:grid-cols-4';

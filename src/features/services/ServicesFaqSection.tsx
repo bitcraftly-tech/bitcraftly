@@ -1,12 +1,11 @@
+import { FaqAccordion } from '@/components/patterns/faq-accordion';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
 import { cn } from '@/lib/cn';
-import { ServiceFaqAccordion } from './ServiceFaqAccordion';
 import { SERVICES_LANDING } from './services.content';
-import '@/features/homepage/FAQ/faq.css';
 
 /**
- * Services listing FAQ — aligned with Solutions FAQ intro rhythm.
+ * Services listing FAQ — canonical FaqAccordion treatment.
  */
 export function ServicesFaqSection() {
   return (
@@ -46,7 +45,7 @@ export function ServicesFaqSection() {
           </p>
         </div>
 
-        <ServiceFaqAccordion items={[...SERVICES_LANDING.listingFaqs]} />
+        <FaqAccordion items={[...SERVICES_LANDING.listingFaqs]} />
       </Container>
     </Section>
   );

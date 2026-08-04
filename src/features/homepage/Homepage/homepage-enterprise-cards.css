@@ -8,7 +8,7 @@
   --ec-radius: 18px;
   --ec-radius-sm: 14px;
   --ec-radius-xs: 12px;
-  --ec-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ec-ease: var(--ms-ease-spring);
   --ec-duration: 160ms;
   --ec-lift: -3px;
   --ec-border: color-mix(in srgb, var(--foreground) 8%, transparent);

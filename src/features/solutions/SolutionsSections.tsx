@@ -12,12 +12,11 @@ import { PortfolioCard } from '@/features/homepage/Portfolio/PortfolioCard';
 import { PORTFOLIO_PROJECTS } from '@/features/homepage/Portfolio/portfolio.constants';
 import '@/features/homepage/Portfolio/portfolio.css';
 import { ServiceCard } from '@/features/services/ServiceCard';
-import { ServiceFaqAccordion } from '@/features/services/ServiceFaqAccordion';
+import { FaqAccordion } from '@/components/patterns/faq-accordion';
 import { PAGE_GRID_CLASS, PAGE_GRID_4_CLASS } from '@/lib/layout/page-shell';
 import { cn } from '@/lib/cn';
 import { SOLUTIONS_LANDING, getSolutionCardModels } from './solutions.content';
 import type { SolutionCardModel } from './solutions.types';
-import '@/features/homepage/FAQ/faq.css';
 import '@/features/homepage/Hero/hero.css';
 import '@/features/services/services.css';
 import './solutions.css';
@@ -585,7 +584,7 @@ export function SolutionsFaqSection() {
           together.
         </p>
       </div>
-      <ServiceFaqAccordion items={[...SOLUTIONS_LANDING.faqs]} />
+      <FaqAccordion items={[...SOLUTIONS_LANDING.faqs]} />
     </Section>
   );
 }

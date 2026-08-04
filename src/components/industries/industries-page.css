@@ -1,0 +1,518 @@
+/* Industries showcase module only — do not import outside src/components/industries */
+
+.industries-page {
+  --ip-ease: var(--ms-ease);
+  --ip-radius: var(--ms-radius);
+  --ip-radius-sm: var(--ms-radius-sm);
+  --ip-border: var(--ms-border);
+  --ip-muted: var(--ms-muted);
+  --ip-soft: var(--ms-soft);
+  --ip-shadow: var(--ms-shadow);
+  --ip-shadow-hover: var(--ms-shadow-hover);
+}
+
+.industries-page a:not([class*='bc-btn']) {
+  text-decoration: none;
+}
+
+/* --- Shared section chrome --- */
+.ip-section-head {
+  max-width: 40rem;
+  margin-bottom: 2rem;
+}
+
+.ip-section-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted-foreground) 70%, var(--primary));
+}
+
+.ip-section-title {
+  margin: 0;
+  font-size: clamp(1.65rem, 2.6vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  color: var(--foreground);
+}
+
+.ip-section-desc {
+  margin: 0.85rem 0 0;
+  font-size: 1.0125rem;
+  line-height: 1.65;
+  color: var(--ip-muted);
+}
+
+.ip-section--muted {
+  background: var(--ip-soft);
+  border-block: 1px solid var(--ip-border);
+}
+
+/* --- Hero --- */
+.ip-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ip-border);
+  background:
+    radial-gradient(
+      80% 50% at 90% 0%,
+      color-mix(in srgb, var(--primary) 11%, transparent),
+      transparent 58%
+    ),
+    radial-gradient(
+      55% 40% at 0% 100%,
+      color-mix(in srgb, var(--accent, var(--primary)) 8%, transparent),
+      transparent 52%
+    ),
+    var(--background);
+}
+
+.ip-hero__inner {
+  padding-block: 48px 52px;
+  max-width: 48rem;
+}
+
+@media (min-width: 1024px) {
+  .ip-hero__inner {
+    padding-block: 72px 68px;
+  }
+}
+
+.ip-hero__eyebrow {
+  margin: 0 0 16px;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted-foreground) 70%, var(--primary));
+}
+
+.ip-hero__title {
+  margin: 0;
+  font-size: clamp(2.1rem, 4.2vw, 3.35rem);
+  font-weight: 750;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  color: var(--foreground);
+}
+
+.ip-hero__desc {
+  margin: 18px 0 0;
+  max-width: 38rem;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ip-muted);
+}
+
+.ip-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.ip-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+}
+
+.ip-selector__btn {
+  appearance: none;
+  border: 1px solid var(--ip-border);
+  background: color-mix(in srgb, var(--background) 88%, var(--card, var(--background)));
+  color: var(--foreground);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition:
+    background-color 180ms var(--ip-ease),
+    border-color 180ms var(--ip-ease),
+    transform 180ms var(--ip-ease);
+}
+
+.ip-selector__btn:hover {
+  border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
+  transform: translateY(-1px);
+}
+
+.ip-selector__btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.ip-selector__btn[aria-pressed='true'] {
+  background: color-mix(in srgb, var(--primary) 12%, var(--card, var(--background)));
+  border-color: color-mix(in srgb, var(--primary) 42%, var(--border));
+}
+
+/* --- Grid --- */
+.ip-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .ip-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.15rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ip-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.ip-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: left;
+  border: 1px solid var(--ip-border);
+  border-radius: var(--ip-radius);
+  background: color-mix(in srgb, var(--card, var(--background)) 96%, transparent);
+  box-shadow: var(--ip-shadow);
+  padding: 1.3rem;
+  cursor: pointer;
+  color: inherit;
+  transition:
+    transform 220ms var(--ip-ease),
+    box-shadow 220ms var(--ip-ease),
+    border-color 220ms var(--ip-ease);
+}
+
+.ip-card:hover,
+.ip-card:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: var(--ip-shadow-hover);
+  border-color: color-mix(in srgb, var(--primary) 28%, var(--border));
+}
+
+.ip-card:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.ip-card[aria-pressed='true'] {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  box-shadow: var(--ip-shadow-hover);
+  background: color-mix(in srgb, var(--primary) 5%, var(--card, var(--background)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ip-card,
+  .ip-card:hover,
+  .ip-selector__btn {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+.ip-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--primary) 10%, var(--background));
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--border));
+}
+
+.ip-card__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
+}
+
+.ip-card__desc {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ip-muted);
+}
+
+.ip-card__block {
+  margin-top: 0.95rem;
+}
+
+.ip-card__label {
+  margin: 0 0 0.35rem;
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted-foreground) 88%, transparent);
+}
+
+.ip-card__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.ip-card__list li {
+  position: relative;
+  padding-left: 0.9rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--ip-muted);
+}
+
+.ip-card__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 70%, transparent);
+}
+
+.ip-card__cta {
+  margin-top: auto;
+  padding-top: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+/* --- Detail --- */
+.ip-detail {
+  scroll-margin-top: 5rem;
+}
+
+.ip-detail__panel {
+  border: 1px solid var(--ip-border);
+  border-radius: calc(var(--ip-radius) + 2px);
+  background: color-mix(in srgb, var(--card, var(--background)) 97%, transparent);
+  box-shadow: var(--ip-shadow);
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .ip-detail__panel {
+    padding: 1.85rem;
+  }
+}
+
+.ip-detail__title {
+  margin: 0;
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+}
+
+.ip-detail__grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.35rem;
+}
+
+@media (min-width: 900px) {
+  .ip-detail__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem 1.75rem;
+  }
+}
+
+.ip-detail__block h4 {
+  margin: 0 0 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted-foreground) 90%, transparent);
+}
+
+.ip-detail__block p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--foreground);
+}
+
+.ip-detail__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.ip-detail__list li {
+  position: relative;
+  padding-left: 0.95rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ip-muted);
+}
+
+.ip-detail__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--foreground) 35%, transparent);
+}
+
+.ip-detail__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ip-detail__chips li {
+  padding: 0.3rem 0.55rem;
+  border-radius: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 550;
+  border: 1px solid var(--ip-border);
+  background: color-mix(in srgb, var(--muted) 40%, transparent);
+  color: var(--foreground);
+}
+
+.ip-detail__meta {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .ip-detail__meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.ip-detail__actions {
+  margin-top: 1.5rem;
+}
+
+/* --- Why --- */
+.ip-why {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .ip-why {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .ip-why {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.ip-why__card {
+  border: 1px solid var(--ip-border);
+  border-radius: var(--ip-radius-sm);
+  background: color-mix(in srgb, var(--card, var(--background)) 96%, transparent);
+  padding: 1.25rem;
+  box-shadow: var(--ip-shadow);
+}
+
+.ip-why__icon {
+  display: inline-flex;
+  margin-bottom: 0.85rem;
+  color: color-mix(in srgb, var(--primary) 80%, var(--foreground));
+}
+
+.ip-why__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.ip-why__desc {
+  margin: 0.45rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ip-muted);
+}
+
+/* --- Tech --- */
+.ip-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.ip-tech__item {
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 550;
+  border: 1px solid var(--ip-border);
+  background: color-mix(in srgb, var(--card, var(--background)) 96%, transparent);
+  color: var(--foreground);
+  box-shadow: var(--ip-shadow);
+}
+
+/* --- Metrics --- */
+.ip-metrics {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (min-width: 900px) {
+  .ip-metrics {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.ip-metric {
+  border: 1px solid var(--ip-border);
+  border-radius: var(--ip-radius-sm);
+  padding: 1.25rem;
+  background: color-mix(in srgb, var(--card, var(--background)) 96%, transparent);
+  text-align: center;
+}
+
+.ip-metric__value {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  color: var(--foreground);
+}
+
+.ip-metric__label {
+  margin: 0.4rem 0 0;
+  font-size: 0.84rem;
+  font-weight: 550;
+  color: var(--ip-muted);
+}

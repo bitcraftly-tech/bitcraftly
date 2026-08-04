@@ -1,12 +1,11 @@
+import { FaqAccordion } from '@/components/patterns/faq-accordion';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
 import { cn } from '@/lib/cn';
 import { WORK_FAQ_COPY, WORK_FAQS } from './work.content';
-import { WorkFaqAccordion } from './WorkFaqAccordion';
-import '@/features/homepage/FAQ/faq.css';
 
 /**
- * Work FAQ — same accordion + intro rhythm as /services.
+ * Work FAQ — canonical FaqAccordion treatment.
  */
 export function WorkFaqSection() {
   return (
@@ -47,7 +46,7 @@ export function WorkFaqSection() {
         </div>
 
         <div className="section-content-grid">
-          <WorkFaqAccordion items={[...WORK_FAQS]} />
+          <FaqAccordion items={[...WORK_FAQS]} />
         </div>
       </Container>
     </Section>

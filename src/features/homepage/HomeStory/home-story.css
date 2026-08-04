@@ -909,7 +909,7 @@
     105deg,
     var(--primary) 0%,
     var(--primary-end) 70%,
-    color-mix(in srgb, var(--primary) 70%, #7c3aed) 100%
+    color-mix(in srgb, var(--primary) 70%, var(--accent)) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -1356,7 +1356,7 @@
     105deg,
     var(--primary) 0%,
     var(--primary-end) 70%,
-    color-mix(in srgb, var(--primary) 70%, #7c3aed) 100%
+    color-mix(in srgb, var(--primary) 70%, var(--accent)) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -1721,7 +1721,7 @@
     105deg,
     var(--primary) 0%,
     var(--primary-end) 70%,
-    color-mix(in srgb, var(--primary) 70%, #7c3aed) 100%
+    color-mix(in srgb, var(--primary) 70%, var(--accent)) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -2521,7 +2521,7 @@
     105deg,
     var(--primary) 0%,
     var(--primary-end) 70%,
-    color-mix(in srgb, var(--primary) 70%, #7c3aed) 100%
+    color-mix(in srgb, var(--primary) 70%, var(--accent)) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -2980,7 +2980,7 @@
     105deg,
     var(--primary) 0%,
     var(--primary-end) 70%,
-    color-mix(in srgb, var(--primary) 70%, #7c3aed) 100%
+    color-mix(in srgb, var(--primary) 70%, var(--accent)) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -3293,7 +3293,7 @@
     105deg,
     var(--primary) 0%,
     var(--primary-end) 70%,
-    color-mix(in srgb, var(--primary) 70%, #7c3aed) 100%
+    color-mix(in srgb, var(--primary) 70%, var(--accent)) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;

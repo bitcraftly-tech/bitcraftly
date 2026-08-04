@@ -11,7 +11,7 @@
   --ecs-radius-sm: var(--ec-radius-sm, 14px);
   --ecs-radius-xs: var(--ec-radius-xs, 12px);
   --ecs-duration: 150ms;
-  --ecs-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ecs-ease: var(--ms-ease-spring);
   --ecs-lift: -2px;
   --ecs-lift-sm: -1px;
   --ecs-border: var(--ec-border, color-mix(in srgb, var(--foreground) 8%, transparent));

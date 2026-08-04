@@ -42,6 +42,13 @@
   --surface-hover: #eef6fb;
   --surface-foreground: #000826;
 
+  /* Card / popover surface aliases (used by marketing modules + search) */
+  --card: var(--surface);
+  --card-foreground: var(--surface-foreground);
+
+  /* Focus ring — single keyboard focus color across marketing + UI */
+  --ring: var(--primary);
+
   --border: #d7e4ee;
   --border-strong: #b7c9d8;
 
@@ -70,6 +77,10 @@
   --error: #dc2626;
   --error-foreground: #ffffff;
   --error-subtle: #fef2f2;
+
+  /* Alias — button/estimator APIs use "destructive" naming */
+  --destructive: var(--error);
+  --destructive-foreground: var(--error-foreground);
 
   --info: #00a8d8;
   --info-foreground: #ffffff;
@@ -190,6 +201,26 @@
   --token-shadow-lg: 0 10px 15px -3px rgb(15 23 42 / 0.1), 0 4px 6px -4px rgb(15 23 42 / 0.1);
   --token-shadow-xl: 0 20px 25px -5px rgb(15 23 42 / 0.1), 0 8px 10px -6px rgb(15 23 42 / 0.1);
 
+  /**
+   * Marketing surface system — shared by pricing, services, industries, work,
+   * AI solutions, discovery, wizard, search, and case-study modules.
+   * Page CSS should alias local prefixes (--pp-*, --sl-*, etc.) to these.
+   */
+  --ms-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ms-ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ms-radius: var(--token-radius-xl); /* 16px */
+  --ms-radius-sm: var(--token-radius-lg); /* 12px */
+  --ms-radius-xs: 0.625rem; /* 10px */
+  --ms-border: color-mix(in srgb, var(--border) 82%, transparent);
+  --ms-muted: color-mix(in srgb, var(--muted-foreground) 92%, transparent);
+  --ms-soft: color-mix(in srgb, var(--canvas) 78%, var(--background));
+  --ms-shadow:
+    0 1px 2px color-mix(in srgb, var(--foreground) 4%, transparent),
+    0 14px 36px -20px color-mix(in srgb, var(--foreground) 18%, transparent);
+  --ms-shadow-hover:
+    0 1px 2px color-mix(in srgb, var(--foreground) 5%, transparent),
+    0 22px 48px -22px color-mix(in srgb, var(--foreground) 24%, transparent);
+
   /* Container — shared edges for Header, Hero, sections, Footer */
   --container-sm: 640px;
   --container-md: 768px;
@@ -297,6 +328,13 @@
     --muted: #a1a1aa;
     --muted-foreground: #d4d4d8;
 
+    /* Inverse chrome — keep footer/on-dark CTAs coherent in dark mode */
+    --inverse: #020617;
+    --inverse-foreground: #f8fafc;
+    --inverse-muted: #94a3b8;
+    --inverse-border: color-mix(in srgb, var(--inverse-muted) 24%, transparent);
+    --inverse-elevated: color-mix(in srgb, var(--inverse-muted) 16%, transparent);
+
     --success: #22c55e;
     --success-foreground: #052e16;
     --success-subtle: #14532d;
@@ -360,6 +398,12 @@
 
   --muted: #a1a1aa;
   --muted-foreground: #d4d4d8;
+
+  --inverse: #020617;
+  --inverse-foreground: #f8fafc;
+  --inverse-muted: #94a3b8;
+  --inverse-border: color-mix(in srgb, var(--inverse-muted) 24%, transparent);
+  --inverse-elevated: color-mix(in srgb, var(--inverse-muted) 16%, transparent);
 
   --success: #22c55e;
   --success-foreground: #052e16;

@@ -7,7 +7,7 @@
 
 .owner-auth-card {
   width: min(100%, 28rem);
-  border: 1px solid color-mix(in oklab, var(--color-border, #e5e7eb) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border, #e5e7eb) 90%, transparent);
   border-radius: var(--token-radius-lg, 0.75rem);
   background: var(--color-surface, hsl(var(--surface)));
   padding: var(--space-6, 1.5rem);

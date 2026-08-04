@@ -5,7 +5,6 @@ import { Icon } from '@/components/ui/icon';
 import { Section } from '@/components/ui/section';
 import { PAGE_GRID_CLASS, PAGE_GRID_4_CLASS } from '@/lib/layout/page-shell';
 import { cn } from '@/lib/cn';
-import '@/features/homepage/FAQ/faq.css';
 import {
   INDUSTRIES_CATALOG,
   INDUSTRIES_LANDING,

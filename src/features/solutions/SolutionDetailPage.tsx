@@ -6,10 +6,9 @@ import { Icon } from '@/components/ui/icon';
 import { Section } from '@/components/ui/section';
 import { ROUTES } from '@/constants/navigation';
 import { ServiceCard } from '@/features/services/ServiceCard';
-import { ServiceFaqAccordion } from '@/features/services/ServiceFaqAccordion';
+import { FaqAccordion } from '@/components/patterns/faq-accordion';
 import { buildSolutionsBreadcrumbs } from '@/lib/seo/breadcrumbs';
 import { cn } from '@/lib/cn';
-import '@/features/homepage/FAQ/faq.css';
 import '@/features/services/services.css';
 import { SolutionDetailHero } from './SolutionDetailHero';
 import { SolutionsPageCta } from './SolutionsPageCta';
@@ -105,7 +104,7 @@ export function SolutionDetailPage({ content }: SolutionDetailPageProps) {
             description={`Common questions about ${content.label} engagements with Bitcraftly.`}
           />
           <div className="solution-detail-faq">
-            <ServiceFaqAccordion items={[...content.faqs]} />
+            <FaqAccordion items={[...content.faqs]} />
           </div>
         </Section>
       ) : null}
