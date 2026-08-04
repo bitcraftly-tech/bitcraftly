@@ -114,7 +114,7 @@ const nextConfig: NextConfig = {
     const security = {
       source: '/(.*)',
       headers: [...buildSecurityHeaders()],
-    } as const;
+    };
 
     if (process.env.NODE_ENV !== 'production') {
       return [
