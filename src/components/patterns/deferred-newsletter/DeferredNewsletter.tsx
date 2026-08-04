@@ -10,7 +10,9 @@ function NewsletterUnavailable() {
 const NewsletterSection = dynamic(
   () =>
     import('@/features/homepage/Newsletter/NewsletterSection')
-      .then((mod) => mod.NewsletterSection)
+      .then((mod) =>
+        typeof mod.NewsletterSection === 'function' ? mod.NewsletterSection : NewsletterUnavailable,
+      )
       .catch(() => NewsletterUnavailable),
   {
     ssr: false,

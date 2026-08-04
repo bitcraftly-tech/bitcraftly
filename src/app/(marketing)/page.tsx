@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { JsonLdScript } from '@/components/patterns/json-ld/JsonLdScript';
 import { HomepageShell } from '@/features/homepage';
 import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 import { ROUTES } from '@/constants/navigation';
@@ -78,10 +79,7 @@ const homepageJsonLd = {
 export default function HomePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageJsonLd) }}
-      />
+      <JsonLdScript data={homepageJsonLd} />
       <HomepageShell />
     </>
   );

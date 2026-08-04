@@ -106,8 +106,33 @@ const nextConfig: NextConfig = {
 
   /**
    * Production Security + Cache Headers
+   * Never set long-lived immutable Cache-Control on `/_next/static` in
+   * development — Chrome keeps stale webpack chunks and full-page reloads.
+   * Staging/production are fine because chunk hashes match the build.
    */
   async headers() {
+    const security = {
+      source: '/(.*)',
+      headers: [...buildSecurityHeaders()],
+    } as const;
+
+    if (process.env.NODE_ENV !== 'production') {
+      return [
+        {
+          source: '/:path*',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'no-store, no-cache, must-revalidate, max-age=0',
+            },
+            { key: 'Pragma', value: 'no-cache' },
+            { key: 'Expires', value: '0' },
+          ],
+        },
+        security,
+      ];
+    }
+
     return [
       {
         source: '/_next/static/:path*',
@@ -118,10 +143,7 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      {
-        source: '/(.*)',
-        headers: [...buildSecurityHeaders()],
-      },
+      security,
     ];
   },
 };

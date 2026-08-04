@@ -9,8 +9,10 @@ function ChromeUnavailable() {
 
 const LeadFunnelWidgets = dynamic(
   () =>
-    import('@/features/lead-funnel')
-      .then((mod) => mod.LeadFunnelWidgets)
+    import('@/features/lead-funnel/LeadFunnelWidgets')
+      .then((mod) =>
+        typeof mod.LeadFunnelWidgets === 'function' ? mod.LeadFunnelWidgets : ChromeUnavailable,
+      )
       .catch(() => ChromeUnavailable),
   { ssr: false },
 );

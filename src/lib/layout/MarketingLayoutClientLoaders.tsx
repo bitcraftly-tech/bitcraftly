@@ -2,18 +2,35 @@
 
 import dynamic from 'next/dynamic';
 
+function MissingIsland() {
+  return null;
+}
+
+function resolveIsland<T>(value: T | undefined): T | typeof MissingIsland {
+  return typeof value === 'function' ? value : MissingIsland;
+}
+
 const MarketingLayoutClientHead = dynamic(
-  () => import('./MarketingLayoutClientIslands').then((mod) => mod.MarketingLayoutClientHead),
+  () =>
+    import('./MarketingLayoutClientIslands').then((mod) =>
+      resolveIsland(mod.MarketingLayoutClientHead),
+    ),
   { ssr: false },
 );
 
 const MarketingLayoutClientMid = dynamic(
-  () => import('./MarketingLayoutClientIslands').then((mod) => mod.MarketingLayoutClientMid),
+  () =>
+    import('./MarketingLayoutClientIslands').then((mod) =>
+      resolveIsland(mod.MarketingLayoutClientMid),
+    ),
   { ssr: false },
 );
 
 const MarketingLayoutClientTail = dynamic(
-  () => import('./MarketingLayoutClientIslands').then((mod) => mod.MarketingLayoutClientTail),
+  () =>
+    import('./MarketingLayoutClientIslands').then((mod) =>
+      resolveIsland(mod.MarketingLayoutClientTail),
+    ),
   { ssr: false },
 );
 
