@@ -38,6 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/terms',
     '/trust',
     '/case-studies',
+    '/resources',
+    '/resources/faq',
+    '/resources/guides',
+    '/resources/documentation',
+    '/events',
+    '/press',
   ];
 
   const industryEntries: MetadataRoute.Sitemap = INDUSTRIES_CATALOG.map((industry) => ({
