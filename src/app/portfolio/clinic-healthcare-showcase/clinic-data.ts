@@ -37,13 +37,13 @@ export const CLINIC_BRAND = {
   address: 'Clinic & Healthcare Campus, Bistupur, Jamshedpur 831001',
 } as const;
 
+/** Primary header links — appointment is a CTA button, not a nav item. */
 export const CLINIC_NAV_LINKS = [
   { label: 'Home', href: '#top' },
-  { label: 'About Us', href: '#why-us' },
+  { label: 'About', href: '#why-us' },
   { label: 'Doctors', href: '#doctors' },
   { label: 'Services', href: '#services' },
   { label: 'AI Features', href: '#ai-solutions' },
-  { label: 'Book Appointment', href: '#appointment' },
   { label: 'Blog', href: '#blog' },
   { label: 'Contact', href: '#contact' },
 ] as const;
@@ -257,7 +257,7 @@ export const CLINIC_WHY_IMAGE = {
 export const CLINIC_TELEHEALTH = {
   eyebrow: 'Telehealth',
   title: 'Consult Doctors from the Comfort of Your Home',
-  copy: 'Our telehealth service links healthcare accessible, convenient and safe — anytime, anywhere.',
+  copy: 'Our telehealth service makes healthcare accessible, convenient and safe — anytime, anywhere.',
   image: clinicImage('photo-1590650153855-d9e808231d41', 1000, 760),
   imageAlt: 'Patient joining a video consultation with a Clinic & Healthcare doctor from home',
   benefits: [

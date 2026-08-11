@@ -16,29 +16,29 @@ const SOCIALS = [
   { label: 'Instagram', icon: Instagram },
   { label: 'LinkedIn', icon: Linkedin },
   { label: 'YouTube', icon: Youtube },
-];
+] as const;
 
 export default function ClinicFooter() {
   return (
-    <footer id="contact" className="bg-[#0b1c2c] text-slate-300">
-      <div className="cl-container py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <ClinicLogoMark className="h-9 w-9" />
-              <span className="text-[0.95rem] font-bold text-white">{CLINIC_BRAND.name}</span>
-            </div>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
+    <footer id="contact" className="cl-footer">
+      <div className="cl-container cl-footer__main">
+        <div className="cl-footer__grid">
+          <div className="cl-footer__brand">
+            <ClinicSectionAnchor href="#top" className="cl-footer__logo">
+              <ClinicLogoMark className="cl-footer__mark" />
+              <span className="cl-footer__brand-name">{CLINIC_BRAND.name}</span>
+            </ClinicSectionAnchor>
+            <p className="cl-footer__tagline">
               Clinic & Healthcare is committed to providing world-class healthcare with compassion
               and excellence.
             </p>
-            <ul className="mt-6 flex items-center gap-2">
+            <ul className="cl-footer__socials">
               {SOCIALS.map(({ label, icon: Icon }) => (
                 <li key={label}>
                   <a
                     href="#contact"
                     aria-label={`${CLINIC_BRAND.name} on ${label}`}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/8 text-slate-300 transition hover:bg-[var(--cl-accent)] hover:text-[#04120f]"
+                    className="cl-footer__social"
                   >
                     <Icon className="h-4 w-4" aria-hidden />
                   </a>
@@ -48,16 +48,13 @@ export default function ClinicFooter() {
           </div>
 
           <nav aria-labelledby="clinic-footer-links">
-            <h2 id="clinic-footer-links" className="cl-h4 text-white">
+            <h2 id="clinic-footer-links" className="cl-footer__heading">
               Quick Links
             </h2>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="cl-footer__list">
               {CLINIC_FOOTER_LINKS.map((link) => (
                 <li key={link.label}>
-                  <ClinicSectionAnchor
-                    href={link.href}
-                    className="text-sm text-slate-400 transition hover:text-white"
-                  >
+                  <ClinicSectionAnchor href={link.href} className="cl-footer__link">
                     {link.label}
                   </ClinicSectionAnchor>
                 </li>
@@ -66,16 +63,13 @@ export default function ClinicFooter() {
           </nav>
 
           <nav aria-labelledby="clinic-footer-departments">
-            <h2 id="clinic-footer-departments" className="cl-h4 text-white">
+            <h2 id="clinic-footer-departments" className="cl-footer__heading">
               Departments
             </h2>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="cl-footer__list">
               {CLINIC_SERVICES.slice(0, 6).map((service) => (
                 <li key={service.title}>
-                  <ClinicSectionAnchor
-                    href="#services"
-                    className="text-sm text-slate-400 transition hover:text-white"
-                  >
+                  <ClinicSectionAnchor href="#services" className="cl-footer__link">
                     {service.title}
                   </ClinicSectionAnchor>
                 </li>
@@ -84,25 +78,18 @@ export default function ClinicFooter() {
           </nav>
 
           <div>
-            <h2 className="cl-h4 text-white">Contact Us</h2>
-            <ul className="mt-4 space-y-3 text-sm text-slate-400">
-              <li className="flex gap-2.5">
-                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[var(--cl-accent)]" aria-hidden />
-                <a
-                  href={`tel:${CLINIC_BRAND.phone.replace(/\s/g, '')}`}
-                  className="transition hover:text-white"
-                >
-                  {CLINIC_BRAND.phone}
-                </a>
+            <h2 className="cl-footer__heading">Contact Us</h2>
+            <ul className="cl-footer__contact">
+              <li>
+                <Phone className="cl-footer__contact-icon" aria-hidden />
+                <a href={`tel:${CLINIC_BRAND.phone.replace(/\s/g, '')}`}>{CLINIC_BRAND.phone}</a>
               </li>
-              <li className="flex gap-2.5">
-                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[var(--cl-accent)]" aria-hidden />
-                <a href={`mailto:${CLINIC_BRAND.email}`} className="transition hover:text-white">
-                  {CLINIC_BRAND.email}
-                </a>
+              <li>
+                <Mail className="cl-footer__contact-icon" aria-hidden />
+                <a href={`mailto:${CLINIC_BRAND.email}`}>{CLINIC_BRAND.email}</a>
               </li>
-              <li className="flex gap-2.5">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--cl-accent)]" aria-hidden />
+              <li>
+                <MapPin className="cl-footer__contact-icon" aria-hidden />
                 <span>{CLINIC_BRAND.address}</span>
               </li>
             </ul>
@@ -110,10 +97,10 @@ export default function ClinicFooter() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="cl-container flex flex-col items-center justify-between gap-2 py-5 text-xs text-slate-500 sm:flex-row">
+      <div className="cl-footer__bar">
+        <div className="cl-container cl-footer__bar-inner">
           <p>© 2026 {CLINIC_BRAND.name}. Fictional showcase built by Bitcraftly.</p>
-          <p className="flex items-center gap-4">
+          <p className="cl-footer__legal">
             <span>Privacy Policy</span>
             <span aria-hidden>·</span>
             <span>Terms &amp; Conditions</span>

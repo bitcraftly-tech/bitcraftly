@@ -11,7 +11,11 @@ import ClinicSectionHeading from './ClinicSectionHeading';
 
 export default function ClinicServices() {
   return (
-    <section id="services" className="cl-bg-tint" aria-labelledby="clinic-services-heading">
+    <section
+      id="services"
+      className="cl-services cl-bg-tint"
+      aria-labelledby="clinic-services-heading"
+    >
       <div className="cl-container cl-section">
         <ClinicSectionHeading
           id="clinic-services-heading"
@@ -19,26 +23,27 @@ export default function ClinicServices() {
           subtitle="Eight departments under one roof, so referrals stay inside your care plan."
         />
 
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="cl-services__grid">
           {CLINIC_SERVICES.map(({ icon: Icon, title, copy }, index) => (
-            <ClinicReveal as="li" key={title} delay={Math.min(index, 4) * 0.06} className="h-full">
+            <ClinicReveal as="li" key={title} delay={Math.min(index, 4) * 0.05} className="h-full">
               <ShowcaseAnchor
                 href="#appointment"
-                className="cl-card cl-card--lift group flex h-full flex-col p-5"
+                className="cl-card cl-card--lift cl-service-card group"
                 aria-label={`${title} — book a consultation`}
               >
-                <span className="flex items-start justify-between gap-3">
-                  <span className="cl-icon-tile">
-                    <Icon className="h-5 w-5" aria-hidden />
+                <span className="cl-service-card__top">
+                  <span className="cl-icon-tile cl-service-card__icon">
+                    <Icon className="h-5 w-5" strokeWidth={1.8} aria-hidden />
                   </span>
-                  <ArrowRight
-                    className="h-4 w-4 shrink-0 translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ color: 'var(--cl-primary)' }}
-                    aria-hidden
-                  />
+                  <span className="cl-service-card__arrow" aria-hidden>
+                    <ArrowRight className="h-4 w-4" strokeWidth={2} />
+                  </span>
                 </span>
-                <span className="cl-h3 mt-4 block">{title}</span>
-                <span className="cl-small mt-1.5 block">{copy}</span>
+
+                <span className="cl-service-card__body">
+                  <span className="cl-service-card__title">{title}</span>
+                  <span className="cl-service-card__copy">{copy}</span>
+                </span>
               </ShowcaseAnchor>
             </ClinicReveal>
           ))}

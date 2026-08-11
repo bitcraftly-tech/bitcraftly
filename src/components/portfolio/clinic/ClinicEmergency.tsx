@@ -12,38 +12,28 @@ import ClinicReveal from './ClinicReveal';
 
 export default function ClinicEmergency() {
   return (
-    <section id="emergency" aria-labelledby="clinic-emergency-heading">
+    <section id="emergency" className="cl-emergency" aria-labelledby="clinic-emergency-heading">
       <div className="cl-container cl-section--tight">
         <ClinicReveal direction="scale">
-          <div
-            className="flex flex-col items-start gap-6 rounded-[1.75rem] px-6 py-7 text-white sm:flex-row sm:items-center sm:justify-between sm:px-9"
-            style={{
-              background:
-                'linear-gradient(120deg, var(--cl-primary-strong) 0%, var(--cl-primary) 45%, var(--cl-accent) 100%)',
-              boxShadow: 'var(--cl-shadow-md)',
-            }}
-          >
-            <div className="flex items-center gap-4">
-              <span
-                className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/18"
-                aria-hidden
-              >
+          <div className="cl-emergency__banner">
+            <div className="cl-emergency__copy">
+              <span className="cl-emergency__icon" aria-hidden>
                 <Ambulance className="h-6 w-6" />
               </span>
               <div>
-                <h2 id="clinic-emergency-heading" className="cl-h3">
+                <h2 id="clinic-emergency-heading" className="cl-emergency__title">
                   Medical Emergency?
                 </h2>
-                <p className="mt-1 text-sm text-white/85">
+                <p className="cl-emergency__desc">
                   Our emergency team is available 24/7 for you.
                 </p>
               </div>
             </div>
 
-            <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+            <div className="cl-emergency__actions">
               <a
                 href={`tel:${CLINIC_BRAND.emergency.replace(/\s/g, '')}`}
-                className="cl-btn cl-btn--light w-full sm:w-auto"
+                className="cl-btn cl-btn--light"
               >
                 <PhoneCall className="h-4 w-4" aria-hidden />
                 Call Now: {CLINIC_BRAND.emergency}
@@ -52,7 +42,7 @@ export default function ClinicEmergency() {
                 href={clinicEmergencyWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cl-btn cl-btn--ghost w-full sm:w-auto"
+                className="cl-btn cl-btn--ghost cl-emergency__whatsapp"
               >
                 <WhatsAppGlyph className="h-4 w-4" />
                 WhatsApp

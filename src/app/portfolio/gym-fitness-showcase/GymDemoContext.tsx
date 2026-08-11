@@ -4,11 +4,11 @@ import { createContext, useCallback, useContext, useMemo, useState, type ReactNo
 
 import { showFeedbackAlert, type FeedbackModalVariant } from '@/lib/sweetAlert';
 
-import type { GymCenter, MembershipPass, WorkoutFormat } from './gym-demo-data';
+import type { GymCenter, GymCity, MembershipPass, WorkoutFormat } from './gym-demo-data';
 
 type GymDemoContextValue = {
-  city: string;
-  setCity: (city: string) => void;
+  city: GymCity;
+  setCity: (city: GymCity) => void;
   trialOpen: boolean;
   setTrialOpen: (open: boolean) => void;
   passModal: MembershipPass | null;
@@ -32,7 +32,7 @@ export function useGymDemo() {
 }
 
 export function GymDemoProvider({ children }: { children: ReactNode }) {
-  const [city, setCity] = useState('Delhi');
+  const [city, setCity] = useState<GymCity>('Delhi');
   const [trialOpen, setTrialOpen] = useState(false);
   const [passModal, setPassModal] = useState<MembershipPass | null>(null);
   const [classModal, setClassModal] = useState<WorkoutFormat | null>(null);

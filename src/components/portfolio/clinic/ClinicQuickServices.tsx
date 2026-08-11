@@ -21,7 +21,7 @@ export default function ClinicQuickServices() {
 
         <ul className="cl-quick-grid">
           {CLINIC_QUICK_SERVICES.map(({ icon: Icon, title, copy, href: to }, index) => (
-            <ClinicReveal as="li" key={title} delay={index * 0.07}>
+            <ClinicReveal as="li" key={title} delay={index * 0.07} className="h-full">
               <ShowcaseAnchor href={to} className="cl-card cl-card--lift cl-quick-card">
                 <span className="cl-icon-tile">
                   <Icon className="h-5 w-5" strokeWidth={1.8} aria-hidden />
@@ -32,7 +32,7 @@ export default function ClinicQuickServices() {
             </ClinicReveal>
           ))}
 
-          <ClinicReveal as="li" delay={CLINIC_QUICK_SERVICES.length * 0.07}>
+          <ClinicReveal as="li" delay={CLINIC_QUICK_SERVICES.length * 0.07} className="h-full">
             <ShowcaseAnchor href={href} className="cl-quick-cta">
               <CtaIcon className="h-5 w-5 shrink-0" strokeWidth={1.8} aria-hidden />
               {label}

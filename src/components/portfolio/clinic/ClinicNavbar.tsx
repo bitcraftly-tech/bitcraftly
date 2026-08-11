@@ -31,39 +31,25 @@ export default function ClinicNavbar() {
   }, [open]);
 
   return (
-    <header
-      className="sticky top-0 z-40 border-b backdrop-blur"
-      style={{
-        borderColor: 'var(--cl-border)',
-        backgroundColor: 'color-mix(in srgb, var(--cl-surface) 88%, transparent)',
-      }}
-    >
-      <div className="cl-container flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
+    <header className="cl-header">
+      <div className="cl-container cl-header__bar">
         <ClinicSectionAnchor
           href="#top"
-          className="flex items-center gap-2.5"
+          className="cl-header__brand"
           aria-label={`${CLINIC_BRAND.name} home`}
         >
-          <ClinicLogoMark className="h-9 w-9 shrink-0" />
-          <span className="leading-tight">
-            <span className="block text-[0.95rem] font-bold tracking-tight">
-              {CLINIC_BRAND.name}
-            </span>
-            <span className="hidden text-[0.625rem] sm:block" style={{ color: 'var(--cl-faint)' }}>
-              {CLINIC_BRAND.tagline}
-            </span>
+          <ClinicLogoMark className="cl-header__mark" />
+          <span className="cl-header__brand-text">
+            <span className="cl-header__brand-name">{CLINIC_BRAND.name}</span>
+            <span className="cl-header__brand-tagline">{CLINIC_BRAND.tagline}</span>
           </span>
         </ClinicSectionAnchor>
 
-        <nav aria-label="Primary" className="hidden xl:block">
-          <ul className="flex items-center gap-0.5">
+        <nav aria-label="Primary" className="cl-header__nav">
+          <ul className="cl-header__links">
             {CLINIC_NAV_LINKS.map((link) => (
               <li key={link.label}>
-                <ClinicSectionAnchor
-                  href={link.href}
-                  className="block rounded-full px-2.5 py-2 text-sm font-medium whitespace-nowrap transition-colors hover:text-[var(--cl-primary)]"
-                  style={{ color: 'var(--cl-muted)' }}
-                >
+                <ClinicSectionAnchor href={link.href} className="cl-header__link">
                   {link.label}
                 </ClinicSectionAnchor>
               </li>
@@ -71,58 +57,48 @@ export default function ClinicNavbar() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
-          <div className="hidden 2xl:block">
-            <a
-              href={`tel:${CLINIC_BRAND.phone.replace(/\s/g, '')}`}
-              className="cl-btn cl-btn--outline cl-btn--sm"
-            >
-              <Phone className="h-4 w-4" aria-hidden />
-              {CLINIC_BRAND.phone}
-            </a>
-          </div>
+        <div className="cl-header__actions">
+          <a
+            href={`tel:${CLINIC_BRAND.phone.replace(/\s/g, '')}`}
+            className="cl-btn cl-btn--outline cl-btn--sm cl-header__phone"
+          >
+            <Phone className="h-4 w-4" aria-hidden />
+            <span>{CLINIC_BRAND.phone}</span>
+          </a>
           <ClinicSectionAnchor href="#appointment" className="cl-btn cl-btn--primary cl-btn--sm">
             <CalendarCheck className="h-4 w-4" aria-hidden />
-            <span className="hidden sm:inline">Book Appointment</span>
-            <span className="sm:hidden">Book</span>
+            <span className="cl-header__book-label">Book Appointment</span>
+            <span className="cl-header__book-short">Book</span>
           </ClinicSectionAnchor>
 
-          <div className="xl:hidden">
-            <button
-              ref={toggleRef}
-              type="button"
-              className="cl-rail-btn"
-              aria-expanded={open}
-              aria-controls="clinic-mobile-nav"
-              aria-label={open ? 'Close menu' : 'Open menu'}
-              onClick={() => setOpen((value) => !value)}
-            >
-              {open ? (
-                <X className="h-5 w-5" aria-hidden />
-              ) : (
-                <Menu className="h-5 w-5" aria-hidden />
-              )}
-            </button>
-          </div>
+          <button
+            ref={toggleRef}
+            type="button"
+            className="cl-header__menu-btn"
+            aria-expanded={open}
+            aria-controls="clinic-mobile-nav"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? (
+              <X className="h-5 w-5" aria-hidden />
+            ) : (
+              <Menu className="h-5 w-5" aria-hidden />
+            )}
+          </button>
         </div>
       </div>
 
       {open ? (
-        <div
-          ref={panelRef}
-          id="clinic-mobile-nav"
-          className="border-t xl:hidden"
-          style={{ borderColor: 'var(--cl-border)', background: 'var(--cl-surface)' }}
-        >
-          <nav aria-label="Mobile" className="cl-container py-3">
-            <ul className="grid gap-1">
+        <div ref={panelRef} id="clinic-mobile-nav" className="cl-header__panel">
+          <nav aria-label="Mobile" className="cl-container cl-header__panel-inner">
+            <ul className="cl-header__panel-links">
               {CLINIC_NAV_LINKS.map((link) => (
                 <li key={link.label}>
                   <ClinicSectionAnchor
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block rounded-xl px-3 py-2.5 text-sm font-medium transition-colors hover:bg-[var(--cl-surface-tint)] hover:text-[var(--cl-primary)]"
-                    style={{ color: 'var(--cl-muted)' }}
+                    className="cl-header__panel-link"
                   >
                     {link.label}
                   </ClinicSectionAnchor>

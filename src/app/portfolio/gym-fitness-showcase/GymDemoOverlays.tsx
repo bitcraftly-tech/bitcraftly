@@ -1,7 +1,7 @@
 'use client';
 
-import { Play, X } from 'lucide-react';
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { Play, X, Zap } from 'lucide-react';
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 
 import { useGymDemo } from './GymDemoContext';
 import { APP_DEMO_REEL } from './gym-demo-data';
@@ -12,37 +12,55 @@ function ModalShell({
   onClose,
   children,
   wide,
+  subtitle,
+  eyebrow,
 }: {
   title: string;
   onClose: () => void;
   children: React.ReactNode;
   wide?: boolean;
+  subtitle?: string;
+  eyebrow?: string;
 }) {
+  const titleId = useId();
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    panelRef.current?.focus();
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = prev;
+    };
+  }, [onClose]);
+
   return (
-    <div
-      className="fixed inset-0 z-[70] flex items-center justify-center p-4"
-      role="dialog"
-      aria-modal="true"
-    >
-      <button
-        type="button"
-        className="absolute inset-0 bg-black/50"
-        onClick={onClose}
-        aria-label="Close"
-      />
+    <div className="gym-modal" role="presentation">
+      <button type="button" className="gym-modal__backdrop" onClick={onClose} aria-label="Close dialog" />
       <div
-        className={`gym-bg-card relative max-h-[90vh] w-full overflow-y-auto rounded-2xl border gym-border p-6 shadow-xl ${wide ? 'max-w-3xl' : 'max-w-md'}`}
+        ref={panelRef}
+        className={`gym-modal__panel${wide ? ' gym-modal__panel--wide' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        tabIndex={-1}
       >
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute right-4 top-4 rounded p-1 hover:bg-[var(--gym-surface)]"
-          aria-label="Close"
-        >
-          <X className="h-5 w-5" />
+        <button type="button" onClick={onClose} className="gym-modal__close" aria-label="Close">
+          <X className="gym-modal__close-icon" aria-hidden />
         </button>
-        <h2 className="pr-8 text-xl font-bold">{title}</h2>
-        <div className="mt-4">{children}</div>
+        <header className="gym-modal__head">
+          {eyebrow ? <p className="gym-modal__eyebrow">{eyebrow}</p> : null}
+          <h2 id={titleId} className="gym-modal__title">
+            {title}
+          </h2>
+          {subtitle ? <p className="gym-modal__subtitle">{subtitle}</p> : null}
+        </header>
+        <div className="gym-modal__body">{children}</div>
       </div>
     </div>
   );
@@ -89,20 +107,17 @@ function GymDemoReelModal({ open, onClose }: { open: boolean; onClose: () => voi
     void startPlayback();
   }, [open, startPlayback]);
 
-  useEffect(() => {
-    if (!open) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [open, onClose]);
-
   if (!open) return null;
 
   return (
-    <ModalShell title="FitRally app · demo reel" onClose={onClose} wide>
-      <div className="relative overflow-hidden rounded-xl bg-black">
+    <ModalShell
+      title="FitRally app · demo reel"
+      eyebrow="Mobile"
+      subtitle="Showcase preview · swap with your app walkthrough on production."
+      onClose={onClose}
+      wide
+    >
+      <div className="gym-modal__media">
         <video
           key="fitrally-demo-reel"
           ref={videoRef}
@@ -112,7 +127,7 @@ function GymDemoReelModal({ open, onClose }: { open: boolean; onClose: () => voi
           playsInline
           autoPlay
           preload="auto"
-          className="aspect-video w-full object-cover"
+          className="gym-modal__video"
           onCanPlay={() => {
             const video = videoRef.current;
             if (video && video.paused) void startPlayback();
@@ -122,19 +137,16 @@ function GymDemoReelModal({ open, onClose }: { open: boolean; onClose: () => voi
           <button
             type="button"
             onClick={() => void startPlayback()}
-            className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/50 text-white"
+            className="gym-modal__play-overlay"
             aria-label="Play demo reel"
           >
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--gym-brand)] shadow-lg">
-              <Play className="h-8 w-8 fill-white pl-1" aria-hidden />
+            <span className="gym-modal__play-btn">
+              <Play className="gym-modal__play-icon" aria-hidden />
             </span>
-            <span className="text-sm font-semibold">Tap to play</span>
+            <span className="gym-modal__play-label">Tap to play</span>
           </button>
         ) : null}
       </div>
-      <p className="gym-text-muted mt-3 text-sm">
-        Showcase preview · swap with your app walkthrough or motion reel on production.
-      </p>
     </ModalShell>
   );
 }
@@ -163,58 +175,89 @@ export function GymDemoOverlays() {
       <GymDemoReelModal open={reelOpen} onClose={() => setReelOpen(false)} />
 
       {trialOpen ? (
-        <ModalShell title="Start your free trial" onClose={() => setTrialOpen(false)}>
-          <p className="gym-text-muted text-sm">
-            7-day rallypass trial · demo only · no payment charged.
-          </p>
-          <label className="mt-4 block text-sm font-medium">
-            Name
-            <input
-              value={trialName}
-              onChange={(e) => setTrialName(e.target.value)}
-              className="gym-border mt-1 w-full rounded-lg border px-3 py-2 text-sm"
-              placeholder="Your name"
-            />
-          </label>
-          <label className="mt-3 block text-sm font-medium">
-            Phone
-            <input
-              value={trialPhone}
-              onChange={(e) => setTrialPhone(e.target.value)}
-              className="gym-border mt-1 w-full rounded-lg border px-3 py-2 text-sm"
-              placeholder="10-digit mobile"
-            />
-          </label>
-          <button
-            type="button"
-            className="gym-btn-primary mt-5 w-full rounded-full py-2.5 text-sm"
-            onClick={() => {
-              setTrialOpen(false);
-              showToast(`Trial activated in ${city} · welcome to FitRally`);
-              setTrialName('');
-              setTrialPhone('');
-            }}
-          >
-            Claim free trial
-          </button>
+        <ModalShell
+          title="Start your free trial"
+          eyebrow="Rallypass"
+          subtitle="7-day trial · demo only · no payment charged"
+          onClose={() => setTrialOpen(false)}
+        >
+          <div className="gym-trial">
+            <div className="gym-trial__badge" aria-hidden>
+              <Zap className="gym-trial__badge-icon" />
+              <span>7 days free in {city}</span>
+            </div>
+
+            <div className="gym-trial__fields">
+              <div className="gym-field-group">
+                <label className="gym-label" htmlFor="gym-trial-name">
+                  Name
+                </label>
+                <input
+                  id="gym-trial-name"
+                  value={trialName}
+                  onChange={(e) => setTrialName(e.target.value)}
+                  className="gym-field"
+                  placeholder="Your name"
+                  autoComplete="name"
+                />
+              </div>
+              <div className="gym-field-group">
+                <label className="gym-label" htmlFor="gym-trial-phone">
+                  Phone
+                </label>
+                <input
+                  id="gym-trial-phone"
+                  value={trialPhone}
+                  onChange={(e) => setTrialPhone(e.target.value)}
+                  className="gym-field"
+                  placeholder="10-digit mobile"
+                  inputMode="tel"
+                  autoComplete="tel"
+                />
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="gym-btn-primary gym-trial__cta"
+              onClick={() => {
+                setTrialOpen(false);
+                showToast(`Trial activated in ${city} · welcome to FitRally`);
+                setTrialName('');
+                setTrialPhone('');
+              }}
+            >
+              Claim free trial
+            </button>
+            <p className="gym-trial__note">Demo form · OTP & billing wire up on production builds.</p>
+          </div>
         </ModalShell>
       ) : null}
 
       {passModal ? (
-        <ModalShell title={passModal.name} onClose={() => setPassModal(null)}>
-          <p className="text-3xl font-bold">
+        <ModalShell
+          title={passModal.name}
+          eyebrow="Membership"
+          subtitle={passModal.highlight}
+          onClose={() => setPassModal(null)}
+        >
+          <p className="gym-modal__price">
             {passModal.price}
-            <span className="gym-text-muted text-base font-normal">{passModal.period}</span>
+            <span className="gym-modal__period">{passModal.period}</span>
           </p>
-          <p className="mt-2 text-sm font-medium gym-brand-text">{passModal.highlight}</p>
-          <ul className="gym-text-muted mt-4 space-y-2 text-sm">
+          <ul className="gym-modal__perks">
             {passModal.perks.map((p) => (
-              <li key={p}>✓ {p}</li>
+              <li key={p} className="gym-modal__perk">
+                <span className="gym-modal__check" aria-hidden>
+                  ✓
+                </span>
+                {p}
+              </li>
             ))}
           </ul>
           <button
             type="button"
-            className="gym-btn-primary mt-6 w-full rounded-full py-2.5 text-sm"
+            className="gym-btn-primary gym-trial__cta"
             onClick={() => {
               setPassModal(null);
               showToast(`${passModal.name} added to cart · demo checkout`);
@@ -226,21 +269,23 @@ export function GymDemoOverlays() {
       ) : null}
 
       {classModal ? (
-        <ModalShell title={`Book ${classModal.name}`} onClose={() => setClassModal(null)}>
+        <ModalShell
+          title={`Book ${classModal.name}`}
+          eyebrow="Group class"
+          subtitle={`${classModal.duration} · ${classModal.calories}`}
+          onClose={() => setClassModal(null)}
+        >
           <GymLazyImage
             src={classModal.image}
             alt={classModal.name}
-            wrapperClassName="aspect-video w-full rounded-xl"
+            wrapperClassName="gym-modal__shot"
             fallbackSeed={classModal.id}
             eager
           />
-          <p className="gym-text-muted mt-3 text-sm">{classModal.tagline}</p>
-          <p className="mt-2 text-sm">
-            {classModal.duration} · {classModal.calories}
-          </p>
+          <p className="gym-modal__copy">{classModal.tagline}</p>
           <button
             type="button"
-            className="gym-btn-primary mt-5 w-full rounded-full py-2.5 text-sm"
+            className="gym-btn-primary gym-trial__cta"
             onClick={() => {
               setClassModal(null);
               showToast(`${classModal.name} class booked · today 7:00 PM · ${city}`);
@@ -252,20 +297,22 @@ export function GymDemoOverlays() {
       ) : null}
 
       {centerModal ? (
-        <ModalShell title={centerModal.name} onClose={() => setCenterModal(null)}>
+        <ModalShell
+          title={centerModal.name}
+          eyebrow="Center tour"
+          subtitle={`${centerModal.area}, ${centerModal.city} · ${centerModal.distance}`}
+          onClose={() => setCenterModal(null)}
+        >
           <GymLazyImage
             src={centerModal.image}
             alt={centerModal.name}
-            wrapperClassName="aspect-video w-full rounded-xl"
+            wrapperClassName="gym-modal__shot"
             fallbackSeed={centerModal.id}
             eager
           />
-          <p className="gym-text-muted mt-3 text-sm">
-            {centerModal.area}, {centerModal.city} · {centerModal.distance}
-          </p>
           <button
             type="button"
-            className="gym-btn-primary mt-5 w-full rounded-full py-2.5 text-sm"
+            className="gym-btn-primary gym-trial__cta"
             onClick={() => {
               setCenterModal(null);
               showToast(`Visit booked at ${centerModal.name}`);

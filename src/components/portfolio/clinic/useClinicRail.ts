@@ -34,8 +34,14 @@ export function useClinicRail<T extends HTMLElement>(): RailApi<T> {
   const scrollByCard = useCallback((direction: 1 | -1) => {
     const rail = railRef.current;
     if (!rail) return;
-    const card = rail.firstElementChild;
-    const step = card ? card.getBoundingClientRect().width + 20 : rail.clientWidth * 0.8;
+    const card = rail.firstElementChild as HTMLElement | null;
+    if (!card) {
+      rail.scrollBy({ left: rail.clientWidth * 0.8 * direction, behavior: 'smooth' });
+      return;
+    }
+    const styles = window.getComputedStyle(rail);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap || '0') || 0;
+    const step = card.getBoundingClientRect().width + gap;
     rail.scrollBy({ left: step * direction, behavior: 'smooth' });
   }, []);
 

@@ -36,6 +36,8 @@ export default function EcommerceNavbar() {
   const deptRef = useRef<HTMLDivElement>(null);
   const scrollIdleRef = useRef<number | null>(null);
 
+  const deliverLabel = pincode.split(' · ')[1] ?? pincode;
+
   useEffect(() => {
     const onDoc = (e: MouseEvent) => {
       if (deptRef.current && !deptRef.current.contains(e.target as Node)) setDeptOpen(false);
@@ -71,44 +73,30 @@ export default function EcommerceNavbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50">
+    <header className="ec-header sticky top-0 z-50">
       <div className="ec-header-bar">
-        <div className={`${EC_CONTAINER} flex flex-wrap items-center gap-3 py-2.5 md:gap-4`}>
+        <div className={`${EC_CONTAINER} ec-header-bar__row`}>
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="ec-logo-btn flex shrink-0 items-center gap-2 px-1 py-1"
+            className="ec-logo-btn"
             aria-label="Ecommerce Store home"
           >
-            <EcommerceLogoMark className="h-8 w-8 shrink-0 md:h-9 md:w-9" />
-            <span className="flex items-baseline gap-1.5 leading-none">
-              <span className="text-base font-bold tracking-tight md:text-lg">Ecommerce</span>
-              <span className="ec-brand-accent text-base font-bold md:text-lg">Store</span>
-            </span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setPincodeOpen(true)}
-            className="ec-header-hit hidden min-w-0 items-start gap-1.5 rounded-md border px-2.5 py-1.5 text-left lg:flex"
-          >
-            <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
-            <span className="min-w-0">
-              <span className="ec-header-muted block text-[11px] leading-4">Deliver to</span>
-              <span className="block max-w-[140px] truncate text-sm font-bold leading-5">
-                {pincode.split(' · ')[1] ?? pincode}
-              </span>
+            <EcommerceLogoMark className="ec-logo-btn__mark" />
+            <span className="ec-logo-btn__text">
+              <span className="ec-logo-btn__name">Ecommerce</span>
+              <span className="ec-brand-accent ec-logo-btn__accent">Store</span>
             </span>
           </button>
 
           <form
-            className="ec-search-shell order-3 basis-full md:order-none md:basis-auto"
+            className="ec-search-shell"
             onSubmit={(e) => {
               e.preventDefault();
               runSearch();
             }}
           >
-            <div ref={deptRef} className="relative hidden shrink-0 sm:block">
+            <div ref={deptRef} className="ec-search-shell__dept-wrap">
               <button
                 type="button"
                 onClick={() => setDeptOpen((o) => !o)}
@@ -117,11 +105,11 @@ export default function EcommerceNavbar() {
                 aria-haspopup="listbox"
               >
                 {department === 'All' ? 'All' : department}
-                <ChevronDown className="h-3.5 w-3.5" aria-hidden />
+                <ChevronDown className="ec-search-shell__dept-icon" aria-hidden />
               </button>
               {deptOpen ? (
                 <ul
-                  className="ec-bg-surface ec-text ec-border absolute left-0 top-full z-50 mt-1 min-w-[180px] rounded-md border py-1 shadow-lg"
+                  className="ec-bg-surface ec-text ec-border ec-search-shell__menu"
                   role="listbox"
                 >
                   {DEPARTMENTS.map((d) => (
@@ -129,8 +117,8 @@ export default function EcommerceNavbar() {
                       <button
                         type="button"
                         onClick={() => pickDepartment(d)}
-                        className={`ec-hover-surface block w-full px-3 py-2.5 text-left text-xs ${
-                          department === d ? 'font-bold ec-link' : ''
+                        className={`ec-hover-surface ec-search-shell__option${
+                          department === d ? ' is-selected' : ''
                         }`}
                       >
                         {d}
@@ -140,80 +128,106 @@ export default function EcommerceNavbar() {
                 </ul>
               ) : null}
             </div>
-            <label className="flex min-w-0 flex-1">
+            <label className="ec-search-shell__field">
               <span className="sr-only">Search Ecommerce Store</span>
               <input
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search Ecommerce Store"
+                placeholder="Search products, brands & more"
                 className="ec-search-shell__input"
               />
             </label>
             <button type="submit" className="ec-search-submit" aria-label="Search">
-              <Search className="h-5 w-5" aria-hidden />
+              <Search className="ec-search-submit__icon" aria-hidden />
             </button>
           </form>
 
-          <div className="ml-auto flex items-center gap-1 sm:gap-1.5">
+          <div className="ec-header-actions">
             <button
               type="button"
               onClick={() => setAccountOpen(true)}
-              className="ec-header-hit flex items-center justify-center rounded-md border px-2 py-1.5 sm:hidden"
+              className="ec-header-action ec-header-action--icon sm:hidden"
               aria-label={signedInAs ? `Account, ${signedInAs}` : 'Sign in'}
             >
-              <UserRound className="h-5 w-5" aria-hidden />
+              <UserRound className="ec-header-action__icon" aria-hidden />
             </button>
             <button
               type="button"
               onClick={() => setAccountOpen(true)}
-              className="ec-header-hit hidden rounded-md border px-2.5 py-1.5 text-left sm:block"
+              className="ec-header-action ec-header-action--account"
             >
-              <span className="ec-header-muted block text-[11px] leading-4">
-                {signedInAs ? `Hello, ${signedInAs.split(' ')[0]}` : 'Hello, sign in'}
-              </span>
-              <span className="flex items-center gap-0.5 text-sm font-bold leading-5">
-                Account &amp; Lists
-                <ChevronDown className="h-3.5 w-3.5" aria-hidden />
+              <UserRound className="ec-header-action__icon" aria-hidden />
+              <span className="ec-header-action__copy">
+                <span className="ec-header-muted">
+                  {signedInAs ? `Hello, ${signedInAs.split(' ')[0]}` : 'Hello, sign in'}
+                </span>
+                <span className="ec-header-action__strong">
+                  Account &amp; Lists
+                  <ChevronDown className="ec-header-action__chevron" aria-hidden />
+                </span>
               </span>
             </button>
             <button
               type="button"
               onClick={() => setOrdersOpen(true)}
-              className="ec-header-hit hidden rounded-md border px-2.5 py-1.5 text-left md:block"
+              className="ec-header-action ec-header-action--orders"
             >
-              <span className="ec-header-muted block text-[11px] leading-4">Returns</span>
-              <span className="text-sm font-bold leading-5">&amp; Orders</span>
+              <span className="ec-header-action__copy">
+                <span className="ec-header-muted">Returns</span>
+                <span className="ec-header-action__strong">&amp; Orders</span>
+              </span>
             </button>
             <button
               type="button"
               onClick={() => setCartOpen(true)}
-              className={`ec-cart-btn ec-header-hit flex items-end gap-1 rounded-md border px-2.5 py-1${cartScrolling ? ' ec-cart-btn--scrolling' : ''}`}
+              className={`ec-cart-btn ec-header-action ec-header-action--cart${
+                cartScrolling ? ' ec-cart-btn--scrolling' : ''
+              }`}
               aria-label={cartCount > 0 ? `Cart, ${cartCount} items` : 'Cart'}
             >
-              <span className="ec-cart-btn__icon relative inline-block">
-                <ShoppingCart className="h-8 w-8" aria-hidden />
+              <span className="ec-cart-btn__icon">
+                <ShoppingCart className="ec-cart-btn__svg" aria-hidden />
                 {cartCount > 0 ? (
-                  <span className="ec-cart-badge absolute -right-1 top-0 rounded-full px-1.5 text-[11px] font-bold">
-                    {cartCount}
+                  <span className="ec-cart-badge">{cartCount}</span>
+                ) : (
+                  <span className="ec-cart-badge ec-cart-badge--empty" aria-hidden>
+                    0
                   </span>
-                ) : null}
+                )}
               </span>
-              <span className="hidden pb-1 text-sm font-bold sm:inline">Cart</span>
+              <span className="ec-header-action__cart-label">Cart</span>
             </button>
           </div>
         </div>
       </div>
 
+      <div className="ec-header-utility">
+        <div className={`${EC_CONTAINER} ec-header-utility__row`}>
+          <button
+            type="button"
+            onClick={() => setPincodeOpen(true)}
+            className="ec-header-deliver"
+          >
+            <MapPin className="ec-header-deliver__icon" aria-hidden />
+            <span className="ec-header-deliver__text">
+              Deliver to <strong>{deliverLabel}</strong>
+              <span className="ec-header-deliver__update"> · Update location</span>
+            </span>
+          </button>
+          <p className="ec-header-utility__perk" aria-hidden>
+            Free shipping over ₹499 · Easy returns
+          </p>
+        </div>
+      </div>
+
       <nav className="ec-header-nav-bar" aria-label="Shop departments">
-        <div
-          className={`${EC_CONTAINER} flex items-center gap-1 overflow-x-auto py-2 scrollbar-none`}
-        >
+        <div className={`${EC_CONTAINER} ec-header-nav-bar__row`}>
           <button
             type="button"
             onClick={() => scrollToSection('search-results')}
-            className="ec-header-hit mr-1 flex shrink-0 items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-sm font-bold"
+            className="ec-header-nav-link ec-header-nav-link--all"
           >
-            <Menu className="h-5 w-5" aria-hidden />
+            <Menu className="ec-header-nav-link__menu" aria-hidden />
             All
           </button>
           {SUB_NAV.map((item) => (
@@ -236,7 +250,7 @@ export default function EcommerceNavbar() {
                   scrollToSection('search-results');
                 }
               }}
-              className="ec-header-hit shrink-0 rounded-md border px-2.5 py-1.5 text-xs font-medium sm:text-sm"
+              className="ec-header-nav-link"
             >
               {item}
             </button>

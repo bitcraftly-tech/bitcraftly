@@ -12,7 +12,7 @@ import ClinicSectionHeading from './ClinicSectionHeading';
 
 export default function ClinicBlog() {
   return (
-    <section id="blog" className="cl-bg-surface" aria-labelledby="clinic-blog-heading">
+    <section id="blog" className="cl-blog cl-bg-surface" aria-labelledby="clinic-blog-heading">
       <div className="cl-container cl-section">
         <ClinicSectionHeading
           id="clinic-blog-heading"
@@ -20,45 +20,32 @@ export default function ClinicBlog() {
           subtitle="Written by our consultants and reviewed before publishing."
         />
 
-        <ul className="mt-10 grid gap-6 md:grid-cols-3">
+        <ul className="cl-blog__grid">
           {CLINIC_POSTS.map((post, index) => (
-            <ClinicReveal as="li" key={post.id} delay={index * 0.08} className="h-full">
-              <article className="cl-card cl-card--lift cl-zoom flex h-full flex-col overflow-hidden">
-                <div className="cl-media relative aspect-[16/10]">
+            <ClinicReveal as="li" key={post.id} delay={index * 0.06} className="h-full">
+              <article className="cl-card cl-card--lift cl-zoom cl-blog-card">
+                <div className="cl-media cl-blog-card__media">
                   <Image
                     src={post.image}
                     alt={post.imageAlt}
                     fill
                     loading="lazy"
-                    sizes="(max-width: 768px) 92vw, 30vw"
+                    sizes="(max-width: 768px) 92vw, 32vw"
                     className="object-cover"
                   />
-                  <span
-                    className="absolute top-3 left-3 rounded-full px-3 py-1 text-[0.6875rem] font-semibold tracking-wide uppercase"
-                    style={{
-                      background: 'var(--cl-surface)',
-                      color: 'var(--cl-primary)',
-                      boxShadow: 'var(--cl-shadow-sm)',
-                    }}
-                  >
-                    {post.category}
-                  </span>
+                  <span className="cl-blog-card__badge">{post.category}</span>
                 </div>
 
-                <div className="flex flex-1 flex-col p-5">
-                  <p
-                    className="flex items-center gap-1.5 text-xs"
-                    style={{ color: 'var(--cl-faint)' }}
-                  >
+                <div className="cl-blog-card__body">
+                  <p className="cl-blog-card__date">
                     <CalendarDays className="h-3.5 w-3.5" aria-hidden />
                     <time dateTime={post.publishedAt}>{post.date}</time>
                   </p>
-                  <h3 className="cl-h3 mt-2">{post.title}</h3>
-                  <p className="cl-small mt-2 flex-1">{post.excerpt}</p>
+                  <h3 className="cl-blog-card__title">{post.title}</h3>
+                  <p className="cl-blog-card__excerpt">{post.excerpt}</p>
                   <ShowcaseAnchor
                     href="#appointment"
-                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold"
-                    style={{ color: 'var(--cl-primary)' }}
+                    className="cl-blog-card__link"
                     aria-label={`Read more: ${post.title}`}
                   >
                     Read More

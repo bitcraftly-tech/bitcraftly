@@ -31,52 +31,64 @@ export default function GymBmiCalculator({ className = '' }: GymBmiCalculatorPro
   }, [heightCm, weightKg]);
 
   return (
-    <div
-      id="bmi"
-      className={`gym-bg-card flex h-full min-h-[340px] scroll-mt-28 flex-col rounded-2xl border gym-border p-6 md:p-8 ${className}`}
-    >
-      <p className="text-xs font-bold uppercase tracking-widest gym-brand-text">Wellness tool</p>
-      <h3 className="mt-2 text-2xl font-bold leading-tight">BMI calculator</h3>
-      <p className="gym-text-muted mt-2 text-xs">Demo widget · not medical advice.</p>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm font-medium">
-          Height (cm)
+    <div id="bmi" className={`gym-bmi-card scroll-mt-28 ${className}`.trim()}>
+      <p className="gym-bmi-card__eyebrow">Wellness tool</p>
+      <h3 className="gym-bmi-card__title">BMI calculator</h3>
+      <p className="gym-bmi-card__note">Demo widget · not medical advice.</p>
+
+      <div className="gym-bmi-card__fields">
+        <div className="gym-field-group">
+          <label className="gym-label" htmlFor="gym-bmi-weight">
+            Weight (kg)
+          </label>
           <input
-            type="number"
-            inputMode="decimal"
-            min={120}
-            max={230}
-            value={heightCm}
-            onChange={(e) => setHeightCm(e.target.value)}
-            className="gym-border mt-1.5 w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:border-[var(--gym-brand)] focus:ring-2 focus:ring-[var(--gym-brand)]/20"
-          />
-        </label>
-        <label className="block text-sm font-medium">
-          Weight (kg)
-          <input
+            id="gym-bmi-weight"
             type="number"
             inputMode="decimal"
             min={35}
             max={250}
             value={weightKg}
             onChange={(e) => setWeightKg(e.target.value)}
-            className="gym-border mt-1.5 w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:border-[var(--gym-brand)] focus:ring-2 focus:ring-[var(--gym-brand)]/20"
+            className="gym-field"
           />
-        </label>
+        </div>
+        <div className="gym-field-group">
+          <label className="gym-label" htmlFor="gym-bmi-height">
+            Height (cm)
+          </label>
+          <input
+            id="gym-bmi-height"
+            type="number"
+            inputMode="decimal"
+            min={120}
+            max={230}
+            value={heightCm}
+            onChange={(e) => setHeightCm(e.target.value)}
+            className="gym-field"
+          />
+        </div>
       </div>
-      <div className="mt-auto flex flex-1 flex-col justify-end pt-6">
-        <div className="flex min-h-[148px] flex-col justify-center rounded-xl bg-[var(--gym-surface)] p-5">
+
+      <div className="gym-bmi-card__result-wrap">
+        <div className="gym-bmi-card__result" aria-live="polite">
           {result ? (
             <>
-              <p className="text-4xl font-extrabold gym-brand-text">{result.bmi}</p>
-              <p className="mt-2 text-sm font-medium">{result.band}</p>
+              <p className="gym-bmi-card__value">{result.bmi}</p>
+              <p className="gym-bmi-card__band">{result.band}</p>
             </>
           ) : (
-            <p className="gym-text-muted text-sm">Enter valid height & weight.</p>
+            <p className="gym-bmi-card__empty">Enter valid height & weight.</p>
           )}
-          <div className="mt-4 h-2 overflow-hidden rounded-full bg-[var(--gym-border)]">
+          <div
+            className="gym-bmi-card__meter"
+            role="meter"
+            aria-valuemin={15}
+            aria-valuemax={40}
+            aria-valuenow={result?.bmi ?? 15}
+            aria-label="BMI range indicator"
+          >
             <div
-              className="h-full rounded-full bg-[var(--gym-brand)] transition-[width] duration-300"
+              className="gym-bmi-card__meter-fill"
               style={{
                 width: `${result ? clamp(((result.bmi - 15) / (40 - 15)) * 100, 5, 100) : 5}%`,
               }}
