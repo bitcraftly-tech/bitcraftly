@@ -58,7 +58,13 @@ export function MarketingFinalCtaBand({
         {reassurance ? <p className="final-cta-reassurance relative z-[1]">{reassurance}</p> : null}
 
         <div className="final-cta-actions">
-          <Link href={primaryCta.href} className={cn('final-cta-button-primary', buttonBase)}>
+          <Link
+            href={primaryCta.href}
+            className={cn('final-cta-button-primary', buttonBase)}
+            {...(primaryCta.href.startsWith('http')
+              ? { target: '_blank', rel: 'noopener noreferrer' }
+              : {})}
+          >
             {primaryCta.label}
             <Icon
               name={primaryCta.icon ?? 'arrow-up-right'}

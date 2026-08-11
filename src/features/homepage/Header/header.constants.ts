@@ -43,8 +43,8 @@ export const HEADER_NAV_LINKS: readonly SiteNavLink[] = [
   }),
   createSimpleNavLink({
     label: 'AI',
-    href: ROUTES.assistant,
-    description: 'Intelligent Business Automation',
+    href: ROUTES.aiStudio,
+    description: 'AI Studio and intelligent automation',
   }),
   createDropdownNav({
     label: 'Work',

@@ -3,6 +3,7 @@
 import { ClearHashOnPageNavigate } from '@/components/patterns/clear-hash-on-page-navigate';
 import { DeferredNewsletter } from '@/components/patterns/deferred-newsletter';
 import { MarketingClientChrome } from '@/components/patterns/marketing-client-chrome';
+import { StudioLaunchToast } from '@/components/patterns/studio-launch-toast';
 import { MarketingDeferredCss } from '@/lib/layout/MarketingDeferredCss';
 
 /**
@@ -15,6 +16,7 @@ export function MarketingLayoutClientHead() {
     <>
       <MarketingDeferredCss />
       <ClearHashOnPageNavigate />
+      <StudioLaunchToast />
     </>
   );
 }
@@ -24,7 +26,7 @@ export function MarketingLayoutClientMid() {
   return <DeferredNewsletter />;
 }
 
-/** Post-footer widgets — Ask AI tab and lead funnel (idle-deferred internally). */
+/** Post-footer widgets — lead funnel (idle-deferred). */
 export function MarketingLayoutClientTail() {
   return <MarketingClientChrome />;
 }

@@ -44,6 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/resources/documentation',
     '/events',
     '/press',
+    '/ai-studio',
   ];
 
   const industryEntries: MetadataRoute.Sitemap = INDUSTRIES_CATALOG.map((industry) => ({

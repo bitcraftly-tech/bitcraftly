@@ -69,7 +69,8 @@ export const FOOTER_NAV_COLUMNS: readonly FooterNavColumn[] = [
     title: 'Explore',
     links: [
       { label: 'Solutions', href: ROUTES.solutions },
-      { label: 'AI', href: ROUTES.assistant },
+      { label: 'AI Studio', href: ROUTES.aiStudio },
+      { label: 'AI Assistant', href: ROUTES.assistant },
       { label: 'Work', href: ROUTES.work },
       { label: 'Pricing', href: ROUTES.pricing },
     ],

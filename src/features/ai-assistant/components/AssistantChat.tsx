@@ -18,8 +18,6 @@ export function AssistantChat({ providerId, className }: AssistantChatProps) {
   const {
     messages,
     isStreaming,
-    providerLabel,
-    providerConfigured,
     error,
     sendMessage,
     stopStreaming,
@@ -35,26 +33,28 @@ export function AssistantChat({ providerId, className }: AssistantChatProps) {
         <div className="ai-assistant__identity">
           <span className="ai-assistant__avatar" aria-hidden="true">
             <Icon name="bot" size="md" />
+            <span className="ai-assistant__status-dot" />
           </span>
           <div>
-            <h1 id="ai-assistant-heading" className="ai-assistant__title">
-              Bitcraftly AI Assistant
-            </h1>
+            <p className="ai-assistant__title">Bitcraftly AI</p>
             <p className="ai-assistant__subtitle">
-              Provider: {providerLabel}
-              {providerConfigured ? ' · Ready' : ' · Adapter pending'}
+              <span>Demo preview</span>
+              <span aria-hidden="true">·</span>
+              <span>Sample answers for common questions</span>
             </p>
           </div>
         </div>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={clearChat}
-          aria-label="Clear conversation"
-        >
-          Clear
-        </Button>
+        <div className="ai-assistant__header-actions">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={clearChat}
+            aria-label="Clear conversation"
+          >
+            Clear
+          </Button>
+        </div>
       </header>
 
       <ChatMessageList messages={messages} isStreaming={isStreaming} />

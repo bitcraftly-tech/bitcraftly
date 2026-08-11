@@ -2,7 +2,6 @@
 
 import { useId, useState, type FormEvent, type KeyboardEvent } from 'react';
 import { Icon } from '@/components/ui/icon';
-import { Button } from '@/components/ui/button';
 
 interface ChatComposerProps {
   onSubmit: (value: string) => void;
@@ -20,6 +19,7 @@ export function ChatComposer({
   const inputId = useId();
   const helpId = useId();
   const [value, setValue] = useState('');
+  const canSend = value.trim().length > 0 && !isStreaming && !disabled;
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -48,45 +48,38 @@ export function ChatComposer({
       <label htmlFor={inputId} className="sr-only">
         Message Bitcraftly AI
       </label>
-      <textarea
-        id={inputId}
-        name="message"
-        rows={2}
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
-        onKeyDown={handleKeyDown}
-        disabled={disabled}
-        aria-describedby={helpId}
-        placeholder="Ask about pricing, services, or AI assistants…"
-        className="ai-assistant__input"
-      />
-      <p id={helpId} className="ai-assistant__composer-help">
-        Enter to send · Shift+Enter for a new line
-      </p>
-      <div className="ai-assistant__composer-actions">
+      <div className="ai-assistant__composer-shell">
+        <textarea
+          id={inputId}
+          name="message"
+          rows={1}
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          onKeyDown={handleKeyDown}
+          disabled={disabled}
+          aria-describedby={helpId}
+          placeholder="Ask about pricing, services, or AI assistants…"
+          className="ai-assistant__input"
+        />
         {isStreaming ? (
-          <Button
-            type="button"
-            variant="outline"
-            size="md"
-            onClick={onStop}
-            aria-label="Stop generating reply"
-          >
+          <button type="button" className="ai-assistant__stop" onClick={onStop}>
             Stop
-          </Button>
+          </button>
         ) : (
-          <Button
+          <button
             type="submit"
-            variant="primary"
-            size="md"
-            disabled={disabled || value.trim().length === 0}
+            className="ai-assistant__send"
+            disabled={!canSend}
             aria-label="Send message"
-            iconRight={<Icon name="arrow-right" size="sm" aria-hidden />}
           >
-            Send
-          </Button>
+            <Icon name="arrow-up-right" size="sm" aria-hidden />
+          </button>
         )}
       </div>
+      <p id={helpId} className="ai-assistant__composer-help">
+        <span>Enter to send · Shift+Enter for a new line</span>
+        <span className="ai-assistant__powered">Powered by Bitcraftly AI</span>
+      </p>
     </form>
   );
 }

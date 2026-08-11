@@ -241,7 +241,16 @@ export async function MarketingIllustratedHero({
               'sm:flex-row sm:flex-wrap sm:items-center',
             )}
           >
-            <Link href={primaryCta.href} className="hero-cta hero-cta-primary">
+            <Link
+              href={primaryCta.href}
+              className="hero-cta hero-cta-primary"
+              {...(primaryCta.href.startsWith('http')
+                ? {
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                  }
+                : {})}
+            >
               <span>{primaryCta.label}</span>
               <span className="hero-cta-arrow" aria-hidden>
                 <Icon name="arrow-up-right" size="sm" className="h-[14px] w-[14px]" />

@@ -114,6 +114,7 @@ export const ROUTES = {
   about: '/about',
   contact: '/contact',
   assistant: '/assistant',
+  aiStudio: '/ai-studio',
   login: '/login',
   admin: '/admin',
 } as const;

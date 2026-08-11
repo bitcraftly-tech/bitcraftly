@@ -1,15 +1,49 @@
 import type { AiProviderId, SuggestedQuestion } from './types';
+import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
 
-/** Active provider for the assistant UI until env-backed selection is added. */
-export const DEFAULT_AI_PROVIDER_ID: AiProviderId = 'mock';
+/** Active provider — OpenAI via `/api/assistant/chat` (demo fallback if no key). */
+export const DEFAULT_AI_PROVIDER_ID: AiProviderId = 'openai';
 
 export const ASSISTANT_META = {
-  title: 'Bitcraftly AI Assistant',
+  title: 'AI Assistant',
   description:
-    'Ask Bitcraftly AI about services, pricing, AI solutions, and next steps — streaming chat UI with multi-provider architecture.',
+    'Ask Bitcraftly AI about Industry Systems, pricing, services, and how to get started — then book a strategy call when you are ready.',
   path: '/assistant',
   name: 'Bitcraftly AI',
-  version: 'UI Preview',
+  version: 'Demo',
+} as const;
+
+export const ASSISTANT_HERO = {
+  eyebrow: 'AI Assistant',
+  title: 'Answers for your next Industry System',
+  titleHighlight: 'Industry System',
+  description:
+    'Ask about pricing, services, AI workflows, and go-live paths. This demo helps you frame the right questions before a strategy call.',
+  supporting: 'Clear answers · Written next steps · Founder-led follow-up',
+  primaryCta: {
+    label: 'Start chatting',
+    href: '#assistant-chat',
+  },
+  secondaryCta: {
+    label: NAV_ACTIONS.bookCall.label,
+    href: `${NAV_ACTIONS.bookCall.href}?source=assistant`,
+  },
+  trustItems: ['Pricing clarity', 'Service fit', 'Launch path'],
+} as const;
+
+export const ASSISTANT_CTA = {
+  heading: 'Ready for a scoped plan?',
+  description:
+    'When the demo answers enough to move forward, book a strategy call — we map your Industry System with written next steps.',
+  primaryCta: {
+    label: NAV_ACTIONS.bookCall.label,
+    href: `${NAV_ACTIONS.bookCall.href}?source=assistant-cta`,
+  },
+  tertiaryCta: {
+    label: 'View pricing',
+    href: ROUTES.pricing,
+  },
+  trust: ['Response within 24 hours', 'No obligation', 'Clear scope'],
 } as const;
 
 export const SUGGESTED_QUESTIONS: readonly SuggestedQuestion[] = [
@@ -36,9 +70,7 @@ export const SUGGESTED_QUESTIONS: readonly SuggestedQuestion[] = [
 ] as const;
 
 export const WELCOME_MESSAGE = [
-  "Hi — I'm **Bitcraftly AI**.",
+  "Hello! 👋 I'm **Bitcraftly AI**.",
   '',
-  'Ask about services, pricing, AI assistants, or how we deliver custom software.',
-  '',
-  '_Streaming UI is ready. OpenAI, Gemini, and Claude adapters are scaffolded — APIs not connected yet._',
+  'Pick a suggested question below, or type your own — pricing, services, AI workflows, or how we launch.',
 ].join('\n');
