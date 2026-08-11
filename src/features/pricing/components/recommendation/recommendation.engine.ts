@@ -50,7 +50,7 @@ const INDUSTRY_RULES: readonly IndustryRule[] = [
     category: 'E-commerce',
     pattern:
       /e-?commerce|ecommerce|grocery|shop|store|retail|marketplace|cart|checkout|inventory|delivery/,
-    defaultAddOns: ['Inventory', 'Payments', 'Admin Panel', 'Delivery'],
+    defaultAddOns: ['Inventory', 'Payment Gateway (Razorpay)', 'Admin Panel', 'Delivery'],
   },
   {
     category: 'Education',
@@ -162,12 +162,16 @@ export function buildProjectRecommendation(prompt: string, priorContext = ''): P
       projectType,
       businessCategory: 'E-commerce',
       packageName,
-      packageSummary: 'Catalog-ready storefront with payments, admin, and growth-ready UX.',
+      packageSummary:
+        'Catalog-ready storefront with Razorpay payment gateway, admin, and growth-ready UX.',
       timeline: wantsFaster ? '4–5 weeks' : '4–6 weeks',
       minLabel: '₹60,000',
       maxLabel: '₹1,00,000',
-      techStack: ['Next.js', 'React', 'Node.js', 'PostgreSQL', 'Tailwind'],
-      addOns: mergeAddOns(industryAddOns('E-commerce'), wantsAi ? ['AI Chatbot'] : []),
+      techStack: ['Next.js', 'React', 'Node.js', 'PostgreSQL', 'Razorpay', 'Tailwind'],
+      addOns: mergeAddOns(
+        ['Payment Gateway (Razorpay)', ...industryAddOns('E-commerce')],
+        wantsAi ? ['AI Chatbot'] : [],
+      ),
       whyRecommendation: whyCopy(packageName, 'E-commerce', projectType),
       reply: 'Here’s a personalized recommendation based on your brief.',
     };

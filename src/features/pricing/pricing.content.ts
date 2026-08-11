@@ -147,7 +147,8 @@ export const PRICING_PACKAGES: Record<PricingPackageTabId, readonly PricingPacka
         'Up to 20 Pages',
         'Custom UI/UX',
         'CMS + Blog',
-        'Advanced Animations',
+        'Payment Gateway (Razorpay)',
+        'Cart + Checkout',
         'Analytics',
         'Performance Optimization',
         '60 Days Support',
@@ -285,7 +286,7 @@ export const PRICING_ADDONS: readonly {
   { id: 'auth', label: 'Authentication', priceLabel: '₹10,000', icon: 'shield' },
   { id: 'booking', label: 'Booking System', priceLabel: '₹15,000', icon: 'calendar' },
   { id: 'seo', label: 'Technical SEO', priceLabel: '₹8,000', icon: 'search' },
-  { id: 'payments', label: 'Payment Gateway', priceLabel: '₹20,000', icon: 'zap' },
+  { id: 'payments', label: 'Payment Gateway (Razorpay)', priceLabel: '₹22,000', icon: 'zap' },
   { id: 'ai-chat', label: 'AI Chatbot', priceLabel: '₹35,000', icon: 'sparkles' },
   { id: 'maintenance', label: 'Annual Maintenance', priceLabel: '₹12,000/year', icon: 'headset' },
 ] as const;

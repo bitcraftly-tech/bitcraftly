@@ -22,7 +22,7 @@ export default function ClinicBlog() {
 
         <ul className="mt-10 grid gap-6 md:grid-cols-3">
           {CLINIC_POSTS.map((post, index) => (
-            <ClinicReveal as="li" key={post.id} delay={index * 0.08}>
+            <ClinicReveal as="li" key={post.id} delay={index * 0.08} className="h-full">
               <article className="cl-card cl-card--lift cl-zoom flex h-full flex-col overflow-hidden">
                 <div className="cl-media relative aspect-[16/10]">
                   <Image

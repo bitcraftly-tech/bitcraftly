@@ -26,7 +26,7 @@ export const WEBSITE_TYPE_OPTIONS: readonly PricingOption<WebsiteType>[] = [
   {
     id: 'ecommerce',
     label: 'Ecommerce store',
-    description: 'Catalog, cart, and checkout experience',
+    description: 'Catalog, cart, checkout + Razorpay payment gateway',
   },
   {
     id: 'web-app',
@@ -60,8 +60,8 @@ export const FEATURE_OPTIONS: readonly (PricingOption<FeatureId> & {
   { id: 'auth', label: 'Authentication', description: 'Sign-in and protected areas', price: 18000 },
   {
     id: 'payments',
-    label: 'Payments',
-    description: 'Checkout or billing integrations',
+    label: 'Payment Gateway (Razorpay)',
+    description: 'UPI, cards, netbanking — checkout integration',
     price: 22000,
   },
   {

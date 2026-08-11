@@ -33,8 +33,9 @@ export default function ClinicTestimonials() {
             <ClinicReveal
               as="li"
               key={item.id}
+              rail
               delay={Math.min(index, 3) * 0.08}
-              className="w-[min(21rem,82vw)]"
+              className="w-[min(21rem,82vw)] shrink-0"
             >
               <figure className="cl-card cl-card--lift flex h-full flex-col p-6">
                 <Quote

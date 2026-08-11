@@ -21,7 +21,7 @@ export default function ClinicServices() {
 
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {CLINIC_SERVICES.map(({ icon: Icon, title, copy }, index) => (
-            <ClinicReveal as="li" key={title} delay={Math.min(index, 4) * 0.06}>
+            <ClinicReveal as="li" key={title} delay={Math.min(index, 4) * 0.06} className="h-full">
               <ShowcaseAnchor
                 href="#appointment"
                 className="cl-card cl-card--lift group flex h-full flex-col p-5"

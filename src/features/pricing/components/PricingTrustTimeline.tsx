@@ -7,7 +7,6 @@ export function PricingTrustTimeline() {
       id="pricing-trust-timeline"
       spacing="lg"
       aria-labelledby="pricing-trust-timeline-heading"
-      className="pp-section--muted"
     >
       <div className="pp-section-head">
         <p className="pp-section-eyebrow">{PRICING_TRUST_TIMELINE_META.eyebrow}</p>

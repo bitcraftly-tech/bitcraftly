@@ -104,17 +104,22 @@ export function PricingAiEstimator({ compact = false, className }: PricingAiEsti
   return (
     <div
       id="pricing-estimator"
-      className={cn('pp-estimator', className)}
+      className={cn('pp-estimator', compact && 'pp-estimator--compact', className)}
       aria-label={ESTIMATOR_COPY.title}
     >
+      <div className="pp-estimator__shine" aria-hidden="true" />
+
       <div className="pp-estimator__head">
         <div className="pp-estimator__title-wrap">
           <span className="pp-estimator__title-icon" aria-hidden>
-            <Icon name="sparkles" size="sm" className="h-[14px] w-[14px]" />
+            <Icon name="sparkles" size="sm" className="h-[15px] w-[15px]" />
           </span>
           <p className="pp-estimator__title">{ESTIMATOR_COPY.title}</p>
         </div>
-        <span className="pp-estimator__live">{ESTIMATOR_COPY.liveLabel}</span>
+        <span className="pp-estimator__live">
+          <span className="pp-estimator__live-dot" aria-hidden="true" />
+          {ESTIMATOR_COPY.liveLabel}
+        </span>
       </div>
 
       <div className="pp-estimator__body">

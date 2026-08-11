@@ -8,7 +8,6 @@ export function PricingWhy() {
       id="pricing-why"
       spacing="lg"
       aria-labelledby="pricing-why-heading"
-      className="pp-section--muted"
     >
       <div className="pp-section-head">
         <p className="pp-section-eyebrow">{PRICING_WHY_META.eyebrow}</p>

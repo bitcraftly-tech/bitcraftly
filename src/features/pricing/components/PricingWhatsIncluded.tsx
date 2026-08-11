@@ -8,7 +8,6 @@ export function PricingWhatsIncluded() {
       id="pricing-included"
       spacing="lg"
       aria-labelledby="pricing-included-heading"
-      className="pp-section--muted"
     >
       <div className="pp-section-head">
         <p className="pp-section-eyebrow">{PRICING_INCLUDED_META.eyebrow}</p>

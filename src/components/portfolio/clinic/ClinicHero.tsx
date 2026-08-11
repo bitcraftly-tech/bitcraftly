@@ -74,11 +74,7 @@ export default function ClinicHero() {
           </ul>
         </div>
 
-        <ClinicReveal
-          delay={0.12}
-          direction="scale"
-          className="cl-hero__figure order-first lg:order-none"
-        >
+        <div className="cl-hero__figure order-first lg:order-none">
           <span className="cl-hero__glow" aria-hidden />
           <Image
             src={CLINIC_HERO.image}
@@ -87,9 +83,10 @@ export default function ClinicHero() {
             priority
             fetchPriority="high"
             sizes="(max-width: 640px) 70vw, (max-width: 1024px) 46vw, 34vw"
-            className="select-none"
+            className="select-none object-contain object-bottom"
+            style={{ objectFit: 'contain', objectPosition: 'bottom center' }}
           />
-        </ClinicReveal>
+        </div>
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Icon } from '@/components/ui/icon';
@@ -20,6 +20,11 @@ import {
   pricingCalculatorSchema,
   type PricingCalculatorFormValues,
 } from './pricing-calculator.schema';
+import {
+  ECOMMERCE_QUOTE_PRESET,
+  ECOMMERCE_REQUIRED_FEATURES,
+  formatFeatureWiseQuotation,
+} from './pricing-quotation';
 import './pricing-calculator.css';
 
 const DEFAULT_VALUES: PricingCalculatorFormValues = {
@@ -70,11 +75,14 @@ export function PricingCalculator({
   className,
   headingId = 'pricing-calculator-heading',
 }: PricingCalculatorProps) {
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle');
+
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
     setValue,
+    reset,
   } = useForm<PricingCalculatorFormValues>({
     resolver: zodResolver(pricingCalculatorSchema),
     defaultValues: DEFAULT_VALUES,
@@ -84,6 +92,32 @@ export function PricingCalculator({
   const values = useWatch({ control });
   const estimate = useMemo(() => calculatePricingEstimate(values), [values]);
 
+  // Ecommerce store builds always include Razorpay payment gateway.
+  useEffect(() => {
+    if (values.websiteType !== 'ecommerce') {
+      return;
+    }
+
+    const current = values.features ?? [];
+    const missing = ECOMMERCE_REQUIRED_FEATURES.filter((id) => !current.includes(id));
+    if (missing.length === 0) {
+      return;
+    }
+
+    setValue('features', [...current, ...missing], { shouldValidate: true });
+  }, [values.websiteType, values.features, setValue]);
+
+  const quotationText = useMemo(
+    () =>
+      formatFeatureWiseQuotation({
+        values,
+        estimate,
+        siteOrigin:
+          typeof window !== 'undefined' ? window.location.origin : 'https://bitcraftly.com',
+      }),
+    [values, estimate],
+  );
+
   const budgetMessage =
     estimate.budgetAlignment === 'above'
       ? 'Estimate is above your selected budget — we can phase delivery.'
@@ -92,6 +126,26 @@ export function PricingCalculator({
         : estimate.budgetAlignment === 'within'
           ? 'Estimate aligns with your selected budget band.'
           : 'Share a budget preference for a tighter recommendation.';
+
+  function applyEcommercePreset() {
+    reset(ECOMMERCE_QUOTE_PRESET);
+    setCopyState('idle');
+  }
+
+  async function copyQuotation() {
+    if (!estimate.isReady) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(quotationText);
+      setCopyState('copied');
+      window.setTimeout(() => setCopyState('idle'), 2500);
+    } catch {
+      setCopyState('error');
+      window.setTimeout(() => setCopyState('idle'), 2500);
+    }
+  }
 
   function onSubmit() {
     const href = new URL(NAV_ACTIONS.freeConsultation.href, 'https://bitcraftly.local');
@@ -113,9 +167,18 @@ export function PricingCalculator({
           Build a transparent project estimate
         </h2>
         <p className="pricing-calc__description">
-          Choose website type, pages, features, timeline, and budget. Get a live cost range and
-          recommended package — written quote before any payment.
+          Choose website type, pages, features, timeline, and budget. Get a live feature-wise cost
+          breakdown — copy a client-ready quotation in one click.
         </p>
+        <div className="pricing-calc__presets">
+          <button type="button" className="pricing-calc__preset" onClick={applyEcommercePreset}>
+            E-commerce quote preset
+            <Icon name="arrow-right" size="sm" aria-hidden />
+          </button>
+          <p className="pricing-calc__preset-hint">
+            Loads store + Razorpay gateway + admin + SEO + analytics (typical client ask).
+          </p>
+        </div>
       </div>
 
       <form
@@ -184,7 +247,8 @@ export function PricingCalculator({
           <fieldset className="pricing-calc__fieldset">
             <legend className="pricing-calc__legend">Features</legend>
             <p className="pricing-calc__hint" id="pricing-features-hint">
-              Optional add-ons. Select all that apply.
+              Feature-wise add-ons with prices. For ecommerce, Payment Gateway (Razorpay) stays
+              selected.
             </p>
             <Controller
               name="features"
@@ -197,14 +261,26 @@ export function PricingCalculator({
                 >
                   {FEATURE_OPTIONS.map((option) => {
                     const selected = field.value.includes(option.id);
+                    const isEcommerceRequired =
+                      values.websiteType === 'ecommerce' &&
+                      ECOMMERCE_REQUIRED_FEATURES.includes(
+                        option.id as (typeof ECOMMERCE_REQUIRED_FEATURES)[number],
+                      );
                     return (
                       <OptionButton
                         key={option.id}
                         type="checkbox"
                         selected={selected}
-                        label={option.label}
-                        description={`${option.description} · from ${formatInr(option.price)}`}
+                        label={`${option.label} · ${formatInr(option.price)}`}
+                        description={
+                          isEcommerceRequired
+                            ? `${option.description} · Required for ecommerce`
+                            : option.description
+                        }
                         onSelect={() => {
+                          if (isEcommerceRequired && selected) {
+                            return;
+                          }
                           const next = selected
                             ? field.value.filter((id) => id !== option.id)
                             : [...field.value, option.id];
@@ -331,6 +407,25 @@ export function PricingCalculator({
             ) : null}
 
             <div className="pricing-calc__actions">
+              <button
+                type="button"
+                className="pricing-calc__copy"
+                disabled={!estimate.isReady}
+                onClick={() => {
+                  void copyQuotation();
+                }}
+                aria-describedby="pricing-copy-status"
+              >
+                {copyState === 'copied'
+                  ? 'Copied — paste to WhatsApp / email'
+                  : 'Copy feature-wise quotation'}
+                <Icon name={copyState === 'copied' ? 'check' : 'arrow-up-right'} size="sm" aria-hidden />
+              </button>
+              <p id="pricing-copy-status" className="pricing-calc__copy-status" role="status">
+                {copyState === 'error'
+                  ? 'Copy failed — try again or copy the breakdown manually.'
+                  : 'For you: copy and send to the client as a feature-wise price list.'}
+              </p>
               <button
                 type="submit"
                 className="pricing-calc__primary"

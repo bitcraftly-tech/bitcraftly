@@ -16,7 +16,7 @@ export function PricingAddons() {
       id="pricing-addons"
       spacing="lg"
       aria-labelledby="pricing-addons-heading"
-      className="pp-section--muted"
+      className="pp-section--soft"
     >
       <div className="pp-section-head">
         <p className="pp-section-eyebrow">{PRICING_ADDONS_META.eyebrow}</p>

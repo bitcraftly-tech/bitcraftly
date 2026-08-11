@@ -4,7 +4,12 @@ import { PRICING_PROCESS, PRICING_PROCESS_META } from '../pricing.content';
 
 export function PricingProcess() {
   return (
-    <Section id="pricing-process" spacing="lg" aria-labelledby="pricing-process-heading">
+    <Section
+      id="pricing-process"
+      spacing="lg"
+      aria-labelledby="pricing-process-heading"
+      className="pp-section--soft"
+    >
       <div className="pp-section-head">
         <p className="pp-section-eyebrow">{PRICING_PROCESS_META.eyebrow}</p>
         <h2 id="pricing-process-heading" className="pp-section-title">

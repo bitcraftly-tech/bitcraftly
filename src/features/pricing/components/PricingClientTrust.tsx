@@ -8,6 +8,7 @@ export function PricingClientTrust() {
       id="pricing-client-trust"
       spacing="lg"
       aria-labelledby="pricing-client-trust-heading"
+      className="pp-section--soft"
     >
       <div className="pp-section-head">
         <p className="pp-section-eyebrow">{PRICING_CLIENT_TRUST_META.eyebrow}</p>

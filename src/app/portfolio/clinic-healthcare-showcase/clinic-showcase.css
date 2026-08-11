@@ -377,7 +377,9 @@
 .cl-hero {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  /* Clip only sideways so the cut-out doctor never loses her head. */
+  overflow-x: clip;
+  overflow-y: visible;
   background: rgb(var(--cl-hero-wash));
 }
 
@@ -598,7 +600,9 @@
   position: relative;
   align-self: end;
   width: 100%;
-  height: clamp(17rem, 40vw, 29rem);
+  /* Tall enough for the 595×1007 cut-out at contain + bottom. */
+  height: clamp(20rem, 52vw, 34rem);
+  overflow: visible;
 }
 
 @media (min-width: 1024px) {
@@ -606,13 +610,13 @@
   .cl-hero__figure {
     align-self: stretch;
     height: auto;
-    min-height: 29rem;
+    min-height: 34rem;
   }
 }
 
 .cl-hero__figure img {
-  object-fit: contain;
-  object-position: bottom center;
+  object-fit: contain !important;
+  object-position: bottom center !important;
 }
 
 .cl-hero__glow {
@@ -716,6 +720,7 @@
 .cl-rail > * {
   scroll-snap-align: start;
   flex: 0 0 auto;
+  min-width: 0;
 }
 
 .cl-rail-btn {

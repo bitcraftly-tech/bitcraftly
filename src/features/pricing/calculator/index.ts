@@ -6,3 +6,8 @@ export {
   pricingCalculatorSchema,
   type PricingCalculatorFormValues,
 } from './pricing-calculator.schema';
+export {
+  ECOMMERCE_QUOTE_PRESET,
+  ECOMMERCE_REQUIRED_FEATURES,
+  formatFeatureWiseQuotation,
+} from './pricing-quotation';

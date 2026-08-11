@@ -29,8 +29,9 @@ export default function ClinicDoctors() {
             <ClinicReveal
               as="li"
               key={doctor.id}
+              rail
               delay={Math.min(index, 3) * 0.08}
-              className="w-[min(16rem,78vw)] sm:w-[17rem]"
+              className="w-[min(16rem,78vw)] shrink-0 sm:w-[17rem]"
             >
               <article className="cl-card cl-card--lift cl-zoom h-full overflow-hidden">
                 <div className="cl-media relative aspect-[4/3]">
@@ -38,7 +39,7 @@ export default function ClinicDoctors() {
                     src={doctor.image}
                     alt={doctor.imageAlt}
                     fill
-                    loading="lazy"
+                    loading={index < 2 ? 'eager' : 'lazy'}
                     sizes="(max-width: 640px) 70vw, 17rem"
                     className="object-cover object-top"
                   />

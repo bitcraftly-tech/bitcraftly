@@ -23,7 +23,7 @@ import {
 
 /** Unsplash delivery URL — sized and cropped at the CDN so Next/Image gets a tight source. */
 export function clinicImage(id: string, w: number, h: number) {
-  return `https://images.unsplash.com/${id}?auto=format&fit=crop&crop=faces,entropy&w=${w}&h=${h}&q=80`;
+  return `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&h=${h}&q=80`;
 }
 
 export const CLINIC_BRAND = {
@@ -138,7 +138,7 @@ export const CLINIC_DOCTORS: readonly ClinicDoctor[] = [
     experience: '15+ years experience',
     rating: 4.9,
     reviews: 412,
-    image: clinicImage('photo-1559839734-2b71ea197ec2', 640, 720),
+    image: '/clinic/doctors/ananya-mehta.webp',
     imageAlt: 'Dr. Ananya Mehta, general medicine consultant',
   },
   {
@@ -148,7 +148,7 @@ export const CLINIC_DOCTORS: readonly ClinicDoctor[] = [
     experience: '18+ years experience',
     rating: 4.8,
     reviews: 356,
-    image: clinicImage('photo-1612531386530-97286d97c2d2', 640, 720),
+    image: '/clinic/doctors/rahul-kapadia.webp',
     imageAlt: 'Dr. Rahul Kapadia, senior cardiologist',
   },
   {
@@ -158,7 +158,7 @@ export const CLINIC_DOCTORS: readonly ClinicDoctor[] = [
     experience: '12+ years experience',
     rating: 4.9,
     reviews: 508,
-    image: clinicImage('photo-1643297654416-05795d62e39c', 640, 720),
+    image: '/clinic/doctors/nikita-saraf.webp',
     imageAlt: 'Dr. Nikita Saraf, gynaecologist and obstetrician',
   },
   {
@@ -168,7 +168,7 @@ export const CLINIC_DOCTORS: readonly ClinicDoctor[] = [
     experience: '20+ years experience',
     rating: 4.7,
     reviews: 289,
-    image: clinicImage('photo-1622253692010-333f2da6031d', 640, 720),
+    image: '/clinic/doctors/sunil-fernandes.webp',
     imageAlt: 'Dr. Sunil Fernandes, orthopaedic surgeon',
   },
   {
@@ -178,7 +178,7 @@ export const CLINIC_DOCTORS: readonly ClinicDoctor[] = [
     experience: '14+ years experience',
     rating: 4.8,
     reviews: 231,
-    image: clinicImage('photo-1612349317150-e413f6a5b16d', 640, 720),
+    image: '/clinic/doctors/imran-qureshi.webp',
     imageAlt: 'Dr. Imran Qureshi, ENT surgeon',
   },
   {
@@ -188,7 +188,7 @@ export const CLINIC_DOCTORS: readonly ClinicDoctor[] = [
     experience: '11+ years experience',
     rating: 4.9,
     reviews: 476,
-    image: clinicImage('photo-1651008376811-b90baee60c1f', 640, 720),
+    image: '/clinic/doctors/meera-iyer.webp',
     imageAlt: 'Dr. Meera Iyer, consultant paediatrician',
   },
 ];

@@ -1,12 +1,12 @@
 /**
  * Connected Industry System composition: Website ? AI ? Dashboard ? Analytics
- * Premium motion — layout positions frozen.
+ * Premium motion ï¿½ layout positions frozen.
  */
 
 .sys {
   --sys-px: 0;
   --sys-py: 0;
-  /* Apple-like soft easing — CSS only */
+  /* Apple-like soft easing ï¿½ CSS only */
   --sys-ease: cubic-bezier(0.33, 0.1, 0.25, 1);
   --sys-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --sys-ease-float: cubic-bezier(0.45, 0.05, 0.55, 0.95);
@@ -36,7 +36,7 @@
   height: 520px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  /* Soft mesh — no hard color stops */
+  /* Soft mesh ï¿½ no hard color stops */
   background:
     radial-gradient(
       55% 50% at 42% 48%,
@@ -250,7 +250,7 @@
   animation: sys-live-pulse 2.4s var(--sys-ease) infinite;
 }
 
-/* Analytics — base (positions frozen; depth via transform only) */
+/* Analytics ï¿½ base (positions frozen; depth via transform only) */
 .sys__analytics {
   z-index: 2;
   right: 8%;
@@ -387,7 +387,7 @@
   font-weight: 600;
 }
 
-/* Website front — compact browser + portfolio slide (fixed size, never stretch) */
+/* Website front ï¿½ compact browser + portfolio slide (fixed size, never stretch) */
 .sys__website {
   z-index: 5;
   left: 18%;
@@ -395,7 +395,7 @@
   width: 58%;
   height: auto;
   animation: sys-float-d 8.6s var(--sys-ease-float) infinite;
-  /* Decorative only — hover/parallax on this card caused desktop flicker */
+  /* Decorative only ï¿½ hover/parallax on this card caused desktop flicker */
   pointer-events: none;
 }
 
@@ -428,7 +428,7 @@
     0 20px 40px -20px color-mix(in srgb, var(--primary-end) 22%, transparent);
 }
 
-/* Soft edge highlight only — no soft-light sweep (flickers under transforms) */
+/* Soft edge highlight only ï¿½ no soft-light sweep (flickers under transforms) */
 .sys__panel--site::before {
   content: none;
 }
@@ -518,7 +518,7 @@
   line-height: 1.2;
 }
 
-/* Fixed viewport — pages slide under constant chrome, edge-to-edge fill */
+/* Fixed viewport ï¿½ pages slide under constant chrome, edge-to-edge fill */
 .sys__browser-viewport {
   position: relative;
   flex: 0 0 240px;
@@ -603,7 +603,7 @@
 }
 
 /*
-  Edge-to-edge fill — every portfolio spans 100% of the browser frame.
+  Edge-to-edge fill ï¿½ every portfolio spans 100% of the browser frame.
   cover + top keeps slides aligned (no left/right letterbox gaps).
 */
 .sys__browser-page > picture {
@@ -692,7 +692,7 @@
   animation: sys-browser-progress linear both;
 }
 
-/* Compact slide counter — all viewports (portfolio carousel). */
+/* Compact slide counter ï¿½ all viewports (portfolio carousel). */
 .sys__browser-pager {
   display: inline-flex;
   position: absolute;
@@ -735,7 +735,7 @@
   color: #ffffff;
 }
 
-/* Desktop side arrows — hidden on mobile (swipe instead) */
+/* Desktop side arrows ï¿½ hidden on mobile (swipe instead) */
 .sys__browser-nav {
   display: none;
 }
@@ -874,7 +874,7 @@
 }
 
 /*
- * Subtle 2–4px float — layer rotations refined for depth only.
+ * Subtle 2ï¿½4px float ï¿½ layer rotations refined for depth only.
  * Positions (left/top/width) remain frozen.
  */
 @keyframes sys-float-a {
@@ -1100,7 +1100,7 @@
     transition: opacity 280ms var(--sys-ease);
   }
 
-  /* Compact counter — already visible on all viewports */
+  /* Compact counter ï¿½ already visible on all viewports */
   .sys__browser-caption {
     bottom: 12px;
     right: 64px;

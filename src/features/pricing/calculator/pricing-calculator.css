@@ -39,6 +39,48 @@
   color: var(--muted-foreground);
 }
 
+.pricing-calc__presets {
+  margin-top: 16px;
+  display: grid;
+  gap: 8px;
+  max-width: 28rem;
+}
+
+.pricing-calc__preset {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, var(--border));
+  background: color-mix(in srgb, var(--primary) 8%, var(--background));
+  color: var(--primary);
+  font-family: var(--font-family-sans), system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pricing-calc__preset:hover {
+  background: color-mix(in srgb, var(--primary) 12%, var(--background));
+}
+
+.pricing-calc__preset:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.pricing-calc__preset-hint {
+  margin: 0;
+  font-family: var(--font-family-sans), system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+}
+
 .pricing-calc__layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -294,6 +336,45 @@
   flex-direction: column;
   gap: 8px;
   margin-top: 4px;
+}
+
+.pricing-calc__copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, var(--border));
+  background: color-mix(in srgb, var(--primary) 10%, var(--background));
+  color: var(--primary);
+  font-family: var(--font-family-sans), system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pricing-calc__copy:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--primary) 14%, var(--background));
+}
+
+.pricing-calc__copy:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.pricing-calc__copy:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.pricing-calc__copy-status {
+  margin: 0;
+  font-family: var(--font-family-sans), system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
 }
 
 .pricing-calc__primary,
