@@ -105,33 +105,33 @@ export default function EcommerceFooter() {
   return (
     <footer className="ec-footer">
       <div className="ec-footer-trust">
-        <div className={`${EC_CONTAINER} grid gap-4 py-6 sm:grid-cols-2 lg:grid-cols-4`}>
+        <div className={`${EC_CONTAINER} ec-footer-trust__grid`}>
           {TRUST_ITEMS.map(({ icon: Icon, label, detail }) => (
             <div key={label} className="ec-footer-trust__item">
               <span className="ec-footer-trust__icon" aria-hidden>
                 <Icon className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-sm font-semibold text-white">{label}</p>
-                <p className="mt-0.5 text-xs text-[var(--ec-header-muted)]">{detail}</p>
+                <p className="ec-footer-trust__label">{label}</p>
+                <p className="ec-footer-trust__detail">{detail}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="ec-footer-mid text-[var(--ec-chrome-text)]">
-        <div className={`${EC_CONTAINER} grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10`}>
+      <div className="ec-footer-mid">
+        <div className={`${EC_CONTAINER} ec-footer-cols`}>
           {FOOTER_COLS.map((col) => {
             const TitleIcon = col.icon;
 
             return (
-              <nav key={col.title} aria-label={col.title}>
+              <nav key={col.title} className="ec-footer-col" aria-label={col.title}>
                 <p className="ec-footer-col__title">
                   <TitleIcon className="ec-footer-col__title-icon" aria-hidden />
                   {col.title}
                 </p>
-                <ul className="mt-4 space-y-2.5">
+                <ul className="ec-footer-col__list">
                   {col.links.map(({ label, icon: Icon }) => (
                     <li key={label}>
                       <ShowcaseAnchor href="#catalog" className="ec-footer-link">
@@ -147,29 +147,24 @@ export default function EcommerceFooter() {
         </div>
 
         <div className="ec-footer-brand-bar">
-          <div
-            className={`${EC_CONTAINER} flex flex-col items-center gap-5 py-7 lg:flex-row lg:justify-between`}
-          >
-            <div className="flex flex-col items-center gap-3 text-center lg:items-start lg:text-left">
-              <p className="flex items-baseline gap-1.5 text-xl font-bold tracking-tight md:text-2xl">
-                <span className="text-white">Ecommerce</span>
+          <div className={`${EC_CONTAINER} ec-footer-brand-bar__inner`}>
+            <div className="ec-footer-brand">
+              <p className="ec-footer-brand__name">
+                <span>Ecommerce</span>
                 <span className="ec-brand-accent">Store</span>
               </p>
-              <p className="max-w-sm text-xs leading-relaxed text-[var(--ec-header-muted)]">
+              <p className="ec-footer-brand__blurb">
                 A fictional marketplace UI specimen — search, cart, coupons, and checkout in one
                 polished demo.
               </p>
             </div>
 
-            <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+            <div className="ec-footer-meta">
               <div className="ec-footer-chip" role="presentation">
-                <Globe className="h-3.5 w-3.5 shrink-0 text-[var(--ec-brand)]" aria-hidden />
+                <Globe className="h-3.5 w-3.5 shrink-0" aria-hidden />
                 English · India
               </div>
-              <ul
-                className="flex flex-wrap items-center justify-center gap-2"
-                aria-label="Payment methods"
-              >
+              <ul className="ec-footer-pay-list" aria-label="Payment methods">
                 {PAYMENT_METHODS.map(({ label, icon: Icon }) => (
                   <li key={label} className="ec-footer-pay">
                     <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden />
@@ -183,10 +178,8 @@ export default function EcommerceFooter() {
       </div>
 
       <div className="ec-footer-deep">
-        <div
-          className={`${EC_CONTAINER} flex flex-col items-center gap-2 py-5 text-center text-xs`}
-        >
-          <p className="text-[var(--ec-header-muted)]">
+        <div className={`${EC_CONTAINER} ec-footer-deep__inner`}>
+          <p>
             Designed &amp; developed by{' '}
             <Link
               href="https://bitcraftly.com/"
@@ -196,7 +189,7 @@ export default function EcommerceFooter() {
               Bitcraftly
             </Link>
           </p>
-          <p className="text-[color-mix(in_srgb,var(--ec-header-muted)_70%,transparent)]">
+          <p className="ec-footer-deep__copy">
             Ecommerce Store is fictional · not affiliated with any retailer · © 2026
           </p>
         </div>

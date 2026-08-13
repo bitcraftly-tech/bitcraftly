@@ -6,6 +6,7 @@ import {
   CreditCard,
   RotateCcw,
   ShieldCheck,
+  ShoppingCart,
   Star,
   Tag,
   Truck,
@@ -36,17 +37,16 @@ import { EcLazySection, ProductGridSkeleton, useEcInfiniteProducts } from './Eco
 function StarRow({ rating, count }: { rating: number; count: number }) {
   const full = Math.floor(rating);
   return (
-    <div className="flex items-center gap-1">
-      <div className="flex text-[#ffa41c]">
+    <div
+      className="ec-star-row"
+      aria-label={`${rating.toFixed(1)} out of 5 stars, ${formatIndianNumber(count)} ratings`}
+    >
+      <div className="ec-star-row__stars" aria-hidden>
         {Array.from({ length: 5 }).map((_, i) => (
-          <Star
-            key={i}
-            className={`h-3.5 w-3.5 ${i < full ? 'fill-[#ffa41c]' : 'fill-[#e0e0e0] text-[#e0e0e0] dark:fill-[#4a5568] dark:text-[#4a5568]'}`}
-            aria-hidden
-          />
+          <Star key={i} className={`ec-star-row__icon ${i < full ? 'is-filled' : 'is-empty'}`} />
         ))}
       </div>
-      <span className="ec-link text-xs">{formatIndianNumber(count)}</span>
+      <span className="ec-star-row__count">{formatIndianNumber(count)}</span>
     </div>
   );
 }
@@ -64,30 +64,36 @@ function ProductCard({ product, index = 0 }: { product: ShopProduct; index?: num
         <div className="ec-product-card__thumb">
           <EcommerceProductImage
             product={product}
-            className="ec-product-card__img aspect-square w-full"
+            className="ec-product-card__img aspect-[4/3] w-full"
           />
         </div>
-        {pct > 0 ? <span className="ec-product-card__badge">-{pct}%</span> : null}
-        <p className="ec-product-card__title line-clamp-2">{product.title}</p>
+        {pct > 0 ? <span className="ec-product-card__badge">{pct}% off</span> : null}
       </div>
-      <div className="flex min-h-0 flex-1 flex-col">
-        <div className="mt-2">
-          <StarRow rating={product.rating} count={product.count} />
+      <div className="ec-product-card__body">
+        <button
+          type="button"
+          className="ec-product-card__title"
+          onClick={() => setProductModal(product)}
+        >
+          {product.title}
+        </button>
+        <StarRow rating={product.rating} count={product.count} />
+        <div className="ec-product-card__pricing">
+          <p className="ec-product-card__price">{formatInr(product.price)}</p>
+          <p className="ec-product-card__mrp">
+            M.R.P. <span className="line-through">{formatInr(product.list)}</span>
+          </p>
         </div>
-        <p className="ec-product-card__price">{formatInr(product.price)}</p>
-        <p className="ec-product-card__mrp">
-          M.R.P.: <span className="line-through">{formatInr(product.list)}</span>
-          {pct > 0 ? <span className="ec-sale-text"> ({pct}% off)</span> : null}
-        </p>
-        <p className="ec-product-card__delivery line-clamp-2 flex-1">{product.delivery}</p>
+        <p className="ec-product-card__delivery">{product.delivery}</p>
+        <button
+          type="button"
+          onClick={() => addToCart(product)}
+          className="ec-product-card__cta"
+        >
+          <ShoppingCart className="ec-product-card__cta-icon" aria-hidden />
+          Add to cart
+        </button>
       </div>
-      <button
-        type="button"
-        onClick={() => addToCart(product)}
-        className="ec-btn-cart ec-product-card__cta py-2 text-xs"
-      >
-        Add to Cart
-      </button>
     </article>
   );
 }
@@ -243,22 +249,6 @@ export default function EcommerceStoreShowcaseDemo() {
                 </ul>
               </div>
 
-              <div className="ec-hero2__sticker" aria-hidden>
-                <span>Save</span>
-                <strong>60%</strong>
-              </div>
-
-              <button
-                type="button"
-                className="ec-hero2__picks"
-                onClick={() => {
-                  setDepartment('Deals');
-                  scrollToSection('deals');
-                }}
-              >
-                Today&apos;s picks
-                <ArrowRight className="h-3.5 w-3.5" aria-hidden />
-              </button>
             </div>
 
             <ul className="ec-hero2__rail" aria-label="Shop by category">
@@ -298,9 +288,9 @@ export default function EcommerceStoreShowcaseDemo() {
       {DEAL_SECTIONS.map((row) => {
         const products = SHOP_PRODUCTS.filter(row.filter).slice(0, 4);
         return (
-          <section key={row.title} id={row.id} className={`${EC_CONTAINER} scroll-mt-36 pb-5`}>
+          <section key={row.title} id={row.id} className={`${EC_CONTAINER} ec-page-section scroll-mt-36`}>
             <div className="ec-section-panel">
-              <div className="mb-5 flex items-center justify-between gap-3">
+              <div className="ec-section-panel__head">
                 <h2 className="ec-section-title">{row.title}</h2>
                 <button
                   type="button"
@@ -311,7 +301,7 @@ export default function EcommerceStoreShowcaseDemo() {
                 </button>
               </div>
               <EcLazySection skeleton={<ProductGridSkeleton count={4} />}>
-                <div className="grid grid-cols-2 items-stretch gap-4 md:grid-cols-4 md:gap-5">
+                <div className="ec-product-grid ec-product-grid--rail">
                   {products.map((p, i) => (
                     <ProductCard key={p.id} product={p} index={i} />
                   ))}
@@ -322,7 +312,7 @@ export default function EcommerceStoreShowcaseDemo() {
         );
       })}
 
-      <section id="search-results" className={`${EC_CONTAINER} scroll-mt-36 pb-8`}>
+      <section id="search-results" className={`${EC_CONTAINER} ec-page-section scroll-mt-36`}>
         <div className="ec-results-layout">
           <aside className="ec-filter-panel" aria-label="Product filters">
             <div className="ec-filter-panel__head">
@@ -334,77 +324,79 @@ export default function EcommerceStoreShowcaseDemo() {
               ) : null}
             </div>
 
-            <fieldset className="ec-filter-group">
-              <legend className="ec-filter-group__legend">Department</legend>
-              <div className="ec-filter-group__options" role="radiogroup" aria-label="Department">
-                {FILTER_DEPARTMENTS.map((d) => (
-                  <label key={d} className="ec-filter-option">
-                    <input
-                      type="radio"
-                      name="ec-filter-department"
-                      checked={department === d}
-                      onChange={() => setDepartment(d)}
-                    />
-                    <span>{d === 'All' ? 'All departments' : d}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
+            <div className="ec-filter-panel__body">
+              <fieldset className="ec-filter-group">
+                <legend className="ec-filter-group__legend">Department</legend>
+                <div className="ec-filter-group__options" role="radiogroup" aria-label="Department">
+                  {FILTER_DEPARTMENTS.map((d) => (
+                    <label key={d} className="ec-filter-option">
+                      <input
+                        type="radio"
+                        name="ec-filter-department"
+                        checked={department === d}
+                        onChange={() => setDepartment(d)}
+                      />
+                      <span>{d === 'All' ? 'All departments' : d}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
 
-            <fieldset className="ec-filter-group">
-              <legend className="ec-filter-group__legend">Price</legend>
-              <div className="ec-filter-group__options" role="radiogroup" aria-label="Price">
-                {PRICE_BANDS.map((band) => (
-                  <label key={band.id} className="ec-filter-option">
-                    <input
-                      type="radio"
-                      name="ec-filter-price"
-                      checked={priceBand === band.id}
-                      onChange={() => setPriceBand(band.id)}
-                    />
-                    <span>{band.label}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
+              <fieldset className="ec-filter-group">
+                <legend className="ec-filter-group__legend">Price</legend>
+                <div className="ec-filter-group__options" role="radiogroup" aria-label="Price">
+                  {PRICE_BANDS.map((band) => (
+                    <label key={band.id} className="ec-filter-option">
+                      <input
+                        type="radio"
+                        name="ec-filter-price"
+                        checked={priceBand === band.id}
+                        onChange={() => setPriceBand(band.id)}
+                      />
+                      <span>{band.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
 
-            <fieldset className="ec-filter-group">
-              <legend className="ec-filter-group__legend">Customer rating</legend>
-              <div
-                className="ec-filter-group__options"
-                role="radiogroup"
-                aria-label="Customer rating"
-              >
-                {RATING_OPTIONS.map((opt) => (
-                  <label key={opt.id} className="ec-filter-option">
-                    <input
-                      type="radio"
-                      name="ec-filter-rating"
-                      checked={minRating === opt.id}
-                      onChange={() => setMinRating(opt.id)}
-                    />
-                    <span>{opt.label}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
+              <fieldset className="ec-filter-group">
+                <legend className="ec-filter-group__legend">Customer rating</legend>
+                <div
+                  className="ec-filter-group__options"
+                  role="radiogroup"
+                  aria-label="Customer rating"
+                >
+                  {RATING_OPTIONS.map((opt) => (
+                    <label key={opt.id} className="ec-filter-option">
+                      <input
+                        type="radio"
+                        name="ec-filter-rating"
+                        checked={minRating === opt.id}
+                        onChange={() => setMinRating(opt.id)}
+                      />
+                      <span>{opt.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
 
-            <fieldset className="ec-filter-group ec-filter-group--last">
-              <legend className="ec-filter-group__legend">Delivery</legend>
-              <label className="ec-filter-option">
-                <input
-                  type="checkbox"
-                  checked={freeDeliveryOnly}
-                  onChange={(e) => setFreeDeliveryOnly(e.target.checked)}
-                />
-                <span>Free delivery</span>
-              </label>
-            </fieldset>
+              <fieldset className="ec-filter-group ec-filter-group--last">
+                <legend className="ec-filter-group__legend">Delivery</legend>
+                <label className="ec-filter-option">
+                  <input
+                    type="checkbox"
+                    checked={freeDeliveryOnly}
+                    onChange={(e) => setFreeDeliveryOnly(e.target.checked)}
+                  />
+                  <span>Free delivery</span>
+                </label>
+              </fieldset>
+            </div>
           </aside>
 
           <div className="ec-section-panel ec-results-main">
-            <div className="ec-border-soft flex flex-col gap-3 border-b pb-4 sm:flex-row sm:items-center sm:justify-between">
-              <p className="ec-type-body ec-text-muted">
+            <div className="ec-results-toolbar">
+              <h2 className="ec-results-toolbar__title">
                 {filteredProducts.length === 0 ? (
                   'No results'
                 ) : (
@@ -437,14 +429,14 @@ export default function EcommerceStoreShowcaseDemo() {
                     ) : null}
                   </>
                 )}
-              </p>
-              <div className="flex flex-wrap items-center gap-3">
-                <label className="ec-text-muted text-xs">
-                  Sort by{' '}
+              </h2>
+              <div className="ec-results-toolbar__actions">
+                <label className="ec-sort">
+                  <span className="ec-sort__label">Sort by</span>
                   <select
                     value={sort}
                     onChange={(e) => setSort(e.target.value as SortOption)}
-                    className="ec-input ec-border ec-text ml-1 rounded-md border px-2 py-1.5"
+                    className="ec-sort__select"
                   >
                     {(Object.keys(SORT_LABELS) as SortOption[]).map((k) => (
                       <option key={k} value={k}>
@@ -453,12 +445,8 @@ export default function EcommerceStoreShowcaseDemo() {
                     ))}
                   </select>
                 </label>
-                <button
-                  type="button"
-                  onClick={runSearch}
-                  className="ec-link text-xs font-medium hover:underline"
-                >
-                  Refresh results
+                <button type="button" onClick={runSearch} className="ec-results-toolbar__refresh">
+                  Refresh
                 </button>
               </div>
             </div>
@@ -473,7 +461,7 @@ export default function EcommerceStoreShowcaseDemo() {
               </p>
             ) : (
               <>
-                <div className="mt-5 grid grid-cols-2 items-stretch gap-4 lg:grid-cols-3 lg:gap-5">
+                <div className="ec-product-grid ec-product-grid--catalog">
                   {visibleProducts.map((p, i) => (
                     <ProductCard key={p.id} product={p} index={i % 8} />
                   ))}
@@ -482,7 +470,7 @@ export default function EcommerceStoreShowcaseDemo() {
                 {feedLoading ? (
                   <div className="mt-4" aria-live="polite" aria-busy="true">
                     <p className="ec-feed-loading-label">Loading more products…</p>
-                    <ProductGridSkeleton count={3} />
+                    <ProductGridSkeleton count={3} variant="catalog" />
                   </div>
                 ) : null}
 
@@ -497,7 +485,7 @@ export default function EcommerceStoreShowcaseDemo() {
         </div>
       </section>
 
-      <section className={`${EC_CONTAINER} space-y-5 pb-10`}>
+      <section className={`${EC_CONTAINER} ec-page-section ec-page-section--last`}>
         <EcLazySection
           skeleton={
             <div className="ec-section-panel" aria-hidden>
@@ -511,11 +499,10 @@ export default function EcommerceStoreShowcaseDemo() {
           }
         >
           <div className="ec-section-panel">
-            <div className="mb-5 flex items-center gap-2">
-              <Tag className="ec-brand-accent h-5 w-5" aria-hidden />
+            <div className="ec-section-panel__head">
               <h2 className="ec-section-title">Bank offers &amp; coupons</h2>
             </div>
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="ec-offer-grid">
               {BANK_OFFERS.map((o, i) => {
                 const selected = selectedCoupon === o.code;
                 return (
@@ -527,9 +514,7 @@ export default function EcommerceStoreShowcaseDemo() {
                       setSelectedCoupon(o.code);
                       showToast(`Coupon ${o.code} applied · demo only`, 'success');
                     }}
-                    className={`ec-offer-card ec-bg-surface-soft ec-border rounded-[var(--ec-radius-md)] border p-4 text-left${
-                      selected ? ' ec-offer-card--selected' : ''
-                    }`}
+                    className={`ec-offer-card${selected ? ' ec-offer-card--selected' : ''}`}
                     style={{ animationDelay: `${i * 70}ms` }}
                   >
                     {selected ? (
@@ -537,12 +522,12 @@ export default function EcommerceStoreShowcaseDemo() {
                         <Check className="h-3.5 w-3.5" strokeWidth={3} />
                       </span>
                     ) : null}
-                    <p className="ec-link text-xs font-bold uppercase tracking-wide">{o.bank}</p>
-                    <p className="ec-text mt-1 text-sm font-semibold">{o.offer}</p>
-                    <p className="ec-type-caption mt-1">{o.cap}</p>
-                    <p className="ec-btn-secondary mt-3 inline-block rounded-md px-2.5 py-1 text-[11px]">
-                      {o.code}
-                    </p>
+                    <p className="ec-offer-card__bank">{o.bank}</p>
+                    <p className="ec-offer-card__offer">{o.offer}</p>
+                    <p className="ec-offer-card__cap">{o.cap}</p>
+                    <span className="ec-offer-card__code">
+                      {selected ? 'Applied' : 'Apply'} · {o.code}
+                    </span>
                   </button>
                 );
               })}
@@ -559,26 +544,22 @@ export default function EcommerceStoreShowcaseDemo() {
             </div>
           }
         >
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {TRUST_STRIPS.map(({ icon: Icon, label, detail }, i) => (
-              <div
-                key={label}
-                className="ec-trust-card ec-bg-surface ec-border flex gap-3 rounded-[var(--ec-radius-md)] border p-4 shadow-sm"
-                style={{ animationDelay: `${i * 70}ms` }}
-              >
-                <div className="ec-trust-card__icon ec-header-bar flex h-10 w-10 shrink-0 items-center justify-center rounded-full">
-                  <Icon className="h-5 w-5" aria-hidden />
-                </div>
+          <ul className="ec-trust-strip">
+            {TRUST_STRIPS.map(({ icon: Icon, label, detail }) => (
+              <li key={label} className="ec-trust-card">
+                <span className="ec-trust-card__icon" aria-hidden>
+                  <Icon className="h-5 w-5" />
+                </span>
                 <div>
-                  <p className="ec-text text-sm font-bold">{label}</p>
-                  <p className="ec-type-caption mt-1">{detail}</p>
+                  <p className="ec-trust-card__label">{label}</p>
+                  <p className="ec-trust-card__detail">{detail}</p>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </EcLazySection>
 
-        <div className="ec-tip-bar flex flex-wrap items-center justify-center gap-3 rounded-[var(--ec-radius-md)] border border-dashed px-4 py-3.5">
+        <div className="ec-tip-bar flex flex-wrap items-center justify-center gap-2 rounded-[var(--ec-radius-md)] border border-dashed px-4 py-2.5">
           <p className="ec-type-caption">Demo tip:</p>
           <button
             type="button"

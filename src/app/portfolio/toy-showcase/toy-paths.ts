@@ -1,4 +1,4 @@
-export const TOY_BASE = '/portfolio/toy--showcase';
+export const TOY_BASE = '/portfolio/toy-showcase';
 
 export const TOY_PATHS = {
   home: TOY_BASE,

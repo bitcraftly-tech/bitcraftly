@@ -1,10 +1,25 @@
 'use client';
 
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { ArrowRight, Minus, Plus, ShieldCheck, Tag, Truck, X } from 'lucide-react';
+import {
+  ArrowRight,
+  Minus,
+  Plus,
+  RotateCcw,
+  ShieldCheck,
+  ShoppingCart,
+  Star,
+  Tag,
+  Truck,
+  X,
+} from 'lucide-react';
 
 import ShowcaseLink from '@/components/portfolio/ShowcaseLink';
-import { formatInr, discountPct, PINCODES } from './ecommerce-demo-data';
+import {
+  EcommerceWhatsAppGlyph,
+  ecommerceWhatsAppUrl,
+} from '@/components/portfolio/ecommerce/EcommerceWhatsAppFab';
+import { formatInr, discountPct, formatIndianNumber, PINCODES } from './ecommerce-demo-data';
 import { useEcommerceDemo } from './EcommerceDemoContext';
 import { EcommerceProductImage } from './EcommerceProductImage';
 
@@ -138,7 +153,7 @@ export function CartDrawer() {
               type="button"
               disabled={checkoutBusy}
               onClick={() => void startRazorpayCheckout()}
-              className="ec-btn-cart mt-3 flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-60"
+              className="ec-btn-cart ec-btn-cart--solid mt-3 flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-60"
             >
               {checkoutBusy ? (
                 'Opening Razorpay…'
@@ -243,7 +258,7 @@ export function AccountModal() {
 
   return (
     <div
-      className={`ec-auth-modal fixed inset-0 z-[70] overflow-y-auto overscroll-contain${entered ? ' ec-auth-modal--open' : ''}`}
+      className={`ec-auth-modal${entered ? ' ec-auth-modal--open' : ''}`}
       role="dialog"
       aria-modal="true"
       aria-labelledby="ec-auth-title"
@@ -256,7 +271,7 @@ export function AccountModal() {
       />
 
       <div className="ec-auth-modal__frame">
-        <div className="ec-auth-card relative w-full">
+        <div className="ec-auth-card">
           <div className="ec-auth-card__banner">
             <button
               type="button"
@@ -449,24 +464,52 @@ export function AccountModal() {
 export function PincodeModal() {
   const { pincodeOpen, setPincodeOpen, pincode, setPincode, showToast } = useEcommerceDemo();
 
+  useEffect(() => {
+    if (!pincodeOpen) return;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [pincodeOpen]);
+
+  useEffect(() => {
+    if (!pincodeOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setPincodeOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [pincodeOpen, setPincodeOpen]);
+
   if (!pincodeOpen) return null;
 
   return (
     <div
-      className="fixed inset-0 z-[70] overflow-y-auto overscroll-contain p-3 sm:p-4"
+      className="ec-overlay-modal"
       role="dialog"
       aria-modal="true"
+      aria-labelledby="ec-pincode-title"
     >
       <button
         type="button"
-        className="fixed inset-0 bg-black/50"
+        className="ec-overlay-modal__backdrop"
         onClick={() => setPincodeOpen(false)}
-        aria-label="Close"
+        aria-label="Close delivery location"
       />
-      <div className="relative mx-auto my-auto flex min-h-[calc(100dvh-1.5rem)] items-center justify-center">
-        <div className="relative w-full max-w-sm rounded-lg ec-bg-surface p-5 shadow-xl sm:p-6">
-          <h2 className="text-lg font-bold">Choose delivery location</h2>
-          <ul className="mt-4 space-y-2">
+      <div className="ec-overlay-modal__frame">
+        <div className="ec-overlay-modal__card">
+          <button
+            type="button"
+            className="ec-overlay-modal__close"
+            onClick={() => setPincodeOpen(false)}
+            aria-label="Close"
+          >
+            <X className="h-5 w-5" aria-hidden />
+          </button>
+          <h2 id="ec-pincode-title" className="ec-overlay-modal__title">
+            Choose delivery location
+          </h2>
+          <ul className="ec-overlay-modal__list">
             {PINCODES.map((p) => (
               <li key={p}>
                 <button
@@ -476,11 +519,8 @@ export function PincodeModal() {
                     setPincodeOpen(false);
                     showToast(`Delivering to ${p}`);
                   }}
-                  className={`w-full rounded-sm border px-3 py-2 text-left text-sm hover:border-[#e77600] ${
-                    pincode === p
-                      ? 'border-[#e77600] ec-highlight font-semibold'
-                      : 'ec-border border'
-                  }`}
+                  className={`ec-overlay-modal__option${pincode === p ? ' is-selected' : ''}`}
+                  aria-pressed={pincode === p}
                 >
                   {p}
                 </button>
@@ -496,39 +536,59 @@ export function PincodeModal() {
 export function OrdersPanel() {
   const { ordersOpen, setOrdersOpen, demoOrders } = useEcommerceDemo();
 
+  useEffect(() => {
+    if (!ordersOpen) return;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [ordersOpen]);
+
+  useEffect(() => {
+    if (!ordersOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOrdersOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [ordersOpen, setOrdersOpen]);
+
   if (!ordersOpen) return null;
 
   return (
     <div
-      className="fixed inset-0 z-[70] overflow-y-auto overscroll-contain p-3 sm:p-4"
+      className="ec-overlay-modal"
       role="dialog"
       aria-modal="true"
+      aria-labelledby="ec-orders-title"
     >
       <button
         type="button"
-        className="fixed inset-0 bg-black/50"
+        className="ec-overlay-modal__backdrop"
         onClick={() => setOrdersOpen(false)}
-        aria-label="Close"
+        aria-label="Close orders"
       />
-      <div className="relative mx-auto flex min-h-[calc(100dvh-1.5rem)] items-center justify-center py-2">
-        <div className="relative max-h-[min(80vh,100%)] w-full max-w-md overflow-y-auto rounded-lg ec-bg-surface p-5 shadow-xl sm:p-6">
+      <div className="ec-overlay-modal__frame">
+        <div className="ec-overlay-modal__card ec-overlay-modal__card--wide">
           <button
             type="button"
+            className="ec-overlay-modal__close"
             onClick={() => setOrdersOpen(false)}
-            className="absolute right-3 top-3"
             aria-label="Close"
           >
-            <X className="h-5 w-5" />
+            <X className="h-5 w-5" aria-hidden />
           </button>
-          <h2 className="text-lg font-bold ec-text">Your orders</h2>
+          <h2 id="ec-orders-title" className="ec-overlay-modal__title">
+            Your orders
+          </h2>
           {demoOrders.length === 0 ? (
             <p className="mt-4 text-sm ec-text-muted">
               No orders yet. Pay with Razorpay from the cart to place a demo order.
             </p>
           ) : (
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-4 max-h-[min(50vh,24rem)] space-y-3 overflow-y-auto text-sm">
               {demoOrders.map((order) => (
-                <li key={order.id} className="rounded-sm border ec-border border p-3 text-sm">
+                <li key={order.id} className="rounded-sm border ec-border border p-3">
                   <p className="font-semibold ec-link">
                     Paid · {formatInr(order.total)}
                     <span className="ec-text-muted ml-1 text-xs font-normal">
@@ -565,57 +625,148 @@ export function OrdersPanel() {
 export function ProductModal() {
   const { productModal, setProductModal, addToCart, checkoutBusy, startRazorpayCheckout } =
     useEcommerceDemo();
+  const [rendered, setRendered] = useState(false);
+  const [entered, setEntered] = useState(false);
+  const [activeProduct, setActiveProduct] = useState(productModal);
 
-  if (!productModal) return null;
+  useEffect(() => {
+    if (productModal) {
+      setActiveProduct(productModal);
+      setRendered(true);
+      const frame = window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => setEntered(true));
+      });
+      return () => window.cancelAnimationFrame(frame);
+    }
 
-  const pct = discountPct(productModal.price, productModal.list);
+    setEntered(false);
+    const timer = window.setTimeout(() => {
+      setRendered(false);
+      setActiveProduct(null);
+    }, 280);
+    return () => window.clearTimeout(timer);
+  }, [productModal]);
+
+  useEffect(() => {
+    if (!rendered) return;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [rendered]);
+
+  useEffect(() => {
+    if (!rendered) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setProductModal(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [rendered, setProductModal]);
+
+  if (!rendered || !activeProduct) return null;
+
+  const pct = discountPct(activeProduct.price, activeProduct.list);
+  const ratingFull = Math.floor(activeProduct.rating);
+  const whatsappHref = ecommerceWhatsAppUrl(
+    `Hi Ecommerce Store! I have a question about “${activeProduct.title}” (${formatInr(activeProduct.price)}).`,
+  );
 
   return (
     <div
-      className="fixed inset-0 z-[70] overflow-y-auto overscroll-contain p-3 sm:p-4"
+      className={`ec-overlay-modal ec-overlay-modal--product${entered ? ' is-open' : ''}`}
       role="dialog"
       aria-modal="true"
+      aria-labelledby="ec-product-title"
     >
       <button
         type="button"
-        className="fixed inset-0 bg-black/50"
+        className="ec-overlay-modal__backdrop"
         onClick={() => setProductModal(null)}
-        aria-label="Close"
+        aria-label="Close product"
       />
-      <div className="relative mx-auto flex min-h-[calc(100dvh-1.5rem)] items-center justify-center py-2">
-        <div className="relative grid w-full max-w-2xl gap-4 rounded-lg ec-bg-surface p-4 shadow-xl sm:p-6 md:grid-cols-2">
+      <div className="ec-overlay-modal__frame">
+        <article className="ec-product-qv">
           <button
             type="button"
+            className="ec-product-qv__close"
             onClick={() => setProductModal(null)}
-            className="absolute right-3 top-3 z-10"
             aria-label="Close"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" aria-hidden />
           </button>
-          <EcommerceProductImage
-            product={productModal}
-            eager
-            className="aspect-square rounded-sm"
-          />
-          <div>
-            <h2 className="pr-8 text-base font-medium leading-snug sm:text-lg">
-              {productModal.title}
+
+          <div className="ec-product-qv__media">
+            <EcommerceProductImage
+              product={activeProduct}
+              eager
+              className="ec-product-qv__image"
+            />
+            {pct > 0 ? <span className="ec-product-qv__badge">{pct}% off</span> : null}
+          </div>
+
+          <div className="ec-product-qv__body">
+            <p className="ec-product-qv__dept">{activeProduct.department}</p>
+            <h2 id="ec-product-title" className="ec-product-qv__title">
+              {activeProduct.title}
             </h2>
-            <p className="mt-3 text-xl font-normal sm:text-2xl">{formatInr(productModal.price)}</p>
-            <p className="text-sm ec-text-muted">
-              M.R.P. <span className="line-through">{formatInr(productModal.list)}</span>
-              {pct > 0 ? <span className="ec-sale-text"> ({pct}% off)</span> : null}
+
+            <div
+              className="ec-product-qv__rating"
+              aria-label={`${activeProduct.rating.toFixed(1)} out of 5 stars, ${formatIndianNumber(activeProduct.count)} ratings`}
+            >
+              <span className="ec-product-qv__stars" aria-hidden>
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`ec-product-qv__star${i < ratingFull ? ' is-filled' : ''}`}
+                  />
+                ))}
+              </span>
+              <span className="ec-product-qv__rating-text">
+                {activeProduct.rating.toFixed(1)} · {formatIndianNumber(activeProduct.count)}{' '}
+                ratings
+              </span>
+            </div>
+
+            <div className="ec-product-qv__price-block">
+              <p className="ec-product-qv__price">{formatInr(activeProduct.price)}</p>
+              <p className="ec-product-qv__mrp">
+                M.R.P. <span className="line-through">{formatInr(activeProduct.list)}</span>
+                {pct > 0 ? <span className="ec-sale-text"> Save {pct}%</span> : null}
+              </p>
+            </div>
+
+            <p className="ec-product-qv__delivery">
+              <Truck className="ec-product-qv__delivery-icon" aria-hidden />
+              <span>{activeProduct.delivery}</span>
             </p>
-            <p className="mt-2 text-sm ec-link">{productModal.delivery}</p>
-            <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+
+            <ul className="ec-product-qv__perks">
+              <li>
+                <ShieldCheck aria-hidden />
+                Secure checkout
+              </li>
+              <li>
+                <RotateCcw aria-hidden />
+                Easy returns
+              </li>
+              <li>
+                <Tag aria-hidden />
+                Festival pricing
+              </li>
+            </ul>
+
+            <div className="ec-product-qv__actions">
               <button
                 type="button"
                 onClick={() => {
-                  addToCart(productModal);
+                  addToCart(activeProduct);
                   setProductModal(null);
                 }}
-                className="ec-btn-cart flex-1 rounded-lg py-2 text-sm font-medium"
+                className="ec-product-qv__btn ec-product-qv__btn--cart"
               >
+                <ShoppingCart className="h-4 w-4" aria-hidden />
                 Add to Cart
               </button>
               <button
@@ -623,15 +774,30 @@ export function ProductModal() {
                 disabled={checkoutBusy}
                 onClick={() => {
                   setProductModal(null);
-                  void startRazorpayCheckout({ addProduct: productModal });
+                  void startRazorpayCheckout({ addProduct: activeProduct });
                 }}
-                className="ec-btn-secondary flex-1 rounded-lg py-2 text-sm font-medium disabled:opacity-60"
+                className="ec-product-qv__btn ec-product-qv__btn--buy"
               >
                 Buy Now
               </button>
             </div>
+
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ec-product-qv__whatsapp"
+            >
+              <EcommerceWhatsAppGlyph className="ec-product-qv__whatsapp-icon" />
+              <span className="ec-product-qv__whatsapp-label ec-product-qv__whatsapp-label--short">
+                WhatsApp enquiry
+              </span>
+              <span className="ec-product-qv__whatsapp-label ec-product-qv__whatsapp-label--long">
+                Ask about this product on WhatsApp
+              </span>
+            </a>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   );

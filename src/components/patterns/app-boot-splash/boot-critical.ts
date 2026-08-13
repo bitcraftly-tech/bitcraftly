@@ -188,6 +188,21 @@ html.bc-app-ready #bc-demo-boot-splash {
   animation: bc-boot-float 1.6s ease-in-out infinite;
   box-shadow: 0 6px 16px color-mix(in srgb, var(--demo-boot-accent, #0f766e) 35%, transparent);
 }
+.bc-demo-boot__logo {
+  position: relative;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: transparent !important;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--demo-boot-accent, #5a31f4) 28%, transparent);
+  will-change: transform;
+  -webkit-animation: bc-boot-float 1.6s ease-in-out infinite;
+  animation: bc-boot-float 1.6s ease-in-out infinite;
+  -webkit-animation-play-state: running;
+  animation-play-state: running;
+}
 .bc-demo-boot__name {
   margin: 0;
   max-width: 16rem;
@@ -234,6 +249,7 @@ html.bc-app-ready #bc-demo-boot-splash {
   .bc-boot-splash__logo,
   .bc-boot-splash__ring,
   .bc-demo-boot__mark,
+  .bc-demo-boot__logo,
   .bc-demo-boot__glow,
   .bc-demo-boot__ring {
     -webkit-animation: none !important;

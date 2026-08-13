@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 
 import EcommerceFooter from '@/components/portfolio/ecommerce/EcommerceFooter';
 import EcommerceNavbar from '@/components/portfolio/ecommerce/EcommerceNavbar';
+import EcommerceWhatsAppFab from '@/components/portfolio/ecommerce/EcommerceWhatsAppFab';
 import { ShowcaseScopedThemeProvider } from '@/components/providers/ShowcaseScopedThemeProvider';
 
 import EcommerceAiChatbot from './EcommerceAiChatbot';
@@ -32,6 +33,7 @@ export default function EcommerceShowcaseLayout({ children }: { children: ReactN
           <main className="flex-1 ec-bg-page">{children}</main>
           <EcommerceFooter />
           <EcommerceBackToTopThumbler />
+          <EcommerceWhatsAppFab />
           <EcommerceAiChatbot />
           <CartDrawer />
           <AccountModal />

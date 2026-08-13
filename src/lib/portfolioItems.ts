@@ -406,6 +406,42 @@ export const homePortfolioItems: PortfolioItem[] = [
       ],
     }),
   },
+  {
+    title: 'PlayNest Toy Store',
+    hint: 'Age shop, category discovery & calm cart UX',
+    cardLine: 'Premium toy ecommerce — age filters, bestsellers & parent-first cart',
+    mobileCardLine: 'Toy store demo · age shop + cart UX',
+    projectFocus: 'Next.js',
+    gradient: 'from-fuchsia-500/18 to-violet-500/12',
+    emoji: '🧸',
+    mockup: 'ecommerce',
+    image: '/products/PlayNest Toy Store.png',
+    featureBullets: ['Shop by age', 'Category sidebar', 'Best sellers', 'Secure cart UX'],
+    demoHref: '/portfolio/toy-showcase',
+    ctaLabel: 'Open interactive demo →',
+    tag: 'Ecommerce',
+    categories: ['ecommerce', 'react-nextjs'],
+    badge: 'Interactive demo',
+    techStack: ['Next.js', 'React', 'Cart UX', 'Age filters'],
+    resultHighlight: 'Parents find safe toys by age — without checkout clutter',
+    caseStudy: defaultCaseStudy({
+      problem:
+        'Toy storefronts bury age guidance and safety signals under noisy grids and weak mobile cart UX.',
+      solution:
+        'Premium D2C-style PlayNest demo with category sidebar, shop-by-age, bestsellers, and calm cart flows.',
+      results: [
+        'Age-first discovery',
+        'Parent trust messaging',
+        'Conversion-ready cart patterns',
+      ],
+      beforePoints: ['Buried age filters', 'Cluttered toy grids', 'Weak trust signals'],
+      afterPoints: [
+        'Shop by age + category nav',
+        'Clear bestsellers & promos',
+        'Calm mobile-friendly cart UX',
+      ],
+    }),
+  },
 ];
 
 const portfolioExtras: PortfolioItem[] = [

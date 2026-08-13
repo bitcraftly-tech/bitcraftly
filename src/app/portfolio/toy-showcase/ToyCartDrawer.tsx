@@ -1,6 +1,7 @@
 'use client';
 
 import { ShoppingBag, X } from 'lucide-react';
+import Image from 'next/image';
 
 import { formatToyInr } from './toy-data';
 import { useToyCart } from './ToyCartContext';
@@ -35,8 +36,14 @@ export function ToyCartDrawer() {
             <ul>
               {lines.map((line) => (
                 <li key={line.product.id} className="toy-line-item">
-                  <div className={`toy-line-item__thumb ${line.product.tone}`} aria-hidden>
-                    {line.product.emoji}
+                  <div className={`toy-line-item__thumb ${line.product.tone}`}>
+                    <Image
+                      src={line.product.image}
+                      alt=""
+                      fill
+                      sizes="56px"
+                      className="toy-line-item__img"
+                    />
                   </div>
                   <div>
                     <p className="toy-line-item__name">{line.product.name}</p>

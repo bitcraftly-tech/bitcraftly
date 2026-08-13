@@ -56,7 +56,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     id: 'mixer',
     title: 'Prestige Iris 750W Mixer Grinder · 3 jars',
-    image: img('photo-1556909114-f6e7ad7d3136'),
+    image: img('photo-1585515320310-259814833e62'),
     price: 3299,
     list: 5495,
     rating: 4.3,

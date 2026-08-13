@@ -16,7 +16,7 @@ function isDarkBackground(hex: string): boolean {
 }
 
 /**
- * Interactive-demo boot splash — brand monogram for the active showcase.
+ * Interactive-demo boot splash — brand logo or monogram for the active showcase.
  * Never shows the Bitcraftly logo.
  */
 export function DemoBootSplash({
@@ -107,7 +107,19 @@ export function DemoBootSplash({
           <span className="bc-demo-boot__ring bc-demo-boot__ring--delayed" />
           <span className="bc-demo-boot__ring" />
           <span className="bc-demo-boot__glow" />
-          <span className="bc-demo-boot__mark">{brand.monogram}</span>
+          {brand.logo ? (
+            // eslint-disable-next-line @next/next/no-img-element -- boot splash must not depend on next/image hydration
+            <img
+              className="bc-demo-boot__logo"
+              src={brand.logo}
+              alt=""
+              width={40}
+              height={40}
+              decoding="async"
+            />
+          ) : (
+            <span className="bc-demo-boot__mark">{brand.monogram}</span>
+          )}
         </div>
         <p className="bc-demo-boot__name" suppressHydrationWarning>
           {brand.name}

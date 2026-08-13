@@ -3,6 +3,8 @@ export type DemoBootBrand = {
   readonly monogram: string;
   readonly accent: string;
   readonly background: string;
+  /** Optional showcase logo shown instead of monogram letters. */
+  readonly logo?: string;
 };
 
 const FALLBACK_BRAND: DemoBootBrand = {
@@ -14,6 +16,16 @@ const FALLBACK_BRAND: DemoBootBrand = {
 
 /** Longest-prefix wins so nested interactive-demos paths resolve correctly. */
 const DEMO_BOOT_BRANDS: ReadonlyArray<readonly [string, DemoBootBrand]> = [
+  [
+    '/portfolio/toy-showcase',
+    {
+      name: 'PlayNest',
+      monogram: 'PN',
+      accent: '#5a31f4',
+      background: '#f7f5ff',
+      logo: '/portfolio/toy-showcase/brand/playnest-logo.png',
+    },
+  ],
   [
     '/portfolio/ecommerce-store-showcase',
     { name: 'Ecommerce Store', monogram: 'ES', accent: '#0d9488', background: '#e8f4f1' },

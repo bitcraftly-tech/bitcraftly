@@ -125,9 +125,18 @@ export function useEcInfiniteProducts(items: readonly ShopProduct[], pageSize = 
   };
 }
 
-export function ProductGridSkeleton({ count = 4 }: { count?: number }) {
+export function ProductGridSkeleton({
+  count = 4,
+  variant = 'rail',
+}: {
+  count?: number;
+  variant?: 'rail' | 'catalog';
+}) {
   return (
-    <div className="grid grid-cols-2 items-stretch gap-4 lg:grid-cols-4" aria-hidden>
+    <div
+      className={`ec-product-grid ${variant === 'catalog' ? 'ec-product-grid--catalog' : 'ec-product-grid--rail'}`}
+      aria-hidden
+    >
       {Array.from({ length: count }).map((_, i) => (
         <ProductCardSkeleton key={`ec-skel-${i}`} />
       ))}

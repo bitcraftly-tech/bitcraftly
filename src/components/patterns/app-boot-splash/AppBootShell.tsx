@@ -1,3 +1,5 @@
+import Script from 'next/script';
+
 import { AppBootSplash } from './AppBootSplash';
 import { APP_BOOT_CRITICAL_CSS } from './boot-critical';
 import { APP_BOOT_FAILSAFE_SCRIPT } from './boot-ready';
@@ -17,8 +19,9 @@ export function AppBootShell({ mode, pathname = '' }: { mode: BootSplashMode; pa
         id="bc-boot-critical-css"
         dangerouslySetInnerHTML={{ __html: APP_BOOT_CRITICAL_CSS }}
       />
-      <script
+      <Script
         id="bc-boot-failsafe"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: APP_BOOT_FAILSAFE_SCRIPT }}
       />
       <noscript>

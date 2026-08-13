@@ -3,9 +3,9 @@
 import { RotateCcw, Send, Sparkles, X } from 'lucide-react';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
-import { whatsappUrl } from '@/lib/constants';
+import { ecommerceWhatsAppUrl } from '@/components/portfolio/ecommerce/EcommerceWhatsAppFab';
 
-import { formatInr } from './ecommerce-demo-data';
+import { formatInr, SHOP_PRODUCTS } from './ecommerce-demo-data';
 import {
   answerEcommerceStoreQuery,
   chatHasVisitorMessages,
@@ -124,7 +124,7 @@ export default function EcommerceAiChatbot() {
         pincode,
         cartCount,
       });
-      window.open(whatsappUrl(message), '_blank', 'noopener,noreferrer');
+      window.open(ecommerceWhatsAppUrl(message), '_blank', 'noopener,noreferrer');
     },
     [cartCount, pincode],
   );
@@ -213,7 +213,7 @@ export default function EcommerceAiChatbot() {
               <p className="ec-chat-panel__title">Ecommerce Store Assistant</p>
               <p className="ec-chat-panel__status">
                 <span className="ec-chat-panel__status-dot" aria-hidden />
-                Online · demo catalog
+                Online · {SHOP_PRODUCTS.length} catalog items
               </p>
             </div>
             <div className="ec-chat-panel__actions">
@@ -267,14 +267,12 @@ export default function EcommerceAiChatbot() {
                           >
                             <EcommerceProductImage
                               product={product}
-                              className="h-12 w-12 shrink-0 rounded-md"
+                              className="ec-chat-product__thumb"
                               eager
                             />
-                            <span className="min-w-0 text-left">
-                              <span className="line-clamp-2 text-[11px] font-semibold leading-snug">
-                                {product.title}
-                              </span>
-                              <span className="mt-0.5 block text-[11px] font-bold text-[var(--ec-cta)]">
+                            <span className="ec-chat-product__copy">
+                              <span className="ec-chat-product__title">{product.title}</span>
+                              <span className="ec-chat-product__price">
                                 {formatInr(product.price)}
                               </span>
                             </span>
@@ -339,7 +337,7 @@ export default function EcommerceAiChatbot() {
                 id={`${panelId}-input`}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about products, deals, delivery…"
+                placeholder="Ask for Samsung, headphones, kitchen, or deals…"
                 autoComplete="off"
                 disabled={busy}
               />

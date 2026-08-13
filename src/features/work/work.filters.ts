@@ -201,10 +201,37 @@ export function filterProjectsByExplorer(
   return projects.filter((project) => matchesWorkExplorer(project, state));
 }
 
+const INDUSTRY_HUB_FILTERS = new Set([
+  'healthcare',
+  'education',
+  'fintech',
+  'retail',
+  'logistics',
+]);
+
 /** Legacy single-filter helper (hubs / featured). */
 export function matchesWorkFilter(project: WorkProject, filter: string): boolean {
-  if (filter === 'all') return true;
+  if (filter === 'all' || filter === 'latest') return true;
   if (filter === 'featured') return Boolean(project.featured);
+  if (filter === 'websites') return matchesPortfolioFilter(project, 'websites');
+  if (filter === 'ai') return matchesPortfolioFilter(project, 'ai');
+  if (filter === 'enterprise') {
+    return (
+      project.categories.includes('enterprise-software') ||
+      Boolean(project.featured) ||
+      normalize(project.industry).includes('saas')
+    );
+  }
+  if (filter === 'mobile-apps') {
+    return matchesService(project, 'mobile-apps') || project.categories.includes('mobile-apps');
+  }
+  if (filter === 'web-applications') {
+    return project.categories.includes('web-applications');
+  }
+  if (INDUSTRY_HUB_FILTERS.has(filter)) {
+    const industryId = filter === 'fintech' ? 'finance' : filter;
+    return matchesIndustry(project, industryId);
+  }
   if (project.filterIds.includes(filter as never)) return true;
   return project.categories.includes(filter as never);
 }
@@ -213,7 +240,11 @@ export function filterWorkProjects(
   projects: readonly WorkProject[],
   filter: string,
 ): readonly WorkProject[] {
-  return projects.filter((project) => matchesWorkFilter(project, filter));
+  const matched = projects.filter((project) => matchesWorkFilter(project, filter));
+  if (filter === 'latest') {
+    return [...matched].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
+  }
+  return matched;
 }
 
 export function toggleChipValue(values: readonly string[], chipId: string): readonly string[] {

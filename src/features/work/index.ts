@@ -30,6 +30,10 @@ export { WorkHubPage, WorkHubFallbackPage } from './WorkHubPage';
 export { WorkProjectDetailPage } from './WorkProjectDetailPage';
 export { WorkTestimonialDetailPage, type WorkTestimonialDetail } from './WorkTestimonialDetailPage';
 export { WorkInternalHero } from './WorkInternalHero';
+export { WorkWebsitesHero } from './WorkWebsitesHero';
+export { WorkAiSolutionsHero } from './WorkAiSolutionsHero';
+export { WorkCollectionHero } from './WorkCollectionHero';
+export { getWorkHubHeroConfig } from './work.hub-heroes';
 export {
   getApprovedTestimonials,
   getFeaturedWorkProjects,

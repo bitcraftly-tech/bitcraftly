@@ -18,10 +18,10 @@ export type ChatMessage = {
 };
 
 export const CHAT_QUICK_PROMPTS = [
-  'Best deals under ₹5000',
-  'Show electronics',
-  'Delivery options',
-  'Help with cart',
+  "Today's top deals",
+  'Samsung & headphones',
+  'Home & Kitchen picks',
+  "What's in my cart?",
 ] as const;
 
 function nowTime() {
@@ -51,9 +51,31 @@ export function createUserMessage(text: string): ChatMessage {
   };
 }
 
+function shortTitle(product: ShopProduct) {
+  return product.title.split('·')[0]?.trim() || product.title;
+}
+
+function topDeals(limit = 3) {
+  return [...SHOP_PRODUCTS]
+    .filter((p) => isDealProduct(p))
+    .sort((a, b) => discountPct(b.price, b.list) - discountPct(a.price, a.list))
+    .slice(0, limit);
+}
+
+function byDepartment(department: ShopProduct['department'], limit = 3) {
+  return SHOP_PRODUCTS.filter((p) => p.department === department).slice(0, limit);
+}
+
+function catalogHint() {
+  const names = SHOP_PRODUCTS.slice(0, 4).map((p) => shortTitle(p)).join(', ');
+  return `This demo catalog has ${SHOP_PRODUCTS.length} items across Electronics, Fashion, and Home & Kitchen — including ${names}.`;
+}
+
 export function createWelcomeMessage(): ChatMessage {
+  const deals = topDeals(3);
   return createBotMessage(
-    "Hi! I'm Ecommerce Store Assistant. Ask about products, deals, delivery, or departments — I answer from this demo catalog.",
+    `Hi — I'm the Ecommerce Store assistant. ${catalogHint()} Ask for a product, a department, or today's deals.`,
+    deals,
   );
 }
 
@@ -132,104 +154,124 @@ export type ChatEngineContext = {
   pincode: string;
 };
 
+function detectDepartment(lower: string): ShopProduct['department'] | 'Deals' | null {
+  if (/\belectronics?\b/.test(lower)) return 'Electronics';
+  if (/\bfashion\b/.test(lower)) return 'Fashion';
+  if (/\bhome\b|\bkitchen\b/.test(lower)) return 'Home & Kitchen';
+  if (/\btoday'?s?\s+(top\s+)?deals\b|\btop deals\b/.test(lower)) return 'Deals';
+  return null;
+}
+
 /**
  * Lightweight demo “AI” — grounded only in Ecommerce Store showcase catalog data.
  */
 export function answerEcommerceStoreQuery(raw: string, ctx: ChatEngineContext): ChatMessage {
   const query = raw.trim();
   const lower = query.toLowerCase();
+  const headphones = SHOP_PRODUCTS.find((p) => p.id === 'headphones') ?? SHOP_PRODUCTS[0];
+  const phone = SHOP_PRODUCTS.find((p) => p.id === 'galaxy-m34') ?? SHOP_PRODUCTS[1];
 
   if (!query) {
-    return createBotMessage('Type a product name, department, or ask about deals and delivery.');
+    return createBotMessage(
+      `Ask for something in this catalog — ${shortTitle(phone)}, ${shortTitle(headphones)}, or today's deals.`,
+      topDeals(3),
+    );
   }
 
   if (/^(hi|hello|hey|namaste|hola)\b/.test(lower)) {
-    return createBotMessage(
-      "Hello! I can find phones, fashion, home essentials, and today's deals from the Ecommerce Store demo catalog.",
-    );
+    return createBotMessage(`Hello! ${catalogHint()}`, topDeals(3));
   }
 
-  if (/(help|what can you|kaise|how do)/.test(lower)) {
-    return createBotMessage(
-      "Try: “best deals”, “electronics”, “mixer”, “delivery”, or “cart”. I only use this page's product data — no live inventory API.",
-    );
-  }
-
-  if (/(cart|checkout|razorpay|pay)/.test(lower)) {
+  if (/(cart|checkout|razorpay|\bpay\b)/.test(lower)) {
+    const suggestions = topDeals(3);
     if (ctx.cartCount === 0) {
       return createBotMessage(
-        "Your cart is empty. Add items from Today's deals or search results, then open Cart to checkout with the Razorpay demo flow.",
+        `Your cart is empty. Add a catalog item such as ${suggestions
+          .map((p) => `${shortTitle(p)} (${formatInr(p.price)})`)
+          .join(', ')}, then open Cart in the header for Razorpay demo checkout.`,
+        suggestions,
       );
     }
     return createBotMessage(
-      `You have ${ctx.cartCount} item(s) · subtotal ${formatInr(ctx.cartSubtotal)}. Open Cart (top right) to adjust qty or pay with Razorpay demo checkout.`,
+      `You have ${ctx.cartCount} item${ctx.cartCount === 1 ? '' : 's'} · subtotal ${formatInr(ctx.cartSubtotal)}. Open Cart (top right) to change qty or pay with the Razorpay demo.`,
     );
   }
 
   if (/(deliver|shipping|pincode|eta|free delivery)/.test(lower)) {
+    const free = SHOP_PRODUCTS.filter((p) => p.delivery.toLowerCase().includes('free')).slice(0, 3);
     return createBotMessage(
-      `Current delivery pin: ${ctx.pincode}. Many items show FREE delivery in the catalog — change pin from the header “Deliver to” control. Same-day is demo copy for select cities.`,
+      `Delivering to ${ctx.pincode}. These catalog picks include free delivery — change pin from “Deliver to” in the header.`,
+      free,
     );
   }
 
   if (/(return|refund|exchange)/.test(lower)) {
     return createBotMessage(
-      'Easy returns are part of the demo trust strip. Use Returns & Orders in the header for the fictional returns panel.',
+      'Returns are a demo flow on this store: use Returns & Orders in the header. Fashion and home items follow the same 30-day demo returns copy.',
     );
   }
 
-  if (/(bank|offer|hdfc|sbi|coupon|cashback)/.test(lower)) {
+  if (/(bank|hdfc|sbi|coupon|cashback)/.test(lower)) {
     return createBotMessage(
-      'Demo bank offers on this page: HDFC 10% (HDFC10), SBI no-cost EMI (SBINOCOST), and Ecommerce Store Pay ₹75 cashback (PAY75). See the Bank offers section below deals.',
+      'Bank offers on this page: HDFC 10% (HDFC10), SBI no-cost EMI (SBINOCOST), and Ecommerce Store Pay ₹75 (PAY75). Apply them under Bank offers, then checkout from Cart.',
     );
   }
 
-  if (
-    /(department|categor|section)/.test(lower) ||
-    /^(electronics|fashion|home|kitchen|deals)$/.test(lower)
-  ) {
-    const deptMatch = lower.includes('electronic')
-      ? 'Electronics'
-      : lower.includes('fashion')
-        ? 'Fashion'
-        : lower.includes('home') || lower.includes('kitchen')
-          ? 'Home & Kitchen'
-          : lower.includes('deal')
-            ? 'Deals'
-            : null;
+  if (/(help|what can you|kaise|how do you)/.test(lower)) {
+    return createBotMessage(
+      `${catalogHint()} Try “${shortTitle(phone)}”, “${shortTitle(headphones)}”, “Home & Kitchen”, or “today's deals”.`,
+      topDeals(3),
+    );
+  }
 
-    if (deptMatch === 'Deals') {
-      const deals = SHOP_PRODUCTS.filter((p) => isDealProduct(p)).slice(0, 3);
-      return createBotMessage(`Here are top deal picks (35%+ off) from the demo catalog:`, deals);
+  const dept = detectDepartment(lower);
+  if (dept || /(department|categor|section)/.test(lower)) {
+    if (dept === 'Deals') {
+      const deals = topDeals(3);
+      return createBotMessage(
+        `Top deals from this catalog (35%+ off): ${deals
+          .map((p) => `${shortTitle(p)} ${formatInr(p.price)}`)
+          .join(' · ')}.`,
+        deals,
+      );
     }
 
-    if (deptMatch) {
-      const items = SHOP_PRODUCTS.filter((p) => p.department === deptMatch).slice(0, 3);
-      return createBotMessage(`${deptMatch} picks from Ecommerce Store:`, items);
+    if (dept && dept !== 'All') {
+      const items = byDepartment(dept, 3);
+      return createBotMessage(
+        `${dept} in this catalog: ${items
+          .map((p) => `${shortTitle(p)} — ${formatInr(p.price)}`)
+          .join('; ')}.`,
+        items,
+      );
     }
 
     return createBotMessage(
-      'Departments on this demo: Electronics, Fashion, Home & Kitchen, and Deals. Ask for any of those by name.',
+      'Departments in this catalog: Electronics, Fashion, Home & Kitchen, and Deals. Ask for any of those by name.',
+      topDeals(3),
     );
   }
 
-  if (/(deal|offer|discount|sale|cheap|budget)/.test(lower)) {
+  if (/(deal|discount|sale|cheap|budget|under|below)/.test(lower) || extractBudget(lower) != null) {
     let deals = SHOP_PRODUCTS.filter((p) => isDealProduct(p));
-    const budget = extractBudget(lower);
-    if (budget != null) deals = underBudget(deals, budget);
+    const dealBudget = extractBudget(lower);
+    if (dealBudget != null) deals = underBudget(deals, dealBudget);
     deals = [...deals].sort((a, b) => discountPct(b.price, b.list) - discountPct(a.price, a.list));
     if (deals.length === 0) {
+      const fallback =
+        dealBudget != null ? underBudget(SHOP_PRODUCTS, dealBudget).slice(0, 3) : topDeals(3);
       return createBotMessage(
-        budget != null
-          ? `No deals found under ${formatInr(budget)} in this demo catalog. Try a higher budget or ask for Electronics.`
-          : "No strong deals matched — browse Today's deals on the page.",
+        dealBudget != null
+          ? `No 35%+ deals under ${formatInr(dealBudget)}. Here are catalog items in that budget:`
+          : 'Here are the strongest discounts on this page:',
+        fallback,
       );
     }
     const top = deals.slice(0, 3);
     const lines = top
-      .map((p) => `${p.title} — ${formatInr(p.price)} (${discountPct(p.price, p.list)}% off)`)
+      .map((p) => `${shortTitle(p)} — ${formatInr(p.price)} (${discountPct(p.price, p.list)}% off)`)
       .join('; ');
-    return createBotMessage(`Hottest demo deals: ${lines}`, top);
+    return createBotMessage(`Hottest catalog deals: ${lines}`, top);
   }
 
   const budget = extractBudget(lower);
@@ -240,7 +282,7 @@ export function answerEcommerceStoreQuery(raw: string, ctx: ChatEngineContext): 
     const top = matched.slice(0, 3);
     const lead = top[0];
     return createBotMessage(
-      `I found ${matched.length} match(es). Top pick: ${lead.title} at ${formatInr(lead.price)} · ${lead.delivery}.`,
+      `Found ${matched.length} catalog match${matched.length === 1 ? '' : 'es'}. Top pick: ${lead.title} at ${formatInr(lead.price)} · ${lead.delivery}.`,
       top,
     );
   }
@@ -248,11 +290,12 @@ export function answerEcommerceStoreQuery(raw: string, ctx: ChatEngineContext): 
   if (budget != null) {
     const cheap = underBudget(SHOP_PRODUCTS, budget).slice(0, 3);
     if (cheap.length) {
-      return createBotMessage(`Under ${formatInr(budget)}, try these demo items:`, cheap);
+      return createBotMessage(`Under ${formatInr(budget)} in this catalog:`, cheap);
     }
   }
 
   return createBotMessage(
-    "I couldn't match that to the Ecommerce Store catalog. Try “Samsung”, “headphones”, “kitchen”, or “best deals”.",
+    `I couldn't match that to this catalog. Try “${shortTitle(phone)}”, “${shortTitle(headphones)}”, or “${shortTitle(SHOP_PRODUCTS[2])}”.`,
+    topDeals(3),
   );
 }

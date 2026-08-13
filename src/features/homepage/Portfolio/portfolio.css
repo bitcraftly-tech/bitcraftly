@@ -39,11 +39,12 @@
   color: var(--primary-foreground);
 }
 
-/* Shell inset: 16px on all sides (image + copy) */
+/* Shell: full-bleed image, compact content inset */
 #featured-portfolio .portfolio-card,
 .portfolio-card {
   box-sizing: border-box;
-  padding: 16px;
+  padding: 0;
+  overflow: hidden;
   border: 1px solid var(--hp-card-border, var(--border));
   background-color: var(--background);
   box-shadow: var(--hp-card-shadow, 0 1px 2px 0 rgb(15 23 42 / 0.04));
@@ -62,9 +63,28 @@
 
 .portfolio-card-media {
   position: relative;
+  width: 100%;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 0;
   aspect-ratio: 16 / 10;
+}
+
+.portfolio-card__title {
+  margin: 12px 12px 0 !important;
+}
+
+.portfolio-card__description {
+  margin: 6px 12px 0 !important;
+}
+
+.portfolio-card__tags {
+  margin: 10px 12px 0 !important;
+}
+
+.portfolio-card-actions {
+  margin: 12px 12px 12px;
+  opacity: 0.92;
+  transition: opacity var(--duration-normal) var(--ease-out);
 }
 
 .portfolio-card-media-visual {
@@ -97,11 +117,6 @@
 .portfolio-card:hover .portfolio-card-media-overlay,
 .portfolio-card:focus-within .portfolio-card-media-overlay {
   opacity: 1;
-}
-
-.portfolio-card-actions {
-  opacity: 0.92;
-  transition: opacity var(--duration-normal) var(--ease-out);
 }
 
 .portfolio-card:hover .portfolio-card-actions,

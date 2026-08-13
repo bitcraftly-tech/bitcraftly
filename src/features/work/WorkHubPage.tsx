@@ -5,10 +5,12 @@ import { Icon } from '@/components/ui/icon';
 import { Section } from '@/components/ui/section';
 import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
 import { buildWorkBreadcrumbs } from '@/lib/seo/breadcrumbs';
-import { WorkInternalHero } from './WorkInternalHero';
+import { WorkAiSolutionsHero } from './WorkAiSolutionsHero';
+import { WorkCollectionHero } from './WorkCollectionHero';
 import { WorkPageCta } from './WorkPageCta';
 import { WorkProjectCard } from './WorkProjectCard';
-import { WORK_HUBS, WORK_LANDING, WORK_PROJECTS } from './work.content';
+import { WorkWebsitesHero } from './WorkWebsitesHero';
+import { WORK_HUBS, WORK_PROJECTS } from './work.content';
 import { filterWorkProjects } from './work.filters';
 import type { WorkHubContent, WorkProject } from './work.types';
 import './work.css';
@@ -29,26 +31,33 @@ export function WorkHubPage({ hub }: WorkHubPageProps) {
   const projects = filterWorkProjects(WORK_PROJECTS, hub.filterPreset);
   const relatedHubs = getRelatedHubs(hub.slug);
   const headingId = `work-hub-${hub.slug}-heading`;
+  const isWebsitesHub = hub.slug === 'websites';
+  const isAiHub = hub.slug === 'ai-solutions';
 
   return (
     <PageShell className="work-page work-detail-page">
-      <WorkInternalHero
-        breadcrumbs={breadcrumbs}
-        headingId={headingId}
-        eyebrow="Work hub"
-        eyebrowIcon="layout-grid"
-        title={hub.title}
-        description={hub.description}
-        primaryCta={{
-          label: WORK_LANDING.primaryCta.label,
-          href: WORK_LANDING.primaryCta.href,
-        }}
-        secondaryCta={{
-          label: 'Browse all work',
-          href: ROUTES.work,
-        }}
-        chips={[hub.filterPreset === 'all' ? 'All projects' : hub.title]}
-      />
+      {isWebsitesHub ? (
+        <WorkWebsitesHero
+          breadcrumbs={breadcrumbs}
+          headingId={headingId}
+          description={hub.description}
+        />
+      ) : isAiHub ? (
+        <WorkAiSolutionsHero
+          breadcrumbs={breadcrumbs}
+          headingId={headingId}
+          description={hub.description}
+        />
+      ) : (
+        <WorkCollectionHero
+          breadcrumbs={breadcrumbs}
+          headingId={headingId}
+          hubSlug={hub.slug}
+          hubTitle={hub.title}
+          description={hub.description}
+          projects={projects}
+        />
+      )}
 
       <Section
         spacing="lg"

@@ -105,6 +105,24 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
 
   /**
+   * Legacy portfolio showcase path fixes.
+   */
+  async redirects() {
+    return [
+      {
+        source: '/portfolio/toy--showcase',
+        destination: '/portfolio/toy-showcase',
+        permanent: true,
+      },
+      {
+        source: '/portfolio/toy--showcase/:path*',
+        destination: '/portfolio/toy-showcase/:path*',
+        permanent: true,
+      },
+    ];
+  },
+
+  /**
    * Production Security + Cache Headers
    * Never set long-lived immutable Cache-Control on `/_next/static` in
    * development — Chrome keeps stale webpack chunks and full-page reloads.
