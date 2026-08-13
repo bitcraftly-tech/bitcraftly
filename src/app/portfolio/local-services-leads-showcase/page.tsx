@@ -5,9 +5,9 @@ import PortfolioShowcaseLayout from '@/components/portfolio/PortfolioShowcaseLay
 import LocalServicesLeadShowcaseContent from './LocalServicesLeadShowcaseContent';
 
 export const metadata: Metadata = {
-  title: 'Local Services Lead Site Showcase | Bitcraftly',
+  title: 'Steel City Home Pros · Local Services Showcase | Bitcraftly',
   description:
-    'Hyperlocal lead funnel mock — strong CTAs, WhatsApp routing & service grids in Bitcraftly dark UI.',
+    'Hyperlocal home-services lead funnel — verified crews, transparent pricing, Jamshedpur zone dispatch and WhatsApp booking.',
 };
 
 export default function LocalServicesLeadsShowcasePage() {

@@ -347,14 +347,14 @@ export const PORTFOLIO_SHOWCASE_THEMES: Record<ShowcaseThemeId, ShowcaseTheme> =
   society: lightShowcaseTheme({
     id: 'society',
     brand: 'Riverstone Resident Portal',
-    tagline: 'Notices · bills · visitors · amenity bookings for housing societies.',
+    tagline: 'Bills · visitors · complaints · amenity bookings for housing societies.',
     accent: 'emerald',
     navLinks: [
       { label: 'Dashboard', href: '#dashboard' },
-      { label: 'Notices', href: '#notices' },
+      { label: 'Bills', href: '#bills' },
       { label: 'Amenities', href: '#amenities' },
     ],
-    navCta: { label: 'Resident login', href: '#dashboard' },
+    navCta: { label: 'Raise complaint', href: '#complaints' },
     footerColumns: [
       {
         title: 'Portal',
@@ -364,7 +364,7 @@ export const PORTFOLIO_SHOWCASE_THEMES: Record<ShowcaseThemeId, ShowcaseTheme> =
         ],
       },
       {
-        title: 'Committee',
+        title: 'Contact us',
         links: [
           { label: 'Complaints', href: '#complaints' },
           { label: 'Emergency', href: '#emergency' },
@@ -375,26 +375,27 @@ export const PORTFOLIO_SHOWCASE_THEMES: Record<ShowcaseThemeId, ShowcaseTheme> =
   chatbot: lightShowcaseTheme({
     id: 'chatbot',
     brand: 'Tasting Desk AI',
-    tagline: 'Menu answers · hours · WhatsApp handoff for restaurants.',
-    accent: 'indigo',
+    tagline: 'Official agentic framework for restaurants.',
+    accent: 'amber',
     navLinks: [
       { label: 'Live demo', href: '#demo' },
-      { label: 'Features', href: '#features' },
+      { label: 'Capabilities', href: '#features' },
+      { label: 'Outcomes', href: '#outcomes' },
     ],
-    navCta: { label: 'Try chat', href: '#demo' },
+    navCta: { label: 'Try now', href: '#demo-chat' },
     footerColumns: [
       {
-        title: 'Assistant',
+        title: 'Agents',
         links: [
-          { label: 'Menu FAQs', href: '#demo' },
-          { label: 'WhatsApp route', href: '#features' },
+          { label: 'Live chat demo', href: '#demo' },
+          { label: 'Capabilities', href: '#features' },
         ],
       },
       {
-        title: 'Ops',
+        title: 'Info',
         links: [
-          { label: 'Hours sync', href: '#features' },
-          { label: 'Staff handoff', href: '#features' },
+          { label: 'Outcomes', href: '#outcomes' },
+          { label: 'Languages', href: '#languages' },
         ],
       },
     ],
@@ -429,10 +430,11 @@ export const PORTFOLIO_SHOWCASE_THEMES: Record<ShowcaseThemeId, ShowcaseTheme> =
   local: lightShowcaseTheme({
     id: 'local',
     brand: 'Steel City Home Pros',
-    tagline: 'Hyperlocal services · verified pros · WhatsApp-first lead funnels.',
+    tagline: 'Verified home crews · WhatsApp quotes · Jamshedpur dispatch.',
     accent: 'amber',
     navLinks: [
       { label: 'Services', href: '#services' },
+      { label: 'Pricing', href: '#pricing' },
       { label: 'Book', href: '#booking' },
     ],
     navCta: { label: 'Book now', href: '#booking' },
@@ -442,13 +444,14 @@ export const PORTFOLIO_SHOWCASE_THEMES: Record<ShowcaseThemeId, ShowcaseTheme> =
         links: [
           { label: 'Plumbing', href: '#services' },
           { label: 'Electrician', href: '#services' },
+          { label: 'AC repair', href: '#services' },
         ],
       },
       {
-        title: 'Coverage',
+        title: 'Contact',
         links: [
-          { label: 'Jamshedpur zones', href: '#services' },
-          { label: '24—7 desk', href: '#booking' },
+          { label: 'Request a visit', href: '#booking' },
+          { label: 'Coverage zones', href: '#zones' },
         ],
       },
     ],

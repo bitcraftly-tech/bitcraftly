@@ -7,8 +7,10 @@ import {
   Calendar,
   Car,
   CreditCard,
+  Dumbbell,
   FileText,
   Home,
+  LayoutDashboard,
   Megaphone,
   Phone,
   PlusCircle,
@@ -16,103 +18,103 @@ import {
   Sparkles,
   Users,
   Wrench,
+  Zap,
 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 import { CONTAINER, SUPPORT_EMAIL, SUPPORT_PHONE_DISPLAY } from '@/lib/constants';
 
+import './society-showcase.css';
+
+const NAV: readonly { id: string; label: string; icon: LucideIcon }[] = [
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'bills', label: 'Maintenance bills', icon: CreditCard },
+  { id: 'visitors', label: 'Visitor management', icon: Car },
+  { id: 'complaints', label: 'Complaints', icon: Wrench },
+  { id: 'notices', label: 'Notices', icon: Bell },
+  { id: 'events', label: 'Events', icon: Calendar },
+  { id: 'emergency', label: 'Emergency', icon: Phone },
+  { id: 'amenities', label: 'Amenities', icon: Building2 },
+] as const;
+
 const KPI = [
   {
-    label: 'Total Residents',
-    value: '482',
+    label: 'Total members',
+    value: '452',
     hint: 'Across 6 towers · 186 flats',
     icon: Users,
-    accent: 'from-violet-600/25 to-violet-950/40',
   },
   {
-    label: 'Pending Bills',
+    label: 'Pending bills',
     value: '₹14.2L',
     hint: '42 flats · due within 7 days',
     icon: CreditCard,
-    accent: 'from-amber-500/15 to-violet-950/40',
   },
   {
-    label: 'Visitor Entries',
-    value: '128',
-    hint: 'This month · pre-approved',
+    label: 'Active visitors',
+    value: '25',
+    hint: 'On-premise · pre-approved',
     icon: Car,
-    accent: 'from-emerald-600/15 to-violet-950/40',
   },
   {
-    label: 'Monthly Expenses',
+    label: 'Monthly expenses',
     value: '₹38.6L',
     hint: 'Ops + civic · reconciled',
     icon: FileText,
-    accent: 'from-fuchsia-600/15 to-violet-950/40',
   },
-] as const;
-
-const SIDEBAR = [
-  'Resident Dashboard',
-  'Maintenance Bills',
-  'Visitor Management',
-  'Complaints & Requests',
-  'Notices & Announcements',
-  'Events & Celebrations',
-  'Emergency Contacts',
-  'Amenities Booking',
 ] as const;
 
 const VISITORS = [
   {
     name: 'Rahul Mehta',
-    flat: 'B‑704',
+    flat: 'B-704',
     vendor: 'AC service · CoolTech',
     inAt: '10:42 AM',
-    status: 'On‑premise',
-    badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/25',
+    status: 'Checked-in',
+    tone: 'ok' as const,
   },
   {
     name: 'Priya Sharma',
-    flat: 'A‑210',
+    flat: 'A-210',
     vendor: 'Guest · birthday party',
     inAt: 'Yesterday · 6 PM',
     status: 'Checked out',
-    badge: 'bg-dark-bg-secondary text-dark-text-tertiary border-dark-border-primary',
+    tone: 'muted' as const,
   },
   {
     name: 'BlueDart Courier',
     flat: 'Lobby desk',
-    vendor: 'Shipment HH‑88921',
+    vendor: 'Shipment HH-88921',
     inAt: '9:15 AM',
     status: 'Awaiting pickup',
-    badge: 'bg-amber-500/15 text-amber-200 border-amber-500/25',
+    tone: 'warn' as const,
   },
 ] as const;
 
 const COMPLAINTS = [
   {
-    id: 'CMP‑2188',
-    title: 'Parking obstruction · Tower B P3',
-    raised: 'Block VP · Flat B‑704',
+    id: 'CMP-2188',
+    title: 'Parking slot blocked · Tower B P3',
+    raised: 'Unit B-704 · 11 May',
     sla: 'Due · 18 hrs',
     status: 'In progress',
-    tone: 'text-violet-300 bg-violet-500/15 border-violet-500/25',
+    tone: 'info' as const,
   },
   {
-    id: 'CMP‑2185',
+    id: 'CMP-2185',
     title: 'Water pressure fluctuation · 14th floor',
-    raised: 'RWA steward desk',
+    raised: 'RWA steward desk · 9 May',
     sla: 'Due · 3 days',
     status: 'Vendor assigned',
-    tone: 'text-amber-200 bg-amber-500/12 border-amber-500/20',
+    tone: 'warn' as const,
   },
   {
-    id: 'CMP‑2179',
+    id: 'CMP-2179',
     title: 'Lift lobby lighting flicker',
-    raised: 'Security kiosk scan',
-    sla: 'Resolved · archived',
+    raised: 'Security kiosk · 4 May',
+    sla: 'Resolved',
     status: 'Closed',
-    tone: 'text-dark-text-tertiary bg-dark-bg-secondary border-dark-border-primary',
+    tone: 'muted' as const,
   },
 ] as const;
 
@@ -124,7 +126,7 @@ const NOTICES = [
     pinned: true,
   },
   {
-    title: 'AGM voting deadline extended · Digital quorum rules',
+    title: 'AGM voting deadline extended · digital quorum rules',
     date: '10 May 2026',
     tag: 'Governance',
     pinned: false,
@@ -139,509 +141,465 @@ const NOTICES = [
 
 const EVENTS = [
   {
-    name: 'Monsoon terrace supper · curated stalls',
+    name: 'Monsoon terrace supper',
     when: 'Sat · 24 May · 7 PM',
-    loc: 'Sky podium deck · RSVP gated',
-    tone: 'border-violet-500/30 bg-violet-500/10',
+    loc: 'Sky podium deck',
   },
   {
     name: 'Children’s science carnival',
     when: 'Sun · 1 Jun · 4 PM',
-    loc: 'Amenity lawn · wristbands issued',
-    tone: 'border-fuchsia-500/28 bg-fuchsia-500/8',
+    loc: 'Amenity lawn',
   },
   {
-    name: 'Yoga sunrise cohort · batch reopen',
-    when: 'Daily · 6 AM slot',
-    loc: 'Wellness studio · capacity 24',
-    tone: 'border-emerald-500/25 bg-emerald-500/8',
+    name: 'Yoga sunrise cohort',
+    when: 'Daily · 6 AM',
+    loc: 'Wellness studio',
   },
 ] as const;
 
 const EMERGENCY = [
-  { role: 'Estate manager · duty desk', ext: '9101 · 24×7', phone: SUPPORT_PHONE_DISPLAY },
-  { role: 'Security control tower', ext: '9009 · CCTV fusion room', phone: SUPPORT_PHONE_DISPLAY },
-  {
-    role: 'Medical booth · tie‑up clinic',
-    ext: 'Dial 144 · escalation ladder',
-    phone: SUPPORT_PHONE_DISPLAY,
-  },
-  {
-    role: 'Electrician & sump standby',
-    ext: 'Vendor panel HH‑EL‑02',
-    phone: SUPPORT_PHONE_DISPLAY,
-  },
+  { role: 'Estate manager', detail: 'Duty desk · 24×7', phone: SUPPORT_PHONE_DISPLAY },
+  { role: 'Security control', detail: 'Gate & CCTV fusion', phone: SUPPORT_PHONE_DISPLAY },
+  { role: 'Medical booth', detail: 'Clinic tie-up · 144', phone: SUPPORT_PHONE_DISPLAY },
+  { role: 'Electrician standby', detail: 'Vendor HH-EL-02', phone: SUPPORT_PHONE_DISPLAY },
 ] as const;
 
 const AMENITIES = [
   {
-    name: 'Badminton court · Court A',
+    name: 'Badminton court',
     slots: 'Sat 6–7 PM · open',
-    fee: '₹400 / hr · resident tier',
+    fee: '₹400 / hr',
     bookable: true,
+    icon: Dumbbell,
   },
   {
-    name: 'Party hall · Level P2',
+    name: 'Party hall',
     slots: 'Sun eve · waitlisted',
-    fee: '₹12k · incl housekeeping',
+    fee: '₹12k · housekeeping',
     bookable: false,
+    icon: Building2,
   },
   {
-    name: 'Guest suite · Tower D',
-    slots: 'Thu–Sun slots · hygiene audit',
+    name: 'Guest suite',
+    slots: 'Thu–Sun · hygiene audit',
     fee: '₹2.8k / night',
     bookable: true,
+    icon: Home,
   },
   {
-    name: 'EV charging bay · Podium',
-    slots: 'Bay 4 · free idle grace',
-    fee: 'Metered billing · wallet sync',
+    name: 'EV charging bay',
+    slots: 'Bay 4 · idle grace',
+    fee: 'Metered billing',
     bookable: true,
+    icon: Zap,
   },
 ] as const;
 
 const BILL_ROWS = [
   {
-    flat: 'B‑704',
-    owner: 'Mehta family',
+    bill: 'May 2026 · Maintenance',
     amount: '₹18,420',
-    due: '22 May 2026',
-    state: 'Due soon',
-    stateTone: 'text-amber-200 bg-amber-500/12',
+    status: 'Due soon',
+    tone: 'warn' as const,
   },
   {
-    flat: 'C‑1102',
-    owner: 'Patel trust',
-    amount: '₹21,050',
-    due: '01 Jun 2026',
-    state: 'Scheduled',
-    stateTone: 'text-violet-800 bg-violet-500/12',
+    bill: 'Apr 2026 · Maintenance',
+    amount: '₹17,980',
+    status: 'Paid',
+    tone: 'ok' as const,
   },
   {
-    flat: 'A‑055',
-    owner: 'Khanna · leased',
-    amount: '₹16,980',
-    due: 'Paid · receipt #88421',
-    state: 'Cleared',
-    stateTone: 'text-emerald-200 bg-emerald-500/12',
+    bill: 'Mar 2026 · Sinking fund',
+    amount: '₹4,200',
+    status: 'Paid',
+    tone: 'ok' as const,
   },
 ] as const;
 
+const PILL: Record<'ok' | 'warn' | 'info' | 'muted', string> = {
+  ok: 'rs-portal__pill rs-portal__pill--ok',
+  warn: 'rs-portal__pill rs-portal__pill--warn',
+  info: 'rs-portal__pill rs-portal__pill--info',
+  muted: 'rs-portal__pill rs-portal__pill--muted',
+};
+
+/**
+ * Harmony Heights / Riverstone resident portal specimen.
+ */
 export default function SocietyManagementShowcaseContent() {
   return (
-    <div className="pb-16 pt-8 md:pb-20 md:pt-10">
-      {/* Portal header */}
-      <section className={`${CONTAINER}`}>
-        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+    <div className="rs-portal pb-16 pt-8 md:pb-20 md:pt-10">
+      <section className={CONTAINER}>
+        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-violet-500/35 bg-violet-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-800">
+            <p className="rs-portal__eyebrow">
               <Sparkles className="h-3.5 w-3.5" aria-hidden />
               UI showcase · fictional society
-            </span>
-            <h1 className="mt-4 font-[var(--font-playfair)] text-3xl font-semibold tracking-tight text-dark-text-primary sm:text-4xl md:text-[2.75rem]">
-              Harmony Heights · Resident Portal
+            </p>
+            <h1 className="rs-portal__title mt-3 text-3xl sm:text-4xl md:text-[2.55rem]">
+              Harmony Heights
+              <span className="mt-1 block text-xl font-semibold text-[color:var(--rs-muted)] sm:text-2xl">
+                Resident Portal
+              </span>
             </h1>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-dark-text-secondary">
-              Dashboard-grade RMS surface — bills, visitors, grievances, and clubhouse workflows on
-              one coherent canvas. Representative UI only; no live tenant data.
+            <p className="rs-portal__lead mt-3">
+              Bills, visitors, grievances, and amenity bookings — a calm RMS canvas residents can
+              actually navigate. Representative UI only.
             </p>
           </div>
-          <div className="flex flex-wrap gap-2 md:flex-col md:items-stretch">
-            <ShowcaseLink
-              href="/contact?intent=consultation&source=society-portal-showcase"
-              className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-violet-900/30 transition hover:brightness-110"
-            >
+          <div className="flex flex-wrap gap-2">
+            <ShowcaseAnchor href="#complaints" className="rs-portal__btn rs-portal__btn--primary">
               <PlusCircle className="h-4 w-4" aria-hidden />
               Raise complaint
-            </ShowcaseLink>
-            <ShowcaseLink
-              href="/contact?intent=billing&source=society-portal-showcase"
-              className="inline-flex cursor-pointer items-center justify-center rounded-full border border-dark-border-secondary bg-dark-bg-card px-5 py-2.5 text-sm font-semibold text-dark-text-primary transition hover:border-violet-500/40"
-            >
-              Maintenance payment
-            </ShowcaseLink>
+            </ShowcaseAnchor>
+            <ShowcaseAnchor href="#bills" className="rs-portal__btn rs-portal__btn--ghost">
+              Pay maintenance
+            </ShowcaseAnchor>
           </div>
         </div>
       </section>
 
-      {/* Security alerts */}
-      <section className={`${CONTAINER} mt-8 space-y-3`}>
-        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-dark-text-tertiary">
-          <Shield className="h-4 w-4 text-amber-400/90" aria-hidden />
-          Security alerts
+      <section className={`${CONTAINER} mt-8`} aria-label="Security alerts">
+        <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-[color:var(--rs-muted)]">
+          <Shield className="h-4 w-4 text-[color:var(--rs-accent)]" aria-hidden />
+          Live alerts
         </div>
-        <div className="grid gap-3 md:grid-cols-2">
-          <div className="flex gap-3 rounded-xl border border-amber-500/35 bg-amber-500/8 px-4 py-3">
-            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-300" aria-hidden />
-            <div>
-              <p className="text-sm font-semibold text-dark-text-primary">
-                Perimeter camera zone B4 offline · failover armed
-              </p>
-              <p className="mt-1 text-xs text-dark-text-secondary">
-                Logged 07:12 IST · vendor ticket RMS‑SEC‑441 dispatched automatically.
-              </p>
-            </div>
-          </div>
-          <div className="flex gap-3 rounded-xl border border-violet-500/30 bg-violet-500/8 px-4 py-3">
-            <Bell className="mt-0.5 h-5 w-5 shrink-0 text-violet-300" aria-hidden />
-            <div>
-              <p className="text-sm font-semibold text-dark-text-primary">
-                Night patrol deviation acknowledged · Gate‑3 QR spike
-              </p>
-              <p className="mt-1 text-xs text-dark-text-secondary">
-                Supervisor sign‑off pending · resident blast suppressed until audit.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Dashboard shell: sidebar + main */}
-      <section className={`${CONTAINER} mt-10 flex flex-col gap-8 lg:flex-row lg:gap-10`}>
-        <aside className="hidden w-56 shrink-0 lg:block">
-          <nav className="sticky top-28 space-y-1 rounded-xl border border-dark-border-primary bg-dark-bg-card p-3">
-            <p className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-dark-text-tertiary">
-              Navigate
+        <div className="rs-portal__alerts">
+          <div className="rs-portal__alert rs-portal__alert--warn">
+            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" aria-hidden />
+            <p>
+              <strong>Perimeter camera zone B4 offline</strong>
+              <span>Failover armed · ticket RMS-SEC-441 dispatched · 07:12 IST</span>
             </p>
-            {SIDEBAR.map((item, i) => (
-              <div
-                key={item}
-                className={`rounded-lg px-3 py-2 text-sm ${
-                  i === 0
-                    ? 'bg-violet-500/15 font-semibold text-violet-100'
-                    : 'text-dark-text-secondary hover:bg-dark-bg-secondary'
-                }`}
-              >
-                {item}
-              </div>
-            ))}
-          </nav>
-        </aside>
+          </div>
+          <div className="rs-portal__alert rs-portal__alert--info">
+            <Bell className="mt-0.5 h-5 w-5 shrink-0" aria-hidden />
+            <p>
+              <strong>Gate-3 QR spike acknowledged</strong>
+              <span>Night patrol deviation logged · resident blast held pending audit</span>
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <div className="min-w-0 flex-1 space-y-12">
-          {/* KPI */}
-          <div id="dashboard">
-            <div className="flex items-center justify-between gap-3">
-              <h2 className="font-[var(--font-playfair)] text-2xl text-dark-text-primary">
-                Resident dashboard
-              </h2>
-              <span className="text-[11px] font-medium text-dark-text-tertiary">
-                Snapshot · May 2026
-              </span>
-            </div>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {KPI.map(({ label, value, hint, icon: Icon, accent }) => (
-                <div
-                  key={label}
-                  className={`rounded-xl border border-dark-border-primary bg-gradient-to-br p-5 shadow-sm ring-1 ring-white/5 ${accent}`}
-                >
-                  <Icon className="h-5 w-5 text-violet-300/90" aria-hidden />
-                  <p className="mt-4 text-[11px] font-semibold uppercase tracking-wide text-dark-text-tertiary">
+      <section className={`${CONTAINER} mt-10`}>
+        <div className="rs-portal__shell">
+          <aside className="rs-portal__nav" aria-label="Portal sections">
+            <p className="rs-portal__nav-label">Navigate</p>
+            <ul className="rs-portal__nav-list">
+              {NAV.map(({ id, label, icon: Icon }, index) => (
+                <li key={id}>
+                  <ShowcaseAnchor
+                    href={`#${id}`}
+                    className="rs-portal__nav-link"
+                    aria-current={index === 0 ? 'true' : undefined}
+                  >
+                    <Icon className="h-4 w-4 shrink-0" aria-hidden />
                     {label}
-                  </p>
-                  <p className="mt-1 font-[var(--font-playfair)] text-2xl font-semibold text-dark-text-primary">
-                    {value}
-                  </p>
-                  <p className="mt-2 text-xs text-dark-text-secondary">{hint}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Announcements + payment */}
-          <div className="grid gap-6 lg:grid-cols-5">
-            <div className="rounded-xl border border-violet-500/35 bg-violet-500/10 p-5 lg:col-span-3">
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-violet-800">
-                <Megaphone className="h-4 w-4" aria-hidden />
-                Society announcements
-              </div>
-              <p className="mt-3 text-sm font-semibold text-dark-text-primary">
-                Digital AGM quorum opens · cast votes before 28 May · biometric mismatch desk
-                operational weekends only.
-              </p>
-              <p className="mt-2 text-xs leading-relaxed text-dark-text-secondary">
-                Audit annex uploaded to document vault · watermark trace enabled for downloads ·
-                OTP‑gated sharing only.
-              </p>
-            </div>
-            <div
-              id="bills"
-              className="rounded-xl border border-dark-border-primary bg-dark-bg-card p-5 lg:col-span-2"
-            >
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-dark-text-tertiary">
-                <CreditCard className="h-4 w-4 text-violet-400" aria-hidden />
-                Maintenance payment
-              </div>
-              <p className="mt-3 text-sm text-dark-text-secondary">
-                Unit <span className="font-semibold text-dark-text-primary">B‑704</span> · invoice #
-                <span className="font-mono text-xs text-violet-800"> HH‑INV‑88902</span>
-              </p>
-              <p className="mt-4 font-[var(--font-playfair)] text-3xl font-semibold text-dark-text-primary">
-                ₹18,420
-              </p>
-              <p className="mt-1 text-[11px] text-dark-text-tertiary">
-                Includes sinking contribution · water tariff adjustment · GST included.
-              </p>
-              <ShowcaseLink
-                href="/contact?intent=payment&source=society-portal-showcase"
-                className="mt-5 inline-flex w-full cursor-pointer items-center justify-center rounded-full bg-violet-600 py-2.5 text-sm font-semibold text-white transition hover:bg-violet-500"
-              >
-                Pay now · mock gateway
-              </ShowcaseLink>
-            </div>
-          </div>
-
-          {/* Bills table */}
-          <div>
-            <h3 className="flex items-center gap-2 font-[var(--font-playfair)] text-xl text-dark-text-primary">
-              <FileText className="h-5 w-5 text-violet-400" aria-hidden />
-              Maintenance bills · ledger view
-            </h3>
-            <div className="mt-4 overflow-hidden rounded-xl border border-dark-border-primary">
-              <table className="w-full text-left text-sm">
-                <thead className="border-b border-dark-border-primary bg-dark-bg-secondary/80 text-[11px] font-semibold uppercase tracking-wide text-dark-text-tertiary">
-                  <tr>
-                    <th className="px-4 py-3">Flat</th>
-                    <th className="hidden px-4 py-3 sm:table-cell">Account</th>
-                    <th className="px-4 py-3">Amount</th>
-                    <th className="hidden px-4 py-3 md:table-cell">Due</th>
-                    <th className="px-4 py-3">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-dark-border-primary bg-dark-bg-card">
-                  {BILL_ROWS.map((row) => (
-                    <tr key={row.flat}>
-                      <td className="px-4 py-3 font-medium text-dark-text-primary">{row.flat}</td>
-                      <td className="hidden px-4 py-3 text-dark-text-secondary sm:table-cell">
-                        {row.owner}
-                      </td>
-                      <td className="px-4 py-3 font-mono text-xs text-dark-text-primary">
-                        {row.amount}
-                      </td>
-                      <td className="hidden px-4 py-3 text-xs text-dark-text-secondary md:table-cell">
-                        {row.due}
-                      </td>
-                      <td className="px-4 py-3">
-                        <span
-                          className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-semibold ${row.stateTone}`}
-                        >
-                          {row.state}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Visitors */}
-          <div id="visitors">
-            <h3 className="flex items-center gap-2 font-[var(--font-playfair)] text-xl text-dark-text-primary">
-              <Car className="h-5 w-5 text-violet-400" aria-hidden />
-              Visitor management
-            </h3>
-            <div className="mt-4 space-y-3">
-              {VISITORS.map((v) => (
-                <div
-                  key={v.name + v.flat}
-                  className="flex flex-col gap-3 rounded-xl border border-dark-border-primary bg-dark-bg-card p-4 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div>
-                    <p className="font-semibold text-dark-text-primary">{v.name}</p>
-                    <p className="mt-1 text-xs text-dark-text-secondary">
-                      {v.flat} · {v.vendor}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-[11px] text-dark-text-tertiary">{v.inAt}</span>
-                    <span
-                      className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${v.badge}`}
-                    >
-                      {v.status}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Complaints */}
-          <div id="complaints">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <h3 className="flex items-center gap-2 font-[var(--font-playfair)] text-xl text-dark-text-primary">
-                <Wrench className="h-5 w-5 text-violet-400" aria-hidden />
-                Complaints & requests
-              </h3>
-              <ShowcaseLink
-                href="/contact?intent=complaint&source=society-portal-showcase"
-                className="inline-flex w-fit cursor-pointer items-center gap-1 rounded-full border border-violet-500/40 px-4 py-2 text-xs font-semibold text-violet-800 transition hover:bg-violet-500/15"
-              >
-                New ticket · wizard mock
-              </ShowcaseLink>
-            </div>
-            <div className="mt-4 space-y-3">
-              {COMPLAINTS.map((c) => (
-                <div
-                  key={c.id}
-                  className="rounded-xl border border-dark-border-primary bg-dark-bg-card p-4"
-                >
-                  <div className="flex flex-wrap items-start justify-between gap-2">
-                    <div>
-                      <span className="font-mono text-[11px] text-dark-text-tertiary">{c.id}</span>
-                      <p className="mt-1 font-medium text-dark-text-primary">{c.title}</p>
-                      <p className="mt-1 text-xs text-dark-text-secondary">{c.raised}</p>
-                    </div>
-                    <span
-                      className={`rounded-full border px-2.5 py-1 text-[10px] font-semibold ${c.tone}`}
-                    >
-                      {c.status}
-                    </span>
-                  </div>
-                  <p className="mt-3 text-[11px] font-medium text-dark-text-tertiary">{c.sla}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Notices */}
-          <div id="notices">
-            <h3 className="flex items-center gap-2 font-[var(--font-playfair)] text-xl text-dark-text-primary">
-              <Bell className="h-5 w-5 text-violet-400" aria-hidden />
-              Notices & announcements
-            </h3>
-            <ul className="mt-4 space-y-3">
-              {NOTICES.map((n) => (
-                <li
-                  key={n.title}
-                  className="flex gap-4 rounded-xl border border-dark-border-primary bg-dark-bg-card px-4 py-4"
-                >
-                  <Calendar className="mt-0.5 h-5 w-5 shrink-0 text-violet-400/80" aria-hidden />
-                  <div className="min-w-0 flex-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      {n.pinned ? (
-                        <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-200">
-                          Pinned
-                        </span>
-                      ) : null}
-                      <span className="rounded-full border border-dark-border-secondary px-2 py-0.5 text-[10px] font-semibold text-dark-text-tertiary">
-                        {n.tag}
-                      </span>
-                      <span className="text-[11px] text-dark-text-tertiary">{n.date}</span>
-                    </div>
-                    <p className="mt-2 text-sm font-medium text-dark-text-primary">{n.title}</p>
-                  </div>
+                  </ShowcaseAnchor>
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Events */}
-          <div id="events">
-            <h3 className="flex items-center gap-2 font-[var(--font-playfair)] text-xl text-dark-text-primary">
-              <Calendar className="h-5 w-5 text-violet-400" aria-hidden />
-              Events & celebrations
-            </h3>
-            <div className="mt-4 grid gap-4 md:grid-cols-3">
-              {EVENTS.map((e) => (
-                <article key={e.name} className={`rounded-xl border px-5 py-5 ${e.tone}`}>
-                  <p className="font-semibold text-dark-text-primary">{e.name}</p>
-                  <p className="mt-2 text-xs text-dark-text-secondary">{e.when}</p>
-                  <p className="mt-3 text-[11px] leading-relaxed text-dark-text-tertiary">
-                    {e.loc}
-                  </p>
-                  <span className="mt-4 inline-flex text-[11px] font-semibold text-violet-300">
-                    RSVP gated · mock
-                  </span>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          {/* Emergency */}
-          <div id="emergency">
-            <h3 className="flex items-center gap-2 font-[var(--font-playfair)] text-xl text-dark-text-primary">
-              <Phone className="h-5 w-5 text-violet-400" aria-hidden />
-              Emergency contacts
-            </h3>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {EMERGENCY.map((e) => (
-                <div
-                  key={e.role}
-                  className="rounded-xl border border-dark-border-primary bg-dark-bg-card p-4"
-                >
-                  <p className="text-sm font-semibold text-dark-text-primary">{e.role}</p>
-                  <p className="mt-2 font-mono text-xs text-violet-800">{e.ext}</p>
-                  <ShowcaseAnchor
-                    href={`tel:${e.phone.replace(/\s/g, '')}`}
-                    className="mt-2 inline-flex text-xs font-medium text-dark-text-secondary hover:text-dark-text-primary"
-                  >
-                    {e.phone}
+            <ul className="rs-portal__nav-mobile">
+              {NAV.map(({ id, label }) => (
+                <li key={id}>
+                  <ShowcaseAnchor href={`#${id}`} className="rs-portal__nav-chip">
+                    {label}
                   </ShowcaseAnchor>
-                </div>
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </aside>
 
-          {/* Amenities */}
-          <div id="amenities">
-            <h3 className="flex items-center gap-2 font-[var(--font-playfair)] text-xl text-dark-text-primary">
-              <Building2 className="h-5 w-5 text-violet-400" aria-hidden />
-              Amenities booking
-            </h3>
-            <div className="mt-4 grid gap-4 md:grid-cols-2">
-              {AMENITIES.map((a) => (
-                <div
-                  key={a.name}
-                  className="rounded-xl border border-dark-border-primary bg-dark-bg-card p-5"
+          <div className="rs-portal__main">
+            <div id="dashboard" className="rs-portal__card rs-portal__card-pad scroll-mt-28">
+              <div className="rs-portal__section-head">
+                <h2 className="rs-portal__section-title">
+                  <LayoutDashboard className="h-5 w-5" aria-hidden />
+                  Resident dashboard
+                </h2>
+                <span className="rs-portal__meta">Snapshot · May 2026</span>
+              </div>
+              <div className="rs-portal__kpis">
+                {KPI.map(({ label, value, hint, icon: Icon }) => (
+                  <article key={label} className="rs-portal__kpi">
+                    <span className="rs-portal__kpi-icon" aria-hidden>
+                      <Icon className="h-4 w-4" strokeWidth={1.75} />
+                    </span>
+                    <p className="rs-portal__kpi-label">{label}</p>
+                    <p className="rs-portal__kpi-value">{value}</p>
+                    <p className="rs-portal__kpi-hint">{hint}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="rs-portal__split">
+              <div className="rs-portal__announce">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-[color:var(--rs-accent-deep)]">
+                  <Megaphone className="h-4 w-4" aria-hidden />
+                  Society announcements
+                </div>
+                <p className="mt-3 text-sm font-bold text-[color:var(--rs-ink)]">
+                  Digital AGM quorum opens — cast votes before 28 May.
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-[color:var(--rs-muted)]">
+                  Audit annex is in the document vault · watermarked downloads · OTP-gated sharing
+                  only. Biometric mismatch desk operates weekends.
+                </p>
+              </div>
+
+              <div
+                id="bills"
+                className="rs-portal__card rs-portal__card-pad rs-portal__pay scroll-mt-28"
+              >
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-[color:var(--rs-muted)]">
+                  <CreditCard className="h-4 w-4 text-[color:var(--rs-accent)]" aria-hidden />
+                  Maintenance invoice
+                </div>
+                <p className="mt-3 text-sm text-[color:var(--rs-muted)]">
+                  Unit <strong className="text-[color:var(--rs-ink)]">B-704</strong> ·{' '}
+                  <span className="font-mono text-xs">HH-INV-88902</span>
+                </p>
+                <p className="rs-portal__pay-amount">₹18,420</p>
+                <p className="mt-1 text-[11px] text-[color:var(--rs-muted)]">
+                  Sinking contribution · water tariff · GST included
+                </p>
+                <ShowcaseLink
+                  href="/contact?intent=payment&source=society-portal-showcase"
+                  className="rs-portal__btn rs-portal__btn--primary mt-auto pt-5 w-full"
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <p className="font-semibold text-dark-text-primary">{a.name}</p>
-                    <Home
-                      className="h-5 w-5 shrink-0 text-dark-text-tertiary opacity-60"
-                      aria-hidden
-                    />
-                  </div>
-                  <p className="mt-2 text-xs text-dark-text-secondary">{a.slots}</p>
-                  <p className="mt-2 text-[11px] font-medium text-dark-text-tertiary">{a.fee}</p>
-                  <button
-                    type="button"
-                    disabled
-                    className={`mt-4 w-full cursor-not-allowed rounded-full py-2 text-xs font-semibold ${
-                      a.bookable
-                        ? 'bg-violet-600/40 text-white/70'
-                        : 'border border-dark-border-secondary bg-dark-bg-secondary text-dark-text-tertiary'
-                    }`}
-                  >
-                    {a.bookable ? 'Request slot · showcase disabled' : 'Waitlisted · showcase'}
-                  </button>
-                </div>
-              ))}
+                  View last invoice
+                </ShowcaseLink>
+              </div>
             </div>
-          </div>
 
-          {/* Footer note */}
-          <div className="rounded-xl border border-dark-border-primary bg-dark-bg-secondary/40 px-5 py-6 text-center">
-            <p className="text-sm text-dark-text-secondary">
-              Need this portal on your society domain?{' '}
-              <ShowcaseLink
-                href="/contact?intent=consultation&source=society-portal-showcase"
-                className="font-semibold text-violet-400 hover:text-violet-300"
-              >
-                Talk to Bitcraftly
-              </ShowcaseLink>{' '}
-              ·{' '}
-              <ShowcaseAnchor
-                href={`mailto:${SUPPORT_EMAIL}`}
-                className="hover:text-dark-text-primary"
-              >
-                {SUPPORT_EMAIL}
-              </ShowcaseAnchor>
-            </p>
-            <p className="mx-auto mt-3 max-w-2xl text-[11px] leading-relaxed text-dark-text-tertiary">
-              Entire interface is fictional · Harmony Heights RMS is a UI specimen only · metrics &
-              tickets are placeholders.
-            </p>
+            <div className="rs-portal__card rs-portal__card-pad">
+              <div className="rs-portal__section-head">
+                <h2 className="rs-portal__section-title">
+                  <FileText className="h-5 w-5" aria-hidden />
+                  Ledger
+                </h2>
+              </div>
+              <div className="rs-portal__table-wrap">
+                <table className="rs-portal__table">
+                  <caption className="sr-only">Maintenance bill history for unit B-704</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Bill</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {BILL_ROWS.map((row) => (
+                      <tr key={row.bill}>
+                        <td className="font-medium">{row.bill}</td>
+                        <td className="font-mono text-xs">{row.amount}</td>
+                        <td>
+                          <span className={PILL[row.tone]}>{row.status}</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div id="visitors" className="rs-portal__card rs-portal__card-pad scroll-mt-28">
+              <div className="rs-portal__section-head">
+                <h2 className="rs-portal__section-title">
+                  <Car className="h-5 w-5" aria-hidden />
+                  Visitor management
+                </h2>
+                <span className="rs-portal__meta">Today</span>
+              </div>
+              <ul className="rs-portal__list">
+                {VISITORS.map((v) => (
+                  <li key={`${v.name}-${v.flat}`} className="rs-portal__row">
+                    <div>
+                      <p className="text-sm font-bold text-[color:var(--rs-ink)]">{v.name}</p>
+                      <p className="mt-0.5 text-xs text-[color:var(--rs-muted)]">
+                        {v.flat} · {v.vendor}
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-[11px] font-medium text-[color:var(--rs-muted)]">
+                        {v.inAt}
+                      </span>
+                      <span className={PILL[v.tone]}>{v.status}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div id="complaints" className="rs-portal__card rs-portal__card-pad scroll-mt-28">
+              <div className="rs-portal__section-head">
+                <h2 className="rs-portal__section-title">
+                  <Wrench className="h-5 w-5" aria-hidden />
+                  Complaints &amp; requests
+                </h2>
+                <ShowcaseLink
+                  href="/contact?intent=complaint&source=society-portal-showcase"
+                  className="rs-portal__btn rs-portal__btn--soft"
+                >
+                  <PlusCircle className="h-4 w-4" aria-hidden />
+                  Raise a new complaint
+                </ShowcaseLink>
+              </div>
+              <ul className="rs-portal__list">
+                {COMPLAINTS.map((c) => (
+                  <li key={c.id} className="rs-portal__row">
+                    <div className="min-w-0">
+                      <span className="font-mono text-[10px] text-[color:var(--rs-muted)]">
+                        {c.id}
+                      </span>
+                      <p className="mt-0.5 text-sm font-bold text-[color:var(--rs-ink)]">
+                        {c.title}
+                      </p>
+                      <p className="mt-0.5 text-xs text-[color:var(--rs-muted)]">
+                        {c.raised} · {c.sla}
+                      </p>
+                    </div>
+                    <span className={PILL[c.tone]}>{c.status}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div id="notices" className="rs-portal__card rs-portal__card-pad scroll-mt-28">
+              <div className="rs-portal__section-head">
+                <h2 className="rs-portal__section-title">
+                  <Bell className="h-5 w-5" aria-hidden />
+                  Notices &amp; announcements
+                </h2>
+              </div>
+              <ul className="rs-portal__list">
+                {NOTICES.map((n) => (
+                  <li key={n.title} className="rs-portal__row">
+                    <div className="flex min-w-0 gap-3">
+                      <span className="rs-portal__kpi-icon mt-0.5 shrink-0" aria-hidden>
+                        <Calendar className="h-4 w-4" />
+                      </span>
+                      <div>
+                        <div className="flex flex-wrap items-center gap-2">
+                          {n.pinned ? <span className={PILL.warn}>Pinned</span> : null}
+                          <span className={PILL.muted}>{n.tag}</span>
+                          <span className="text-[11px] text-[color:var(--rs-muted)]">{n.date}</span>
+                        </div>
+                        <p className="mt-1.5 text-sm font-semibold text-[color:var(--rs-ink)]">
+                          {n.title}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div id="events" className="rs-portal__card rs-portal__card-pad scroll-mt-28">
+              <div className="rs-portal__section-head">
+                <h2 className="rs-portal__section-title">
+                  <Calendar className="h-5 w-5" aria-hidden />
+                  Events &amp; celebrations
+                </h2>
+              </div>
+              <div className="rs-portal__grid-3">
+                {EVENTS.map((e) => (
+                  <article key={e.name} className="rs-portal__event">
+                    <p className="text-sm font-bold text-[color:var(--rs-ink)]">{e.name}</p>
+                    <p className="mt-2 text-xs font-semibold text-[color:var(--rs-accent-deep)]">
+                      {e.when}
+                    </p>
+                    <p className="mt-2 text-xs text-[color:var(--rs-muted)]">{e.loc}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div id="emergency" className="rs-portal__card rs-portal__card-pad scroll-mt-28">
+              <div className="rs-portal__section-head">
+                <h2 className="rs-portal__section-title">
+                  <Phone className="h-5 w-5" aria-hidden />
+                  Emergency contacts
+                </h2>
+              </div>
+              <div className="rs-portal__grid-2">
+                {EMERGENCY.map((e) => (
+                  <div key={e.role} className="rs-portal__row !items-start">
+                    <div>
+                      <p className="text-sm font-bold text-[color:var(--rs-ink)]">{e.role}</p>
+                      <p className="mt-1 text-xs text-[color:var(--rs-muted)]">{e.detail}</p>
+                      <ShowcaseAnchor
+                        href={`tel:${e.phone.replace(/\s/g, '')}`}
+                        className="mt-2 inline-flex text-sm font-semibold text-[color:var(--rs-accent-deep)] hover:underline"
+                      >
+                        {e.phone}
+                      </ShowcaseAnchor>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div id="amenities" className="rs-portal__card rs-portal__card-pad scroll-mt-28">
+              <div className="rs-portal__section-head">
+                <h2 className="rs-portal__section-title">
+                  <Building2 className="h-5 w-5" aria-hidden />
+                  Amenities booking
+                </h2>
+              </div>
+              <div className="rs-portal__grid-2">
+                {AMENITIES.map((a) => {
+                  const Icon = a.icon;
+                  return (
+                    <article key={a.name} className="rs-portal__amenity">
+                      <span className="rs-portal__amenity-media" aria-hidden>
+                        <Icon className="h-5 w-5" strokeWidth={1.75} />
+                      </span>
+                      <p className="text-sm font-bold text-[color:var(--rs-ink)]">{a.name}</p>
+                      <p className="mt-1 text-xs text-[color:var(--rs-muted)]">{a.slots}</p>
+                      <p className="mt-1 text-[11px] font-semibold text-[color:var(--rs-accent-deep)]">
+                        {a.fee}
+                      </p>
+                      <button
+                        type="button"
+                        disabled
+                        className={`rs-portal__btn mt-auto w-full cursor-not-allowed opacity-80 ${
+                          a.bookable ? 'rs-portal__btn--soft' : 'rs-portal__btn--ghost'
+                        }`}
+                      >
+                        {a.bookable ? 'Book slot · demo' : 'Fully booked · view status'}
+                      </button>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="rs-portal__footnote">
+              <p className="text-sm text-[color:var(--rs-ink)]">
+                Need this portal for your society?{' '}
+                <ShowcaseLink
+                  href="/contact?intent=consultation&source=society-portal-showcase"
+                  className="font-bold text-[color:var(--rs-accent-deep)] hover:underline"
+                >
+                  Talk to Bitcraftly
+                </ShowcaseLink>{' '}
+                ·{' '}
+                <ShowcaseAnchor
+                  href={`mailto:${SUPPORT_EMAIL}`}
+                  className="hover:underline"
+                >
+                  {SUPPORT_EMAIL}
+                </ShowcaseAnchor>
+              </p>
+              <p className="mx-auto mt-2 max-w-2xl text-[11px] leading-relaxed text-[color:var(--rs-muted)]">
+                Fictional RMS specimen · Harmony Heights / Riverstone · metrics and tickets are
+                placeholders only.
+              </p>
+            </div>
           </div>
         </div>
       </section>

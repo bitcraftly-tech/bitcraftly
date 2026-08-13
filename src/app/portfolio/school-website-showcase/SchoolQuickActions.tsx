@@ -52,7 +52,7 @@ export default function SchoolQuickActions() {
   };
 
   return (
-    <section className="school-bg-surface border-y school-border py-10">
+    <section className="border-y school-border bg-white py-10 lg:py-12" aria-label="Quick links">
       <div className={CONTAINER}>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-4">
           {QUICK_ACTIONS.map((a) => {
@@ -62,13 +62,13 @@ export default function SchoolQuickActions() {
                 key={a.id}
                 type="button"
                 onClick={() => handle(a.id, a.label)}
-                className="school-card-hover school-glass group flex flex-col items-center rounded-2xl p-4 text-center sm:p-5"
+                className="school-tile"
               >
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--school-accent-soft)] text-[var(--school-orange)] transition group-hover:bg-[var(--school-orange)] group-hover:text-white">
+                <span className="school-tile__icon">
                   <Icon className="h-6 w-6" aria-hidden />
                 </span>
                 <p className="mt-3 text-sm font-bold text-[var(--school-navy)]">{a.label}</p>
-                <p className="school-text-muted mt-1 text-[10px] leading-tight sm:text-xs">
+                <p className="school-text-muted mt-1 text-[11px] leading-snug sm:text-xs">
                   {a.desc}
                 </p>
               </button>

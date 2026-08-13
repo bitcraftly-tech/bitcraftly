@@ -64,71 +64,65 @@ export function SchoolAdmissionForm({
 
   if (hero) {
     return (
-      <form onSubmit={submit} className="space-y-2.5">
-        <input
-          required
-          value={parentName}
-          onChange={(e) => setParentName(e.target.value)}
-          placeholder="Parent Name"
-          className={fieldClass}
-        />
-        <input
-          required
-          value={mobile}
-          onChange={(e) => setMobile(e.target.value)}
-          placeholder="Mobile Number"
-          className={fieldClass}
-          inputMode="tel"
-        />
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          placeholder="Email Address"
-          className={fieldClass}
-        />
-        <select
-          value={academicYear}
-          onChange={(e) => setAcademicYear(e.target.value)}
-          className={fieldClass}
-        >
-          <option value="">Academic Year</option>
-          {ACADEMIC_YEARS.map((y) => (
-            <option key={y} value={y}>
-              {y}
-            </option>
-          ))}
-        </select>
-        <select
-          required
-          value={grade}
-          onChange={(e) => setGrade(e.target.value)}
-          className={fieldClass}
-        >
-          <option value="">Grade Applying For</option>
-          {GRADE_OPTIONS.map((g) => (
-            <option key={g} value={g}>
-              {g}
-            </option>
-          ))}
-        </select>
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Message"
-          rows={3}
-          className={`${fieldClass} resize-none`}
-        />
+      <form onSubmit={submit} className="space-y-3" aria-label="Admissions enquiry">
+        <div>
+          <label htmlFor="school-hero-parent" className="sr-only">
+            Parent name
+          </label>
+          <input
+            id="school-hero-parent"
+            required
+            value={parentName}
+            onChange={(e) => setParentName(e.target.value)}
+            placeholder="Parent Name *"
+            className={fieldClass}
+            autoComplete="name"
+          />
+        </div>
+        <div>
+          <label htmlFor="school-hero-mobile" className="sr-only">
+            Mobile number
+          </label>
+          <input
+            id="school-hero-mobile"
+            required
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
+            placeholder="Mobile Number *"
+            className={fieldClass}
+            inputMode="tel"
+            autoComplete="tel"
+          />
+        </div>
+        <div>
+          <label htmlFor="school-hero-grade" className="sr-only">
+            Grade applying for
+          </label>
+          <select
+            id="school-hero-grade"
+            required
+            value={grade}
+            onChange={(e) => setGrade(e.target.value)}
+            className={fieldClass}
+          >
+            <option value="">Grade Applying For *</option>
+            {GRADE_OPTIONS.map((g) => (
+              <option key={g} value={g}>
+                {g}
+              </option>
+            ))}
+          </select>
+        </div>
         <button
           type="submit"
           className="school-btn-orange w-full rounded-md py-3 text-sm font-bold uppercase tracking-wide"
         >
-          Submit Enquiry
+          Submit Request
         </button>
         <button
           type="button"
           onClick={openWhatsApp}
-          className="flex w-full items-center justify-center gap-2 pt-1 text-sm font-semibold text-[#25D366] hover:underline"
+          className="flex w-full items-center justify-center gap-2 text-sm font-semibold text-[#25D366] hover:underline"
         >
           <MessageCircle className="h-4 w-4 text-[#25D366]" aria-hidden />
           Chat on WhatsApp

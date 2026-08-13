@@ -5,9 +5,9 @@ import PortfolioShowcaseLayout from '@/components/portfolio/PortfolioShowcaseLay
 import SocietyManagementShowcaseContent from './SocietyManagementShowcaseContent';
 
 export const metadata: Metadata = {
-  title: 'Society Management Portal Showcase | Bitcraftly',
+  title: 'Riverstone Resident Portal · Society RMS Showcase | Bitcraftly',
   description:
-    'Resident portal mock — notices, bookings & committee workflows in Bitcraftly dark UI.',
+    'Harmony Heights resident portal specimen — maintenance bills, visitors, complaints, notices, events and amenity bookings.',
 };
 
 export default function SocietyManagementShowcasePage() {

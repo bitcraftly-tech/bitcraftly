@@ -5,9 +5,9 @@ import PortfolioShowcaseLayout from '@/components/portfolio/PortfolioShowcaseLay
 import RestaurantAiChatbotShowcaseContent from './RestaurantAiChatbotShowcaseContent';
 
 export const metadata: Metadata = {
-  title: 'Restaurant AI Chatbot Showcase | Bitcraftly',
+  title: 'Tasting Desk AI · Restaurant Assistant Showcase | Bitcraftly',
   description:
-    'Menu-aware assistant mock — WhatsApp handoff, FAQs & smart replies in Bitcraftly dark UI.',
+    'Premium restaurant AI assistant specimen — menu-aware chat, table booking, WhatsApp handoff, and outcome telemetry.',
 };
 
 export default function RestaurantAiChatbotShowcasePage() {

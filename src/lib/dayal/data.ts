@@ -1,6 +1,7 @@
 export const DAYAL = {
   brand: 'Dayal Builders',
-  tagline: 'Leading the New Era of Real Estate in Jamshedpur',
+  tagline: 'The Promise of New Keys in Real Estate · Jamshedpur',
+  heroHeadline: 'Crafting Tomorrow’s Landmarks',
   heroHighlight: 'Char Sahebzade',
   location: 'Jamshedpur, Jharkhand',
   siteAddress: 'Near Chatt Ghat, Govindpur, Jamshedpur',
@@ -109,7 +110,15 @@ export const PROPRIETOR = {
 } as const;
 
 export const HERO_DESCRIPTION =
-  'Explore Char Sahebzade — where modern design and quality construction come together to create exceptional living and commercial spaces.';
+  'Since 1999, Dayal Builders has shaped Jamshedpur’s skyline with quality construction, prime locations, and thoughtfully planned residential and commercial spaces.';
+
+export const HERO_CATEGORIES = [
+  { label: 'Showcase', href: '#home', icon: 'sparkles' },
+  { label: 'Residential', href: '#future-projects', icon: 'home' },
+  { label: 'Commercial', href: '#ongoing-projects', icon: 'building' },
+  { label: 'Amenities', href: '#amenities', icon: 'layers' },
+  { label: 'Premium Plots', href: '#past-projects', icon: 'map' },
+] as const;
 
 export const HERO_IMAGE = '/dayal-builders/projects/char-sahib-zaade.avif';
 
@@ -130,23 +139,42 @@ export const FOOTER_ABOUT =
 
 export const NAV_LINKS = [
   { label: 'Home', href: '#home' },
+  { label: 'Projects', href: '#future-projects' },
   { label: 'About Us', href: '#about' },
-  { label: 'Future Projects', href: '#future-projects' },
-  { label: 'Ongoing Projects', href: '#ongoing-projects' },
-  { label: 'Past Projects', href: '#past-projects' },
-  { label: 'Contact Us', href: '#contact' },
+  { label: 'Amenities', href: '#amenities' },
+  { label: 'Contact', href: '#contact' },
   { label: 'Blog', href: '#blog' },
 ] as const;
 
-export const FOOTER_LINKS = [
-  { label: 'Home', href: '#home' },
-  { label: 'About Us', href: '#about' },
-  { label: 'Future Projects', href: '#future-projects' },
-  { label: 'Ongoing Projects', href: '#ongoing-projects' },
-  { label: 'Past Projects', href: '#past-projects' },
-  { label: 'Contact Us', href: '#contact' },
-  { label: 'Blog', href: '#blog' },
+export const FOOTER_COLUMNS = [
+  {
+    title: 'Company',
+    links: [
+      { label: 'Home', href: '#home' },
+      { label: 'About Us', href: '#about' },
+      { label: 'Contact', href: '#contact' },
+      { label: 'Blog', href: '#blog' },
+    ],
+  },
+  {
+    title: 'Projects',
+    links: [
+      { label: 'Future Projects', href: '#future-projects' },
+      { label: 'Ongoing Projects', href: '#ongoing-projects' },
+      { label: 'Past Projects', href: '#past-projects' },
+    ],
+  },
+  {
+    title: 'Explore',
+    links: [
+      { label: 'Amenities', href: '#amenities' },
+      { label: 'Gallery', href: '#gallery' },
+      { label: 'Official Website', href: 'https://www.dayalbuilder.com/' },
+    ],
+  },
 ] as const;
+
+export const FOOTER_LINKS = FOOTER_COLUMNS.flatMap((column) => column.links);
 
 export const TRUST_HIGHLIGHTS = [
   'Quality Construction',

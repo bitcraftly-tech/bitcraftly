@@ -13,7 +13,7 @@ export default function SchoolFacilities() {
   const { showToast } = useSchoolDemo();
 
   return (
-    <section id="facilities" className="school-bg-soft scroll-mt-28 py-16">
+    <section id="facilities" className="scroll-mt-28 bg-white py-16 lg:py-20">
       <div className={CONTAINER}>
         <div className="mx-auto max-w-2xl text-center">
           <p className="school-section-label">World-Class Infrastructure</p>
@@ -32,9 +32,9 @@ export default function SchoolFacilities() {
                 key={f.title}
                 type="button"
                 onClick={() => showToast(`${f.title} · virtual tour demo`)}
-                className="school-card-hover school-glass group flex gap-4 rounded-2xl p-5 text-left"
+                className="school-tile school-tile--row school-tile--navy"
               >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--school-navy)] text-[var(--school-orange)] transition group-hover:bg-[var(--school-orange)] group-hover:text-white">
+                <span className="school-tile__icon">
                   <Icon className="h-6 w-6" aria-hidden />
                 </span>
                 <div>

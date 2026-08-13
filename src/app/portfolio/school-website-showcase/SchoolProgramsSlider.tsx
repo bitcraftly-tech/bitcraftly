@@ -55,20 +55,23 @@ export default function SchoolProgramsSlider() {
   const programCards = ACADEMIC_PROGRAMS.map((p) => (
     <article
       key={p.id}
-      className="school-card-hover shrink-0 overflow-hidden rounded-xl border school-border bg-white shadow-md"
+      className="school-card-hover group shrink-0 overflow-hidden rounded-2xl border school-border bg-white shadow-[0_12px_32px_-20px_rgba(15,39,68,0.35)]"
       style={{ width: cardWidth }}
     >
-      <div className="relative">
-        <SchoolLazyImage
-          src={p.image}
-          alt={p.title}
-          wrapperClassName="aspect-[16/10] w-full"
-          fallbackSeed={p.id}
-        />
+      <div className="school-media relative">
+        <div className="school-media__visual">
+          <SchoolLazyImage
+            src={p.image}
+            alt={p.title}
+            wrapperClassName="aspect-[16/10] w-full"
+            className="h-full w-full object-cover"
+            fallbackSeed={p.id}
+          />
+        </div>
       </div>
-      <div className="relative px-4 pb-4 pt-6">
+      <div className="relative px-5 pb-5 pt-7">
         <span
-          className="absolute -top-5 left-4 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-sm font-bold text-white shadow-md"
+          className="absolute -top-5 left-5 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-sm font-bold text-white shadow-md"
           style={{ backgroundColor: p.iconColor }}
           aria-hidden
         >
@@ -87,7 +90,7 @@ export default function SchoolProgramsSlider() {
           }}
           className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[var(--school-brand)] hover:underline"
         >
-          Discover More <ArrowRight className="h-3.5 w-3.5" />
+          Learn More <ArrowRight className="h-3.5 w-3.5" />
         </button>
       </div>
     </article>

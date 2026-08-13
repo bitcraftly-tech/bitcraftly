@@ -321,7 +321,7 @@ export const homePortfolioItems: PortfolioItem[] = [
     gradient: 'from-rose-500/20 to-fuchsia-500/10',
     emoji: '💪',
     mockup: 'gym',
-    image: '/products/Gym Website.png',
+    image: '/products/gym-website.png',
     featureBullets: [...RECENT_PROJECT_TRUST_LINES],
     demoHref: '/portfolio/gym-fitness-showcase',
     ctaLabel: 'Open interactive demo →',

@@ -4,11 +4,13 @@ import {
   BarChart3,
   Bot,
   Calendar,
+  Check,
   ChefHat,
   Globe,
   Headphones,
   MessageCircle,
   Phone,
+  ShieldCheck,
   Sparkles,
   UtensilsCrossed,
   Wine,
@@ -17,21 +19,22 @@ import {
 import { CONTAINER } from '@/lib/constants';
 
 import RestaurantChatDemoPanel from './RestaurantChatDemoPanel';
+import './restaurant-ai-showcase.css';
 
 const FEATURE_STRIP = [
   {
     title: 'AI food recommendations',
-    desc: 'Margin-aware upsells from live inventory & dietary tags.',
+    desc: 'Margin-aware upsells from live inventory and dietary tags.',
     icon: ChefHat,
   },
   {
     title: 'Table booking',
-    desc: 'Natural language slots synced to floor plans & waitlists.',
+    desc: 'Natural-language slots synced to floor plans and waitlists.',
     icon: Calendar,
   },
   {
     title: 'WhatsApp integration',
-    desc: 'Same brain on web widget + Business API threads.',
+    desc: 'Same brain on web widget and Business API threads.',
     icon: MessageCircle,
   },
   {
@@ -46,172 +49,185 @@ const FEATURE_STRIP = [
   },
 ] as const;
 
+const DEMO_HIGHLIGHTS = [
+  {
+    title: 'Food ordering suggestions',
+    detail: 'Combos, spice calibration, and budget nudges inline.',
+    icon: UtensilsCrossed,
+  },
+  {
+    title: 'Table booking assistant',
+    detail: 'Party size, dietary notes, and deposit copy in-thread.',
+    icon: Wine,
+  },
+  {
+    title: 'Smart replies',
+    detail: 'Grounded menu facts with graceful staff WhatsApp handoff.',
+    icon: Bot,
+  },
+] as const;
+
 const AI_FEATURES = [
-  'Intent routing : menu vs billing vs franchise escalation paths.',
-  'Grounded replies : menu PDF & kitchen PDF ingest with citation snippets.',
-  'Handoff queues : human takeover + WhatsApp deep-link preserved.',
-  'Safety filters : profanity, competitor bait, and medical nutrition disclaimers.',
-  'Latency UX : streaming tokens + skeleton chips while models think.',
+  'Intent routing for menu, billing, and franchise escalation paths.',
+  'Grounded replies from menu and kitchen docs with citation snippets.',
+  'Handoff queues with human takeover and WhatsApp deep-links preserved.',
+  'Safety filters for profanity, competitor bait, and nutrition disclaimers.',
+  'Latency UX with streaming tokens and skeleton chips while models think.',
 ] as const;
 
 const MENU_AUTO = [
-  'Seasonal prix-fixe blocks injected from sheet → LLM seasonal voice.',
-  "86'd items suppressed automatically across channels.",
+  'Seasonal prix-fixe blocks injected into seasonal voice automatically.',
+  "86'd items suppressed across web widget and WhatsApp threads.",
   'Photo-ready descriptions localized per outlet dialect.',
-  'Pairing prompts : beverage attach rate tuning per shift.',
+  'Pairing prompts that tune beverage attach rate per shift.',
 ] as const;
 
 const RESERVATIONS = [
-  'Hold deposits · Stripe / Razorpay intent stubs before confirm SMS.',
-  'Walk-in bump rules & VIP override tokens for managers.',
-  "Private dining upsell ladder : tasting vs chef's table narrative.",
-  'Calendar sync exports · ICS handoff for concierge desks.',
+  'Hold deposits with Stripe / Razorpay intent stubs before confirm SMS.',
+  'Walk-in bump rules and VIP override tokens for managers.',
+  "Private dining upsell ladder — tasting vs chef's table narrative.",
+  'Calendar sync exports and ICS handoff for concierge desks.',
 ] as const;
 
 const SUPPORT = [
-  'Tier-1 deflection : refunds, spice levels, delivery ETA templates.',
-  'Ticket mirror : Zendesk / Freshdesk webhook fan-out optional.',
-  'SLA dashboards : first-response heatmaps per outlet.',
-  'After-hours mode : empathy-first tone + callback scheduling.',
+  'Tier-1 deflection for refunds, spice levels, and delivery ETA templates.',
+  'Ticket mirror via Zendesk / Freshdesk webhook fan-out.',
+  'SLA dashboards with first-response heatmaps per outlet.',
+  'After-hours mode with empathy-first tone and callback scheduling.',
 ] as const;
 
 const ANALYTICS = [
-  { label: 'Sessions / week', pct: 82 },
-  { label: 'Cart attach rate', pct: 64 },
+  { label: 'Sessions / week', pct: 85 },
+  { label: 'Cart conversion', pct: 80 },
   { label: 'Booking conversion', pct: 71 },
-  { label: 'CSAT proxy', pct: 89 },
+  { label: 'CSAT score', pct: 94 },
 ] as const;
 
 const LANGS = [
-  'English',
-  'Hindi · Hinglish',
+  'Hindi · English',
   'Bengali · Marathi',
-  'Arabic · Roman Urdu',
+  'Arabic · French · Urdu',
+  'Hinglish · Roman Urdu',
   'Custom glossary per brand',
 ] as const;
 
+const PROOF = [
+  { label: 'WhatsApp-ready', icon: MessageCircle },
+  { label: 'Menu-grounded', icon: ShieldCheck },
+  { label: 'Human-handoff', icon: Headphones },
+  { label: 'Multi-dialect', icon: Globe },
+] as const;
+
+/**
+ * Tasting Desk AI — premium restaurant assistant showcase.
+ */
 export default function RestaurantAiChatbotShowcaseContent() {
   return (
-    <>
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-dark-border-primary">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(139,92,246,0.22),transparent_55%)]" />
-        <div className={`${CONTAINER} relative py-14 lg:py-20`}>
+    <div className="td-ai">
+      <section className="td-ai-hero td-ai__section" aria-labelledby="td-ai-hero-heading">
+        <div className={`${CONTAINER} td-ai__section-pad`}>
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-violet-500/35 bg-violet-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-800">
+            <p className="td-ai__eyebrow">
               <Sparkles className="h-3.5 w-3.5" aria-hidden />
-              Showcase · fictional restaurant brand
-            </span>
-            <h1 className="mt-6 font-[var(--font-playfair)] text-4xl font-semibold tracking-tight text-dark-text-primary sm:text-5xl lg:text-[3.25rem] lg:leading-[1.06]">
-              AI Assistant for Restaurants
-            </h1>
-            <p className="mt-5 text-base leading-relaxed text-dark-text-secondary sm:text-lg">
-              Automate food discovery, basket guidance, and reservation flows — one conversational
-              surface that respects your menu, margins, and multilingual guests.
+              Official agentic framework
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <ShowcaseAnchor
-                href="#demo-chat"
-                className="inline-flex cursor-pointer items-center justify-center rounded-full bg-gradient-to-r from-violet-600 via-violet-700 to-fuchsia-600 px-7 py-2.5 text-sm font-semibold text-white shadow-[0_16px_48px_-14px_rgba(139,92,246,0.65)] transition hover:brightness-110"
-              >
-                Try demo
+            <h1 id="td-ai-hero-heading" className="td-ai__title td-ai-hero__title">
+              AI Assistant for <span className="td-ai__title-mark">Restaurants</span>
+            </h1>
+            <p className="td-ai__lead td-ai-hero__lead mx-auto">
+              Cloud-native conversational ordering that respects your menu, margins, and multilingual
+              guests — from discovery to deposit-backed bookings.
+            </p>
+            <div className="td-ai-hero__actions justify-center">
+              <ShowcaseAnchor href="#demo-chat" className="td-ai__btn td-ai__btn--primary">
+                Try for free
               </ShowcaseAnchor>
-              <ShowcaseLink
-                href="/contact?intent=consultation&source=restaurant-ai-chatbot-showcase"
-                className="inline-flex cursor-pointer items-center justify-center rounded-full border border-dark-border-secondary bg-dark-bg-card px-7 py-2.5 text-sm font-semibold text-dark-text-primary transition hover:border-violet-500/45"
-              >
-                Book consultation
-              </ShowcaseLink>
+              <ShowcaseAnchor href="#features" className="td-ai__btn td-ai__btn--ghost">
+                See more features
+              </ShowcaseAnchor>
             </div>
-          </div>
-
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {FEATURE_STRIP.map(({ title, desc, icon: Icon }) => (
-              <div
-                key={title}
-                className="rounded-xl border border-dark-border-primary bg-dark-bg-card p-4 transition hover:border-violet-500/35 hover:shadow-[0_20px_50px_-38px_rgba(139,92,246,0.45)]"
-              >
-                <Icon className="h-5 w-5 text-violet-400" aria-hidden />
-                <p className="mt-3 text-sm font-semibold text-dark-text-primary">{title}</p>
-                <p className="mt-2 text-[11px] leading-relaxed text-dark-text-secondary">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Chat + highlights */}
-      <section id="demo" className={`${CONTAINER} scroll-mt-28 py-14 md:py-16`}>
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-          <RestaurantChatDemoPanel />
-          <div className="flex flex-col justify-center space-y-6 lg:col-span-5">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-violet-400/90">
-                Main chatbot UI
-              </p>
-              <h2 className="mt-2 font-[var(--font-playfair)] text-2xl text-dark-text-primary sm:text-3xl">
-                Conversational ordering & support shell
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed text-dark-text-secondary">
-                Neon-accent panels echo SaaS-grade chat products while staying on-brand for
-                hospitality — quick replies, streaming-safe bubbles, and POS-aware recommendation
-                rails.
-              </p>
-            </div>
-            <ul className="space-y-4 text-sm text-dark-text-secondary">
-              <li className="flex gap-3 rounded-xl border border-dark-border-primary bg-dark-bg-card px-4 py-3">
-                <UtensilsCrossed
-                  className="mt-0.5 h-5 w-5 shrink-0 text-fuchsia-400/90"
-                  aria-hidden
-                />
-                <span>
-                  <strong className="text-dark-text-primary">Food ordering suggestions</strong> —
-                  combos, spice calibration, and budget nudges inline.
-                </span>
-              </li>
-              <li className="flex gap-3 rounded-xl border border-dark-border-primary bg-dark-bg-card px-4 py-3">
-                <Wine className="mt-0.5 h-5 w-5 shrink-0 text-violet-400" aria-hidden />
-                <span>
-                  <strong className="text-dark-text-primary">Table booking assistant</strong> —
-                  party size, dietary notes, deposit copy baked into thread.
-                </span>
-              </li>
-              <li className="flex gap-3 rounded-xl border border-dark-border-primary bg-dark-bg-card px-4 py-3">
-                <Bot className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400/90" aria-hidden />
-                <span>
-                  <strong className="text-dark-text-primary">Smart replies</strong> — grounded menu
-                  facts + graceful fallback to staff WhatsApp.
-                </span>
-              </li>
+            <ul className="td-ai-hero__proof justify-center" aria-label="Delivery strengths">
+              {PROOF.map(({ label, icon: Icon }) => (
+                <li key={label} className="td-ai-hero__proof-item">
+                  <Icon className="h-3.5 w-3.5" aria-hidden />
+                  {label}
+                </li>
+              ))}
             </ul>
           </div>
+
+          <ul className="td-ai-caps mt-12 lg:mt-14" aria-label="Product capabilities">
+            {FEATURE_STRIP.map(({ title, desc, icon: Icon }) => (
+              <li key={title} className="td-ai-cap">
+                <div className="td-ai-cap__media">
+                  <div className="td-ai-cap__media-visual">
+                    <span className="td-ai-cap__icon" aria-hidden>
+                      <Icon className="h-5 w-5" strokeWidth={1.75} />
+                    </span>
+                  </div>
+                </div>
+                <div className="td-ai-cap__body">
+                  <p className="td-ai-cap__title">{title}</p>
+                  <p className="td-ai-cap__desc">{desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* AI Features */}
+      <section id="demo" className="td-ai-demo td-ai__section scroll-mt-28">
+        <div className={`${CONTAINER} td-ai__section-pad`}>
+          <div className="td-ai-demo__grid">
+            <RestaurantChatDemoPanel />
+            <div>
+              <p className="td-ai__eyebrow">Main capability</p>
+              <h2 className="td-ai__title mt-3 text-3xl sm:text-[2.15rem]">
+                Conversational ordering &amp; support shell
+              </h2>
+              <p className="td-ai__lead mt-4">
+                A hospitality-grade chat surface with quick replies, streaming-safe bubbles, and
+                POS-aware recommendation rails — ready for web widget or WhatsApp.
+              </p>
+              <ul className="td-ai-demo__side-list">
+                {DEMO_HIGHLIGHTS.map(({ title, detail, icon: Icon }) => (
+                  <li key={title} className="td-ai-demo__side-item">
+                    <span className="td-ai-demo__side-icon" aria-hidden>
+                      <Icon className="h-4 w-4" strokeWidth={1.75} />
+                    </span>
+                    <span>
+                      <strong>{title}</strong>
+                      <span>{detail}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section
         id="features"
-        className="scroll-mt-28 border-y border-dark-border-primary bg-dark-bg-secondary/25 py-14 md:py-16"
+        className="td-ai-band td-ai-band--soft td-ai__section scroll-mt-28"
+        aria-labelledby="td-ai-features-heading"
       >
-        <div className={`${CONTAINER}`}>
+        <div className={`${CONTAINER} td-ai__section-pad`}>
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-violet-400/90">
-              AI features
-            </p>
-            <h2 className="mt-3 font-[var(--font-playfair)] text-3xl text-dark-text-primary sm:text-4xl">
+            <p className="td-ai__eyebrow">AI capabilities</p>
+            <h2 id="td-ai-features-heading" className="td-ai__title mt-3 text-3xl sm:text-4xl">
               Built like production AI
             </h2>
+            <p className="td-ai__lead mx-auto mt-4">
+              Guardrails, grounding, and handoff patterns that hold up on busy service nights.
+            </p>
           </div>
-          <ul className="mx-auto mt-10 grid max-w-4xl gap-3 sm:grid-cols-2">
+          <ul className="td-ai-feature-grid mx-auto max-w-5xl">
             {AI_FEATURES.map((line) => (
-              <li
-                key={line}
-                className="flex gap-3 rounded-xl border border-dark-border-primary bg-dark-bg-card px-4 py-3 text-sm text-dark-text-secondary"
-              >
-                <span
-                  className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-400 shadow-[0_0_10px_rgba(167,139,250,0.8)]"
-                  aria-hidden
-                />
+              <li key={line} className="td-ai-feature-item">
+                <span className="td-ai-feature-check" aria-hidden>
+                  <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
+                </span>
                 {line}
               </li>
             ))}
@@ -219,151 +235,163 @@ export default function RestaurantAiChatbotShowcaseContent() {
         </div>
       </section>
 
-      {/* Menu + Reservations */}
-      <section className={`${CONTAINER} py-14 md:py-16`}>
-        <div className="grid gap-12 lg:grid-cols-2">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-fuchsia-400/85">
-              Menu automation
-            </p>
-            <h3 className="mt-2 font-[var(--font-playfair)] text-2xl text-dark-text-primary">
-              Always-current voice
-            </h3>
-            <ul className="mt-6 space-y-3 text-sm text-dark-text-secondary">
-              {MENU_AUTO.map((line) => (
-                <li key={line} className="border-l-2 border-violet-500/40 pl-4">
-                  {line}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-violet-400/90">
-              Reservation system
-            </p>
-            <h3 className="mt-2 font-[var(--font-playfair)] text-2xl text-dark-text-primary">
-              Floor-aware booking
-            </h3>
-            <ul className="mt-6 space-y-3 text-sm text-dark-text-secondary">
-              {RESERVATIONS.map((line) => (
-                <li key={line} className="border-l-2 border-fuchsia-500/35 pl-4">
-                  {line}
-                </li>
-              ))}
-            </ul>
+      <section className="td-ai-band td-ai__section" aria-labelledby="td-ai-ops-heading">
+        <div className={`${CONTAINER} td-ai__section-pad`}>
+          <h2 id="td-ai-ops-heading" className="sr-only">
+            Voice automation and operational safety
+          </h2>
+          <div className="td-ai-split">
+            <article className="td-ai-split__card">
+              <p className="td-ai__eyebrow">Voice automation</p>
+              <h3 className="td-ai__title mt-3 text-2xl sm:text-[1.75rem]">Always-current voice</h3>
+              <ul className="td-ai-split__list">
+                {MENU_AUTO.map((line) => (
+                  <li key={line}>
+                    <span className="td-ai-split__bullet" aria-hidden />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            </article>
+            <article className="td-ai-split__card">
+              <p className="td-ai__eyebrow">Operational safety</p>
+              <h3 className="td-ai__title mt-3 text-2xl sm:text-[1.75rem]">Floor-aware booking</h3>
+              <ul className="td-ai-split__list">
+                {RESERVATIONS.map((line) => (
+                  <li key={line}>
+                    <span className="td-ai-split__bullet" aria-hidden />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            </article>
           </div>
         </div>
       </section>
 
-      {/* Customer support */}
-      <section className="border-y border-dark-border-primary bg-dark-bg-secondary/20 py-14 md:py-16">
-        <div className={`${CONTAINER} grid gap-10 lg:grid-cols-2 lg:items-center`}>
+      <section className="td-ai-band td-ai-band--soft td-ai__section">
+        <div
+          className={`${CONTAINER} grid gap-10 td-ai__section-pad lg:grid-cols-2 lg:items-center lg:gap-14`}
+        >
           <div>
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-violet-400/90">
-              <Headphones className="h-4 w-4" aria-hidden />
-              Customer support
-            </div>
-            <h3 className="mt-3 font-[var(--font-playfair)] text-3xl text-dark-text-primary">
-              Deflect without sounding robotic
-            </h3>
-            <ul className="mt-6 space-y-3 text-sm leading-relaxed text-dark-text-secondary">
+            <p className="td-ai__eyebrow">
+              <Headphones className="h-3.5 w-3.5" aria-hidden />
+              Human-agent handoff
+            </p>
+            <h2 className="td-ai__title mt-3 text-3xl">Escalate without losing context</h2>
+            <ul className="mt-7 space-y-3.5">
               {SUPPORT.map((line) => (
-                <li key={line} className="flex gap-2">
-                  <span className="text-emerald-400">✓</span>
+                <li
+                  key={line}
+                  className="flex gap-2.5 text-sm leading-relaxed text-[color:var(--td-muted)]"
+                >
+                  <Check
+                    className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--td-accent-deep)]"
+                    aria-hidden
+                  />
                   {line}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl border border-dark-border-primary bg-dark-bg-card p-6">
-            <div className="flex items-center gap-3 rounded-xl border border-slate-200/80 bg-white/[0.04] p-4">
-              <Phone className="h-8 w-8 text-violet-400" aria-hidden />
-              <div>
-                <p className="text-sm font-semibold text-dark-text-primary">
-                  Human escalation ribbon
-                </p>
-                <p className="mt-1 text-xs text-dark-text-secondary">
-                  Shift supervisor ping · preserve transcript hash · SLA timer armed.
-                </p>
-              </div>
+          <aside className="td-ai-panel">
+            <div className="td-ai-panel__row">
+              <span className="td-ai-panel__icon" aria-hidden>
+                <Phone className="h-5 w-5" strokeWidth={1.75} />
+              </span>
+              <p>
+                <strong>Human escalation ribbon</strong>
+                <span>
+                  Shift supervisor ping on WhatsApp · transcript hash preserved · SLA timer armed.
+                </span>
+              </p>
             </div>
-            <p className="mt-4 text-xs leading-relaxed text-dark-text-tertiary">
-              Showcase card — production stacks wire Twilio / WhatsApp Cloud API + your ticketing
+            <p className="mt-4 text-xs leading-relaxed text-[color:var(--td-muted)]">
+              Showcase card — production stacks wire Twilio / WhatsApp Cloud API plus your ticketing
               vendor of choice.
             </p>
+            <ShowcaseLink
+              href="/contact?intent=consultation&source=restaurant-ai-chatbot-showcase"
+              className="td-ai__btn td-ai__btn--primary mt-5"
+            >
+              Talk to Bitcraftly
+            </ShowcaseLink>
+          </aside>
+        </div>
+      </section>
+
+      <section
+        id="outcomes"
+        className="td-ai-band td-ai__section scroll-mt-28"
+        aria-labelledby="td-ai-outcomes-heading"
+      >
+        <div className={`${CONTAINER} td-ai__section-pad`}>
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="td-ai__eyebrow">Analytics dashboard</p>
+            <h2 id="td-ai-outcomes-heading" className="td-ai__title mt-3 text-3xl sm:text-4xl">
+              Outcome telemetry
+            </h2>
+            <p className="td-ai__lead mx-auto mt-4">
+              Operator-ready KPI patterns you can embed in consoles or weekly investor emails.
+            </p>
+          </div>
+          <div className="td-ai-metrics mx-auto max-w-4xl">
+            {ANALYTICS.map((row) => (
+              <div key={row.label} className="td-ai-metric">
+                <div className="td-ai-metric__head">
+                  <p className="td-ai-metric__label">{row.label}</p>
+                  <span className="td-ai-metric__value">{row.pct}%</span>
+                </div>
+                <div
+                  className="td-ai-metric__track"
+                  role="meter"
+                  aria-label={row.label}
+                  aria-valuenow={row.pct}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                >
+                  <div className="td-ai-metric__fill" style={{ width: `${row.pct}%` }} />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Analytics */}
-      <section className={`${CONTAINER} py-14 md:py-16`}>
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-violet-400/90">
-            Analytics dashboard
-          </p>
-          <h3 className="mt-3 font-[var(--font-playfair)] text-3xl text-dark-text-primary sm:text-4xl">
-            Outcome telemetry
-          </h3>
-          <p className="mt-4 text-sm text-dark-text-secondary">
-            Mini KPI visualization pattern — embed inside operator consoles or weekly investor
-            emails.
-          </p>
-        </div>
-        <div className="mx-auto mt-10 grid max-w-3xl gap-6 sm:grid-cols-2">
-          {ANALYTICS.map((row) => (
-            <div
-              key={row.label}
-              className="rounded-xl border border-dark-border-primary bg-dark-bg-card p-5"
-            >
-              <div className="flex items-center justify-between gap-3">
-                <p className="text-sm font-medium text-dark-text-primary">{row.label}</p>
-                <span className="font-mono text-xs font-semibold text-violet-300">{row.pct}%</span>
-              </div>
-              <div className="mt-4 h-2 overflow-hidden rounded-full bg-dark-bg-secondary">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-indigo-400 shadow-[0_0_12px_rgba(167,139,250,0.6)]"
-                  style={{ width: `${row.pct}%` }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Multi-language */}
-      <section className="border-t border-dark-border-primary bg-dark-bg-secondary/25 py-14 md:pb-20">
-        <div className={`${CONTAINER}`}>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+      <section
+        id="languages"
+        className="td-ai-band td-ai-band--soft td-ai__section scroll-mt-28"
+        aria-labelledby="td-ai-lang-heading"
+      >
+        <div className={`${CONTAINER} td-ai__section-pad pb-16 md:pb-20`}>
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
             <div className="max-w-xl">
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-violet-400/90">
-                <Globe className="h-4 w-4" aria-hidden />
+              <p className="td-ai__eyebrow">
+                <Globe className="h-3.5 w-3.5" aria-hidden />
                 Multi-language support
-              </div>
-              <h3 className="mt-3 font-[var(--font-playfair)] text-3xl text-dark-text-primary">
+              </p>
+              <h2 id="td-ai-lang-heading" className="td-ai__title mt-3 text-3xl">
                 Dialect switching without breaking tone
-              </h3>
-              <p className="mt-4 text-sm leading-relaxed text-dark-text-secondary">
-                Locale packs ship as YAML overlays — transliteration toggles for Roman Hindi / Urdu,
+              </h2>
+              <p className="td-ai__lead mt-4">
+                Locale packs ship as overlays — transliteration toggles for Roman Hindi / Urdu,
                 formal Arabic menus, and outlet-specific slang tables.
               </p>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {LANGS.map((l) => (
-                <span
-                  key={l}
-                  className="rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-2 text-xs font-semibold text-violet-100"
-                >
-                  {l}
+            <div className="td-ai-langs" aria-label="Supported languages">
+              {LANGS.map((lang) => (
+                <span key={lang} className="td-ai-lang">
+                  {lang}
                 </span>
               ))}
             </div>
           </div>
-          <p className="mx-auto mt-12 max-w-2xl text-center text-[11px] leading-relaxed text-dark-text-tertiary">
-            Zaika Kitchen is fictional · this page is a UI specimen for Bitcraftly — conversation
-            copy & metrics are illustrative only.
+          <p className="td-ai-footnote">
+            Tasting Desk AI is a fictional brand · this page is a UI specimen for Bitcraftly —
+            conversation copy and metrics are illustrative only.
           </p>
         </div>
       </section>
-    </>
+    </div>
   );
 }

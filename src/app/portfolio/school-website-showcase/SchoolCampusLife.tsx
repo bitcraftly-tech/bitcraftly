@@ -23,14 +23,18 @@ function ReelCard({ item, index }: { item: CampusItem; index: number }) {
       className="school-campus-reel-card group cursor-pointer"
     >
       <div className="overflow-hidden rounded-t-2xl bg-white">
-        <SchoolLazyImage
-          src={item.image}
-          alt={item.title}
-          wrapperClassName="aspect-[4/5] w-full"
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-          fallbackSeed={item.id}
-          eager={index < 2}
-        />
+        <div className="school-media">
+          <div className="school-media__visual">
+            <SchoolLazyImage
+              src={item.image}
+              alt={item.title}
+              wrapperClassName="aspect-[4/5] w-full"
+              className="h-full w-full object-cover"
+              fallbackSeed={item.id}
+              eager={index < 2}
+            />
+          </div>
+        </div>
       </div>
       <div className="rounded-b-2xl border border-t-0 border-white/20 bg-white px-4 py-3.5 shadow-lg">
         <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--school-orange)]">

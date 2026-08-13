@@ -1,13 +1,13 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import DayalSectionLink from '@/components/dayal/DayalSectionLink';
 import {
   Building2,
-  Calendar,
-  Download,
   HardHat,
   HeartHandshake,
+  Home,
+  Layers,
+  MapPinned,
   MapPin,
   Maximize2,
   Play,
@@ -27,8 +27,10 @@ import {
 
 import DayalHeroBackgroundVideo from '@/components/dayal/DayalHeroBackgroundVideo';
 import DayalReveal from '@/components/dayal/DayalReveal';
+import DayalSectionLink from '@/components/dayal/DayalSectionLink';
 import {
   DAYAL,
+  HERO_CATEGORIES,
   HERO_DESCRIPTION,
   HERO_MEDIA_SLIDES,
   HERO_VIDEO,
@@ -38,6 +40,14 @@ import {
 } from '@/lib/dayal/data';
 
 const TRUST_ICONS = [HardHat, Building2, Sparkles, Shield, HeartHandshake] as const;
+
+const CATEGORY_ICONS = {
+  sparkles: Sparkles,
+  home: Home,
+  building: Building2,
+  layers: Layers,
+  map: MapPinned,
+} as const;
 
 type VideoWithWebkit = HTMLVideoElement & {
   webkitEnterFullscreen?: () => void;
@@ -303,20 +313,17 @@ export default function DayalHero() {
   }, [hasVideo, resetHeroVideo, syncFullscreenState]);
 
   return (
-    <section
-      id="home"
-      className="dayal-hero relative overflow-hidden pt-20 pb-12 sm:pt-24 lg:pt-28"
-    >
+    <section id="home" className="dayal-hero">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute -left-24 top-16 h-72 w-72 rounded-full bg-[#c8a46b]/10 blur-3xl" />
         <div className="absolute -right-16 bottom-8 h-80 w-80 rounded-full bg-[rgb(11_22_51_/_0.04)] blur-3xl" />
         {mounted && !reduce
-          ? Array.from({ length: 8 }).map((_, i) => (
+          ? Array.from({ length: 6 }).map((_, i) => (
               <motion.span
                 key={i}
                 className="absolute h-1 w-1 rounded-full bg-[#c8a46b]/35"
-                style={{ left: `${10 + i * 11}%`, top: `${18 + (i % 4) * 16}%` }}
-                animate={{ y: [0, -14, 0], opacity: [0.15, 0.55, 0.15] }}
+                style={{ left: `${12 + i * 14}%`, top: `${20 + (i % 3) * 18}%` }}
+                animate={{ y: [0, -12, 0], opacity: [0.15, 0.5, 0.15] }}
                 transition={{ duration: 5 + i * 0.35, repeat: Infinity, ease: 'easeInOut' }}
               />
             ))
@@ -324,17 +331,29 @@ export default function DayalHero() {
       </div>
 
       <div className="dayal-container relative">
-        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
-          <DayalReveal className="lg:col-span-5">
+        <DayalReveal>
+          <ul className="dayal-hero-cats" aria-label="Browse categories">
+            {HERO_CATEGORIES.map((cat) => {
+              const Icon = CATEGORY_ICONS[cat.icon];
+              return (
+                <li key={cat.label}>
+                  <DayalSectionLink href={cat.href} className="dayal-hero-cats__item">
+                    <Icon className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+                    {cat.label}
+                  </DayalSectionLink>
+                </li>
+              );
+            })}
+          </ul>
+        </DayalReveal>
+
+        <div className="dayal-hero__grid">
+          <DayalReveal className="dayal-hero__copy">
             <p className="dayal-eyebrow">{DAYAL.tagline}</p>
 
-            <h1 className="mt-5">
-              <span className="block text-[11px] font-semibold uppercase tracking-[0.28em] text-[#0b1633]/55 sm:text-xs">
-                {DAYAL.brand}
-              </span>
-              <span className="dayal-serif mt-2 block text-[2.35rem] font-bold leading-[1.05] tracking-tight text-[#0b1633] sm:text-5xl lg:text-[3.35rem] xl:text-6xl">
-                {DAYAL.heroHighlight}
-              </span>
+            <h1 className="dayal-hero__title">
+              <span className="dayal-hero__brand">{DAYAL.brand}</span>
+              <span className="dayal-serif dayal-hero__headline">{DAYAL.heroHeadline}</span>
             </h1>
 
             <div className="mt-4 flex items-center gap-3" aria-hidden>
@@ -342,33 +361,27 @@ export default function DayalHero() {
               <span className="h-1.5 w-1.5 rounded-full bg-[#c8a46b]" />
             </div>
 
-            <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#c8a46b]/30 bg-white/70 px-3 py-1.5 text-sm text-[#5c6478] shadow-sm backdrop-blur-sm">
+            <p className="dayal-hero__location">
               <MapPin className="h-3.5 w-3.5 text-[#c8a46b]" aria-hidden />
               {DAYAL.location}
             </p>
 
-            <p className="mt-5 max-w-md text-base leading-relaxed text-[#5c6478] sm:text-[1.05rem]">
-              {HERO_DESCRIPTION}
-            </p>
+            <p className="dayal-hero__lead">{HERO_DESCRIPTION}</p>
 
-            <div className="dayal-btn-stack-mobile mt-7 sm:mt-8 sm:flex sm:flex-wrap sm:gap-3">
-              <DayalSectionLink href="#contact" className="dayal-btn-primary">
-                <Calendar className="h-4 w-4" aria-hidden />
-                Let&apos;s Connect
+            <div className="dayal-btn-stack-mobile dayal-hero__actions">
+              <DayalSectionLink href="#about" className="dayal-btn-primary">
+                Learn More
               </DayalSectionLink>
-              <a
-                href={DAYAL.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="dayal-btn-outline"
+              <DayalSectionLink
+                href="#future-projects"
+                className="dayal-btn-outline dayal-btn-outline--navy"
               >
-                <Download className="h-4 w-4" aria-hidden />
-                Visit Official Site
-              </a>
+                View All Projects
+              </DayalSectionLink>
             </div>
           </DayalReveal>
 
-          <DayalReveal instant className="relative lg:col-span-7">
+          <DayalReveal instant className="dayal-hero__media-col">
             <div className="dayal-hero-media relative">
               <div
                 className="pointer-events-none absolute -inset-px rounded-[1.35rem] bg-gradient-to-br from-[#c8a46b]/55 via-[#c8a46b]/15 to-transparent p-px"
@@ -377,7 +390,7 @@ export default function DayalHero() {
               <div className="relative overflow-hidden rounded-[1.25rem] bg-[#0b1633] shadow-[0_28px_64px_rgba(11,22,51,0.28)] ring-1 ring-[#0b1633]/10">
                 <div
                   ref={shellRef}
-                  className={`dayal-hero-video-shell group relative aspect-[5/4] overflow-hidden sm:aspect-[4/3] ${
+                  className={`dayal-hero-video-shell group relative aspect-[16/11] overflow-hidden sm:aspect-[5/4] lg:aspect-[4/3] ${
                     isVideoActive ? 'cursor-pointer' : ''
                   }`}
                   role={isVideoActive ? 'button' : undefined}
@@ -455,7 +468,7 @@ export default function DayalHero() {
                   </div>
 
                   <div
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#0b1633]/50 via-transparent to-[#0b1633]/10"
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#0b1633]/45 via-transparent to-[#0b1633]/10"
                     aria-hidden
                   />
 

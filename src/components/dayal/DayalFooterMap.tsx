@@ -43,7 +43,7 @@ export default function DayalFooterMap({ location = getDayalLocation('office') }
 
   return (
     <div className="flex flex-col">
-      <div className="relative min-h-[12rem] overflow-hidden rounded-xl border border-[#0b1633]/10 bg-[#f8f6f2] shadow-sm lg:min-h-[16rem]">
+      <div className="relative min-h-[11rem] overflow-hidden rounded-xl border border-[#0b1633]/08 bg-[#fffdf9] shadow-[0_12px_28px_-22px_rgba(11,22,51,0.35)] sm:min-h-[13rem] lg:min-h-[14.5rem]">
         <iframe
           key={location.id}
           title={`${location.label} — ${location.title} on Google Maps`}

@@ -1,30 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import { Building2, MapPin } from 'lucide-react';
+import { ArrowRight, MapPin } from 'lucide-react';
+import { useState } from 'react';
 
 import DayalSectionLink from '@/components/dayal/DayalSectionLink';
-
 import DayalReveal from '@/components/dayal/DayalReveal';
 import { FUTURE_PROJECTS, ONGOING_PROJECTS, PAST_PROJECTS } from '@/lib/dayal/data';
 
 const STATUS_STYLES: Record<string, string> = {
-  Future: 'bg-[#0b1633]/90 text-white',
-  Ongoing: 'bg-amber-500/90 text-white',
-  Completed: 'bg-emerald-600/90 text-white',
-};
-
-type RichPart = { readonly text: string; readonly bold?: boolean };
-
-type FeatureProject = {
-  readonly id: string;
-  readonly name: string;
-  readonly image: string;
-  readonly description: string;
-  readonly tagline?: string;
-  readonly headlineSuffix?: string;
-  readonly descriptionRich?: readonly RichPart[];
-  readonly status?: string;
+  Future: 'bg-[#0b1633]/92 text-white',
+  Ongoing: 'bg-amber-700/92 text-white',
+  Completed: 'bg-emerald-800/92 text-white',
 };
 
 type GridProject =
@@ -32,137 +19,70 @@ type GridProject =
   | (typeof ONGOING_PROJECTS)[number]
   | (typeof PAST_PROJECTS)[number];
 
-function ProjectCard({ project, className = '' }: { project: GridProject; className?: string }) {
+function ProjectCard({
+  project,
+  featured = false,
+}: {
+  project: GridProject;
+  featured?: boolean;
+}) {
+  const [loaded, setLoaded] = useState(false);
+
   return (
     <article
-      className={`group flex h-full flex-col overflow-hidden bg-white transition-shadow duration-300 hover:shadow-lg ${className}`}
+      className={`dayal-project-card group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_16px_40px_-28px_rgba(11,22,51,0.45)] ring-1 ring-[#0b1633]/8 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-28px_rgba(11,22,51,0.5)] hover:ring-[#c8a46b]/45 ${
+        featured ? 'dayal-project-card--featured' : ''
+      }`}
     >
-      <div className="relative aspect-[16/10] overflow-hidden dayal-media-skeleton sm:aspect-[5/3]">
-        <Image
-          src={project.image}
-          alt={project.name}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 400px"
-        />
+      <div
+        className={`dayal-project-card__media dayal-media-skeleton relative overflow-hidden ${
+          loaded ? 'is-loaded' : ''
+        }`}
+      >
+        <div className="dayal-project-card__media-visual absolute inset-0">
+          <Image
+            src={project.image}
+            alt={`${project.name} — ${project.location}`}
+            fill
+            className="object-cover object-center"
+            sizes={
+              featured
+                ? '(max-width: 768px) 100vw, 50vw'
+                : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'
+            }
+            onLoad={() => setLoaded(true)}
+          />
+        </div>
         <span
-          className={`absolute left-3 top-3 z-10 rounded px-2 py-0.5 dayal-micro font-bold uppercase tracking-wide ${STATUS_STYLES[project.status] ?? ''}`}
+          className={`absolute left-3 top-3 z-10 rounded-md px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide shadow-sm ${
+            STATUS_STYLES[project.status] ?? 'bg-[#0b1633] text-white'
+          }`}
         >
           {project.status}
         </span>
       </div>
-      <div className="flex flex-1 flex-col p-4">
-        <h3 className="dayal-serif text-base font-semibold text-[#0b1633] sm:text-lg">
+
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        <h3 className="dayal-serif text-lg font-semibold tracking-tight text-[#0b1633] sm:text-xl">
           {project.name}
         </h3>
-        <p className="dayal-caption mt-1 flex items-center gap-1">
-          <MapPin className="h-3 w-3 shrink-0 text-[#c8a46b]" />
+        <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-[#5c6478] sm:text-sm">
+          <MapPin className="h-3.5 w-3.5 shrink-0 text-[#c8a46b]" aria-hidden />
           {project.location}
         </p>
-        <p className="dayal-caption mt-1.5 font-medium text-[#c8a46b]">{project.tagline}</p>
-        <p className="dayal-caption mt-1.5 flex-1">{project.description}</p>
-        <DayalSectionLink
-          href="#contact"
-          className="dayal-caption mt-3 inline-flex items-center gap-1 font-semibold text-[#0b1633] transition hover:text-[#c0392b]"
-        >
-          <Building2 className="h-3 w-3" />
-          View Project
-        </DayalSectionLink>
-      </div>
-    </article>
-  );
-}
-
-function FeatureProjectIcon() {
-  return (
-    <span
-      className="mb-2 inline-flex h-6 w-6 shrink-0 items-center justify-center text-[#c0392b]"
-      aria-hidden
-    >
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
-        <path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm13 0h3v3h-3v-3zm-6 3h3v4h-3v-4zm6 4h3v3h-3v-3z" />
-      </svg>
-    </span>
-  );
-}
-
-function FeatureProjectRow({
-  project,
-  reversed = false,
-}: {
-  project: FeatureProject;
-  reversed?: boolean;
-}) {
-  const rich = project.descriptionRich ?? [{ text: project.description }];
-  const headlineSuffix = project.headlineSuffix ?? project.tagline ?? '';
-
-  return (
-    <article
-      className={`group grid overflow-hidden rounded-xl bg-[#eeedea] shadow-sm ring-1 ring-[#0b1633]/6 ${
-        reversed ? 'md:grid-cols-[1fr_minmax(0,32%)]' : 'md:grid-cols-[minmax(0,32%)_1fr]'
-      }`}
-    >
-      <div
-        className={`dayal-media-skeleton relative aspect-[16/10] overflow-hidden md:aspect-auto md:min-h-[150px] ${
-          reversed ? 'order-1 md:order-2' : 'order-1 md:order-1'
-        }`}
-      >
-        <Image
-          src={project.image}
-          alt={project.name}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 280px"
-        />
-      </div>
-
-      <div
-        className={`flex flex-col justify-center px-4 py-4 sm:px-5 sm:py-5 md:px-6 md:py-6 ${
-          reversed ? 'order-2 md:order-1' : 'order-2 md:order-2'
-        }`}
-      >
-        <FeatureProjectIcon />
-        <h3 className="text-sm font-normal leading-snug text-[#1a1a1a] sm:text-base">
-          <span className="font-bold">{project.name}</span>
-          {headlineSuffix ? (
-            <>
-              {' – '}
-              {headlineSuffix}
-            </>
-          ) : null}
-        </h3>
-        <p className="dayal-body mt-2 max-w-lg text-[#4a4a4a]">
-          {rich.map((part, i) =>
-            part.bold ? (
-              <strong key={i} className="font-bold text-[#1a1a1a]">
-                {part.text}
-              </strong>
-            ) : (
-              <span key={i}>{part.text}</span>
-            ),
-          )}
+        <p className="mt-2 text-xs font-semibold uppercase tracking-[0.08em] text-[#c8a46b]">
+          {project.tagline}
         </p>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-[#5c6478]">{project.description}</p>
         <DayalSectionLink
           href="#contact"
-          className="dayal-caption mt-3 inline-flex items-center gap-1 font-semibold text-[#0b1633] transition hover:text-[#c0392b]"
+          className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0b1633] transition hover:text-[#c0392b]"
         >
-          <Building2 className="h-3 w-3" />
-          View Project
+          Enquire about {project.name}
+          <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </DayalSectionLink>
       </div>
     </article>
-  );
-}
-
-function FeatureProjectList({ projects }: { projects: readonly FeatureProject[] }) {
-  return (
-    <div className="mt-10 flex w-full flex-col gap-4">
-      {projects.map((project, i) => (
-        <DayalReveal key={project.id} delay={i * 0.08}>
-          <FeatureProjectRow project={project} reversed={i === 1} />
-        </DayalReveal>
-      ))}
-    </div>
   );
 }
 
@@ -172,73 +92,68 @@ function ProjectGrid({
   eyebrow,
   title,
   subtitle,
-  featureLayout = false,
+  featured = false,
 }: {
   projects: readonly GridProject[];
   sectionId: string;
   eyebrow: string;
   title: string;
   subtitle: string;
-  featureLayout?: boolean;
+  featured?: boolean;
 }) {
-  const useFeature = featureLayout && projects.length <= 4;
-
-  const gridClass = 'mt-10 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5';
-
-  const cardWrapClass = 'min-w-0 w-full';
+  const gridClass = featured
+    ? 'mt-10 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 lg:gap-6'
+    : 'mt-10 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5';
 
   return (
-    <div id={sectionId} className="scroll-mt-24">
-      <DayalReveal className="text-center">
+    <div id={sectionId} className="scroll-mt-28">
+      <DayalReveal className="dayal-section__header dayal-section__header--center">
         <p className="dayal-eyebrow">{eyebrow}</p>
-        <h2 className="dayal-section-title">{title}</h2>
+        <div className="dayal-gold-line mt-3" aria-hidden />
+        <h2 className="dayal-section-title mt-4">{title}</h2>
         <p className="dayal-body mx-auto mt-4 max-w-2xl">{subtitle}</p>
       </DayalReveal>
 
-      {useFeature ? (
-        <FeatureProjectList projects={projects as readonly FeatureProject[]} />
-      ) : (
-        <div className={gridClass}>
-          {projects.map((project, i) => (
-            <DayalReveal key={project.id} delay={i * 0.06} className={cardWrapClass}>
-              <ProjectCard
-                project={project}
-                className="h-full overflow-hidden rounded-xl shadow-md ring-1 ring-[#0b1633]/5"
-              />
-            </DayalReveal>
-          ))}
-        </div>
-      )}
+      <div className={gridClass}>
+        {projects.map((project, i) => (
+          <DayalReveal key={project.id} delay={i * 0.06} className="min-w-0 h-full">
+            <ProjectCard project={project} featured={featured} />
+          </DayalReveal>
+        ))}
+      </div>
     </div>
   );
 }
 
+/**
+ * Dayal project collections — equal media frames, hover zoom, premium cards.
+ */
 export default function DayalProjects() {
   return (
-    <section id="projects" className="py-12">
-      <div className="dayal-container space-y-14 sm:space-y-20">
+    <section id="projects" className="dayal-projects-section dayal-section" aria-label="Projects">
+      <div className="dayal-container space-y-20 sm:space-y-24">
         <ProjectGrid
           sectionId="future-projects"
           eyebrow="Future Projects"
-          title="Crafting Tomorrow's Landmarks"
-          subtitle="Discover our upcoming developments designed to elevate modern living and shape the future skyline."
+          title="Crafting tomorrow’s landmarks"
+          subtitle="Upcoming developments designed for modern living across Jamshedpur."
           projects={FUTURE_PROJECTS}
-          featureLayout
+          featured
         />
         <ProjectGrid
           sectionId="ongoing-projects"
           eyebrow="Ongoing Projects"
-          title="Current Development Shaping the Future of Urban Living"
-          subtitle="Explore our ongoing projects, where modern design meets superior construction to create exceptional living and commercial spaces."
+          title="Under construction, built with care"
+          subtitle="Active sites where design and construction come together."
           projects={ONGOING_PROJECTS}
         />
         <ProjectGrid
           sectionId="past-projects"
           eyebrow="Past Projects"
-          title="Legacy Projects — Foundations of Our Trusted Reputation"
-          subtitle="Our past projects showcase a proven track record of quality, commitment, and architectural excellence."
+          title="A proven track record"
+          subtitle="Completed homes that built our reputation for quality and trust."
           projects={PAST_PROJECTS}
-          featureLayout
+          featured
         />
       </div>
     </section>

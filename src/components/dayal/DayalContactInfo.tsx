@@ -18,9 +18,9 @@ export default function DayalContactInfo() {
   const selected = getDayalLocation(selectedId);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
-      <div>
-        <div role="tablist" aria-label="Office locations" className="space-y-3" id={tablistId}>
+    <div className="dayal-footer-contact">
+      <div className="dayal-footer-contact__locations">
+        <div role="tablist" aria-label="Office locations" className="dayal-footer-contact__tabs" id={tablistId}>
           {DAYAL_LOCATIONS.map((location) => {
             const isActive = location.id === selectedId;
             return (
@@ -45,51 +45,35 @@ export default function DayalContactInfo() {
                         ];
                   setSelectedId(next.id);
                 }}
-                className={`flex w-full gap-3 rounded-xl border p-3.5 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a46b]/45 ${
-                  isActive
-                    ? 'border-[#c8a46b] bg-[#c8a46b]/10 shadow-sm'
-                    : 'border-[#0b1633]/8 bg-[#f8f6f2] hover:border-[#c8a46b]/40'
+                className={`dayal-footer-contact__tab ${
+                  isActive ? 'dayal-footer-contact__tab--active' : ''
                 }`}
               >
-                <span
-                  className={`mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
-                    isActive ? 'bg-[#c8a46b] text-[#0b1633]' : 'bg-[#c8a46b]/15 text-[#c8a46b]'
-                  }`}
-                >
-                  <MapPin className="h-4 w-4" aria-hidden />
+                <span className="dayal-footer-contact__tab-icon" aria-hidden>
+                  <MapPin className="h-4 w-4" />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-xs font-semibold uppercase tracking-wide text-[#0b1633]">
-                    {location.title}
-                  </span>
-                  <span className="mt-1 block text-sm leading-relaxed text-[#5c6478]">
-                    {location.address}
-                  </span>
+                  <span className="dayal-footer-contact__tab-label">{location.title}</span>
+                  <span className="dayal-footer-contact__tab-address">{location.address}</span>
                 </span>
               </button>
             );
           })}
         </div>
 
-        <ul className="mt-4 space-y-3 text-sm">
+        <ul className="dayal-footer-contact__channels">
           {DAYAL.phones.map((phone) => (
             <li key={phone.tel}>
-              <a
-                href={`tel:${phone.tel}`}
-                className="flex items-center gap-3 text-[#5c6478] transition hover:text-[#c0392b]"
-              >
-                <Phone className="h-4 w-4 shrink-0 text-[#c8a46b]" aria-hidden />
+              <a href={`tel:${phone.tel}`} className="dayal-footer-contact__channel">
+                <Phone className="h-4 w-4 shrink-0" aria-hidden />
                 {phone.display}
               </a>
             </li>
           ))}
           <li>
-            <a
-              href={`mailto:${DAYAL.email}`}
-              className="flex items-center gap-3 break-all text-[#5c6478] transition hover:text-[#c0392b]"
-            >
-              <Mail className="h-4 w-4 shrink-0 text-[#c8a46b]" aria-hidden />
-              {DAYAL.email}
+            <a href={`mailto:${DAYAL.email}`} className="dayal-footer-contact__channel">
+              <Mail className="h-4 w-4 shrink-0" aria-hidden />
+              <span className="break-all">{DAYAL.email}</span>
             </a>
           </li>
         </ul>
@@ -99,6 +83,7 @@ export default function DayalContactInfo() {
         role="tabpanel"
         id={`${tablistId}-panel`}
         aria-labelledby={`${tablistId}-${selected.id}`}
+        className="dayal-footer-contact__map"
       >
         <DayalFooterMap key={selected.id} location={selected} />
       </div>

@@ -16,7 +16,7 @@ export default function DayalNavbar() {
   const [active, setActive] = useState('#home');
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -33,7 +33,7 @@ export default function DayalNavbar() {
         ([entry]) => {
           if (entry.isIntersecting) setActive(`#${id}`);
         },
-        { rootMargin: '-35% 0px -55% 0px', threshold: 0 },
+        { rootMargin: '-30% 0px -55% 0px', threshold: 0 },
       );
 
       observer.observe(el);
@@ -53,33 +53,18 @@ export default function DayalNavbar() {
   const linkClass = (href: string, mobile = false) => {
     const isActive = active === href;
     if (mobile) {
-      return `dayal-serif block rounded-lg px-3 py-3 text-base transition ${
-        isActive
-          ? 'font-semibold text-[#c0392b]'
-          : 'font-medium text-[#0b1633] hover:bg-[#c8a46b]/10'
-      }`;
+      return `dayal-nav__link dayal-nav__link--mobile${isActive ? ' is-active' : ''}`;
     }
-    return `dayal-serif rounded-md px-2.5 py-2 text-[15px] tracking-wide transition xl:px-3 ${
-      isActive ? 'font-semibold text-[#c0392b]' : 'font-medium text-[#282626] hover:text-[#c0392b]'
-    }`;
+    return `dayal-nav__link${isActive ? ' is-active' : ''}`;
   };
 
   return (
     <>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-500 ${
-          scrolled
-            ? 'border-[#0b1633]/12 bg-[#fffdf9]/95 shadow-sm backdrop-blur-xl'
-            : 'border-[#0b1633]/6 bg-[#fffdf9]/80 backdrop-blur-sm'
-        }`}
-      >
-        <div className="dayal-container flex items-center justify-between gap-2 py-2.5 sm:gap-3 sm:py-3">
+      <header className={`dayal-header${scrolled ? ' is-scrolled' : ''}`}>
+        <div className="dayal-container dayal-header__inner">
           <DayalLogo priority className="min-w-0" />
 
-          <nav
-            className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex"
-            aria-label="Main"
-          >
+          <nav className="dayal-header__nav" aria-label="Main">
             {NAV_LINKS.map((link) => (
               <DayalSectionLink key={link.href} href={link.href} className={linkClass(link.href)}>
                 {link.label}
@@ -87,19 +72,17 @@ export default function DayalNavbar() {
             ))}
           </nav>
 
-          <div className="flex shrink-0 items-center gap-2">
-            <DayalSectionLink
-              href="#contact"
-              className="dayal-btn-primary hidden px-3 py-2 text-xs sm:inline-flex sm:px-4 sm:py-2.5 sm:text-sm"
-            >
+          <div className="dayal-header__actions">
+            <DayalSectionLink href="#contact" className="dayal-btn-primary dayal-header__cta">
               <Calendar className="h-4 w-4 shrink-0" aria-hidden />
-              <span className="hidden md:inline">Let&apos;s Connect</span>
-              <span className="md:hidden">Connect</span>
+              <span className="hidden sm:inline">Let&apos;s Connect</span>
+              <span className="sm:hidden">Connect</span>
             </DayalSectionLink>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#0b1633]/15 text-[#0b1633] lg:hidden"
+              className="dayal-header__menu-btn"
               aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -109,7 +92,7 @@ export default function DayalNavbar() {
       </header>
 
       <AnimatePresence>
-        {open && (
+        {open ? (
           <motion.div
             className="fixed inset-0 z-[60] lg:hidden"
             initial={{ opacity: 0 }}
@@ -118,7 +101,7 @@ export default function DayalNavbar() {
           >
             <button
               type="button"
-              className="absolute inset-0 bg-[#0b1633]/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-[#0b1633]/45 backdrop-blur-sm"
               aria-label="Close menu"
               onClick={() => setOpen(false)}
             />
@@ -138,7 +121,7 @@ export default function DayalNavbar() {
               </div>
 
               <div className="dayal-mobile-nav__scroll min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-4 touch-pan-y">
-                <ul className="flex flex-col gap-0.5">
+                <ul className="flex flex-col gap-1">
                   {NAV_LINKS.map((link) => (
                     <li key={link.href}>
                       <DayalSectionLink
@@ -159,13 +142,13 @@ export default function DayalNavbar() {
                   className="dayal-btn-primary w-full"
                   onClick={() => setOpen(false)}
                 >
-                  <Calendar className="h-4 w-4" />
+                  <Calendar className="h-4 w-4" aria-hidden />
                   Let&apos;s Connect
                 </DayalSectionLink>
               </div>
             </motion.nav>
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </>
   );

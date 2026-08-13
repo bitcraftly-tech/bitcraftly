@@ -36,6 +36,8 @@ export const IMAGES = {
   aboutCampus: '/images/school-about-campus.jpg',
   aboutCampusFallback:
     'https://images.pexels.com/photos/256395/pexels-photo-256395.jpeg?auto=compress&cs=tinysrgb&w=900&h=1125&fit=crop',
+  aboutCampusSecondary:
+    'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&h=1000&q=80',
   ctaPanel: '/images/school-cta-panel.jpg',
   ctaPanelFallback:
     'https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop',

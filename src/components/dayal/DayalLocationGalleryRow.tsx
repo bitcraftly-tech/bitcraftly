@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
 import DayalReveal from '@/components/dayal/DayalReveal';
 import { DAYAL, GALLERY_IMAGES, NEARBY } from '@/lib/dayal/data';
@@ -46,15 +46,11 @@ function ColumnHeader({
   description?: string;
 }) {
   return (
-    <header className="mb-6 lg:mb-7">
-      <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c8a46b]">{label}</p>
+    <header className="mb-7 lg:mb-8">
+      <p className="dayal-eyebrow">{label}</p>
       <div className="dayal-gold-line mt-3" aria-hidden />
-      <h2 className="dayal-serif mt-3 text-2xl font-semibold leading-tight text-[#0b1633] sm:text-[1.65rem]">
-        {title}
-      </h2>
-      {description ? (
-        <p className="mt-3 max-w-md text-sm leading-relaxed text-[#5c6478]">{description}</p>
-      ) : null}
+      <h2 className="dayal-section-title mt-4">{title}</h2>
+      {description ? <p className="dayal-body mt-3 max-w-md">{description}</p> : null}
     </header>
   );
 }
@@ -64,15 +60,22 @@ function GalleryLightbox({
   onClose,
   onPrev,
   onNext,
+  titleId,
 }: {
   index: number;
   onClose: () => void;
   onPrev: () => void;
   onNext: () => void;
+  titleId: string;
 }) {
   const item = GALLERY_IMAGES[index];
   const total = GALLERY_IMAGES.length;
   const progress = ((index + 1) / total) * 100;
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    closeRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -85,9 +88,10 @@ function GalleryLightbox({
   }, [onClose, onNext, onPrev]);
 
   useEffect(() => {
+    const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = prev;
     };
   }, []);
 
@@ -100,7 +104,7 @@ function GalleryLightbox({
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label="Gallery slideshow"
+      aria-labelledby={titleId}
     >
       <motion.div
         className="flex w-[min(92vw,60rem)] max-w-full flex-col overflow-hidden rounded-xl border border-[#c8a46b]/20 bg-[#0b1633] shadow-[0_24px_80px_rgba(0,0,0,0.55)] aspect-[3/2] max-h-[min(85dvh,calc(92vw*2/3))]"
@@ -115,15 +119,18 @@ function GalleryLightbox({
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#c8a46b]">
               Gallery
             </p>
-            <p className="dayal-serif truncate text-sm text-white sm:text-base">Crafted Spaces</p>
+            <p id={titleId} className="dayal-serif truncate text-sm text-white sm:text-base">
+              {item.alt}
+            </p>
           </div>
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <span className="rounded-full border border-white/15 px-2.5 py-0.5 text-xs tabular-nums text-white/75">
               {index + 1} / {total}
             </span>
             <button
+              ref={closeRef}
               type="button"
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#c8a46b] text-[#0b1633] transition hover:bg-[#d4b57d]"
+              className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#c8a46b] text-[#0b1633] transition hover:bg-[#d4b57d]"
               aria-label="Close gallery"
               onClick={onClose}
             >
@@ -189,6 +196,8 @@ function GalleryLightbox({
 
 export default function DayalLocationGalleryRow() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const titleId = useId();
+  const lastTriggerRef = useRef<HTMLButtonElement | null>(null);
 
   const total = GALLERY_IMAGES.length;
   const goPrev = useCallback(() => {
@@ -198,15 +207,24 @@ export default function DayalLocationGalleryRow() {
     setLightboxIndex((i) => (i === null ? null : (i + 1) % total));
   }, [total]);
 
+  const closeLightbox = useCallback(() => {
+    setLightboxIndex(null);
+    lastTriggerRef.current?.focus();
+  }, []);
+
   return (
-    <section className="bg-white py-12">
+    <section className="dayal-section dayal-section--cream" aria-label="Location and gallery">
       <div className="dayal-container">
-        <div className="grid items-start gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-x-14 lg:gap-y-0 xl:gap-x-16">
-          <DayalReveal id="location" className="lg:pr-2">
-            <ColumnHeader label="Location" title="Head Office & Site Address" />
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-x-14 xl:gap-x-16">
+          <DayalReveal id="location" className="scroll-mt-28 lg:pr-2">
+            <ColumnHeader
+              label="Location"
+              title="Head office & site"
+              description="Visit us in Bistupur, or see the project site near Chatt Ghat, Govindpur."
+            />
 
             <div className="space-y-3">
-              <div className="flex gap-4 rounded-xl border border-[#0b1633]/8 bg-[#f8f6f2] p-4">
+              <div className="flex gap-4 rounded-xl border border-[#0b1633]/8 bg-white p-4 shadow-[0_10px_28px_-24px_rgba(11,22,51,0.4)]">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#c8a46b]/15 text-[#c8a46b]">
                   <Building2 className="h-5 w-5" aria-hidden />
                 </span>
@@ -219,7 +237,7 @@ export default function DayalLocationGalleryRow() {
                   </p>
                 </div>
               </div>
-              <div className="flex gap-4 rounded-xl border border-[#0b1633]/8 bg-[#f8f6f2] p-4">
+              <div className="flex gap-4 rounded-xl border border-[#0b1633]/8 bg-white p-4 shadow-[0_10px_28px_-24px_rgba(11,22,51,0.4)]">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#c8a46b]/15 text-[#c8a46b]">
                   <MapPin className="h-5 w-5" aria-hidden />
                 </span>
@@ -232,7 +250,7 @@ export default function DayalLocationGalleryRow() {
               </div>
             </div>
 
-            <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#0b1633]/55">
+            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-[#0b1633]/55">
               Nearby & connected
             </p>
             <ul className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
@@ -242,7 +260,7 @@ export default function DayalLocationGalleryRow() {
                   <DayalReveal
                     as="li"
                     key={place.name}
-                    delay={0.1 + i * 0.05}
+                    delay={0.08 + i * 0.04}
                     className="flex items-center justify-between gap-2 rounded-lg border border-[#0b1633]/8 bg-[#fffdf9] px-3 py-2.5"
                   >
                     <div className="flex min-w-0 flex-1 items-center gap-2.5">
@@ -253,7 +271,7 @@ export default function DayalLocationGalleryRow() {
                         {place.name}
                       </span>
                     </div>
-                    <span className="shrink-0 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-700">
+                    <span className="shrink-0 rounded-full bg-[#0b1633]/06 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#0b1633]">
                       {place.time}
                     </span>
                   </DayalReveal>
@@ -265,16 +283,16 @@ export default function DayalLocationGalleryRow() {
           <DayalReveal
             delay={0.08}
             id="gallery"
-            className="min-w-0 lg:border-l lg:border-[#0b1633]/10 lg:pl-14 xl:pl-16"
+            className="min-w-0 scroll-mt-28 lg:border-l lg:border-[#0b1633]/10 lg:pl-14 xl:pl-16"
           >
             <ColumnHeader
               label="Gallery"
-              title="A Glimpse into Our Crafted Spaces"
-              description="Explore stunning visuals of our completed and ongoing projects that reflect our commitment to excellence."
+              title="A glimpse into our spaces"
+              description="Completed and ongoing projects that reflect our commitment to craft."
             />
 
             <div
-              className="grid min-w-0 grid-cols-2 grid-flow-dense gap-2 auto-rows-[5.25rem] sm:grid-cols-3 sm:auto-rows-[5.25rem] lg:auto-rows-[5rem]"
+              className="grid min-w-0 grid-cols-2 grid-flow-dense gap-2.5 auto-rows-[5.25rem] sm:grid-cols-3 sm:auto-rows-[5.25rem] lg:auto-rows-[5rem]"
               role="list"
             >
               {GALLERY_IMAGES.map((item, index) => (
@@ -282,17 +300,24 @@ export default function DayalLocationGalleryRow() {
                   key={item.src}
                   type="button"
                   role="listitem"
-                  className={`dayal-media-skeleton group relative min-h-0 overflow-hidden rounded-lg ring-1 ring-[#0b1633]/8 transition hover:ring-[#c8a46b]/40 ${galleryTileClass(index)}`}
-                  onClick={() => setLightboxIndex(index)}
+                  className={`dayal-media-skeleton dayal-gallery-tile group relative min-h-0 ${galleryTileClass(index)}`}
+                  onClick={(e) => {
+                    lastTriggerRef.current = e.currentTarget;
+                    setLightboxIndex(index);
+                  }}
+                  aria-label={`Open gallery image: ${item.alt}`}
                 >
                   <Image
                     src={item.src}
-                    alt={item.alt}
+                    alt=""
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 33vw, 18vw"
                   />
-                  <span className="pointer-events-none absolute inset-0 bg-[#0b1633]/0 transition group-hover:bg-[#0b1633]/10" />
+                  <span
+                    className="pointer-events-none absolute inset-0 bg-[#0b1633]/0 transition group-hover:bg-[#0b1633]/15"
+                    aria-hidden
+                  />
                 </button>
               ))}
             </div>
@@ -304,9 +329,10 @@ export default function DayalLocationGalleryRow() {
         {lightboxIndex !== null ? (
           <GalleryLightbox
             index={lightboxIndex}
-            onClose={() => setLightboxIndex(null)}
+            onClose={closeLightbox}
             onPrev={goPrev}
             onNext={goNext}
+            titleId={titleId}
           />
         ) : null}
       </AnimatePresence>
