@@ -131,17 +131,12 @@ export default async function RootLayout({
       : isInteractiveDemoPath(pathname)
         ? 'demo'
         : 'brand';
-  const bootClass = bootMode === 'demo' ? 'bc-demo-booting' : 'bc-booting';
 
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${bootClass} h-full antialiased`}
-      aria-busy="true"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
-      {...(bootMode === 'demo'
-        ? { 'data-demo-boot': '1', 'data-demo-path': pathname }
-        : {})}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <AppBootShell mode={bootMode} pathname={pathname} />

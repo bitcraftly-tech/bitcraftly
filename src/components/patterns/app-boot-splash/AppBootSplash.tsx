@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import {
   BOOT_DOM_FAILSAFE_MS,
   BOOT_FADE_OUT_MS,
+  hasBootRevealCompleted,
   revealBootedDocument,
   waitUntilBootReady,
 } from './boot-ready';
@@ -15,9 +16,17 @@ import { isInteractiveDemoPath } from './boot-path';
  * Interactive demos use {@link DemoBootSplash} instead.
  */
 export function AppBootSplash() {
-  const [phase, setPhase] = useState<'booting' | 'leaving' | 'gone' | 'skip'>('booting');
+  const [phase, setPhase] = useState<'booting' | 'leaving' | 'gone' | 'skip'>(() =>
+    hasBootRevealCompleted() ? 'gone' : 'booting',
+  );
 
   useEffect(() => {
+    if (hasBootRevealCompleted()) {
+      revealBootedDocument();
+      setPhase('gone');
+      return;
+    }
+
     const root = document.documentElement;
     const path = root.getAttribute('data-demo-path') || location.pathname;
     if (
