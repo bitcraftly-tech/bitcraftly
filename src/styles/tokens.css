@@ -56,7 +56,11 @@
   --muted-foreground: #346c84;
 
   /* Brand ambient — cyan/blue glow */
-  --glow: color-mix(in srgb, var(--accent) 16%, color-mix(in srgb, var(--primary) 14%, transparent));
+  --glow: color-mix(
+    in srgb,
+    var(--accent) 16%,
+    color-mix(in srgb, var(--primary) 14%, transparent)
+  );
 
   /* Inverse surface — marketing chrome (footer): sampled from logo lockup navy */
   --inverse: #000726;
@@ -320,7 +324,11 @@
     --surface-hover: #142033;
     --surface-foreground: #f4f8fc;
 
-    --glow: color-mix(in srgb, var(--accent) 20%, color-mix(in srgb, var(--primary) 16%, transparent));
+    --glow: color-mix(
+      in srgb,
+      var(--accent) 20%,
+      color-mix(in srgb, var(--primary) 16%, transparent)
+    );
 
     --border: #27272a;
     --border-strong: #3f3f46;
@@ -391,7 +399,11 @@
   --surface-hover: #142033;
   --surface-foreground: #f4f8fc;
 
-  --glow: color-mix(in srgb, var(--accent) 20%, color-mix(in srgb, var(--primary) 16%, transparent));
+  --glow: color-mix(
+    in srgb,
+    var(--accent) 20%,
+    color-mix(in srgb, var(--primary) 16%, transparent)
+  );
 
   --border: #27272a;
   --border-strong: #3f3f46;

@@ -15,9 +15,7 @@ const SHOW_DELAY_MS = 600;
 const SKIP_PREFIXES = ['/ai-studio', '/admin', '/owner', '/portfolio', '/login'] as const;
 
 function shouldSkipPath(pathname: string): boolean {
-  return SKIP_PREFIXES.some(
-    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
-  );
+  return SKIP_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
 }
 
 /**

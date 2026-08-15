@@ -1,15 +1,10 @@
-import type {
-  DiscoveryAnswers,
-  DiscoveryRecommendation,
-} from './types';
+import type { DiscoveryAnswers, DiscoveryRecommendation } from './types';
 
 function unique(items: readonly string[]): readonly string[] {
   return [...new Set(items)];
 }
 
-export function buildDiscoveryRecommendation(
-  answers: DiscoveryAnswers,
-): DiscoveryRecommendation {
+export function buildDiscoveryRecommendation(answers: DiscoveryAnswers): DiscoveryRecommendation {
   const product = answers.product ?? 'website';
   const industry = answers.industry ?? 'other';
   const budget = answers.budget ?? '50k-1l';
@@ -35,13 +30,18 @@ export function buildDiscoveryRecommendation(
       why.push('Website scope fits your goal of launching a credible digital presence quickly.');
       break;
     case 'web-app':
-      packageName = features.includes('inventory') || features.includes('reports')
-        ? 'Custom Operations App'
-        : 'Custom Web Application';
+      packageName =
+        features.includes('inventory') || features.includes('reports')
+          ? 'Custom Operations App'
+          : 'Custom Web Application';
       packageSummary =
         'Authenticated web application with workflows, admin tools, and scalable architecture.';
       estimatedInvestment =
-        budget === '5l-plus' ? '₹5,00,000+' : budget === '1l-5l' ? '₹1,50,000 – ₹4,50,000' : '₹75,000 – ₹1,50,000';
+        budget === '5l-plus'
+          ? '₹5,00,000+'
+          : budget === '1l-5l'
+            ? '₹1,50,000 – ₹4,50,000'
+            : '₹75,000 – ₹1,50,000';
       estimatedTimeline =
         timeline === 'urgent' || timeline === '1-month' ? '6–8 weeks' : '8–14 weeks';
       techStack.push('Node.js', 'PostgreSQL');
@@ -49,10 +49,8 @@ export function buildDiscoveryRecommendation(
       break;
     case 'mobile-app':
       packageName = 'Cross-Platform Mobile App';
-      packageSummary =
-        'React Native mobile experience with shared logic and API-backed features.';
-      estimatedInvestment =
-        budget === '5l-plus' ? '₹5,00,000+' : '₹1,00,000 – ₹3,50,000';
+      packageSummary = 'React Native mobile experience with shared logic and API-backed features.';
+      estimatedInvestment = budget === '5l-plus' ? '₹5,00,000+' : '₹1,00,000 – ₹3,50,000';
       estimatedTimeline = timeline === 'flexible' ? '10–16 weeks' : '8–12 weeks';
       techStack.push('React Native', 'Node.js', 'PostgreSQL');
       why.push('Mobile delivery pairs best with a clear MVP feature set and API foundation.');
@@ -61,8 +59,7 @@ export function buildDiscoveryRecommendation(
       packageName = 'AI Solution Package';
       packageSummary =
         'Practical AI product — chatbot, automation, or assistant — grounded in your workflows.';
-      estimatedInvestment =
-        budget === 'below-50k' ? '₹40,000 – ₹80,000' : '₹80,000 – ₹3,00,000';
+      estimatedInvestment = budget === 'below-50k' ? '₹40,000 – ₹80,000' : '₹80,000 – ₹3,00,000';
       estimatedTimeline = timeline === 'urgent' ? '4–6 weeks' : '6–10 weeks';
       techStack.push('OpenAI', 'Python', 'PostgreSQL');
       why.push('AI is recommended only where it improves response time, conversion, or ops speed.');
@@ -71,8 +68,7 @@ export function buildDiscoveryRecommendation(
       packageName = 'Custom Discovery Build';
       packageSummary =
         'A tailored engagement starting with discovery to define the right product shape.';
-      estimatedInvestment =
-        budget === '5l-plus' ? '₹5,00,000+' : '₹50,000 – ₹2,50,000';
+      estimatedInvestment = budget === '5l-plus' ? '₹5,00,000+' : '₹50,000 – ₹2,50,000';
       estimatedTimeline = 'Discovery first · 1–2 weeks scoping';
       techStack.push('Node.js', 'PostgreSQL');
       why.push('Custom scope needs a short discovery before locking package and timeline.');

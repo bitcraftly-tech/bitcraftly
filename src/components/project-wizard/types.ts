@@ -1,20 +1,8 @@
 export type WizardStepId =
-  | 'intro'
-  | 'product'
-  | 'industry'
-  | 'goals'
-  | 'budget'
-  | 'timeline'
-  | 'analyzing'
-  | 'result';
+  'intro' | 'product' | 'industry' | 'goals' | 'budget' | 'timeline' | 'analyzing' | 'result';
 
 export type WizardProductId =
-  | 'website'
-  | 'web-application'
-  | 'mobile-app'
-  | 'ai-product'
-  | 'saas-platform'
-  | 'not-sure';
+  'website' | 'web-application' | 'mobile-app' | 'ai-product' | 'saas-platform' | 'not-sure';
 
 export type WizardIndustryId =
   | 'healthcare'

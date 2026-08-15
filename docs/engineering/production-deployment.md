@@ -168,11 +168,11 @@ DATABASE_URL="..." DIRECT_URL="..." npm run db:deploy
 
 ### Branch → environment flow
 
-| Stage | Branch | Vercel target | URL |
-|-------|--------|---------------|-----|
-| Feature work | `feature/*` | Preview (PR) | Vercel preview URL |
-| Staging / UT | `develop` | Preview + branch domain | https://staging.bitcraftly.com |
-| Production | `main` | Production | https://bitcraftly.com |
+| Stage        | Branch      | Vercel target           | URL                            |
+| ------------ | ----------- | ----------------------- | ------------------------------ |
+| Feature work | `feature/*` | Preview (PR)            | Vercel preview URL             |
+| Staging / UT | `develop`   | Preview + branch domain | https://staging.bitcraftly.com |
+| Production   | `main`      | Production              | https://bitcraftly.com         |
 
 Promoted path:
 

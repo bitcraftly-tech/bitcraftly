@@ -29,11 +29,7 @@ export function IndustryDetailPanel({ industry }: IndustryDetailPanelProps) {
         </h2>
       </header>
 
-      <div
-        id="industry-detail-panel"
-        className="ip-detail__panel"
-        aria-live="polite"
-      >
+      <div id="industry-detail-panel" className="ip-detail__panel" aria-live="polite">
         <h3 className="ip-detail__title">{industry.name} solution overview</h3>
 
         <div className="ip-detail__grid">

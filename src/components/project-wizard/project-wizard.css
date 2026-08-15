@@ -119,7 +119,9 @@
   height: 0.45rem;
   border-radius: 999px;
   background: color-mix(in srgb, var(--muted-foreground) 28%, transparent);
-  transition: background-color 280ms var(--pw-ease), transform 280ms var(--pw-ease);
+  transition:
+    background-color 280ms var(--pw-ease),
+    transform 280ms var(--pw-ease);
 }
 
 .pw-progress__dot.is-done,

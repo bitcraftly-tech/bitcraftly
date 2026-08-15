@@ -4,11 +4,7 @@ import { ServiceOfferingCard } from './ServiceOfferingCard';
 
 export function ServicesOfferings() {
   return (
-    <Section
-      id="services-offerings"
-      spacing="lg"
-      aria-labelledby="services-offerings-heading"
-    >
+    <Section id="services-offerings" spacing="lg" aria-labelledby="services-offerings-heading">
       <header className="sl-section-head">
         <p className="sl-section-eyebrow">Service catalog</p>
         <h2 id="services-offerings-heading" className="sl-section-title">

@@ -184,9 +184,7 @@ export function createOpenAiAssistantStream(
                   controller.close();
                   return;
                 }
-                controller.enqueue(
-                  encodeEvent({ type: 'error', message: parsed.error.message }),
-                );
+                controller.enqueue(encodeEvent({ type: 'error', message: parsed.error.message }));
                 controller.close();
                 return;
               }

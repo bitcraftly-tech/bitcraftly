@@ -33,7 +33,11 @@ html:has(.bc-marketing),
   --border-strong: #b7c9d8;
   --muted: #4a6b7c;
   --muted-foreground: #346c84;
-  --glow: color-mix(in srgb, var(--accent) 16%, color-mix(in srgb, var(--primary) 14%, transparent));
+  --glow: color-mix(
+    in srgb,
+    var(--accent) 16%,
+    color-mix(in srgb, var(--primary) 14%, transparent)
+  );
   --inverse: #000726;
   --inverse-foreground: #ffffff;
   --inverse-muted: #8eabc0;
@@ -375,12 +379,11 @@ html[data-header-mode='home'][data-header-scrolled='true'] .header-adaptive {
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
   border-radius: 18px;
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--surface) 92%, var(--background)) 0%,
-      color-mix(in srgb, var(--background) 88%, var(--canvas)) 100%
-    );
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--surface) 92%, var(--background)) 0%,
+    color-mix(in srgb, var(--background) 88%, var(--canvas)) 100%
+  );
   box-shadow:
     0 1px 0 color-mix(in srgb, white 70%, transparent) inset,
     0 10px 28px -24px color-mix(in srgb, var(--foreground) 28%, transparent);
@@ -424,12 +427,11 @@ html[data-header-mode='home'][data-header-scrolled='true'] .header-adaptive {
 .header-mobile-nav__tile--solo {
   border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
   border-radius: 18px;
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--surface) 92%, var(--background)) 0%,
-      color-mix(in srgb, var(--background) 88%, var(--canvas)) 100%
-    );
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--surface) 92%, var(--background)) 0%,
+    color-mix(in srgb, var(--background) 88%, var(--canvas)) 100%
+  );
   box-shadow:
     0 1px 0 color-mix(in srgb, white 70%, transparent) inset,
     0 10px 28px -24px color-mix(in srgb, var(--foreground) 28%, transparent);
@@ -454,12 +456,11 @@ html[data-header-mode='home'][data-header-scrolled='true'] .header-adaptive {
 
 .header-mobile-nav__tile--solo:hover {
   border-color: color-mix(in srgb, var(--primary) 28%, var(--border));
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--surface) 92%, var(--background)) 0%,
-      color-mix(in srgb, var(--background) 88%, var(--canvas)) 100%
-    );
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--surface) 92%, var(--background)) 0%,
+    color-mix(in srgb, var(--background) 88%, var(--canvas)) 100%
+  );
   box-shadow:
     0 1px 0 color-mix(in srgb, white 76%, transparent) inset,
     0 16px 34px -24px color-mix(in srgb, var(--primary) 35%, transparent);
