@@ -49,12 +49,7 @@ export function CaseStudiesSection({
   };
 
   return (
-    <Section
-      spacing="lg"
-      background="default"
-      className="cs-section"
-      aria-labelledby={headingId}
-    >
+    <Section spacing="lg" background="default" className="cs-section" aria-labelledby={headingId}>
       <Container>
         <header className="cs-section__intro">
           <p className="cs-section__eyebrow">{eyebrow}</p>

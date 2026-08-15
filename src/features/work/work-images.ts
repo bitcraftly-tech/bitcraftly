@@ -1,8 +1,8 @@
-/** Portfolio screenshots served from `public/products`. */
+/** Portfolio screenshots served from `public/products` (kebab-case filenames). */
 
-/** Product screenshot path — same-origin static asset. */
+/** Product screenshot path — same-origin static asset (no URI encoding). */
 export function workProductImage(fileName: string): string {
-  return `/products/${encodeURIComponent(fileName)}`;
+  return `/products/${fileName}`;
 }
 
 export const WORK_WHATSAPP_HREF =

@@ -39,7 +39,8 @@ export const SERVICE_CATEGORIES: readonly ServiceCategory[] = [
       {
         id: 'business-websites',
         title: 'Business Websites',
-        description: 'Conversion-focused websites that present your offer clearly and drive enquiries.',
+        description:
+          'Conversion-focused websites that present your offer clearly and drive enquiries.',
         bestFor: 'SMBs and growing brands that need a credible web presence',
         startingPrice: '₹15,000',
         technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
@@ -49,7 +50,8 @@ export const SERVICE_CATEGORIES: readonly ServiceCategory[] = [
       {
         id: 'corporate-websites',
         title: 'Corporate Websites',
-        description: 'Enterprise-ready corporate sites with structured content, branding, and governance.',
+        description:
+          'Enterprise-ready corporate sites with structured content, branding, and governance.',
         bestFor: 'Companies that need trust, clarity, and multi-page depth',
         startingPrice: '₹35,000',
         technologies: ['Next.js', 'CMS', 'TypeScript', 'SEO'],
@@ -96,7 +98,8 @@ export const SERVICE_CATEGORIES: readonly ServiceCategory[] = [
       {
         id: 'erp',
         title: 'ERP',
-        description: 'Inventory, procurement, and operations workflows consolidated into one system.',
+        description:
+          'Inventory, procurement, and operations workflows consolidated into one system.',
         bestFor: 'Businesses needing operational control across teams',
         startingPrice: '₹1,50,000',
         technologies: ['Next.js', 'Node.js', 'PostgreSQL', 'Redis'],
@@ -106,7 +109,8 @@ export const SERVICE_CATEGORIES: readonly ServiceCategory[] = [
       {
         id: 'inventory',
         title: 'Inventory',
-        description: 'Stock tracking, alerts, and movement history designed for day-to-day accuracy.',
+        description:
+          'Stock tracking, alerts, and movement history designed for day-to-day accuracy.',
         bestFor: 'Retail, warehouse, and multi-location operations',
         startingPrice: '₹60,000',
         technologies: ['Next.js', 'Node.js', 'PostgreSQL'],
@@ -116,7 +120,8 @@ export const SERVICE_CATEGORIES: readonly ServiceCategory[] = [
       {
         id: 'booking',
         title: 'Booking',
-        description: 'Appointment and reservation systems with schedules, reminders, and admin control.',
+        description:
+          'Appointment and reservation systems with schedules, reminders, and admin control.',
         bestFor: 'Clinics, salons, consultants, and service businesses',
         startingPrice: '₹45,000',
         technologies: ['Next.js', 'Node.js', 'PostgreSQL', 'SMS'],
@@ -136,7 +141,8 @@ export const SERVICE_CATEGORIES: readonly ServiceCategory[] = [
       {
         id: 'marketplace',
         title: 'Marketplace',
-        description: 'Two-sided platforms connecting buyers and providers with trust and workflows.',
+        description:
+          'Two-sided platforms connecting buyers and providers with trust and workflows.',
         bestFor: 'Startups and brands launching multi-sided products',
         startingPrice: '₹1,25,000',
         technologies: ['Next.js', 'Node.js', 'PostgreSQL', 'Search'],
@@ -297,7 +303,8 @@ export const SERVICE_CATEGORIES: readonly ServiceCategory[] = [
       {
         id: 'figma-to-code',
         title: 'Figma to Code',
-        description: 'Pixel-faithful, accessible implementation of approved designs in production code.',
+        description:
+          'Pixel-faithful, accessible implementation of approved designs in production code.',
         bestFor: 'Design-led teams ready for engineering handoff',
         startingPrice: '₹40,000',
         technologies: ['Next.js', 'React', 'Tailwind CSS'],
@@ -314,7 +321,8 @@ export const SERVICE_CATEGORIES: readonly ServiceCategory[] = [
       {
         id: 'deployment',
         title: 'Deployment',
-        description: 'Production-ready deployments with environments, rollbacks, and clear ownership.',
+        description:
+          'Production-ready deployments with environments, rollbacks, and clear ownership.',
         bestFor: 'Teams launching or migrating production apps',
         startingPrice: '₹25,000',
         technologies: ['Vercel', 'AWS', 'Docker', 'DNS'],
@@ -344,7 +352,8 @@ export const SERVICE_CATEGORIES: readonly ServiceCategory[] = [
       {
         id: 'cloud-infrastructure',
         title: 'Cloud Infrastructure',
-        description: 'Secure, scalable cloud foundations tailored to your application architecture.',
+        description:
+          'Secure, scalable cloud foundations tailored to your application architecture.',
         bestFor: 'Growing products that need durable infrastructure',
         startingPrice: '₹50,000',
         technologies: ['AWS', 'PostgreSQL', 'CDN', 'Security'],
@@ -394,7 +403,8 @@ export const SERVICES_PROCESS: readonly ServicesProcessStep[] = [
     id: 'discover',
     step: '01',
     title: 'Discovery',
-    description: 'Goals, constraints, users, and success metrics — documented before engineering starts.',
+    description:
+      'Goals, constraints, users, and success metrics — documented before engineering starts.',
   },
   {
     id: 'design',
@@ -448,7 +458,8 @@ export const SERVICES_TECH_STACK: readonly ServicesTechGroup[] = [
 export const SERVICES_TECH_META = {
   eyebrow: 'Technology',
   title: 'Technology stack',
-  description: 'Proven tools chosen for performance, maintainability, and long-term product ownership.',
+  description:
+    'Proven tools chosen for performance, maintainability, and long-term product ownership.',
 } as const;
 
 export const SERVICES_INDUSTRIES: readonly ServicesIndustryItem[] = [

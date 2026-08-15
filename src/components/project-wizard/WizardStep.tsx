@@ -59,9 +59,7 @@ export function WizardStep<T extends string>({
         aria-label={prompt}
       >
         {options.map((option) => {
-          const pressed = multi
-            ? selectedIds.includes(option.id)
-            : selectedId === option.id;
+          const pressed = multi ? selectedIds.includes(option.id) : selectedId === option.id;
 
           return (
             <WizardOptionChip

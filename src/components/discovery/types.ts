@@ -10,12 +10,7 @@ export type DiscoveryStepId =
   | 'lead'
   | 'complete';
 
-export type DiscoveryProductId =
-  | 'website'
-  | 'web-app'
-  | 'mobile-app'
-  | 'ai-solution'
-  | 'other';
+export type DiscoveryProductId = 'website' | 'web-app' | 'mobile-app' | 'ai-solution' | 'other';
 
 export type DiscoveryIndustryId =
   | 'healthcare'
@@ -74,10 +69,7 @@ export interface DiscoveryLead {
 }
 
 export interface DiscoveryQuestionConfig {
-  readonly id: Exclude<
-    DiscoveryStepId,
-    'intro' | 'analyzing' | 'result' | 'lead' | 'complete'
-  >;
+  readonly id: Exclude<DiscoveryStepId, 'intro' | 'analyzing' | 'result' | 'lead' | 'complete'>;
   readonly prompt: string;
   readonly helper: string;
   readonly multi?: boolean;

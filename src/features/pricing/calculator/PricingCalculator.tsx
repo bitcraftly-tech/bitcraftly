@@ -419,7 +419,11 @@ export function PricingCalculator({
                 {copyState === 'copied'
                   ? 'Copied — paste to WhatsApp / email'
                   : 'Copy feature-wise quotation'}
-                <Icon name={copyState === 'copied' ? 'check' : 'arrow-up-right'} size="sm" aria-hidden />
+                <Icon
+                  name={copyState === 'copied' ? 'check' : 'arrow-up-right'}
+                  size="sm"
+                  aria-hidden
+                />
               </button>
               <p id="pricing-copy-status" className="pricing-calc__copy-status" role="status">
                 {copyState === 'error'

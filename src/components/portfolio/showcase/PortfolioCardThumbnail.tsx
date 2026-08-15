@@ -31,7 +31,7 @@ function PreviewImage({
       className={`absolute inset-0 origin-center transition-transform duration-250 ease-out ${hoverScaleClass}`}
     >
       <Image
-        src={encodeURI(project.image)}
+        src={project.image}
         alt={`${project.title} website preview`}
         fill
         sizes={sizes}

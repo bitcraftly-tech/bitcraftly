@@ -109,8 +109,7 @@ export function SystemBrowserCarousel({
 
     const current = activeIndexRef.current;
     // Swipe left → next; swipe right → previous
-    const nextIndex =
-      deltaX < 0 ? (current + 1) % total : (current - 1 + total) % total;
+    const nextIndex = deltaX < 0 ? (current + 1) % total : (current - 1 + total) % total;
     onSelectIndex(nextIndex);
   });
 
@@ -222,9 +221,7 @@ export function SystemBrowserCarousel({
             return (
               <div
                 key={item.id}
-                className={
-                  isActive ? 'sys__browser-page is-active' : 'sys__browser-page'
-                }
+                className={isActive ? 'sys__browser-page is-active' : 'sys__browser-page'}
               >
                 {/*
                   Never lazy-load carousel shots — overflow:hidden + translate

@@ -15,11 +15,7 @@ export {
   SEARCH_MOCK_DOCUMENTS,
   getCategoryLabel,
 } from './search.mock';
-export {
-  readRecentSearches,
-  writeRecentSearch,
-  clearRecentSearches,
-} from './search.recent';
+export { readRecentSearches, writeRecentSearch, clearRecentSearches } from './search.recent';
 export type {
   SearchCategoryId,
   SearchCategoryMeta,

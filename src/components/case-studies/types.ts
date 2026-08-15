@@ -1,12 +1,5 @@
 export type CaseStudyIndustry =
-  | 'AI'
-  | 'Healthcare'
-  | 'E-commerce'
-  | 'Education'
-  | 'Real Estate'
-  | 'CRM'
-  | 'ERP'
-  | 'Marketplace';
+  'AI' | 'Healthcare' | 'E-commerce' | 'Education' | 'Real Estate' | 'CRM' | 'ERP' | 'Marketplace';
 
 export type CaseStudyFilterId = 'all' | CaseStudyIndustry;
 

@@ -92,9 +92,7 @@ export function ProjectWizard({
       const exists = current.goals.includes(id);
       return {
         ...current,
-        goals: exists
-          ? current.goals.filter((goal) => goal !== id)
-          : [...current.goals, id],
+        goals: exists ? current.goals.filter((goal) => goal !== id) : [...current.goals, id],
       };
     });
   };

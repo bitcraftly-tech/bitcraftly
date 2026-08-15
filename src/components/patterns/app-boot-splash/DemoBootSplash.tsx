@@ -1,8 +1,13 @@
 'use client';
 
-import { useEffect, useMemo, useState, type CSSProperties } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 
-import { BOOT_FADE_OUT_MS, revealBootedDocument, waitUntilBootReady } from './boot-ready';
+import {
+  BOOT_FADE_OUT_MS,
+  hasBootRevealCompleted,
+  revealBootedDocument,
+  waitUntilBootReady,
+} from './boot-ready';
 import { resolveDemoBootBrand, type DemoBootBrand } from './demo-boot-brands';
 
 function isDarkBackground(hex: string): boolean {
@@ -26,12 +31,20 @@ export function DemoBootSplash({
   active?: boolean;
   pathname?: string;
 }) {
-  const [phase, setPhase] = useState<'booting' | 'leaving' | 'gone' | 'skip'>('booting');
+  const [phase, setPhase] = useState<'booting' | 'leaving' | 'gone' | 'skip'>(() =>
+    hasBootRevealCompleted() ? 'gone' : 'booting',
+  );
   const [brand, setBrand] = useState<DemoBootBrand>(() =>
     resolveDemoBootBrand(pathname || (typeof location !== 'undefined' ? location.pathname : '')),
   );
 
   useEffect(() => {
+    if (hasBootRevealCompleted()) {
+      revealBootedDocument();
+      setPhase('gone');
+      return;
+    }
+
     const root = document.documentElement;
     const onDemo =
       active ||
@@ -79,7 +92,7 @@ export function DemoBootSplash({
     };
   }, [active, pathname]);
 
-  const label = useMemo(() => `Loading ${brand.name}`, [brand.name]);
+  const label = `Loading ${brand.name}`;
 
   if (phase === 'gone' || phase === 'skip') {
     return null;

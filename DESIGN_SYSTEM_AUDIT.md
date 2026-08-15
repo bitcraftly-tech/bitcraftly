@@ -17,23 +17,23 @@ No redesign. Structure and branding unchanged.
 
 ## High Issues
 
-| ID | Issue | Status |
-|----|--------|--------|
-| H1 | Final CTA band hardcoded indigo/navy hexes | **Fixed** — `--inverse` / `--primary` / `--inverse-foreground` |
-| H2 | Process side-CTA hardcoded navy gradient | **Fixed** — inverse + primary mix |
-| H3 | Footer accent/focus `#33e0f0` | **Fixed** — `--accent` + inverse tokens |
+| ID  | Issue                                      | Status                                                         |
+| --- | ------------------------------------------ | -------------------------------------------------------------- |
+| H1  | Final CTA band hardcoded indigo/navy hexes | **Fixed** — `--inverse` / `--primary` / `--inverse-foreground` |
+| H2  | Process side-CTA hardcoded navy gradient   | **Fixed** — inverse + primary mix                              |
+| H3  | Footer accent/focus `#33e0f0`              | **Fixed** — `--accent` + inverse tokens                        |
 
 ## Medium Issues
 
-| ID | Issue | Status |
-|----|--------|--------|
-| M1 | Stale Work CTA CSS off-brand hexes | **Fixed** — mapped to tokens |
-| M2 | AI Assistant `oklab` color-mix | **Fixed** — `srgb` |
-| M3 | Owner CRM / Admin / Owner Auth `oklab` | **Fixed** — `srgb` |
-| M4 | Estimator `--ae-ease` duplicate | **Fixed** — `var(--ms-ease)` |
-| M5 | Enterprise skins local ease | **Fixed** — `var(--ms-ease-spring)` |
-| M6 | Final CTA radius `14px` | **Fixed** — `var(--ms-radius-sm)` |
-| M7 | Font weights 650/750 | Deferred |
+| ID  | Issue                                  | Status                              |
+| --- | -------------------------------------- | ----------------------------------- |
+| M1  | Stale Work CTA CSS off-brand hexes     | **Fixed** — mapped to tokens        |
+| M2  | AI Assistant `oklab` color-mix         | **Fixed** — `srgb`                  |
+| M3  | Owner CRM / Admin / Owner Auth `oklab` | **Fixed** — `srgb`                  |
+| M4  | Estimator `--ae-ease` duplicate        | **Fixed** — `var(--ms-ease)`        |
+| M5  | Enterprise skins local ease            | **Fixed** — `var(--ms-ease-spring)` |
+| M6  | Final CTA radius `14px`                | **Fixed** — `var(--ms-radius-sm)`   |
+| M7  | Font weights 650/750                   | Deferred                            |
 
 ## Low Issues (deferred)
 

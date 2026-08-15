@@ -118,7 +118,10 @@ function whyCopy(
   return `Based on your project size and expected features, the ${packageName} package offers the best balance between scalability, timeline and investment.`;
 }
 
-export function buildProjectRecommendation(prompt: string, priorContext = ''): ProjectRecommendation {
+export function buildProjectRecommendation(
+  prompt: string,
+  priorContext = '',
+): ProjectRecommendation {
   const text = `${priorContext} ${prompt}`.toLowerCase();
   const category = detectBusinessCategory(text);
 
@@ -128,8 +131,7 @@ export function buildProjectRecommendation(prompt: string, priorContext = ''): P
   const wantsCorporate = /corporate|enterprise|multi-?language/.test(text);
   const wantsStarter = /starter|brochure|landing|simple|one.?page/.test(text);
   const wantsEcommerce =
-    category === 'E-commerce' ||
-    /e-?commerce|grocery|online store|shop|marketplace/.test(text);
+    category === 'E-commerce' || /e-?commerce|grocery|online store|shop|marketplace/.test(text);
   const wantsApp =
     wantsCrm ||
     category === 'SaaS / Product' ||

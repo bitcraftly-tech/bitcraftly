@@ -368,11 +368,7 @@
       color-mix(in srgb, var(--primary) 10%, transparent) 0%,
       transparent 55%
     ),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--canvas) 80%, white) 0%,
-      var(--hs-bg) 100%
-    );
+    linear-gradient(180deg, color-mix(in srgb, var(--canvas) 80%, white) 0%, var(--hs-bg) 100%);
 }
 
 .hs-path-head {
@@ -739,7 +735,9 @@
   opacity: 0.07;
   pointer-events: none;
   user-select: none;
-  transition: opacity 200ms var(--ease-out), color 200ms var(--ease-out);
+  transition:
+    opacity 200ms var(--ease-out),
+    color 200ms var(--ease-out);
 }
 
 .hs-module__name {
@@ -935,7 +933,9 @@
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
-  transition: gap 180ms ease, color 180ms ease;
+  transition:
+    gap 180ms ease,
+    color 180ms ease;
 }
 
 .hs-wave-all:hover {
@@ -973,12 +973,11 @@
   overflow: hidden;
   border-radius: 22px;
   border: 1px solid color-mix(in srgb, var(--foreground) 7%, transparent);
-  background:
-    linear-gradient(
-      155deg,
-      color-mix(in srgb, white 88%, transparent) 0%,
-      color-mix(in srgb, var(--background) 92%, transparent) 100%
-    );
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, white 88%, transparent) 0%,
+    color-mix(in srgb, var(--background) 92%, transparent) 100%
+  );
   box-shadow:
     0 1px 0 color-mix(in srgb, white 75%, transparent) inset,
     0 18px 40px -28px color-mix(in srgb, var(--foreground) 28%, transparent);
@@ -1184,7 +1183,9 @@
   font-weight: 700;
   text-decoration: none;
   width: fit-content;
-  transition: gap 180ms ease, color 180ms ease;
+  transition:
+    gap 180ms ease,
+    color 180ms ease;
 }
 
 .hs-system__cta:hover {
@@ -1394,12 +1395,11 @@
   overflow: hidden;
   border-radius: 20px;
   border: 1px solid color-mix(in srgb, var(--foreground) 7%, transparent);
-  background:
-    linear-gradient(
-      160deg,
-      color-mix(in srgb, white 90%, transparent) 0%,
-      color-mix(in srgb, var(--background) 94%, transparent) 100%
-    );
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, white 90%, transparent) 0%,
+    color-mix(in srgb, var(--background) 94%, transparent) 100%
+  );
   box-shadow:
     0 1px 0 color-mix(in srgb, white 75%, transparent) inset,
     0 16px 36px -26px color-mix(in srgb, var(--foreground) 26%, transparent);
@@ -1535,7 +1535,9 @@
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
-  transition: gap 180ms ease, color 180ms ease;
+  transition:
+    gap 180ms ease,
+    color 180ms ease;
 }
 
 .hs-auto-link:hover {
@@ -1770,13 +1772,12 @@
   overflow: hidden;
   border-radius: 24px;
   border: 1px solid color-mix(in srgb, var(--foreground) 7%, transparent);
-  background:
-    linear-gradient(
-      155deg,
-      color-mix(in srgb, white 86%, transparent) 0%,
-      color-mix(in srgb, var(--primary) 6%, white) 55%,
-      color-mix(in srgb, var(--background) 90%, transparent) 100%
-    );
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, white 86%, transparent) 0%,
+    color-mix(in srgb, var(--primary) 6%, white) 55%,
+    color-mix(in srgb, var(--background) 90%, transparent) 100%
+  );
   box-shadow:
     0 1px 0 color-mix(in srgb, white 75%, transparent) inset,
     0 28px 56px -32px color-mix(in srgb, var(--foreground) 28%, transparent);
@@ -2194,8 +2195,12 @@
       transparent 16px 20px,
       color-mix(in srgb, white 28%, transparent) 20px 22px
     );
-  background-size: 100% 100%, 120% 55%;
-  background-position: center, left bottom;
+  background-size:
+    100% 100%,
+    120% 55%;
+  background-position:
+    center,
+    left bottom;
   background-repeat: no-repeat;
   opacity: 0.9;
 }
@@ -2546,13 +2551,12 @@
   padding: 22px;
   border-radius: 24px;
   border: 1px solid color-mix(in srgb, var(--border) 85%, var(--primary));
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, white 92%, var(--primary)) 0%,
-      color-mix(in srgb, var(--background) 96%, white) 48%,
-      color-mix(in srgb, var(--canvas) 90%, white) 100%
-    );
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, white 92%, var(--primary)) 0%,
+    color-mix(in srgb, var(--background) 96%, white) 48%,
+    color-mix(in srgb, var(--canvas) 90%, white) 100%
+  );
   box-shadow:
     0 1px 0 color-mix(in srgb, white 80%, transparent) inset,
     0 24px 48px -28px color-mix(in srgb, var(--primary) 22%, transparent);
@@ -2753,12 +2757,11 @@
   padding: 12px 14px;
   border-radius: 14px;
   border: 1px solid color-mix(in srgb, var(--primary) 16%, var(--border));
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, white 90%, var(--primary)) 0%,
-      color-mix(in srgb, var(--primary) 5%, white) 100%
-    );
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, white 90%, var(--primary)) 0%,
+    color-mix(in srgb, var(--primary) 5%, white) 100%
+  );
   box-shadow: 0 8px 20px -16px color-mix(in srgb, var(--primary) 30%, transparent);
   transition:
     transform var(--duration-fast) var(--ease-out),
@@ -3049,12 +3052,11 @@
   padding: 16px;
   border-radius: 18px;
   border: 1px solid color-mix(in srgb, var(--border) 90%, var(--primary));
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, white 94%, var(--primary)) 0%,
-      color-mix(in srgb, var(--background) 97%, white) 100%
-    );
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, white 94%, var(--primary)) 0%,
+    color-mix(in srgb, var(--background) 97%, white) 100%
+  );
   box-shadow: 0 14px 32px -24px color-mix(in srgb, var(--primary) 28%, transparent);
 }
 
@@ -3131,12 +3133,11 @@
 
 .hs-duel__side--us {
   border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
-  background:
-    linear-gradient(
-      145deg,
-      color-mix(in srgb, var(--primary) 12%, white) 0%,
-      color-mix(in srgb, var(--primary) 6%, white) 100%
-    );
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--primary) 12%, white) 0%,
+    color-mix(in srgb, var(--primary) 6%, white) 100%
+  );
   color: color-mix(in srgb, var(--primary) 72%, black);
   font-weight: 600;
   box-shadow: 0 8px 18px -14px color-mix(in srgb, var(--primary) 40%, transparent);
@@ -3316,13 +3317,12 @@
   padding: 28px 16px;
   border-radius: 24px;
   border: 1px solid color-mix(in srgb, var(--border) 85%, var(--primary));
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, white 92%, var(--primary)) 0%,
-      color-mix(in srgb, var(--background) 96%, white) 50%,
-      color-mix(in srgb, var(--canvas) 90%, white) 100%
-    );
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, white 92%, var(--primary)) 0%,
+    color-mix(in srgb, var(--background) 96%, white) 50%,
+    color-mix(in srgb, var(--canvas) 90%, white) 100%
+  );
   box-shadow:
     0 1px 0 color-mix(in srgb, white 80%, transparent) inset,
     0 24px 48px -28px color-mix(in srgb, var(--primary) 20%, transparent);
@@ -3448,7 +3448,6 @@
 .hs-launch__step:nth-child(4) .hs-launch__num {
   animation-name: hs-launch-node-4;
 }
-
 
 .hs-launch__rail {
   display: block;
@@ -4208,13 +4207,13 @@
       color-mix(in srgb, var(--primary) 28%, transparent) 1px,
       transparent 0
     ),
-    linear-gradient(
-      0deg,
-      color-mix(in srgb, var(--primary) 6%, transparent) 0%,
-      transparent 55%
-    );
-  background-size: 22px 22px, 100% 100%;
-  background-position: center bottom, center bottom;
+    linear-gradient(0deg, color-mix(in srgb, var(--primary) 6%, transparent) 0%, transparent 55%);
+  background-size:
+    22px 22px,
+    100% 100%;
+  background-position:
+    center bottom,
+    center bottom;
   mask-image: linear-gradient(to top, black 0%, black 28%, transparent 78%);
   -webkit-mask-image: linear-gradient(to top, black 0%, black 28%, transparent 78%);
 }

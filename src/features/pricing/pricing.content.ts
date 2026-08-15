@@ -12,11 +12,7 @@ export const PRICING_HERO = {
     label: 'Book Discovery Call',
     href: `${ROUTES.contact}?intent=discovery&source=pricing-hero`,
   },
-  trustItems: [
-    'No Hidden Charges',
-    'Milestone Payments',
-    'Source Code Ownership',
-  ] as const,
+  trustItems: ['No Hidden Charges', 'Milestone Payments', 'Source Code Ownership'] as const,
 } as const;
 
 export const PRICING_ESTIMATOR = {
@@ -49,11 +45,7 @@ export const PRICING_ESTIMATOR = {
     'Web app or booking system',
   ] as const,
   followUpPrompt: 'Want to refine this? Ask for a cheaper band, AI features, or a faster timeline.',
-  followUpSuggestions: [
-    'Make it more affordable',
-    'Add AI chatbot',
-    'Need it faster',
-  ] as const,
+  followUpSuggestions: ['Make it more affordable', 'Add AI chatbot', 'Need it faster'] as const,
   resultEyebrow: 'Indicative estimate',
   projectTypeLabel: 'Detected type',
   packageLabel: 'Recommended package',
@@ -68,11 +60,7 @@ export const PRICING_ESTIMATOR = {
   bookLabel: 'Book Discovery Call',
   secondaryCtaLabel: 'Browse packages',
   secondaryCtaHref: '#pricing-packages',
-  trustItems: [
-    'No Hidden Charges',
-    'Milestone Payments',
-    'NDA Available',
-  ] as const,
+  trustItems: ['No Hidden Charges', 'Milestone Payments', 'NDA Available'] as const,
 } as const;
 
 export type PricingPackageTabId = 'websites' | 'web-apps' | 'ai';
@@ -288,7 +276,7 @@ export const PRICING_ADDONS: readonly {
   { id: 'seo', label: 'Technical SEO', priceLabel: '₹8,000', icon: 'search' },
   { id: 'payments', label: 'Payment Gateway (Razorpay)', priceLabel: '₹22,000', icon: 'zap' },
   { id: 'ai-chat', label: 'AI Chatbot', priceLabel: '₹35,000', icon: 'sparkles' },
-  { id: 'maintenance', label: 'Annual Maintenance', priceLabel: '₹12,000/year', icon: 'headset' },
+  { id: 'maintenance', label: 'Annual Maintenance', priceLabel: '₹20,000/year', icon: 'headset' },
 ] as const;
 
 export const PRICING_ADDONS_META = {

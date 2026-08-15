@@ -1,19 +1,2 @@
-import type { Metadata } from 'next';
-
-import PortfolioShowcaseLayout from '@/components/portfolio/PortfolioShowcaseLayout';
-
-import ReactVideoDemoContent from './ReactVideoDemoContent';
-
-export const metadata: Metadata = {
-  title: 'React Video Portfolio Demo | Bitcraftly',
-  description:
-    'Premium OTT-style streaming UI showcase built with React.js, HLS.js, Video.js, and CSS Grid — a fictional demo project by Bitcraftly.',
-};
-
-export default function ReactVideoDemoPage() {
-  return (
-    <PortfolioShowcaseLayout themeId="video">
-      <ReactVideoDemoContent />
-    </PortfolioShowcaseLayout>
-  );
-}
+export { default } from '@bitcraftly/showcase-react-video-demo/app/react-video-demo/page';
+export * from '@bitcraftly/showcase-react-video-demo/app/react-video-demo/page';

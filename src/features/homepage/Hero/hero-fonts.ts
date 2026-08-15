@@ -4,7 +4,7 @@ import { Dancing_Script } from 'next/font/google';
 export const heroHandFont = Dancing_Script({
   variable: '--font-hero-hand',
   subsets: ['latin'],
-  weight: ['600', '700'],
+  weight: ['400', '700'],
   display: 'swap',
   preload: true,
   adjustFontFallback: true,

@@ -126,12 +126,11 @@
   padding: 16px;
   border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--border));
   border-radius: 14px;
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, var(--primary) 9%, var(--background)) 0%,
-      var(--background) 42%
-    );
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--primary) 9%, var(--background)) 0%,
+    var(--background) 42%
+  );
   box-shadow:
     0 1px 2px color-mix(in srgb, var(--foreground) 4%, transparent),
     0 18px 40px -24px color-mix(in srgb, var(--primary) 28%, transparent);
@@ -142,7 +141,11 @@
   position: absolute;
   inset: 0 0 auto;
   height: 2px;
-  background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--accent) 70%, var(--primary)));
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    color-mix(in srgb, var(--accent) 70%, var(--primary))
+  );
 }
 
 .ae-result-card__eyebrow {

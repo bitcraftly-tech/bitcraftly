@@ -15,14 +15,9 @@ export interface AssistantChatProps {
 }
 
 export function AssistantChat({ providerId, className }: AssistantChatProps) {
-  const {
-    messages,
-    isStreaming,
-    error,
-    sendMessage,
-    stopStreaming,
-    clearChat,
-  } = useAssistantChat({ providerId });
+  const { messages, isStreaming, error, sendMessage, stopStreaming, clearChat } = useAssistantChat({
+    providerId,
+  });
 
   const showSuggestions =
     !isStreaming && messages.filter((message) => message.role === 'user').length === 0;

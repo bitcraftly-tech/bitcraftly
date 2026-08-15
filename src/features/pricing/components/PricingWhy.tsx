@@ -4,11 +4,7 @@ import { PRICING_WHY, PRICING_WHY_META } from '../pricing.content';
 
 export function PricingWhy() {
   return (
-    <Section
-      id="pricing-why"
-      spacing="lg"
-      aria-labelledby="pricing-why-heading"
-    >
+    <Section id="pricing-why" spacing="lg" aria-labelledby="pricing-why-heading">
       <div className="pp-section-head">
         <p className="pp-section-eyebrow">{PRICING_WHY_META.eyebrow}</p>
         <h2 id="pricing-why-heading" className="pp-section-title">

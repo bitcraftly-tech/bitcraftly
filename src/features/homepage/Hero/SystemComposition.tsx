@@ -1,11 +1,7 @@
 'use client';
 
 import { useEffect, useEffectEvent, useRef, useState } from 'react';
-import {
-  HERO_INDUSTRY_PREVIEWS,
-  HERO_INDUSTRY_ROTATE_MS,
-  HERO_SYSTEM,
-} from './hero.constants';
+import { HERO_INDUSTRY_PREVIEWS, HERO_INDUSTRY_ROTATE_MS, HERO_SYSTEM } from './hero.constants';
 import { SystemBrowserCarousel } from './SystemBrowserCarousel';
 
 /**
@@ -87,7 +83,10 @@ export function SystemComposition() {
 
       <div className="sys__stage">
         <div className="sys__layer sys__analytics sys__parallax-a">
-          <div key={`analytics-${contentKey}`} className="sys__panel sys__panel--analytics sys__swap">
+          <div
+            key={`analytics-${contentKey}`}
+            className="sys__panel sys__panel--analytics sys__swap"
+          >
             <div className="sys__panel-head">
               <span>Analytics</span>
               <span className="sys__live">Live</span>

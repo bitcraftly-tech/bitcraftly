@@ -5,12 +5,7 @@ interface WizardOptionChipProps {
   readonly onSelect: () => void;
 }
 
-export function WizardOptionChip({
-  label,
-  description,
-  pressed,
-  onSelect,
-}: WizardOptionChipProps) {
+export function WizardOptionChip({ label, description, pressed, onSelect }: WizardOptionChipProps) {
   return (
     <button type="button" className="pw-option" aria-pressed={pressed} onClick={onSelect}>
       <span className="pw-option__label">{label}</span>

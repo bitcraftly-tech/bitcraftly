@@ -4427,7 +4427,12 @@
       color-mix(in srgb, #22d3ee 18%, transparent),
       transparent 50%
     ),
-    linear-gradient(160deg, var(--inverse) 0%, color-mix(in srgb, var(--primary) 22%, var(--inverse)) 55%, var(--inverse) 100%);
+    linear-gradient(
+      160deg,
+      var(--inverse) 0%,
+      color-mix(in srgb, var(--primary) 22%, var(--inverse)) 55%,
+      var(--inverse) 100%
+    );
   box-shadow:
     0 1px 0 color-mix(in srgb, white 8%, transparent),
     0 28px 48px -28px rgb(15 23 42 / 0.55);
@@ -6242,7 +6247,11 @@
   border-radius: 26px;
   padding: 10px;
   border: 1px solid color-mix(in srgb, var(--border) 70%, white);
-  background: linear-gradient(180deg, var(--inverse), color-mix(in srgb, var(--primary) 12%, var(--inverse)));
+  background: linear-gradient(
+    180deg,
+    var(--inverse),
+    color-mix(in srgb, var(--primary) 12%, var(--inverse))
+  );
   box-shadow: 0 24px 40px -20px rgb(15 23 42 / 0.55);
 }
 .work-care__phone-notch {

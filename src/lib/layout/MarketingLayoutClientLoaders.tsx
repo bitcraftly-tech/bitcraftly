@@ -12,25 +12,25 @@ function resolveIsland<T>(value: T | undefined): T | typeof MissingIsland {
 
 const MarketingLayoutClientHead = dynamic(
   () =>
-    import('./MarketingLayoutClientIslands').then((mod) =>
-      resolveIsland(mod.MarketingLayoutClientHead),
-    ),
+    import('./MarketingLayoutClientIslands').then((mod) => ({
+      default: resolveIsland(mod.MarketingLayoutClientHead),
+    })),
   { ssr: false },
 );
 
 const MarketingLayoutClientMid = dynamic(
   () =>
-    import('./MarketingLayoutClientIslands').then((mod) =>
-      resolveIsland(mod.MarketingLayoutClientMid),
-    ),
+    import('./MarketingLayoutClientIslands').then((mod) => ({
+      default: resolveIsland(mod.MarketingLayoutClientMid),
+    })),
   { ssr: false },
 );
 
 const MarketingLayoutClientTail = dynamic(
   () =>
-    import('./MarketingLayoutClientIslands').then((mod) =>
-      resolveIsland(mod.MarketingLayoutClientTail),
-    ),
+    import('./MarketingLayoutClientIslands').then((mod) => ({
+      default: resolveIsland(mod.MarketingLayoutClientTail),
+    })),
   { ssr: false },
 );
 

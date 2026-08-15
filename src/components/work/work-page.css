@@ -142,7 +142,9 @@
   padding: 0.8rem 1rem 0.8rem 2.55rem;
   font-size: 0.9375rem;
   line-height: 1.3;
-  transition: border-color 180ms var(--wp-ease), box-shadow 180ms var(--wp-ease);
+  transition:
+    border-color 180ms var(--wp-ease),
+    box-shadow 180ms var(--wp-ease);
 }
 
 .wp-search__input::placeholder {
@@ -510,7 +512,9 @@
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 180ms var(--wp-ease), border-color 180ms var(--wp-ease);
+  transition:
+    background-color 180ms var(--wp-ease),
+    border-color 180ms var(--wp-ease);
 }
 
 .wp-card__cta:hover {

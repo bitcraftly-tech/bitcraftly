@@ -13,9 +13,7 @@ describe('isMobileUserAgentString', () => {
 
   it('detects tablet user agents', () => {
     expect(
-      isMobileUserAgentString(
-        'Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15',
-      ),
+      isMobileUserAgentString('Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15'),
     ).toBe(true);
     expect(isMobileUserAgentString('Mozilla/5.0 (Linux; Android 12; SM-T870) Tablet')).toBe(true);
   });

@@ -1,11 +1,5 @@
 import { ROUTES } from '@/constants/navigation';
-import type {
-  AiFaqItem,
-  AiIndustryItem,
-  AiProcessStep,
-  AiSolutionItem,
-  AiWhyItem,
-} from './types';
+import type { AiFaqItem, AiIndustryItem, AiProcessStep, AiSolutionItem, AiWhyItem } from './types';
 
 const consultCta = (label = 'Discuss This Solution') =>
   ({
@@ -114,8 +108,7 @@ export const AI_SOLUTION_ITEMS: readonly AiSolutionItem[] = [
   {
     id: 'custom-ai-apps',
     title: 'Custom AI Applications',
-    description:
-      'Purpose-built AI products tailored to your domain, data, and operating model.',
+    description: 'Purpose-built AI products tailored to your domain, data, and operating model.',
     benefits: ['Fit-for-purpose design', 'Owned IP path', 'Scalable architecture'],
     icon: 'sparkles',
     cta: consultCta('Scope Custom AI'),

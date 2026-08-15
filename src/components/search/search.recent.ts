@@ -36,9 +36,7 @@ export function writeRecentSearch(query: string): readonly string[] {
     return readRecentSearches();
   }
 
-  const existing = readRecentSearches().filter(
-    (item) => item.toLowerCase() !== next.toLowerCase(),
-  );
+  const existing = readRecentSearches().filter((item) => item.toLowerCase() !== next.toLowerCase());
   const updated = [next, ...existing].slice(0, MAX_RECENT);
 
   try {

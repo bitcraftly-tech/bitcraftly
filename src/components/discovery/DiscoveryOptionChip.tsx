@@ -12,12 +12,7 @@ export function DiscoveryOptionChip({
   onSelect,
 }: DiscoveryOptionChipProps) {
   return (
-    <button
-      type="button"
-      className="df-option"
-      aria-pressed={pressed}
-      onClick={onSelect}
-    >
+    <button type="button" className="df-option" aria-pressed={pressed} onClick={onSelect}>
       <span className="df-option__label">{label}</span>
       {description ? <span className="df-option__desc">{description}</span> : null}
     </button>

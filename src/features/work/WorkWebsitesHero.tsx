@@ -35,13 +35,7 @@ interface WorkWebsitesHeroProps {
   description: string;
 }
 
-function WebsitePreviewCard({
-  project,
-  className,
-}: {
-  project: WorkProject;
-  className?: string;
-}) {
+function WebsitePreviewCard({ project, className }: { project: WorkProject; className?: string }) {
   return (
     <article className={cn('work-websites-hero__card', className)}>
       <div className="work-websites-hero__card-bar" aria-hidden>
@@ -66,7 +60,9 @@ function WebsitePreviewCard({
       </div>
       <div className="work-websites-hero__card-meta">
         <p className="work-websites-hero__card-title">{project.title}</p>
-        {project.badge ? <span className="work-websites-hero__card-badge">{project.badge}</span> : null}
+        {project.badge ? (
+          <span className="work-websites-hero__card-badge">{project.badge}</span>
+        ) : null}
       </div>
     </article>
   );
