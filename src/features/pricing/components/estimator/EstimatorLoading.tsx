@@ -23,8 +23,7 @@ export function EstimatorLoading({ activeStep }: EstimatorLoadingProps) {
         </div>
         <ol className="ae-loading__steps">
           {ESTIMATOR_LOADING_STEPS.map((step, index) => {
-            const state =
-              index < activeStep ? 'is-done' : index === activeStep ? 'is-active' : '';
+            const state = index < activeStep ? 'is-done' : index === activeStep ? 'is-active' : '';
             return (
               <li key={step} className={state}>
                 <span className="ae-loading__mark" aria-hidden>

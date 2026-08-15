@@ -61,7 +61,12 @@ export const CASE_STUDY_ITEMS: readonly CaseStudyItem[] = [
     coverImageAlt: 'AI operations assistant interface with conversational insights',
     techStack: ['Next.js', 'Python', 'PostgreSQL', 'Vector Search'],
     timeline: '10 Weeks',
-    keyFeatures: ['Knowledge retrieval', 'Ticket summarization', 'Role-based answers', 'Audit trail'],
+    keyFeatures: [
+      'Knowledge retrieval',
+      'Ticket summarization',
+      'Role-based answers',
+      'Audit trail',
+    ],
     businessOutcome: '−35% Support Resolution Time',
     ctaLabel: 'View Case Study',
     details: {
@@ -95,7 +100,7 @@ export const CASE_STUDY_ITEMS: readonly CaseStudyItem[] = [
     name: 'Commerce Growth Suite',
     description:
       'High-converting storefront with catalog, checkout, and order workflows built for scale.',
-    coverImage: '/products/Ecommerce Store.png',
+    coverImage: '/products/ecommerce-store.png',
     coverImageAlt: 'E-commerce storefront product listing and checkout experience',
     techStack: ['Next.js', 'React', 'Node.js', 'PostgreSQL'],
     timeline: '12 Weeks',
@@ -199,8 +204,7 @@ export const CASE_STUDY_ITEMS: readonly CaseStudyItem[] = [
         'Standardizing inquiry fields for sales teams',
         'Keeping content editable without developer bottlenecks',
       ],
-      results:
-        'Qualified inquiries rose 67%, with cleaner lead data and faster sales follow-up.',
+      results: 'Qualified inquiries rose 67%, with cleaner lead data and faster sales follow-up.',
     },
   },
   {
@@ -237,8 +241,7 @@ export const CASE_STUDY_ITEMS: readonly CaseStudyItem[] = [
         'Designing stages that matched real sales behavior',
         'Keeping the UI fast for daily use',
       ],
-      results:
-        'Pipeline velocity improved 29%, with clearer ownership and fewer stalled deals.',
+      results: 'Pipeline velocity improved 29%, with clearer ownership and fewer stalled deals.',
     },
   },
   {

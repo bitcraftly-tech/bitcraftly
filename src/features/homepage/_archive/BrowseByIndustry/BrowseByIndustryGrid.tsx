@@ -24,11 +24,7 @@ function IndustryBrowseCard({
   return (
     <Link
       href={card.href}
-      className={cn(
-        'bbi-card',
-        `bbi-card--${card.accent}`,
-        active && 'bbi-card--active',
-      )}
+      className={cn('bbi-card', `bbi-card--${card.accent}`, active && 'bbi-card--active')}
       onMouseEnter={onActivate}
       onFocus={onActivate}
     >

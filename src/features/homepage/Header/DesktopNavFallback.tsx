@@ -12,7 +12,6 @@ export function DesktopNavFallback() {
       id={HEADER_NAV_ID}
       aria-label="Main navigation"
       className="relative flex max-w-full min-w-0 flex-nowrap items-center justify-center gap-x-[10px] text-[13px]"
-
     >
       {HEADER_NAV_LINKS.map((link) => {
         const hasDropdownMenu = hasMegaMenu(link);

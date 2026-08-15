@@ -179,7 +179,11 @@
   opacity: 0.35;
   background-image:
     linear-gradient(color-mix(in srgb, var(--foreground) 5%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--foreground) 5%, transparent) 1px, transparent 1px);
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--foreground) 5%, transparent) 1px,
+      transparent 1px
+    );
   background-size: 72px 72px;
   mask-image: radial-gradient(ellipse 80% 70% at 55% 40%, black 20%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse 80% 70% at 55% 40%, black 20%, transparent 75%);
@@ -261,12 +265,11 @@
   padding: 0 12px 0 10px;
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--border));
-  background:
-    linear-gradient(
-      105deg,
-      color-mix(in srgb, var(--primary) 8%, white) 0%,
-      color-mix(in srgb, white 88%, var(--canvas)) 100%
-    );
+  background: linear-gradient(
+    105deg,
+    color-mix(in srgb, var(--primary) 8%, white) 0%,
+    color-mix(in srgb, white 88%, var(--canvas)) 100%
+  );
   box-shadow: 0 1px 0 color-mix(in srgb, white 80%, transparent) inset;
   color: color-mix(in srgb, var(--foreground) 72%, var(--primary));
   font-size: 12px;
@@ -815,13 +818,12 @@
   position: absolute;
   inset: 6% 2% 8% 6%;
   border-radius: 36px;
-  background:
-    radial-gradient(
-      80% 70% at 60% 40%,
-      color-mix(in srgb, white 70%, transparent) 0%,
-      color-mix(in srgb, var(--primary) 5%, transparent) 55%,
-      color-mix(in srgb, white 30%, transparent) 100%
-    );
+  background: radial-gradient(
+    80% 70% at 60% 40%,
+    color-mix(in srgb, white 70%, transparent) 0%,
+    color-mix(in srgb, var(--primary) 5%, transparent) 55%,
+    color-mix(in srgb, white 30%, transparent) 100%
+  );
   border: 1px solid color-mix(in srgb, var(--foreground) 5%, transparent);
   box-shadow:
     0 1px 0 color-mix(in srgb, white 85%, transparent) inset,

@@ -202,8 +202,7 @@ export const WORK_PROJECTS: readonly WorkProject[] = [
         'Matching stages to real sales behavior',
         'Keeping the UI fast for daily use',
       ],
-      outcome:
-        'Pipeline velocity improved 29%, with clearer ownership and fewer stalled deals.',
+      outcome: 'Pipeline velocity improved 29%, with clearer ownership and fewer stalled deals.',
       screenshots: [
         {
           src: '/products/hero/local-services-lead-site-720.avif',
@@ -215,8 +214,7 @@ export const WORK_PROJECTS: readonly WorkProject[] = [
   {
     id: 'erp-ops-core',
     name: 'Operations ERP Core',
-    overview:
-      'Inventory, procurement, and fulfillment consolidated into one operations system.',
+    overview: 'Inventory, procurement, and fulfillment consolidated into one operations system.',
     industry: 'ERP',
     projectType: 'Enterprise System',
     technology: ['Next.js', 'Node.js', 'PostgreSQL', 'Redis'],
@@ -227,8 +225,7 @@ export const WORK_PROJECTS: readonly WorkProject[] = [
     cta: { label: 'View case study', href: '#work-details' },
     searchTags: ['inventory', 'procurement', 'erp', 'operations'],
     details: {
-      problem:
-        'Operations teams reconciled inventory and orders across disconnected tools.',
+      problem: 'Operations teams reconciled inventory and orders across disconnected tools.',
       solution:
         'We consolidated inventory, purchasing, and fulfillment into an ERP core with permissions and dashboards.',
       architecture:
@@ -266,7 +263,7 @@ export const WORK_PROJECTS: readonly WorkProject[] = [
     technology: ['Next.js', 'React', 'Node.js', 'PostgreSQL'],
     timeline: '12 Weeks',
     businessImpact: '+58% online conversion',
-    coverImage: '/products/Ecommerce Store.png',
+    coverImage: '/products/ecommerce-store.png',
     coverImageAlt: 'E-commerce storefront product listing experience',
     cta: { label: 'View case study', href: '#work-details' },
     searchTags: ['storefront', 'checkout', 'commerce', 'conversion'],
@@ -294,7 +291,7 @@ export const WORK_PROJECTS: readonly WorkProject[] = [
         'Online conversion rose 58% after launch, with faster mobile load times and fewer abandoned carts.',
       screenshots: [
         {
-          src: '/products/Ecommerce Store.png',
+          src: '/products/ecommerce-store.png',
           alt: 'Commerce storefront product grid',
         },
       ],
@@ -359,8 +356,7 @@ export const WORK_PROJECTS: readonly WorkProject[] = [
     cta: { label: 'View case study', href: '#work-details' },
     searchTags: ['property', 'leads', 'real estate', 'showcase'],
     details: {
-      problem:
-        'Project interest came through scattered WhatsApp messages and static pages.',
+      problem: 'Project interest came through scattered WhatsApp messages and static pages.',
       solution:
         'We built a branded showcase with rich project pages, structured inquiries, and sales routing.',
       architecture:
@@ -378,8 +374,7 @@ export const WORK_PROJECTS: readonly WorkProject[] = [
         'Standardizing inquiry fields for sales',
         'Keeping content editable without developer bottlenecks',
       ],
-      outcome:
-        'Qualified inquiries rose 67%, with cleaner lead data and faster follow-up.',
+      outcome: 'Qualified inquiries rose 67%, with cleaner lead data and faster follow-up.',
       screenshots: [
         {
           src: '/products/hero/builder-website-720.avif',

@@ -20,7 +20,10 @@ export function PortfolioCard({ project, className }: PortfolioCardProps) {
 
   return (
     <article
-      className={cn('portfolio-card flex h-full flex-col rounded-[16px] !p-0 overflow-hidden', className)}
+      className={cn(
+        'portfolio-card flex h-full flex-col rounded-[16px] !p-0 overflow-hidden',
+        className,
+      )}
     >
       <div className="portfolio-card-media relative">
         <div className="portfolio-card-media-visual absolute inset-0">

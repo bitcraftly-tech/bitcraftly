@@ -456,12 +456,11 @@
   box-sizing: border-box;
   padding: 0 12px;
   border-bottom: 1px solid color-mix(in srgb, var(--foreground) 5%, transparent);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, white 96%, var(--canvas)) 0%,
-      color-mix(in srgb, var(--canvas) 55%, white) 100%
-    );
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, white 96%, var(--canvas)) 0%,
+    color-mix(in srgb, var(--canvas) 55%, white) 100%
+  );
   box-shadow: 0 1px 0 color-mix(in srgb, white 80%, transparent) inset;
 }
 
@@ -529,12 +528,11 @@
   border-bottom-right-radius: 16px;
   isolation: isolate;
   transform: translateZ(0);
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, var(--primary) 10%, var(--border)) 0%,
-      #e2e8f0 100%
-    );
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--primary) 10%, var(--border)) 0%,
+    #e2e8f0 100%
+  );
 }
 
 .sys__browser-track {
@@ -571,12 +569,11 @@
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform: translateZ(0);
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, var(--primary) 8%, #f8fafc) 0%,
-      #e2e8f0 100%
-    );
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--primary) 8%, #f8fafc) 0%,
+    #e2e8f0 100%
+  );
 }
 
 .sys__browser-page .sys__browser-shot {
@@ -902,11 +899,7 @@
   }
   50% {
     transform: rotate(-3.5deg)
-      translate3d(
-        calc(var(--sys-px) * -0.35 * 1px),
-        calc(var(--sys-py) * 0.3 * 1px - 4px),
-        0
-      )
+      translate3d(calc(var(--sys-px) * -0.35 * 1px), calc(var(--sys-py) * 0.3 * 1px - 4px), 0)
       translateZ(-12px);
   }
 }
@@ -920,11 +913,7 @@
   }
   50% {
     transform: rotate(4.5deg)
-      translate3d(
-        calc(var(--sys-px) * 0.4 * 1px),
-        calc(var(--sys-py) * -0.25 * 1px - 3px),
-        0
-      )
+      translate3d(calc(var(--sys-px) * 0.4 * 1px), calc(var(--sys-py) * -0.25 * 1px - 3px), 0)
       translateZ(6px);
   }
 }

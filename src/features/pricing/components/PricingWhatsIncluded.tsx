@@ -4,11 +4,7 @@ import { PRICING_INCLUDED, PRICING_INCLUDED_META } from '../pricing.content';
 
 export function PricingWhatsIncluded() {
   return (
-    <Section
-      id="pricing-included"
-      spacing="lg"
-      aria-labelledby="pricing-included-heading"
-    >
+    <Section id="pricing-included" spacing="lg" aria-labelledby="pricing-included-heading">
       <div className="pp-section-head">
         <p className="pp-section-eyebrow">{PRICING_INCLUDED_META.eyebrow}</p>
         <h2 id="pricing-included-heading" className="pp-section-title">

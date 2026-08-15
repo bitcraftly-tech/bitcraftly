@@ -17,12 +17,20 @@ export function RecommendationField({
   fullWidth = false,
 }: RecommendationFieldProps) {
   return (
-    <div className={fullWidth ? 'ae-result-card__field ae-result-card__field--full' : 'ae-result-card__field'}>
+    <div
+      className={
+        fullWidth ? 'ae-result-card__field ae-result-card__field--full' : 'ae-result-card__field'
+      }
+    >
       <p className="ae-result-card__label">
         <Icon name={icon} size="sm" aria-hidden className="h-[12px] w-[12px]" />
         {label}
       </p>
-      <p className={emphasize ? 'ae-result-card__value ae-result-card__value--lg' : 'ae-result-card__value'}>
+      <p
+        className={
+          emphasize ? 'ae-result-card__value ae-result-card__value--lg' : 'ae-result-card__value'
+        }
+      >
         {value}
       </p>
     </div>
