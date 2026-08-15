@@ -1,19 +1,2 @@
-import type { Metadata } from 'next';
-
-import PortfolioShowcaseLayout from '@/components/portfolio/PortfolioShowcaseLayout';
-
-import LocalServicesLeadShowcaseContent from './LocalServicesLeadShowcaseContent';
-
-export const metadata: Metadata = {
-  title: 'Steel City Home Pros · Local Services Showcase | Bitcraftly',
-  description:
-    'Hyperlocal home-services lead funnel — verified crews, transparent pricing, Jamshedpur zone dispatch and WhatsApp booking.',
-};
-
-export default function LocalServicesLeadsShowcasePage() {
-  return (
-    <PortfolioShowcaseLayout themeId="local">
-      <LocalServicesLeadShowcaseContent />
-    </PortfolioShowcaseLayout>
-  );
-}
+export { default } from '@bitcraftly/showcase-local-services-leads/app/local-services-leads-showcase/page';
+export * from '@bitcraftly/showcase-local-services-leads/app/local-services-leads-showcase/page';

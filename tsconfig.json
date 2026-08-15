@@ -19,7 +19,41 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@bitcraftly/showcase-shared": ["./showcases/shared/src/index.ts"],
+      "@bitcraftly/showcase-shared/*": ["./showcases/shared/src/*"],
+      "@bitcraftly/showcase-dayal-builders": ["./showcases/dayal-builders/src/index.ts"],
+      "@bitcraftly/showcase-dayal-builders/*": ["./showcases/dayal-builders/src/*"],
+      "@bitcraftly/showcase-clinic-healthcare": ["./showcases/clinic-healthcare/src/index.ts"],
+      "@bitcraftly/showcase-clinic-healthcare/*": ["./showcases/clinic-healthcare/src/*"],
+      "@bitcraftly/showcase-gym-fitness": ["./showcases/gym-fitness/src/index.ts"],
+      "@bitcraftly/showcase-gym-fitness/*": ["./showcases/gym-fitness/src/*"],
+      "@bitcraftly/showcase-school-website": ["./showcases/school-website/src/index.ts"],
+      "@bitcraftly/showcase-school-website/*": ["./showcases/school-website/src/*"],
+      "@bitcraftly/showcase-ecommerce-store": ["./showcases/ecommerce-store/src/index.ts"],
+      "@bitcraftly/showcase-ecommerce-store/*": ["./showcases/ecommerce-store/src/*"],
+      "@bitcraftly/showcase-claycraft-crockery": ["./showcases/claycraft-crockery/src/index.ts"],
+      "@bitcraftly/showcase-claycraft-crockery/*": ["./showcases/claycraft-crockery/src/*"],
+      "@bitcraftly/showcase-restaurant-website": ["./showcases/restaurant-website/src/index.ts"],
+      "@bitcraftly/showcase-restaurant-website/*": ["./showcases/restaurant-website/src/*"],
+      "@bitcraftly/showcase-restaurant-ai-chatbot": [
+        "./showcases/restaurant-ai-chatbot/src/index.ts"
+      ],
+      "@bitcraftly/showcase-restaurant-ai-chatbot/*": ["./showcases/restaurant-ai-chatbot/src/*"],
+      "@bitcraftly/showcase-society-management": ["./showcases/society-management/src/index.ts"],
+      "@bitcraftly/showcase-society-management/*": ["./showcases/society-management/src/*"],
+      "@bitcraftly/showcase-builder-real-estate": ["./showcases/builder-real-estate/src/index.ts"],
+      "@bitcraftly/showcase-builder-real-estate/*": ["./showcases/builder-real-estate/src/*"],
+      "@bitcraftly/showcase-local-services-leads": [
+        "./showcases/local-services-leads/src/index.ts"
+      ],
+      "@bitcraftly/showcase-local-services-leads/*": ["./showcases/local-services-leads/src/*"],
+      "@bitcraftly/showcase-toy-store": ["./showcases/toy-store/src/index.ts"],
+      "@bitcraftly/showcase-toy-store/*": ["./showcases/toy-store/src/*"],
+      "@bitcraftly/showcase-rpytech-training": ["./showcases/rpytech-training/src/index.ts"],
+      "@bitcraftly/showcase-rpytech-training/*": ["./showcases/rpytech-training/src/*"],
+      "@bitcraftly/showcase-react-video-demo": ["./showcases/react-video-demo/src/index.ts"],
+      "@bitcraftly/showcase-react-video-demo/*": ["./showcases/react-video-demo/src/*"]
     }
   },
   "include": [
