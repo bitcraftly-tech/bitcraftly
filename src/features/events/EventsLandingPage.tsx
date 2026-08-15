@@ -149,7 +149,12 @@ export function EventsLandingPage() {
                       )}
                     >
                       {event.ctaLabel ?? 'Learn more'}
-                      <Icon name="arrow-right" size="sm" aria-hidden className="h-[14px] w-[14px]" />
+                      <Icon
+                        name="arrow-right"
+                        size="sm"
+                        aria-hidden
+                        className="h-[14px] w-[14px]"
+                      />
                     </Link>
                   ) : null}
                 </div>
@@ -190,7 +195,12 @@ export function EventsLandingPage() {
                       )}
                     >
                       {event.ctaLabel ?? 'View'}
-                      <Icon name="arrow-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
+                      <Icon
+                        name="arrow-right"
+                        size="sm"
+                        aria-hidden
+                        className="h-[13px] w-[13px]"
+                      />
                     </Link>
                   ) : null}
                 </article>

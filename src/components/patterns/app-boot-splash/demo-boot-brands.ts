@@ -65,7 +65,7 @@ const DEMO_BOOT_BRANDS: ReadonlyArray<readonly [string, DemoBootBrand]> = [
   ],
   [
     '/portfolio/society-management-showcase',
-    { name: 'Harmony Heights', monogram: 'HH', accent: '#7c3aed', background: '#f5f3ff' },
+    { name: 'Harmony Heights', monogram: 'HH', accent: '#0d9488', background: '#ecfdf5' },
   ],
   [
     '/portfolio/restaurant-website-showcase',

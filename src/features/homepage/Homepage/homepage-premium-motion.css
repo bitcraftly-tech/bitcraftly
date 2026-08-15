@@ -103,8 +103,7 @@
 }
 
 .home-story .hs-module {
-  transition:
-    background-color var(--motion-fast) var(--motion-ease);
+  transition: background-color var(--motion-fast) var(--motion-ease);
 }
 
 .home-story .hs-outcome:hover {

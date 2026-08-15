@@ -3,7 +3,6 @@
 import { ClearHashOnPageNavigate } from '@/components/patterns/clear-hash-on-page-navigate';
 import { DeferredNewsletter } from '@/components/patterns/deferred-newsletter';
 import { MarketingClientChrome } from '@/components/patterns/marketing-client-chrome';
-import { StudioLaunchToast } from '@/components/patterns/studio-launch-toast';
 import { MarketingDeferredCss } from '@/lib/layout/MarketingDeferredCss';
 
 /**
@@ -16,7 +15,7 @@ export function MarketingLayoutClientHead() {
     <>
       <MarketingDeferredCss />
       <ClearHashOnPageNavigate />
-      <StudioLaunchToast />
+      {/* StudioLaunchToast stays unmounted until AI Studio launches publicly. */}
     </>
   );
 }

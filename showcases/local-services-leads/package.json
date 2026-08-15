@@ -1,0 +1,18 @@
+{
+  "name": "@bitcraftly/showcase-local-services-leads",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*"
+  },
+  "peerDependencies": {
+    "next": ">=15",
+    "react": ">=19",
+    "react-dom": ">=19"
+  },
+  "dependencies": {
+    "@bitcraftly/showcase-shared": "0.0.0"
+  }
+}

@@ -45,7 +45,12 @@ export function PricingAddons() {
           <ul className="pp-consult__points">
             {PRICING_ADDONS_META.consultPoints.map((point) => (
               <li key={point}>
-                <Icon name="check" size="sm" aria-hidden className="h-[14px] w-[14px] text-primary" />
+                <Icon
+                  name="check"
+                  size="sm"
+                  aria-hidden
+                  className="h-[14px] w-[14px] text-primary"
+                />
                 <span>{point}</span>
               </li>
             ))}

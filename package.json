@@ -2,18 +2,21 @@
   "name": "bitcraftly-platform",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "showcases/*"
+  ],
   "scripts": {
     "dev": "next dev --webpack",
     "dev:turbo": "next dev",
     "prebuild": "npm run db:generate",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "analyze": "cross-env ANALYZE=true next build",
+    "analyze": "cross-env ANALYZE=true next build --webpack",
     "test": "vitest run",
     "test:unit": "vitest run",
     "test:watch": "vitest",

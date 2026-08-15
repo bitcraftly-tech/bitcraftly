@@ -10,7 +10,7 @@ import {
   type ReactNode,
 } from 'react';
 
-import ShowcaseThemeToggle from '@/components/portfolio/ShowcaseThemeToggle';
+import ShowcaseThemeToggle from '@bitcraftly/showcase-shared/ShowcaseThemeToggle';
 
 type ThemeValue = 'light' | 'dark';
 

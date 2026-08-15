@@ -27,13 +27,7 @@ function slotClass(offset: number) {
   return '';
 }
 
-function SlideCard({
-  item,
-  active,
-}: {
-  item: WorkCarouselItem;
-  active: boolean;
-}) {
+function SlideCard({ item, active }: { item: WorkCarouselItem; active: boolean }) {
   return (
     <article
       className={cn('hp-work-slide', active && 'is-active')}
@@ -136,10 +130,7 @@ export function WorkCarousel() {
           if (Math.abs(offset) > 2) return null;
 
           return (
-            <div
-              key={item.id}
-              className={cn('hp-work-carousel__slot', slotClass(offset))}
-            >
+            <div key={item.id} className={cn('hp-work-carousel__slot', slotClass(offset))}>
               <SlideCard item={item} active={offset === 0} />
             </div>
           );

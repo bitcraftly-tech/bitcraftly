@@ -17,7 +17,7 @@ export const WHATSAPP_PORTFOLIO_HREF = `https://wa.me/${WHATSAPP_NUMBER}?text=${
 
 export const BITCRAFTLY_LEGACY_ORIGIN = 'https://bitcraftly.com';
 
-/** Portfolio screenshot from `public/products` (same-origin static asset). */
+/** Portfolio screenshot from `public/products` (kebab-case filenames, no URI encoding). */
 export function bitcraftlyProductImage(fileName: string): string {
-  return `/products/${encodeURIComponent(fileName)}`;
+  return `/products/${fileName}`;
 }

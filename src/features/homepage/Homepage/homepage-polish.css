@@ -21,8 +21,7 @@
   --hp-elev-1:
     var(--hp-inset), 0 16px 36px -26px color-mix(in srgb, var(--foreground) 22%, transparent);
   --hp-elev-2:
-    var(--hp-inset),
-    0 22px 48px -28px color-mix(in srgb, var(--foreground) 28%, transparent),
+    var(--hp-inset), 0 22px 48px -28px color-mix(in srgb, var(--foreground) 28%, transparent),
     0 10px 20px -14px color-mix(in srgb, var(--foreground) 10%, transparent);
   --hp-elev-hover:
     var(--hp-inset), 0 26px 52px -28px color-mix(in srgb, var(--primary) 30%, transparent);

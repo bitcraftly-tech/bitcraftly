@@ -1,11 +1,5 @@
 export type SearchCategoryId =
-  | 'pages'
-  | 'services'
-  | 'industries'
-  | 'ai-solutions'
-  | 'case-studies'
-  | 'pricing'
-  | 'blog';
+  'pages' | 'services' | 'industries' | 'ai-solutions' | 'case-studies' | 'pricing' | 'blog';
 
 export interface SearchCategoryMeta {
   readonly id: SearchCategoryId;

@@ -1,9 +1,9 @@
-'use client';
+﻿'use client';
 
 import { useId, useState } from 'react';
 import { Ambulance, PhoneCall, ShieldAlert } from 'lucide-react';
 
-import { CLINIC_BRAND } from '@/app/portfolio/clinic-healthcare-showcase/clinic-data';
+import { CLINIC_BRAND } from '@bitcraftly/showcase-clinic-healthcare/app/clinic-healthcare-showcase/clinic-data';
 import AiProcessing from '@/modules/ai/shared/components/AiProcessing';
 import { useFakeAiDelay } from '@/modules/ai/shared/hooks/useFakeAiDelay';
 import { assessEmergency, type TriageResult } from '@/modules/ai/emergency-triage/data/triage';
@@ -39,7 +39,7 @@ export default function EmergencyTriageDemo() {
           Emergency AI triage
         </h2>
         <p className="cl-small mt-2">
-          Showcase urgency routing — for real emergencies always call local emergency services.
+          Showcase urgency routing â€” for real emergencies always call local emergency services.
         </p>
         <label className="cl-label mt-5" htmlFor={`${uid}-symptoms`}>
           Current symptoms
@@ -47,7 +47,7 @@ export default function EmergencyTriageDemo() {
         <textarea
           id={`${uid}-symptoms`}
           className="cl-field min-h-[9rem] resize-y"
-          placeholder="Example: Sudden crushing chest pain radiating to the left arm…"
+          placeholder="Example: Sudden crushing chest pain radiating to the left armâ€¦"
           value={symptoms}
           onChange={(event) => setSymptoms(event.target.value)}
           aria-invalid={error ? true : undefined}
@@ -65,11 +65,11 @@ export default function EmergencyTriageDemo() {
           aria-busy={busy}
         >
           <ShieldAlert className="h-4 w-4" aria-hidden />
-          {busy ? 'Assessing…' : 'Assess Urgency'}
+          {busy ? 'Assessingâ€¦' : 'Assess Urgency'}
         </button>
         {busy ? (
           <div className="mt-4">
-            <AiProcessing label="Running triage rules…" />
+            <AiProcessing label="Running triage rulesâ€¦" />
           </div>
         ) : null}
       </section>
@@ -89,7 +89,7 @@ export default function EmergencyTriageDemo() {
             <ul className="space-y-2">
               {result.actions.map((action) => (
                 <li key={action} className="cl-small">
-                  • {action}
+                  â€¢ {action}
                 </li>
               ))}
             </ul>

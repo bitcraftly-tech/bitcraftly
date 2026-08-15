@@ -42,7 +42,7 @@ export const HEADER_NAV_LINKS: readonly SiteNavLink[] = [
     viewAllLabel: 'View all industries',
   }),
   createSimpleNavLink({
-    label: 'AI',
+    label: 'AI Studio',
     href: ROUTES.aiStudio,
     description: 'AI Studio and intelligent automation',
   }),

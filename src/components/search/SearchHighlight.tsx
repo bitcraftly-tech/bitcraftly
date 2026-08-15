@@ -16,10 +16,7 @@ function findCaseInsensitiveRanges(
   }
 
   const lowerText = text.toLowerCase();
-  const tokens = needle
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean);
+  const tokens = needle.toLowerCase().split(/\s+/).filter(Boolean);
 
   const ranges: { start: number; end: number }[] = [];
 

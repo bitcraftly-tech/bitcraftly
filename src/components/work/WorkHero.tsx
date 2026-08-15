@@ -24,12 +24,7 @@ interface WorkHeroProps {
   readonly onFilterChange: (filter: WorkFilterId) => void;
 }
 
-export function WorkHero({
-  query,
-  activeFilter,
-  onQueryChange,
-  onFilterChange,
-}: WorkHeroProps) {
+export function WorkHero({ query, activeFilter, onQueryChange, onFilterChange }: WorkHeroProps) {
   return (
     <section className="wp-hero" aria-labelledby="work-hero-heading">
       <Container>

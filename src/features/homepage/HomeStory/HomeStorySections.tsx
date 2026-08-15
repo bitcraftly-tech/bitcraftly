@@ -270,11 +270,7 @@ export function HomeStorySections() {
       </section>
 
       {/* Wave 1 */}
-      <section
-        className="hs-section hs-wave"
-        id="wave-1"
-        aria-labelledby="hs-wave-heading"
-      >
+      <section className="hs-section hs-wave" id="wave-1" aria-labelledby="hs-wave-heading">
         <div className="hs-wave-stage">
           <Container size="xl" className="hs-wave-shell">
             <header className="hs-wave-head">
@@ -289,8 +285,8 @@ export function HomeStorySections() {
                     Explore <em>Industry Systems</em>
                   </h2>
                   <p className="hs-wave-lede">
-                    Four launch-ready systems — website, AI, dashboard, and analytics as one
-                    product for your vertical.
+                    Four launch-ready systems — website, AI, dashboard, and analytics as one product
+                    for your vertical.
                   </p>
                 </div>
                 <Link href={ROUTES.industries} className="hs-wave-all">
@@ -302,11 +298,7 @@ export function HomeStorySections() {
 
             <div className="hs-wave-grid">
               {WAVE1.map((system) => (
-                <article
-                  key={system.name}
-                  className="hs-system"
-                  data-tone={system.tone}
-                >
+                <article key={system.name} className="hs-system" data-tone={system.tone}>
                   <span className="hs-system__watermark" aria-hidden="true">
                     {system.index}
                   </span>
@@ -584,11 +576,11 @@ export function HomeStorySections() {
 
               <ul className="hs-sync__channels">
                 {[
-                  { label: "Payments", hint: "Billing & payouts", lag: "12ms" },
-                  { label: "Calendar", hint: "Bookings & slots", lag: "18ms" },
-                  { label: "CRM", hint: "Leads & clients", lag: "9ms" },
-                  { label: "Messaging", hint: "Chat & alerts", lag: "14ms" },
-                  { label: "Email", hint: "Campaigns & inbox", lag: "21ms" },
+                  { label: 'Payments', hint: 'Billing & payouts', lag: '12ms' },
+                  { label: 'Calendar', hint: 'Bookings & slots', lag: '18ms' },
+                  { label: 'CRM', hint: 'Leads & clients', lag: '9ms' },
+                  { label: 'Messaging', hint: 'Chat & alerts', lag: '14ms' },
+                  { label: 'Email', hint: 'Campaigns & inbox', lag: '21ms' },
                 ].map((ch) => (
                   <li key={ch.label} className="hs-sync__channel">
                     <span className="hs-sync__channel-mark" />
@@ -635,9 +627,7 @@ export function HomeStorySections() {
                 {COMPARISON.map((row, index) => (
                   <li key={row.dim} className="hs-duel__row">
                     <div className="hs-duel__dim">
-                      <span className="hs-duel__index">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
+                      <span className="hs-duel__index">{String(index + 1).padStart(2, '0')}</span>
                       <span className="hs-duel__dim-label">{row.dim}</span>
                     </div>
                     <div className="hs-duel__pair">

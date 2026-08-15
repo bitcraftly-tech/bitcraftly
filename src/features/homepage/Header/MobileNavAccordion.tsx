@@ -47,7 +47,10 @@ export function MobileNavAccordion({ links, pathname, onNavigate }: MobileNavAcc
               href={link.href}
               aria-current={isActive ? 'page' : undefined}
               onClick={onNavigate}
-              className={cn('header-mobile-nav__tile header-mobile-nav__tile--solo', isActive && 'is-active')}
+              className={cn(
+                'header-mobile-nav__tile header-mobile-nav__tile--solo',
+                isActive && 'is-active',
+              )}
             >
               <span className="header-mobile-nav__tile-index" aria-hidden>
                 {indexLabel}
@@ -70,7 +73,11 @@ export function MobileNavAccordion({ links, pathname, onNavigate }: MobileNavAcc
         return (
           <div
             key={`${link.label}-${link.href}`}
-            className={cn('header-mobile-nav__section', isOpen && 'is-open', isActive && 'is-active')}
+            className={cn(
+              'header-mobile-nav__section',
+              isOpen && 'is-open',
+              isActive && 'is-active',
+            )}
           >
             <button
               type="button"
@@ -148,7 +155,12 @@ export function MobileNavAccordion({ links, pathname, onNavigate }: MobileNavAcc
                     className="header-mobile-nav__view-all"
                   >
                     <span>{link.viewAllLabel ?? `View all ${link.label.toLowerCase()}`}</span>
-                    <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[14px] w-[14px]" />
+                    <Icon
+                      name="arrow-up-right"
+                      size="sm"
+                      aria-hidden
+                      className="h-[14px] w-[14px]"
+                    />
                   </Link>
                 </>
               ) : null}

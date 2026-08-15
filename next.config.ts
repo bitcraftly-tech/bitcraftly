@@ -15,6 +15,25 @@ const nextConfig: NextConfig = {
    */
   reactStrictMode: true,
 
+  /** Isolated portfolio showcase packages under showcases/* */
+  transpilePackages: [
+    '@bitcraftly/showcase-shared',
+    '@bitcraftly/showcase-dayal-builders',
+    '@bitcraftly/showcase-clinic-healthcare',
+    '@bitcraftly/showcase-gym-fitness',
+    '@bitcraftly/showcase-school-website',
+    '@bitcraftly/showcase-ecommerce-store',
+    '@bitcraftly/showcase-claycraft-crockery',
+    '@bitcraftly/showcase-restaurant-website',
+    '@bitcraftly/showcase-restaurant-ai-chatbot',
+    '@bitcraftly/showcase-society-management',
+    '@bitcraftly/showcase-builder-real-estate',
+    '@bitcraftly/showcase-local-services-leads',
+    '@bitcraftly/showcase-toy-store',
+    '@bitcraftly/showcase-rpytech-training',
+    '@bitcraftly/showcase-react-video-demo',
+  ],
+
   /**
    * Allow LAN / loopback hosts to load Next.js dig assets (HMR + client chunks).
    * Without this, phone QA via http://192.168.x.x:3000 gets SSR HTML but no
@@ -48,6 +67,31 @@ const nextConfig: NextConfig = {
    * Restrict output tracing to this application.
    */
   outputFileTracingRoot: projectRoot,
+
+  /**
+   * `prisma generate` rewrites `src/generated/prisma` on every build, and that
+   * folder lives inside the watched `src` tree. A build running next to
+   * `next dev` would otherwise trigger Fast Refresh full page reloads.
+   */
+  webpack(config, { dev }) {
+    if (!dev) {
+      return config;
+    }
+
+    const currentIgnored = config.watchOptions?.ignored;
+    const inherited = Array.isArray(currentIgnored)
+      ? currentIgnored
+      : typeof currentIgnored === 'string'
+        ? [currentIgnored]
+        : [];
+
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: [...inherited, '**/src/generated/**', '**/.next/**'],
+    };
+
+    return config;
+  },
 
   /**
    * Prefer modern JS output — drop legacy polyfills for evergreen browsers.

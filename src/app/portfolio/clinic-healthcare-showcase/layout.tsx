@@ -1,7 +1,2 @@
-import type { ReactNode } from 'react';
-
-import ClinicShowcaseLayout from './ClinicShowcaseLayout';
-
-export default function ClinicHealthcareShowcaseRootLayout({ children }: { children: ReactNode }) {
-  return <ClinicShowcaseLayout>{children}</ClinicShowcaseLayout>;
-}
+export { default } from '@bitcraftly/showcase-clinic-healthcare/app/clinic-healthcare-showcase/layout';
+export * from '@bitcraftly/showcase-clinic-healthcare/app/clinic-healthcare-showcase/layout';

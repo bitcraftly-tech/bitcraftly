@@ -1,10 +1,5 @@
 import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
-import type {
-  IndustriesFaqItem,
-  IndustriesMetric,
-  IndustriesWhyItem,
-  IndustryItem,
-} from './types';
+import type { IndustriesFaqItem, IndustriesMetric, IndustriesWhyItem, IndustryItem } from './types';
 
 const discoveryCta = (label = 'Explore Solutions') =>
   ({
@@ -316,7 +311,8 @@ export const INDUSTRIES_WHY: readonly IndustriesWhyItem[] = [
   {
     id: 'ai-first',
     title: 'AI-first development',
-    description: 'Practical AI where it improves conversion, support, or operations — with guardrails.',
+    description:
+      'Practical AI where it improves conversion, support, or operations — with guardrails.',
     icon: 'brain',
   },
   {

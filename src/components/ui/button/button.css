@@ -10,12 +10,9 @@
   --btn-font: var(--font-family-sans);
   --btn-weight: 600;
   --btn-transition:
-    filter 180ms var(--ease-out, ease),
-    transform 180ms var(--ease-out, ease),
-    box-shadow 180ms var(--ease-out, ease),
-    background-color 180ms var(--ease-out, ease),
-    border-color 180ms var(--ease-out, ease),
-    color 180ms var(--ease-out, ease),
+    filter 180ms var(--ease-out, ease), transform 180ms var(--ease-out, ease),
+    box-shadow 180ms var(--ease-out, ease), background-color 180ms var(--ease-out, ease),
+    border-color 180ms var(--ease-out, ease), color 180ms var(--ease-out, ease),
     opacity 180ms var(--ease-out, ease);
 
   /* Logo CTA — two-stop only: electric blue → violet */

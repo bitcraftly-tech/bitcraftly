@@ -13,11 +13,7 @@ import { useRouter } from 'next/navigation';
 import { Icon } from '@/components/ui/icon';
 import { fuzzySearchDocuments } from './search.fuzzy';
 import { getSearchIndex, SEARCH_CATEGORIES } from './search.index';
-import {
-  clearRecentSearches,
-  readRecentSearches,
-  writeRecentSearch,
-} from './search.recent';
+import { clearRecentSearches, readRecentSearches, writeRecentSearch } from './search.recent';
 import { SearchEmptyState } from './SearchEmptyState';
 import { SearchRecentList } from './SearchRecentList';
 import { SearchResultsGroup } from './SearchResultsGroup';
@@ -207,7 +203,12 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
             </button>
           </div>
 
-          <div className="gs-body" id={listboxId} role="listbox" aria-label="Command palette results">
+          <div
+            className="gs-body"
+            id={listboxId}
+            role="listbox"
+            aria-label="Command palette results"
+          >
             {query.trim() ? (
               flatResults.length > 0 ? (
                 groups.map((group) => {

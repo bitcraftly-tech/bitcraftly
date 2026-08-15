@@ -91,11 +91,7 @@ export function WorkPage({ className, initialFilter = 'all' }: WorkPageProps) {
         project={featuredProject}
         onViewDetails={() => selectProject(featuredProject.id)}
       />
-      <WorkGrid
-        projects={filteredProjects}
-        activeId={activeProject.id}
-        onSelect={selectProject}
-      />
+      <WorkGrid projects={filteredProjects} activeId={activeProject.id} onSelect={selectProject} />
       <WorkCaseStudyDetails project={activeProject} />
       <WorkTechStack />
       <WorkClientResults />

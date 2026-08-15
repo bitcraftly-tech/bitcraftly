@@ -13,26 +13,23 @@
   --ec-lift: -3px;
   --ec-border: color-mix(in srgb, var(--foreground) 8%, transparent);
   --ec-border-hover: color-mix(in srgb, var(--primary) 28%, transparent);
-  --ec-glass: 0 1px 0 color-mix(in srgb, white 88%, transparent) inset,
+  --ec-glass:
+    0 1px 0 color-mix(in srgb, white 88%, transparent) inset,
     0 0 0 0.5px color-mix(in srgb, white 45%, transparent) inset;
   --ec-shadow:
-    var(--ec-glass),
-    0 1px 2px color-mix(in srgb, var(--foreground) 4%, transparent),
+    var(--ec-glass), 0 1px 2px color-mix(in srgb, var(--foreground) 4%, transparent),
     0 12px 28px -18px color-mix(in srgb, var(--foreground) 22%, transparent),
     0 22px 44px -26px color-mix(in srgb, var(--foreground) 16%, transparent);
   --ec-shadow-hover:
-    var(--ec-glass),
-    0 2px 4px color-mix(in srgb, var(--foreground) 5%, transparent),
+    var(--ec-glass), 0 2px 4px color-mix(in srgb, var(--foreground) 5%, transparent),
     0 16px 32px -16px color-mix(in srgb, var(--primary) 28%, transparent),
     0 28px 52px -24px color-mix(in srgb, var(--primary-end) 22%, transparent);
   --ec-fill: color-mix(in srgb, white 94%, transparent);
   --ec-fill-soft: color-mix(in srgb, white 88%, var(--canvas));
   --ec-interact:
-    transform var(--ec-duration) var(--ec-ease),
-    border-color var(--ec-duration) var(--ec-ease),
+    transform var(--ec-duration) var(--ec-ease), border-color var(--ec-duration) var(--ec-ease),
     box-shadow var(--ec-duration) var(--ec-ease),
-    background-color var(--ec-duration) var(--ec-ease),
-    filter var(--ec-duration) var(--ec-ease);
+    background-color var(--ec-duration) var(--ec-ease), filter var(--ec-duration) var(--ec-ease);
 }
 
 /* Shared interactive card language */
@@ -102,12 +99,11 @@
   padding: 26px 24px 22px;
   border-radius: var(--ec-radius);
   border: 1px solid var(--ec-border);
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, white 96%, transparent) 0%,
-      color-mix(in srgb, var(--canvas) 35%, white) 100%
-    );
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, white 96%, transparent) 0%,
+    color-mix(in srgb, var(--canvas) 35%, white) 100%
+  );
   box-shadow: var(--ec-shadow);
   backdrop-filter: blur(14px) saturate(1.06);
   -webkit-backdrop-filter: blur(14px) saturate(1.06);
@@ -239,12 +235,11 @@
   padding: 24px 22px 22px;
   border-radius: var(--ec-radius);
   border: 1px solid var(--ec-border);
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, white 96%, transparent) 0%,
-      color-mix(in srgb, var(--canvas) 30%, white) 100%
-    );
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, white 96%, transparent) 0%,
+    color-mix(in srgb, var(--canvas) 30%, white) 100%
+  );
   box-shadow: var(--ec-shadow);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -344,12 +339,11 @@
   padding: 13px 14px;
   border-radius: var(--ec-radius-sm);
   border: 1px solid var(--ec-border);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, white 96%, transparent) 0%,
-      color-mix(in srgb, var(--primary) 4%, white) 100%
-    );
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, white 96%, transparent) 0%,
+    color-mix(in srgb, var(--primary) 4%, white) 100%
+  );
   box-shadow: var(--ec-shadow);
 }
 
@@ -378,12 +372,11 @@
   padding: 16px;
   border-radius: var(--ec-radius);
   border: 1px solid var(--ec-border);
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, white 96%, transparent) 0%,
-      color-mix(in srgb, var(--canvas) 25%, white) 100%
-    );
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, white 96%, transparent) 0%,
+    color-mix(in srgb, var(--canvas) 25%, white) 100%
+  );
   box-shadow: var(--ec-shadow);
 }
 
@@ -420,12 +413,11 @@
 
 .home-story .hs-duel__side--us {
   border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
-  background:
-    linear-gradient(
-      145deg,
-      color-mix(in srgb, var(--primary) 11%, white) 0%,
-      color-mix(in srgb, var(--primary) 5%, white) 100%
-    );
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--primary) 11%, white) 0%,
+    color-mix(in srgb, var(--primary) 5%, white) 100%
+  );
   box-shadow:
     0 1px 0 color-mix(in srgb, white 80%, transparent) inset,
     0 10px 20px -14px color-mix(in srgb, var(--primary) 34%, transparent);
@@ -445,12 +437,11 @@
   padding: 28px 16px;
   border-radius: 20px;
   border: 1px solid var(--ec-border);
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, white 96%, transparent) 0%,
-      color-mix(in srgb, var(--canvas) 40%, white) 100%
-    );
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, white 96%, transparent) 0%,
+    color-mix(in srgb, var(--canvas) 40%, white) 100%
+  );
   box-shadow: var(--ec-shadow);
 }
 

@@ -11,10 +11,7 @@ import {
   DISCOVERY_QUESTIONS,
   DISCOVERY_TIMELINE_OPTIONS,
 } from './discovery.content';
-import {
-  buildDiscoveryRecommendation,
-  EMPTY_DISCOVERY_ANSWERS,
-} from './discovery.engine';
+import { buildDiscoveryRecommendation, EMPTY_DISCOVERY_ANSWERS } from './discovery.engine';
 import { DiscoveryAnalyzing } from './DiscoveryAnalyzing';
 import { DiscoveryFinalActions } from './DiscoveryFinalActions';
 import { DiscoveryIntro } from './DiscoveryIntro';
@@ -203,12 +200,7 @@ export function DiscoveryFunnel({
   } else if (step === 'analyzing') {
     body = <DiscoveryAnalyzing />;
   } else if (step === 'result' && recommendation) {
-    body = (
-      <DiscoveryResult
-        recommendation={recommendation}
-        onContinue={() => setStep('lead')}
-      />
-    );
+    body = <DiscoveryResult recommendation={recommendation} onContinue={() => setStep('lead')} />;
   } else if (step === 'lead') {
     body = (
       <DiscoveryLeadForm
@@ -220,11 +212,7 @@ export function DiscoveryFunnel({
     );
   } else if (step === 'complete' && lead && recommendation) {
     body = (
-      <DiscoveryFinalActions
-        lead={lead}
-        recommendation={recommendation}
-        onRestart={restart}
-      />
+      <DiscoveryFinalActions lead={lead} recommendation={recommendation} onRestart={restart} />
     );
   }
 

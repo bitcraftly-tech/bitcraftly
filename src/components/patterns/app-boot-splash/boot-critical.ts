@@ -273,12 +273,23 @@ html.bc-app-ready #bc-demo-boot-splash {
 
 /**
  * Runs before paint — picks Bitcraftly boot vs interactive-demo boot from pathname.
+ * Skips re-boot when this tab already revealed (stops splash flash on RSC/html remount).
  */
 export const APP_BOOT_INIT_SCRIPT = `
 (function () {
   try {
+    var KEY = 'bc-boot-ready';
     var root = document.documentElement;
-    if (root.classList.contains('bc-app-ready')) return;
+    var already = root.classList.contains('bc-app-ready');
+    try { already = already || window.sessionStorage.getItem(KEY) === '1'; } catch (_) {}
+    if (already) {
+      root.classList.remove('bc-booting', 'bc-demo-booting');
+      root.classList.add('bc-app-ready');
+      root.removeAttribute('data-demo-boot');
+      root.removeAttribute('data-demo-path');
+      root.setAttribute('aria-busy', 'false');
+      return;
+    }
     var path = location.pathname || '';
     var isDemo =
       path.indexOf('/interactive-demos/') === 0 ||

@@ -112,7 +112,8 @@ export const DISCOVERY_RESULT_META = {
 export const DISCOVERY_LEAD_META = {
   eyebrow: 'Almost done',
   title: 'Where should we send your estimate?',
-  description: 'We’ll use this to prepare a clearer proposal. Nothing is submitted to a backend in this demo.',
+  description:
+    'We’ll use this to prepare a clearer proposal. Nothing is submitted to a backend in this demo.',
   submitLabel: 'Continue to next steps',
 } as const;
 

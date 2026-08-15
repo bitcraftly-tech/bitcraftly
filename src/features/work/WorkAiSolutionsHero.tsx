@@ -13,13 +13,7 @@ import { filterWorkProjects } from './work.filters';
 import { WORK_LANDING, WORK_PROJECTS } from './work.content';
 import './work.css';
 
-const AI_CHIPS = [
-  'Assistants',
-  'Automation',
-  'Agents',
-  'RAG / search',
-  'Human handoff',
-] as const;
+const AI_CHIPS = ['Assistants', 'Automation', 'Agents', 'RAG / search', 'Human handoff'] as const;
 
 const AI_STATS = [
   { id: 'deflect', value: '65%', label: 'FAQ deflection focus' },
@@ -109,8 +103,8 @@ export async function WorkAiSolutionsHero({
             </p>
 
             <h1 id={headingId} className="work-ai-hero__title">
-              Ship <span className="work-hero__title-mark">AI</span> that operators trust —
-              not demos that stall
+              Ship <span className="work-hero__title-mark">AI</span> that operators trust — not
+              demos that stall
             </h1>
 
             <p className="work-ai-hero__description">{description}</p>

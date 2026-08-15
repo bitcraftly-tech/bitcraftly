@@ -201,13 +201,7 @@ export function filterProjectsByExplorer(
   return projects.filter((project) => matchesWorkExplorer(project, state));
 }
 
-const INDUSTRY_HUB_FILTERS = new Set([
-  'healthcare',
-  'education',
-  'fintech',
-  'retail',
-  'logistics',
-]);
+const INDUSTRY_HUB_FILTERS = new Set(['healthcare', 'education', 'fintech', 'retail', 'logistics']);
 
 /** Legacy single-filter helper (hubs / featured). */
 export function matchesWorkFilter(project: WorkProject, filter: string): boolean {

@@ -15,10 +15,7 @@
   --ecs-lift: -2px;
   --ecs-lift-sm: -1px;
   --ecs-border: var(--ec-border, color-mix(in srgb, var(--foreground) 8%, transparent));
-  --ecs-border-hover: var(
-    --ec-border-hover,
-    color-mix(in srgb, var(--primary) 28%, transparent)
-  );
+  --ecs-border-hover: var(--ec-border-hover, color-mix(in srgb, var(--primary) 28%, transparent));
   --ecs-shadow: var(--ec-shadow);
   --ecs-shadow-hover: var(--ec-shadow-hover);
   --ecs-glass: var(--ec-glass);
@@ -27,11 +24,9 @@
   --ecs-cta-pad-y: 0;
   --ecs-cta-min: 44px;
   --ecs-interact:
-    transform var(--ecs-duration) var(--ecs-ease),
-    border-color var(--ecs-duration) var(--ecs-ease),
+    transform var(--ecs-duration) var(--ecs-ease), border-color var(--ecs-duration) var(--ecs-ease),
     box-shadow var(--ecs-duration) var(--ecs-ease),
-    background-color var(--ecs-duration) var(--ecs-ease),
-    gap var(--ecs-duration) var(--ecs-ease),
+    background-color var(--ecs-duration) var(--ecs-ease), gap var(--ecs-duration) var(--ecs-ease),
     filter var(--ecs-duration) var(--ecs-ease);
 }
 

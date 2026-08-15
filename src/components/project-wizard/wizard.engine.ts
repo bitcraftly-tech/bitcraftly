@@ -1,8 +1,4 @@
-import type {
-  WizardAnswers,
-  WizardPhase,
-  WizardRecommendation,
-} from './types';
+import type { WizardAnswers, WizardPhase, WizardRecommendation } from './types';
 
 function unique(items: readonly string[]): readonly string[] {
   return [...new Set(items)];
@@ -65,8 +61,7 @@ export function buildWizardRecommendation(answers: WizardAnswers): WizardRecomme
   switch (product) {
     case 'website':
       solutionName = 'Conversion-Focused Business Website';
-      solutionSummary =
-        'A premium website engineered for trust, SEO, and enquiry conversion.';
+      solutionSummary = 'A premium website engineered for trust, SEO, and enquiry conversion.';
       bestPackage = budget === 'below-50k' ? 'Starter Website' : 'Business Website';
       packageSummary =
         budget === 'below-50k'
@@ -133,8 +128,7 @@ export function buildWizardRecommendation(answers: WizardAnswers): WizardRecomme
         'A practical AI product grounded in your data, workflows, and escalation rules.';
       bestPackage = 'AI Solution Package';
       packageSummary = 'Chatbot, automation, or agent scope with monitoring and guardrails.';
-      estimatedCost =
-        budget === 'below-50k' ? '₹40,000 – ₹80,000' : '₹80,000 – ₹3,00,000';
+      estimatedCost = budget === 'below-50k' ? '₹40,000 – ₹80,000' : '₹80,000 – ₹3,00,000';
       estimatedTimeline = timeline === 'asap' ? '4–6 weeks' : '6–10 weeks';
       suggestedTechnology.push('OpenAI', 'Python', 'PostgreSQL', 'Vector Search');
       aiOpportunities.push(
