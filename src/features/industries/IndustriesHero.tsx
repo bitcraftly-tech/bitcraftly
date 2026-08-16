@@ -7,7 +7,7 @@ import { isMobileUserAgent } from '@/lib/device/is-mobile-user-agent';
 import type { BreadcrumbItem } from '@/lib/seo/breadcrumbs';
 import '@/features/homepage/Hero/hero.css';
 import { INDUSTRIES_LANDING } from './industries.content';
-import { IndustriesHeroVisual } from './IndustriesHeroVisual';
+import { IndustriesHeroPanel } from './IndustriesHeroPanel';
 import { IndustriesTrustedBy } from './IndustriesTrustedBy';
 import './industries.css';
 
@@ -16,9 +16,11 @@ interface IndustriesHeroProps {
 }
 
 /**
- * Industries-only hero — matches approved Industries marketing mock.
- * Right column uses `/industries-hero.webp` like Services / Solutions.
- * Background layers match Services / Solutions (`hero-surface` + grids + aurora).
+ * Industries-only hero — Corporate / Trust treatment.
+ *
+ * Reading order is credibility-first: positioning, then actions, then the
+ * assurance checklist, then a ruled credentials band. Surface, type and accents
+ * come from the shared `lux-hero--corporate` variant.
  */
 export async function IndustriesHero({ breadcrumbs }: IndustriesHeroProps) {
   const isMobile = await isMobileUserAgent();
@@ -28,43 +30,16 @@ export async function IndustriesHero({ breadcrumbs }: IndustriesHeroProps) {
     ? title.split(highlight)
     : [title, ''];
 
-  const resolvedTrust = isMobile ? INDUSTRIES_LANDING.trust.slice(0, 2) : INDUSTRIES_LANDING.trust;
-
   return (
     <Section
       spacing="lg"
       aria-labelledby="industries-page-heading"
       className={cn(
-        'industries-hero relative overflow-hidden hero-surface',
+        'lux-hero lux-hero--corporate industries-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}
     >
-      {!isMobile ? (
-        <>
-          <div
-            className="pointer-events-none absolute inset-0 opacity-55 hero-dot-grid"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-0 opacity-25 hero-line-grid"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute -top-[var(--space-16)] -right-[12%] size-[680px] rounded-full blur-3xl opacity-90 hero-aurora-accent"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute -bottom-[var(--space-10)] -left-[14%] size-[560px] rounded-full blur-3xl opacity-85 hero-aurora-primary"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute top-1/3 left-1/2 size-[460px] -translate-x-1/2 rounded-full opacity-50 blur-3xl hero-aurora-blend"
-            aria-hidden
-          />
-        </>
-      ) : null}
-
       <div className="industries-hero__layout relative">
         <div className="industries-hero__content min-w-0">
           <MarketingBreadcrumbs items={breadcrumbs} className="mb-[var(--space-3)]" />
@@ -84,28 +59,6 @@ export async function IndustriesHero({ breadcrumbs }: IndustriesHeroProps) {
 
           <p className="industries-hero__description">{INDUSTRIES_LANDING.description}</p>
 
-          {!isMobile ? (
-            <ul className="industries-hero__highlights" aria-label="Why Bitcraftly for industries">
-              {INDUSTRIES_LANDING.highlights.map((item) => (
-                <li
-                  key={item.id}
-                  className={cn(
-                    'industries-hero__highlight',
-                    `industries-hero__highlight--${item.tone}`,
-                  )}
-                >
-                  <div className="industries-hero__highlight-head">
-                    <span className="industries-hero__highlight-icon" aria-hidden>
-                      <Icon name={item.icon} size="sm" className="h-[18px] w-[18px]" />
-                    </span>
-                    <span className="industries-hero__highlight-title">{item.title}</span>
-                  </div>
-                  <p className="industries-hero__highlight-desc">{item.description}</p>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-
           <div className="industries-hero__actions">
             <Link
               href={INDUSTRIES_LANDING.primaryCta.href}
@@ -124,7 +77,7 @@ export async function IndustriesHero({ breadcrumbs }: IndustriesHeroProps) {
           </div>
 
           <ul className="industries-hero__trust" aria-label="Trust indicators">
-            {resolvedTrust.map((item) => (
+            {INDUSTRIES_LANDING.trust.map((item) => (
               <li key={item}>
                 <Icon
                   name="check"
@@ -136,9 +89,23 @@ export async function IndustriesHero({ breadcrumbs }: IndustriesHeroProps) {
               </li>
             ))}
           </ul>
+
+          <ul className="industries-hero__highlights" aria-label="Why Bitcraftly for industries">
+            {INDUSTRIES_LANDING.highlights.map((item) => (
+              <li key={item.id} className="industries-hero__highlight">
+                <div className="industries-hero__highlight-head">
+                  <span className="industries-hero__highlight-icon" aria-hidden>
+                    <Icon name={item.icon} size="sm" className="h-[16px] w-[16px]" />
+                  </span>
+                  <span className="industries-hero__highlight-title">{item.title}</span>
+                </div>
+                <p className="industries-hero__highlight-desc">{item.description}</p>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {!isMobile ? <IndustriesHeroVisual /> : null}
+        {!isMobile ? <IndustriesHeroPanel /> : null}
       </div>
 
       {!isMobile ? <IndustriesTrustedBy /> : null}

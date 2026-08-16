@@ -405,6 +405,17 @@ export const INDUSTRIES_LANDING = {
     },
   ],
   trust: ['12+ verticals mapped', 'Compliance-aware engineering', 'Founder-led delivery'],
+  heroPanel: {
+    title: 'Industry coverage',
+    countLabel: 'verticals',
+    verticalColumn: 'Vertical',
+    timelineColumn: 'Timeline',
+    caption:
+      'Featured industries with the organizations we build for and typical delivery timelines',
+    note: 'Written proposal before delivery starts',
+    moreLabel: 'Full list',
+    moreHref: '#industries-grid',
+  },
   trustedBy: {
     label: 'Trusted by innovative companies across industries',
     brands: [

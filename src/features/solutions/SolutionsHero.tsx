@@ -69,7 +69,7 @@ export async function SolutionsHero({ breadcrumbs }: SolutionsHeroProps) {
       spacing="lg"
       aria-labelledby="solutions-page-heading"
       className={cn(
-        'solutions-hero relative overflow-hidden hero-surface',
+        'lux-hero solutions-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}

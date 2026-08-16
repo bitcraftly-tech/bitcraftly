@@ -53,7 +53,7 @@ export async function ResourcesHero({
       contained={false}
       aria-labelledby={headingId}
       className={cn(
-        'resources-hero relative overflow-hidden hero-surface',
+        'lux-hero resources-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}

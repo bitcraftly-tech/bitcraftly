@@ -119,7 +119,7 @@ export async function LegalDocumentHero({
       contained={false}
       aria-labelledby={headingId}
       className={cn(
-        'legal-hero relative overflow-hidden hero-surface',
+        'lux-hero legal-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}

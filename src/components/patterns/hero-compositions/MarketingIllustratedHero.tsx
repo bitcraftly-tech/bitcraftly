@@ -152,7 +152,7 @@ export async function MarketingIllustratedHero({
       spacing="lg"
       aria-labelledby={headingId}
       className={cn(
-        'relative overflow-hidden hero-surface',
+        'lux-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
         className,

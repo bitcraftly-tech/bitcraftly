@@ -69,7 +69,7 @@ export async function TrustHero({ breadcrumbs }: TrustHeroProps) {
       contained={false}
       aria-labelledby="trust-page-heading"
       className={cn(
-        'trust-hero relative overflow-hidden hero-surface',
+        'lux-hero trust-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}
