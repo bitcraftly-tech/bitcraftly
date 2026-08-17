@@ -44,7 +44,7 @@ export async function ServiceDetailHero({
       contained={false}
       aria-labelledby={headingId}
       className={cn(
-        'services-hero relative overflow-hidden hero-surface',
+        'lux-hero services-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}

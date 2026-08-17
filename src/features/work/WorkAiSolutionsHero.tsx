@@ -64,7 +64,7 @@ export async function WorkAiSolutionsHero({
       contained={false}
       aria-labelledby={headingId}
       className={cn(
-        'work-hero work-ai-hero relative overflow-hidden hero-surface',
+        'lux-hero work-hero work-ai-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}

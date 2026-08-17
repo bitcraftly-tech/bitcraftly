@@ -179,7 +179,6 @@ function FounderAudioPlayerComponent({ content, active = true }: FounderAudioPla
         <audio
           ref={audioRef}
           preload="none"
-          playsInline
           src={language?.audioSrc}
           onLoadedMetadata={(event) => {
             setDuration(event.currentTarget.duration || 0);

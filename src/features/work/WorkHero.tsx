@@ -84,7 +84,7 @@ export async function WorkHero({ breadcrumbs }: WorkHeroProps) {
       contained={false}
       aria-labelledby="work-page-heading"
       className={cn(
-        'work-hero relative overflow-hidden hero-surface',
+        'lux-hero work-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}

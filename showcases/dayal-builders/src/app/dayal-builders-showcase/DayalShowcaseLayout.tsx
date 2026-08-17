@@ -8,6 +8,7 @@ import {
 } from '@bitcraftly/showcase-dayal-builders/lib/fonts';
 
 import '@bitcraftly/showcase-dayal-builders/styles/dayal.css';
+import '@bitcraftly/showcase-dayal-builders/styles/dayal-estate.css';
 
 export default function DayalShowcaseLayout({ children }: { children: ReactNode }) {
   return (

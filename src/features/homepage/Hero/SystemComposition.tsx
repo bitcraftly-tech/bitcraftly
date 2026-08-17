@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useEffectEvent, useRef, useState } from 'react';
+import { useCallback, useEffect, useEffectEvent, useRef, useState } from 'react';
 import { HERO_INDUSTRY_PREVIEWS, HERO_INDUSTRY_ROTATE_MS, HERO_SYSTEM } from './hero.constants';
 import { SystemBrowserCarousel } from './SystemBrowserCarousel';
 
@@ -21,11 +21,11 @@ export function SystemComposition() {
     setContentKey((key) => key + 1);
   });
 
-  const onSelectIndex = useEffectEvent((index: number) => {
+  const onSelectIndex = useCallback((index: number) => {
     setIndustryIndex(index);
     setContentKey((key) => key + 1);
     setRotateEpoch((epoch) => epoch + 1);
-  });
+  }, []);
 
   /* Industry auto-rotate — restarts after swipe so dwell time feels natural. */
   useEffect(() => {

@@ -125,9 +125,9 @@ export function extractVisitorName(raw: string): string | null {
   if (!text) return null;
 
   const patterns: RegExp[] = [
-    /(?:my\s+name\s+is|i\s*am|i'?m|this\s+is|call\s+me)\s+([a-zA-Z\u0900-\u097F][a-zA-Z\u0900-\u097F\s'.-]{1,36})/i,
-    /(?:mera\s+naam\s+(?:hai\s+)?|main\s+|mein\s+)([a-zA-Z\u0900-\u097F][a-zA-Z\u0900-\u097F\s'.-]{1,36})(?:\s+hoon|\s+hun|\s+hai)?/i,
-    /^([a-zA-Z\u0900-\u097F]{2,20})(?:\s+[a-zA-Z\u0900-\u097F]{2,20}){0,2}\s+here\.?$/i,
+    /(?:my\s+name\s+is|i\s*am|i'?m|this\s+is|call\s+me)\s+([\p{L}\p{M}][\p{L}\p{M}\s'.-]{1,36})/iu,
+    /(?:mera\s+naam\s+(?:hai\s+)?|main\s+|mein\s+)([\p{L}\p{M}][\p{L}\p{M}\s'.-]{1,36})(?:\s+hoon|\s+hun|\s+hai)?/iu,
+    /^([\p{L}\p{M}]{2,20})(?:\s+[\p{L}\p{M}]{2,20}){0,2}\s+here\.?$/iu,
   ];
 
   for (const pattern of patterns) {
@@ -144,7 +144,7 @@ export function extractVisitorName(raw: string): string | null {
 /** Bare name only — used when we still need a name for the session. */
 function extractBareName(raw: string): string | null {
   const text = raw.trim().replace(/[.,!?]+$/g, '');
-  if (!/^[a-zA-Z\u0900-\u097F][a-zA-Z\u0900-\u097F\s'.-]{1,36}$/.test(text)) return null;
+  if (!/^[\p{L}\p{M}][\p{L}\p{M}\s'.-]{1,36}$/u.test(text)) return null;
   const normalized = titleCaseName(text);
   return isPlausibleName(normalized) ? normalized : null;
 }

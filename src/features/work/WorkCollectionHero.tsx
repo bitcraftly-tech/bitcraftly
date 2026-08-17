@@ -44,7 +44,7 @@ export async function WorkCollectionHero({
       contained={false}
       aria-labelledby={headingId}
       className={cn(
-        'work-hero work-collection-hero relative overflow-hidden hero-surface',
+        'lux-hero work-hero work-collection-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}

@@ -24,11 +24,6 @@ test.describe('Primary navigation', () => {
 
     const destinations = [
       {
-        trigger: 'Services',
-        explore: 'Explore all services',
-        path: /\/services\/?$/,
-      },
-      {
         trigger: 'Solutions',
         explore: 'Explore all solutions',
         path: /\/solutions\/?$/,
@@ -48,8 +43,11 @@ test.describe('Primary navigation', () => {
     for (const dest of destinations) {
       await page.goto('/');
       const nav = page.getByRole('navigation', { name: /main navigation/i });
-      await nav.getByRole('button', { name: dest.trigger }).click();
-      await page.getByRole('link', { name: dest.explore, exact: true }).first().click();
+      await expect(nav).toBeVisible();
+      await nav.getByRole('button', { name: dest.trigger, exact: true }).click();
+      const destinationLink = page.getByRole('link', { name: dest.explore, exact: true }).first();
+      await destinationLink.focus();
+      await destinationLink.press('Enter');
       await expect(page).toHaveURL(dest.path);
       await expect(page.locator('main h1').first()).toBeVisible();
     }

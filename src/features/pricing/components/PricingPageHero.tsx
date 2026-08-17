@@ -19,7 +19,7 @@ const secondaryCtaClassName = bcButtonClassName({
 
 export function PricingPageHero() {
   return (
-    <section className="pp-hero" aria-labelledby="pricing-page-heading">
+    <section className="lux-hero pp-hero" aria-labelledby="pricing-page-heading">
       <div className="pp-hero__atmosphere" aria-hidden="true">
         <span className="pp-hero__orb pp-hero__orb--a" />
         <span className="pp-hero__orb pp-hero__orb--b" />

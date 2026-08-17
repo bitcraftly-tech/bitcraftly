@@ -33,9 +33,14 @@ function GoogleMapPin() {
 
 type Props = {
   location?: DayalMapLocation;
+  /** Fires when the embedded map frame finishes loading */
+  onMapLoad?: () => void;
 };
 
-export default function DayalFooterMap({ location = getDayalLocation('office') }: Props) {
+export default function DayalFooterMap({
+  location = getDayalLocation('office'),
+  onMapLoad,
+}: Props) {
   const [showAddress, setShowAddress] = useState(false);
   const embed = dayalMapEmbed(location);
   const directions = dayalMapDirections(location);
@@ -52,6 +57,7 @@ export default function DayalFooterMap({ location = getDayalLocation('office') }
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           allowFullScreen
+          onLoad={onMapLoad}
         />
 
         <button

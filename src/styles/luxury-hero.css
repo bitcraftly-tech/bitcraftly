@@ -1,0 +1,624 @@
+/**
+ * Luxury / Premium hero layer — light porcelain + the logo gradient.
+ *
+ * Opt-in: add `lux-hero` to a hero root. Nothing is styled globally, so the
+ * homepage, the portfolio showcases and the AI Studio hero stay untouched even
+ * where they share hero class names.
+ *
+ * Palette is sampled from the Bitcraftly mark: cyan -> electric blue -> violet,
+ * on the navy wordmark ink. Everything stays on a light surface so hero copy
+ * keeps well above WCAG AA contrast.
+ */
+
+.lux-hero {
+  /* ---- Palette (from the logo) ------------------------------------------ */
+  --lux-ink: #000726;
+  --lux-quiet: #46617a;
+  --lux-cyan: #00c4dc;
+  --lux-blue: #3d5bff;
+  --lux-violet: #7b5cff;
+  --lux-porcelain: #f6f9fd;
+  --lux-panel: #ffffff;
+  --lux-hairline: color-mix(in srgb, var(--lux-ink) 9%, transparent);
+  --lux-hairline-strong: color-mix(in srgb, var(--lux-ink) 16%, transparent);
+
+  --lux-display:
+    'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+
+  /* Layered porcelain canvas — reused by heroes that own a background */
+  --lux-canvas:
+    radial-gradient(
+      74% 118% at 88% -20%,
+      color-mix(in srgb, var(--lux-violet) 13%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      58% 92% at 4% 112%,
+      color-mix(in srgb, var(--lux-cyan) 12%, transparent),
+      transparent 58%
+    ),
+    linear-gradient(180deg, #ffffff 0%, var(--lux-porcelain) 58%, #ffffff 100%);
+
+  /* Matches the homepage hero gap under the sticky header */
+  --lux-hero-pt: 32px;
+  --lux-hero-pb: 40px;
+
+  position: relative;
+  isolation: isolate;
+  border-bottom: 1px solid var(--lux-hairline);
+  background: var(--lux-canvas);
+  color: var(--lux-ink);
+}
+
+/* Heroes that paint their own background need the canvas re-applied */
+.lux-hero.sl-hero,
+.lux-hero.pp-hero,
+.lux-hero.work-hero,
+.lux-hero.services-hero,
+.lux-hero.solutions-hero,
+.lux-hero.industries-hero,
+.lux-hero.trust-hero,
+.lux-hero.legal-hero,
+.lux-hero.resources-hero {
+  background: var(--lux-canvas);
+}
+
+/* Fine engraved grid — keeps the porcelain from reading as flat white */
+.lux-hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--lux-ink) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--lux-ink) 4%, transparent) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(115% 100% at 50% 0%, #000 20%, transparent 76%);
+  content: '';
+  pointer-events: none;
+}
+
+/* Foil rule along the bottom edge — the brand gradient as a hairline */
+.lux-hero::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--lux-cyan) 55%, transparent) 18%,
+    color-mix(in srgb, var(--lux-blue) 70%, transparent) 50%,
+    color-mix(in srgb, var(--lux-violet) 60%, transparent) 82%,
+    transparent
+  );
+  content: '';
+  pointer-events: none;
+}
+
+/* ---- Spacing — align every hero with the homepage header gap ------------- */
+
+/* Only the element that already owns the hero padding is retimed, so heroes
+   with `spacing="none"` keep py-0 on the root and pad their inner container. */
+.lux-hero.page-shell,
+.lux-hero .services-hero__container,
+.lux-hero .resources-hero__container,
+.lux-hero .work-hero__container,
+.lux-hero .trust-hero__container,
+.lux-hero .legal-hero__container,
+.lux-hero .pp-hero__grid,
+.lux-hero .sl-hero__inner {
+  padding-top: var(--lux-hero-pt);
+  padding-bottom: var(--lux-hero-pb);
+}
+
+@media (min-width: 1280px) {
+  .lux-hero {
+    --lux-hero-pt: 36px;
+    --lux-hero-pb: 48px;
+  }
+}
+
+/* ---- Eyebrow ------------------------------------------------------------ */
+
+/* Pill eyebrows. Several features tinted these with `--accent` (cyan), which
+   sits near 2:1 against a light surface — ink keeps the label readable. */
+.lux-hero .hero-eyebrow,
+.lux-hero .services-hero__eyebrow,
+.lux-hero .work-hero__eyebrow,
+.lux-hero .resources-hero__eyebrow,
+.lux-hero .industries-hero__eyebrow,
+.lux-hero .solutions-hero__eyebrow,
+.lux-hero .trust-hero__eyebrow,
+.lux-hero .legal-hero__eyebrow,
+.lux-hero .pp-hero__badge-tag {
+  border: 1px solid var(--lux-hairline);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--lux-panel) 88%, transparent);
+  color: var(--lux-ink);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    0 10px 24px -20px color-mix(in srgb, var(--lux-ink) 70%, transparent);
+}
+
+/* This one ships as bare text, so it needs the pill's padding too */
+.lux-hero .resources-hero__eyebrow {
+  padding: 8px 14px;
+}
+
+/* Services landing keeps its full-width label — tracking only, no pill */
+.lux-hero .sl-hero__eyebrow {
+  color: var(--lux-quiet);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.lux-hero .hero-eyebrow svg,
+.lux-hero .services-hero__eyebrow svg,
+.lux-hero .work-hero__eyebrow svg,
+.lux-hero .resources-hero__eyebrow svg,
+.lux-hero .industries-hero__eyebrow svg,
+.lux-hero .solutions-hero__eyebrow svg,
+.lux-hero .trust-hero__eyebrow svg,
+.lux-hero .legal-hero__eyebrow svg {
+  color: var(--lux-blue);
+}
+
+/* ---- Headline ----------------------------------------------------------- */
+
+.lux-hero h1 {
+  color: var(--lux-ink);
+  font-family: var(--lux-display);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.08;
+}
+
+/* Letterhead rule under the headline */
+.lux-hero h1::after {
+  display: block;
+  width: 92px;
+  height: 2px;
+  margin-top: 20px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--lux-cyan), var(--lux-blue) 52%, var(--lux-violet));
+  content: '';
+}
+
+/* Cyan is reserved for rules and washes — text keeps the blue/violet end so
+   large headline marks stay above the 3:1 contrast floor. */
+.lux-hero .hero-gradient-text,
+.lux-hero .services-hero__title-accent,
+.lux-hero .services-hero__title-mark,
+.lux-hero .solutions-hero__title-accent,
+.lux-hero .work-hero__title-mark,
+.lux-hero .industries-hero__title-mark,
+.lux-hero .resources-hero__title-mark,
+.lux-hero .legal-hero__title-accent,
+.lux-hero .trust-hero__title-accent,
+.lux-hero .sl-hero__title-accent,
+.lux-hero .pp-hero__highlight {
+  background: linear-gradient(96deg, var(--lux-blue), var(--lux-violet) 78%);
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.lux-hero .pp-hero__highlight-underline {
+  background: linear-gradient(90deg, var(--lux-cyan), var(--lux-blue) 52%, var(--lux-violet));
+  opacity: 0.55;
+}
+
+.lux-hero p {
+  color: var(--lux-quiet);
+}
+
+/* ---- Calls to action ---------------------------------------------------- */
+
+.lux-hero .hero-cta-primary,
+.lux-hero .services-hero__cta--primary,
+.lux-hero .solutions-hero__cta--primary,
+.lux-hero .work-hero__cta--primary,
+.lux-hero .resources-hero__cta--primary,
+.lux-hero .industries-hero__cta--primary,
+.lux-hero .trust-hero__cta--primary,
+.lux-hero .legal-hero__cta--primary,
+.lux-hero .sl-hero__cta--primary,
+.lux-hero .pp-hero__cta--primary {
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, var(--lux-blue), var(--lux-violet));
+  color: #ffffff;
+  box-shadow: 0 18px 34px -20px color-mix(in srgb, var(--lux-blue) 85%, transparent);
+}
+
+.lux-hero .hero-cta-primary:hover,
+.lux-hero .services-hero__cta--primary:hover,
+.lux-hero .solutions-hero__cta--primary:hover,
+.lux-hero .work-hero__cta--primary:hover,
+.lux-hero .resources-hero__cta--primary:hover,
+.lux-hero .industries-hero__cta--primary:hover,
+.lux-hero .trust-hero__cta--primary:hover,
+.lux-hero .legal-hero__cta--primary:hover,
+.lux-hero .sl-hero__cta--primary:hover,
+.lux-hero .pp-hero__cta--primary:hover {
+  background: linear-gradient(135deg, #2f48e6, #6a4dff);
+}
+
+.lux-hero .hero-cta-outline,
+.lux-hero .hero-cta-ghost,
+.lux-hero .services-hero__cta--secondary,
+.lux-hero .solutions-hero__cta--secondary,
+.lux-hero .work-hero__cta--secondary,
+.lux-hero .resources-hero__cta--secondary,
+.lux-hero .industries-hero__cta--secondary,
+.lux-hero .trust-hero__cta--secondary,
+.lux-hero .legal-hero__cta--secondary,
+.lux-hero .sl-hero__cta--secondary,
+.lux-hero .pp-hero__cta--secondary {
+  border: 1px solid var(--lux-hairline-strong);
+  background: var(--lux-panel);
+  color: var(--lux-ink);
+  box-shadow: 0 10px 24px -20px color-mix(in srgb, var(--lux-ink) 70%, transparent);
+}
+
+.lux-hero .hero-cta-outline:hover,
+.lux-hero .hero-cta-ghost:hover,
+.lux-hero .services-hero__cta--secondary:hover,
+.lux-hero .solutions-hero__cta--secondary:hover,
+.lux-hero .work-hero__cta--secondary:hover,
+.lux-hero .resources-hero__cta--secondary:hover,
+.lux-hero .industries-hero__cta--secondary:hover,
+.lux-hero .trust-hero__cta--secondary:hover,
+.lux-hero .legal-hero__cta--secondary:hover,
+.lux-hero .sl-hero__cta--secondary:hover,
+.lux-hero .pp-hero__cta--secondary:hover {
+  border-color: color-mix(in srgb, var(--lux-blue) 45%, transparent);
+}
+
+.lux-hero a:focus-visible,
+.lux-hero button:focus-visible {
+  outline: 2px solid var(--lux-blue);
+  outline-offset: 3px;
+}
+
+/* ---- Chips, checks, stat panels ----------------------------------------- */
+
+.lux-hero .services-page-chip,
+.lux-hero .resources-hero__chip,
+.lux-hero .industries-hero__highlight,
+.lux-hero .work-hero__chip,
+.lux-hero .work-detail-hero__chips li,
+.lux-hero .services-hero-stack__pill,
+.lux-hero .pp-hero__trust li {
+  border: 1px solid var(--lux-hairline);
+  background: var(--lux-panel);
+  color: var(--lux-ink);
+  box-shadow: inset 0 1px 0 #ffffff;
+}
+
+.lux-hero .services-page-check,
+.lux-hero .hero-pill-icon,
+.lux-hero .sl-hero__trust-icon,
+.lux-hero .services-hero-stack__pill-icon {
+  background: color-mix(in srgb, var(--lux-blue) 12%, transparent);
+  color: var(--lux-blue);
+}
+
+.lux-hero dl > div,
+.lux-hero .services-hero-stats > *,
+.lux-hero .work-hero-stats > *,
+.lux-hero .trust-hero-stats > *,
+.lux-hero .industries-hero__trust > * {
+  border-color: var(--lux-hairline);
+  background: var(--lux-panel);
+}
+
+.lux-hero dl > div:hover {
+  border-color: color-mix(in srgb, var(--lux-blue) 40%, transparent);
+  box-shadow: 0 18px 36px -26px color-mix(in srgb, var(--lux-blue) 70%, transparent);
+}
+
+/* ---- Breadcrumbs -------------------------------------------------------- */
+
+.lux-hero nav[aria-label='Breadcrumb'] a {
+  color: var(--lux-quiet);
+}
+
+.lux-hero nav[aria-label='Breadcrumb'] a:hover {
+  color: var(--lux-blue);
+}
+
+/* ---- Legacy atmosphere -------------------------------------------------- */
+
+/* The old blue blob/grid layers would muddy the porcelain canvas */
+.lux-hero .hero-aurora-primary,
+.lux-hero .hero-aurora-accent,
+.lux-hero .hero-aurora-blend,
+.lux-hero .hero-dot-grid,
+.lux-hero .hero-line-grid,
+.lux-hero .pp-hero__atmosphere,
+.lux-hero .work-hero__aurora--a,
+.lux-hero .work-hero__aurora--b {
+  display: none;
+}
+
+/* =========================================================================
+   Corporate / Trust variant — `lux-hero lux-hero--corporate`
+
+   Same spacing and readability as the premium layer, but restrained: sans
+   display type, ruled surfaces instead of washes, one flat blue accent, and
+   credibility presented as a bordered credentials band.
+   ========================================================================= */
+
+.lux-hero--corporate {
+  --lux-display: var(--font-family-sans);
+  --lux-steel: #5b7189;
+  --lux-band: #eef3f9;
+
+  /* Blueprint ruling reads as engineering rigour, not decoration */
+  --lux-canvas: linear-gradient(180deg, #ffffff 0%, #ffffff 52%, var(--lux-band) 100%);
+}
+
+.lux-hero--corporate::before {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--lux-ink) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--lux-ink) 5%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(180deg, #000 0%, transparent 72%);
+}
+
+/* A single flat rule replaces the gradient foil */
+.lux-hero--corporate::after {
+  background: color-mix(in srgb, var(--lux-blue) 32%, transparent);
+}
+
+/* Square-shouldered eyebrow with a blue index bar */
+.lux-hero--corporate .industries-hero__eyebrow {
+  gap: 10px;
+  padding: 7px 14px 7px 12px;
+  border-radius: 4px;
+  border: 1px solid color-mix(in srgb, var(--lux-ink) 12%, transparent);
+  border-left: 3px solid var(--lux-blue);
+  background: #ffffff;
+  color: var(--lux-ink);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  box-shadow: none;
+}
+
+.lux-hero--corporate h1 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* The fixed 45px headline ran to four lines on a 390px screen */
+.lux-hero--corporate .industries-hero__title {
+  max-width: 20ch;
+  font-size: clamp(29px, 7vw, 45px);
+}
+
+@media (min-width: 1024px) {
+  .lux-hero--corporate .industries-hero__title {
+    max-width: 14ch;
+  }
+}
+
+/* The letterhead flourish belongs to the premium variant */
+.lux-hero--corporate h1::after {
+  display: none;
+}
+
+/* Flat accent — gradients read as marketing, not assurance */
+.lux-hero--corporate .industries-hero__title-mark {
+  background: none;
+  color: var(--lux-blue);
+  -webkit-text-fill-color: var(--lux-blue);
+  box-shadow: inset 0 -0.14em 0 color-mix(in srgb, var(--lux-blue) 22%, transparent);
+}
+
+.lux-hero--corporate .industries-hero__description {
+  color: var(--lux-steel);
+}
+
+/* ---- Credentials band --------------------------------------------------- */
+
+.lux-hero--corporate .industries-hero__highlights {
+  gap: 0;
+  margin-top: var(--space-5);
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--lux-ink) 11%, transparent);
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--lux-ink) 6%, transparent);
+}
+
+.lux-hero--corporate .industries-hero__highlight {
+  --hl-tone: var(--lux-blue);
+  gap: 6px;
+  padding: 13px 15px;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--lux-ink) 8%, transparent);
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.lux-hero--corporate .industries-hero__highlight:first-child {
+  border-top: 0;
+}
+
+@media (min-width: 640px) {
+  .lux-hero--corporate .industries-hero__highlight {
+    padding: 16px 18px;
+    border-top: 0;
+    border-left: 1px solid color-mix(in srgb, var(--lux-ink) 8%, transparent);
+  }
+
+  .lux-hero--corporate .industries-hero__highlight:first-child {
+    border-left: 0;
+  }
+}
+
+.lux-hero--corporate .industries-hero__highlight:hover {
+  transform: none;
+  border-color: color-mix(in srgb, var(--lux-ink) 8%, transparent);
+  background: color-mix(in srgb, var(--lux-band) 55%, #ffffff);
+  box-shadow: none;
+}
+
+.lux-hero--corporate .industries-hero__highlight-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 6px;
+  border-color: color-mix(in srgb, var(--lux-blue) 20%, transparent);
+  background: color-mix(in srgb, var(--lux-blue) 8%, #ffffff);
+  color: var(--lux-blue);
+}
+
+.lux-hero--corporate .industries-hero__highlight-title {
+  font-size: 14px;
+}
+
+.lux-hero--corporate .industries-hero__highlight-desc {
+  color: var(--lux-steel);
+}
+
+/* ---- Actions ------------------------------------------------------------ */
+
+.lux-hero--corporate .industries-hero__btn {
+  border-radius: 8px;
+}
+
+.lux-hero--corporate .industries-hero__btn--primary {
+  background-image: none;
+  background-color: var(--lux-blue);
+  color: #ffffff;
+  box-shadow: 0 10px 22px -16px color-mix(in srgb, var(--lux-blue) 80%, transparent);
+}
+
+.lux-hero--corporate .industries-hero__btn--primary:hover {
+  transform: none;
+  opacity: 1;
+  background-color: #2f48e6;
+}
+
+.lux-hero--corporate .industries-hero__btn--outline {
+  border-color: color-mix(in srgb, var(--lux-ink) 18%, transparent);
+  background-color: #ffffff;
+  color: var(--lux-ink);
+  font-weight: 600;
+}
+
+.lux-hero--corporate .industries-hero__btn--outline:hover {
+  transform: none;
+  border-color: color-mix(in srgb, var(--lux-blue) 45%, transparent);
+  color: var(--lux-ink);
+  box-shadow: none;
+}
+
+/* ---- Assurance checklist ------------------------------------------------ */
+
+.lux-hero--corporate .industries-hero__trust {
+  gap: 10px 22px;
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid color-mix(in srgb, var(--lux-ink) 9%, transparent);
+}
+
+.lux-hero--corporate .industries-hero__trust li {
+  gap: 8px;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lux-ink);
+}
+
+.lux-hero--corporate .industries-hero__trust svg {
+  padding: 2px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--lux-blue) 12%, transparent);
+  color: var(--lux-blue);
+}
+
+/* ---- Coverage panel ----------------------------------------------------- */
+
+.lux-hero--corporate .industries-hero__panel {
+  --panel-hairline: color-mix(in srgb, var(--lux-ink) 10%, transparent);
+  --panel-band: color-mix(in srgb, var(--lux-band) 70%, #ffffff);
+  background: #ffffff;
+}
+
+.lux-hero--corporate .industries-hero__panel-count-value,
+.lux-hero--corporate .industries-hero__panel-icon,
+.lux-hero--corporate .industries-hero__panel-note svg,
+.lux-hero--corporate .industries-hero__panel-more {
+  color: var(--lux-blue);
+}
+
+.lux-hero--corporate .industries-hero__panel-icon {
+  border-color: color-mix(in srgb, var(--lux-blue) 18%, transparent);
+  background: color-mix(in srgb, var(--lux-blue) 8%, #ffffff);
+}
+
+.lux-hero--corporate .industries-hero__panel-row:hover .industries-hero__panel-label {
+  color: var(--lux-blue);
+}
+
+.lux-hero--corporate .industries-hero__panel-meta,
+.lux-hero--corporate .industries-hero__panel-note,
+.lux-hero--corporate .industries-hero__panel-count,
+.lux-hero--corporate .industries-hero__panel-table thead th {
+  color: var(--lux-steel);
+}
+
+/* ---- Client proof strip ------------------------------------------------- */
+
+.lux-hero--corporate .industries-hero__trusted {
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--lux-ink) 10%, transparent);
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.lux-hero--corporate .industries-hero__trusted-label {
+  color: var(--lux-steel);
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.lux-hero--corporate .industries-trusted__mark {
+  color: color-mix(in srgb, var(--lux-ink) 62%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lux-hero .hero-cta,
+  .lux-hero .hero-cta-primary,
+  .lux-hero .hero-cta-outline {
+    transition: none;
+  }
+
+  .lux-hero .hero-cta:hover {
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .lux-hero {
+    border-bottom-color: CanvasText;
+  }
+
+  .lux-hero .hero-gradient-text,
+  .lux-hero .pp-hero__highlight {
+    color: CanvasText;
+    -webkit-text-fill-color: CanvasText;
+  }
+}

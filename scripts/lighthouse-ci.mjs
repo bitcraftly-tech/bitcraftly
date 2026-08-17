@@ -171,7 +171,14 @@ function evaluateGates(lhr) {
   for (const [category, rule] of Object.entries(GATES)) {
     const score = lhr.categories[category]?.score;
     if (typeof score !== 'number') {
-      failures.push(`${category}: missing score`);
+      const message = `${category}: missing score`;
+      // Performance is intentionally warn-only; Chrome occasionally returns no
+      // performance category on heavy marketing pages under CI load.
+      if (rule.level === 'error') {
+        failures.push(message);
+      } else {
+        warnings.push(message);
+      }
       continue;
     }
     if (score + 1e-9 < rule.min) {
@@ -185,6 +192,21 @@ function evaluateGates(lhr) {
   }
 
   return { failures, warnings };
+}
+
+/**
+ * Retry once when Chromium fails to produce a performance category score.
+ * Accessibility/SEO remain hard gates and are never softened by this path.
+ */
+async function auditUrlWithRetry(chrome, url) {
+  const first = await auditUrl(chrome, url);
+  if (typeof first.categories.performance?.score === 'number') {
+    return first;
+  }
+
+  process.stdout.write(`  retrying ${url} after missing performance score\n`);
+  await sleep(1500);
+  return auditUrl(chrome, url);
 }
 
 function fmt(score) {
@@ -229,7 +251,7 @@ async function main() {
 
     for (const target of URLS) {
       process.stdout.write(`Auditing ${target.url}\n`);
-      const lhr = await auditUrl(chrome, target.url);
+      const lhr = await auditUrlWithRetry(chrome, target.url);
       const reportPath = path.join(OUT_DIR, `${target.id}.report.json`);
       await writeFile(reportPath, JSON.stringify(lhr, null, 2), 'utf8');
 
