@@ -32,6 +32,7 @@ permissions:
 # client generation. CI never connects to this placeholder database; staging
 # and production continue to use environment-specific hosting secrets.
 env:
+  DATABASE_URL: postgresql://ci:ci@127.0.0.1:5432/bitcraftly_ci
   DIRECT_URL: postgresql://ci:ci@127.0.0.1:5432/bitcraftly_ci
 
 jobs:
