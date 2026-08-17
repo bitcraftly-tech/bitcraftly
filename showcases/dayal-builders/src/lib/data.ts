@@ -127,6 +127,8 @@ export const HERO_VIDEO = '/dayal-builders/hero.mp4';
 /** Smaller mobile copy (~720p) — generate with: npm run encode:dayal-hero */
 export const HERO_VIDEO_MOBILE = '/dayal-builders/hero-mobile.mp4';
 export const HERO_VIDEO_POSTER = HERO_IMAGE;
+/** The source file opens with ~10s of title/credit cards — skip straight to the walkthrough */
+export const HERO_VIDEO_START = 10;
 
 export const ABOUT_INTRO =
   'Mr Surender Pal Singh (Proprietor, M/S Dayal Builders) derives core strength from state-of-the-art engineering techniques and top-quality materials — delivering cost-effective, holistic solutions for residential complexes and business centers across Jamshedpur.';
@@ -168,6 +170,7 @@ export const FOOTER_COLUMNS = [
     title: 'Explore',
     links: [
       { label: 'Amenities', href: '#amenities' },
+      { label: 'Location', href: '#location' },
       { label: 'Gallery', href: '#gallery' },
       { label: 'Official Website', href: 'https://www.dayalbuilder.com/' },
     ],

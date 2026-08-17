@@ -114,7 +114,7 @@ export async function CareersHero({ breadcrumbs }: CareersHeroProps) {
       contained={false}
       aria-labelledby="careers-page-heading"
       className={cn(
-        'services-hero careers-hero relative overflow-hidden hero-surface',
+        'lux-hero services-hero careers-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}

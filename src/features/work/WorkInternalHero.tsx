@@ -72,7 +72,7 @@ export async function WorkInternalHero({
       contained={false}
       aria-labelledby={headingId}
       className={cn(
-        'work-hero relative overflow-hidden hero-surface',
+        'lux-hero work-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}

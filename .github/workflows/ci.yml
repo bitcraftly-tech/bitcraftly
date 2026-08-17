@@ -28,6 +28,15 @@ concurrency:
 permissions:
   contents: read
 
+# Prisma loads its datasource while evaluating prisma.config.ts, including for
+# client generation. CI never connects to these placeholder database URLs.
+# Runtime validation is skipped only for the isolated CI build/test server;
+# Vercel staging and production continue to use their configured secrets.
+env:
+  DIRECT_URL: postgresql://ci:ci@127.0.0.1:5432/bitcraftly_ci
+  DATABASE_URL: postgresql://ci:ci@127.0.0.1:5432/bitcraftly_ci
+  SKIP_ENV_VALIDATION: 'true'
+
 jobs:
   quality:
     name: Lint · Typecheck · Unit · Build

@@ -2,33 +2,38 @@
 
 import DayalShowcaseChrome from '@bitcraftly/showcase-dayal-builders/components/DayalShowcaseChrome';
 import DayalFooter from '@bitcraftly/showcase-dayal-builders/components/DayalFooter';
-import DayalHero from '@bitcraftly/showcase-dayal-builders/components/DayalHero';
-import DayalLocationGalleryRow from '@bitcraftly/showcase-dayal-builders/components/DayalLocationGalleryRow';
 import DayalNavbar from '@bitcraftly/showcase-dayal-builders/components/DayalNavbar';
-import DayalPlanAmenitiesRow from '@bitcraftly/showcase-dayal-builders/components/DayalPlanAmenitiesRow';
-import DayalProjects from '@bitcraftly/showcase-dayal-builders/components/DayalProjects';
 import DayalAboutTrust from '@bitcraftly/showcase-dayal-builders/components/DayalAboutTrust';
-import DayalTrustBar from '@bitcraftly/showcase-dayal-builders/components/DayalTrustBar';
 import DayalBlog from '@bitcraftly/showcase-dayal-builders/components/DayalBlog';
-import DayalVisitCta from '@bitcraftly/showcase-dayal-builders/components/DayalVisitCta';
 import DayalWhyTestimonialsRow from '@bitcraftly/showcase-dayal-builders/components/DayalWhyTestimonialsRow';
+import { DayalEstateFilterProvider } from '@bitcraftly/showcase-dayal-builders/components/DayalEstateFilters';
+import DayalEstateCalculator from '@bitcraftly/showcase-dayal-builders/components/DayalEstateCalculator';
+import DayalEstateGallery from '@bitcraftly/showcase-dayal-builders/components/DayalEstateGallery';
+import DayalEstateHero from '@bitcraftly/showcase-dayal-builders/components/DayalEstateHero';
+import DayalEstateListings from '@bitcraftly/showcase-dayal-builders/components/DayalEstateListings';
+import DayalEstateLocality from '@bitcraftly/showcase-dayal-builders/components/DayalEstateLocality';
+import DayalEstatePlans from '@bitcraftly/showcase-dayal-builders/components/DayalEstatePlans';
+import DayalEstateStats from '@bitcraftly/showcase-dayal-builders/components/DayalEstateStats';
+import DayalEstateVisit from '@bitcraftly/showcase-dayal-builders/components/DayalEstateVisit';
 
-/** Full-bleed cinematic real-estate showcase */
+/** Property-portal showcase — searchable inventory, plans, EMI and site visits */
 export default function DayalShowcaseContent() {
   return (
-    <>
+    <DayalEstateFilterProvider>
       <DayalNavbar />
-      <DayalHero />
-      <DayalTrustBar />
+      <DayalEstateHero />
+      <DayalEstateStats />
       <DayalAboutTrust />
-      <DayalProjects />
-      <DayalPlanAmenitiesRow />
-      <DayalLocationGalleryRow />
+      <DayalEstateListings />
+      <DayalEstatePlans />
+      <DayalEstateCalculator />
+      <DayalEstateLocality />
+      <DayalEstateGallery />
       <DayalWhyTestimonialsRow />
       <DayalBlog />
-      <DayalVisitCta />
+      <DayalEstateVisit />
       <DayalFooter />
       <DayalShowcaseChrome />
-    </>
+    </DayalEstateFilterProvider>
   );
 }

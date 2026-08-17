@@ -6,6 +6,7 @@ import {
   HERO_VIDEO,
   HERO_VIDEO_MOBILE,
   HERO_VIDEO_POSTER,
+  HERO_VIDEO_START,
 } from '@bitcraftly/showcase-dayal-builders/lib/data';
 
 type Props = {
@@ -37,12 +38,21 @@ function configureMobileHeroVideo(video: HTMLVideoElement) {
   video.setAttribute('x5-video-player-type', 'h5');
 }
 
+function skipIntro(video: HTMLVideoElement) {
+  if (HERO_VIDEO_START <= 0) return;
+  if (video.readyState < HTMLMediaElement.HAVE_METADATA) return;
+  if (video.duration && HERO_VIDEO_START >= video.duration) return;
+  if (video.currentTime >= HERO_VIDEO_START) return;
+  video.currentTime = HERO_VIDEO_START;
+}
+
 function forcePlay(video: HTMLVideoElement | null) {
   if (!video) return;
   configureMobileHeroVideo(video);
   if (video.readyState < HTMLMediaElement.HAVE_METADATA) {
     video.load();
   }
+  skipIntro(video);
   const playPromise = video.play();
   if (playPromise !== undefined) {
     playPromise.catch(() => {});
@@ -79,6 +89,7 @@ export default function DayalHeroBackgroundVideo({
           node.src = srcRef.current;
         }
         if (autoplay) forcePlay(node);
+        else skipIntro(node);
       }
     },
     [autoplay, onVideoRef],
@@ -105,6 +116,27 @@ export default function DayalHeroBackgroundVideo({
       video.pause();
     }
   }, [mounted, active, autoplay]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    const seekPastIntro = () => skipIntro(video);
+    const restart = () => {
+      video.currentTime = HERO_VIDEO_START;
+      if (autoplay) forcePlay(video);
+    };
+
+    video.addEventListener('loadedmetadata', seekPastIntro);
+    video.addEventListener('ended', restart);
+    seekPastIntro();
+
+    return () => {
+      video.removeEventListener('loadedmetadata', seekPastIntro);
+      video.removeEventListener('ended', restart);
+    };
+  }, [mounted, autoplay]);
 
   useEffect(() => {
     if (!mounted || !active || !autoplay) return;
@@ -175,7 +207,6 @@ export default function DayalHeroBackgroundVideo({
       className={className}
       autoPlay={autoplay}
       muted
-      loop
       playsInline
       preload={autoplay ? 'auto' : 'metadata'}
       poster={HERO_VIDEO_POSTER}

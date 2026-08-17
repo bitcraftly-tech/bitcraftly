@@ -44,7 +44,6 @@ export default function GymHeroBackground({ city, centerName }: GymHeroBackgroun
           key={`${city}-${i}-${src}`}
           className={`gym-hero__slide${i === index ? ' is-active' : ''}`}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={src}
             alt=""

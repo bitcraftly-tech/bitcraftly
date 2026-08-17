@@ -2,18 +2,18 @@ import type { Metadata } from 'next';
 
 import PortfolioShowcaseLayout from '@bitcraftly/showcase-shared/PortfolioShowcaseLayout';
 
-import RestaurantAiChatbotShowcaseContent from './RestaurantAiChatbotShowcaseContent';
+import RestaurantAiExperiencePage from './RestaurantAiExperiencePage';
 
 export const metadata: Metadata = {
-  title: 'Tasting Desk AI · Restaurant Assistant Showcase | Bitcraftly',
+  title: 'Tasting Desk AI · Restaurant AI Host Showcase | Bitcraftly',
   description:
-    'Premium restaurant AI assistant specimen — menu-aware chat, table booking, WhatsApp handoff, and outcome telemetry.',
+    'Interactive restaurant AI host showcase — menu-aware chat, ordering, reservations, multilingual guest care, and operator insights.',
 };
 
 export default function RestaurantAiChatbotShowcasePage() {
   return (
     <PortfolioShowcaseLayout themeId="chatbot">
-      <RestaurantAiChatbotShowcaseContent />
+      <RestaurantAiExperiencePage />
     </PortfolioShowcaseLayout>
   );
 }

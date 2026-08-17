@@ -135,7 +135,7 @@ export async function BlogHero({ breadcrumbs, activeCategory = 'all', query = ''
       contained={false}
       aria-labelledby="blog-page-heading"
       className={cn(
-        'services-hero blog-hero relative overflow-hidden hero-surface',
+        'lux-hero services-hero blog-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}

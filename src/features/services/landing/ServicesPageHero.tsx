@@ -18,7 +18,7 @@ const secondaryCtaClassName = bcButtonClassName({
 
 export function ServicesPageHero() {
   return (
-    <section className="sl-hero" aria-labelledby="services-landing-hero-heading">
+    <section className="lux-hero sl-hero" aria-labelledby="services-landing-hero-heading">
       <Container>
         <div className="sl-hero__inner">
           <p className="sl-hero__eyebrow">{SERVICES_LANDING_HERO.eyebrow}</p>

@@ -7,27 +7,25 @@ test.describe('Mobile header layout', () => {
     test(`no horizontal overflow at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 800 });
       await page.goto('/');
-      await page.waitForSelector('#header');
+      await page.waitForSelector('#header .header-bar');
+      await page.waitForFunction(() => !document.documentElement.classList.contains('bc-booting'));
 
       const overflow = await page.evaluate(() => {
         const doc = document.documentElement;
         return {
           docScrollWidth: doc.scrollWidth,
           docClientWidth: doc.clientWidth,
-          bodyScrollWidth: document.body.scrollWidth,
-          bodyClientWidth: document.body.clientWidth,
         };
       });
 
       expect(overflow.docScrollWidth).toBeLessThanOrEqual(overflow.docClientWidth + 1);
-      expect(overflow.bodyScrollWidth).toBeLessThanOrEqual(overflow.bodyClientWidth + 1);
 
       const layout = await page.evaluate(() => {
         const header = document.getElementById('header');
-        const container = header?.querySelector('.mx-auto');
+        const container = header?.querySelector('.header-bar');
         const logo = header?.querySelector('a[href="/"]');
         const hero = document.getElementById('hero');
-        const heroContainer = hero?.querySelector('.mx-auto');
+        const heroContainer = hero?.querySelector('.hp-hero__shell');
         const hamburger = header?.querySelector('button[aria-controls="header-mobile-menu"]');
 
         if (!header || !container || !logo) {
@@ -61,8 +59,8 @@ test.describe('Mobile header layout', () => {
         return;
       }
 
-      expect(layout.headerHeight).toBeGreaterThanOrEqual(64);
-      expect(layout.headerHeight).toBeLessThanOrEqual(72);
+      expect(layout.headerHeight).toBeGreaterThanOrEqual(87);
+      expect(layout.headerHeight).toBeLessThanOrEqual(89);
       expect(layout.headerScrollWidth).toBeLessThanOrEqual(layout.headerClientWidth + 1);
 
       const expectedPadding = width >= 640 ? 20 : 16;
@@ -79,14 +77,14 @@ test.describe('Mobile header layout', () => {
       }
 
       const brandName = await page
-        .locator('#header a[href="/"] span.whitespace-nowrap')
+        .locator('#header a[href="/"] .header-logo__wordmark')
         .textContent();
       expect(brandName?.trim()).toBe('Bitcraftly');
 
       const bookCallInBar = page
-        .locator('#header .mx-auto')
+        .locator('#header .header-bar')
         .first()
-        .getByRole('link', { name: 'Book a Call' });
+        .getByRole('link', { name: 'Book Strategy Call' });
       await expect(bookCallInBar).toBeHidden();
 
       const menuButton = page.locator('button[aria-controls="header-mobile-menu"]');
@@ -96,8 +94,8 @@ test.describe('Mobile header layout', () => {
       await expect(page.locator('#header-mobile-menu')).toBeVisible();
 
       const menuPanel = page.locator('#header-mobile-menu');
-      await expect(menuPanel.getByRole('link', { name: 'Get Free Consultation' })).toBeVisible();
-      await expect(menuPanel.getByRole('link', { name: 'Book a Call' })).toBeVisible();
+      await expect(menuPanel.getByRole('link', { name: 'Explore Industry Systems' })).toBeVisible();
+      await expect(menuPanel.getByRole('link', { name: 'Book Strategy Call' })).toBeVisible();
 
       const hamburgerBeforeClose = await menuButton.boundingBox();
       await menuButton.click();

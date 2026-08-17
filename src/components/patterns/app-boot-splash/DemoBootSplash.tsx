@@ -121,7 +121,6 @@ export function DemoBootSplash({
           <span className="bc-demo-boot__ring" />
           <span className="bc-demo-boot__glow" />
           {brand.logo ? (
-            // eslint-disable-next-line @next/next/no-img-element -- boot splash must not depend on next/image hydration
             <img
               className="bc-demo-boot__logo"
               src={brand.logo}

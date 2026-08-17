@@ -40,7 +40,7 @@ export default function Rpy2SkillsPath() {
           <span className="rpyv2-journey-eyebrow">Your Path to Success</span>
           <h2 className="rpyv2-journey-title">From Learning to Earning</h2>
           <p className="rpyv2-journey-sub">
-            Three steps. One destination. A career you're proud of.
+            Three steps. One destination. A career you&apos;re proud of.
           </p>
         </div>
 

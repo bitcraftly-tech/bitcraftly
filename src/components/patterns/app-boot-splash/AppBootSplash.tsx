@@ -91,7 +91,6 @@ export function AppBootSplash() {
         <div className="bc-boot-splash__logo-wrap" aria-hidden>
           <span className="bc-boot-splash__ring bc-boot-splash__ring--delayed" aria-hidden />
           <span className="bc-boot-splash__ring" aria-hidden />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="bc-boot-splash__logo"
             src="/brand/logo-mark.webp"

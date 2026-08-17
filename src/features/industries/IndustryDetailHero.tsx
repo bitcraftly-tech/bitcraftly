@@ -28,7 +28,7 @@ export async function IndustryDetailHero({ industry, breadcrumbs }: IndustryDeta
       spacing="lg"
       aria-labelledby={headingId}
       className={cn(
-        'industries-hero relative overflow-hidden hero-surface',
+        'lux-hero industries-hero relative overflow-hidden hero-surface',
         'border-b border-border/60',
         isMobile && 'marketing-hero--compact',
       )}
