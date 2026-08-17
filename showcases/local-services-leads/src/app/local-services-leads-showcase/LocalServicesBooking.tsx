@@ -7,12 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { CONTAINER, SUPPORT_PHONE_DISPLAY } from '@/lib/constants';
 
 import LocalServicesReveal from './LocalServicesReveal';
-import {
-  BOOKING_ASSURANCES,
-  SERVICES,
-  URGENCY_OPTIONS,
-  ZONES,
-} from './local-services.content';
+import { BOOKING_ASSURANCES, SERVICES, URGENCY_OPTIONS, ZONES } from './local-services.content';
 
 type Step = 0 | 1 | 2;
 
@@ -161,7 +156,9 @@ export default function LocalServicesBooking() {
           <LocalServicesReveal delay={0.12} className="lsx-wizard">
             <div className="lsx-wizard__head">
               <div>
-                <p>Step {step + 1} of {STEP_LABELS.length}</p>
+                <p>
+                  Step {step + 1} of {STEP_LABELS.length}
+                </p>
                 <strong>{STEP_LABELS[step]}</strong>
               </div>
               <strong aria-hidden>{Math.round(progress)}%</strong>
@@ -170,9 +167,7 @@ export default function LocalServicesBooking() {
               <motion.i
                 animate={{ scaleX: progress / 100 }}
                 transition={
-                  reduceMotion
-                    ? { duration: 0 }
-                    : { type: 'spring', stiffness: 260, damping: 28 }
+                  reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 260, damping: 28 }
                 }
                 style={{ transformOrigin: 'left center' }}
               />

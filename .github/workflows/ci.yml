@@ -28,6 +28,12 @@ concurrency:
 permissions:
   contents: read
 
+# Prisma loads its datasource while evaluating prisma.config.ts, including for
+# client generation. CI never connects to this placeholder database; staging
+# and production continue to use environment-specific hosting secrets.
+env:
+  DIRECT_URL: postgresql://ci:ci@127.0.0.1:5432/bitcraftly_ci
+
 jobs:
   quality:
     name: Lint · Typecheck · Unit · Build

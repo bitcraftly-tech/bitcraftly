@@ -18,12 +18,9 @@ export default function LocalServicesVoices() {
   const [paused, setPaused] = useState(false);
   const current = TESTIMONIALS[index] ?? TESTIMONIALS[0];
 
-  const go = useCallback(
-    (next: number) => {
-      setIndex((next + TESTIMONIALS.length) % TESTIMONIALS.length);
-    },
-    [],
-  );
+  const go = useCallback((next: number) => {
+    setIndex((next + TESTIMONIALS.length) % TESTIMONIALS.length);
+  }, []);
 
   useEffect(() => {
     if (reduceMotion || paused) return;
@@ -121,11 +118,7 @@ export default function LocalServicesVoices() {
             </div>
 
             <div className="lsx-voices__buttons">
-              <button
-                type="button"
-                aria-label="Previous testimonial"
-                onClick={() => go(index - 1)}
-              >
+              <button type="button" aria-label="Previous testimonial" onClick={() => go(index - 1)}>
                 <ChevronLeft size={16} aria-hidden />
               </button>
               <button type="button" aria-label="Next testimonial" onClick={() => go(index + 1)}>

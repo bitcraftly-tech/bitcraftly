@@ -11,7 +11,11 @@ import { OPERATOR_NOTES, PROOF_STATS } from './local-services.content';
 /** Dark proof band with animated metrics and operator notes. */
 export default function LocalServicesProof() {
   return (
-    <section id="proof" className="lsx-section lsx-proof scroll-mt-28" aria-labelledby="lsx-proof-heading">
+    <section
+      id="proof"
+      className="lsx-section lsx-proof scroll-mt-28"
+      aria-labelledby="lsx-proof-heading"
+    >
       <div className={CONTAINER}>
         <div className="lsx-proof__split">
           <LocalServicesReveal className="lsx-head">
@@ -46,11 +50,7 @@ export default function LocalServicesProof() {
                   <Icon size={16} strokeWidth={1.85} />
                 </span>
                 <strong>
-                  <LocalServicesCounter
-                    value={stat.value}
-                    suffix={stat.suffix}
-                    durationMs={1400}
-                  />
+                  <LocalServicesCounter value={stat.value} suffix={stat.suffix} durationMs={1400} />
                 </strong>
                 <p>{stat.label}</p>
                 <small>{stat.detail}</small>

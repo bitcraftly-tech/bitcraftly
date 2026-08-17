@@ -120,7 +120,12 @@ export const SERVICES: readonly ServiceCategory[] = [
     tagline: 'Leaks, tanks and bathroom retrofits',
     blurb:
       'Certified plumbers arrive with pressure gauges and spare fittings, so most call-outs finish in a single visit instead of a parts run.',
-    jobs: ['Leak and seepage fixes', 'Overhead tank cleaning', 'Motor and pump install', 'Bathroom retrofit'],
+    jobs: [
+      'Leak and seepage fixes',
+      'Overhead tank cleaning',
+      'Motor and pump install',
+      'Bathroom retrofit',
+    ],
     startsAt: '₹299 visit',
     sla: 'Same-day slots',
     warranty: '30-day labour cover',
@@ -144,7 +149,12 @@ export const SERVICES: readonly ServiceCategory[] = [
     tagline: 'Cooling restored, hygiene included',
     blurb:
       'Gauge-tested gas top-ups with before/after temperature readings shared on WhatsApp — no guesswork billing.',
-    jobs: ['Gas refill with gauge log', 'PCB fault diagnosis', 'Split and window service', 'AMC hygiene visits'],
+    jobs: [
+      'Gas refill with gauge log',
+      'PCB fault diagnosis',
+      'Split and window service',
+      'AMC hygiene visits',
+    ],
     startsAt: '₹499 service',
     sla: 'Peak-season priority',
     warranty: '90-day gas warranty',
@@ -156,7 +166,12 @@ export const SERVICES: readonly ServiceCategory[] = [
     tagline: 'Move-out grade sparkle',
     blurb:
       'Crews carry their own machines and log deposit-proof photos, which is what saves tenants the landlord argument later.',
-    jobs: ['Move-out deep clean', 'Sofa and mattress shampoo', 'Kitchen degrease', 'Sanitisation fogging'],
+    jobs: [
+      'Move-out deep clean',
+      'Sofa and mattress shampoo',
+      'Kitchen degrease',
+      'Sanitisation fogging',
+    ],
     startsAt: '₹1,899 half-day',
     sla: 'Weekend crews',
     warranty: 'Re-clean within 48h',
@@ -168,7 +183,12 @@ export const SERVICES: readonly ServiceCategory[] = [
     tagline: 'Masked, primed, on schedule',
     blurb:
       'Waterproofing primer and obsessive floor masking, with a supervisor pushing daily progress pictures to your chat.',
-    jobs: ['Interior and texture work', 'Waterproofing primer', 'Wood polish', 'Site masking and cleanup'],
+    jobs: [
+      'Interior and texture work',
+      'Waterproofing primer',
+      'Wood polish',
+      'Site masking and cleanup',
+    ],
     startsAt: '₹1,899 half-day',
     sla: 'Scheduled 48h ahead',
     warranty: 'Finish touch-ups free',
@@ -180,7 +200,12 @@ export const SERVICES: readonly ServiceCategory[] = [
     tagline: 'Doors, modular and fittings',
     blurb:
       'Hinge swaps and modular fixes handled with the right jig, so drawers keep aligning months after the visit.',
-    jobs: ['Door alignment', 'Modular kitchen fixes', 'Furniture assembly', 'Hinge and channel swaps'],
+    jobs: [
+      'Door alignment',
+      'Modular kitchen fixes',
+      'Furniture assembly',
+      'Hinge and channel swaps',
+    ],
     startsAt: '₹399 visit',
     sla: 'Next-day slots',
     warranty: '30-day labour cover',

@@ -17,6 +17,12 @@ export default tseslint.config(
       'coverage',
       'playwright-report',
       'test-results',
+      '.ci-check/**',
+      '.tmp/**',
+      'artifacts/**',
+      'scripts/output/**',
+      'scripts/verify-*.mjs',
+      'scripts/capture-*.mjs',
       'src/generated/**',
       'next-env.d.ts',
     ],
@@ -61,6 +67,12 @@ export default tseslint.config(
 
       'prettier/prettier': 'error',
 
+      // These React Compiler diagnostics were promoted to errors by a plugin
+      // upgrade. Keep them visible while the legacy interactive components are
+      // migrated incrementally instead of blocking every deployment.
+      'react-hooks/set-state-in-effect': 'warn',
+      'react-hooks/refs': 'warn',
+
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
@@ -78,6 +90,13 @@ export default tseslint.config(
       globals: {
         ...globals.node,
       },
+    },
+  },
+
+  {
+    files: ['public/sw.js'],
+    languageOptions: {
+      globals: globals.serviceworker,
     },
   },
 

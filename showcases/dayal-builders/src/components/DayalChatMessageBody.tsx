@@ -4,7 +4,7 @@ import DayalSectionLink from '@bitcraftly/showcase-dayal-builders/components/Day
 import { DAYAL } from '@bitcraftly/showcase-dayal-builders/lib/data';
 
 function tidyHref(raw: string) {
-  return raw.replace(/[),.;\]\}]+$/, '').trimEnd();
+  return raw.replace(/[),.;\]}]+$/, '').trimEnd();
 }
 
 function linkClass(isUser: boolean) {

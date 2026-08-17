@@ -40,9 +40,7 @@ export default function LocalServicesPricing() {
               className="lsx-pricing__thumb"
               animate={{ left: billing === 'visit' ? '0.3rem' : '50%' }}
               transition={
-                reduceMotion
-                  ? { duration: 0 }
-                  : { type: 'spring', stiffness: 380, damping: 32 }
+                reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 32 }
               }
               aria-hidden
             />

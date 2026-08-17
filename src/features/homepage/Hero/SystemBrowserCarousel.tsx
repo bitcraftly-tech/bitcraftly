@@ -1,8 +1,8 @@
 'use client';
 
 import {
+  useCallback,
   useEffect,
-  useEffectEvent,
   useLayoutEffect,
   useRef,
   type CSSProperties,
@@ -62,9 +62,6 @@ export function SystemBrowserCarousel({
   const viewportRef = useRef<HTMLDivElement>(null);
   const prevIndexRef = useRef(activeIndex);
   const swipeRef = useRef<SwipeState | null>(null);
-  const activeIndexRef = useRef(activeIndex);
-
-  activeIndexRef.current = activeIndex;
 
   useEffect(() => {
     let cancelled = false;
@@ -103,21 +100,25 @@ export function SystemBrowserCarousel({
     track.classList.remove('is-wrap-jump');
   }, [activeIndex, total]);
 
-  const commitSwipe = useEffectEvent((deltaX: number) => {
-    if (!onSelectIndex || total < 2) return;
-    if (Math.abs(deltaX) < SWIPE_THRESHOLD_PX) return;
+  const commitSwipe = useCallback(
+    (deltaX: number) => {
+      if (!onSelectIndex || total < 2) return;
+      if (Math.abs(deltaX) < SWIPE_THRESHOLD_PX) return;
 
-    const current = activeIndexRef.current;
-    // Swipe left → next; swipe right → previous
-    const nextIndex = deltaX < 0 ? (current + 1) % total : (current - 1 + total) % total;
-    onSelectIndex(nextIndex);
-  });
+      // Swipe left → next; swipe right → previous
+      const nextIndex = deltaX < 0 ? (activeIndex + 1) % total : (activeIndex - 1 + total) % total;
+      onSelectIndex(nextIndex);
+    },
+    [activeIndex, onSelectIndex, total],
+  );
 
-  const goToRelative = useEffectEvent((delta: -1 | 1) => {
-    if (!onSelectIndex || total < 2) return;
-    const current = activeIndexRef.current;
-    onSelectIndex((current + delta + total) % total);
-  });
+  const goToRelative = useCallback(
+    (delta: -1 | 1) => {
+      if (!onSelectIndex || total < 2) return;
+      onSelectIndex((activeIndex + delta + total) % total);
+    },
+    [activeIndex, onSelectIndex, total],
+  );
 
   const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (!onSelectIndex || event.pointerType === 'mouse') return;

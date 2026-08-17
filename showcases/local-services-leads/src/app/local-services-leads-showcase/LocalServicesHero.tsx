@@ -156,9 +156,7 @@ export default function LocalServicesHero() {
             <span className="lsx-dispatch__meter" aria-hidden>
               <motion.i
                 animate={
-                  reduceMotion
-                    ? { scaleX: 0.72 }
-                    : { scaleX: [0.35, 0.82, 0.55, 0.9, 0.72] }
+                  reduceMotion ? { scaleX: 0.72 } : { scaleX: [0.35, 0.82, 0.55, 0.9, 0.72] }
                 }
                 transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
               />

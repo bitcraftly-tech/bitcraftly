@@ -19,7 +19,11 @@ export default function LocalServicesServices() {
   const ActiveIcon = active.icon;
 
   return (
-    <section id="services" className="lsx-section lsx-services scroll-mt-28" aria-labelledby="lsx-services-heading">
+    <section
+      id="services"
+      className="lsx-section lsx-services scroll-mt-28"
+      aria-labelledby="lsx-services-heading"
+    >
       <div className={CONTAINER}>
         <LocalServicesReveal className="lsx-head lsx-head--center">
           <p className="lsx-eyebrow">Popular services</p>
@@ -33,11 +37,7 @@ export default function LocalServicesServices() {
         </LocalServicesReveal>
 
         <LayoutGroup id={tabId}>
-          <div
-            className="lsx-services__tabs"
-            role="tablist"
-            aria-label="Service categories"
-          >
+          <div className="lsx-services__tabs" role="tablist" aria-label="Service categories">
             {SERVICES.map((service) => {
               const Icon = service.icon;
               const selected = service.id === activeId;

@@ -75,7 +75,11 @@ export default function LocalServicesZones() {
                   className="lsx-radar__pin"
                   data-active={zone.id === activeId}
                   aria-label={`${zone.name}, ${zone.eta}`}
-                  style={{ left: `${zone.x}%`, top: `${zone.y}%`, transform: 'translate(-50%, -50%)' }}
+                  style={{
+                    left: `${zone.x}%`,
+                    top: `${zone.y}%`,
+                    transform: 'translate(-50%, -50%)',
+                  }}
                   onClick={() => setActiveId(zone.id)}
                   whileHover={reduceMotion ? undefined : { scale: 1.06 }}
                   whileTap={reduceMotion ? undefined : { scale: 0.96 }}
