@@ -20,8 +20,8 @@ export const MARKETING_PAGES: readonly MarketingPageSpec[] = [
   {
     name: 'Home',
     path: '/',
-    heading: /AI-Powered Digital Products/i,
-    cta: /Get Free Consultation|View Our Work/i,
+    heading: /Complete\s*Digital\s*Systems\s*for\s*Your\s*Industry/i,
+    cta: /Explore Industry Systems|Book (a )?Strategy Call/i,
   },
   {
     name: 'Services',
