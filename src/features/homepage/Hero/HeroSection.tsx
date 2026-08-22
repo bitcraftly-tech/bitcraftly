@@ -1,5 +1,5 @@
 import { cn } from '@/lib/cn';
-import { HERO_HEADING_ID, HERO_ID, HERO_INDUSTRY_PREVIEWS, HERO_SYSTEM } from './hero.constants';
+import { HERO_HEADING_ID, HERO_ID, HERO_SYSTEM } from './hero.constants';
 import { heroHandFont } from './hero-fonts';
 import { HeroBackground } from './HeroBackground';
 import { HeroIntro, HeroMeta } from './HeroContent';
@@ -13,7 +13,6 @@ import { SystemComposition } from './SystemComposition';
  */
 export function HeroSection() {
   const flowLabel = HERO_SYSTEM.flow.join(' to ');
-  const lcpPreview = HERO_INDUSTRY_PREVIEWS[0];
 
   return (
     <section
@@ -21,16 +20,6 @@ export function HeroSection() {
       aria-labelledby={HERO_HEADING_ID}
       className={cn('hp-hero', heroHandFont.variable)}
     >
-      {lcpPreview?.usesHeroOptimized ? (
-        <link
-          rel="preload"
-          as="image"
-          type="image/avif"
-          imageSrcSet={lcpPreview.imageAvifSrcSet}
-          imageSizes={lcpPreview.imageSizes}
-          fetchPriority="high"
-        />
-      ) : null}
       <HeroBackground />
 
       <div className="hp-hero__shell">

@@ -115,8 +115,8 @@ export async function waitUntilBootReady(options?: {
     maxMs,
   );
 
-  /* Ensure the logo spinner is visible long enough (esp. fast iOS caches). */
-  if (!reduced) {
+  /* Pad splash only off-homepage so LCP on `/` is not blocked by a minimum dwell. */
+  if (!reduced && !fast) {
     const remaining = BOOT_MIN_VISIBLE_MS - (performance.now() - startedAt);
     if (remaining > 0) {
       await withBootTimeout(Promise.resolve(), remaining);

@@ -6,6 +6,7 @@ import { ORGANIZATION_ID } from '@/lib/seo/organization';
 import { getAbsoluteUrl, getSiteUrl } from '@/lib/seo/site';
 import { WEBSITE_ID } from '@/lib/seo/website';
 import { ROUTES } from '@/constants/navigation';
+import { HERO_INDUSTRY_PREVIEWS } from '@/features/homepage/Hero/hero.constants';
 
 const HOME_TITLE = 'Bitcraftly | Complete Digital Systems for Your Industry';
 const HOME_DESCRIPTION =
@@ -46,8 +47,21 @@ const homepageJsonLd = {
 };
 
 export default function HomePage() {
+  const lcpPreview = HERO_INDUSTRY_PREVIEWS[0];
+
   return (
     <>
+      {lcpPreview?.usesHeroOptimized ? (
+        <link
+          rel="preload"
+          as="image"
+          href={`/products/hero/${lcpPreview.id}-480.avif`}
+          type="image/avif"
+          imageSrcSet={lcpPreview.imageAvifSrcSet}
+          imageSizes={lcpPreview.imageSizes}
+          fetchPriority="high"
+        />
+      ) : null}
       <JsonLdScript data={homepageJsonLd} />
       <HomepageShell />
     </>

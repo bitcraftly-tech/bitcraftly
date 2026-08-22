@@ -5,6 +5,7 @@ import {
   useEffect,
   useLayoutEffect,
   useRef,
+  useState,
   type CSSProperties,
   type PointerEvent as ReactPointerEvent,
 } from 'react';
@@ -66,14 +67,33 @@ export function SystemBrowserCarousel({
   const viewportRef = useRef<HTMLDivElement>(null);
   const prevIndexRef = useRef(activeIndex);
   const swipeRef = useRef<SwipeState | null>(null);
+  const [allowNeighbors, setAllowNeighbors] = useState(false);
 
   useEffect(() => {
-    if (total === 0) return;
+    let timeoutId = 0;
+    const arm = () => {
+      timeoutId = window.setTimeout(() => setAllowNeighbors(true), 800);
+    };
+
+    if (document.readyState === 'complete') {
+      arm();
+    } else {
+      window.addEventListener('load', arm, { once: true });
+    }
+
+    return () => {
+      window.removeEventListener('load', arm);
+      window.clearTimeout(timeoutId);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!allowNeighbors || total === 0) return;
     const next = items[(activeIndex + 1) % total];
     const prev = items[(activeIndex - 1 + total) % total];
     if (next) warmImage(previewSrcForViewport(next));
     if (prev && prev !== next) warmImage(previewSrcForViewport(prev));
-  }, [activeIndex, items, total]);
+  }, [activeIndex, allowNeighbors, items, total]);
 
   /* Instant jump on wrap so last→first does not slide backward through all pages. */
   useLayoutEffect(() => {
@@ -214,7 +234,9 @@ export function SystemBrowserCarousel({
         <div ref={trackRef} className="sys__browser-track" style={trackStyle}>
           {items.map((item, slideIndex) => {
             const isActive = slideIndex === activeIndex;
-            const shouldLoad = isNearActive(slideIndex, activeIndex, total);
+            const shouldLoad =
+              slideIndex === activeIndex ||
+              (allowNeighbors && isNearActive(slideIndex, activeIndex, total));
 
             return (
               <div

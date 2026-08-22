@@ -26,7 +26,7 @@ export function HeaderSection() {
     <HeaderElement>
       <div className="header-bar">
         <div className="header-bar__brand">
-          <Logo priority />
+          <Logo />
         </div>
 
         <div className="header-bar__nav">
