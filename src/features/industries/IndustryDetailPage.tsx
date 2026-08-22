@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { JsonLdScript } from '@/components/patterns/json-ld';
 import { PageShell } from '@/components/patterns/marketing-layout';
 import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
 import { Icon } from '@/components/ui/icon';
@@ -9,6 +10,7 @@ import { IndustryDetailHero } from './IndustryDetailHero';
 import { IndustriesPageCta } from './IndustriesPageCta';
 import { IndustryCard } from './IndustryCard';
 import { getIndustryModelBySlug, INDUSTRIES_CATALOG } from './industries.content';
+import { buildIndustryDetailJsonLd } from './industries-schema';
 import type { IndustryModel } from './industries.types';
 import './industries.css';
 
@@ -31,6 +33,7 @@ export function IndustryDetailPage({ industry }: IndustryDetailPageProps) {
     <PageShell
       className={`industries-page industry-detail-page industries-accent--${industry.accent}`}
     >
+      <JsonLdScript data={buildIndustryDetailJsonLd(industry)} />
       <IndustryDetailHero industry={industry} breadcrumbs={breadcrumbs} />
 
       <Section

@@ -1,13 +1,18 @@
 import Link from 'next/link';
 import { FaqAccordion } from '@/components/patterns/faq-accordion';
+import { JsonLdScript } from '@/components/patterns/json-ld';
 import { PageShell } from '@/components/patterns/marketing-layout';
 import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
 import { Icon } from '@/components/ui/icon';
 import { Section } from '@/components/ui/section';
 import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
 import { FAQ_ITEMS } from '@/features/homepage/FAQ/faq.constants';
-import { buildResourcesBreadcrumbs } from '@/lib/seo/breadcrumbs';
 import { cn } from '@/lib/cn';
+import { buildResourcesBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { buildBreadcrumbListJsonLd } from '@/lib/seo/json-ld-breadcrumbs';
+import { buildFaqPageJsonLd } from '@/lib/seo/json-ld-faq';
+import { getAbsoluteUrl } from '@/lib/seo/site';
+import { WEBSITE_ID } from '@/lib/seo/website';
 import '@/features/homepage/FAQ/faq.css';
 import { ResourcesHero } from './ResourcesHero';
 import { ResourcesPageCta } from './ResourcesPageCta';
@@ -24,9 +29,27 @@ const focusRing = cn(
  */
 export function ResourcesFaqPage() {
   const breadcrumbs = buildResourcesBreadcrumbs([{ label: 'FAQ' }]);
+  const pageUrl = getAbsoluteUrl(ROUTES.resourcesFaq);
 
   return (
     <PageShell className="resources-page resources-detail-page resources-faq-page">
+      <JsonLdScript
+        data={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'WebPage',
+              '@id': `${pageUrl}#webpage`,
+              url: pageUrl,
+              name: RESOURCES_FAQ_COPY.title,
+              description: RESOURCES_FAQ_COPY.description,
+              isPartOf: { '@id': WEBSITE_ID },
+            },
+            buildFaqPageJsonLd(pageUrl, FAQ_ITEMS),
+            buildBreadcrumbListJsonLd(breadcrumbs, pageUrl),
+          ],
+        }}
+      />
       <ResourcesHero
         breadcrumbs={breadcrumbs}
         headingId="resources-faq-page-heading"

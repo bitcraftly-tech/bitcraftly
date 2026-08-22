@@ -1,8 +1,14 @@
+import { ALL_SERVICES, getServiceHref } from '@/constants/services';
 import { ROUTES } from '@/constants/navigation';
+import { ORGANIZATION_ID } from '@/lib/seo/organization';
+import { getAbsoluteUrl } from '@/lib/seo/site';
+import { WEBSITE_ID } from '@/lib/seo/website';
 import { SERVICES_LANDING } from './services.content';
 import type { ServicePageContent } from './services.types';
 
 export function buildServicesListingJsonLd() {
+  const pageUrl = getAbsoluteUrl(ROUTES.services);
+
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -13,47 +19,34 @@ export function buildServicesListingJsonLd() {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://bitcraftly.com/',
+            item: getAbsoluteUrl(ROUTES.home),
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Services',
-            item: 'https://bitcraftly.com/services',
+            item: pageUrl,
           },
         ],
       },
       {
         '@type': 'CollectionPage',
-        '@id': 'https://bitcraftly.com/services#webpage',
-        url: 'https://bitcraftly.com/services',
+        '@id': `${pageUrl}#webpage`,
+        url: pageUrl,
         name: 'Bitcraftly Services',
         description:
           'End-to-end digital engineering services including AI, websites, apps, custom software, and cloud DevOps.',
-        isPartOf: { '@id': 'https://bitcraftly.com/#website' },
+        isPartOf: { '@id': WEBSITE_ID },
       },
       {
         '@type': 'ItemList',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'AI & Automation',
-            url: 'https://bitcraftly.com/services#ai-automation',
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Development',
-            url: 'https://bitcraftly.com/services#development',
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: 'Digital Growth',
-            url: 'https://bitcraftly.com/services#digital-growth',
-          },
-        ],
+        '@id': `${pageUrl}#list`,
+        itemListElement: ALL_SERVICES.map((service, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: service.label,
+          url: getAbsoluteUrl(getServiceHref(service.slug)),
+        })),
       },
       {
         '@type': 'FAQPage',
@@ -71,7 +64,7 @@ export function buildServicesListingJsonLd() {
 }
 
 export function buildServiceDetailJsonLd(content: ServicePageContent) {
-  const url = `https://bitcraftly.com${ROUTES.services}/${content.slug}`;
+  const url = getAbsoluteUrl(getServiceHref(content.slug));
 
   return {
     '@context': 'https://schema.org',
@@ -83,10 +76,7 @@ export function buildServiceDetailJsonLd(content: ServicePageContent) {
         description: content.metaDescription,
         url,
         provider: {
-          '@type': 'Organization',
-          '@id': 'https://bitcraftly.com/#organization',
-          name: 'Bitcraftly',
-          url: 'https://bitcraftly.com',
+          '@id': ORGANIZATION_ID,
         },
         areaServed: {
           '@type': 'Country',
@@ -101,13 +91,13 @@ export function buildServiceDetailJsonLd(content: ServicePageContent) {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://bitcraftly.com/',
+            item: getAbsoluteUrl(ROUTES.home),
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Services',
-            item: 'https://bitcraftly.com/services',
+            item: getAbsoluteUrl(ROUTES.services),
           },
           {
             '@type': 'ListItem',

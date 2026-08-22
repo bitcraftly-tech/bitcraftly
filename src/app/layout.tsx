@@ -60,9 +60,19 @@ export const metadata: Metadata = {
     },
   ],
 
+  applicationName: 'Bitcraftly',
+
+  category: 'technology',
+
   creator: 'Bitcraftly',
 
   publisher: 'Bitcraftly',
+
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
 
   robots: {
     index: true,
@@ -100,6 +110,14 @@ export const metadata: Metadata = {
     images: ['/twitter-image.webp'],
   },
 
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? {
+        verification: {
+          google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+        },
+      }
+    : {}),
+
   icons: {
     icon: [
       { url: '/brand/favicon-16.png', type: 'image/png', sizes: '16x16' },
@@ -134,7 +152,7 @@ export default async function RootLayout({
 
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >

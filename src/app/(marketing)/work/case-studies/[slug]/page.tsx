@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { getAllCaseStudySlugs, getCaseStudyBySlug, getCaseStudyHref } from '@/content/case-studies';
 import { createPageMetadata } from '@/lib/seo/createPageMetadata';
+import { createNoIndexMetadata } from '@/lib/seo/noindex-metadata';
 
 /** Older `/work/case-studies/*` slugs → canonical `/work/[slug]` case studies. */
 const LEGACY_CASE_STUDY_REDIRECTS: Record<string, string> = {
@@ -26,11 +27,7 @@ export async function generateMetadata({ params }: LegacyCaseStudyPageProps): Pr
   const study = getCaseStudyBySlug(canonicalSlug);
 
   if (!study) {
-    return createPageMetadata({
-      title: 'Case Study | Work',
-      description: 'Bitcraftly case study detail page.',
-      path: getCaseStudyHref(canonicalSlug),
-    });
+    return createNoIndexMetadata();
   }
 
   return createPageMetadata({

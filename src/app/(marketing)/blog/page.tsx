@@ -1,8 +1,19 @@
 import type { Metadata } from 'next';
 import { BlogLandingPage, BLOG_LANDING_META, isBlogCategoryId } from '@/features/blog';
 import { createPageMetadata } from '@/lib/seo/createPageMetadata';
+import { getAbsoluteUrl } from '@/lib/seo/site';
 
-export const metadata: Metadata = createPageMetadata(BLOG_LANDING_META);
+const blogPageMetadata = createPageMetadata(BLOG_LANDING_META);
+
+export const metadata: Metadata = {
+  ...blogPageMetadata,
+  alternates: {
+    ...blogPageMetadata.alternates,
+    types: {
+      'application/rss+xml': getAbsoluteUrl('/feed.xml'),
+    },
+  },
+};
 
 interface BlogPageProps {
   searchParams: Promise<{

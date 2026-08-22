@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { JsonLdScript } from '@/components/patterns/json-ld';
 import { PageShell } from '@/components/patterns/marketing-layout';
 import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
 import { Icon } from '@/components/ui/icon';
@@ -10,6 +11,7 @@ import { WorkPageCta } from './WorkPageCta';
 import { WorkProjectCard } from './WorkProjectCard';
 import { getWorkProjectHref, WORK_LANDING, WORK_PROJECTS } from './work.content';
 import type { WorkProject } from './work.types';
+import { buildWorkProjectJsonLd } from './work-schema';
 import './work.css';
 
 interface WorkProjectDetailPageProps {
@@ -50,6 +52,7 @@ export function WorkProjectDetailPage({ project }: WorkProjectDetailPageProps) {
 
   return (
     <PageShell className={`work-page work-detail-page work-detail-page--${project.accent}`}>
+      <JsonLdScript data={buildWorkProjectJsonLd(project)} />
       <WorkInternalHero
         breadcrumbs={breadcrumbs}
         headingId={headingId}

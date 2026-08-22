@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { getSiteUrl } from './site';
+import { getAbsoluteUrl } from './site';
 
 interface CreatePageMetadataInput {
   title: string;
@@ -21,20 +21,27 @@ export function createPageMetadata({
   keywords,
   image = DEFAULT_OG_IMAGE_PATH,
 }: CreatePageMetadataInput): Metadata {
-  const siteUrl = getSiteUrl();
-  const url = `${siteUrl}${path}`;
+  const url = getAbsoluteUrl(path);
   const alreadyBranded = title.includes(SITE_NAME);
   /** Absolute title when input already includes the brand (avoids `| Bitcraftly | Bitcraftly`). */
   const metadataTitle = alreadyBranded ? ({ absolute: title } as const) : title;
   const socialTitle = alreadyBranded ? title : `${title} | ${SITE_NAME}`;
-  const imageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
+  const imageUrl = getAbsoluteUrl(image);
 
   return {
     title: metadataTitle,
     description,
     keywords: keywords ? [...keywords] : undefined,
+    robots: {
+      index: true,
+      follow: true,
+    },
     alternates: {
-      canonical: path,
+      canonical: url,
+      languages: {
+        'en-IN': url,
+        'x-default': url,
+      },
     },
     openGraph: {
       title: socialTitle,

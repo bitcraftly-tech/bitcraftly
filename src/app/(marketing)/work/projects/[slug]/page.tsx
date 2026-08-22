@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: WorkProjectPageProps): Promis
     description:
       project.seoDescription ?? project.summary ?? 'Bitcraftly project case detail page.',
     path: `${ROUTES.workProjects}/${slug}`,
+    image: project.coverImage,
   });
 }
 

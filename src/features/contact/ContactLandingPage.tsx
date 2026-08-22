@@ -1,3 +1,4 @@
+import { JsonLdScript } from '@/components/patterns/json-ld';
 import { MarketingIllustratedHero } from '@/components/patterns/hero-compositions';
 import { PageShell } from '@/components/patterns/marketing-layout';
 import { ROUTES } from '@/constants/navigation';
@@ -8,6 +9,10 @@ import {
   type LeadIntent,
 } from '@/features/lead-funnel';
 import { buildContactBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { buildBreadcrumbListJsonLd } from '@/lib/seo/json-ld-breadcrumbs';
+import { ORGANIZATION_ID } from '@/lib/seo/organization';
+import { getAbsoluteUrl } from '@/lib/seo/site';
+import { WEBSITE_ID } from '@/lib/seo/website';
 import { ContactHeroVisual } from './ContactHeroVisual';
 
 const VALID_INTENTS = new Set<LeadIntent>([
@@ -49,12 +54,37 @@ interface ContactLandingPageProps {
   searchParams?: Record<string, string | string[] | undefined>;
 }
 
+export const CONTACT_LANDING_META = {
+  title: 'Contact',
+  description:
+    'Book a call, request a free consultation or website audit, or message Bitcraftly on WhatsApp — founder-led replies within one business day.',
+  path: ROUTES.contact,
+} as const;
+
 export function ContactLandingPage({ searchParams }: ContactLandingPageProps) {
   const breadcrumbs = buildContactBreadcrumbs();
   const defaults = parseDefaults(searchParams);
+  const pageUrl = getAbsoluteUrl(ROUTES.contact);
 
   return (
     <PageShell className="contact-page">
+      <JsonLdScript
+        data={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'ContactPage',
+              '@id': `${pageUrl}#webpage`,
+              url: pageUrl,
+              name: CONTACT_LANDING_META.title,
+              description: CONTACT_LANDING_META.description,
+              isPartOf: { '@id': WEBSITE_ID },
+              about: { '@id': ORGANIZATION_ID },
+            },
+            buildBreadcrumbListJsonLd(breadcrumbs, pageUrl),
+          ],
+        }}
+      />
       <MarketingIllustratedHero
         breadcrumbs={breadcrumbs}
         headingId="contact-page-heading"
@@ -79,10 +109,3 @@ export function ContactLandingPage({ searchParams }: ContactLandingPageProps) {
     </PageShell>
   );
 }
-
-export const CONTACT_LANDING_META = {
-  title: 'Contact',
-  description:
-    'Book a call, request a free consultation or website audit, or message Bitcraftly on WhatsApp — founder-led replies within one business day.',
-  path: ROUTES.contact,
-} as const;

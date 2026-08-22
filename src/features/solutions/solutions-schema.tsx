@@ -1,7 +1,13 @@
+import { ALL_SOLUTIONS, getSolutionHref } from '@/constants/solutions';
 import { ROUTES } from '@/constants/navigation';
+import { ORGANIZATION_ID } from '@/lib/seo/organization';
+import { getAbsoluteUrl } from '@/lib/seo/site';
+import { WEBSITE_ID } from '@/lib/seo/website';
 import type { SolutionPageContent } from './solutions.types';
 
 export function buildSolutionsListingJsonLd() {
+  const pageUrl = getAbsoluteUrl(ROUTES.solutions);
+
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -12,48 +18,41 @@ export function buildSolutionsListingJsonLd() {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://bitcraftly.com/',
+            item: getAbsoluteUrl(ROUTES.home),
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Solutions',
-            item: 'https://bitcraftly.com/solutions',
+            item: pageUrl,
           },
         ],
       },
       {
         '@type': 'CollectionPage',
-        '@id': 'https://bitcraftly.com/solutions#webpage',
-        url: 'https://bitcraftly.com/solutions',
+        '@id': `${pageUrl}#webpage`,
+        url: pageUrl,
         name: 'Bitcraftly Solutions',
         description:
           'Business and AI solutions — CRM, ERP, SaaS platforms, automation, and knowledge systems.',
-        isPartOf: { '@id': 'https://bitcraftly.com/#website' },
+        isPartOf: { '@id': WEBSITE_ID },
       },
       {
         '@type': 'ItemList',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Business Solutions',
-            url: 'https://bitcraftly.com/solutions#business-solutions',
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'AI Solutions',
-            url: 'https://bitcraftly.com/solutions#ai-solutions',
-          },
-        ],
+        '@id': `${pageUrl}#list`,
+        itemListElement: ALL_SOLUTIONS.map((solution, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: solution.label,
+          url: getAbsoluteUrl(getSolutionHref(solution.slug)),
+        })),
       },
     ],
   };
 }
 
 export function buildSolutionDetailJsonLd(content: SolutionPageContent) {
-  const url = `https://bitcraftly.com${ROUTES.solutions}/${content.slug}`;
+  const url = getAbsoluteUrl(getSolutionHref(content.slug));
 
   return {
     '@context': 'https://schema.org',
@@ -65,10 +64,7 @@ export function buildSolutionDetailJsonLd(content: SolutionPageContent) {
         description: content.metaDescription,
         url,
         provider: {
-          '@type': 'Organization',
-          '@id': 'https://bitcraftly.com/#organization',
-          name: 'Bitcraftly',
-          url: 'https://bitcraftly.com',
+          '@id': ORGANIZATION_ID,
         },
         areaServed: { '@type': 'Country', name: 'India' },
         serviceType: content.groupTitle,
@@ -80,13 +76,13 @@ export function buildSolutionDetailJsonLd(content: SolutionPageContent) {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://bitcraftly.com/',
+            item: getAbsoluteUrl(ROUTES.home),
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Solutions',
-            item: 'https://bitcraftly.com/solutions',
+            item: getAbsoluteUrl(ROUTES.solutions),
           },
           {
             '@type': 'ListItem',

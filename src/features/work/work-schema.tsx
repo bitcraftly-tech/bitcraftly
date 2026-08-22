@@ -3,10 +3,13 @@
  */
 
 import { ROUTES } from '@/constants/navigation';
+import { buildWorkBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { buildBreadcrumbListJsonLd } from '@/lib/seo/json-ld-breadcrumbs';
+import { ORGANIZATION_ID } from '@/lib/seo/organization';
+import { getAbsoluteUrl } from '@/lib/seo/site';
+import { WEBSITE_ID } from '@/lib/seo/website';
 import type { WorkFaqItem, WorkHubContent, WorkProject } from './work.types';
 import { getWorkProjectHref, WORK_FAQS } from './work.content';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ?? 'https://bitcraftly.com';
 
 const WORK_PAGE_SEO = {
   name: 'Work | Bitcraftly Portfolio',
@@ -14,48 +17,30 @@ const WORK_PAGE_SEO = {
     'Explore Bitcraftly portfolio work — live client websites, SaaS platforms, healthcare, ecommerce, AI concierge experiences, and engineered outcomes.',
 } as const;
 
-function absolute(path: string): string {
-  if (path.startsWith('http')) return path;
-  return `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`;
-}
-
 export function buildWorkListingJsonLd(
   projects: readonly WorkProject[],
   faqs: readonly WorkFaqItem[] = WORK_FAQS,
 ) {
+  const pageUrl = getAbsoluteUrl(ROUTES.work);
+
   return {
     '@context': 'https://schema.org',
     '@graph': [
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Home',
-            item: `${SITE_URL}/`,
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Work',
-            item: absolute(ROUTES.work),
-          },
-        ],
-      },
+      buildBreadcrumbListJsonLd(buildWorkBreadcrumbs(), pageUrl),
       {
         '@type': 'CollectionPage',
-        '@id': `${absolute(ROUTES.work)}#webpage`,
-        url: absolute(ROUTES.work),
+        '@id': `${pageUrl}#webpage`,
+        url: pageUrl,
         name: WORK_PAGE_SEO.name,
         description: WORK_PAGE_SEO.description,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
+        isPartOf: { '@id': WEBSITE_ID },
+        about: { '@id': ORGANIZATION_ID },
         mainEntity: {
           '@type': 'ItemList',
           itemListElement: projects.map((project, index) => ({
             '@type': 'ListItem',
             position: index + 1,
-            url: absolute(getWorkProjectHref(project.slug)),
+            url: getAbsoluteUrl(getWorkProjectHref(project.slug)),
             name: project.title,
           })),
         },
@@ -76,31 +61,52 @@ export function buildWorkListingJsonLd(
 }
 
 export function buildWorkHubJsonLd(hub: WorkHubContent, projects: readonly WorkProject[]) {
+  const pageUrl = getAbsoluteUrl(`${ROUTES.work}/${hub.slug}`);
+  const breadcrumbs = buildWorkBreadcrumbs([{ label: hub.title }]);
+
   return {
     '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: hub.seoTitle,
-    description: hub.seoDescription,
-    url: absolute(`${ROUTES.work}/${hub.slug}`),
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: projects.map((project, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        url: absolute(getWorkProjectHref(project.slug)),
-        name: project.title,
-      })),
-    },
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${pageUrl}#webpage`,
+        name: hub.seoTitle,
+        description: hub.seoDescription,
+        url: pageUrl,
+        isPartOf: { '@id': WEBSITE_ID },
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: projects.map((project, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            url: getAbsoluteUrl(getWorkProjectHref(project.slug)),
+            name: project.title,
+          })),
+        },
+      },
+      buildBreadcrumbListJsonLd(breadcrumbs, pageUrl),
+    ],
   };
 }
 
 export function buildWorkProjectJsonLd(project: WorkProject) {
+  const pageUrl = getAbsoluteUrl(getWorkProjectHref(project.slug));
+  const breadcrumbs = buildWorkBreadcrumbs([{ label: project.title }]);
+
   return {
     '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
-    name: project.title,
-    description: project.seoDescription ?? project.summary,
-    url: absolute(getWorkProjectHref(project.slug)),
-    ...(project.coverImage.startsWith('http') ? { image: project.coverImage } : {}),
+    '@graph': [
+      {
+        '@type': 'CreativeWork',
+        '@id': `${pageUrl}#work`,
+        name: project.title,
+        description: project.seoDescription ?? project.summary,
+        url: pageUrl,
+        image: getAbsoluteUrl(project.coverImage),
+        creator: { '@id': ORGANIZATION_ID },
+        isPartOf: { '@id': WEBSITE_ID },
+      },
+      buildBreadcrumbListJsonLd(breadcrumbs, pageUrl),
+    ],
   };
 }

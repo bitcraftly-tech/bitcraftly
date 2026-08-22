@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { JsonLdScript } from '@/components/patterns/json-ld';
 import { PageShell } from '@/components/patterns/marketing-layout';
 import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
 import { Icon } from '@/components/ui/icon';
@@ -13,6 +14,7 @@ import { WorkWebsitesHero } from './WorkWebsitesHero';
 import { WORK_HUBS, WORK_PROJECTS } from './work.content';
 import { filterWorkProjects } from './work.filters';
 import type { WorkHubContent, WorkProject } from './work.types';
+import { buildWorkHubJsonLd } from './work-schema';
 import './work.css';
 
 interface WorkHubPageProps {
@@ -36,6 +38,7 @@ export function WorkHubPage({ hub }: WorkHubPageProps) {
 
   return (
     <PageShell className="work-page work-detail-page">
+      <JsonLdScript data={buildWorkHubJsonLd(hub, projects)} />
       {isWebsitesHub ? (
         <WorkWebsitesHero
           breadcrumbs={breadcrumbs}
@@ -138,12 +141,14 @@ export function WorkHubPage({ hub }: WorkHubPageProps) {
 export function WorkHubFallbackPage({
   title,
   description,
+  slug,
 }: {
   title: string;
   description: string;
+  slug: string;
 }) {
   const syntheticHub: WorkHubContent = {
-    slug: 'collection',
+    slug,
     title,
     description,
     filterPreset: 'all',

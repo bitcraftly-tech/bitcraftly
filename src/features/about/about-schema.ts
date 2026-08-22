@@ -1,9 +1,12 @@
 import { ROUTES } from '@/constants/navigation';
+import { ORGANIZATION_ID } from '@/lib/seo/organization';
+import { getAbsoluteUrl, getSiteUrl } from '@/lib/seo/site';
+import { WEBSITE_ID } from '@/lib/seo/website';
 import { ABOUT_FAQS, ABOUT_LANDING_META, ABOUT_LEADERSHIP } from './about.content';
 
-const SITE_URL = 'https://bitcraftly.com';
-
 export function buildAboutJsonLd() {
+  const siteUrl = getSiteUrl();
+  const pageUrl = getAbsoluteUrl(ROUTES.about);
   const founder = ABOUT_LEADERSHIP[0];
 
   return {
@@ -11,43 +14,32 @@ export function buildAboutJsonLd() {
     '@graph': [
       {
         '@type': 'AboutPage',
-        '@id': `${SITE_URL}${ROUTES.about}#webpage`,
-        url: `${SITE_URL}${ROUTES.about}`,
+        '@id': `${pageUrl}#webpage`,
+        url: pageUrl,
         name: ABOUT_LANDING_META.title,
         description: ABOUT_LANDING_META.description,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        about: { '@id': `${SITE_URL}/#organization` },
+        isPartOf: { '@id': WEBSITE_ID },
+        about: { '@id': ORGANIZATION_ID },
         primaryImageOfPage: {
           '@type': 'ImageObject',
-          url: `${SITE_URL}/brand/icon.png`,
+          url: getAbsoluteUrl('/brand/icon.png'),
         },
       },
-      {
-        '@type': 'Organization',
-        '@id': `${SITE_URL}/#organization`,
-        name: 'Bitcraftly',
-        url: SITE_URL,
-        logo: `${SITE_URL}/brand/icon.png`,
-        description: ABOUT_LANDING_META.description,
-        foundingLocation: {
-          '@type': 'Place',
-          name: 'Delhi NCR, India',
-        },
-        sameAs: [],
-        ...(founder
-          ? {
-              founder: {
-                '@type': 'Person',
-                name: founder.name,
-                jobTitle: founder.role,
-                description: founder.bio,
-              },
-            }
-          : {}),
-      },
+      ...(founder
+        ? [
+            {
+              '@type': 'Person',
+              '@id': `${pageUrl}#founder`,
+              name: founder.name,
+              jobTitle: founder.role,
+              description: founder.bio,
+              worksFor: { '@id': ORGANIZATION_ID },
+            },
+          ]
+        : []),
       {
         '@type': 'FAQPage',
-        '@id': `${SITE_URL}${ROUTES.about}#about-faq`,
+        '@id': `${pageUrl}#about-faq`,
         mainEntity: ABOUT_FAQS.map((item) => ({
           '@type': 'Question',
           name: item.question,
@@ -59,19 +51,19 @@ export function buildAboutJsonLd() {
       },
       {
         '@type': 'BreadcrumbList',
-        '@id': `${SITE_URL}${ROUTES.about}#breadcrumb`,
+        '@id': `${pageUrl}#breadcrumb`,
         itemListElement: [
           {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: SITE_URL,
+            item: siteUrl,
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'About',
-            item: `${SITE_URL}${ROUTES.about}`,
+            item: pageUrl,
           },
         ],
       },

@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BlogPostDetailPage, getBlogPostHref } from '@/features/blog';
 import { createPageMetadata } from '@/lib/seo/createPageMetadata';
-import { getAllBlogSlugs, getBlogPostBySlug } from '@/content/blog';
+import { createNoIndexMetadata } from '@/lib/seo/noindex-metadata';
+import { getAllBlogSlugs, getBlogAuthorById, getBlogPostBySlug } from '@/content/blog';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -17,13 +18,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const post = getBlogPostBySlug(slug);
 
   if (!post) {
-    return createPageMetadata({
-      title: 'Article not found',
-      description: 'The requested blog article could not be found.',
-      path: getBlogPostHref(slug),
-    });
+    return createNoIndexMetadata();
   }
 
+  const author = getBlogAuthorById(post.authorId);
   const base = createPageMetadata({
     title: post.seoTitle ?? post.title,
     description: post.seoDescription ?? post.description,
@@ -39,7 +37,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       type: 'article',
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt ?? post.publishedAt,
-      authors: [post.authorId],
+      authors: [author?.name ?? 'Bitcraftly'],
       tags: [...post.tags],
     },
   };

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { JsonLdScript } from '@/components/patterns/json-ld';
 import { MarketingIllustratedHero } from '@/components/patterns/hero-compositions';
 import { PageShell } from '@/components/patterns/marketing-layout';
 import { Section } from '@/components/ui/section';
@@ -6,12 +7,14 @@ import { CASE_STUDIES, getCaseStudyHref } from '@/content/case-studies';
 import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
 import { buildCaseStudiesBreadcrumbs } from '@/lib/seo/breadcrumbs';
 import { CaseStudiesHeroVisual } from './CaseStudiesHeroVisual';
+import { buildCaseStudiesListingJsonLd } from './case-study-schema';
 
 export function CaseStudiesLandingPage() {
   const breadcrumbs = buildCaseStudiesBreadcrumbs();
 
   return (
     <PageShell className="case-studies-page">
+      <JsonLdScript data={buildCaseStudiesListingJsonLd()} />
       <MarketingIllustratedHero
         breadcrumbs={breadcrumbs}
         headingId="case-studies-page-heading"

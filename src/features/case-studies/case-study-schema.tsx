@@ -1,48 +1,55 @@
-import { getCaseStudyHref, type CaseStudy } from '@/content/case-studies';
+import { CASE_STUDIES, getCaseStudyHref, type CaseStudy } from '@/content/case-studies';
 import { ROUTES } from '@/constants/navigation';
+import { buildCaseStudiesBreadcrumbs, buildWorkBreadcrumbs } from '@/lib/seo/breadcrumbs';
+import { buildBreadcrumbListJsonLd } from '@/lib/seo/json-ld-breadcrumbs';
+import { ORGANIZATION_ID } from '@/lib/seo/organization';
+import { getAbsoluteUrl } from '@/lib/seo/site';
+import { WEBSITE_ID } from '@/lib/seo/website';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ?? 'https://bitcraftly.com';
-
-function absolute(path: string): string {
-  if (path.startsWith('http')) return path;
-  return `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`;
-}
-
-export function buildCaseStudyJsonLd(study: CaseStudy) {
-  const url = absolute(getCaseStudyHref(study.slug));
+export function buildCaseStudiesListingJsonLd() {
+  const pageUrl = getAbsoluteUrl(ROUTES.caseStudies);
+  const breadcrumbs = buildCaseStudiesBreadcrumbs();
 
   return {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          {
+        '@type': 'CollectionPage',
+        '@id': `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: 'Case Studies | Bitcraftly',
+        description: 'Outcomes and delivery stories from Bitcraftly projects.',
+        isPartOf: { '@id': WEBSITE_ID },
+        about: { '@id': ORGANIZATION_ID },
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: CASE_STUDIES.map((study, index) => ({
             '@type': 'ListItem',
-            position: 1,
-            name: 'Home',
-            item: `${SITE_URL}/`,
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Work',
-            item: absolute(ROUTES.work),
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
+            position: index + 1,
             name: study.title,
-            item: url,
-          },
-        ],
+            url: getAbsoluteUrl(getCaseStudyHref(study.slug)),
+          })),
+        },
       },
+      buildBreadcrumbListJsonLd(breadcrumbs, pageUrl),
+    ],
+  };
+}
+
+export function buildCaseStudyJsonLd(study: CaseStudy) {
+  const url = getAbsoluteUrl(getCaseStudyHref(study.slug));
+  const breadcrumbs = buildWorkBreadcrumbs([{ label: study.title }]);
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildBreadcrumbListJsonLd(breadcrumbs, url),
       {
         '@type': 'Article',
         '@id': `${url}#casestudy`,
         headline: study.title,
         description: study.seoDescription ?? study.description,
-        image: [absolute(study.coverImage)],
+        image: [getAbsoluteUrl(study.coverImage)],
         url,
         articleSection: 'Case Study',
         about: {
@@ -50,12 +57,14 @@ export function buildCaseStudyJsonLd(study: CaseStudy) {
           name: study.client.name,
         },
         author: {
-          '@type': 'Organization',
-          name: 'Bitcraftly',
-          url: SITE_URL,
+          '@id': ORGANIZATION_ID,
+        },
+        publisher: {
+          '@id': ORGANIZATION_ID,
         },
         keywords: study.tags.join(', '),
         datePublished: `${study.engagement.year}-01-01`,
+        isPartOf: { '@id': WEBSITE_ID },
       },
     ],
   };

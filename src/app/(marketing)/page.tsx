@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { JsonLdScript } from '@/components/patterns/json-ld/JsonLdScript';
 import { HomepageShell } from '@/features/homepage';
 import { createPageMetadata } from '@/lib/seo/createPageMetadata';
+import { ORGANIZATION_ID } from '@/lib/seo/organization';
+import { getAbsoluteUrl, getSiteUrl } from '@/lib/seo/site';
+import { WEBSITE_ID } from '@/lib/seo/website';
 import { ROUTES } from '@/constants/navigation';
 
 const HOME_TITLE = 'Bitcraftly | Complete Digital Systems for Your Industry';
@@ -25,55 +28,21 @@ export const metadata: Metadata = createPageMetadata({
   ],
 });
 
+const siteUrl = getSiteUrl();
+
 const homepageJsonLd = {
   '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': 'https://bitcraftly.com/#organization',
-      name: 'Bitcraftly',
-      url: 'https://bitcraftly.com',
-      logo: 'https://bitcraftly.com/brand/icon.png',
-      description:
-        'AI-Powered Digital Engineering Partner delivering Complete Digital Systems — Industry Systems with website, AI, dashboard, analytics, and integrations.',
-      email: 'hello@bitcraftly.com',
-      telephone: '+91-96677-10954',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Noida',
-        addressRegion: 'Uttar Pradesh',
-        addressCountry: 'IN',
-      },
-      sameAs: [
-        'https://www.linkedin.com/company/bitcraftly',
-        'https://x.com/bitcraftly',
-        'https://github.com/bitcraftly',
-        'https://www.youtube.com/@bitcraftly',
-      ],
-    },
-    {
-      '@type': 'WebSite',
-      '@id': 'https://bitcraftly.com/#website',
-      url: 'https://bitcraftly.com',
-      name: 'Bitcraftly',
-      description: HOME_DESCRIPTION,
-      publisher: { '@id': 'https://bitcraftly.com/#organization' },
-      inLanguage: 'en-IN',
-    },
-    {
-      '@type': 'WebPage',
-      '@id': 'https://bitcraftly.com/#webpage',
-      url: 'https://bitcraftly.com',
-      name: HOME_TITLE,
-      isPartOf: { '@id': 'https://bitcraftly.com/#website' },
-      about: { '@id': 'https://bitcraftly.com/#organization' },
-      description: HOME_DESCRIPTION,
-      primaryImageOfPage: {
-        '@type': 'ImageObject',
-        url: 'https://bitcraftly.com/opengraph-image.webp',
-      },
-    },
-  ],
+  '@type': 'WebPage',
+  '@id': `${siteUrl}/#webpage`,
+  url: siteUrl,
+  name: HOME_TITLE,
+  isPartOf: { '@id': WEBSITE_ID },
+  about: { '@id': ORGANIZATION_ID },
+  description: HOME_DESCRIPTION,
+  primaryImageOfPage: {
+    '@type': 'ImageObject',
+    url: getAbsoluteUrl('/opengraph-image.webp'),
+  },
 };
 
 export default function HomePage() {

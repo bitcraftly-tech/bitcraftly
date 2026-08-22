@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
+import { JsonLdScript } from '@/components/patterns/json-ld';
 import { PageShell } from '@/components/patterns/marketing-layout';
 import { MarketingSectionIntro } from '@/components/patterns/marketing-section-intro';
 import { MarketingStagger } from '@/components/patterns/marketing-stagger';
@@ -11,6 +12,7 @@ import { cn } from '@/lib/cn';
 import { ResourcesHero } from './ResourcesHero';
 import { ResourcesPageCta } from './ResourcesPageCta';
 import { RESOURCES_LANDING } from './resources.content';
+import { buildResourcesListingJsonLd } from './resources-schema';
 import './resources.css';
 
 const focusRing = cn(
@@ -26,6 +28,7 @@ export function ResourcesLandingPage() {
 
   return (
     <PageShell className="resources-page">
+      <JsonLdScript data={buildResourcesListingJsonLd()} />
       <ResourcesHero
         breadcrumbs={breadcrumbs}
         headingId="resources-page-heading"

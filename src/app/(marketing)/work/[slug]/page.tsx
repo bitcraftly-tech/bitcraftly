@@ -89,5 +89,5 @@ export default async function WorkSlugPage({ params }: WorkSlugPageProps) {
     notFound();
   }
 
-  return <WorkHubFallbackPage title={item.label} description={item.description} />;
+  return <WorkHubFallbackPage slug={item.slug} title={item.label} description={item.description} />;
 }
