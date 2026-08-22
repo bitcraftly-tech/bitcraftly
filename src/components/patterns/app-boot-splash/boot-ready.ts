@@ -115,20 +115,12 @@ export async function waitUntilBootReady(options?: {
     maxMs,
   );
 
-  /* Pad splash only off-homepage so LCP on `/` is not blocked by a minimum dwell. */
-  if (!reduced && !fast) {
+  /* Ensure the logo spinner is visible long enough (esp. fast iOS caches). */
+  if (!reduced) {
     const remaining = BOOT_MIN_VISIBLE_MS - (performance.now() - startedAt);
     if (remaining > 0) {
       await withBootTimeout(Promise.resolve(), remaining);
     }
-  }
-}
-
-function readBootReadySession(): boolean {
-  try {
-    return window.sessionStorage.getItem(BOOT_READY_SESSION_KEY) === '1';
-  } catch {
-    return false;
   }
 }
 
@@ -140,17 +132,13 @@ function writeBootReadySession(): void {
   }
 }
 
-/** True after the first successful reveal in this tab (or sticky session). */
+/** True after the first successful reveal in this document (in-memory / html class). */
 export function hasBootRevealCompleted(): boolean {
   if (bootRevealComplete) return true;
   if (
     typeof document !== 'undefined' &&
     document.documentElement.classList.contains('bc-app-ready')
   ) {
-    bootRevealComplete = true;
-    return true;
-  }
-  if (typeof window !== 'undefined' && readBootReadySession()) {
     bootRevealComplete = true;
     return true;
   }
@@ -192,51 +180,39 @@ export function persistBootReadyIfNeeded(): void {
 export const APP_BOOT_FAILSAFE_SCRIPT = `
 (function () {
   try {
-    var KEY = '${BOOT_READY_SESSION_KEY}';
     var root = document.documentElement;
     var applying = false;
-
-    function shouldPersist() {
-      if (root.classList.contains('bc-app-ready')) return true;
-      try { return window.sessionStorage.getItem(KEY) === '1'; } catch (_) { return false; }
-    }
+    var lastReady = root.classList.contains('bc-app-ready');
 
     function persistReady() {
-      if (applying || !shouldPersist()) return;
-      if (
-        root.classList.contains('bc-app-ready') &&
-        !root.classList.contains('bc-booting') &&
-        !root.classList.contains('bc-demo-booting')
-      ) {
-        return;
+      if (applying) return;
+      var hasReady = root.classList.contains('bc-app-ready');
+      if (lastReady && !hasReady) {
+        applying = true;
+        try {
+          root.classList.remove('bc-booting', 'bc-demo-booting');
+          root.classList.add('bc-app-ready');
+          root.removeAttribute('data-demo-boot');
+          root.removeAttribute('data-demo-path');
+          root.setAttribute('aria-busy', 'false');
+        } finally {
+          applying = false;
+        }
+        hasReady = true;
       }
-      applying = true;
-      try {
-        root.classList.remove('bc-booting', 'bc-demo-booting');
-        root.classList.add('bc-app-ready');
-        root.removeAttribute('data-demo-boot');
-        root.removeAttribute('data-demo-path');
-        root.setAttribute('aria-busy', 'false');
-        try { window.sessionStorage.setItem(KEY, '1'); } catch (_) {}
-      } finally {
-        applying = false;
-      }
+      lastReady = root.classList.contains('bc-app-ready');
     }
 
-    persistReady();
     if (!root.__bcBootPersistObs) {
       root.__bcBootPersistObs = new MutationObserver(persistReady);
       root.__bcBootPersistObs.observe(root, { attributes: true, attributeFilter: ['class'] });
     }
-
-    if (root.classList.contains('bc-app-ready')) return;
 
     window.setTimeout(function () {
       if (root.classList.contains('bc-app-ready')) return;
       root.classList.remove('bc-booting', 'bc-demo-booting');
       root.classList.add('bc-app-ready');
       root.setAttribute('aria-busy', 'false');
-      try { window.sessionStorage.setItem(KEY, '1'); } catch (_) {}
     }, ${BOOT_DOM_FAILSAFE_MS});
   } catch (_) {}
 })();

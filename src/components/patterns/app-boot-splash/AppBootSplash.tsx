@@ -98,7 +98,7 @@ export function AppBootSplash() {
             width={40}
             height={28}
             decoding="sync"
-            fetchPriority="low"
+            fetchPriority="high"
             draggable={false}
           />
         </div>

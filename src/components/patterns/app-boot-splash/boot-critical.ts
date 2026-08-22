@@ -273,15 +273,14 @@ html.bc-app-ready #bc-demo-boot-splash {
 
 /**
  * Runs before paint — picks Bitcraftly boot vs interactive-demo boot from pathname.
- * Skips re-boot when this tab already revealed (stops splash flash on RSC/html remount).
+ * Always starts a boot on a fresh HTML parse so the logo splash can play.
+ * React remounts of `<html className>` are handled by the failsafe observer.
  */
 export const APP_BOOT_INIT_SCRIPT = `
 (function () {
   try {
-    var KEY = 'bc-boot-ready';
     var root = document.documentElement;
     var already = root.classList.contains('bc-app-ready');
-    try { already = already || window.sessionStorage.getItem(KEY) === '1'; } catch (_) {}
     if (already) {
       root.classList.remove('bc-booting', 'bc-demo-booting');
       root.classList.add('bc-app-ready');
