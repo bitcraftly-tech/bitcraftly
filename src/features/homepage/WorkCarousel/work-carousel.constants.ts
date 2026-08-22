@@ -23,7 +23,7 @@ export const WORK_CAROUSEL_ITEMS = WORK_PROJECTS.map((project) => ({
   industry: project.industry,
   badge: project.badge ?? (project.status === 'future' ? 'Upcoming' : 'Showcase'),
   host: project.previewHost ?? 'bitcraftly.com',
-  imageSrc: project.coverImage,
+  imageSrc: `/products/hero/${project.slug}-720.webp`,
   imageAlt: project.coverImageAlt ?? `${project.title} preview`,
   href: getWorkProjectHref(project.slug),
   accent: project.accent,

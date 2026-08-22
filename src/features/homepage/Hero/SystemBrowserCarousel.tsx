@@ -20,6 +20,14 @@ type SystemBrowserCarouselProps = {
 const SWIPE_THRESHOLD_PX = 48;
 const AXIS_LOCK_PX = 10;
 
+function isNearActive(slideIndex: number, activeIndex: number, total: number): boolean {
+  if (total <= 3) return true;
+  if (slideIndex === activeIndex) return true;
+  if (slideIndex === (activeIndex + 1) % total) return true;
+  if (slideIndex === (activeIndex - 1 + total) % total) return true;
+  return false;
+}
+
 function previewSrcForViewport(item: HeroIndustryPreview): string {
   if (!item.usesHeroOptimized || typeof window === 'undefined') {
     return item.imageSrc;
@@ -29,13 +37,9 @@ function previewSrcForViewport(item: HeroIndustryPreview): string {
 }
 
 function warmImage(src: string) {
-  return new Promise<void>((resolve) => {
-    const img = new window.Image();
-    img.decoding = 'async';
-    img.onload = () => resolve();
-    img.onerror = () => resolve();
-    img.src = src;
-  });
+  const img = new window.Image();
+  img.decoding = 'async';
+  img.src = src;
 }
 
 type SwipeState = {
@@ -64,20 +68,12 @@ export function SystemBrowserCarousel({
   const swipeRef = useRef<SwipeState | null>(null);
 
   useEffect(() => {
-    let cancelled = false;
-    const run = async () => {
-      // Warm the exact fallback URLs the <img> uses so every slide paints.
-      for (const item of items) {
-        if (cancelled) return;
-        await warmImage(item.imageSrc);
-        await warmImage(previewSrcForViewport(item));
-      }
-    };
-    void run();
-    return () => {
-      cancelled = true;
-    };
-  }, [items]);
+    if (total === 0) return;
+    const next = items[(activeIndex + 1) % total];
+    const prev = items[(activeIndex - 1 + total) % total];
+    if (next) warmImage(previewSrcForViewport(next));
+    if (prev && prev !== next) warmImage(previewSrcForViewport(prev));
+  }, [activeIndex, items, total]);
 
   /* Instant jump on wrap so last→first does not slide backward through all pages. */
   useLayoutEffect(() => {
@@ -218,50 +214,50 @@ export function SystemBrowserCarousel({
         <div ref={trackRef} className="sys__browser-track" style={trackStyle}>
           {items.map((item, slideIndex) => {
             const isActive = slideIndex === activeIndex;
+            const shouldLoad = isNearActive(slideIndex, activeIndex, total);
 
             return (
               <div
                 key={item.id}
                 className={isActive ? 'sys__browser-page is-active' : 'sys__browser-page'}
               >
-                {/*
-                  Never lazy-load carousel shots — overflow:hidden + translate
-                  tracks hide off-screen slides from the lazy observer, so images
-                  never load and slides look blank.
-                */}
                 {item.usesHeroOptimized ? (
                   <picture>
-                    <source
-                      type="image/avif"
-                      srcSet={item.imageAvifSrcSet}
-                      sizes={item.imageSizes}
-                    />
-                    <source
-                      type="image/webp"
-                      srcSet={item.imageWebpSrcSet}
-                      sizes={item.imageSizes}
-                    />
+                    {shouldLoad ? (
+                      <>
+                        <source
+                          type="image/avif"
+                          srcSet={item.imageAvifSrcSet}
+                          sizes={item.imageSizes}
+                        />
+                        <source
+                          type="image/webp"
+                          srcSet={item.imageWebpSrcSet}
+                          sizes={item.imageSizes}
+                        />
+                      </>
+                    ) : null}
                     <img
-                      src={item.imageSrc}
+                      src={shouldLoad ? item.imageSrc : undefined}
                       alt=""
                       width={item.imageWidth}
                       height={item.imageHeight}
                       className="sys__browser-shot"
                       decoding="async"
-                      loading="eager"
+                      loading={shouldLoad ? 'eager' : undefined}
                       fetchPriority={isActive ? 'high' : 'low'}
                       draggable={false}
                     />
                   </picture>
                 ) : (
                   <img
-                    src={item.imageSrc}
+                    src={shouldLoad ? item.imageSrc : undefined}
                     alt=""
                     width={item.imageWidth}
                     height={item.imageHeight}
                     className="sys__browser-shot"
                     decoding="async"
-                    loading="eager"
+                    loading={shouldLoad ? 'eager' : undefined}
                     fetchPriority={isActive ? 'high' : 'low'}
                     draggable={false}
                   />

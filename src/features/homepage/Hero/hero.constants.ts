@@ -101,10 +101,21 @@ const HERO_IMAGE_SIZES = '(max-width: 767px) 92vw, (max-width: 1023px) 50vw, 560
 
 /** Work slugs with responsive AVIF/WebP under `public/products/hero`. */
 const HERO_OPTIMIZED_ASSET_SLUGS = new Set([
-  'clinic-healthcare',
   'shrishti-cloud-kitchen',
+  'swastik-makhana',
+  'kunwar-dairy',
+  'next-gen-saas-platform',
+  'clinic-healthcare',
+  'school-website',
+  'gym-website',
+  'restaurant-ai-chatbot',
+  'ecommerce-store',
+  'playnest-toy-store',
   'builder-website',
+  'society-portal',
+  'rpy-training-institute',
   'local-services-lead-site',
+  'online-crockery-shop',
 ]);
 
 export type HeroIndustryPreview = {
@@ -284,10 +295,21 @@ const HERO_RICH_OVERLAYS: Readonly<Record<string, HeroRichOverlay>> = {
 };
 
 const HERO_OPTIMIZED_DIMENSIONS: Readonly<Record<string, readonly [number, number]>> = {
-  'clinic-healthcare': [1024, 768],
   'shrishti-cloud-kitchen': [1448, 1086],
-  'builder-website': [1024, 768],
-  'local-services-lead-site': [1402, 1122],
+  'swastik-makhana': [1448, 1086],
+  'kunwar-dairy': [1536, 1024],
+  'next-gen-saas-platform': [1536, 1024],
+  'clinic-healthcare': [1200, 900],
+  'school-website': [1200, 900],
+  'gym-website': [1200, 900],
+  'restaurant-ai-chatbot': [1200, 900],
+  'ecommerce-store': [1200, 900],
+  'playnest-toy-store': [1200, 900],
+  'builder-website': [1200, 900],
+  'society-portal': [1200, 900],
+  'rpy-training-institute': [1200, 900],
+  'local-services-lead-site': [1200, 900],
+  'online-crockery-shop': [1200, 900],
 };
 
 function genericOverlay(project: WorkProject): HeroRichOverlay {
