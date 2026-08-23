@@ -45,7 +45,7 @@ type SolutionOverride = Partial<
 const CONTENT_OVERRIDES: Record<string, SolutionOverride> = {
   crm: {
     metaDescription:
-      'CRM solutions by Bitcraftly — pipelines, automation, and relationship systems that convert.',
+      'Bitcraftly CRM solutions include lead pipelines, WhatsApp and email follow-ups, and conversion reporting — shaped around how you sell, not a generic CRM dump.',
     eyebrow: 'Business Solutions',
     headline: 'CRM that your sales team actually uses',
     intro:
@@ -72,7 +72,7 @@ const CONTENT_OVERRIDES: Record<string, SolutionOverride> = {
   },
   erp: {
     metaDescription:
-      'ERP solutions by Bitcraftly — operations across finance, inventory, and teams.',
+      'Bitcraftly ERP solutions connect finance, inventory, and teams into one operating system — modular enough to start focused and grow without a rewrite.',
     eyebrow: 'Business Solutions',
     headline: 'ERP for how your business really runs',
     intro:
@@ -98,7 +98,8 @@ const CONTENT_OVERRIDES: Record<string, SolutionOverride> = {
     keywords: ['ERP solutions', 'operations software', 'inventory ERP'],
   },
   cms: {
-    metaDescription: 'CMS solutions by Bitcraftly — flexible content platforms for growth teams.',
+    metaDescription:
+      'Bitcraftly CMS solutions give marketing and product teams structured, SEO-ready content systems that ship fast and stay safe for non-engineers to publish.',
     eyebrow: 'Business Solutions',
     headline: 'CMS platforms built for content velocity',
     intro:
@@ -125,7 +126,7 @@ const CONTENT_OVERRIDES: Record<string, SolutionOverride> = {
   },
   'saas-platforms': {
     metaDescription:
-      'SaaS platform solutions by Bitcraftly — multi-tenant products built to scale.',
+      'Bitcraftly SaaS platforms include multi-tenant shells with auth, billing-ready UI, admin, and analytics — engineered for launch, not just demos.',
     eyebrow: 'Business Solutions',
     headline: 'SaaS platforms ready for real tenants',
     intro:
@@ -152,7 +153,7 @@ const CONTENT_OVERRIDES: Record<string, SolutionOverride> = {
   },
   'internal-business-tools': {
     metaDescription:
-      'Internal business tools by Bitcraftly — custom ops software that streamlines daily work.',
+      'Bitcraftly internal business tools cover approvals, trackers, and team dashboards — custom ops software for workflows your off-the-shelf stack cannot handle.',
     eyebrow: 'Business Solutions',
     headline: 'Internal tools that remove busywork',
     intro:
@@ -175,7 +176,7 @@ const CONTENT_OVERRIDES: Record<string, SolutionOverride> = {
   },
   'enterprise-portals': {
     metaDescription:
-      'Enterprise portals by Bitcraftly — secure portals for partners, staff, and customers.',
+      'Bitcraftly enterprise portals give partners, staff, and customers secure auth, clear roles, and self-serve flows that feel premium on every device.',
     eyebrow: 'Business Solutions',
     headline: 'Secure portals for every stakeholder',
     intro:
@@ -202,7 +203,7 @@ const CONTENT_OVERRIDES: Record<string, SolutionOverride> = {
   },
   'ai-assistants': {
     metaDescription:
-      'AI assistants by Bitcraftly — assistants that support teams and customers with human handoff.',
+      'Bitcraftly AI assistants support teams and customers with content-grounded answers and WhatsApp or chat handoff when a human should take over.',
     eyebrow: 'AI Solutions',
     headline: 'AI assistants that stay useful',
     intro:
@@ -229,7 +230,7 @@ const CONTENT_OVERRIDES: Record<string, SolutionOverride> = {
   },
   'ai-automation': {
     metaDescription:
-      'AI automation solutions by Bitcraftly — intelligent automation across business workflows.',
+      'Bitcraftly AI automation runs repetitive business workflows with monitoring and human review — so operations scale without chaos.',
     eyebrow: 'AI Solutions',
     headline: 'AI automation across your workflows',
     intro:
@@ -256,7 +257,7 @@ const CONTENT_OVERRIDES: Record<string, SolutionOverride> = {
   },
   'ai-analytics': {
     metaDescription:
-      'AI analytics by Bitcraftly — insights and predictions from your business data.',
+      'Bitcraftly AI analytics turns product and business data into decision-ready insights — dashboards leaders trust and predictions you can act on.',
     eyebrow: 'AI Solutions',
     headline: 'AI analytics for clearer decisions',
     intro:
@@ -282,7 +283,8 @@ const CONTENT_OVERRIDES: Record<string, SolutionOverride> = {
     keywords: ['AI analytics', 'business intelligence', 'predictive analytics'],
   },
   'ai-workflows': {
-    metaDescription: 'AI workflows by Bitcraftly — orchestrated AI steps across your systems.',
+    metaDescription:
+      'Bitcraftly AI workflows connect multi-step AI processes across tools — with checkpoints, logging, and approval gates for sensitive actions.',
     eyebrow: 'AI Solutions',
     headline: 'Orchestrated AI workflows',
     intro:
@@ -309,7 +311,7 @@ const CONTENT_OVERRIDES: Record<string, SolutionOverride> = {
   },
   'knowledge-base-ai': {
     metaDescription:
-      'Knowledge Base AI by Bitcraftly — searchable knowledge powered by your content.',
+      'Bitcraftly Knowledge Base AI delivers searchable, grounded answers from your docs, policies, and product content — with citations and safe fallbacks.',
     eyebrow: 'AI Solutions',
     headline: 'Knowledge Base AI your team can trust',
     intro:

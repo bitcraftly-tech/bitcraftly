@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: SolutionSlugPageProps): Promi
   }
 
   return createPageMetadata({
-    title: content.label,
+    title: `${content.label} | Bitcraftly`,
     description: content.metaDescription,
     path: getSolutionHref(slug),
     keywords: content.keywords,

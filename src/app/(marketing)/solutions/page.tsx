@@ -4,9 +4,9 @@ import { ROUTES } from '@/constants/navigation';
 import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'Solutions',
+  title: 'Business & AI Solutions | Bitcraftly',
   description:
-    'Enterprise business and AI solutions from Bitcraftly — CRM, ERP, CMS, SaaS platforms, automation, dashboards, and workflows with measurable outcomes.',
+    'Bitcraftly builds CRM, ERP, CMS, SaaS, and AI workflow solutions — founder-led delivery with clear scope, dashboards, and measurable outcomes.',
   path: ROUTES.solutions,
   keywords: [
     'Bitcraftly solutions',
