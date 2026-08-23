@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: IndustrySlugPageProps): Promi
   }
 
   return createPageMetadata({
-    title: `${industry.label} Industry Solutions`,
+    title: `${industry.label} Industry Solutions | Bitcraftly`,
     description: industry.description,
     path: industryDetailHref(industry.slug),
     keywords: [industry.label, 'Bitcraftly', 'industry software', 'digital engineering'],

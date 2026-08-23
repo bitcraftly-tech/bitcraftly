@@ -4,9 +4,9 @@ import { ROUTES } from '@/constants/navigation';
 import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'Industries',
+  title: 'Industry Digital Systems | Bitcraftly',
   description:
-    'Bitcraftly engineers industry platforms for healthcare, education, retail, finance, logistics, SaaS, and more — domain networks with measurable delivery.',
+    'Bitcraftly designs and builds digital systems across healthcare, education, retail, finance, logistics, SaaS, and more — solving operational challenges with measurable results.',
   path: ROUTES.industries,
   keywords: [
     'industry software development',

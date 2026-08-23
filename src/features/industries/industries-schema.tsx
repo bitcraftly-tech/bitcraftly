@@ -9,18 +9,24 @@ import { INDUSTRIES_CATALOG, INDUSTRY_FAQS, industryDetailHref } from './industr
 
 export function buildIndustriesListingJsonLd() {
   const pageUrl = getAbsoluteUrl(ROUTES.industries);
+  const breadcrumbId = `${pageUrl}#breadcrumb`;
+  const breadcrumbs = buildIndustriesBreadcrumbs();
 
   return {
     '@context': 'https://schema.org',
     '@graph': [
+      buildBreadcrumbListJsonLd(breadcrumbs, pageUrl),
       {
         '@type': 'CollectionPage',
         '@id': `${pageUrl}#page`,
         url: pageUrl,
-        name: 'Industries | Bitcraftly',
+        name: 'Industry Digital Systems | Bitcraftly',
         description:
           'Industry-focused digital engineering across healthcare, education, retail, finance, logistics, SaaS, and more.',
+        inLanguage: 'en-IN',
         isPartOf: { '@id': WEBSITE_ID },
+        publisher: { '@id': ORGANIZATION_ID },
+        breadcrumb: { '@id': breadcrumbId },
       },
       {
         '@type': 'ItemList',
@@ -29,12 +35,13 @@ export function buildIndustriesListingJsonLd() {
           '@type': 'ListItem',
           position: index + 1,
           name: industry.label,
-          url: getAbsoluteUrl(`${ROUTES.industries}/${industry.slug}`),
+          url: getAbsoluteUrl(industryDetailHref(industry.slug)),
         })),
       },
       {
         '@type': 'FAQPage',
         '@id': `${pageUrl}#faq`,
+        inLanguage: 'en-IN',
         mainEntity: INDUSTRY_FAQS.map((item) => ({
           '@type': 'Question',
           name: item.question,
@@ -50,33 +57,39 @@ export function buildIndustriesListingJsonLd() {
 
 export function buildIndustryDetailJsonLd(industry: IndustryModel) {
   const pageUrl = getAbsoluteUrl(industryDetailHref(industry.slug));
+  const breadcrumbId = `${pageUrl}#breadcrumb`;
+  const webPageId = `${pageUrl}#webpage`;
+  const serviceId = `${pageUrl}#service`;
   const breadcrumbs = buildIndustriesBreadcrumbs([{ label: industry.label }]);
 
   return {
     '@context': 'https://schema.org',
     '@graph': [
+      buildBreadcrumbListJsonLd(breadcrumbs, pageUrl),
       {
         '@type': 'WebPage',
-        '@id': `${pageUrl}#webpage`,
+        '@id': webPageId,
         url: pageUrl,
         name: `${industry.label} Industry Solutions | Bitcraftly`,
         description: industry.description,
+        inLanguage: 'en-IN',
         isPartOf: { '@id': WEBSITE_ID },
-        about: { '@id': ORGANIZATION_ID },
+        publisher: { '@id': ORGANIZATION_ID },
+        breadcrumb: { '@id': breadcrumbId },
+        about: { '@id': serviceId },
+        mainEntity: { '@id': serviceId },
       },
       {
         '@type': 'Service',
-        '@id': `${pageUrl}#service`,
+        '@id': serviceId,
         name: `${industry.label} Industry System`,
         description: industry.description,
+        url: pageUrl,
+        inLanguage: 'en-IN',
         provider: { '@id': ORGANIZATION_ID },
-        areaServed: {
-          '@type': 'Country',
-          name: 'India',
-        },
         serviceType: industry.label,
+        mainEntityOfPage: { '@id': webPageId },
       },
-      buildBreadcrumbListJsonLd(breadcrumbs, pageUrl),
     ],
   };
 }
