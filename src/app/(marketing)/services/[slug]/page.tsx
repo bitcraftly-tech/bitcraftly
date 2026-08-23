@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: ServiceSlugPageProps): Promis
   }
 
   return createPageMetadata({
-    title: content.label,
+    title: `${content.label} | Bitcraftly`,
     description: content.metaDescription,
     path: getServiceHref(slug),
     keywords: content.keywords,

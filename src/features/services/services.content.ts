@@ -42,7 +42,7 @@ type ServiceContentOverride = Partial<
 const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   'ai-solutions': {
     metaDescription:
-      'Bitcraftly AI solutions — assistants, automation, and LLM products built for measurable business outcomes.',
+      'Bitcraftly AI solutions cover assistants, automation, and LLM products built to shorten time-to-lead, cut repetitive ops work, and stay human-backed where it matters.',
     eyebrow: 'AI & Automation',
     headline: 'AI Solutions that drive real outcomes',
     intro:
@@ -83,7 +83,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'ai-chatbots': {
     metaDescription:
-      'AI chatbots for support and sales — menu answers, lead qualification, and WhatsApp handoff by Bitcraftly.',
+      'Bitcraftly AI chatbots for websites and WhatsApp answer FAQs, qualify leads, and hand off to a person when needed — built for support and sales, not novelty demos.',
     eyebrow: 'AI & Automation',
     headline: 'AI Chatbots that convert conversations',
     intro:
@@ -113,7 +113,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'ai-automation': {
     metaDescription:
-      'AI automation for repetitive workflows — Bitcraftly builds practical automations with human oversight.',
+      'Bitcraftly AI automation handles repetitive workflows across leads, documents, and internal tools — with monitoring and human review where risk is high.',
     eyebrow: 'AI & Automation',
     headline: 'AI Automation for everyday operations',
     intro:
@@ -135,7 +135,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'ai-agents': {
     metaDescription:
-      'AI agents for complex operations — Bitcraftly designs agent workflows with clear guardrails.',
+      'Bitcraftly AI agents plan and execute multi-step work with scoped tools, checkpoints, and human approval — production agent workflows with clear guardrails.',
     eyebrow: 'AI & Automation',
     headline: 'AI Agents for multi-step work',
     intro:
@@ -157,7 +157,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'llm-integration': {
     metaDescription:
-      'LLM integration with OpenAI, Gemini, and custom models — production wiring by Bitcraftly.',
+      'Bitcraftly LLM integration wires OpenAI, Gemini, and custom models into your product with prompts, retrieval, rate limits, evaluation, and cost controls.',
     eyebrow: 'AI & Automation',
     headline: 'LLM Integration done for production',
     intro:
@@ -178,7 +178,8 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
     keywords: ['LLM integration', 'OpenAI integration', 'RAG'],
   },
   'document-ai': {
-    metaDescription: 'Document AI — extract, classify, and process documents with Bitcraftly.',
+    metaDescription:
+      'Bitcraftly Document AI extracts, classifies, and routes invoices, forms, and contracts so teams spend time on decisions — not copy-paste.',
     eyebrow: 'AI & Automation',
     headline: 'Document AI that reduces manual review',
     intro:
@@ -200,7 +201,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'website-development': {
     metaDescription:
-      'High-performance website development with Next.js — SEO-friendly sites that convert, by Bitcraftly.',
+      'Bitcraftly website development builds Next.js marketing and product sites that load fast, stay SEO-ready, and turn visitors into WhatsApp enquiries and booked calls.',
     eyebrow: 'Development',
     headline: 'Websites built to convert',
     intro:
@@ -235,7 +236,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'web-application-development': {
     metaDescription:
-      'Web application development — SaaS, dashboards, and portals engineered by Bitcraftly.',
+      'Bitcraftly web application development covers SaaS platforms, dashboards, and portals in typed React/Next.js stacks — ready for real users, not demos.',
     eyebrow: 'Development',
     headline: 'Web apps engineered for scale',
     intro:
@@ -257,7 +258,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'mobile-app-development': {
     metaDescription:
-      'Mobile app development for Android and iOS — polished product UX by Bitcraftly.',
+      'Bitcraftly mobile app development covers Android, iOS, and cross-platform apps with clear flows, reliable APIs, and a path from MVP to growth.',
     eyebrow: 'Development',
     headline: 'Mobile apps with product-grade UX',
     intro:
@@ -278,7 +279,8 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
     keywords: ['mobile app development', 'React Native', 'iOS Android apps'],
   },
   'custom-software-development': {
-    metaDescription: 'Custom software — ERP, CRM, CMS, and internal tools tailored by Bitcraftly.',
+    metaDescription:
+      'Bitcraftly builds custom ERP, CRM, CMS, and internal tools around how your teams actually work — not generic templates that fight your process.',
     eyebrow: 'Development',
     headline: 'Custom software for how you operate',
     intro:
@@ -300,7 +302,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'cloud-devops': {
     metaDescription:
-      'Cloud & DevOps — CI/CD, infrastructure, and reliability for Bitcraftly products.',
+      'Bitcraftly Cloud & DevOps covers infrastructure, CI/CD, and monitoring so releases stay predictable while your product keeps moving.',
     eyebrow: 'Development',
     headline: 'Cloud & DevOps that keep shipping',
     intro:
@@ -326,7 +328,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'api-integration': {
     metaDescription:
-      'API integration — reliable system wiring and third-party integrations by Bitcraftly.',
+      'Bitcraftly API integration connects CRMs, payments, WhatsApp, and internal systems with resilient APIs — retries, auth, and observability included.',
     eyebrow: 'Development',
     headline: 'API Integration you can trust',
     intro:
@@ -352,7 +354,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'ui-ux-design': {
     metaDescription:
-      'UI/UX design for products and marketing sites — Bitcraftly design systems that convert.',
+      'Bitcraftly UI/UX design covers product systems and marketing experiences that reduce friction — accessible patterns, clear hierarchy, conversion-first flows.',
     eyebrow: 'Digital Growth',
     headline: 'UI/UX that feels premium and clear',
     intro:
@@ -374,7 +376,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'technical-seo': {
     metaDescription:
-      'Technical SEO — crawlability, structure, and search performance by Bitcraftly.',
+      'Bitcraftly technical SEO improves crawlability, site structure, metadata, and search performance so content and campaigns have a solid foundation.',
     eyebrow: 'Digital Growth',
     headline: 'Technical SEO that compounds',
     intro:
@@ -396,7 +398,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'performance-optimization': {
     metaDescription:
-      'Performance optimization — speed, Core Web Vitals, and scale with Bitcraftly.',
+      'Bitcraftly performance optimization covers speed, Core Web Vitals, and rendering strategy so your product feels premium on real devices and networks.',
     eyebrow: 'Digital Growth',
     headline: 'Performance that users feel',
     intro:
@@ -418,7 +420,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'analytics-dashboard': {
     metaDescription:
-      'Analytics dashboards — decision-ready product and business analytics by Bitcraftly.',
+      'Bitcraftly analytics dashboards turn product and business data into decision-ready views — clear metrics, trustworthy numbers, and UI leaders can present.',
     eyebrow: 'Digital Growth',
     headline: 'Analytics dashboards for decisions',
     intro:
@@ -443,7 +445,8 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
     keywords: ['analytics dashboard', 'business intelligence UI', 'product analytics'],
   },
   'website-maintenance': {
-    metaDescription: 'Website maintenance — updates, reliability, and ongoing care by Bitcraftly.',
+    metaDescription:
+      'Bitcraftly website maintenance covers updates, reliability, and ongoing care so your site stays fast, secure, and conversion-ready after launch.',
     eyebrow: 'Digital Growth',
     headline: 'Website maintenance that protects momentum',
     intro:
@@ -465,7 +468,7 @@ const CONTENT_OVERRIDES: Record<string, ServiceContentOverride> = {
   },
   'security-monitoring': {
     metaDescription:
-      'Security & monitoring — hardening, alerts, and incident readiness by Bitcraftly.',
+      'Bitcraftly security and monitoring covers hardening, alerts, and incident readiness for web products — practical controls without enterprise theater.',
     eyebrow: 'Digital Growth',
     headline: 'Security & monitoring basics that matter',
     intro:

@@ -4,9 +4,9 @@ import { ROUTES } from '@/constants/navigation';
 import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'Services',
+  title: 'AI, Web & Software Development Services | Bitcraftly',
   description:
-    'End-to-end digital engineering services including AI solutions, websites, apps, custom software, and cloud DevOps — founder-led delivery by Bitcraftly.',
+    'Bitcraftly builds AI systems, websites, web apps, mobile apps, and cloud infrastructure — clear scope, starting prices, and founder-led digital engineering.',
   path: ROUTES.services,
   keywords: [
     'Bitcraftly services',
