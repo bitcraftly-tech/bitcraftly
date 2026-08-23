@@ -2,6 +2,7 @@ import {
   CASE_STUDIES,
   getCaseStudyHref,
   getCaseStudyPublishedAt,
+  isCaseStudyIndexable,
   type CaseStudy,
 } from '@/content/case-studies';
 import { ROUTES } from '@/constants/navigation';
@@ -14,6 +15,8 @@ import { WEBSITE_ID } from '@/lib/seo/website';
 export function buildCaseStudiesListingJsonLd() {
   const pageUrl = getAbsoluteUrl(ROUTES.caseStudies);
   const breadcrumbs = buildCaseStudiesBreadcrumbs();
+  const breadcrumbJsonLd = buildBreadcrumbListJsonLd(breadcrumbs, pageUrl);
+  const indexableStudies = CASE_STUDIES.filter(isCaseStudyIndexable);
 
   return {
     '@context': 'https://schema.org',
@@ -23,20 +26,28 @@ export function buildCaseStudiesListingJsonLd() {
         '@id': `${pageUrl}#webpage`,
         url: pageUrl,
         name: 'Case Studies | Bitcraftly',
-        description: 'Outcomes and delivery stories from Bitcraftly projects.',
+        description:
+          'Bitcraftly case studies approved for public publication. Stories are listed here after review.',
+        inLanguage: 'en-IN',
         isPartOf: { '@id': WEBSITE_ID },
         about: { '@id': ORGANIZATION_ID },
-        mainEntity: {
-          '@type': 'ItemList',
-          itemListElement: CASE_STUDIES.map((study, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            name: study.title,
-            url: getAbsoluteUrl(getCaseStudyHref(study.slug)),
-          })),
-        },
+        publisher: { '@id': ORGANIZATION_ID },
+        breadcrumb: { '@id': breadcrumbJsonLd['@id'] },
+        ...(indexableStudies.length > 0
+          ? {
+              mainEntity: {
+                '@type': 'ItemList',
+                itemListElement: indexableStudies.map((study, index) => ({
+                  '@type': 'ListItem',
+                  position: index + 1,
+                  name: study.title,
+                  url: getAbsoluteUrl(getCaseStudyHref(study.slug)),
+                })),
+              },
+            }
+          : {}),
       },
-      buildBreadcrumbListJsonLd(breadcrumbs, pageUrl),
+      breadcrumbJsonLd,
     ],
   };
 }
