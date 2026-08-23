@@ -1,11 +1,15 @@
 import { Section } from '@/components/ui/section';
-import type { CaseStudy } from '@/content/case-studies';
+import { hasApprovedCaseStudyQuote, type CaseStudy } from '@/content/case-studies';
 
 interface CaseStudyTestimonialProps {
   study: CaseStudy;
 }
 
 export function CaseStudyTestimonial({ study }: CaseStudyTestimonialProps) {
+  if (!hasApprovedCaseStudyQuote(study) || !study.testimonial) {
+    return null;
+  }
+
   const { testimonial } = study;
 
   return (

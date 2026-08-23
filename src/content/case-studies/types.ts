@@ -56,11 +56,35 @@ export interface CaseStudy {
   readonly architecture: readonly CaseStudyArchitectureLayer[];
   readonly features: readonly string[];
   readonly screenshots: readonly CaseStudyScreenshot[];
-  readonly results: {
+  /** Outcome copy. Shown on the page when present. Index/schema only if `resultsApproved`. */
+  readonly results?: {
     readonly summary: string;
     readonly metrics: readonly CaseStudyMetric[];
   };
-  readonly testimonial: CaseStudyTestimonial;
+  /**
+   * Explicit sourcing/approval for SEO of results metrics and outcome summary.
+   * Presence of `results` data is not approval.
+   */
+  readonly resultsApproved?: boolean;
+  /** Named quote. Shown on the page when present. Index/schema only if `quoteApproved`. */
+  readonly testimonial?: CaseStudyTestimonial;
+  /**
+   * Explicit approval to index/schema the named quote.
+   * Presence of `testimonial` data is not approval.
+   */
+  readonly quoteApproved?: boolean;
+  /**
+   * Explicit approval to associate this page with `client` in JSON-LD `about`.
+   * Presence of a client name is not approval.
+   */
+  readonly clientAssociationApproved?: boolean;
+  /** Real ISO-8601 publication date. Never synthesize from `engagement.year`. */
+  readonly publishedAt?: string;
+  /**
+   * Explicit approval to index this case-study URL.
+   * Unset/false means noindex. Do not infer from other fields.
+   */
+  readonly indexApproved?: boolean;
   readonly relatedSlugs: readonly string[];
   readonly tags: readonly string[];
   readonly seoTitle?: string;

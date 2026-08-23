@@ -9,7 +9,12 @@ import { buildWorkBreadcrumbs } from '@/lib/seo/breadcrumbs';
 import { WorkInternalHero } from './WorkInternalHero';
 import { WorkPageCta } from './WorkPageCta';
 import { WorkProjectCard } from './WorkProjectCard';
-import { getWorkProjectHref, WORK_LANDING, WORK_PROJECTS } from './work.content';
+import {
+  getWorkProjectCaseStudyHref,
+  getWorkProjectHref,
+  WORK_LANDING,
+  WORK_PROJECTS,
+} from './work.content';
 import type { WorkProject } from './work.types';
 import { buildWorkProjectJsonLd } from './work-schema';
 import './work.css';
@@ -38,6 +43,7 @@ export function WorkProjectDetailPage({ project }: WorkProjectDetailPageProps) {
   const headingId = `work-project-${project.slug}-heading`;
   const contactHref = `${NAV_ACTIONS.freeConsultation.href}?intent=${encodeURIComponent(`project-${project.slug}`)}&source=work-project`;
   const isInteractiveDemo = project.badge === 'Interactive demo';
+  const caseStudyHref = getWorkProjectCaseStudyHref(project);
   const primaryLive =
     project.liveUrl && project.status !== 'future'
       ? {
@@ -204,7 +210,7 @@ export function WorkProjectDetailPage({ project }: WorkProjectDetailPageProps) {
         </Section>
       ) : null}
 
-      {project.caseStudySlug ? (
+      {caseStudyHref ? (
         <Section
           spacing="md"
           background="surface"
@@ -217,10 +223,7 @@ export function WorkProjectDetailPage({ project }: WorkProjectDetailPageProps) {
               title="Full case study"
               description="Read the deeper narrative — problem, architecture, and measured results."
             />
-            <Link
-              href={`${ROUTES.work}/${project.caseStudySlug}`}
-              className="work-hero__btn work-hero__btn--primary"
-            >
+            <Link href={caseStudyHref} className="work-hero__btn work-hero__btn--primary">
               Open case study
               <Icon name="arrow-up-right" size="sm" aria-hidden />
             </Link>

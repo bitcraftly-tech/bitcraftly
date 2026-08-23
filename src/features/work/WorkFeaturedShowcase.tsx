@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@/components/ui/icon';
-import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { NAV_ACTIONS } from '@/constants/navigation';
 import { WORK_WHATSAPP_HREF } from './work-images';
+import { getWorkProjectCaseStudyHref, getWorkProjectHref } from './work.content';
 import type { WorkProject } from './work.types';
 
 interface WorkFeaturedShowcaseProps {
@@ -14,9 +15,15 @@ interface WorkFeaturedShowcaseProps {
  */
 export function WorkFeaturedShowcase({ project }: WorkFeaturedShowcaseProps) {
   const isFuture = project.status === 'future';
-  const caseHref = isFuture
+  const caseStudyHref = getWorkProjectCaseStudyHref(project);
+  const primaryHref = isFuture
     ? NAV_ACTIONS.freeConsultation.href
-    : `${ROUTES.workProjects}/${project.slug}`;
+    : (caseStudyHref ?? getWorkProjectHref(project.slug));
+  const primaryLabel = isFuture
+    ? 'Discuss this build'
+    : caseStudyHref
+      ? 'View Case Study'
+      : 'View project';
   const coverAlt = project.coverImageAlt ?? `${project.title} product screenshot`;
   const liveHref = project.liveUrl ?? WORK_WHATSAPP_HREF;
   const isInteractiveDemo = project.badge === 'Interactive demo';
@@ -61,8 +68,8 @@ export function WorkFeaturedShowcase({ project }: WorkFeaturedShowcaseProps) {
           </ul>
 
           <div className="work-pf-showcase__actions">
-            <Link href={caseHref} className="work-pf-card__btn work-pf-card__btn--primary">
-              {isFuture ? 'Discuss this build' : 'View Case Study'}
+            <Link href={primaryHref} className="work-pf-card__btn work-pf-card__btn--primary">
+              {primaryLabel}
               <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
             </Link>
             <Link

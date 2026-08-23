@@ -217,6 +217,14 @@ export const WORK_STATIC_SLUGS = Array.from(
   new Set([...WORK_CATEGORY_SLUGS, ...WORK_HUB_ROUTES.map((hub) => hub.slug)]),
 );
 
+/** Public `/work/[slug]` hubs that must stay noindex until they have indexable content. */
+export const WORK_NOINDEX_HUB_SLUGS: ReadonlySet<string> = new Set([
+  'testimonials',
+  'fintech',
+  'logistics',
+  'mobile-apps',
+]);
+
 export const WORK_FEATURED: NavFeaturedCard = {
   eyebrow: 'Featured',
   label: 'Enterprise Digital Products',

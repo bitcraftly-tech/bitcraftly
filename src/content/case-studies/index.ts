@@ -36,6 +36,35 @@ export function getCaseStudyHref(slug: string): string {
   return `/work/${slug}`;
 }
 
+export function hasApprovedCaseStudyQuote(study: CaseStudy): boolean {
+  return study.quoteApproved === true && Boolean(study.testimonial?.quote.trim());
+}
+
+export function hasApprovedCaseStudyResults(study: CaseStudy): boolean {
+  return study.resultsApproved === true && study.results != null;
+}
+
+export function isCaseStudyIndexable(study: CaseStudy): boolean {
+  return study.indexApproved === true;
+}
+
+export function getCaseStudyPublishedAt(study: CaseStudy): string | undefined {
+  const value = study.publishedAt?.trim();
+  if (!value) {
+    return undefined;
+  }
+
+  if (!/^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?)?$/.test(value)) {
+    return undefined;
+  }
+
+  if (Number.isNaN(Date.parse(value))) {
+    return undefined;
+  }
+
+  return value;
+}
+
 export function getRelatedCaseStudies(study: CaseStudy, limit = 3): readonly CaseStudy[] {
   const related = study.relatedSlugs
     .map((slug) => getCaseStudyBySlug(slug))

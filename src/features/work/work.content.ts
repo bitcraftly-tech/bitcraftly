@@ -1,3 +1,4 @@
+import { getCaseStudyBySlug, getCaseStudyHref } from '@/content/case-studies';
 import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
 import type {
   WorkCaseStudy,
@@ -25,6 +26,17 @@ const WORK_BASE = ROUTES.work;
 
 export function getWorkProjectHref(slug: string): string {
   return `${ROUTES.workProjects}/${slug}`;
+}
+
+/** Canonical case-study URL only when `caseStudySlug` exists in CASE_STUDIES. */
+export function getWorkProjectCaseStudyHref(
+  project: Pick<WorkProject, 'caseStudySlug'>,
+): string | undefined {
+  const slug = project.caseStudySlug;
+  if (!slug || !getCaseStudyBySlug(slug)) {
+    return undefined;
+  }
+  return getCaseStudyHref(slug);
 }
 
 /**
@@ -64,6 +76,7 @@ export const WORK_PROJECTS: readonly WorkProject[] = [
     accent: 'amber',
     seoTitle: 'Shrishti Cloud Kitchen | Work',
     seoDescription: 'Live cloud kitchen website with WhatsApp-first menu discovery by Bitcraftly.',
+    caseStudySlug: 'shrishti-cloud-kitchen',
   },
   {
     slug: 'swastik-makhana',

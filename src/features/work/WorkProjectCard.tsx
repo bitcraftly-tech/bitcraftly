@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@/components/ui/icon';
-import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { NAV_ACTIONS } from '@/constants/navigation';
 import { cn } from '@/lib/cn';
-import { getWorkProjectHref } from './work.content';
+import { getWorkProjectCaseStudyHref, getWorkProjectHref } from './work.content';
 import type { WorkProject } from './work.types';
 
 export type WorkProjectCardSize = 'large' | 'medium' | 'compact';
@@ -14,11 +14,8 @@ interface WorkProjectCardProps {
   className?: string;
 }
 
-function caseStudyHref(project: WorkProject): string {
-  if (project.caseStudySlug) {
-    return `${ROUTES.workCaseStudies}/${project.caseStudySlug}`;
-  }
-  return getWorkProjectHref(project.slug);
+function projectPrimaryHref(project: WorkProject): string {
+  return getWorkProjectCaseStudyHref(project) ?? getWorkProjectHref(project.slug);
 }
 
 /**
@@ -28,12 +25,14 @@ function caseStudyHref(project: WorkProject): string {
 export function WorkProjectCard({ project, className }: WorkProjectCardProps) {
   const isFuture = project.status === 'future';
   const isInteractiveDemo = project.badge === 'Interactive demo';
-  const caseHref = isFuture ? NAV_ACTIONS.freeConsultation.href : caseStudyHref(project);
-  const liveHref = project.liveUrl ?? caseHref;
+  const caseStudyHref = getWorkProjectCaseStudyHref(project);
+  const primaryHref = isFuture ? NAV_ACTIONS.freeConsultation.href : projectPrimaryHref(project);
+  const liveHref = project.liveUrl ?? primaryHref;
   const liveExternal = Boolean(project.liveExternal) || isInteractiveDemo;
   const coverAlt = project.coverImageAlt ?? `${project.title} product screenshot`;
   const badge = project.badge ?? (isFuture ? 'Future project' : project.industry);
   const demoLabel = isInteractiveDemo ? 'Interactive demo' : 'Live Client';
+  const primaryLabel = isFuture ? 'Discuss build' : caseStudyHref ? 'Case Study' : 'View project';
 
   return (
     <article
@@ -71,8 +70,8 @@ export function WorkProjectCard({ project, className }: WorkProjectCardProps) {
       </ul>
 
       <div className="work-pf-card__actions">
-        <Link href={caseHref} className="work-pf-card__btn work-pf-card__btn--primary">
-          {isFuture ? 'Discuss build' : 'Case Study'}
+        <Link href={primaryHref} className="work-pf-card__btn work-pf-card__btn--primary">
+          {primaryLabel}
           <Icon name="arrow-up-right" size="sm" aria-hidden className="h-[13px] w-[13px]" />
         </Link>
         {!isFuture ? (

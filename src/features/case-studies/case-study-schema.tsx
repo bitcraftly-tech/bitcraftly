@@ -1,4 +1,9 @@
-import { CASE_STUDIES, getCaseStudyHref, type CaseStudy } from '@/content/case-studies';
+import {
+  CASE_STUDIES,
+  getCaseStudyHref,
+  getCaseStudyPublishedAt,
+  type CaseStudy,
+} from '@/content/case-studies';
 import { ROUTES } from '@/constants/navigation';
 import { buildCaseStudiesBreadcrumbs, buildWorkBreadcrumbs } from '@/lib/seo/breadcrumbs';
 import { buildBreadcrumbListJsonLd } from '@/lib/seo/json-ld-breadcrumbs';
@@ -39,6 +44,7 @@ export function buildCaseStudiesListingJsonLd() {
 export function buildCaseStudyJsonLd(study: CaseStudy) {
   const url = getAbsoluteUrl(getCaseStudyHref(study.slug));
   const breadcrumbs = buildWorkBreadcrumbs([{ label: study.title }]);
+  const publishedAt = getCaseStudyPublishedAt(study);
 
   return {
     '@context': 'https://schema.org',
@@ -48,14 +54,18 @@ export function buildCaseStudyJsonLd(study: CaseStudy) {
         '@type': 'Article',
         '@id': `${url}#casestudy`,
         headline: study.title,
-        description: study.seoDescription ?? study.description,
+        description: study.subtitle,
         image: [getAbsoluteUrl(study.coverImage)],
         url,
         articleSection: 'Case Study',
-        about: {
-          '@type': 'Organization',
-          name: study.client.name,
-        },
+        ...(study.clientAssociationApproved
+          ? {
+              about: {
+                '@type': 'Organization',
+                name: study.client.name,
+              },
+            }
+          : {}),
         author: {
           '@id': ORGANIZATION_ID,
         },
@@ -63,7 +73,7 @@ export function buildCaseStudyJsonLd(study: CaseStudy) {
           '@id': ORGANIZATION_ID,
         },
         keywords: study.tags.join(', '),
-        datePublished: `${study.engagement.year}-01-01`,
+        ...(publishedAt ? { datePublished: publishedAt } : {}),
         isPartOf: { '@id': WEBSITE_ID },
       },
     ],

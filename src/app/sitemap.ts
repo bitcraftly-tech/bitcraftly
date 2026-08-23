@@ -1,9 +1,14 @@
 import type { MetadataRoute } from 'next';
 import { BLOG_POSTS } from '@/content/blog';
-import { CASE_STUDIES, getCaseStudyHref } from '@/content/case-studies';
+import {
+  CASE_STUDIES,
+  getCaseStudyHref,
+  getCaseStudyPublishedAt,
+  isCaseStudyIndexable,
+} from '@/content/case-studies';
 import { getServiceHref, SERVICE_SLUGS } from '@/constants/services';
 import { getSolutionHref, SOLUTION_SLUGS } from '@/constants/solutions';
-import { WORK_STATIC_SLUGS } from '@/constants/work';
+import { WORK_NOINDEX_HUB_SLUGS, WORK_STATIC_SLUGS } from '@/constants/work';
 import { getBlogPostHref } from '@/features/blog/blog.utils';
 import { INDUSTRIES_CATALOG } from '@/features/industries/industries.content';
 import { getWorkProjectHref, WORK_PROJECTS } from '@/features/work/work.content';
@@ -76,14 +81,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const workEntries: MetadataRoute.Sitemap = WORK_STATIC_SLUGS.map((slug) => ({
+  const workEntries: MetadataRoute.Sitemap = WORK_STATIC_SLUGS.filter(
+    (slug) => !WORK_NOINDEX_HUB_SLUGS.has(slug),
+  ).map((slug) => ({
     url: `${BASE_URL}/work/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',
     priority: 0.75,
   }));
 
-  const workProjectEntries: MetadataRoute.Sitemap = WORK_PROJECTS.map((project) => ({
+  const workProjectEntries: MetadataRoute.Sitemap = WORK_PROJECTS.filter(
+    (project) => project.status !== 'future',
+  ).map((project) => ({
     url: `${BASE_URL}${getWorkProjectHref(project.slug)}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',
@@ -106,12 +115,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const caseStudyEntries: MetadataRoute.Sitemap = CASE_STUDIES.map((study) => ({
-    url: `${BASE_URL}${getCaseStudyHref(study.slug)}`,
-    lastModified: new Date(`${study.engagement.year}-01-01`),
-    changeFrequency: 'monthly',
-    priority: 0.75,
-  }));
+  const caseStudyEntries: MetadataRoute.Sitemap = CASE_STUDIES.filter(isCaseStudyIndexable).map(
+    (study) => {
+      const publishedAt = getCaseStudyPublishedAt(study);
+      return {
+        url: `${BASE_URL}${getCaseStudyHref(study.slug)}`,
+        ...(publishedAt ? { lastModified: new Date(publishedAt) } : {}),
+        changeFrequency: 'monthly' as const,
+        priority: 0.75,
+      };
+    },
+  );
 
   return [
     ...mapStaticRoutes(staticRoutes),

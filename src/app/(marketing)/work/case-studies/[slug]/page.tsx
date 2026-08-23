@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
-import { getAllCaseStudySlugs, getCaseStudyBySlug, getCaseStudyHref } from '@/content/case-studies';
+import {
+  getAllCaseStudySlugs,
+  getCaseStudyBySlug,
+  getCaseStudyHref,
+  isCaseStudyIndexable,
+} from '@/content/case-studies';
 import { createPageMetadata } from '@/lib/seo/createPageMetadata';
 import { createNoIndexMetadata } from '@/lib/seo/noindex-metadata';
 
@@ -30,12 +35,14 @@ export async function generateMetadata({ params }: LegacyCaseStudyPageProps): Pr
     return createNoIndexMetadata();
   }
 
-  return createPageMetadata({
+  const pageMetadata = createPageMetadata({
     title: study.seoTitle ?? `${study.title} | Case Study`,
-    description: study.seoDescription ?? study.description,
+    description: study.subtitle,
     path: getCaseStudyHref(study.slug),
     image: study.coverImage,
   });
+
+  return isCaseStudyIndexable(study) ? pageMetadata : createNoIndexMetadata(pageMetadata);
 }
 
 export default async function LegacyWorkCaseStudyPage({ params }: LegacyCaseStudyPageProps) {

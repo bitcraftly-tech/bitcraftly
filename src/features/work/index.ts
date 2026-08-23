@@ -40,6 +40,7 @@ export {
   getWorkCaseStudyBySlug,
   getWorkHubBySlug,
   getWorkProjectBySlug,
+  getWorkProjectCaseStudyHref,
   getWorkProjectHref,
   WORK_CASE_STUDIES,
   WORK_CATEGORIES,

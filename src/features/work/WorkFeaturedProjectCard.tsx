@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { Icon } from '@/components/ui/icon';
-import { NAV_ACTIONS, ROUTES } from '@/constants/navigation';
+import { NAV_ACTIONS } from '@/constants/navigation';
 import { cn } from '@/lib/cn';
-import { getWorkProjectHref } from './work.content';
+import { getWorkProjectCaseStudyHref, getWorkProjectHref } from './work.content';
 import { WorkBrowserCover } from './WorkBrowserCover';
 import type { WorkProject } from './work.types';
 
@@ -14,11 +14,8 @@ interface WorkFeaturedProjectCardProps {
   priority?: boolean;
 }
 
-function caseStudyHref(project: WorkProject): string {
-  if (project.caseStudySlug) {
-    return `${ROUTES.workCaseStudies}/${project.caseStudySlug}`;
-  }
-  return getWorkProjectHref(project.slug);
+function projectPrimaryHref(project: WorkProject): string {
+  return getWorkProjectCaseStudyHref(project) ?? getWorkProjectHref(project.slug);
 }
 
 /**
@@ -33,8 +30,13 @@ export function WorkFeaturedProjectCard({
   priority = false,
 }: WorkFeaturedProjectCardProps) {
   const isFuture = project.status === 'future';
-  const href = isFuture ? NAV_ACTIONS.freeConsultation.href : caseStudyHref(project);
-  const ctaLabel = isFuture ? 'Discuss this build' : 'View Case Study';
+  const caseStudyHref = getWorkProjectCaseStudyHref(project);
+  const href = isFuture ? NAV_ACTIONS.freeConsultation.href : projectPrimaryHref(project);
+  const ctaLabel = isFuture
+    ? 'Discuss this build'
+    : caseStudyHref
+      ? 'View Case Study'
+      : 'View project';
   const results = project.metrics.slice(0, variant === 'spotlight' ? 2 : 1);
   const tech = project.techStack.slice(0, variant === 'spotlight' ? 5 : 3);
   const hostname = project.previewHost ?? `${project.slug.replace(/-/g, '.')}.app`;

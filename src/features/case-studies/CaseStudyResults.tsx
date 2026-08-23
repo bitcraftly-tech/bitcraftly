@@ -1,11 +1,17 @@
 import { Section } from '@/components/ui/section';
-import type { CaseStudy } from '@/content/case-studies';
+import { hasApprovedCaseStudyResults, type CaseStudy } from '@/content/case-studies';
 
 interface CaseStudyResultsProps {
   study: CaseStudy;
 }
 
 export function CaseStudyResults({ study }: CaseStudyResultsProps) {
+  if (!hasApprovedCaseStudyResults(study) || !study.results) {
+    return null;
+  }
+
+  const { results } = study;
+
   return (
     <Section
       id="results"
@@ -24,11 +30,11 @@ export function CaseStudyResults({ study }: CaseStudyResultsProps) {
         Measurable outcomes
       </h2>
       <p className="mt-[12px] m-0 max-w-3xl font-sans text-[16px] leading-[1.75] text-foreground/90">
-        {study.results.summary}
+        {results.summary}
       </p>
 
       <ul className="mt-[20px] m-0 grid list-none grid-cols-1 gap-[12px] p-0 sm:grid-cols-3">
-        {study.results.metrics.map((metric) => (
+        {results.metrics.map((metric) => (
           <li
             key={metric.id}
             className="rounded-[16px] border border-border bg-surface/50 px-[16px] py-[18px]"

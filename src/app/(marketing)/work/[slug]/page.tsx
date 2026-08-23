@@ -1,7 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getAllCaseStudySlugs, getCaseStudyBySlug, getCaseStudyHref } from '@/content/case-studies';
+import {
+  getAllCaseStudySlugs,
+  getCaseStudyBySlug,
+  getCaseStudyHref,
+  isCaseStudyIndexable,
+} from '@/content/case-studies';
 import { getWorkPageBySlug, WORK_STATIC_SLUGS } from '@/constants/navigation';
+import { WORK_NOINDEX_HUB_SLUGS } from '@/constants/work';
 import { CaseStudyDetailPage } from '@/features/case-studies';
 import { getWorkHubBySlug, WorkHubFallbackPage, WorkHubPage } from '@/features/work';
 import { createPageMetadata } from '@/lib/seo/createPageMetadata';
@@ -35,28 +41,32 @@ export async function generateMetadata({ params }: WorkSlugPageProps): Promise<M
   if (study) {
     const base = createPageMetadata({
       title: study.seoTitle ?? `${study.title} | Case Study`,
-      description: study.seoDescription ?? study.description,
+      description: study.subtitle,
       path: getCaseStudyHref(study.slug),
       keywords: [...study.tags],
       image: study.coverImage,
     });
 
-    return {
+    const articleMetadata = {
       ...base,
       openGraph: {
         ...base.openGraph,
-        type: 'article',
+        type: 'article' as const,
       },
     };
+
+    return isCaseStudyIndexable(study) ? articleMetadata : createNoIndexMetadata(articleMetadata);
   }
 
   const hub = getWorkHubBySlug(slug);
   if (hub) {
-    return createPageMetadata({
+    const hubMetadata = createPageMetadata({
       title: hub.seoTitle,
       description: hub.seoDescription,
       path: `/work/${hub.slug}`,
     });
+
+    return WORK_NOINDEX_HUB_SLUGS.has(hub.slug) ? createNoIndexMetadata(hubMetadata) : hubMetadata;
   }
 
   const item = getWorkPageBySlug(slug);
@@ -64,11 +74,13 @@ export async function generateMetadata({ params }: WorkSlugPageProps): Promise<M
     return createNoIndexMetadata();
   }
 
-  return createPageMetadata({
+  const itemMetadata = createPageMetadata({
     title: `${item.label} | Work`,
     description: item.description,
     path: item.href,
   });
+
+  return WORK_NOINDEX_HUB_SLUGS.has(item.slug) ? createNoIndexMetadata(itemMetadata) : itemMetadata;
 }
 
 export default async function WorkSlugPage({ params }: WorkSlugPageProps) {
