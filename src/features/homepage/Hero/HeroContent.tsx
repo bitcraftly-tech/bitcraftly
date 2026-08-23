@@ -31,11 +31,11 @@ export function HeroIntro() {
         aria-label={`${HERO_HEADING.lead} ${HERO_HEADING.focus} ${HERO_HEADING.sub}`}
         style={{ ['--type-len' as string]: HERO_HEADING.focus.length }}
       >
-        <span className="hp-hero-heading__lead" aria-hidden="true">
+        <span className="hp-hero-heading__lead">
           <span className="hp-hero-heading__lead-text">{HERO_HEADING.lead}</span>
         </span>
         <HeroTypedFocus />
-        <span className="hp-hero-heading__sub" aria-hidden="true">
+        <span className="hp-hero-heading__sub">
           <span className="hp-hero-heading__sub-lead">{HERO_HEADING.subLead}</span>
           <span className="hp-hero-heading__sub-accent">
             {Array.from(HERO_HEADING.subAccent).map((char, index) => (

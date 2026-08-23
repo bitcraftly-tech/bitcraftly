@@ -10,7 +10,7 @@ import { HERO_INDUSTRY_PREVIEWS } from '@/features/homepage/Hero/hero.constants'
 
 const HOME_TITLE = 'Bitcraftly | Complete Digital Systems for Your Industry';
 const HOME_DESCRIPTION =
-  'AI-Powered Digital Engineering Partner. Launch Complete Digital Systems — website, AI, dashboard, analytics, and integrations — engineered as one Industry System.';
+  'AI-powered digital engineering from Bitcraftly. We build complete systems for your industry — website, AI, dashboard, analytics, and integrations.';
 
 export const metadata: Metadata = createPageMetadata({
   title: HOME_TITLE,
