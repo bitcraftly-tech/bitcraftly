@@ -90,7 +90,7 @@ export function BlogLandingPage({ category = 'all', tag, q, page = 1 }: BlogLand
 }
 
 export const BLOG_LANDING_META = {
-  title: 'Blog',
+  title: 'Blog | Bitcraftly',
   description:
     'Engineering and product insights on AI development, Next.js, React, web performance, and SEO from the Bitcraftly team.',
   path: ROUTES.blog,

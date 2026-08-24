@@ -1,19 +1,13 @@
 import type { Metadata } from 'next';
-import { BlogLandingPage, BLOG_LANDING_META, isBlogCategoryId } from '@/features/blog';
+import {
+  BlogLandingPage,
+  BLOG_LANDING_META,
+  isBlogCategoryId,
+  isBlogListingIndexable,
+} from '@/features/blog';
 import { createPageMetadata } from '@/lib/seo/createPageMetadata';
+import { createNoIndexMetadata } from '@/lib/seo/noindex-metadata';
 import { getAbsoluteUrl } from '@/lib/seo/site';
-
-const blogPageMetadata = createPageMetadata(BLOG_LANDING_META);
-
-export const metadata: Metadata = {
-  ...blogPageMetadata,
-  alternates: {
-    ...blogPageMetadata.alternates,
-    types: {
-      'application/rss+xml': getAbsoluteUrl('/feed.xml'),
-    },
-  },
-};
 
 interface BlogPageProps {
   searchParams: Promise<{
@@ -22,6 +16,29 @@ interface BlogPageProps {
     q?: string;
     page?: string;
   }>;
+}
+
+function withBlogRssAlternate(metadata: Metadata): Metadata {
+  return {
+    ...metadata,
+    alternates: {
+      ...metadata.alternates,
+      types: {
+        'application/rss+xml': getAbsoluteUrl('/feed.xml'),
+      },
+    },
+  };
+}
+
+export async function generateMetadata({ searchParams }: BlogPageProps): Promise<Metadata> {
+  const params = await searchParams;
+  const listingMetadata = withBlogRssAlternate(createPageMetadata(BLOG_LANDING_META));
+
+  if (!isBlogListingIndexable(params)) {
+    return createNoIndexMetadata(listingMetadata);
+  }
+
+  return listingMetadata;
 }
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {

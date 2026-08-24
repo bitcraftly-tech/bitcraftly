@@ -130,4 +130,18 @@ export function isBlogCategoryId(value: string): value is BlogCategoryId {
   );
 }
 
+const BLOG_LISTING_PARAM_KEYS = ['category', 'tag', 'q', 'page'] as const;
+
+export interface BlogListingSearchParams {
+  readonly category?: string;
+  readonly tag?: string;
+  readonly q?: string;
+  readonly page?: string;
+}
+
+/** Hub `/blog` is indexable only when none of the listing query params are present. */
+export function isBlogListingIndexable(params: BlogListingSearchParams): boolean {
+  return BLOG_LISTING_PARAM_KEYS.every((key) => params[key] === undefined);
+}
+
 export { DEFAULT_PAGE_SIZE };
